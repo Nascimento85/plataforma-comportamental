@@ -1,0 +1,224 @@
+'use client'
+
+import { useState } from 'react'
+import { MBTI_QUESTIONS } from '@/lib/engines/mbti'
+import TestResultCard from '@/components/tests/TestResultCard'
+
+interface MBTIAnswer {
+  questionId: number
+  scoreA: number
+  scoreB: number
+}
+
+const SCALE_OPTIONS = [
+  { scoreA: 3, scoreB: 0, label: 'Totalmente A' },
+  { scoreA: 2, scoreB: 1, label: 'Mais A' },
+  { scoreA: 1, scoreB: 2, label: 'Mais B' },
+  { scoreA: 0, scoreB: 3, label: 'Totalmente B' },
+]
+
+const PAGE_SIZE = 10 // questões por página
+
+export default function MBTITest({
+  assessmentId,
+  token,
+}: {
+  assessmentId: string
+  token: string
+}) {
+  const [answers, setAnswers] = useState<Record<number, MBTIAnswer>>({})
+  const [page, setPage] = useState(0)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const [done, setDone] = useState(false)
+  const [resultData, setResultData] = useState<Record<string, unknown> | null>(null)
+
+  const totalPages = Math.ceil(MBTI_QUESTIONS.length / PAGE_SIZE)
+  const pageQuestions = MBTI_QUESTIONS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+  const answered = Object.keys(answers).length
+  const progress = Math.round((answered / MBTI_QUESTIONS.length) * 100)
+
+  // Verifica se todas as questões da página atual foram respondidas
+  const pageComplete = pageQuestions.every((q) => answers[q.id] !== undefined)
+
+  function handleAnswer(questionId: number, scoreA: number, scoreB: number) {
+    setAnswers((prev) => ({ ...prev, [questionId]: { questionId, scoreA, scoreB } }))
+  }
+
+  async function handleSubmit() {
+    const unanswered = MBTI_QUESTIONS.filter((q) => !answers[q.id])
+    if (unanswered.length > 0) {
+      const firstPage = Math.floor(
+        MBTI_QUESTIONS.findIndex((q) => q.id === unanswered[0].id) / PAGE_SIZE
+      )
+      setPage(firstPage)
+      setError(`${unanswered.length} questão(ões) ainda não respondida(s).`)
+      return
+    }
+
+    setSubmitting(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, answers: Object.values(answers) }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error ?? 'Erro ao enviar respostas.')
+        return
+      }
+
+      const data = await res.json()
+      setResultData(data.result ?? null)
+      setDone(true)
+    } catch {
+      setError('Erro de conexão. Tente novamente.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  if (done) {
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="text-5xl mb-3">🎉</div>
+          <h2 className="text-xl font-bold text-gray-900">Avaliação concluída!</h2>
+          <p className="text-gray-500 text-sm mt-1">Aqui está um resumo do seu perfil identificado:</p>
+        </div>
+        {resultData && <TestResultCard testType="MBTI" result={resultData} />}
+        <div className="card p-4 bg-brand-50 border-brand-200 text-center text-sm text-brand-700">
+          O relatório completo e detalhado será disponibilizado pela sua empresa.
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Progresso */}
+      <div>
+        <div className="flex justify-between text-sm text-gray-500 mb-1">
+          <span>Página {page + 1} de {totalPages}</span>
+          <span>{answered}/{MBTI_QUESTIONS.length} respondidas</span>
+        </div>
+        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-brand-500 rounded-full transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Instrução */}
+      <div className="bg-brand-50 border border-brand-200 rounded-xl p-4 text-sm text-brand-800">
+        <strong>Como responder:</strong> Para cada par de afirmações, indique qual delas mais se aproxima de você.
+      </div>
+
+      {/* Questões da página atual */}
+      <div className="space-y-4">
+        {pageQuestions.map((q, idx) => {
+          const selected = answers[q.id]
+
+          return (
+            <div key={q.id} className="card p-5">
+              <p className="text-sm font-medium text-gray-800 mb-3">
+                <span className="text-xs text-gray-400 mr-2">{page * PAGE_SIZE + idx + 1}.</span>
+                {q.theme}
+              </p>
+              <div className="space-y-2">
+                {SCALE_OPTIONS.map((opt) => {
+                  const isSelected =
+                    selected?.scoreA === opt.scoreA && selected?.scoreB === opt.scoreB
+
+                  return (
+                    <button
+                      key={opt.label}
+                      onClick={() => handleAnswer(q.id, opt.scoreA, opt.scoreB)}
+                      className={`w-full text-left px-4 py-3 rounded-lg border-2 text-sm transition-all
+                        ${
+                          isSelected
+                            ? 'border-brand-500 bg-brand-50 text-brand-800 font-medium'
+                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700'
+                        }
+                      `}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className={`mt-0.5 w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center
+                            ${isSelected ? 'border-brand-500 bg-brand-500' : 'border-gray-300'}`}
+                        >
+                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                        </div>
+                        <div className="flex flex-col">
+                          {opt.scoreA === 3 && (
+                            <span className="font-medium">{q.optionA.text}</span>
+                          )}
+                          {opt.scoreA === 2 && (
+                            <span className="text-gray-500 italic">Levemente: {q.optionA.text}</span>
+                          )}
+                          {opt.scoreB === 2 && (
+                            <span className="text-gray-500 italic">Levemente: {q.optionB.text}</span>
+                          )}
+                          {opt.scoreB === 3 && (
+                            <span className="font-medium">{q.optionB.text}</span>
+                          )}
+                        </div>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Erro */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
+          {error}
+        </div>
+      )}
+
+      {/* Navegação */}
+      <div className="flex gap-3">
+        <button
+          onClick={() => setPage((p) => Math.max(0, p - 1))}
+          disabled={page === 0}
+          className="btn-secondary flex-1"
+        >
+          ← Anterior
+        </button>
+
+        {page < totalPages - 1 ? (
+          <button
+            onClick={() => {
+              if (!pageComplete) {
+                setError('Responda todas as questões desta página antes de continuar.')
+                return
+              }
+              setError('')
+              setPage((p) => p + 1)
+            }}
+            className="btn-primary flex-1"
+          >
+            Próxima →
+          </button>
+        ) : (
+          <button
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="btn-primary flex-1"
+          >
+            {submitting ? 'Enviando...' : '✓ Finalizar teste'}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
