@@ -150,6 +150,91 @@ function buildEmailHtml(input: SendAssessmentEmailInput): string {
 </html>`
 }
 
+// ── E-mail de recuperação de senha ───────────────────────────────────────────
+
+function buildPasswordResetHtml(name: string, resetLink: string): string {
+  const firstName = name.split(' ')[0]
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"/><title>Recuperação de Senha — ${APP_NAME}</title></head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+        <tr>
+          <td style="background:#2a47f5;border-radius:12px 12px 0 0;padding:32px 40px;text-align:center;">
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">Recuperação de Senha</h1>
+            <p style="margin:8px 0 0;color:rgba(255,255,255,0.8);font-size:14px;">${APP_NAME}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#ffffff;padding:40px;">
+            <p style="margin:0 0 16px;font-size:20px;font-weight:700;color:#111827;">Olá, ${firstName}!</p>
+            <p style="margin:0 0 24px;font-size:15px;color:#4b5563;line-height:1.6;">
+              Recebemos uma solicitação para redefinir a senha da sua conta. Clique no botão abaixo para criar uma nova senha.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+              <tr><td align="center">
+                <a href="${resetLink}" style="display:inline-block;background:#2a47f5;color:#ffffff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 40px;border-radius:10px;">
+                  Redefinir minha senha →
+                </a>
+              </td></tr>
+            </table>
+            <div style="background:#fef9ec;border:1px solid #f6d860;border-radius:8px;padding:14px 18px;margin-bottom:24px;">
+              <p style="margin:0;font-size:13px;color:#92400e;">⏰ Este link expira em <strong>1 hora</strong>. Após isso, solicite um novo link.</p>
+            </div>
+            <p style="margin:0 0 6px;font-size:13px;color:#6b7280;">Se não foi você, ignore este e-mail. Sua senha não será alterada.</p>
+            <p style="margin:0;font-size:12px;color:#2a47f5;word-break:break-all;">${resetLink}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-radius:0 0 12px 12px;padding:20px 40px;border-top:1px solid #e5e7eb;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">© ${new Date().getFullYear()} ${APP_NAME}</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
+export async function sendPasswordResetEmail(
+  toEmail: string,
+  name: string,
+  resetLink: string
+): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  const html = buildPasswordResetHtml(name, resetLink)
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [toEmail],
+        subject: `[${APP_NAME}] Redefinição de senha`,
+        html,
+      }),
+    })
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      const msg = (body as { message?: string }).message ?? `HTTP ${res.status}`
+      return { sent: false, error: msg }
+    }
+
+    return { sent: true }
+  } catch (err) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
+
 // ── Função principal ──────────────────────────────────────────────────────────
 
 export async function sendAssessmentEmail(
