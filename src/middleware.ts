@@ -5,11 +5,15 @@ const PUBLIC_ROUTES = [
   '/',                 // landing page
   '/login',
   '/register',
+  '/forgot-password',  // recuperação de senha
+  '/reset-password',   // redefinição de senha (com token)
   '/test',
   '/result',           // página pública de resultado — sem login
   '/api/auth/login',
   '/api/auth/logout',
   '/api/auth/register',
+  '/api/auth/forgot-password',
+  '/api/auth/reset-password',
 ]
 
 export function middleware(request: NextRequest) {
