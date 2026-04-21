@@ -26,13 +26,19 @@ export async function POST(request: NextRequest) {
 
     const { employeeName, employeeEmail, testType } = parsed.data
 
-    // Verifica saldo de créditos
-    const creditBalance = await prisma.creditBalance.findUnique({ where: { companyId } })
-    if (!creditBalance || creditBalance.balance < 1) {
-      return NextResponse.json(
-        { error: 'Saldo insuficiente. Compre mais créditos para criar avaliações.' },
-        { status: 402 }
-      )
+    // Verifica se é admin (admin não consome créditos)
+    const company = await prisma.company.findUnique({ where: { id: companyId }, select: { isAdmin: true, name: true } })
+    const isAdmin = company?.isAdmin ?? false
+
+    // Verifica saldo de créditos (apenas para não-admins)
+    if (!isAdmin) {
+      const creditBalance = await prisma.creditBalance.findUnique({ where: { companyId } })
+      if (!creditBalance || creditBalance.balance < 1) {
+        return NextResponse.json(
+          { error: 'Saldo insuficiente. Compre mais créditos para criar avaliações.' },
+          { status: 402 }
+        )
+      }
     }
 
     // Cria ou reutiliza employee
@@ -49,7 +55,7 @@ export async function POST(request: NextRequest) {
     const token = uuidv4()
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
-    // Cria assessment + debita 1 crédito (transação atômica)
+    // Cria assessment + debita 1 crédito se não for admin (transação atômica)
     const assessment = await prisma.$transaction(async (tx) => {
       const a = await tx.assessment.create({
         data: {
@@ -62,20 +68,22 @@ export async function POST(request: NextRequest) {
         },
       })
 
-      // Debita crédito
-      await tx.creditBalance.update({
-        where: { companyId },
-        data: { balance: { decrement: 1 } },
-      })
+      if (!isAdmin) {
+        // Debita crédito
+        await tx.creditBalance.update({
+          where: { companyId },
+          data: { balance: { decrement: 1 } },
+        })
 
-      await tx.creditTransaction.create({
-        data: {
-          companyId,
-          type: 'DEBIT',
-          amount: -1,
-          description: `Avaliação ${testType} — ${employeeName}`,
-        },
-      })
+        await tx.creditTransaction.create({
+          data: {
+            companyId,
+            type: 'DEBIT',
+            amount: -1,
+            description: `Avaliação ${testType} — ${employeeName}`,
+          },
+        })
+      }
 
       return a
     })
@@ -83,10 +91,6 @@ export async function POST(request: NextRequest) {
     const testLink = `${process.env.NEXT_PUBLIC_APP_URL}/test/${token}`
 
     // Envia e-mail ao colaborador (não bloqueia nem cancela em caso de falha)
-    const company = await prisma.company.findUnique({
-      where: { id: companyId },
-      select: { name: true },
-    })
 
     const { sent: emailSent, error: emailError } = await sendAssessmentEmail({
       employeeName:  employeeName,

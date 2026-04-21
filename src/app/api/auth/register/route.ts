@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     // Hash da senha
     const passwordHash = await bcrypt.hash(password, 12)
 
-    // Cria empresa + saldo de créditos inicial (0)
+    // Cria empresa + saldo de créditos inicial (4 créditos de bônus = 1 de cada teste)
     const company = await prisma.$transaction(async (tx) => {
       const c = await tx.company.create({
         data: {
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
         },
       })
       await tx.creditBalance.create({
-        data: { companyId: c.id, balance: 0 },
+        data: { companyId: c.id, balance: 4 },
       })
       return c
     })
