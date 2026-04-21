@@ -13,6 +13,7 @@ export type SessionUser = {
   id: string
   name: string
   email: string
+  isAdmin?: boolean
 }
 
 // ── JWT mínimo (HS256) usando apenas Node.js crypto ──────────

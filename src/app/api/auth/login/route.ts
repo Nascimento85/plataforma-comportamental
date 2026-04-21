@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
     const company = await prisma.company.findUnique({
       where: { email },
-      select: { id: true, name: true, email: true, passwordHash: true, active: true },
+      select: { id: true, name: true, email: true, passwordHash: true, active: true, isAdmin: true },
     })
 
     if (!company || !company.active) {
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'E-mail ou senha incorretos.' }, { status: 401 })
     }
 
-    await createSession({ id: company.id, name: company.name, email: company.email })
+    await createSession({ id: company.id, name: company.name, email: company.email, isAdmin: company.isAdmin })
     return NextResponse.json({ ok: true })
   } catch (error) {
     console.error('[Login API]', error)

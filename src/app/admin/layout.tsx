@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { SignOutButton } from '@/components/ui/SignOutButton'
 import LogoBrand from '@/components/ui/LogoBrand'
 
-export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession()
   if (!session) redirect('/login')
+  if (!session.isAdmin) redirect('/dashboard')
 
   return (
     <div className="min-h-screen flex bg-gray-50">
@@ -19,17 +20,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
         {/* Nav */}
         <nav className="flex-1 p-4 space-y-1">
-          <NavLink href="/dashboard" label="Dashboard" icon="📊" />
-          <NavLink href="/dashboard/assessments" label="Avaliações" icon="📋" />
-          <NavLink href="/dashboard/credits" label="Créditos" icon="💳" />
-          {session.isAdmin && (
-            <>
-              <div className="pt-3 pb-1 px-3">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Admin</p>
-              </div>
-              <NavLink href="/admin" label="Painel Admin" icon="🛡️" />
-            </>
-          )}
+          <div className="px-3 pb-2">
+            <span className="text-xs font-bold text-brand-600 uppercase tracking-widest bg-brand-50 px-2 py-1 rounded">
+              🛡️ Admin
+            </span>
+          </div>
+          <NavLink href="/admin" label="Visão geral" icon="📊" />
+          <NavLink href="/admin/assessments" label="Todos os testes" icon="📋" />
+          <div className="pt-3 pb-1 px-3">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Usuário</p>
+          </div>
+          <NavLink href="/dashboard" label="Meu dashboard" icon="🏠" />
         </nav>
 
         {/* Footer */}
@@ -42,7 +43,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       {/* Main */}
       <main className="flex-1 overflow-auto">
-        <div className="max-w-6xl mx-auto px-6 py-8">{children}</div>
+        <div className="max-w-7xl mx-auto px-6 py-8">{children}</div>
       </main>
     </div>
   )
