@@ -7,6 +7,10 @@ const schema = z.object({
   name: z.string().min(2, 'Nome muito curto'),
   email: z.string().email('E-mail inválido'),
   password: z.string().min(8, 'Senha deve ter ao menos 8 caracteres'),
+  type: z.enum(['PF', 'PJ']).default('PJ'),
+  phone: z.string().min(8, 'Telefone inválido'),
+  instagram: z.string().optional(),
+  birthDate: z.string().optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -21,7 +25,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { name, email, password } = parsed.data
+    const { name, email, password, type, phone, instagram, birthDate } = parsed.data
 
     // Verifica se e-mail já existe
     const existing = await prisma.company.findUnique({ where: { email } })
@@ -35,7 +39,15 @@ export async function POST(request: NextRequest) {
     // Cria empresa + saldo de créditos inicial (0)
     const company = await prisma.$transaction(async (tx) => {
       const c = await tx.company.create({
-        data: { name, email, passwordHash },
+        data: {
+          name,
+          email,
+          passwordHash,
+          type,
+          phone: phone,
+          instagram: instagram ?? null,
+          birthDate: birthDate ? new Date(birthDate) : null,
+        },
       })
       await tx.creditBalance.create({
         data: { companyId: c.id, balance: 0 },

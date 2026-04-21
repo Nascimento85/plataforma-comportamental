@@ -20,13 +20,17 @@ datasource db {
 // EMPRESA (cliente do SaaS)
 // ============================================================
 model Company {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   name         String
-  email        String   @unique
+  email        String    @unique
   passwordHash String
-  active       Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  type         String    @default("PJ") // PF | PJ
+  phone        String?
+  instagram    String?
+  birthDate    DateTime?
+  active       Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   employees          Employee[]
   assessments        Assessment[]
