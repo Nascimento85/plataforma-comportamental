@@ -24,12 +24,61 @@ export default async function DashboardPage() {
 
   const credits = creditBalance?.balance ?? 0
 
+  const isNewAccount = recentAssessments.length === 0 && totalCompleted === 0
+  const firstName = session!.name?.split(' ')[0] ?? 'bem-vindo'
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-gray-500 text-sm mt-1">Visão geral da sua empresa</p>
       </div>
+
+      {/* Banner de boas-vindas para conta nova */}
+      {isNewAccount && (
+        <div className="rounded-2xl bg-gradient-to-br from-brand-600 to-brand-700 text-white p-6">
+          <div className="flex items-start gap-4">
+            <div className="text-3xl flex-shrink-0">👋</div>
+            <div className="flex-1">
+              <h2 className="text-lg font-bold mb-1">Olá, {firstName}! Sua conta está pronta.</h2>
+              <p className="text-brand-100 text-sm leading-relaxed mb-4">
+                Você ganhou <strong className="text-white">4 créditos de bônus</strong> para testar a plataforma.
+                Comece criando sua primeira avaliação — envie o link para um colaborador e receba o resultado em minutos.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/dashboard/assessments"
+                  className="inline-flex items-center gap-2 bg-white text-brand-700 font-semibold text-sm px-4 py-2 rounded-lg hover:bg-brand-50 transition-colors"
+                >
+                  + Criar primeira avaliação
+                </Link>
+                <Link
+                  href="/dashboard/credits"
+                  className="inline-flex items-center gap-2 bg-brand-500 text-white font-semibold text-sm px-4 py-2 rounded-lg hover:bg-brand-400 transition-colors"
+                >
+                  Ver planos de créditos
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Passo a passo */}
+          <div className="grid grid-cols-3 gap-3 mt-6 pt-5 border-t border-brand-500">
+            {[
+              { step: '1', text: 'Crie uma avaliação e escolha o tipo de teste' },
+              { step: '2', text: 'O colaborador recebe o link por e-mail e responde' },
+              { step: '3', text: 'Acesse a devolutiva completa no painel' },
+            ].map((s) => (
+              <div key={s.step} className="flex items-start gap-2">
+                <div className="w-6 h-6 rounded-full bg-brand-500 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                  {s.step}
+                </div>
+                <p className="text-xs text-brand-100 leading-snug">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <MetricCard
