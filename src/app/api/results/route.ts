@@ -5,6 +5,8 @@ import { calculateDisc } from '@/lib/engines/disc'
 import { calculateMBTI } from '@/lib/engines/mbti'
 import { calculateEnneagram } from '@/lib/engines/enneagram'
 import { calculateTemperament } from '@/lib/engines/temperament'
+import { calculateArchetypeMixed } from '@/lib/engines/archetype-mixed'
+import { calculateArchetypeFeminine } from '@/lib/engines/archetype-feminine'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 
@@ -68,6 +70,16 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; selected: 'A' | 'C' | 'I' | 'O' }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'ARCHETYPE':
+        resultData = calculateArchetypeMixed(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
+      case 'ARCHETYPE_FEMININE':
+        resultData = calculateArchetypeFeminine(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -109,6 +121,17 @@ export async function POST(request: NextRequest) {
             assessmentId: assessment.id,
             questionId: a.questionId,
             selected: a.selected,
+          })),
+        })
+      }
+
+      // Arquétipos usam o mesmo formato do Eneagrama (questionId + value 1-5)
+      if (assessment.testType === 'ARCHETYPE' || assessment.testType === 'ARCHETYPE_FEMININE') {
+        await tx.enneagramAnswer.createMany({
+          data: (answers as { questionId: number; value: number }[]).map((a) => ({
+            assessmentId: assessment.id,
+            questionId: a.questionId,
+            value: a.value,
           })),
         })
       }

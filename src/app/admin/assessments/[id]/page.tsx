@@ -275,10 +275,123 @@ function TemperamentDevolutiva({ result }: { result: Record<string, unknown> }) 
   )
 }
 
+function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    dominant: string; secondary: string; shadow: string
+    scores: Record<string, number>; percentages: Record<string, number>
+    report: { name: string; title: string; tagline: string; motivation: string; fear: string; gift: string; shadow: string; keywords: string[]; strengths: string[]; challenges: string[]; careers: string[]; leadershipStyle: string; description: string }
+    secondaryReport: { name: string; title: string; tagline: string; description: string }
+  }
+  const sorted = Object.entries(r.percentages).sort(([, a], [, b]) => b - a)
+  return (
+    <div className="space-y-5">
+      <div className="card p-6 flex items-start gap-5">
+        <div className="w-16 h-16 rounded-2xl bg-brand-600 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">{r.report.name.charAt(0)}</div>
+        <div>
+          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Arquétipo dominante · Secundário: {r.secondaryReport.name}</p>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="text-brand-600 font-medium text-sm mt-1">{r.report.title}</p>
+          <p className="text-gray-400 text-xs mt-0.5 italic">"{r.report.tagline}"</p>
+        </div>
+      </div>
+      <Section title="Descrição"><p className="text-sm text-gray-700 leading-relaxed">{r.report.description}</p></Section>
+      <div className="grid grid-cols-2 gap-4">
+        <InfoCard label="Dom principal" text={r.report.gift} bg="bg-green-50 border-green-200 text-green-800" />
+        <InfoCard label="Motivação central" text={r.report.motivation} bg="bg-brand-50 border-brand-200 text-brand-800" />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <InfoCard label="Maior medo" text={r.report.fear} bg="bg-red-50 border-red-200 text-red-800" />
+        <InfoCard label="Sombra" text={r.report.shadow} bg="bg-amber-50 border-amber-200 text-amber-800" />
+      </div>
+      <Section title="Palavras-chave"><TagList items={r.report.keywords} color="brand" /></Section>
+      <Section title="Distribuição dos arquétipos">
+        <div className="space-y-2">
+          {sorted.map(([name, pct]) => (
+            <div key={name}>
+              <div className="flex justify-between text-xs text-gray-600 mb-1"><span className="font-medium">{name}</span><span>{Math.round(pct)}%</span></div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-brand-600 rounded-full" style={{ width: `${pct}%` }} /></div>
+            </div>
+          ))}
+        </div>
+      </Section>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Section title="Pontos fortes"><BulletList items={r.report.strengths} color="green" /></Section>
+        <Section title="Desafios"><BulletList items={r.report.challenges} color="red" /></Section>
+      </div>
+      <Section title="Estilo de liderança"><p className="text-sm text-gray-700 bg-gray-50 rounded-lg px-4 py-3">{r.report.leadershipStyle}</p></Section>
+      <Section title="Carreiras alinhadas"><TagList items={r.report.careers} color="brand" /></Section>
+      <Section title={`Arquétipo secundário — ${r.secondaryReport.name}`}>
+        <div className="bg-brand-50 border border-brand-200 rounded-lg px-4 py-3">
+          <p className="text-xs font-semibold text-brand-700 mb-1">{r.secondaryReport.title} · "{r.secondaryReport.tagline}"</p>
+          <p className="text-sm text-brand-900">{r.secondaryReport.description}</p>
+        </div>
+      </Section>
+    </div>
+  )
+}
+
+function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    dominant: string; secondary: string; toActivate: string
+    scores: Record<string, number>; percentages: Record<string, number>
+    report: { name: string; title: string; goddess: string; tagline: string; essence: string; keyword: string; shadow: string; strengths: string[]; challenges: string[]; description: string; activationTip: string }
+    secondaryReport: { name: string; title: string; tagline: string; description: string }
+    activationReport: { name: string; title: string; tagline: string; activationTip: string }
+  }
+  const sorted = Object.entries(r.percentages).sort(([, a], [, b]) => b - a)
+  return (
+    <div className="space-y-5">
+      <div className="card p-6 flex items-start gap-5">
+        <div className="w-16 h-16 rounded-full bg-violet-600 flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">{r.report.name.charAt(0)}</div>
+        <div>
+          <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Arquétipo dominante · Deusa: {r.report.goddess}</p>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="text-violet-600 font-medium text-sm mt-1">{r.report.title}</p>
+          <p className="text-gray-400 text-xs mt-0.5 italic">"{r.report.tagline}"</p>
+        </div>
+      </div>
+      <Section title="Descrição da energia"><p className="text-sm text-gray-700 leading-relaxed">{r.report.description}</p></Section>
+      <div className="grid grid-cols-2 gap-4">
+        <InfoCard label="Essência" text={r.report.essence} bg="bg-violet-50 border-violet-200 text-violet-800" />
+        <InfoCard label="Palavra-chave" text={r.report.keyword} bg="bg-brand-50 border-brand-200 text-brand-800" />
+      </div>
+      <InfoCard label="Sombra" text={r.report.shadow} bg="bg-amber-50 border-amber-200 text-amber-800" />
+      <Section title="Distribuição das energias">
+        <div className="space-y-2">
+          {sorted.map(([name, pct]) => (
+            <div key={name}>
+              <div className="flex justify-between text-xs text-gray-600 mb-1"><span className="font-medium">{name}</span><span>{Math.round(pct)}%</span></div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-violet-500 rounded-full" style={{ width: `${pct}%` }} /></div>
+            </div>
+          ))}
+        </div>
+      </Section>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Section title="Pontos fortes"><BulletList items={r.report.strengths} color="green" /></Section>
+        <Section title="Desafios"><BulletList items={r.report.challenges} color="red" /></Section>
+      </div>
+      <Section title={`Arquétipo secundário — ${r.secondaryReport.name}`}>
+        <div className="bg-violet-50 border border-violet-200 rounded-lg px-4 py-3">
+          <p className="text-xs font-semibold text-violet-700 mb-1">{r.secondaryReport.title} · "{r.secondaryReport.tagline}"</p>
+          <p className="text-sm text-violet-900">{r.secondaryReport.description}</p>
+        </div>
+      </Section>
+      {r.activationReport && (
+        <div className="card p-5 bg-amber-50 border-amber-200">
+          <h3 className="text-sm font-semibold text-amber-800 mb-2">💫 Energia a ativar: {r.activationReport.name}</h3>
+          <p className="text-xs text-amber-600 italic mb-2">"{r.activationReport.tagline}"</p>
+          <p className="text-sm text-amber-800">{r.activationReport.activationTip}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Página principal ────────────────────────────────────────────
 
 const TEST_LABELS: Record<string, string> = {
   DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
+  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arquétipos Femininos',
 }
 
 interface PageProps {
@@ -351,10 +464,12 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
       </div>
 
       {/* Conteúdo da devolutiva por tipo */}
-      {testType === 'DISC'        && <DiscDevolutiva        result={resultData} />}
-      {testType === 'MBTI'        && <MbtiDevolutiva        result={resultData} />}
-      {testType === 'ENNEAGRAM'   && <EnneagramDevolutiva   result={resultData} />}
-      {testType === 'TEMPERAMENT' && <TemperamentDevolutiva result={resultData} />}
+      {testType === 'DISC'               && <DiscDevolutiva             result={resultData} />}
+      {testType === 'MBTI'               && <MbtiDevolutiva             result={resultData} />}
+      {testType === 'ENNEAGRAM'          && <EnneagramDevolutiva        result={resultData} />}
+      {testType === 'TEMPERAMENT'        && <TemperamentDevolutiva      result={resultData} />}
+      {testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        result={resultData} />}
+      {testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva result={resultData} />}
     </div>
   )
 }

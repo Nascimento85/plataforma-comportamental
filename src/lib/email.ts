@@ -22,17 +22,21 @@ export interface SendAssessmentEmailInput {
 }
 
 const TEST_LABELS: Record<string, string> = {
-  DISC:        'DISC — Perfil Comportamental',
-  MBTI:        'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM:   'Eneagrama — 9 Tipos',
-  TEMPERAMENT: '4 Temperamentos',
+  DISC:               'DISC — Perfil Comportamental',
+  MBTI:               'MBTI — 16 Tipos de Personalidade',
+  ENNEAGRAM:          'Eneagrama — 9 Tipos',
+  TEMPERAMENT:        '4 Temperamentos',
+  ARCHETYPE:          'Arquétipos — Os 12 Padrões Universais',
+  ARCHETYPE_FEMININE: 'Arquétipos Femininos — As 7 Energias',
 }
 
 const TEST_DESCRIPTIONS: Record<string, string> = {
-  DISC:        'Identifica seu estilo de comportamento dominante nas dimensões Dominância, Influência, Estabilidade e Cautela.',
-  MBTI:        'Mapeia suas preferências cognitivas em 4 dimensões para identificar seu tipo de personalidade entre 16 possíveis.',
-  ENNEAGRAM:   'Revela seu padrão motivacional profundo e como ele influencia seus pensamentos, emoções e comportamentos.',
-  TEMPERAMENT: 'Descobre seu temperamento predominante entre os 4 tipos clássicos: Colérico, Sanguíneo, Melancólico e Fleumático.',
+  DISC:               'Identifica seu estilo de comportamento dominante nas dimensões Dominância, Influência, Estabilidade e Cautela.',
+  MBTI:               'Mapeia suas preferências cognitivas em 4 dimensões para identificar seu tipo de personalidade entre 16 possíveis.',
+  ENNEAGRAM:          'Revela seu padrão motivacional profundo e como ele influencia seus pensamentos, emoções e comportamentos.',
+  TEMPERAMENT:        'Descobre seu temperamento predominante entre os 4 tipos clássicos: Colérico, Sanguíneo, Melancólico e Fleumático.',
+  ARCHETYPE:          'Baseado na teoria de Carl Jung, identifica seu arquétipo dominante entre 12 padrões universais — revelando como você lidera, decide e se relaciona.',
+  ARCHETYPE_FEMININE: 'Identifica qual das 7 energias arquetípicas femininas governa seu momento atual — e qual precisa ser ativada para o seu equilíbrio pleno.',
 }
 
 // ── Template HTML ─────────────────────────────────────────────────────────────

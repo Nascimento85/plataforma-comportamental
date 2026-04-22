@@ -5,10 +5,20 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
 
+// Custo em créditos por tipo de teste
+const CREDIT_COST: Record<string, number> = {
+  DISC: 1,
+  MBTI: 1,
+  ENNEAGRAM: 1,
+  TEMPERAMENT: 1,
+  ARCHETYPE: 2,
+  ARCHETYPE_FEMININE: 2,
+}
+
 const schema = z.object({
   employeeName: z.string().min(2),
   employeeEmail: z.string().email(),
-  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT']),
+  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE']),
 })
 
 export async function POST(request: NextRequest) {
@@ -30,12 +40,15 @@ export async function POST(request: NextRequest) {
     const company = await prisma.company.findUnique({ where: { id: companyId }, select: { isAdmin: true, name: true } })
     const isAdmin = company?.isAdmin ?? false
 
+    // Custo do teste
+    const creditCost = CREDIT_COST[testType] ?? 1
+
     // Verifica saldo de créditos (apenas para não-admins)
     if (!isAdmin) {
       const creditBalance = await prisma.creditBalance.findUnique({ where: { companyId } })
-      if (!creditBalance || creditBalance.balance < 1) {
+      if (!creditBalance || creditBalance.balance < creditCost) {
         return NextResponse.json(
-          { error: 'Saldo insuficiente. Compre mais créditos para criar avaliações.' },
+          { error: `Saldo insuficiente. Este teste custa ${creditCost} crédito${creditCost > 1 ? 's' : ''}. Compre mais créditos para continuar.` },
           { status: 402 }
         )
       }
@@ -69,17 +82,17 @@ export async function POST(request: NextRequest) {
       })
 
       if (!isAdmin) {
-        // Debita crédito
+        // Debita créditos
         await tx.creditBalance.update({
           where: { companyId },
-          data: { balance: { decrement: 1 } },
+          data: { balance: { decrement: creditCost } },
         })
 
         await tx.creditTransaction.create({
           data: {
             companyId,
             type: 'DEBIT',
-            amount: -1,
+            amount: -creditCost,
             description: `Avaliação ${testType} — ${employeeName}`,
           },
         })

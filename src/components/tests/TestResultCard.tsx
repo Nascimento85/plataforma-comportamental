@@ -266,6 +266,144 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
     )
   }
 
+  if (testType === 'ARCHETYPE') {
+    const r = result as {
+      dominant: string
+      secondary: string
+      shadow: string
+      percentages: Record<string, number>
+      report: { name: string; title: string; tagline: string; motivation: string; gift: string; strengths: string[] }
+      secondaryReport: { name: string; title: string }
+    }
+
+    const topThree = Object.entries(r.percentages)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 3)
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-brand-600 text-white text-2xl font-bold mb-4">
+            {r.report.name.charAt(0)}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="text-brand-600 font-medium text-sm mt-1">{r.report.title}</p>
+          <p className="text-gray-500 text-xs mt-1 italic">"{r.report.tagline}"</p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="card p-4 bg-green-50 border-green-200">
+            <p className="text-xs font-semibold text-green-700 mb-1">Dom Principal</p>
+            <p className="text-sm text-green-800">{r.report.gift}</p>
+          </div>
+          <div className="card p-4 bg-brand-50 border-brand-200">
+            <p className="text-xs font-semibold text-brand-700 mb-1">Motivação</p>
+            <p className="text-sm text-brand-800">{r.report.motivation}</p>
+          </div>
+        </div>
+
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Top 3 arquétipos</h3>
+          <div className="space-y-2">
+            {topThree.map(([name, pct], i) => (
+              <div key={name}>
+                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                  <span className="font-medium">{i === 0 ? '★ ' : ''}{name}</span>
+                  <span>{Math.round(pct)}%</span>
+                </div>
+                <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-brand-600 rounded-full" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Seus pontos fortes</h3>
+          <ul className="space-y-2">
+            {r.report.strengths.slice(0, 3).map((s, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                <span className="text-brand-500 mt-0.5">✓</span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
+  if (testType === 'ARCHETYPE_FEMININE') {
+    const r = result as {
+      dominant: string
+      secondary: string
+      toActivate: string
+      percentages: Record<string, number>
+      report: { name: string; title: string; goddess: string; tagline: string; essence: string; strengths: string[] }
+      secondaryReport: { name: string; title: string }
+      activationReport: { name: string; activationTip: string }
+    }
+
+    const topThree = Object.entries(r.percentages)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 3)
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-violet-600 text-white text-2xl font-bold mb-4">
+            {r.report.name.charAt(0)}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="text-violet-600 font-medium text-sm mt-1">{r.report.title}</p>
+          <p className="text-gray-400 text-xs mt-1">Deusa: {r.report.goddess} · "{r.report.tagline}"</p>
+        </div>
+
+        <div className="card p-4 bg-violet-50 border-violet-200">
+          <p className="text-xs font-semibold text-violet-700 mb-1">Essência</p>
+          <p className="text-sm text-violet-800">{r.report.essence}</p>
+        </div>
+
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Top 3 energias</h3>
+          <div className="space-y-2">
+            {topThree.map(([name, pct], i) => (
+              <div key={name}>
+                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                  <span className="font-medium">{i === 0 ? '★ ' : ''}{name}</span>
+                  <span>{Math.round(pct)}%</span>
+                </div>
+                <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-violet-600 rounded-full" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Suas principais forças</h3>
+          <ul className="space-y-2">
+            {r.report.strengths.slice(0, 3).map((s, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                <span className="text-violet-500 mt-0.5">✓</span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {r.activationReport && (
+          <div className="card p-4 bg-amber-50 border-amber-200">
+            <p className="text-xs font-semibold text-amber-700 mb-1">💫 Energia a ativar: {r.activationReport.name}</p>
+            <p className="text-sm text-amber-800">{r.activationReport.activationTip}</p>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="text-center py-8 text-gray-500">
       Resultado processado com sucesso.
