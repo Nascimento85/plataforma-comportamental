@@ -12,7 +12,14 @@ const CREDIT_PACKS = [
   { pack: 50, price: 'R$ 349,90', priceId: process.env.STRIPE_PRICE_PACK_50, highlight: false },
 ]
 
-export default async function CreditsPage() {
+interface PageProps {
+  searchParams: { success?: string; canceled?: string }
+}
+
+export default async function CreditsPage({ searchParams }: PageProps) {
+  const justPurchased = searchParams.success === '1'
+  const wasCanceled   = searchParams.canceled === '1'
+
   const session = await getSession()
   const companyId = session!.id
 
@@ -33,6 +40,26 @@ export default async function CreditsPage() {
         <h1 className="text-2xl font-bold text-gray-900">Créditos</h1>
         <p className="text-gray-500 mt-1">Cada crédito gera um relatório completo</p>
       </div>
+
+      {/* Banners de feedback do Stripe */}
+      {justPurchased && (
+        <div className="flex items-start gap-3 bg-green-50 border border-green-200 rounded-2xl px-5 py-4">
+          <span className="text-2xl flex-shrink-0">🎉</span>
+          <div>
+            <p className="font-semibold text-green-800">Pagamento confirmado!</p>
+            <p className="text-sm text-green-700 mt-0.5">Seus créditos já foram adicionados ao saldo e estão disponíveis para uso imediato.</p>
+          </div>
+        </div>
+      )}
+      {wasCanceled && (
+        <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-4">
+          <span className="text-2xl flex-shrink-0">⚠️</span>
+          <div>
+            <p className="font-semibold text-amber-800">Pagamento cancelado</p>
+            <p className="text-sm text-amber-700 mt-0.5">Nenhum valor foi cobrado. Você pode tentar novamente quando quiser.</p>
+          </div>
+        </div>
+      )}
 
       <div className="card p-6 flex items-center justify-between">
         <div>

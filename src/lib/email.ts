@@ -154,6 +154,187 @@ function buildEmailHtml(input: SendAssessmentEmailInput): string {
 </html>`
 }
 
+// ── E-mail de conclusão do teste ─────────────────────────────────────────────
+
+export interface TestCompletionInput {
+  employeeName:  string
+  employeeEmail: string
+  companyName:   string
+  companyEmail:  string
+  testType:      string
+  assessmentId:  string
+}
+
+/** HTML para a empresa: "Seu colaborador finalizou o teste" */
+function buildCompletionHtmlForCompany(input: TestCompletionInput): string {
+  const { employeeName, companyName, testType, assessmentId } = input
+  const testLabel   = TEST_LABELS[testType] ?? testType
+  const resultLink  = `${APP_URL}/dashboard/assessments/${assessmentId}`
+  const today       = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
+
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"/><title>Teste concluído — ${APP_NAME}</title></head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+        <tr>
+          <td style="background:#2a47f5;border-radius:12px 12px 0 0;padding:32px 40px;text-align:center;">
+            <div style="font-size:40px;margin-bottom:12px;">✅</div>
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">Avaliação concluída!</h1>
+            <p style="margin:8px 0 0;color:rgba(255,255,255,0.8);font-size:14px;">${testLabel}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#ffffff;padding:40px;">
+            <p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#111827;">Olá, ${companyName}!</p>
+            <p style="margin:0 0 24px;font-size:15px;color:#4b5563;line-height:1.6;">
+              <strong>${employeeName}</strong> finalizou o teste <strong>${testLabel}</strong> em ${today}.
+              O relatório completo já está disponível na plataforma.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+              <tr><td align="center">
+                <a href="${resultLink}" style="display:inline-block;background:#2a47f5;color:#ffffff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 40px;border-radius:10px;">
+                  Ver devolutiva completa →
+                </a>
+              </td></tr>
+            </table>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px 18px;">
+              <p style="margin:0;font-size:13px;color:#166534;">
+                💡 Você também pode baixar o PDF do relatório diretamente na plataforma,
+                ou compartilhar o link público da devolutiva com o colaborador.
+              </p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-radius:0 0 12px 12px;padding:20px 40px;border-top:1px solid #e5e7eb;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">© ${new Date().getFullYear()} ${APP_NAME} — Avaliações Comportamentais</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+}
+
+/** HTML para o colaborador: "Seu resultado está pronto" */
+function buildResultHtmlForEmployee(input: TestCompletionInput): string {
+  const { employeeName, companyName, testType, assessmentId } = input
+  const firstName   = employeeName.split(' ')[0]
+  const testLabel   = TEST_LABELS[testType] ?? testType
+  const publicLink  = `${APP_URL}/result/${assessmentId}`
+  const today       = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
+
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"/><title>Seu resultado — ${testLabel}</title></head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+        <tr>
+          <td style="background:#2a47f5;border-radius:12px 12px 0 0;padding:32px 40px;text-align:center;">
+            <div style="font-size:40px;margin-bottom:12px;">🎯</div>
+            <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">Seu resultado está pronto!</h1>
+            <p style="margin:8px 0 0;color:rgba(255,255,255,0.8);font-size:14px;">${testLabel}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#ffffff;padding:40px;">
+            <p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#111827;">Parabéns, ${firstName}! 🎉</p>
+            <p style="margin:0 0 24px;font-size:15px;color:#4b5563;line-height:1.6;">
+              Você concluiu a avaliação <strong>${testLabel}</strong> em ${today}, solicitada por <strong>${companyName}</strong>.
+              Sua devolutiva completa está disponível no link abaixo — um relatório profundo e personalizado sobre o seu perfil.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+              <tr><td align="center">
+                <a href="${publicLink}" style="display:inline-block;background:#2a47f5;color:#ffffff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 40px;border-radius:10px;">
+                  Ver minha devolutiva →
+                </a>
+              </td></tr>
+            </table>
+            <div style="background:#f0f4ff;border-left:4px solid #2a47f5;border-radius:6px;padding:14px 18px;margin-bottom:24px;">
+              <p style="margin:0;font-size:13px;color:#374151;line-height:1.6;">
+                A devolutiva inclui seu perfil completo, pontos fortes, áreas de desenvolvimento,
+                estilo de liderança e muito mais. Guarde este link — você pode acessá-lo a qualquer momento.
+              </p>
+            </div>
+            <p style="margin:0 0 6px;font-size:13px;color:#6b7280;">Link direto para o seu resultado:</p>
+            <p style="margin:0;font-size:12px;color:#2a47f5;word-break:break-all;">${publicLink}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-radius:0 0 12px 12px;padding:20px 40px;border-top:1px solid #e5e7eb;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">© ${new Date().getFullYear()} ${APP_NAME} — Avaliações Comportamentais</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+}
+
+/** Envia notificação de conclusão para a empresa, colaborador e admin */
+export async function sendTestCompletionNotifications(
+  input: TestCompletionInput
+): Promise<void> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada — notificações não enviadas.')
+    return
+  }
+
+  const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'kenio.araujo@live.com'
+  const testLabel   = TEST_LABELS[input.testType] ?? input.testType
+
+  const sends = [
+    // 1. Para a empresa (admin da conta)
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from:    `${FROM_NAME} <${FROM_EMAIL}>`,
+        to:      [input.companyEmail],
+        subject: `[${APP_NAME}] ${input.employeeName} finalizou a avaliação ${testLabel}`,
+        html:    buildCompletionHtmlForCompany(input),
+      }),
+    }),
+    // 2. Para o colaborador
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from:    `${FROM_NAME} <${FROM_EMAIL}>`,
+        to:      [input.employeeEmail],
+        subject: `Sua devolutiva ${testLabel} está pronta! 🎯`,
+        html:    buildResultHtmlForEmployee(input),
+      }),
+    }),
+    // 3. Para o admin da plataforma (owner)
+    ADMIN_EMAIL !== input.companyEmail
+      ? fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from:    `${FROM_NAME} <${FROM_EMAIL}>`,
+            to:      [ADMIN_EMAIL],
+            subject: `[Admin] Teste concluído — ${input.employeeName} (${input.companyName}) · ${testLabel}`,
+            html:    buildCompletionHtmlForCompany({ ...input, companyName: `${input.companyName} [via Admin]` }),
+          }),
+        })
+      : Promise.resolve(),
+  ]
+
+  await Promise.allSettled(sends)
+    .then((results) => {
+      results.forEach((r, i) => {
+        if (r.status === 'rejected') console.error(`[email] Falha no envio ${i}:`, r.reason)
+      })
+    })
+    .catch(console.error)
+}
+
 // ── E-mail de recuperação de senha ───────────────────────────────────────────
 
 function buildPasswordResetHtml(name: string, resetLink: string): string {
