@@ -7,7 +7,7 @@ const nextConfig = {
           ignoreDuringBuilds: true,
     },
     experimental: {
-          serverComponentsExternalPackages: ['@prisma/client', 'prisma', '@react-pdf/renderer'],
+          serverComponentsExternalPackages: ['@prisma/client', 'prisma', '@react-pdf/renderer', 'puppeteer-core', '@sparticuz/chromium'],
     },
     images: {
           remotePatterns: [
