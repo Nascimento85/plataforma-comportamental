@@ -62,7 +62,7 @@ export default async function AdminPage() {
 
       {/* Header */}
       <div>
-        <h1 className="font-serif font-light text-3xl text-soul-ink">Painel Administrativo</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink">Painel Administrativo</h1>
         <p className="text-sm text-soul-ink/45 mt-1 font-sans">Visão geral de toda a plataforma</p>
       </div>
 
@@ -81,7 +81,7 @@ export default async function AdminPage() {
               <span className="text-[10px] font-sans font-semibold uppercase tracking-widest"
                     style={{ color: 'rgba(28,26,23,0.4)' }}>{s.label}</span>
             </div>
-            <div className="font-serif font-light leading-none" style={{ fontSize: '36px', color: s.color }}>
+            <div className="font-serif font-semibold leading-none" style={{ fontSize: '36px', color: s.color }}>
               {s.value}
             </div>
           </div>
@@ -104,7 +104,7 @@ export default async function AdminPage() {
                  style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${t.dot}`} />
               <div>
-                <div className="font-serif font-light text-2xl text-soul-ink leading-none">{t.value}</div>
+                <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{t.value}</div>
                 <div className="text-[11px] text-soul-ink/40 mt-0.5 font-sans">{t.label}</div>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default async function AdminPage() {
         <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
           <div className="flex items-center justify-between px-6 py-4"
                style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
-            <h2 className="font-serif font-light text-lg text-soul-ink flex items-center gap-2">
+            <h2 className="font-serif font-semibold text-lg text-soul-ink flex items-center gap-2">
               <span>📋</span> Últimos concluídos
             </h2>
             <Link href="/admin/assessments"
@@ -152,7 +152,7 @@ export default async function AdminPage() {
         {/* Empresas recentes */}
         <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
           <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
-            <h2 className="font-serif font-light text-lg text-soul-ink flex items-center gap-2">
+            <h2 className="font-serif font-semibold text-lg text-soul-ink flex items-center gap-2">
               <span>🏢</span> Empresas recentes
             </h2>
           </div>

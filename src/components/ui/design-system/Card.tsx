@@ -68,7 +68,7 @@ export function SectionHeader({
 }) {
   return (
     <div className={`flex items-center justify-between mb-5 ${className}`}>
-      <h2 className="font-serif font-light text-xl text-soul-ink flex items-center gap-2.5">
+      <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
         {icon && (
           <span className="w-7 h-7 rounded-lg bg-soul-terracota/10 flex items-center justify-center text-sm flex-shrink-0">
             {icon}

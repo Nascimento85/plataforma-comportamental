@@ -3,92 +3,41 @@
 import { ReactNode, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+// ═══════════════════════════════════════════════════════════════
+// CATÁLOGO DE TESTES — 3 Categorias Executivas
+// ═══════════════════════════════════════════════════════════════
+
+export type CategoryKey = 'ARCHETYPE' | 'BEHAVIORAL' | 'RELATIONSHIPS'
+
 interface TestType {
   value: string
-  label: string        // Nome completo — sem abreviação
+  label: string
   short: string
+  category: CategoryKey
   credits: number
   image: string
-  hook: string         // Linha de gancho / promessa
-  description: string  // Descrição persuasiva, voltada a decisão de compra
-  bullets: string[]    // Benefícios rápidos em bullets
+  hook: string
+  description: string
+  bullets: string[]
   badge?: string
 }
 
 const TEST_TYPES: TestType[] = [
-  {
-    value: 'DISC',
-    label: 'DISC — Perfil Comportamental Completo',
-    short: 'DISC',
-    credits: 1,
-    image: '/tests/disc.jpg',
-    hook: 'A ferramenta mais usada no mundo corporativo.',
-    description:
-      'Revele em minutos como o candidato decide, lidera e se comunica. O DISC identifica as quatro forças comportamentais que regem cada pessoa — e mostra exatamente como maximizar sua performance em qualquer ambiente.',
-    bullets: [
-      'Mapa completo de Dominância, Influência, Estabilidade e Conformidade',
-      'Indica cargos e funções de alta compatibilidade',
-      'Relatório PDF pronto para devolutiva com o colaborador',
-    ],
-  },
-  {
-    value: 'MBTI',
-    label: 'MBTI — 16 Tipos de Personalidade',
-    short: 'MBTI',
-    credits: 1,
-    image: '/tests/mbti.jpg',
-    hook: 'Baseado em Carl Jung. Usado por Fortune 500.',
-    description:
-      'O MBTI decodifica as preferências cognitivas em 4 dimensões para identificar entre 16 tipos de personalidade. É o mapa mais profundo disponível para entender como cada pessoa pensa, decide e se energiza.',
-    bullets: [
-      '70 questões validadas cientificamente',
-      'Reveste o tipo dominante, auxiliar, terciário e inferior',
-      'Aplicação direta em formação de times e coaching',
-    ],
-  },
-  {
-    value: 'ENNEAGRAM',
-    label: 'Eneagrama de Personalidade — Os 9 Tipos',
-    short: 'Eneagrama',
-    credits: 1,
-    image: '/tests/eneagrama.jpg',
-    hook: 'Usado pela NASA e pelo Vale do Silício.',
-    description:
-      'O Eneagrama vai além do comportamento aparente: revela a motivação oculta por trás de cada ação, o medo nuclear que trava o desenvolvimento e o caminho exato para a versão mais madura da pessoa. Ferramenta definitiva para líderes de alta complexidade.',
-    bullets: [
-      '135 afirmações cruzadas para mapear os 9 tipos',
-      'Identifica motivação raiz, medo básico e vetores de crescimento',
-      'Asas, instintos e níveis de saúde emocional',
-    ],
-  },
-  {
-    value: 'TEMPERAMENT',
-    label: '4 Temperamentos Clássicos',
-    short: 'Temperamentos',
-    credits: 1,
-    image: '/tests/temperamentos.jpg',
-    hook: 'A base milenar de Hipócrates para o comportamento humano.',
-    description:
-      'Identifica as quatro inclinações inatas — Colérico, Sanguíneo, Melancólico e Fleumático — que determinam como a pessoa reage ao mundo. É a "matéria-prima" comportamental que nenhum outro teste captura com tanta precisão.',
-    bullets: [
-      'Teste rápido e de leitura imediata (25 questões)',
-      'Perfil primário + secundário com estilo de comunicação e trabalho',
-      'Indicadores de funções ideais por temperamento',
-    ],
-  },
+  // ── Categoria 1: Arquétipos ─────────────────────────────────
   {
     value: 'ARCHETYPE',
     label: 'Arquétipos Junguianos — Os 12 Padrões Universais',
     short: 'Arquétipos',
+    category: 'ARCHETYPE',
     credits: 2,
     image: '/tests/arquetipo-misto.jpg',
-    hook: 'O teste mais profundo e completo da plataforma.',
+    hook: 'O mapa mais profundo da plataforma.',
     description:
-      'Baseado na psicologia analítica de Carl Jung, descobre qual dos 12 arquétipos universais está no comando da personalidade — e como isso molda decisões, liderança, relacionamentos e resultados. Esse é o mapa que revela a força-motriz invisível por trás de tudo.',
+      'Baseado na psicologia analítica de Carl Jung. Identifica qual dos 12 padrões arquetípicos está no comando de uma pessoa — e revela a força-motriz invisível por trás de decisões, liderança e posicionamento. Leitura executiva para fundadores, C-level e líderes em transição de carreira.',
     bullets: [
       'Arquétipo dominante + secundário com leitura integrada',
       'Dom, sombra e jornada de amadurecimento de cada padrão',
-      'Relatório mais extenso e detalhado da plataforma',
+      'Aplicação direta em sucessão, coaching e posicionamento de carreira',
     ],
     badge: 'Mais completo',
   },
@@ -96,51 +45,143 @@ const TEST_TYPES: TestType[] = [
     value: 'ARCHETYPE_FEMININE',
     label: 'Arquétipos Femininos — As 7 Energias',
     short: 'Arq. Femininos',
+    category: 'ARCHETYPE',
     credits: 2,
     image: '/tests/arquetipo-feminino.jpg',
-    hook: 'Exclusivo para decodificar o feminino de lideranças.',
+    hook: 'O divino feminino aplicado à liderança.',
     description:
-      'Identifica qual das 7 energias arquetípicas femininas governa o momento atual — Mãe, Virgem, Amazona, Sábia, Mística, Sacerdotisa e Feiticeira — e qual precisa ser ativada para liderança e equilíbrio plenos. Ferramenta indispensável para coaching feminino e desenvolvimento de líderes mulheres.',
+      'Mapeia qual das 7 energias arquetípicas femininas governa o momento atual — Mãe, Virgem, Amazona, Sábia, Mística, Sacerdotisa e Feiticeira. Diagnóstico da energia ativa e da que precisa ser ativada para plenitude de comando. Ferramenta indispensável para programas de liderança feminina.',
     bullets: [
-      'Diagnóstico de energia ativa + energia a desenvolver',
-      'Aplicação direta em liderança feminina e mentoria',
-      'Leitura integrada com fases de vida e ciclos profissionais',
+      'Energia dominante + energia a desenvolver no ciclo atual',
+      'Leitura integrada com fases profissionais e de carreira',
+      'Aplicação em mentoria, coaching e desenvolvimento de líderes mulheres',
     ],
     badge: 'Exclusivo',
   },
+
+  // ── Categoria 2: Análises Comportamentais ───────────────────
   {
-    value: 'LOVE_LANGUAGES',
-    label: 'As 5 Linguagens do Amor — Gary Chapman',
-    short: 'Ling. Amor',
-    credits: 4,
-    image: '/tests/linguagens-amor.jpg',
-    hook: 'Best-seller mundial aplicado a relacionamentos e liderança.',
+    value: 'DISC',
+    label: 'DISC — Perfil Comportamental Completo',
+    short: 'DISC',
+    category: 'BEHAVIORAL',
+    credits: 1,
+    image: '/tests/disc.jpg',
+    hook: 'A ferramenta mais usada no mundo corporativo.',
     description:
-      'Identifica a linguagem primária de amor de cada pessoa — como ela se sente mais valorizada e reconhecida. Tem aplicação direta em casais, mas também em liderança: revela como elogiar, reconhecer e motivar cada membro da equipe no nível emocional mais profundo.',
+      'Revela as quatro forças que regem o comportamento no trabalho — Dominância, Influência, Estabilidade e Conformidade. A lente de entrada para entender como cada pessoa executa, decide sob pressão e o que a trava em função. Base técnica para composição de times e alinhamento de cultura.',
     bullets: [
-      'Palavras de afirmação, tempo de qualidade, presentes, atos de serviço, toque físico',
-      'Ranking completo das 5 linguagens com percentuais',
-      'Guia prático de aplicação em relacionamentos e gestão de pessoas',
+      'Mapa completo de D, I, S e C com perfil dominante',
+      'Indica cargos, funções e ambientes de alta compatibilidade',
+      'Relatório PDF pronto para devolutiva executiva',
     ],
-    badge: 'Novo',
+  },
+  {
+    value: 'MBTI',
+    label: 'MBTI — 16 Tipos de Personalidade',
+    short: 'MBTI',
+    category: 'BEHAVIORAL',
+    credits: 1,
+    image: '/tests/mbti.jpg',
+    hook: 'Baseado em Carl Jung. Usado por Fortune 500.',
+    description:
+      'Decodifica as preferências cognitivas que moldam decisão e comunicação. Identifica 1 entre 16 tipos de personalidade e é a base para alinhar estilos de liderança, montar times complementares e conduzir coaching executivo de alta profundidade.',
+    bullets: [
+      '70 questões validadas cientificamente',
+      'Perfil dominante, auxiliar, terciário e inferior',
+      'Aplicação em formação de times e planos de sucessão',
+    ],
+  },
+  {
+    value: 'ENNEAGRAM',
+    label: 'Eneagrama de Personalidade — Os 9 Tipos',
+    short: 'Eneagrama',
+    category: 'BEHAVIORAL',
+    credits: 1,
+    image: '/tests/eneagrama.jpg',
+    hook: 'Usado pela NASA e pelo Vale do Silício.',
+    description:
+      'Vai além do comportamento visível: revela a motivação raiz e o medo nuclear que travam maturidade profissional. Adotado por lideranças de alta complexidade para acelerar desenvolvimento, identificar pontos cegos e direcionar o caminho exato para a versão mais madura do colaborador.',
+    bullets: [
+      '135 afirmações cruzadas para precisão dos 9 tipos',
+      'Motivação raiz, medo básico e vetores de crescimento',
+      'Asas, instintos e níveis de saúde emocional',
+    ],
+  },
+  {
+    value: 'TEMPERAMENT',
+    label: '4 Personalidades — Temperamentos Clássicos',
+    short: 'Temperamentos',
+    category: 'BEHAVIORAL',
+    credits: 1,
+    image: '/tests/temperamentos.jpg',
+    hook: 'A matéria-prima comportamental inata.',
+    description:
+      'Identifica as quatro inclinações naturais — Colérico, Sanguíneo, Melancólico e Fleumático — que determinam como uma pessoa reage, comunica e ocupa espaço em um time. Leitura rápida e precisa para gestores que precisam calibrar pessoas no dia a dia operacional.',
+    bullets: [
+      'Teste ágil e de leitura imediata (25 questões)',
+      'Perfil primário + secundário com estilo de trabalho e comunicação',
+      'Indica funções e dinâmicas ideais para cada temperamento',
+    ],
   },
   {
     value: 'BUNDLE_4',
     label: 'Bundle Completo — 4 Testes Comportamentais',
     short: 'Bundle 4',
+    category: 'BEHAVIORAL',
     credits: 4,
     image: '/tests/disc.jpg',
     hook: 'O raio-X comportamental definitivo. Um link, quatro testes.',
     description:
-      'DISC, MBTI, Eneagrama e 4 Temperamentos em um único envio. O colaborador responde os 4 testes em sequência e você recebe uma devolutiva integrada que cruza os 4 mapas — a leitura mais rica possível sobre uma pessoa. Ideal para executivos, líderes e processos de sucessão.',
+      'DISC, MBTI, Eneagrama e 4 Temperamentos em um único envio. O colaborador responde os 4 testes em sequência e você recebe uma devolutiva integrada gerada por IA que cruza os 4 mapas. Ideal para avaliação de executivos, processos de sucessão e contratações-chave.',
     bullets: [
-      'Um único link de envio — os 4 testes em sequência',
-      'Relatório integrado gerado por IA cruzando os 4 perfis',
+      'Um único link — os 4 testes em sequência',
+      'Relatório integrado gerado por IA cruzando os perfis',
       'Economia de 20% comparado ao envio individual',
     ],
     badge: 'Mais completo',
   },
+
+  // ── Categoria 3: Inteligência em Relacionamentos ────────────
+  {
+    value: 'LOVE_LANGUAGES',
+    label: 'As 5 Linguagens do Amor — Aplicadas à Liderança',
+    short: 'Ling. do Amor',
+    category: 'RELATIONSHIPS',
+    credits: 4,
+    image: '/tests/linguagens-amor.jpg',
+    hook: 'Comunicação afetiva convertida em cultura.',
+    description:
+      'Baseado no best-seller de Gary Chapman. Identifica como cada colaborador se sente mais reconhecido: palavras de afirmação, tempo de qualidade, presentes, atos de serviço ou toque/proximidade. Em liderança, é o guia preciso para elogiar, motivar e construir pertencimento real — convertendo afeto em retenção e espírito de equipe.',
+    bullets: [
+      'Ranking completo das 5 linguagens com percentuais',
+      'Aplicação direta em reconhecimento, feedback e retenção',
+      'Ferramenta de harmonização para times e relações profissionais',
+    ],
+    badge: 'Exclusivo',
+  },
 ]
+
+const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = {
+  ARCHETYPE: {
+    title: 'Arquétipos',
+    subtitle: 'O mapa profundo da motivação',
+  },
+  BEHAVIORAL: {
+    title: 'Análises Comportamentais',
+    subtitle: 'Foco em performance e produtividade',
+  },
+  RELATIONSHIPS: {
+    title: 'Inteligência em Relacionamentos',
+    subtitle: 'Harmonia, pertencimento e comunicação',
+  },
+}
+
+const CATEGORY_ORDER: CategoryKey[] = ['ARCHETYPE', 'BEHAVIORAL', 'RELATIONSHIPS']
+
+// ═══════════════════════════════════════════════════════════════
+// Componente
+// ═══════════════════════════════════════════════════════════════
 
 interface SuccessState {
   link: string
@@ -151,12 +192,22 @@ interface SuccessState {
 interface Props {
   children?: ReactNode
   variant?: 'primary' | 'secondary'
+  /** Pré-seleciona a primeira avaliação da categoria ao abrir o modal */
+  initialCategory?: CategoryKey
 }
 
-export default function NewAssessmentButton({ children, variant = 'primary' }: Props) {
+export default function NewAssessmentButton({ children, variant = 'primary', initialCategory }: Props) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
-  const [form, setForm] = useState({ employeeName: '', employeeEmail: '', testType: 'DISC' })
+
+  const defaultTest =
+    (initialCategory && TEST_TYPES.find((t) => t.category === initialCategory)?.value) ?? 'ARCHETYPE'
+
+  const [form, setForm] = useState({
+    employeeName: '',
+    employeeEmail: '',
+    testType: defaultTest,
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState<SuccessState | null>(null)
@@ -208,7 +259,12 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
 
   function handleClose() {
     setOpen(false); setSuccess(null); setError(''); setCopied(false)
-    setForm({ employeeName: '', employeeEmail: '', testType: 'DISC' })
+    setForm({ employeeName: '', employeeEmail: '', testType: defaultTest })
+  }
+
+  function handleOpen() {
+    setForm((prev) => ({ ...prev, testType: defaultTest }))
+    setOpen(true)
   }
 
   const triggerClasses = variant === 'secondary'
@@ -216,12 +272,12 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
     : 'inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra'
 
   const triggerStyle = variant === 'secondary'
-    ? { borderColor: 'rgba(196,99,58,0.4)', color: '#c4633a' }
+    ? { borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }
     : { background: 'linear-gradient(135deg, #c4633a, #d4943a)' }
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className={triggerClasses} style={triggerStyle}>
+      <button onClick={handleOpen} className={triggerClasses} style={triggerStyle}>
         {children ?? (
           <>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -235,10 +291,9 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
       {open && (
         <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center bg-soul-ink/60 px-3 md:px-6 py-6 backdrop-blur-sm overflow-y-auto">
           <div
-            className="bg-white rounded-3xl shadow-soul-xl w-full max-w-4xl my-auto"
+            className="bg-white rounded-3xl shadow-soul-xl w-full max-w-5xl my-auto"
             style={{ border: '1px solid rgba(232,226,214,0.6)' }}
           >
-
             {success ? (
               /* ──────────────── Sucesso ──────────────── */
               <div className="p-6 md:p-10 text-center">
@@ -246,27 +301,27 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                 <h3 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink mb-3 leading-tight">
                   Avaliação criada com sucesso!
                 </h3>
-                <p className="text-[16px] text-soul-ink/75 font-medium mb-6 max-w-lg mx-auto">
+                <p className="text-[16px] text-soul-ink font-medium mb-6 max-w-lg mx-auto">
                   O link único foi gerado e está pronto para ser enviado ao candidato.
                 </p>
 
                 {success.emailSent ? (
                   <div className="flex items-center justify-center gap-2 rounded-2xl px-5 py-4 mb-6 text-[15px] font-sans font-semibold"
-                       style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.35)', color: '#3a6b3e' }}>
+                       style={{ background: 'rgba(122,158,126,0.18)', border: '1px solid rgba(122,158,126,0.4)', color: '#2f5c33' }}>
                     <span className="text-xl">📧</span>
                     <span>E-mail enviado para <strong>{success.employeeEmail}</strong></span>
                   </div>
                 ) : (
                   <div className="flex items-center justify-center gap-2 rounded-2xl px-5 py-4 mb-6 text-[15px] font-sans font-semibold"
-                       style={{ background: 'rgba(212,148,58,0.12)', border: '1px solid rgba(212,148,58,0.35)', color: '#8a5c1e' }}>
+                       style={{ background: 'rgba(212,148,58,0.15)', border: '1px solid rgba(212,148,58,0.4)', color: '#7a4f17' }}>
                     <span className="text-xl">⚠</span>
                     <span>E-mail não enviado — compartilhe o link manualmente</span>
                   </div>
                 )}
 
-                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/60 mb-2">Link do teste</p>
-                <div className="rounded-2xl p-4 text-[13px] font-mono break-all text-soul-ink/85 mb-6 text-left font-semibold"
-                     style={{ background: 'rgba(232,226,214,0.4)', border: '1px solid rgba(232,226,214,0.8)' }}>
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75 mb-2">Link do teste</p>
+                <div className="rounded-2xl p-4 text-[13px] font-mono break-all text-soul-ink mb-6 text-left font-semibold"
+                     style={{ background: 'rgba(232,226,214,0.5)', border: '1px solid rgba(232,226,214,0.9)' }}>
                   {success.link}
                 </div>
 
@@ -274,7 +329,7 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                   <button
                     onClick={handleCopy}
                     className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all"
-                    style={{ borderColor: 'rgba(196,99,58,0.4)', color: '#c4633a' }}
+                    style={{ borderColor: 'rgba(196,99,58,0.5)', color: '#a8522e' }}
                   >
                     {copied ? '✓ Link copiado!' : '📋 Copiar link'}
                   </button>
@@ -291,20 +346,20 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
               /* ──────────────── Formulário ──────────────── */
               <div className="flex flex-col lg:flex-row">
 
-                {/* ── Coluna esquerda: formulário ── */}
-                <div className="lg:w-[44%] p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-soul-mist/60">
+                {/* ── Coluna esquerda: formulário + categorias ── */}
+                <div className="lg:w-[46%] p-6 md:p-8 border-b lg:border-b-0 lg:border-r border-soul-mist/70">
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h3 className="font-serif font-semibold text-2xl md:text-3xl text-soul-ink leading-tight">
                         Nova avaliação
                       </h3>
-                      <p className="text-[14px] text-soul-ink/70 font-medium mt-1">
+                      <p className="text-[14px] text-soul-ink/80 font-medium mt-1">
                         Envie um teste em menos de 30 segundos.
                       </p>
                     </div>
                     <button
                       onClick={handleClose}
-                      className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/50 hover:text-soul-ink hover:bg-soul-mist/60 transition-all text-2xl leading-none font-light"
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/70 hover:text-soul-ink hover:bg-soul-mist/60 transition-all text-2xl leading-none font-medium"
                       aria-label="Fechar"
                     >
                       ×
@@ -314,65 +369,84 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                   <form onSubmit={handleCreate} className="space-y-5">
                     {error && (
                       <div className="rounded-2xl px-4 py-3 text-[14px] font-sans font-semibold"
-                           style={{ background: 'rgba(196,122,114,0.12)', border: '1px solid rgba(196,122,114,0.35)', color: '#8a4a42' }}>
+                           style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
                         {error}
                       </div>
                     )}
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/70 uppercase tracking-widest mb-2">
+                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
                         Nome do candidato
                       </label>
                       <input
                         type="text" required value={form.employeeName}
                         onChange={(e) => update('employeeName', e.target.value)}
-                        className="soul-input text-[15px] font-medium py-3.5" placeholder="João Silva"
+                        className="soul-input text-[15px] font-semibold py-3.5" placeholder="João Silva"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/70 uppercase tracking-widest mb-2">
+                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
                         E-mail do candidato
                       </label>
                       <input
                         type="email" required value={form.employeeEmail}
                         onChange={(e) => update('employeeEmail', e.target.value)}
-                        className="soul-input text-[15px] font-medium py-3.5" placeholder="joao@empresa.com"
+                        className="soul-input text-[15px] font-semibold py-3.5" placeholder="joao@empresa.com"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/70 uppercase tracking-widest mb-2">
-                        Tipo de avaliação
+                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-3">
+                        Categoria e avaliação
                       </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {TEST_TYPES.map((t) => {
-                          const active = form.testType === t.value
+
+                      <div className="space-y-4">
+                        {CATEGORY_ORDER.map((catKey) => {
+                          const meta = CATEGORY_META[catKey]
+                          const tests = TEST_TYPES.filter((t) => t.category === catKey)
                           return (
-                            <button
-                              key={t.value}
-                              type="button"
-                              onClick={() => update('testType', t.value)}
-                              className="relative text-left rounded-2xl p-3 transition-all duration-150"
-                              style={{
-                                border: active ? '2px solid #c4633a' : '1.5px solid rgba(232,226,214,0.9)',
-                                background: active ? 'rgba(196,99,58,0.06)' : 'white',
-                              }}
-                            >
-                              {t.badge && (
-                                <span className="absolute top-1.5 right-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full font-sans"
-                                      style={{ background: 'rgba(212,148,58,0.2)', color: '#8a5c1e' }}>
-                                  {t.badge}
+                            <div key={catKey}>
+                              <div className="flex items-baseline justify-between mb-2">
+                                <p className="font-serif text-[15px] font-semibold text-soul-ink leading-tight">
+                                  {meta.title}
+                                </p>
+                                <span className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota">
+                                  {tests.length} {tests.length === 1 ? 'teste' : 'testes'}
                                 </span>
-                              )}
-                              <p className="text-[14px] font-bold mb-0.5 font-sans leading-tight"
-                                 style={{ color: active ? '#c4633a' : '#1c1a17' }}>
-                                {t.short}
-                              </p>
-                              <p className="text-[12px] font-sans font-semibold" style={{ color: 'rgba(28,26,23,0.55)' }}>
-                                {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
-                              </p>
-                            </button>
+                              </div>
+                              <div className="grid grid-cols-2 gap-2">
+                                {tests.map((t) => {
+                                  const active = form.testType === t.value
+                                  return (
+                                    <button
+                                      key={t.value}
+                                      type="button"
+                                      onClick={() => update('testType', t.value)}
+                                      className="relative text-left rounded-2xl p-3 transition-all duration-150"
+                                      style={{
+                                        border: active ? '2px solid #c4633a' : '1.5px solid rgba(232,226,214,1)',
+                                        background: active ? 'rgba(196,99,58,0.08)' : 'white',
+                                      }}
+                                    >
+                                      {t.badge && (
+                                        <span className="absolute top-1.5 right-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full font-sans"
+                                              style={{ background: 'rgba(212,148,58,0.25)', color: '#7a4f17' }}>
+                                          {t.badge}
+                                        </span>
+                                      )}
+                                      <p className="text-[14px] font-bold mb-0.5 font-sans leading-tight"
+                                         style={{ color: active ? '#a8522e' : '#1c1a17' }}>
+                                        {t.short}
+                                      </p>
+                                      <p className="text-[12px] font-sans font-semibold" style={{ color: 'rgba(28,26,23,0.75)' }}>
+                                        {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
+                                      </p>
+                                    </button>
+                                  )
+                                })}
+                              </div>
+                            </div>
                           )
                         })}
                       </div>
@@ -382,7 +456,7 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                       <button
                         type="button" onClick={handleClose}
                         className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all"
-                        style={{ borderColor: 'rgba(232,226,214,1)', color: 'rgba(28,26,23,0.7)' }}
+                        style={{ borderColor: 'rgba(28,26,23,0.25)', color: 'rgba(28,26,23,0.85)' }}
                       >
                         Cancelar
                       </button>
@@ -398,11 +472,11 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                 </div>
 
                 {/* ── Coluna direita: preview vendedor ── */}
-                <div className="lg:w-[56%] p-6 md:p-8 relative overflow-hidden"
-                     style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f5f0e8 100%)' }}>
+                <div className="lg:w-[54%] p-6 md:p-8 relative overflow-hidden"
+                     style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
 
                   {/* Imagem */}
-                  <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist/70">
+                  <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist">
                     <img
                       src={selectedTest.image}
                       alt={selectedTest.label}
@@ -411,36 +485,40 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                     />
                   </div>
 
-                  {/* Badge de créditos */}
-                  <div className="flex items-center gap-3 mb-3">
+                  {/* Badges */}
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
                     <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                          style={{ background: 'rgba(196,99,58,0.12)', color: '#c4633a' }}>
+                          style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
                       {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
+                    </span>
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wider"
+                          style={{ background: 'rgba(28,26,23,0.1)', color: '#1c1a17' }}>
+                      {CATEGORY_META[selectedTest.category].title}
                     </span>
                     {selectedTest.badge && (
                       <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                            style={{ background: 'rgba(212,148,58,0.18)', color: '#8a5c1e' }}>
+                            style={{ background: 'rgba(212,148,58,0.22)', color: '#7a4f17' }}>
                         ✦ {selectedTest.badge}
                       </span>
                     )}
                   </div>
 
-                  {/* Nome completo — fonte grande */}
+                  {/* Nome completo */}
                   <h4 className="font-serif font-semibold text-[22px] md:text-[26px] text-soul-ink leading-tight mb-2">
                     {selectedTest.label}
                   </h4>
 
-                  {/* Gancho de vendas */}
+                  {/* Gancho */}
                   <p className="text-[15px] font-bold text-soul-terracota mb-4 leading-snug italic">
                     {selectedTest.hook}
                   </p>
 
-                  {/* Descrição persuasiva */}
-                  <p className="text-[15px] text-soul-ink/85 leading-relaxed font-medium mb-5">
+                  {/* Descrição executiva */}
+                  <p className="text-[15px] text-soul-ink leading-relaxed font-medium mb-5">
                     {selectedTest.description}
                   </p>
 
-                  {/* Bullets de benefícios */}
+                  {/* Bullets */}
                   <div className="space-y-2.5">
                     {selectedTest.bullets.map((b, i) => (
                       <div key={i} className="flex items-start gap-3">
@@ -455,7 +533,6 @@ export default function NewAssessmentButton({ children, variant = 'primary' }: P
                 </div>
               </div>
             )}
-
           </div>
         </div>
       )}

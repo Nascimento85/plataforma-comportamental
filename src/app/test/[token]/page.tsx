@@ -69,7 +69,7 @@ export default async function TestPage({ params }: PageProps) {
         <div className="space-y-5">
           <div className="text-center">
             <div className="text-5xl mb-3">{allBundleDone ? '🏆' : '✅'}</div>
-            <h2 className="font-serif font-light text-2xl text-soul-ink">
+            <h2 className="font-serif font-semibold text-2xl text-soul-ink">
               {allBundleDone ? 'Bundle concluído!' : 'Teste concluído!'}
             </h2>
             <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.5)' }}>
@@ -145,7 +145,7 @@ export default async function TestPage({ params }: PageProps) {
       <TestShell>
         <div className="text-center py-16">
           <div className="text-6xl mb-4">⏰</div>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">Link expirado</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">Link expirado</h2>
           <p className="text-sm font-sans mt-2" style={{ color: 'rgba(28,26,23,0.5)' }}>
             Este link de avaliação expirou. Solicite um novo link à sua empresa.
           </p>

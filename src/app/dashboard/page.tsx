@@ -179,7 +179,7 @@ export default async function DashboardPage() {
               style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
             />
             <div className="text-xl mb-2">💡</div>
-            <div className="font-serif font-light text-sm text-white leading-snug mb-2">
+            <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
               Insight do seu arquétipo
             </div>
             <p className="text-xs text-white/55 leading-relaxed">

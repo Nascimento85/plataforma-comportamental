@@ -67,17 +67,17 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
       {/* Info */}
       <div className="flex-1 relative z-10 min-w-0">
         <div
-          className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase mb-1.5"
-          style={{ color: '#c9a84c' }}
+          className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-2"
+          style={{ color: '#d4b85c' }}
         >
           Seu Arquétipo Dominante
         </div>
-        <div className="font-serif font-light text-4xl text-white leading-none mb-2">
+        <div className="font-serif font-semibold text-4xl md:text-5xl text-white leading-none mb-3">
           O Explorador
         </div>
         <div
-          className="font-display italic text-base leading-relaxed mb-4"
-          style={{ color: 'rgba(255,255,255,0.5)' }}
+          className="font-display italic text-base md:text-lg leading-relaxed mb-5 font-semibold"
+          style={{ color: 'rgba(255,255,255,0.85)' }}
         >
           &ldquo;A liberdade de descobrir novos horizontes é o que move sua alma.&rdquo;
         </div>
@@ -85,8 +85,8 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
           {['Autonomia', 'Curiosidade', 'Aventura', 'Propósito'].map((attr) => (
             <span
               key={attr}
-              className="text-[11px] px-3 py-1 rounded-full font-sans"
-              style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.65)' }}
+              className="text-[12px] font-semibold px-3 py-1.5 rounded-full font-sans"
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.92)' }}
             >
               {attr}
             </span>
@@ -98,28 +98,28 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
       <div className="relative z-10 flex-shrink-0 text-center hidden sm:block">
         <div className="w-20 h-20 relative mb-2">
           <svg viewBox="0 0 80 80" className="w-full h-full" style={{ transform: 'rotate(-90deg)' }}>
-            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="5"/>
+            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="5"/>
             <circle
               cx="40" cy="40" r="34" fill="none"
-              stroke="#c9a84c" strokeWidth="5" strokeLinecap="round"
+              stroke="#d4b85c" strokeWidth="5" strokeLinecap="round"
               strokeDasharray="213.6"
               strokeDashoffset={dashOffset}
               style={{ transition: 'stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-serif text-xl font-semibold text-white leading-none">
+            <span className="font-serif text-xl font-bold text-white leading-none">
               Nv{level}
             </span>
             <span
-              className="text-[9px] font-sans uppercase tracking-wide"
-              style={{ color: '#c9a84c' }}
+              className="text-[10px] font-sans font-bold uppercase tracking-wide"
+              style={{ color: '#d4b85c' }}
             >
               XP
             </span>
           </div>
         </div>
-        <div className="text-[11px] text-white/40 font-sans whitespace-nowrap">
+        <div className="text-[12px] text-white/80 font-sans font-semibold whitespace-nowrap">
           {name.split(' ')[0]} · {label}
         </div>
       </div>

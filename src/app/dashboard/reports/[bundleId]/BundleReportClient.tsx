@@ -110,7 +110,7 @@ export default function BundleReportClient({
             <circle cx="45" cy="45" r="2.5" fill="#c4633a" opacity="0.8"/>
           </svg>
         </div>
-        <h2 className="font-serif font-light text-2xl text-soul-ink mb-3">
+        <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
           Cruzando os resultados…
         </h2>
         <p className="text-sm text-soul-ink/50 font-sans max-w-xs mx-auto leading-relaxed mb-8">
@@ -133,7 +133,7 @@ export default function BundleReportClient({
     return (
       <div className="max-w-2xl mx-auto py-24 text-center px-4">
         <div className="text-5xl mb-4">⚠️</div>
-        <h2 className="font-serif font-light text-2xl text-soul-ink mb-3">Erro na geração</h2>
+        <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-3">Erro na geração</h2>
         <p className="text-sm text-soul-ink/50 font-sans mb-8">
           Ocorreu um problema ao gerar a devolutiva. Você pode tentar novamente.
         </p>
@@ -187,7 +187,7 @@ export default function BundleReportClient({
                  style={{ color: '#c9a84c' }}>
               Devolutiva Integrada · Bundle 4 Testes
             </div>
-            <h1 className="font-serif font-light text-white leading-tight mb-3"
+            <h1 className="font-serif font-semibold text-white leading-tight mb-3"
                 style={{ fontSize: '28px' }}>
               {content.perfil_sintese.titulo}
             </h1>
@@ -399,7 +399,7 @@ function ReportSection({
       className="rounded-3xl p-6"
       style={{ background: accentBg, border: `1px solid ${accentBorder}` }}
     >
-      <h2 className="font-serif font-light text-xl text-soul-ink mb-5 flex items-center gap-2.5">
+      <h2 className="font-serif font-semibold text-xl text-soul-ink mb-5 flex items-center gap-2.5">
         <span
           className="w-8 h-8 rounded-xl flex items-center justify-center text-base flex-shrink-0"
           style={{ background: `${accent}18` }}

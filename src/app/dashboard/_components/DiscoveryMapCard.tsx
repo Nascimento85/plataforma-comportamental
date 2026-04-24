@@ -38,9 +38,9 @@ function MapNode({
       : { background: '#e8e2d6', border: '2px solid transparent', opacity: 0.55 }
 
   const labelColor =
-    status === 'done'   ? 'text-soul-terracota font-medium' :
-    status === 'active' ? 'text-soul-ink font-medium' :
-                          'text-soul-ink/35'
+    status === 'done'   ? 'text-soul-terracota font-bold' :
+    status === 'active' ? 'text-soul-ink font-bold' :
+                          'text-soul-ink/65 font-semibold'
 
   return (
     <div className="flex flex-col items-center" style={{ flexShrink: 0 }}>
@@ -60,7 +60,7 @@ function MapNode({
           {node.emoji}
         </div>
       </div>
-      <div className={`text-[10.5px] text-center mt-1.5 leading-tight max-w-[60px] ${labelColor}`}>
+      <div className={`text-[11px] text-center mt-1.5 leading-tight max-w-[64px] ${labelColor}`}>
         {node.label}
       </div>
     </div>
@@ -87,19 +87,19 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
   const progressPct = Math.round((clampedCompleted / JOURNEY_NODES.length) * 100)
 
   return (
-    <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
+    <div className="bg-white rounded-3xl border border-soul-mist p-6">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
-        <h2 className="font-serif font-light text-xl text-soul-ink flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-soul-terracota/10 flex items-center justify-center text-sm flex-shrink-0">
+        <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
+          <span className="w-8 h-8 rounded-lg bg-soul-terracota/15 flex items-center justify-center text-sm flex-shrink-0">
             🗺️
           </span>
           Mapa da Descoberta
         </h2>
         <Link
           href="/dashboard/assessments"
-          className="text-xs text-soul-terracota flex items-center gap-1 hover:gap-2 transition-all duration-200"
+          className="text-[13px] font-bold text-soul-terracota flex items-center gap-1 hover:gap-2 transition-all duration-200"
         >
           Ver jornada completa →
         </Link>
@@ -127,9 +127,9 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
 
       {/* Progress bar */}
       <div className="mb-4">
-        <div className="flex justify-between text-xs text-soul-ink/40 mb-1.5">
+        <div className="flex justify-between text-[12px] font-bold text-soul-ink mb-1.5">
           <span>Progresso da jornada</span>
-          <span className="text-soul-terracota font-medium">
+          <span className="text-soul-terracota font-bold">
             {clampedCompleted} de {JOURNEY_NODES.length} completos
           </span>
         </div>
@@ -152,18 +152,18 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
         >
           <div className="text-2xl flex-shrink-0">{activeNode.emoji}</div>
           <div className="flex-1 min-w-0">
-            <div className="text-sm font-medium text-soul-ink">
+            <div className="text-[15px] font-bold text-soul-ink">
               Continue: {activeNode.label}
             </div>
-            <div className="text-xs text-soul-ink/40 mt-0.5">
+            <div className="text-[13px] text-soul-ink/80 mt-0.5 font-medium">
               ~18 minutos · +{activeNode.xp} XP ao completar
             </div>
           </div>
           <Link
             href="/dashboard/assessments"
-            className="flex-shrink-0 px-4 py-2 rounded-full bg-soul-terracota text-white text-xs font-medium font-sans
+            className="flex-shrink-0 px-5 py-2.5 rounded-full bg-soul-terracota text-white text-[13px] font-bold font-sans
                        hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px whitespace-nowrap
-                       shadow-[0_3px_10px_rgba(196,99,58,0.22)]"
+                       shadow-[0_4px_12px_rgba(196,99,58,0.28)]"
           >
             Continuar →
           </Link>
@@ -183,8 +183,8 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
           </div>
           <Link
             href="/dashboard/reports"
-            className="ml-auto flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium font-sans
-                       text-soul-sage border border-soul-sage/30 hover:bg-soul-sage/10 transition-colors whitespace-nowrap"
+            className="ml-auto flex-shrink-0 px-5 py-2.5 rounded-full text-[13px] font-bold font-sans
+                       text-soul-sage border-2 border-soul-sage/45 hover:bg-soul-sage/10 transition-colors whitespace-nowrap"
           >
             Ver relatório →
           </Link>

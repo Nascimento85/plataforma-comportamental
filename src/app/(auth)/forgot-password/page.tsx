@@ -58,7 +58,7 @@ export default function ForgotPasswordPage() {
               <circle cx="45" cy="45" r="4" fill="white" opacity="0.9"/>
             </svg>
           </div>
-          <h1 className="font-serif font-light text-2xl text-white mb-1">Recuperar senha</h1>
+          <h1 className="font-serif font-semibold text-2xl text-white mb-1">Recuperar senha</h1>
           <p className="text-[12px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
             Digite seu e-mail para receber o link de redefinição
           </p>
@@ -70,7 +70,7 @@ export default function ForgotPasswordPage() {
           {sent ? (
             <div className="text-center">
               <div className="text-5xl mb-4">📧</div>
-              <h2 className="font-serif font-light text-xl text-white mb-2">E-mail enviado!</h2>
+              <h2 className="font-serif font-semibold text-xl text-white mb-2">E-mail enviado!</h2>
               <p className="text-sm font-sans mb-6 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Se esse e-mail estiver cadastrado, você receberá um link para redefinir sua senha em instantes.
                 Verifique também a caixa de spam.

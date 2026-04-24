@@ -692,7 +692,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
                   <circle cx="45" cy="45" r="5" fill="white" opacity="0.9"/>
                 </svg>
               </div>
-              <span className="font-serif font-light text-base text-soul-ink">{APP_NAME}</span>
+              <span className="font-serif font-semibold text-base text-soul-ink">{APP_NAME}</span>
             </div>
             <div className="flex items-center gap-2">
               <CopyLinkButton />
@@ -735,7 +735,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
             <div className="p-5 flex items-start justify-between flex-wrap gap-3">
               <div>
                 <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.35)' }}>Avaliação de</p>
-                <h1 className="font-serif font-light text-2xl text-soul-ink">{assessment.employee.name}</h1>
+                <h1 className="font-serif font-semibold text-2xl text-soul-ink">{assessment.employee.name}</h1>
                 <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(28,26,23,0.45)' }}>{assessment.employee.email}</p>
               </div>
               <div className="text-right">

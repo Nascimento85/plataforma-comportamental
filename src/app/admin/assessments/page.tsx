@@ -52,7 +52,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
 
       {/* Header */}
       <div>
-        <h1 className="font-serif font-light text-3xl text-soul-ink">Todos os Testes</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink">Todos os Testes</h1>
         <p className="text-sm text-soul-ink/45 mt-1 font-sans">
           {assessments.length} resultado{assessments.length !== 1 ? 's' : ''}
           {totalCompleted > 0 && ` · ${totalCompleted} concluído${totalCompleted !== 1 ? 's' : ''}`}
@@ -111,7 +111,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
         {assessments.length === 0 ? (
           <div className="py-16 text-center">
             <p className="text-4xl mb-4">🔍</p>
-            <p className="font-serif font-light text-lg text-soul-ink">Nenhum resultado encontrado</p>
+            <p className="font-serif font-semibold text-lg text-soul-ink">Nenhum resultado encontrado</p>
             <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.4)' }}>Tente ajustar os filtros</p>
           </div>
         ) : (

@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
               <circle cx="45" cy="45" r="4" fill="white" opacity="0.9"/>
             </svg>
           </div>
-          <h1 className="font-serif font-light text-2xl text-white mb-1">Nova senha</h1>
+          <h1 className="font-serif font-semibold text-2xl text-white mb-1">Nova senha</h1>
           <p className="text-[12px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
             Escolha uma senha segura para sua conta
           </p>
@@ -92,7 +92,7 @@ export default function ResetPasswordPage() {
           {success ? (
             <div className="text-center">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="font-serif font-light text-xl text-white mb-2">Senha redefinida!</h2>
+              <h2 className="font-serif font-semibold text-xl text-white mb-2">Senha redefinida!</h2>
               <p className="text-sm font-sans mb-6 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Sua senha foi atualizada com sucesso. Você será redirecionado para o login em instantes.
               </p>

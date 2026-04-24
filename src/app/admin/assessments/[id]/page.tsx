@@ -103,7 +103,7 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>
             Perfil predominante · {r.combination}
           </p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.report.name}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.tagline}</p>
         </div>
       </div>
@@ -164,7 +164,7 @@ function MbtiDevolutiva({ result }: { result: Record<string, unknown> }) {
         </div>
         <div>
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>Tipo MBTI</p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.report.name}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1 italic" style={{ color: '#c4633a' }}>"{r.report.tagline}"</p>
         </div>
       </div>
@@ -202,7 +202,7 @@ function EnneagramDevolutiva({ result }: { result: Record<string, unknown> }) {
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>
             Tipo {r.predominant} · {r.report.altName}
           </p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.report.name}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.tagline}</p>
         </div>
       </div>
@@ -260,7 +260,7 @@ function TemperamentDevolutiva({ result }: { result: Record<string, unknown> }) 
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>
             {r.profile.name} · Secundário: {r.secondaryProfile.name}
           </p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.profile.title}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.profile.title}</h2>
           <p className="text-sm font-sans mt-1 max-w-lg" style={{ color: 'rgba(28,26,23,0.5)' }}>{r.interpretation}</p>
         </div>
       </div>
@@ -314,7 +314,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>
             Arquétipo dominante · Secundário: {r.secondaryReport.name}
           </p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.report.name}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.title}</p>
           <p className="text-[11px] font-sans mt-0.5 italic" style={{ color: 'rgba(28,26,23,0.4)' }}>"{r.report.tagline}"</p>
         </div>
@@ -379,7 +379,7 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
           <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.4)' }}>
             Arquétipo dominante · Deusa: {r.report.goddess}
           </p>
-          <h2 className="font-serif font-light text-2xl text-soul-ink">{r.report.name}</h2>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#6d5a9c' }}>{r.report.title}</p>
           <p className="text-[11px] font-sans mt-0.5 italic" style={{ color: 'rgba(28,26,23,0.4)' }}>"{r.report.tagline}"</p>
         </div>
@@ -457,7 +457,7 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
         </Link>
         <div className="bg-white rounded-3xl p-12 text-center" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
           <p className="text-4xl mb-4">⏳</p>
-          <p className="font-serif font-light text-lg text-soul-ink">Avaliação ainda não concluída</p>
+          <p className="font-serif font-semibold text-lg text-soul-ink">Avaliação ainda não concluída</p>
           <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.45)' }}>
             Status atual: <strong>{assessment.status}</strong>
           </p>
@@ -494,7 +494,7 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
             <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.4)' }}>
               {TEST_LABELS[testType] ?? testType} · Devolutiva
             </p>
-            <h1 className="font-serif font-light text-2xl text-soul-ink mt-1">{assessment.employee.name}</h1>
+            <h1 className="font-serif font-semibold text-2xl text-soul-ink mt-1">{assessment.employee.name}</h1>
             <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(28,26,23,0.5)' }}>{assessment.employee.email}</p>
           </div>
           <div className="text-right flex-shrink-0">

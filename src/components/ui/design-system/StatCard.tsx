@@ -79,7 +79,7 @@ export default function StatCard({
       )}
 
       {/* Value */}
-      <div className="font-serif font-light text-4xl leading-none text-soul-ink mb-1">
+      <div className="font-serif font-semibold text-4xl leading-none text-soul-ink mb-1">
         {value}
       </div>
 

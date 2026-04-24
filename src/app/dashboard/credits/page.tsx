@@ -40,7 +40,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
 
       {/* ── Header ── */}
       <div>
-        <h1 className="font-serif font-light text-3xl text-soul-ink">Créditos</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink">Créditos</h1>
         <p className="text-sm text-soul-ink/45 mt-1 font-sans">
           Cada crédito gera um relatório comportamental completo
         </p>
@@ -87,7 +87,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                style={{ color: 'rgba(196,99,58,0.55)' }}>
             Saldo atual
           </div>
-          <div className="font-serif font-light leading-none mb-1"
+          <div className="font-serif font-semibold leading-none mb-1"
                style={{ fontSize: '56px', color: isLow ? '#b3522e' : '#c4633a' }}>
             {credits}
           </div>
@@ -106,7 +106,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
 
       {/* ── Credit packs ── */}
       <div>
-        <h2 className="font-serif font-light text-xl text-soul-ink mb-4 flex items-center gap-2.5">
+        <h2 className="font-serif font-semibold text-xl text-soul-ink mb-4 flex items-center gap-2.5">
           <span className="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
                 style={{ background: 'rgba(196,99,58,0.08)' }}>
             🛒
@@ -139,7 +139,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                   Mais popular
                 </span>
               )}
-              <div className="font-serif font-light leading-none mb-0.5"
+              <div className="font-serif font-semibold leading-none mb-0.5"
                    style={{ fontSize: '40px', color: '#1c1a17' }}>
                 {pack.pack}
               </div>
@@ -155,7 +155,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
       {/* ── Transaction history ── */}
       <div className="bg-white rounded-3xl border border-soul-mist/60 overflow-hidden">
         <div className="px-6 py-4 border-b border-soul-mist/40">
-          <h2 className="font-serif font-light text-xl text-soul-ink flex items-center gap-2.5">
+          <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg flex items-center justify-center text-sm"
                   style={{ background: 'rgba(61,79,124,0.08)' }}>
               📊

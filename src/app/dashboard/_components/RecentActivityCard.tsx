@@ -51,7 +51,7 @@ export default function RecentActivityCard({ assessments }: Props) {
   if (assessments.length === 0) {
     return (
       <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
-        <h2 className="font-serif font-light text-xl text-soul-ink mb-4 flex items-center gap-2.5">
+        <h2 className="font-serif font-semibold text-xl text-soul-ink mb-4 flex items-center gap-2.5">
           <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
           Atividade recente
         </h2>
@@ -79,13 +79,13 @@ export default function RecentActivityCard({ assessments }: Props) {
       {/* Activity list */}
       <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="font-serif font-light text-xl text-soul-ink flex items-center gap-2.5">
+          <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
             Atividade recente
           </h2>
           <Link
             href="/dashboard/assessments"
-            className="text-xs text-soul-terracota hover:gap-2 transition-all duration-200"
+            className="text-[13px] font-bold text-soul-terracota hover:gap-2 transition-all duration-200"
           >
             Ver todas →
           </Link>
@@ -114,16 +114,16 @@ export default function RecentActivityCard({ assessments }: Props) {
                 <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
 
                 <div className="flex-1 min-w-0">
-                  <div className="text-[13px] text-soul-ink">
-                    <span className="font-medium">{a.employee.name}</span>
+                  <div className="text-[14px] text-soul-ink font-medium">
+                    <span className="font-bold">{a.employee.name}</span>
                     {a.status === 'COMPLETED' ? ' completou ' : ' iniciou '}
-                    <span className="text-soul-ink/60">{emoji} {a.testType}</span>
+                    <span className="text-soul-ink/80 font-semibold">{emoji} {a.testType}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <Badge variant={cfg.variant}>{cfg.label}</Badge>
-                  <span className="text-[11px] text-soul-ink/30">{timeAgo(a.createdAt)}</span>
+                  <span className="text-[12px] text-soul-ink/70 font-semibold">{timeAgo(a.createdAt)}</span>
                 </div>
               </div>
             )
@@ -134,11 +134,11 @@ export default function RecentActivityCard({ assessments }: Props) {
       {/* Candidates summary */}
       <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif font-light text-xl text-soul-ink flex items-center gap-2.5">
+          <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-indigo/10 flex items-center justify-center text-sm">👥</span>
             Candidatos
           </h2>
-          <Link href="/dashboard/assessments" className="text-xs text-soul-terracota">
+          <Link href="/dashboard/assessments" className="text-[13px] font-bold text-soul-terracota">
             Ver todos →
           </Link>
         </div>
@@ -153,10 +153,10 @@ export default function RecentActivityCard({ assessments }: Props) {
               <div key={a.id} className="flex items-center gap-3 py-2.5 border-b border-soul-mist/40 last:border-b-0">
                 <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
                 <div className="flex-1 min-w-0">
-                  <div className="text-[13px] font-medium text-soul-ink truncate">
+                  <div className="text-[14px] font-bold text-soul-ink truncate">
                     {a.employee.name}
                   </div>
-                  <div className="text-[11px] font-display italic text-soul-ink/40">
+                  <div className="text-[12px] font-display italic text-soul-ink/75 font-semibold">
                     Descobrindo…
                   </div>
                 </div>
@@ -171,8 +171,8 @@ export default function RecentActivityCard({ assessments }: Props) {
         {assessments.length > 5 && (
           <Link
             href="/dashboard/assessments"
-            className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-full
-                       text-sm text-soul-terracota border border-soul-terracota/20
+            className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full
+                       text-[14px] font-bold text-soul-terracota border-2 border-soul-terracota/35
                        hover:bg-soul-terracota/5 transition-colors font-sans"
           >
             + {assessments.length - 5} mais candidatos

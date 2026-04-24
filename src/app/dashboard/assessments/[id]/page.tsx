@@ -581,7 +581,7 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
         </Link>
         <div className="bg-white rounded-3xl py-16 text-center" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
           <div className="text-4xl mb-4">⏳</div>
-          <p className="font-serif font-light text-xl text-soul-ink mb-2">Avaliação ainda não concluída</p>
+          <p className="font-serif font-semibold text-xl text-soul-ink mb-2">Avaliação ainda não concluída</p>
           <p className="text-sm text-soul-ink/45 font-sans">A devolutiva estará disponível após o colaborador finalizar o teste.</p>
         </div>
       </div>
@@ -618,7 +618,7 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
         <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] text-soul-ink/35 mb-1">
           {TEST_LABELS[testType] ?? testType} · Devolutiva
         </p>
-        <h1 className="font-serif font-light text-3xl text-soul-ink">{employeeName}</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink">{employeeName}</h1>
         <p className="text-sm text-soul-ink/40 mt-1 font-sans">
           {assessment.employee.email} · Concluído em {new Date(assessment.completedAt!).toLocaleDateString('pt-BR')}
         </p>

@@ -64,7 +64,6 @@ export default async function AssessmentsPage() {
     bundleReports.map((r: { bundleId: string; status: string }) => [r.bundleId, r.status])
   )
 
-  // bundleId exists in DB after migration but not yet in generated Prisma types
   type AssessmentRow = typeof assessments[0] & { bundleId?: string | null }
 
   // Stats
@@ -73,76 +72,223 @@ export default async function AssessmentsPage() {
   const pending   = assessments.filter((a: AssessmentRow) => a.status === 'PENDING' || a.status === 'SENT').length
   const expired   = assessments.filter((a: AssessmentRow) => a.status === 'EXPIRED').length
 
-  const stats = [
-    { label: 'Total',      value: total,     color: 'bg-soul-indigo/10 text-soul-indigo',     dot: 'bg-soul-indigo'    },
-    { label: 'Concluídas', value: completed, color: 'bg-soul-sage/12 text-soul-sage',          dot: 'bg-soul-sage'     },
-    { label: 'Em aberto',  value: pending,   color: 'bg-soul-amber/10 text-soul-amber',        dot: 'bg-soul-amber'    },
-    { label: 'Expiradas',  value: expired,   color: 'bg-soul-mist text-soul-ink/40',           dot: 'bg-soul-mist'     },
-  ]
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
 
-      {/* ── Header ── */}
+      {/* ── Header ────────────────────────────────────────────── */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="font-serif font-light text-3xl text-soul-ink">Avaliações</h1>
-          <p className="text-sm text-soul-ink/45 mt-1 font-sans">
-            Gerencie os convites e acompanhe o progresso de cada colaborador
+          <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
+            Avaliações
+          </h1>
+          <p className="text-[16px] text-soul-ink/85 mt-2 font-medium max-w-2xl">
+            Escolha a categoria mais adequada ao que você precisa decifrar — arquétipo, performance ou relacionamento — e envie o teste em menos de 30 segundos.
           </p>
         </div>
         <NewAssessmentButton />
       </div>
 
-      {/* ── Stats row ── */}
+      {/* ── 3 CATEGORIAS (HERO) ───────────────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+        {/* ── Categoria 1: Arquétipos ── */}
+        <article
+          className="relative overflow-hidden rounded-3xl p-7 text-white flex flex-col"
+          style={{
+            background: 'linear-gradient(135deg, #1c1a17 0%, #2a2015 55%, #3d2a1c 100%)',
+            minHeight: '340px',
+          }}
+        >
+          <div
+            className="absolute top-0 right-0 w-60 h-60 rounded-full opacity-[0.1] pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}
+          />
+          <div className="relative z-10 flex flex-col h-full">
+            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+                  style={{ background: 'rgba(201,168,76,0.2)', color: '#e8c878' }}>
+              Categoria 1 · Profundidade
+            </span>
+
+            <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-3">
+              Arquétipos Junguianos
+            </h2>
+
+            <p className="text-[15px] leading-relaxed font-medium text-white/90 mb-5 flex-1">
+              Os padrões psíquicos universais que Carl Jung mapeou. Não descrevem o que a pessoa faz — descrevem a força invisível que decide por ela. A lente mais profunda da plataforma para posicionamento de carreira, sucessão e liderança de alta complexidade.
+            </p>
+
+            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-white/85">
+              <p>· Arquétipos Junguianos (12 padrões universais)</p>
+              <p>· Arquétipos Femininos (7 energias de liderança)</p>
+            </div>
+
+            <NewAssessmentButton initialCategory="ARCHETYPE">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+              </svg>
+              Descobrir Arquétipo
+            </NewAssessmentButton>
+          </div>
+        </article>
+
+        {/* ── Categoria 2: Análises Comportamentais ── */}
+        <article
+          className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
+          style={{
+            background: 'linear-gradient(135deg, #faf7f2 0%, #f5ebd9 100%)',
+            border: '1px solid rgba(196,99,58,0.22)',
+            minHeight: '340px',
+          }}
+        >
+          <div
+            className="absolute top-0 right-0 w-60 h-60 rounded-full opacity-[0.18] pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #c4633a, transparent)', transform: 'translate(30%,-30%)' }}
+          />
+          <div className="relative z-10 flex flex-col h-full">
+            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+                  style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+              Categoria 2 · Performance
+            </span>
+
+            <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
+              Análises Comportamentais
+            </h2>
+            <p className="font-display italic text-[15px] text-soul-terracota font-semibold mb-3">
+              Foco em produtividade e dinâmica de trabalho
+            </p>
+
+            <p className="text-[15px] leading-relaxed font-medium text-soul-ink mb-5 flex-1">
+              As quatro lentes clássicas para ler o comportamento em ambiente corporativo. Revelam como cada líder e colaborador decide sob pressão, comunica, conduz conflito e sustenta cultura. Material bruto para formar times de alta performance e calibrar lideranças.
+            </p>
+
+            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
+              <p>· DISC — Perfil Comportamental</p>
+              <p>· MBTI — 16 Tipos de Personalidade</p>
+              <p>· Eneagrama de Personalidade</p>
+              <p>· 4 Personalidades (Temperamentos)</p>
+            </div>
+
+            <NewAssessmentButton initialCategory="BEHAVIORAL">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+              </svg>
+              Testes Comportamentais
+            </NewAssessmentButton>
+          </div>
+        </article>
+
+        {/* ── Categoria 3: Inteligência em Relacionamentos ── */}
+        <article
+          className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
+          style={{
+            background: 'linear-gradient(135deg, #faf5f4 0%, #f0dcd6 100%)',
+            border: '1px solid rgba(196,122,114,0.3)',
+            minHeight: '340px',
+          }}
+        >
+          <div
+            className="absolute top-0 right-0 w-60 h-60 rounded-full opacity-[0.18] pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #c47a72, transparent)', transform: 'translate(30%,-30%)' }}
+          />
+          <div className="relative z-10 flex flex-col h-full">
+            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+                  style={{ background: 'rgba(196,122,114,0.18)', color: '#7a3d35' }}>
+              Categoria 3 · Cultura
+            </span>
+
+            <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
+              Inteligência em Relacionamentos
+            </h2>
+            <p className="font-display italic text-[15px] font-semibold mb-3" style={{ color: '#9b4d43' }}>
+              Harmonia, pertencimento e comunicação afetiva
+            </p>
+
+            <p className="text-[15px] leading-relaxed font-medium text-soul-ink mb-5 flex-1">
+              Como um colaborador se sente reconhecido é o que define engajamento, retenção e espírito de equipe. Esta categoria mapeia a dimensão afetiva — a linguagem em que cada pessoa recebe valorização — e converte cultura em resultado operacional.
+            </p>
+
+            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
+              <p>· 5 Linguagens do Amor aplicadas à liderança</p>
+              <p>· Guia de reconhecimento individualizado</p>
+              <p>· Aplicação em retenção e cultura</p>
+            </div>
+
+            <NewAssessmentButton initialCategory="RELATIONSHIPS">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+              </svg>
+              Relacionamentos
+            </NewAssessmentButton>
+          </div>
+        </article>
+      </div>
+
+      {/* ── Stats row ─────────────────────────────────────────── */}
       {total > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {stats.map((s) => (
-            <div key={s.label} className="bg-white rounded-2xl border border-soul-mist/60 px-4 py-3 flex items-center gap-3">
-              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${s.dot}`} />
+          {[
+            { label: 'Total',      value: total,     dot: 'bg-soul-indigo'    },
+            { label: 'Concluídas', value: completed, dot: 'bg-soul-sage'      },
+            { label: 'Em aberto',  value: pending,   dot: 'bg-soul-amber'     },
+            { label: 'Expiradas',  value: expired,   dot: 'bg-soul-rose'      },
+          ].map((s) => (
+            <div key={s.label} className="bg-white rounded-2xl border border-soul-mist px-4 py-3.5 flex items-center gap-3">
+              <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${s.dot}`} />
               <div>
-                <div className="font-serif font-light text-2xl text-soul-ink leading-none">{s.value}</div>
-                <div className="text-[11px] text-soul-ink/40 mt-0.5 font-sans">{s.label}</div>
+                <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{s.value}</div>
+                <div className="text-[12px] text-soul-ink/75 mt-1 font-bold uppercase tracking-wider">{s.label}</div>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* ── Empty state ── */}
+      {/* ── Histórico title ───────────────────────────────────── */}
+      {assessments.length > 0 && (
+        <div>
+          <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-1">
+            Histórico de envios
+          </h2>
+          <p className="text-[14px] text-soul-ink/75 font-medium">
+            Todas as avaliações enviadas pela sua empresa, com status e ações.
+          </p>
+        </div>
+      )}
+
+      {/* ── Empty state ───────────────────────────────────────── */}
       {assessments.length === 0 && (
-        <div className="bg-white rounded-3xl border border-soul-mist/60 py-20 text-center">
+        <div className="bg-white rounded-3xl border border-soul-mist py-16 text-center">
           <div className="text-5xl mb-4">🗺️</div>
-          <p className="font-serif font-light text-xl text-soul-ink mb-2">Nenhuma avaliação ainda</p>
-          <p className="text-sm text-soul-ink/45 mb-7 max-w-xs mx-auto font-sans">
-            Convide o primeiro colaborador para descobrir seu arquétipo e começar a mapear seu time.
+          <p className="font-serif font-semibold text-2xl text-soul-ink mb-2">Nenhuma avaliação enviada ainda</p>
+          <p className="text-[15px] text-soul-ink/80 mb-7 max-w-md mx-auto font-medium">
+            Escolha uma das três categorias acima e envie a primeira avaliação para começar a mapear sua empresa.
           </p>
           <NewAssessmentButton />
         </div>
       )}
 
-      {/* ── List ── */}
+      {/* ── Lista ─────────────────────────────────────────────── */}
       {assessments.length > 0 && (
-        <div className="bg-white rounded-3xl border border-soul-mist/60 overflow-hidden">
+        <div className="bg-white rounded-3xl border border-soul-mist overflow-hidden">
 
           {/* Desktop table */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-soul-mist/50">
-                  <th className="text-left px-6 py-4 text-[11px] font-sans font-semibold text-soul-ink/40 uppercase tracking-widest">
+                <tr className="border-b border-soul-mist bg-soul-parchment/40">
+                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
                     Colaborador
                   </th>
-                  <th className="text-left px-6 py-4 text-[11px] font-sans font-semibold text-soul-ink/40 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
                     Avaliação
                   </th>
-                  <th className="text-left px-6 py-4 text-[11px] font-sans font-semibold text-soul-ink/40 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
                     Status
                   </th>
-                  <th className="text-left px-6 py-4 text-[11px] font-sans font-semibold text-soul-ink/40 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
                     Data
                   </th>
-                  <th className="text-right px-6 py-4 text-[11px] font-sans font-semibold text-soul-ink/40 uppercase tracking-widest">
+                  <th className="text-right px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
                     Ações
                   </th>
                 </tr>
@@ -155,14 +301,14 @@ export default async function AssessmentsPage() {
                   return (
                     <tr
                       key={a.id}
-                      className="border-b border-soul-mist/30 last:border-b-0 hover:bg-soul-cream/40 transition-colors"
+                      className="border-b border-soul-mist/60 last:border-b-0 hover:bg-soul-parchment/40 transition-colors"
                     >
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
                           <div>
-                            <div className="text-sm font-medium text-soul-ink">{a.employee.name}</div>
-                            <div className="text-[11px] text-soul-ink/35 mt-0.5">{a.employee.email}</div>
+                            <div className="text-[15px] font-semibold text-soul-ink">{a.employee.name}</div>
+                            <div className="text-[13px] text-soul-ink/75 mt-0.5 font-medium">{a.employee.email}</div>
                           </div>
                         </div>
                       </td>
@@ -170,7 +316,7 @@ export default async function AssessmentsPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <span className="text-base">{tInfo.emoji}</span>
-                          <span className="text-sm text-soul-ink/70">{tInfo.label}</span>
+                          <span className="text-[14px] text-soul-ink font-semibold">{tInfo.label}</span>
                         </div>
                       </td>
 
@@ -179,10 +325,10 @@ export default async function AssessmentsPage() {
                       </td>
 
                       <td className="px-6 py-4">
-                        <div className="text-[12px] text-soul-ink/40 font-sans">
+                        <div className="text-[13px] text-soul-ink font-semibold">
                           {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                         </div>
-                        <div className="text-[11px] text-soul-ink/25 mt-0.5">
+                        <div className="text-[12px] text-soul-ink/70 mt-0.5 font-medium">
                           {timeAgo(a.createdAt)}
                         </div>
                       </td>
@@ -193,28 +339,28 @@ export default async function AssessmentsPage() {
                             <>
                               <Link
                                 href={`/dashboard/assessments/${a.id}`}
-                                className="text-xs font-medium text-soul-terracota hover:underline font-sans"
+                                className="text-[13px] font-bold text-soul-terracota hover:underline font-sans"
                               >
                                 Ver devolutiva →
                               </Link>
                               <a
                                 href={`/api/results/${a.id}/pdf`}
                                 target="_blank"
-                                className="text-xs text-soul-ink/35 hover:text-soul-ink/60 font-sans transition-colors"
+                                className="text-[13px] text-soul-ink/80 hover:text-soul-ink font-sans font-semibold transition-colors"
                               >
                                 Baixar PDF
                               </a>
                               {a.bundleId && bundleReportMap[a.bundleId] === 'COMPLETED' && (
                                 <Link
                                   href={`/dashboard/reports/${a.bundleId}`}
-                                  className="text-xs font-semibold px-3 py-1 rounded-full font-sans
-                                             bg-soul-indigo text-white hover:bg-soul-indigo/80 transition-colors"
+                                  className="text-[12px] font-bold px-3 py-1.5 rounded-full font-sans
+                                             bg-soul-indigo text-white hover:bg-soul-indigo/85 transition-colors"
                                 >
                                   ✦ Relatório Cruzado
                                 </Link>
                               )}
                               {a.bundleId && bundleReportMap[a.bundleId] === 'GENERATING' && (
-                                <span className="text-xs text-soul-indigo font-medium animate-pulse font-sans">
+                                <span className="text-[12px] text-soul-indigo font-bold animate-pulse font-sans">
                                   Gerando relatório…
                                 </span>
                               )}
@@ -225,7 +371,7 @@ export default async function AssessmentsPage() {
                               <a
                                 href={`${APP_URL}/test/${a.token}`}
                                 target="_blank"
-                                className="text-xs font-medium text-soul-terracota hover:underline font-sans"
+                                className="text-[13px] font-bold text-soul-terracota hover:underline font-sans"
                               >
                                 {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                               </a>
@@ -245,7 +391,7 @@ export default async function AssessmentsPage() {
           </div>
 
           {/* Mobile cards */}
-          <div className="md:hidden divide-y divide-soul-mist/40">
+          <div className="md:hidden divide-y divide-soul-mist">
             {assessments.map((a: AssessmentRow, i: number) => {
               const cfg   = STATUS_CONFIG[a.status as AssessmentStatus] ?? { label: a.status, variant: 'locked' as const }
               const tInfo = TEST_LABELS[a.testType] ?? { label: a.testType, emoji: '📊' }
@@ -256,8 +402,8 @@ export default async function AssessmentsPage() {
                     <div className="flex items-center gap-3">
                       <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
                       <div>
-                        <div className="text-sm font-medium text-soul-ink">{a.employee.name}</div>
-                        <div className="text-[11px] text-soul-ink/35">{a.employee.email}</div>
+                        <div className="text-[15px] font-semibold text-soul-ink">{a.employee.name}</div>
+                        <div className="text-[13px] text-soul-ink/75 font-medium">{a.employee.email}</div>
                       </div>
                     </div>
                     <Badge variant={cfg.variant}>{cfg.label}</Badge>
@@ -266,32 +412,32 @@ export default async function AssessmentsPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span>{tInfo.emoji}</span>
-                      <span className="text-sm text-soul-ink/60 font-sans">{tInfo.label}</span>
+                      <span className="text-[14px] text-soul-ink font-semibold">{tInfo.label}</span>
                     </div>
-                    <span className="text-[11px] text-soul-ink/30 font-sans">
+                    <span className="text-[12px] text-soul-ink/75 font-semibold">
                       {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                     </span>
                   </div>
 
                   {a.status === 'COMPLETED' && (
-                    <div className="flex items-center gap-4 pt-1">
+                    <div className="flex items-center gap-4 pt-1 flex-wrap">
                       <Link
                         href={`/dashboard/assessments/${a.id}`}
-                        className="text-sm text-soul-terracota font-medium hover:underline font-sans"
+                        className="text-[14px] text-soul-terracota font-bold hover:underline font-sans"
                       >
                         Ver devolutiva →
                       </Link>
                       <a
                         href={`/api/results/${a.id}/pdf`}
                         target="_blank"
-                        className="text-sm text-soul-ink/35 hover:text-soul-ink/60 font-sans"
+                        className="text-[14px] text-soul-ink font-bold hover:text-soul-terracota font-sans"
                       >
                         Baixar PDF
                       </a>
                       {a.bundleId && bundleReportMap[a.bundleId] === 'COMPLETED' && (
                         <Link
                           href={`/dashboard/reports/${a.bundleId}`}
-                          className="text-xs font-bold px-3 py-1 rounded-full bg-soul-indigo text-white font-sans"
+                          className="text-[12px] font-bold px-3 py-1.5 rounded-full bg-soul-indigo text-white font-sans"
                         >
                           ✦ Relatório Cruzado
                         </Link>
@@ -304,7 +450,7 @@ export default async function AssessmentsPage() {
                       <a
                         href={`${APP_URL}/test/${a.token}`}
                         target="_blank"
-                        className="text-sm text-soul-terracota font-medium hover:underline font-sans"
+                        className="text-[14px] text-soul-terracota font-bold hover:underline font-sans"
                       >
                         {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                       </a>

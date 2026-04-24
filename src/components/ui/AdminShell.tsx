@@ -175,7 +175,7 @@ export default function AdminShell({ children, session }: Props) {
             <line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
         </button>
-        <span className="font-serif font-light text-white text-base">Admin</span>
+        <span className="font-serif font-semibold text-white text-base">Admin</span>
       </header>
 
       {/* Main content */}
