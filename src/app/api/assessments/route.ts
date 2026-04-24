@@ -13,12 +13,13 @@ const CREDIT_COST: Record<string, number> = {
   TEMPERAMENT: 1,
   ARCHETYPE: 2,
   ARCHETYPE_FEMININE: 2,
+  LOVE_LANGUAGES: 4,
 }
 
 const schema = z.object({
   employeeName: z.string().min(2),
   employeeEmail: z.string().email(),
-  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE']),
+  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES']),
 })
 
 export async function POST(request: NextRequest) {

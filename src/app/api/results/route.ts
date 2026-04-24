@@ -7,8 +7,11 @@ import { calculateEnneagram } from '@/lib/engines/enneagram'
 import { calculateTemperament } from '@/lib/engines/temperament'
 import { calculateArchetypeMixed } from '@/lib/engines/archetype-mixed'
 import { calculateArchetypeFeminine } from '@/lib/engines/archetype-feminine'
+import { calculateLoveLanguages } from '@/lib/engines/love-languages'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
+import { sendTestCompletionNotifications } from '@/lib/email'
+import { generateBundleReport } from '@/lib/bundle-report/generate'
 
 const schema = z.object({
   token: z.string().min(1),
@@ -30,7 +33,7 @@ export async function POST(request: NextRequest) {
       where: { token },
       include: {
         employee: { select: { name: true, email: true } },
-        company: { select: { name: true } },
+        company: { select: { name: true, email: true } },
       },
     })
 
@@ -78,6 +81,11 @@ export async function POST(request: NextRequest) {
       case 'ARCHETYPE_FEMININE':
         resultData = calculateArchetypeFeminine(
           answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
+      case 'LOVE_LANGUAGES':
+        resultData = calculateLoveLanguages(
+          answers as { questionId: number; selected: 'A' | 'B' }[]
         ) as unknown as Record<string, unknown>
         break
       default:
@@ -147,6 +155,7 @@ export async function POST(request: NextRequest) {
             (resultData as { predominant?: string | number }).predominant ??
             (resultData as { type?: string }).type ??
             (resultData as { primaryType?: string }).primaryType ??
+            (resultData as { primaryLanguage?: string }).primaryLanguage ??
             ''
           ),
         },
@@ -161,8 +170,23 @@ export async function POST(request: NextRequest) {
       return r
     })
 
-    // Gera PDF em background (não bloqueia resposta)
+    // Gera PDF e envia notificações em background (não bloqueia resposta)
     generateAndUploadReport(assessment, resultData, result.id).catch(console.error)
+
+    // Se faz parte de um bundle, verifica se todos concluíram → gera devolutiva cruzada
+    if (assessment.bundleId) {
+      checkAndGenerateBundleReport(assessment.bundleId).catch(console.error)
+    }
+
+    sendTestCompletionNotifications({
+      employeeName:  assessment.employee.name,
+      employeeEmail: assessment.employee.email,
+      companyName:   assessment.company.name,
+      companyEmail:  assessment.company.email,
+      testType:      assessment.testType,
+      assessmentId:  assessment.id,
+      resultId:      result.id,
+    }).catch(console.error)
 
     return NextResponse.json({ resultId: result.id, result: resultData }, { status: 201 })
   } catch (err) {
@@ -178,7 +202,7 @@ async function generateAndUploadReport(
     companyId: string
     testType: string
     employee: { name: string; email: string }
-    company: { name: string }
+    company: { name: string; email: string }
   },
   resultData: Record<string, unknown>,
   resultId: string
@@ -203,5 +227,21 @@ async function generateAndUploadReport(
     })
   } catch (err) {
     console.error('[generateAndUploadReport]', err)
+  }
+}
+
+// Verifica se todos os testes do bundle foram concluídos e dispara geração da devolutiva cruzada
+async function checkAndGenerateBundleReport(bundleId: string): Promise<void> {
+  const bundleAssessments = await prisma.assessment.findMany({
+    where: { bundleId },
+    select: { status: true },
+  })
+
+  const allDone = bundleAssessments.length >= 4 &&
+    bundleAssessments.every(a => a.status === 'COMPLETED')
+
+  if (allDone) {
+    console.log(`[bundleReport] 🎉 Bundle ${bundleId} completo — gerando devolutiva cruzada...`)
+    await generateBundleReport(bundleId)
   }
 }

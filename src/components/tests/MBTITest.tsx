@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MBTI_QUESTIONS } from '@/lib/engines/mbti'
+import { MBTI_QUESTION_SETS, getMbtiVersion } from '@/lib/engines/mbti'
 import TestResultCard from '@/components/tests/TestResultCard'
 
 interface MBTIAnswer {
@@ -26,6 +26,8 @@ export default function MBTITest({
   assessmentId: string
   token: string
 }) {
+  const MBTI_QUESTIONS = MBTI_QUESTION_SETS[getMbtiVersion(token)]
+
   const [answers, setAnswers] = useState<Record<number, MBTIAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)

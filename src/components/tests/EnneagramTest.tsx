@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ENNEAGRAM_QUESTIONS } from '@/lib/engines/enneagram'
+import { ENNEAGRAM_QUESTION_SETS, getEnneagramVersion } from '@/lib/engines/enneagram'
 import TestResultCard from '@/components/tests/TestResultCard'
 
 interface EnneagramAnswer {
@@ -28,6 +28,8 @@ export default function EnneagramTest({
   assessmentId: string
   token: string
 }) {
+  const ENNEAGRAM_QUESTIONS = ENNEAGRAM_QUESTION_SETS[getEnneagramVersion(token)]
+
   const [answers, setAnswers] = useState<Record<number, EnneagramAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)

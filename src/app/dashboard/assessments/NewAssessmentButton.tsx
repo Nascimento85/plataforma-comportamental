@@ -64,6 +64,24 @@ const TEST_TYPES: TestType[] = [
     description: 'Identifica qual das 7 energias arquetípicas femininas governa o momento atual — e qual precisa ser ativada para liderança e equilíbrio plenos.',
     badge: 'Exclusivo',
   },
+  {
+    value: 'LOVE_LANGUAGES',
+    label: '5 Linguagens do Amor',
+    short: 'Ling. Amor',
+    credits: 4,
+    image: '/tests/linguagens-amor.jpg',
+    description: 'Baseado no best-seller de Gary Chapman. Identifica a linguagem primária do amor da pessoa — como ela se sente mais amada e valorizada — com aplicação direta em relacionamentos e liderança.',
+    badge: 'Novo',
+  },
+  {
+    value: 'BUNDLE_4',
+    label: 'Bundle — 4 Testes Comportamentais',
+    short: 'Bundle 4',
+    credits: 4,
+    image: '/tests/disc.jpg',
+    description: 'DISC + MBTI + Eneagrama + Temperamentos num único link. O colaborador realiza os 4 testes em sequência, um após o outro, com apenas 1 envio.',
+    badge: 'Completo',
+  },
 ]
 
 interface SuccessState {
@@ -92,10 +110,16 @@ export default function NewAssessmentButton() {
     setError('')
     setLoading(true)
     try {
-      const res = await fetch('/api/assessments', {
+      const isBundle = form.testType === 'BUNDLE_4'
+      const endpoint = isBundle ? '/api/bundles' : '/api/assessments'
+      const payload = isBundle
+        ? { employeeName: form.employeeName, employeeEmail: form.employeeEmail }
+        : form
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error ?? 'Erro ao criar avaliação.'); return }
@@ -126,128 +150,178 @@ export default function NewAssessmentButton() {
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className="btn-primary">+ Nova avaliação</button>
+      <button
+        onClick={() => setOpen(true)}
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-sans font-medium text-white
+                   transition-all duration-200 hover:-translate-y-px shadow-terra"
+        style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+      >
+        ✦ Nova avaliação
+      </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-soul-ink/40 px-4 backdrop-blur-sm">
+          <div
+            className="bg-white rounded-3xl shadow-soul-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+            style={{ border: '1px solid rgba(232,226,214,0.6)' }}
+          >
 
             {success ? (
-              <div className="text-center">
-                <div className="text-5xl mb-3">✅</div>
-                <h3 className="font-bold text-lg text-gray-900 mb-1">Avaliação criada!</h3>
+              <div className="text-center py-4">
+                <div className="text-5xl mb-4">✨</div>
+                <h3 className="font-serif font-light text-2xl text-soul-ink mb-2">Avaliação criada!</h3>
 
                 {success.emailSent ? (
-                  <div className="flex items-center justify-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-2 mb-4 text-sm">
+                  <div className="flex items-center justify-center gap-2 rounded-2xl px-4 py-3 mb-5 text-sm font-sans"
+                       style={{ background: 'rgba(122,158,126,0.1)', border: '1px solid rgba(122,158,126,0.2)', color: '#5a8a5e' }}>
                     <span>📧</span>
                     <span>E-mail enviado para <strong>{success.employeeEmail}</strong></span>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center gap-2 text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-4 text-sm">
+                  <div className="flex items-center justify-center gap-2 rounded-2xl px-4 py-3 mb-5 text-sm font-sans"
+                       style={{ background: 'rgba(212,148,58,0.08)', border: '1px solid rgba(212,148,58,0.2)', color: '#a0722e' }}>
                     <span>⚠️</span>
                     <span>E-mail não enviado — compartilhe o link manualmente</span>
                   </div>
                 )}
 
-                <p className="text-sm text-gray-500 mb-2">Link do teste:</p>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs font-mono break-all text-gray-700 mb-4 text-left">
+                <p className="text-xs text-soul-ink/40 mb-2 font-sans">Link do teste:</p>
+                <div className="rounded-2xl p-3 text-xs font-mono break-all text-soul-ink/60 mb-5 text-left"
+                     style={{ background: 'rgba(232,226,214,0.3)', border: '1px solid rgba(232,226,214,0.6)' }}>
                   {success.link}
                 </div>
 
-                <button onClick={handleCopy} className="btn-secondary w-full mb-3">
-                  {copied ? '✓ Copiado!' : 'Copiar link'}
+                <button
+                  onClick={handleCopy}
+                  className="w-full py-2.5 rounded-full text-sm font-sans font-medium border transition-all mb-3"
+                  style={{ borderColor: 'rgba(196,99,58,0.3)', color: '#c4633a' }}
+                >
+                  {copied ? '✓ Link copiado!' : '📋 Copiar link'}
                 </button>
-                <button onClick={handleClose} className="btn-primary w-full">Fechar</button>
+                <button
+                  onClick={handleClose}
+                  className="w-full py-2.5 rounded-full text-sm font-sans font-medium text-white transition-all hover:-translate-y-px shadow-terra"
+                  style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+                >
+                  Fechar
+                </button>
               </div>
             ) : (
               <>
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="font-bold text-lg text-gray-900">Nova avaliação</h3>
-                  <button onClick={handleClose} className="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-serif font-light text-xl text-soul-ink">Nova avaliação</h3>
+                  <button
+                    onClick={handleClose}
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-soul-ink/40 hover:text-soul-ink/70 hover:bg-soul-mist/40 transition-all text-lg leading-none"
+                  >
+                    ×
+                  </button>
                 </div>
 
-                <form onSubmit={handleCreate} className="space-y-4">
+                <form onSubmit={handleCreate} className="space-y-5">
                   {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
+                    <div className="rounded-2xl px-4 py-3 text-sm font-sans"
+                         style={{ background: 'rgba(196,122,114,0.08)', border: '1px solid rgba(196,122,114,0.2)', color: '#a05a52' }}>
                       {error}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Nome do colaborador</label>
+                    <label className="block text-xs font-sans font-semibold text-soul-ink/50 uppercase tracking-widest mb-2">
+                      Nome do colaborador
+                    </label>
                     <input
                       type="text" required value={form.employeeName}
                       onChange={(e) => update('employeeName', e.target.value)}
-                      className="input" placeholder="João Silva"
+                      className="soul-input" placeholder="João Silva"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">E-mail do colaborador</label>
+                    <label className="block text-xs font-sans font-semibold text-soul-ink/50 uppercase tracking-widest mb-2">
+                      E-mail do colaborador
+                    </label>
                     <input
                       type="email" required value={form.employeeEmail}
                       onChange={(e) => update('employeeEmail', e.target.value)}
-                      className="input" placeholder="joao@empresa.com"
+                      className="soul-input" placeholder="joao@empresa.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de avaliação</label>
+                    <label className="block text-xs font-sans font-semibold text-soul-ink/50 uppercase tracking-widest mb-3">
+                      Tipo de avaliação
+                    </label>
                     <div className="grid grid-cols-2 gap-2">
-                      {TEST_TYPES.map((t) => (
-                        <button
-                          key={t.value}
-                          type="button"
-                          onClick={() => update('testType', t.value)}
-                          className={`relative text-left rounded-xl border-2 p-3 transition-all ${
-                            form.testType === t.value
-                              ? 'border-brand-600 bg-brand-50'
-                              : 'border-gray-200 hover:border-brand-300 bg-white'
-                          }`}
-                        >
-                          {t.badge && (
-                            <span className="absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">
-                              {t.badge}
-                            </span>
-                          )}
-                          <p className={`text-xs font-bold mb-0.5 ${form.testType === t.value ? 'text-brand-700' : 'text-gray-700'}`}>
-                            {t.short}
-                          </p>
-                          <p className="text-[11px] text-gray-400">
-                            {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
-                          </p>
-                        </button>
-                      ))}
+                      {TEST_TYPES.map((t) => {
+                        const active = form.testType === t.value
+                        return (
+                          <button
+                            key={t.value}
+                            type="button"
+                            onClick={() => update('testType', t.value)}
+                            className="relative text-left rounded-2xl p-3 transition-all duration-150"
+                            style={{
+                              border: active ? '2px solid #c4633a' : '1.5px solid rgba(232,226,214,0.8)',
+                              background: active ? 'rgba(196,99,58,0.05)' : 'white',
+                            }}
+                          >
+                            {t.badge && (
+                              <span className="absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full font-sans"
+                                    style={{ background: 'rgba(212,148,58,0.15)', color: '#a0722e' }}>
+                                {t.badge}
+                              </span>
+                            )}
+                            <p className="text-sm font-semibold mb-0.5 font-sans"
+                               style={{ color: active ? '#c4633a' : '#1c1a17' }}>
+                              {t.short}
+                            </p>
+                            <p className="text-[11px] font-sans" style={{ color: 'rgba(28,26,23,0.4)' }}>
+                              {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
+                            </p>
+                          </button>
+                        )
+                      })}
                     </div>
                   </div>
 
-                  {/* Preview do teste selecionado */}
-                  <div className="rounded-xl border border-gray-200 overflow-hidden">
+                  {/* Preview */}
+                  <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
                     <img
                       src={selectedTest.image}
                       alt={selectedTest.label}
                       className="w-full object-cover"
-                      style={{ maxHeight: '120px', objectPosition: 'center top' }}
+                      style={{ maxHeight: '100px', objectPosition: 'center top' }}
                     />
-                    <div className="p-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-bold text-gray-900">{selectedTest.label}</p>
-                        <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                          selectedTest.credits > 1
-                            ? 'bg-amber-100 text-amber-700'
-                            : 'bg-brand-50 text-brand-700'
-                        }`}>
+                    <div className="p-4" style={{ background: 'rgba(250,247,242,0.6)' }}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <p className="text-sm font-semibold text-soul-ink font-sans">{selectedTest.label}</p>
+                        <span className="text-xs font-semibold px-2 py-1 rounded-full font-sans"
+                              style={{
+                                background: selectedTest.credits > 1 ? 'rgba(212,148,58,0.12)' : 'rgba(196,99,58,0.08)',
+                                color: selectedTest.credits > 1 ? '#a0722e' : '#c4633a',
+                              }}>
                           {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 leading-relaxed">{selectedTest.description}</p>
+                      <p className="text-xs text-soul-ink/50 leading-relaxed font-sans">{selectedTest.description}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-3 pt-1">
-                    <button type="button" onClick={handleClose} className="btn-secondary flex-1">Cancelar</button>
-                    <button type="submit" disabled={loading} className="btn-primary flex-1">
-                      {loading ? 'Criando...' : 'Criar e enviar link'}
+                    <button
+                      type="button" onClick={handleClose}
+                      className="flex-1 py-2.5 rounded-full text-sm font-sans font-medium border transition-all"
+                      style={{ borderColor: 'rgba(232,226,214,0.8)', color: 'rgba(28,26,23,0.5)' }}
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="submit" disabled={loading}
+                      className="flex-1 py-2.5 rounded-full text-sm font-sans font-medium text-white transition-all hover:-translate-y-px shadow-terra disabled:opacity-60 disabled:translate-y-0"
+                      style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+                    >
+                      {loading ? 'Criando…' : 'Criar e enviar link'}
                     </button>
                   </div>
                 </form>

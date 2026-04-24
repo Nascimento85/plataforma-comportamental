@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { TEMPERAMENT_QUESTIONS } from '@/lib/engines/temperament'
+import { TEMPERAMENT_QUESTION_SETS, getTemperamentVersion } from '@/lib/engines/temperament'
 import type { TemperamentOption } from '@/lib/engines/temperament'
 import TestResultCard from '@/components/tests/TestResultCard'
 
@@ -43,6 +43,11 @@ export default function TemperamentTest({
   assessmentId: string
   token: string
 }) {
+  // Deriva a versão do conjunto de questões deterministicamente a partir do token.
+  // Isso garante que o mesmo avaliado sempre veja o mesmo set sem precisar salvar no banco.
+  const version = getTemperamentVersion(token)
+  const QUESTIONS = TEMPERAMENT_QUESTION_SETS[version]
+
   const [answers, setAnswers] = useState<Record<number, TemperamentAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -50,11 +55,11 @@ export default function TemperamentTest({
   const [done, setDone] = useState(false)
   const [resultData, setResultData] = useState<Record<string, unknown> | null>(null)
 
-  const totalPages = Math.ceil(TEMPERAMENT_QUESTIONS.length / PAGE_SIZE)
-  const pageQuestions = TEMPERAMENT_QUESTIONS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+  const totalPages = Math.ceil(QUESTIONS.length / PAGE_SIZE)
+  const pageQuestions = QUESTIONS.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
   const answered = Object.keys(answers).length
-  const progress = Math.round((answered / TEMPERAMENT_QUESTIONS.length) * 100)
+  const progress = Math.round((answered / QUESTIONS.length) * 100)
   const pageComplete = pageQuestions.every((q) => answers[q.id] !== undefined)
 
   function handleAnswer(questionId: number, selected: TemperamentOption) {
@@ -62,10 +67,10 @@ export default function TemperamentTest({
   }
 
   async function handleSubmit() {
-    const unanswered = TEMPERAMENT_QUESTIONS.filter((q) => !answers[q.id])
+    const unanswered = QUESTIONS.filter((q) => !answers[q.id])
     if (unanswered.length > 0) {
       const firstMissingPage = Math.floor(
-        TEMPERAMENT_QUESTIONS.findIndex((q) => q.id === unanswered[0].id) / PAGE_SIZE
+        QUESTIONS.findIndex((q) => q.id === unanswered[0].id) / PAGE_SIZE
       )
       setPage(firstMissingPage)
       setError(`Ainda há ${unanswered.length} questão(ões) sem resposta.`)
@@ -120,7 +125,7 @@ export default function TemperamentTest({
       <div>
         <div className="flex justify-between text-sm text-gray-500 mb-1">
           <span>Página {page + 1} de {totalPages}</span>
-          <span>{answered}/{TEMPERAMENT_QUESTIONS.length} respondidas</span>
+          <span>{answered}/{QUESTIONS.length} respondidas</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
           <div
@@ -224,7 +229,7 @@ export default function TemperamentTest({
         ) : (
           <button
             onClick={handleSubmit}
-            disabled={submitting || answered < TEMPERAMENT_QUESTIONS.length}
+            disabled={submitting || answered < QUESTIONS.length}
             className="btn-primary flex-1"
           >
             {submitting ? 'Enviando...' : '✓ Finalizar teste'}

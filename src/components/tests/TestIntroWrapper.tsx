@@ -6,11 +6,14 @@ import MBTITest from '@/components/tests/MBTITest'
 import EnneagramTest from '@/components/tests/EnneagramTest'
 import TemperamentTest from '@/components/tests/TemperamentTest'
 import ArchetypeTest from '@/components/tests/ArchetypeTest'
+import LoveLanguagesTest from '@/components/tests/LoveLanguagesTest'
 import {
-  ARCHETYPE_MIXED_QUESTIONS,
+  ARCHETYPE_MIXED_QUESTION_SETS,
+  getArchetypeMixedVersion,
 } from '@/lib/engines/archetype-mixed'
 import {
-  ARCHETYPE_FEMININE_QUESTIONS,
+  ARCHETYPE_FEMININE_QUESTION_SETS,
+  getArchetypeFeminineVersion,
 } from '@/lib/engines/archetype-feminine'
 
 // ── Conteúdo das intros por tipo ───────────────────────────────
@@ -125,6 +128,26 @@ const INTROS: Record<string, {
     cta: 'Revelar meu Arquétipo',
     duration: '15–20 min',
     questions: 72,
+  },
+  LOVE_LANGUAGES: {
+    title: '5 Linguagens do Amor',
+    subtitle: 'Descubra como você dá e recebe amor',
+    image: '/tests/linguagens-amor.jpg',
+    description: 'Baseado no best-seller de Gary Chapman, este teste identifica sua linguagem primária do amor — a forma como você mais se sente amado(a) e valorizado(a). Usado por casais, líderes e equipes para criar conexões mais profundas e relacionamentos mais saudáveis.',
+    tips: [
+      { icon: '💝', text: 'Em cada par, escolha a afirmação que mais representa você — mesmo que ambas pareçam verdadeiras.' },
+      { icon: '⚡', text: 'Vá pela primeira reação instintiva — não tente calcular a "resposta certa".' },
+      { icon: '🔓', text: 'Não há linguagem melhor. Cada uma revela uma forma única e genuína de amar.' },
+    ],
+    discovers: [
+      'Sua linguagem primária do amor — como você mais se sente valorizado(a)',
+      'Sua linguagem secundária — o complemento da sua forma de amar',
+      'Como aplicar isso em relacionamentos pessoais e profissionais',
+      'Dicas práticas para comunicar suas necessidades emocionais',
+    ],
+    cta: 'Descobrir minha Linguagem do Amor',
+    duration: '8–12 min',
+    questions: 30,
   },
   ARCHETYPE_FEMININE: {
     title: 'Arquétipos Femininos — As 7 Energias',
@@ -270,7 +293,7 @@ function renderTest(testType: string, assessmentId: string, token: string) {
     <ArchetypeTest
       assessmentId={assessmentId}
       token={token}
-      questions={ARCHETYPE_MIXED_QUESTIONS}
+      questions={ARCHETYPE_MIXED_QUESTION_SETS[getArchetypeMixedVersion(token)]}
       testType="ARCHETYPE"
     />
   )
@@ -278,9 +301,12 @@ function renderTest(testType: string, assessmentId: string, token: string) {
     <ArchetypeTest
       assessmentId={assessmentId}
       token={token}
-      questions={ARCHETYPE_FEMININE_QUESTIONS}
+      questions={ARCHETYPE_FEMININE_QUESTION_SETS[getArchetypeFeminineVersion(token)]}
       testType="ARCHETYPE_FEMININE"
     />
+  )
+  if (testType === 'LOVE_LANGUAGES') return (
+    <LoveLanguagesTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

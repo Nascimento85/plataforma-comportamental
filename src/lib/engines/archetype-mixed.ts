@@ -500,3 +500,220 @@ export function calculateArchetypeMixed(answers: ArchetypeMixedAnswer[]): Archet
     secondaryReport: ARCHETYPE_MIXED_PROFILES[secondary],
   }
 }
+
+// ============================================================
+// VARIAÇÃO V2 — Reformulações alternativas (mesmos id/archetype)
+// ============================================================
+export const ARCHETYPE_MIXED_QUESTIONS_V2: ArchetypeMixedQuestion[] = [
+  // ── Inocente (INNOCENT) ─────────────────────────────────
+  { id: 1,  text: 'Tenho uma tendência natural de assumir que as coisas vão se resolver para o bem no final.', archetype: 'INNOCENT' },
+  { id: 2,  text: 'Mesmo diante de situações difíceis, procuro manter uma perspectiva otimista e esperançosa.', archetype: 'INNOCENT' },
+  { id: 3,  text: 'Minha postura padrão com pessoas novas é a de abertura e boa fé, antes de ter razões para agir diferente.', archetype: 'INNOCENT' },
+  { id: 4,  text: 'Valorizo profundamente a transparência, a pureza de intenção e a ausência de máscaras nas relações.', archetype: 'INNOCENT' },
+  { id: 5,  text: 'Acredito que a maioria das pessoas é fundamentalmente boa e que o mundo oferece mais segurança do que ameaça.', archetype: 'INNOCENT' },
+  { id: 6,  text: 'Quando surge um conflito, meu impulso é encontrar o que há de bom na situação e buscar paz.', archetype: 'INNOCENT' },
+
+  // ── Cara Comum / Órfão (ORPHAN) ────────────────────────
+  { id: 7,  text: 'Para mim, sentir-me parte de algo coletivo é tão importante quanto qualquer realização individual.', archetype: 'ORPHAN' },
+  { id: 8,  text: 'Sinto-me mais à vontade quando ninguém está me distinguindo do grupo como especial ou diferente.', archetype: 'ORPHAN' },
+  { id: 9,  text: 'Prefiro contribuir como parte do time a ocupar um papel de destaque ou liderança visível.', archetype: 'ORPHAN' },
+  { id: 10, text: 'Me conecto mais facilmente com histórias e experiências de pessoas comuns do que de figuras excepcionais.', archetype: 'ORPHAN' },
+  { id: 11, text: 'Igualdade é um valor central para mim — não gosto de hierarquias desnecessárias.', archetype: 'ORPHAN' },
+  { id: 12, text: 'Valorizo muito a lealdade e o senso de pertencimento a um grupo com o qual me identifico.', archetype: 'ORPHAN' },
+
+  // ── Herói (HERO) ────────────────────────────────────────
+  { id: 13, text: 'Quando enfrento desafios, sinto que estou no meu elemento — é como se eu fosse feito para isso.', archetype: 'HERO' },
+  { id: 14, text: 'Tenho uma disposição natural de assumir dificuldades que outros evitam.', archetype: 'HERO' },
+  { id: 15, text: 'A ideia de fazer diferença no mundo por meio de ação corajosa me motiva profundamente.', archetype: 'HERO' },
+  { id: 16, text: 'Em situações de crise, as pessoas ao meu redor costumam me procurar porque sabem que vou agir.', archetype: 'HERO' },
+  { id: 17, text: 'Quando vejo injustiça, sinto quase uma obrigação de fazer algo — não consigo simplesmente ignorar.', archetype: 'HERO' },
+  { id: 18, text: 'Disciplina e determinação são valores que cultivo conscientemente em mim.', archetype: 'HERO' },
+
+  // ── Cuidador (CAREGIVER) ────────────────────────────────
+  { id: 19, text: 'Colocar as necessidades dos outros à frente das minhas parece natural — não é um esforço consciente.', archetype: 'CAREGIVER' },
+  { id: 20, text: 'Quando alguém está em dificuldades, sinto um impulso genuíno de oferecer suporte, seja ele qual for.', archetype: 'CAREGIVER' },
+  { id: 21, text: 'Cuidar do bem-estar das pessoas ao meu redor é algo que me dá profundo senso de propósito.', archetype: 'CAREGIVER' },
+  { id: 22, text: 'Tenho facilidade de perceber quando alguém está sofrendo em silêncio, mesmo que não diga nada.', archetype: 'CAREGIVER' },
+  { id: 23, text: 'Criar um ambiente onde as pessoas se sintam seguras e acolhidas é algo que valorizo profundamente.', archetype: 'CAREGIVER' },
+  { id: 24, text: 'Já me sacrifiquei de formas que outros considerariam excessivas — mas para mim parecia o certo a fazer.', archetype: 'CAREGIVER' },
+
+  // ── Explorador (EXPLORER) ───────────────────────────────
+  { id: 25, text: 'Sinto uma atração constante pelo desconhecido — o que ainda não descobri me chama mais do que o familiar.', archetype: 'EXPLORER' },
+  { id: 26, text: 'Regras e estruturas rígidas me sufocam — preciso de espaço para fazer as coisas do meu jeito.', archetype: 'EXPLORER' },
+  { id: 27, text: 'A ideia de uma vida sem aventura, surpresa ou descoberta me parece sem propósito.', archetype: 'EXPLORER' },
+  { id: 28, text: 'Prefiro descobrir as coisas por mim mesmo a seguir o caminho que outros já percorreram.', archetype: 'EXPLORER' },
+  { id: 29, text: 'Mudar de rota no meio do caminho quando descubro algo melhor não me incomoda — me empolga.', archetype: 'EXPLORER' },
+  { id: 30, text: 'Liberdade é o valor que, se me tirassem, me deixaria mais incompleto.', archetype: 'EXPLORER' },
+
+  // ── Rebelde (REBEL) ─────────────────────────────────────
+  { id: 31, text: 'Quando me deparo com uma regra injusta, meu primeiro instinto é desafiá-la, não obedecê-la.', archetype: 'REBEL' },
+  { id: 32, text: 'Prefiro ser fiel ao que acredito a me encaixar nas expectativas de quem está ao meu redor.', archetype: 'REBEL' },
+  { id: 33, text: 'Sinto uma energia especial quando estou questionando algo que todos aceitam sem pensar.', archetype: 'REBEL' },
+  { id: 34, text: 'Nunca fui de seguir modas ou tendências — crio meu próprio caminho.', archetype: 'REBEL' },
+  { id: 35, text: 'A transformação muitas vezes exige ruptura, e não tenho medo de ser o agente dessa ruptura.', archetype: 'REBEL' },
+  { id: 36, text: 'Pessoas que se conformam sem questionar me causam uma certa frustração.', archetype: 'REBEL' },
+
+  // ── Amante (LOVER) ──────────────────────────────────────
+  { id: 37, text: 'Me entrego de forma total naquilo que amo — seja uma pessoa, uma causa ou um projeto.', archetype: 'LOVER' },
+  { id: 38, text: 'A beleza — em qualquer forma — tem um poder real sobre mim: me afeta e me inspira.', archetype: 'LOVER' },
+  { id: 39, text: 'Prefiro uma vida intensa e apaixonada a uma segura e sem profundidade emocional.', archetype: 'LOVER' },
+  { id: 40, text: 'Conexões superficiais não me satisfazem — preciso de intimidade e profundidade nas relações.', archetype: 'LOVER' },
+  { id: 41, text: 'Sou movido por desejo — de criar, de conectar, de experienciar o que há de mais rico na vida.', archetype: 'LOVER' },
+  { id: 42, text: 'Quando estou apaixonado por algo, me dedico a isso com uma intensidade que às vezes me surpreende.', archetype: 'LOVER' },
+
+  // ── Criador (CREATOR) ───────────────────────────────────
+  { id: 43, text: 'Me sinto mais realizado quando estou criando — dando forma a algo que ainda não existia.', archetype: 'CREATOR' },
+  { id: 44, text: 'A possibilidade de construir algo original e duradouro me motiva mais do que qualquer outro objetivo.', archetype: 'CREATOR' },
+  { id: 45, text: 'Tenho uma visão estética apurada e me importo profundamente com o cuidado na execução.', archetype: 'CREATOR' },
+  { id: 46, text: 'Quando vejo algo feito de forma descuidada ou genérica, sinto um desconforto genuíno.', archetype: 'CREATOR' },
+  { id: 47, text: 'Criar algo do nada — seja uma ideia, um produto, uma solução — é onde me sinto mais vivo.', archetype: 'CREATOR' },
+  { id: 48, text: 'Quero que o que construo tenha valor além do imediato — que deixe uma marca.', archetype: 'CREATOR' },
+
+  // ── Mago (MAGICIAN) ─────────────────────────────────────
+  { id: 49, text: 'Acredito que a consciência e a intenção têm um poder real sobre os resultados da vida.', archetype: 'MAGICIAN' },
+  { id: 50, text: 'Consigo ver conexões e padrões que a maioria das pessoas não enxerga à primeira vista.', archetype: 'MAGICIAN' },
+  { id: 51, text: 'Temas como transformação, cura e evolução humana me fascinam e me atraem naturalmente.', archetype: 'MAGICIAN' },
+  { id: 52, text: 'Me sinto em meu elemento quando estou ajudando alguém a passar por uma transformação profunda.', archetype: 'MAGICIAN' },
+  { id: 53, text: 'Acredito que o modo como as pessoas pensam e acreditam molda diretamente a realidade que vivem.', archetype: 'MAGICIAN' },
+  { id: 54, text: 'Me atraio por conhecimentos que transcendem o que é popularmente aceito ou ensinado.', archetype: 'MAGICIAN' },
+
+  // ── Sábio (SAGE) ────────────────────────────────────────
+  { id: 55, text: 'Antes de agir, preciso entender — a compreensão profunda vem antes da ação para mim.', archetype: 'SAGE' },
+  { id: 56, text: 'Aprender e crescer intelectualmente é uma necessidade para mim, não apenas um interesse.', archetype: 'SAGE' },
+  { id: 57, text: 'Prefiro explorar todos os ângulos de uma questão antes de formar uma opinião definitiva.', archetype: 'SAGE' },
+  { id: 58, text: 'Confio mais em dados, evidências e raciocínio lógico do que em impressões intuitivas.', archetype: 'SAGE' },
+  { id: 59, text: 'Ser uma referência de conhecimento e expertise é algo que valorizo profundamente.', archetype: 'SAGE' },
+  { id: 60, text: 'Aceitar algo apenas por autoridade — sem entender o porquê — me é quase impossível.', archetype: 'SAGE' },
+
+  // ── Governante (RULER) ──────────────────────────────────
+  { id: 61, text: 'Em ambientes sem liderança clara, eu naturalmente começo a preencher esse papel.', archetype: 'RULER' },
+  { id: 62, text: 'Sinto um senso de responsabilidade pela ordem, pelos processos e pelas estruturas ao meu redor.', archetype: 'RULER' },
+  { id: 63, text: 'Me sinto mais seguro e eficaz quando tenho controle sobre os resultados e os processos.', archetype: 'RULER' },
+  { id: 64, text: 'Planejar com antecedência é natural para mim — surpresas desnecessárias me incomodam.', archetype: 'RULER' },
+  { id: 65, text: 'Construir algo que dure — um legado, uma instituição, uma cultura forte — é uma das minhas maiores motivações.', archetype: 'RULER' },
+  { id: 66, text: 'Sinto responsabilidade pelo sucesso e pelo crescimento das pessoas sob minha liderança.', archetype: 'RULER' },
+
+  // ── Bobo da Corte (JESTER) ──────────────────────────────
+  { id: 67, text: 'O humor é uma das minhas ferramentas naturais para criar conexão e aliviar tensão.', archetype: 'JESTER' },
+  { id: 68, text: 'Para mim, aproveitar o presente é mais importante do que ficar planejando cada passo do futuro.', archetype: 'JESTER' },
+  { id: 69, text: 'Fazer alguém rir ou sorrir é uma das formas mais genuínas de prazer que conheço.', archetype: 'JESTER' },
+  { id: 70, text: 'Uma vida leve e prazerosa vale mais para mim do que uma carreira de grande prestígio mas sem alegria.', archetype: 'JESTER' },
+  { id: 71, text: 'A leveza e a irreverência são partes fundamentais de quem sou — não consigo levar tudo muito a sério.', archetype: 'JESTER' },
+  { id: 72, text: 'Tenho um talento de ver o lado absurdo ou cômico em situações que os outros tratam com excesso de seriedade.', archetype: 'JESTER' },
+]
+
+// ============================================================
+// VARIAÇÃO V3 — Cenários situacionais (mesmos id/archetype)
+// ============================================================
+export const ARCHETYPE_MIXED_QUESTIONS_V3: ArchetypeMixedQuestion[] = [
+  // ── Inocente (INNOCENT) ─────────────────────────────────
+  { id: 1,  text: 'Quando algo dá errado, minha tendência é acreditar que vai se resolver e que o melhor ainda está por vir.', archetype: 'INNOCENT' },
+  { id: 2,  text: 'Em situações adversas, você consegue manter a esperança com mais facilidade do que a maioria das pessoas.', archetype: 'INNOCENT' },
+  { id: 3,  text: 'Ao conhecer alguém novo, você parte do pressuposto de que a pessoa é honesta até provar o contrário.', archetype: 'INNOCENT' },
+  { id: 4,  text: 'Quando alguém é transparente e direto com você, você aprecia muito mais do que qualquer discurso sofisticado.', archetype: 'INNOCENT' },
+  { id: 5,  text: 'Você tende a interpretar situações ambíguas de forma positiva em vez de suspeitar do pior.', archetype: 'INNOCENT' },
+  { id: 6,  text: 'Diante de um conflito, você busca naturalmente a saída que preserve a harmonia e o bom relacionamento.', archetype: 'INNOCENT' },
+
+  // ── Cara Comum / Órfão (ORPHAN) ────────────────────────
+  { id: 7,  text: 'Em um novo grupo, você rapidamente busca formas de se conectar e de se sentir parte.', archetype: 'ORPHAN' },
+  { id: 8,  text: 'Quando você se destaca mais do que o grupo, sente um desconforto — prefere que todos brilhem juntos.', archetype: 'ORPHAN' },
+  { id: 9,  text: 'Em projetos coletivos, você se sente mais realizado contribuindo como parte do todo do que liderando sozinho.', archetype: 'ORPHAN' },
+  { id: 10, text: 'Você se identifica mais com histórias de pessoas comuns superando desafios do que com líderes excepcionais.', archetype: 'ORPHAN' },
+  { id: 11, text: 'Quando nota que está sendo tratado de forma diferente dos outros no grupo, sente um desconforto genuíno.', archetype: 'ORPHAN' },
+  { id: 12, text: 'Pertencer a um grupo onde você se sente igual e aceito é uma das suas maiores necessidades.', archetype: 'ORPHAN' },
+
+  // ── Herói (HERO) ────────────────────────────────────────
+  { id: 13, text: 'Quando uma situação exige coragem e ação, você se sente naturalmente no seu elemento.', archetype: 'HERO' },
+  { id: 14, text: 'Você se oferece para assumir os desafios mais difíceis quando vê que ninguém mais está se movendo.', archetype: 'HERO' },
+  { id: 15, text: 'Saber que suas ações fazem diferença real para o mundo ou para as pessoas ao redor é o que mais te motiva.', archetype: 'HERO' },
+  { id: 16, text: 'Em crises, os outros tendem a olhar para você esperando liderança e ação.', archetype: 'HERO' },
+  { id: 17, text: 'Quando presencia uma injustiça, você dificilmente consegue ficar de braços cruzados.', archetype: 'HERO' },
+  { id: 18, text: 'Você cultiva disciplina porque sabe que é o que separa quem fala de quem realiza.', archetype: 'HERO' },
+
+  // ── Cuidador (CAREGIVER) ────────────────────────────────
+  { id: 19, text: 'Em grupos, você é frequentemente a pessoa que verifica se todos estão bem antes de se preocupar consigo.', archetype: 'CAREGIVER' },
+  { id: 20, text: 'Quando alguém ao seu redor está sofrendo, é difícil para você ignorar e seguir em frente.', archetype: 'CAREGIVER' },
+  { id: 21, text: 'Saber que contribuiu para o bem-estar de alguém é uma das formas mais profundas de satisfação que conhece.', archetype: 'CAREGIVER' },
+  { id: 22, text: 'Você percebe quando alguém está mal mesmo quando essa pessoa não diz nada — é algo quase intuitivo para você.', archetype: 'CAREGIVER' },
+  { id: 23, text: 'Em qualquer ambiente que frequenta, você tende a criar um espaço onde os outros se sintam acolhidos.', archetype: 'CAREGIVER' },
+  { id: 24, text: 'Já abriu mão de tempo, dinheiro ou energia por alguém que precisava de você — e faria de novo.', archetype: 'CAREGIVER' },
+
+  // ── Explorador (EXPLORER) ───────────────────────────────
+  { id: 25, text: 'O que é novo, diferente ou pouco explorado te atrai muito mais do que o que é familiar e seguro.', archetype: 'EXPLORER' },
+  { id: 26, text: 'Quando você sente que está sendo limitado por regras ou estruturas rígidas, sente uma necessidade de se libertar.', archetype: 'EXPLORER' },
+  { id: 27, text: 'Quando imagina uma vida sem novas descobertas ou experiências, sente uma angústia genuína.', archetype: 'EXPLORER' },
+  { id: 28, text: 'Você aprende melhor descobrindo por conta própria do que seguindo um caminho já pavimentado.', archetype: 'EXPLORER' },
+  { id: 29, text: 'Quando surge uma oportunidade de rota diferente mais interessante, você muda sem hesitar.', archetype: 'EXPLORER' },
+  { id: 30, text: 'Liberdade de escolha e de movimento é algo que você protege com muita atenção na sua vida.', archetype: 'EXPLORER' },
+
+  // ── Rebelde (REBEL) ─────────────────────────────────────
+  { id: 31, text: 'Quando vê uma norma que considera injusta, o impulso de desafiá-la é mais forte do que o de cumpri-la.', archetype: 'REBEL' },
+  { id: 32, text: 'Você prefere ser você mesmo e sofrer consequências a se moldar às expectativas dos outros.', archetype: 'REBEL' },
+  { id: 33, text: 'Questionar o que parece óbvio para todo mundo é algo que você faz naturalmente.', archetype: 'REBEL' },
+  { id: 34, text: 'Você constrói seu próprio estilo — nunca se viu simplesmente adotando o que está na moda.', archetype: 'REBEL' },
+  { id: 35, text: 'Às vezes a única forma de avançar é quebrar o que está estabelecido, e você não tem medo de fazer isso.', archetype: 'REBEL' },
+  { id: 36, text: 'Quando vê pessoas aceitando situações injustas sem questionar, sente frustração ou inquietação.', archetype: 'REBEL' },
+
+  // ── Amante (LOVER) ──────────────────────────────────────
+  { id: 37, text: 'Quando se apaixona por algo — seja uma pessoa, ideia ou projeto — você se entrega de forma total.', archetype: 'LOVER' },
+  { id: 38, text: 'Ambientes esteticamente ricos — em arte, design, natureza ou qualquer forma de beleza — te afetam profundamente.', archetype: 'LOVER' },
+  { id: 39, text: 'Uma vida intensa e cheia de paixão é, para você, muito mais atraente do que uma vida segura e previsível.', archetype: 'LOVER' },
+  { id: 40, text: 'Relacionamentos ou conversas sem profundidade emocional real te deixam com uma sensação de vazio.', archetype: 'LOVER' },
+  { id: 41, text: 'O desejo de experienciar, criar e conectar é uma força motriz central na sua vida.', archetype: 'LOVER' },
+  { id: 42, text: 'Quando algo te apaixona, você se dedica com uma intensidade que às vezes surpreende até você mesmo.', archetype: 'LOVER' },
+
+  // ── Criador (CREATOR) ───────────────────────────────────
+  { id: 43, text: 'Você se sente mais vivo quando está criando algo que ainda não existia antes.', archetype: 'CREATOR' },
+  { id: 44, text: 'A possibilidade de construir algo original que dure é o que mais te move profissionalmente.', archetype: 'CREATOR' },
+  { id: 45, text: 'Você tem um senso estético desenvolvido e se incomoda quando algo é feito de forma descuidada ou genérica.', archetype: 'CREATOR' },
+  { id: 46, text: 'Quando vê algo que poderia ser mais bonito, mais funcional ou mais significativo, fica com vontade de refazer.', archetype: 'CREATOR' },
+  { id: 47, text: 'Transformar uma ideia bruta em algo real e refinado é o tipo de processo que te dá grande satisfação.', archetype: 'CREATOR' },
+  { id: 48, text: 'Você quer que o que você cria tenha valor além do imediato — que deixe uma marca no tempo.', archetype: 'CREATOR' },
+
+  // ── Mago (MAGICIAN) ─────────────────────────────────────
+  { id: 49, text: 'Você acredita que uma mudança de perspectiva pode literalmente transformar a realidade de alguém.', archetype: 'MAGICIAN' },
+  { id: 50, text: 'Você percebe padrões e dinâmicas ocultas em situações que a maioria das pessoas processa de forma superficial.', archetype: 'MAGICIAN' },
+  { id: 51, text: 'Você é atraído por temas como autoconhecimento, evolução humana e transformação.', archetype: 'MAGICIAN' },
+  { id: 52, text: 'Quando ajuda alguém a passar por uma virada importante, sente que está no seu melhor.', archetype: 'MAGICIAN' },
+  { id: 53, text: 'Para você, o que as pessoas acreditam sobre si mesmas tem um poder direto sobre o que conseguem alcançar.', archetype: 'MAGICIAN' },
+  { id: 54, text: 'Você vai buscar conhecimento onde for preciso — inclusive em lugares que estão fora do convencional.', archetype: 'MAGICIAN' },
+
+  // ── Sábio (SAGE) ────────────────────────────────────────
+  { id: 55, text: 'Antes de agir, você precisa entender a fundo — agir sem compreensão sólida te deixa desconfortável.', archetype: 'SAGE' },
+  { id: 56, text: 'Aprender algo novo ou complexo é uma das experiências que mais te energiza.', archetype: 'SAGE' },
+  { id: 57, text: 'Você explora um problema de vários ângulos antes de se comprometer com uma conclusão.', archetype: 'SAGE' },
+  { id: 58, text: 'Você confia mais em evidências e análise do que em impressões ou sentimentos ao tomar decisões importantes.', archetype: 'SAGE' },
+  { id: 59, text: 'Ser reconhecido pela sua expertise e profundidade de conhecimento é importante para você.', archetype: 'SAGE' },
+  { id: 60, text: 'Você tem dificuldade de aceitar afirmações sem embasamento — sempre precisa entender o fundamento.', archetype: 'SAGE' },
+
+  // ── Governante (RULER) ──────────────────────────────────
+  { id: 61, text: 'Quando não há liderança clara, você naturalmente começa a organizar e definir a direção.', archetype: 'RULER' },
+  { id: 62, text: 'Você sente uma responsabilidade real pela manutenção da ordem e das estruturas nos ambientes em que está.', archetype: 'RULER' },
+  { id: 63, text: 'Você funciona melhor quando tem clareza e controle sobre o processo e os resultados.', archetype: 'RULER' },
+  { id: 64, text: 'Você planeja com antecedência porque imprevistos desnecessários te custam tempo e energia.', archetype: 'RULER' },
+  { id: 65, text: 'Construir algo que dure além de você — uma cultura, uma organização, um legado — é uma das suas grandes motivações.', archetype: 'RULER' },
+  { id: 66, text: 'Você assume responsabilidade pelo desenvolvimento e pelo bem-estar das pessoas que lidera.', archetype: 'RULER' },
+
+  // ── Bobo da Corte (JESTER) ──────────────────────────────
+  { id: 67, text: 'Em ambientes tensos, você instintivamente usa humor para aliviar a pressão e reconectar as pessoas.', archetype: 'JESTER' },
+  { id: 68, text: 'Para você, aproveitar o momento presente é tão ou mais importante do que planejar o futuro.', archetype: 'JESTER' },
+  { id: 69, text: 'Fazer alguém rir de verdade é uma das formas de conexão que mais valoriza.', archetype: 'JESTER' },
+  { id: 70, text: 'Você escolheria uma vida mais simples e prazerosa a uma carreira de grande prestígio sem alegria.', archetype: 'JESTER' },
+  { id: 71, text: 'Você é o tipo de pessoa que raramente leva as coisas a sério demais — a leveza faz parte do seu jeito de ser.', archetype: 'JESTER' },
+  { id: 72, text: 'Em situações absurdas ou ridículas, você consegue encontrar o humor onde outros só veem o problema.', archetype: 'JESTER' },
+]
+
+// ============================================================
+// LOOKUP: versão → conjunto de questões
+// ============================================================
+export const ARCHETYPE_MIXED_QUESTION_SETS: Record<1 | 2 | 3, ArchetypeMixedQuestion[]> = {
+  1: ARCHETYPE_MIXED_QUESTIONS,
+  2: ARCHETYPE_MIXED_QUESTIONS_V2,
+  3: ARCHETYPE_MIXED_QUESTIONS_V3,
+}
+
+/** Deriva a versão a partir do token UUID */
+export function getArchetypeMixedVersion(token: string): 1 | 2 | 3 {
+  const sum = token.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0)
+  return ((sum % 3) + 1) as 1 | 2 | 3
+}

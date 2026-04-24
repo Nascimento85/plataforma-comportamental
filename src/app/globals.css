@@ -2,45 +2,206 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — PSIQUE / MAPA DA ALMA
+   Tokens CSS, tipografia e utilitários compartilhados
+═══════════════════════════════════════════════════════════════ */
+
 @layer base {
   :root {
-    --font-inter: 'Inter', sans-serif;
+    /* Fontes */
+    --font-inter:     'Inter', sans-serif;
+    --font-dm-sans:   'DM Sans', system-ui, sans-serif;
+    --font-fraunces:  'Fraunces', Georgia, serif;
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+
+    /* Paleta Soul — CSS Custom Properties
+       (espelham os tokens Tailwind para uso em CSS puro) */
+    --soul-ink:       #1c1a17;
+    --soul-cream:     #faf7f2;
+    --soul-parchment: #f5f0e8;
+    --soul-mist:      #e8e2d6;
+    --soul-terracota: #c4633a;
+    --soul-amber:     #d4943a;
+    --soul-sage:      #7a9e7e;
+    --soul-indigo:    #3d4f7c;
+    --soul-rose:      #c47a72;
+    --soul-gold:      #c9a84c;
+    --soul-shadow:    rgba(28, 26, 23, 0.08);
+
+    /* Sidebar */
+    --sidebar-width: 240px;
   }
 
   html {
     @apply antialiased;
+    font-size: 15px;
   }
 
   body {
-    @apply bg-gray-50 text-gray-900;
+    background-color: var(--soul-cream);
+    color: var(--soul-ink);
+    font-family: var(--font-dm-sans);
   }
+
+  /* Scrollbar global suave */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--soul-mist) transparent;
+  }
+  *::-webkit-scrollbar        { width: 4px; height: 4px; }
+  *::-webkit-scrollbar-thumb  { background: var(--soul-mist); border-radius: 4px; }
+  *::-webkit-scrollbar-track  { background: transparent; }
 }
 
+/* ─── COMPONENTES LEGADOS (mantidos para compatibilidade) ──── */
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg
-           bg-brand-600 text-white font-medium text-sm
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg
+           bg-brand-600 text-white font-semibold text-base
            hover:bg-brand-700 active:bg-brand-800
            transition-colors duration-150
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg
-           border border-gray-300 bg-white text-gray-700 font-medium text-sm
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-lg
+           border border-gray-300 bg-white text-gray-700 font-semibold text-base
            hover:bg-gray-50 active:bg-gray-100
            transition-colors duration-150
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .input {
-    @apply block w-full rounded-lg border border-gray-300 px-3 py-2
-           text-sm text-gray-900 placeholder-gray-400
+    @apply block w-full rounded-lg border border-gray-300 px-3.5 py-2.5
+           text-base text-gray-900 placeholder-gray-400
            focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
            disabled:bg-gray-100 disabled:cursor-not-allowed;
   }
 
   .card {
     @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+  }
+}
+
+/* ─── COMPONENTES SOUL ───────────────────────────────────────── */
+@layer components {
+
+  /* Botões */
+  .soul-btn {
+    @apply inline-flex items-center justify-center gap-2 font-sans
+           font-medium rounded-full transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .soul-btn-primary {
+    @apply soul-btn px-5 py-2.5 text-sm text-white
+           bg-soul-terracota hover:bg-soul-terracota-dark
+           active:scale-[0.98];
+    box-shadow: 0 4px 12px rgba(196, 99, 58, 0.22);
+  }
+
+  .soul-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(196, 99, 58, 0.30);
+  }
+
+  .soul-btn-ghost {
+    @apply soul-btn px-4 py-2 text-sm text-soul-ink
+           bg-transparent border border-soul-mist
+           hover:border-soul-terracota hover:text-soul-terracota;
+  }
+
+  .soul-btn-dark {
+    @apply soul-btn px-5 py-2.5 text-sm text-white
+           bg-soul-ink hover:bg-soul-ink/90;
+  }
+
+  /* Inputs */
+  .soul-input {
+    @apply block w-full rounded-2xl border border-soul-mist
+           bg-white px-4 py-3 text-sm text-soul-ink
+           placeholder:text-soul-mist/70
+           focus:outline-none focus:border-soul-terracota
+           focus:ring-2 focus:ring-soul-terracota/10
+           transition-colors duration-150;
+  }
+
+  /* Cards */
+  .soul-card {
+    @apply bg-white rounded-3xl border border-soul-mist/60
+           shadow-soul transition-all duration-200;
+  }
+
+  .soul-card:hover {
+    @apply shadow-soul-md;
+  }
+
+  .soul-panel {
+    @apply bg-white rounded-3xl border border-soul-mist/60 p-6;
+  }
+
+  /* Badges / Pills */
+  .soul-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1
+           text-xs font-medium font-sans;
+  }
+
+  .soul-badge-done    { @apply soul-badge bg-soul-sage-muted text-soul-sage; }
+  .soul-badge-pending { @apply soul-badge bg-soul-amber-muted text-soul-amber; }
+  .soul-badge-locked  { @apply soul-badge bg-soul-mist/60 text-soul-ink/40; }
+  .soul-badge-new     { @apply soul-badge bg-soul-indigo-muted text-soul-indigo; }
+  .soul-badge-gold    { @apply soul-badge bg-soul-gold-muted text-soul-gold; }
+
+  /* Tipografia */
+  .soul-title {
+    font-family: var(--font-fraunces);
+    @apply font-light text-soul-ink leading-tight;
+  }
+
+  .soul-tagline {
+    font-family: var(--font-cormorant);
+    @apply italic text-soul-ink/55 leading-relaxed;
+  }
+
+  .soul-label {
+    @apply text-xs font-medium tracking-widest uppercase text-soul-ink/40;
+  }
+
+  /* Progress bars */
+  .soul-progress {
+    @apply h-1.5 rounded-full bg-soul-mist overflow-hidden;
+  }
+
+  .soul-progress-fill {
+    @apply h-full rounded-full transition-all duration-1000 ease-out;
+    background: linear-gradient(90deg, var(--soul-terracota), var(--soul-amber));
+  }
+
+  /* Avatar */
+  .soul-avatar {
+    @apply rounded-full flex items-center justify-center
+           font-serif font-medium text-white flex-shrink-0;
+  }
+
+  /* Nav item (sidebar) */
+  .soul-nav-item {
+    @apply flex items-center gap-3 px-6 py-2.5 text-sm
+           text-white/55 transition-all duration-200
+           relative cursor-pointer no-underline;
+  }
+
+  .soul-nav-item:hover {
+    @apply text-white/88 bg-white/[0.04];
+  }
+
+  .soul-nav-item.active {
+    @apply text-white bg-soul-gold/[0.12];
+  }
+
+  .soul-nav-item.active::before {
+    content: '';
+    @apply absolute left-0 top-[20%] bottom-[20%] w-0.5 rounded-r
+           bg-soul-gold;
   }
 }

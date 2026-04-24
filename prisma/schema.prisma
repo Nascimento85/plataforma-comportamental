@@ -39,6 +39,7 @@ model Company {
   creditPurchases    CreditPurchase[]
   creditTransactions CreditTransaction[]
   reports            Report[]
+  bundleReports      BundleReport[]
 }
 
 // ============================================================
@@ -63,8 +64,9 @@ model Employee {
   email     String
   createdAt DateTime @default(now())
 
-  company     Company      @relation(fields: [companyId], references: [id])
-  assessments Assessment[]
+  company       Company        @relation(fields: [companyId], references: [id])
+  assessments   Assessment[]
+  bundleReports BundleReport[]
 
   @@unique([companyId, email])
 }
@@ -79,6 +81,8 @@ model Assessment {
   testType    String    // DISC | MBTI | ENNEAGRAM | TEMPERAMENT
   token       String    @unique
   status      String    @default("PENDING") // PENDING | SENT | COMPLETED | EXPIRED
+  bundleId    String?   // agrupa assessments de um bundle
+  bundleOrder Int?      // ordem no bundle: 1=DISC, 2=MBTI, 3=ENNEAGRAM, 4=TEMPERAMENT
   expiresAt   DateTime
   completedAt DateTime?
   createdAt   DateTime  @default(now())
@@ -200,4 +204,22 @@ model CreditTransaction {
   createdAt   DateTime @default(now())
 
   company Company @relation(fields: [companyId], references: [id])
+}
+
+// ============================================================
+// RELATÓRIO CRUZADO DE BUNDLE (devolutiva integrada dos 4 testes)
+// ============================================================
+model BundleReport {
+  id          String   @id @default(cuid())
+  bundleId    String   @unique        // mesmo bundleId dos 4 assessments
+  companyId   String
+  employeeId  String
+  status      String   @default("PENDING") // PENDING | GENERATING | COMPLETED | FAILED
+  content     String?  @db.Text            // JSON com seções do relatório gerado por IA
+  pdfUrl      String?                      // URL do PDF no Supabase Storage
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company  Company  @relation(fields: [companyId], references: [id])
+  employee Employee @relation(fields: [employeeId], references: [id])
 }

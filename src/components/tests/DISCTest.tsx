@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { DISC_GROUPS } from '@/lib/engines/disc'
+import { DISC_GROUP_SETS, getDiscVersion } from '@/lib/engines/disc'
 import TestResultCard from '@/components/tests/TestResultCard'
 
 interface DISCAnswer {
@@ -43,6 +43,8 @@ export default function DISCTest({
   token: string
 }) {
   const router = useRouter()
+
+  const DISC_GROUPS = DISC_GROUP_SETS[getDiscVersion(token)]
 
   // Para cada grupo, armazenamos o ranking atribuído a cada perfil (null = não atribuído)
   const [rankings, setRankings] = useState<Record<number, Record<string, number | null>>>(

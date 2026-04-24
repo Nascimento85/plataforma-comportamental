@@ -9,11 +9,16 @@ const PUBLIC_ROUTES = [
   '/reset-password',   // redefinição de senha (com token)
   '/test',
   '/result',           // página pública de resultado — sem login
+  '/amor',             // landing page relacionamentos
+  '/amor.html',
+  '/empresas',         // landing page corporativa
+  '/empresas.html',
   '/api/auth/login',
   '/api/auth/logout',
   '/api/auth/register',
   '/api/auth/forgot-password',
   '/api/auth/reset-password',
+  '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
 ]
 
 export function middleware(request: NextRequest) {

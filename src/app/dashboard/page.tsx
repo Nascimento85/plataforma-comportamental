@@ -2,139 +2,214 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { StatCard } from '@/components/ui/design-system'
+import DiscoveryMapCard from './_components/DiscoveryMapCard'
+import RecentActivityCard from './_components/RecentActivityCard'
+import CreditsWidget from './_components/CreditsWidget'
+import ArchetypeHero from './_components/ArchetypeHero'
+import OnboardingHero from './_components/OnboardingHero'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Data Layer
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function getDashboardData(companyId: string) {
+  const [creditBalance, recentAssessments, totalCompleted, totalPending] =
+    await Promise.all([
+      prisma.creditBalance.findUnique({ where: { companyId } }),
+
+      prisma.assessment.findMany({
+        where: { companyId },
+        orderBy: { createdAt: 'desc' },
+        take: 8,
+        include: { employee: { select: { name: true } } },
+      }),
+
+      prisma.assessment.count({
+        where: { companyId, status: 'COMPLETED' },
+      }),
+
+      prisma.assessment.count({
+        where: { companyId, status: { in: ['PENDING', 'SENT'] } },
+      }),
+    ])
+
+  return {
+    credits:           creditBalance?.balance ?? 0,
+    recentAssessments,
+    totalCompleted,
+    totalPending,
+    totalCandidates:   recentAssessments.length,
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default async function DashboardPage() {
-  const session = await getSession()
-  const companyId = session!.id
+  const session     = await getSession()
+  const companyId   = session!.id
+  const firstName   = session!.name?.split(' ')[0] ?? 'explorador'
 
-  const [creditBalance, recentAssessments, totalCompleted] = await Promise.all([
-    prisma.creditBalance.findUnique({ where: { companyId } }),
-    prisma.assessment.findMany({
-      where: { companyId },
-      orderBy: { createdAt: 'desc' },
-      take: 5,
-      include: { employee: { select: { name: true } } },
-    }),
-    prisma.assessment.count({
-      where: { companyId, status: 'COMPLETED' },
-    }),
-  ])
+  const { credits, recentAssessments, totalCompleted, totalPending, totalCandidates } =
+    await getDashboardData(companyId)
 
-  const credits = creditBalance?.balance ?? 0
+  const isNewAccount = recentAssessments.length === 0
+
+  // Hora do dia para saudação
+  const hour    = new Date().getHours()
+  const greeting =
+    hour < 12 ? 'Bom dia' :
+    hour < 18 ? 'Boa tarde' : 'Boa noite'
+
+  // Dia e data formatados
+  const today = new Date().toLocaleDateString('pt-BR', {
+    weekday: 'long',
+    day:     'numeric',
+    month:   'long',
+  })
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 text-sm mt-1">Visão geral da sua empresa</p>
+
+      {/* ══════════════════════════════════════════════════════
+          TOP BAR
+      ══════════════════════════════════════════════════════ */}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="font-serif font-light text-3xl text-soul-ink leading-tight">
+            {greeting},{' '}
+            <em className="not-italic text-soul-terracota">{firstName}</em>{' '}
+            <span className="text-2xl">✦</span>
+          </h1>
+          <p className="text-sm text-soul-ink/45 mt-1 capitalize">{today}</p>
+        </div>
+
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          <Link
+            href="/dashboard/assessments"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full
+                       border border-soul-mist bg-white text-sm text-soul-ink/70 font-sans
+                       hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
+          >
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <path d="M13.5 8C13.5 11.04 11.04 13.5 8 13.5C4.96 13.5 2.5 11.04 2.5 8C2.5 4.96 4.96 2.5 8 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M11 2L14 5L11 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Importar CSV
+          </Link>
+
+          <Link
+            href="/dashboard/assessments/new"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                       bg-soul-terracota text-white text-sm font-sans font-medium
+                       hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px
+                       shadow-[0_4px_12px_rgba(196,99,58,0.22)]"
+          >
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            Convidar candidato
+          </Link>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <MetricCard
+      {/* ══════════════════════════════════════════════════════
+          HERO: onboarding para conta nova / arquétipo para conta ativa
+      ══════════════════════════════════════════════════════ */}
+      {isNewAccount ? (
+        <OnboardingHero firstName={firstName} credits={credits} />
+      ) : (
+        <ArchetypeHero
+          name={session!.name ?? firstName}
+          totalCompleted={totalCompleted}
+        />
+      )}
+
+      {/* ══════════════════════════════════════════════════════
+          STATS ROW
+      ══════════════════════════════════════════════════════ */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatCard
+          value={credits}
           label="Créditos disponíveis"
-          value={credits.toString()}
-          sub="relatórios disponíveis"
-          accent={credits <= 3 ? 'red' : 'brand'}
-          action={credits <= 3 ? { href: '/dashboard/credits', label: 'Comprar mais' } : undefined}
+          icon="🪙"
+          accent={credits <= 3 ? 'rose' : 'terracota'}
+          delta={credits <= 3 ? '⚠ Recarregar em breve' : undefined}
+          deltaUp={credits > 3 ? true : false}
         />
-        <MetricCard
+        <StatCard
+          value={totalCompleted}
           label="Avaliações concluídas"
-          value={totalCompleted.toString()}
-          sub="total histórico"
-          accent="green"
+          icon="✅"
+          accent="sage"
+          delta={totalCompleted > 0 ? `↑ histórico acumulado` : undefined}
+          deltaUp={true}
         />
-        <MetricCard
-          label="Avaliações pendentes"
-          value={recentAssessments.filter((a) => a.status === 'PENDING' || a.status === 'SENT').length.toString()}
-          sub="aguardando resposta"
-          accent="amber"
+        <StatCard
+          value={totalPending}
+          label="Candidatos ativos"
+          icon="👥"
+          accent="indigo"
+          delta={totalPending > 0 ? `${totalPending} aguardando resposta` : 'Nenhum em andamento'}
+          deltaUp={totalPending === 0}
+        />
+        <StatCard
+          value="4/12"
+          label="Cartas descobertas"
+          icon="🃏"
+          accent="gold"
+          delta="↑ Nova carta disponível!"
+          deltaUp={true}
         />
       </div>
 
-      <div className="card p-6">
-        <h2 className="font-semibold text-gray-900 mb-4">Ações rápidas</h2>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/dashboard/assessments" className="btn-primary">
-            + Nova avaliação
-          </Link>
-          <Link href="/dashboard/credits" className="btn-secondary">
-            Comprar créditos
-          </Link>
-        </div>
-      </div>
+      {/* ══════════════════════════════════════════════════════
+          GRID: Discovery Map + Créditos/Insight
+      ══════════════════════════════════════════════════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
 
-      <div className="card">
-        <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-          <h2 className="font-semibold text-gray-900">Avaliações recentes</h2>
-          <Link href="/dashboard/assessments" className="text-sm text-brand-600 hover:underline">
-            Ver todas →
-          </Link>
-        </div>
+        {/* Discovery Map */}
+        <DiscoveryMapCard totalCompleted={totalCompleted} />
 
-        {recentAssessments.length === 0 ? (
-          <div className="px-6 py-10 text-center text-gray-400 text-sm">
-            Nenhuma avaliação criada ainda.{' '}
-            <Link href="/dashboard/assessments" className="text-brand-600 hover:underline">
-              Criar primeira
+        {/* Lateral direita */}
+        <div className="flex flex-col gap-5">
+          <CreditsWidget credits={credits} />
+
+          {/* Insight card */}
+          <div
+            className="rounded-3xl p-5 relative overflow-hidden"
+            style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
+          >
+            <div
+              className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
+              style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
+            />
+            <div className="text-xl mb-2">💡</div>
+            <div className="font-serif font-light text-sm text-white leading-snug mb-2">
+              Insight do seu arquétipo
+            </div>
+            <p className="text-xs text-white/55 leading-relaxed">
+              Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição do time.
+            </p>
+            <Link
+              href="/dashboard/reports"
+              className="mt-3 inline-flex items-center gap-1 text-xs text-white/70 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
+            >
+              Explorar compatibilidade →
             </Link>
           </div>
-        ) : (
-          <ul className="divide-y divide-gray-100">
-            {recentAssessments.map((a) => (
-              <li key={a.id} className="px-6 py-4 flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-900">{a.employee.name}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">
-                    {a.testType} · {new Date(a.createdAt).toLocaleDateString('pt-BR')}
-                  </p>
-                </div>
-                <StatusBadge status={a.status} />
-              </li>
-            ))}
-          </ul>
-        )}
+        </div>
       </div>
-    </div>
-  )
-}
 
-function MetricCard({
-  label, value, sub, accent, action,
-}: {
-  label: string; value: string; sub: string; accent: 'brand' | 'green' | 'amber' | 'red'
-  action?: { href: string; label: string }
-}) {
-  const accentClasses = {
-    brand: 'text-brand-600',
-    green: 'text-green-600',
-    amber: 'text-amber-600',
-    red: 'text-red-600',
-  }
-  return (
-    <div className="card p-5">
-      <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">{label}</p>
-      <p className={`text-3xl font-bold mt-2 ${accentClasses[accent]}`}>{value}</p>
-      <p className="text-xs text-gray-400 mt-1">{sub}</p>
-      {action && (
-        <Link href={action.href} className="text-xs text-brand-600 hover:underline mt-2 inline-block">
-          {action.label}
-        </Link>
-      )}
-    </div>
-  )
-}
+      {/* ══════════════════════════════════════════════════════
+          BOTTOM: Activity + Candidatos
+      ══════════════════════════════════════════════════════ */}
+      <RecentActivityCard assessments={recentAssessments} />
 
-function StatusBadge({ status }: { status: string }) {
-  const map: Record<string, { label: string; className: string }> = {
-    PENDING:   { label: 'Pendente',   className: 'bg-gray-100 text-gray-600' },
-    SENT:      { label: 'Enviado',    className: 'bg-blue-100 text-blue-700' },
-    COMPLETED: { label: 'Concluído',  className: 'bg-green-100 text-green-700' },
-    EXPIRED:   { label: 'Expirado',   className: 'bg-red-100 text-red-600' },
-  }
-  const { label, className } = map[status] ?? { label: status, className: 'bg-gray-100 text-gray-500' }
-  return (
-    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${className}`}>{label}</span>
+    </div>
   )
 }

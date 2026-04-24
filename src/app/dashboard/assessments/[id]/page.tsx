@@ -12,25 +12,26 @@ export const metadata: Metadata = { title: 'Devolutiva Comportamental' }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="card p-6">
-      <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">{title}</h2>
+    <div className="bg-white rounded-3xl p-6" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <h2 className="text-[10px] font-sans font-semibold text-soul-ink/40 uppercase tracking-[0.15em] mb-4">{title}</h2>
       {children}
     </div>
   )
 }
 
 function TagList({ items, color = 'brand' }: { items: string[]; color?: string }) {
-  const colors: Record<string, string> = {
-    brand: 'bg-brand-50 text-brand-700 border-brand-200',
-    green: 'bg-green-50 text-green-700 border-green-200',
-    red:   'bg-red-50 text-red-700 border-red-200',
-    violet:'bg-violet-50 text-violet-700 border-violet-200',
-    amber: 'bg-amber-50 text-amber-700 border-amber-200',
+  const styles: Record<string, React.CSSProperties> = {
+    brand:  { background: 'rgba(196,99,58,0.08)',   color: '#c4633a',   border: '1px solid rgba(196,99,58,0.15)'  },
+    green:  { background: 'rgba(122,158,126,0.10)',  color: '#5a8a5e',   border: '1px solid rgba(122,158,126,0.2)' },
+    red:    { background: 'rgba(196,122,114,0.08)',  color: '#a05a52',   border: '1px solid rgba(196,122,114,0.15)'},
+    violet: { background: 'rgba(122,100,180,0.08)',  color: '#6b5fad',   border: '1px solid rgba(122,100,180,0.15)'},
+    amber:  { background: 'rgba(212,148,58,0.10)',   color: '#a0722e',   border: '1px solid rgba(212,148,58,0.2)' },
   }
+  const s = styles[color] ?? styles.brand
   return (
     <div className="flex flex-wrap gap-2">
       {items.map((item, i) => (
-        <span key={i} className={`text-xs font-medium px-3 py-1 rounded-full border ${colors[color] ?? colors.brand}`}>
+        <span key={i} className="text-xs font-medium px-3 py-1 rounded-full font-sans" style={s}>
           {item}
         </span>
       ))}
@@ -39,12 +40,16 @@ function TagList({ items, color = 'brand' }: { items: string[]; color?: string }
 }
 
 function BulletList({ items, color = 'green' }: { items: string[]; color?: 'green' | 'red' | 'brand' }) {
-  const dot: Record<string, string> = { green: 'text-green-500', red: 'text-red-400', brand: 'text-brand-500' }
+  const dotColor: Record<string, string> = {
+    green: '#7a9e7e',
+    red:   '#c47a72',
+    brand: '#c4633a',
+  }
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-2.5">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-          <span className={`mt-0.5 font-bold ${dot[color]}`}>✓</span>
+        <li key={i} className="flex items-start gap-2.5 text-sm text-soul-ink/65 font-sans">
+          <span className="mt-0.5 font-bold flex-shrink-0" style={{ color: dotColor[color] }}>✓</span>
           {item}
         </li>
       ))}
@@ -52,11 +57,27 @@ function BulletList({ items, color = 'green' }: { items: string[]; color?: 'gree
   )
 }
 
-function InfoCard({ label, text, bg }: { label: string; text: string; bg: string }) {
+type InfoCardVariant = 'sage' | 'terracota' | 'rose' | 'amber' | 'indigo' | 'rose-warn'
+
+function InfoCard({ label, text, variant = 'sage' }: {
+  label: string
+  text: string
+  variant?: InfoCardVariant
+  bg?: string  // kept for backward compat, ignored
+}) {
+  const variantStyles: Record<InfoCardVariant, React.CSSProperties> = {
+    sage:      { background: 'rgba(122,158,126,0.08)', border: '1px solid rgba(122,158,126,0.2)',  color: '#4a7a4e' },
+    terracota: { background: 'rgba(196,99,58,0.07)',   border: '1px solid rgba(196,99,58,0.15)',   color: '#c4633a' },
+    rose:      { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
+    amber:     { background: 'rgba(212,148,58,0.08)',  border: '1px solid rgba(212,148,58,0.18)',  color: '#8a622e' },
+    indigo:    { background: 'rgba(61,79,124,0.07)',   border: '1px solid rgba(61,79,124,0.15)',   color: '#3d4f7c' },
+    'rose-warn': { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
+  }
+  const s = variantStyles[variant]
   return (
-    <div className={`rounded-xl border p-4 ${bg}`}>
-      <p className="text-xs font-semibold mb-1 opacity-70 uppercase tracking-wide">{label}</p>
-      <p className="text-sm leading-relaxed">{text}</p>
+    <div className="rounded-2xl p-4" style={s}>
+      <p className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5 font-sans opacity-70">{label}</p>
+      <p className="text-sm leading-relaxed font-sans">{text}</p>
     </div>
   )
 }
@@ -113,8 +134,8 @@ function DiscDevolutiva({ result, employee }: { result: Record<string, unknown>;
 
       {/* Valores e Medo */}
       <div className="grid grid-cols-2 gap-4">
-        <InfoCard label="Valor central" text={r.report.values} bg="bg-green-50 border-green-200 text-green-800" />
-        <InfoCard label="Maior receio" text={r.report.fear} bg="bg-red-50 border-red-200 text-red-800" />
+        <InfoCard label="Valor central" text={r.report.values} variant="sage" />
+        <InfoCard label="Maior receio" text={r.report.fear} variant="rose" />
       </div>
 
       {/* Características */}
@@ -235,8 +256,8 @@ function EnneagramDevolutiva({ result, employee }: { result: Record<string, unkn
       </Section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <InfoCard label="Motivação central" text={r.report.motivation} bg="bg-green-50 border-green-200 text-green-800" />
-        <InfoCard label="Medo básico" text={r.report.basicFear} bg="bg-red-50 border-red-200 text-red-800" />
+        <InfoCard label="Motivação central" text={r.report.motivation} variant="sage" />
+        <InfoCard label="Medo básico" text={r.report.basicFear} variant="rose" />
       </div>
 
       <Section title="Foco de atenção">
@@ -385,13 +406,13 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
       </Section>
 
       <div className="grid grid-cols-2 gap-4">
-        <InfoCard label="Dom principal" text={r.report.gift} bg="bg-green-50 border-green-200 text-green-800" />
-        <InfoCard label="Motivação central" text={r.report.motivation} bg="bg-brand-50 border-brand-200 text-brand-800" />
+        <InfoCard label="Dom principal" text={r.report.gift} variant="sage" />
+        <InfoCard label="Motivação central" text={r.report.motivation} variant="terracota" />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <InfoCard label="Maior medo" text={r.report.fear} bg="bg-red-50 border-red-200 text-red-800" />
-        <InfoCard label="Sombra (ponto cego)" text={r.report.shadow} bg="bg-amber-50 border-amber-200 text-amber-800" />
+        <InfoCard label="Maior medo" text={r.report.fear} variant="rose" />
+        <InfoCard label="Sombra (ponto cego)" text={r.report.shadow} variant="amber" />
       </div>
 
       <Section title="Palavras-chave do arquétipo">
@@ -477,11 +498,11 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
       </Section>
 
       <div className="grid grid-cols-2 gap-4">
-        <InfoCard label="Essência" text={r.report.essence} bg="bg-violet-50 border-violet-200 text-violet-800" />
-        <InfoCard label="Palavra-chave" text={r.report.keyword} bg="bg-brand-50 border-brand-200 text-brand-800" />
+        <InfoCard label="Essência" text={r.report.essence} variant="indigo" />
+        <InfoCard label="Palavra-chave" text={r.report.keyword} variant="terracota" />
       </div>
 
-      <InfoCard label="Sombra (ponto cego)" text={r.report.shadow} bg="bg-amber-50 border-amber-200 text-amber-800" />
+      <InfoCard label="Sombra (ponto cego)" text={r.report.shadow} variant="amber" />
 
       <Section title="Distribuição das energias">
         <div className="space-y-2">
@@ -555,13 +576,13 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
   if (assessment.status !== 'COMPLETED' || !assessment.result) {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-3">
-          <Link href="/dashboard/assessments" className="text-sm text-gray-400 hover:text-gray-600">← Avaliações</Link>
-        </div>
-        <div className="card p-12 text-center text-gray-400">
-          <p className="text-4xl mb-4">⏳</p>
-          <p className="font-medium text-gray-600">Avaliação ainda não concluída</p>
-          <p className="text-sm mt-1">A devolutiva estará disponível após o colaborador finalizar o teste.</p>
+        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/40 hover:text-soul-ink/70 font-sans transition-colors">
+          ← Avaliações
+        </Link>
+        <div className="bg-white rounded-3xl py-16 text-center" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+          <div className="text-4xl mb-4">⏳</div>
+          <p className="font-serif font-light text-xl text-soul-ink mb-2">Avaliação ainda não concluída</p>
+          <p className="text-sm text-soul-ink/45 font-sans">A devolutiva estará disponível após o colaborador finalizar o teste.</p>
         </div>
       </div>
     )
@@ -572,19 +593,20 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
   const employeeName = assessment.employee.name
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-5 max-w-3xl">
       {/* Navegação */}
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <Link href="/dashboard/assessments" className="text-sm text-gray-400 hover:text-gray-600">
-          ← Voltar para avaliações
+        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/40 hover:text-soul-ink/70 font-sans transition-colors">
+          ← Avaliações
         </Link>
         <div className="flex items-center gap-2">
-          {/* Link compartilhável — abre a página pública /result/[id] */}
           <ShareResultButton assessmentId={assessment.id} />
           <a
             href={`/api/results/${assessment.id}/pdf`}
             target="_blank"
-            className="btn-primary text-sm px-4 py-2"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-sans font-medium text-white
+                       transition-all hover:-translate-y-px shadow-terra"
+            style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
           >
             ⬇ Baixar PDF
           </a>
@@ -593,9 +615,11 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
 
       {/* Cabeçalho */}
       <div>
-        <p className="text-xs text-gray-400 uppercase tracking-wide">{TEST_LABELS[testType] ?? testType} · Devolutiva</p>
-        <h1 className="text-2xl font-bold text-gray-900 mt-1">{employeeName}</h1>
-        <p className="text-sm text-gray-500 mt-0.5">
+        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] text-soul-ink/35 mb-1">
+          {TEST_LABELS[testType] ?? testType} · Devolutiva
+        </p>
+        <h1 className="font-serif font-light text-3xl text-soul-ink">{employeeName}</h1>
+        <p className="text-sm text-soul-ink/40 mt-1 font-sans">
           {assessment.employee.email} · Concluído em {new Date(assessment.completedAt!).toLocaleDateString('pt-BR')}
         </p>
       </div>

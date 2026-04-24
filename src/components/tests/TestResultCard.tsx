@@ -5,6 +5,13 @@
 // Mostra o perfil identificado de forma visualmente rica
 // ============================================================
 
+import {
+  LOVE_LANGUAGE_LABELS,
+  LOVE_LANGUAGE_EMOJIS,
+  LOVE_LANGUAGE_COLORS,
+  type LoveLanguage,
+} from '@/lib/engines/love-languages'
+
 interface TestResultCardProps {
   testType: string
   result: Record<string, unknown>
@@ -43,7 +50,7 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
       percentages: { D: number; I: number; S: number; C: number }
     }
 
-    const DISC_NAMES: Record<string, string> = { D: 'Dominante', I: 'Influente', S: 'Estável', C: 'Cauteloso' }
+    const DISC_NAMES: Record<string, string> = { D: 'Dominante (ou Executor)', I: 'Influenciador (ou Comunicador)', S: 'Estável (ou Planejador)', C: 'Conforme (ou Analista)' }
 
     return (
       <div className="space-y-6">
@@ -400,6 +407,64 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
             <p className="text-sm text-amber-800">{r.activationReport.activationTip}</p>
           </div>
         )}
+      </div>
+    )
+  }
+
+  // ── 5 Linguagens do Amor ──────────────────────────────────────
+  if (testType === 'LOVE_LANGUAGES') {
+    const r = result as {
+      primaryLanguage: LoveLanguage
+      secondaryLanguage: LoveLanguage
+      ranking: LoveLanguage[]
+      scores: Record<LoveLanguage, number>
+      percentages: Record<LoveLanguage, number>
+      report: { name: string; tagline: string; summary: string; professional: string; personal: string; tips: string[] }
+    }
+
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="text-center">
+          <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full text-4xl mb-4 ${LOVE_LANGUAGE_COLORS[r.primaryLanguage]}`}>
+            {LOVE_LANGUAGE_EMOJIS[r.primaryLanguage]}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="text-rose-600 font-medium text-sm mt-1">{r.report.tagline}</p>
+        </div>
+
+        {/* Distribuição */}
+        <div className="card p-5 space-y-3">
+          <h3 className="font-semibold text-gray-800 text-sm">Suas 5 linguagens — do mais ao menos presente</h3>
+          {r.ranking.map((lang) => (
+            <div key={lang}>
+              <div className="flex justify-between text-xs text-gray-600 mb-1">
+                <span className="font-medium">{LOVE_LANGUAGE_EMOJIS[lang]} {LOVE_LANGUAGE_LABELS[lang]}</span>
+                <span>{r.scores[lang]} pts</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className={`h-full rounded-full ${LOVE_LANGUAGE_COLORS[lang]}`}
+                  style={{ width: `${Math.round(r.percentages[lang] * 100)}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Resumo */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-2">O que isso significa</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{r.report.summary}</p>
+        </div>
+
+        {/* Linguagem secundária */}
+        <div className="card p-4 bg-rose-50 border-rose-100">
+          <p className="text-xs font-semibold text-rose-600 mb-1">
+            {LOVE_LANGUAGE_EMOJIS[r.secondaryLanguage]} Sua linguagem secundária: {LOVE_LANGUAGE_LABELS[r.secondaryLanguage]}
+          </p>
+          <p className="text-sm text-rose-800">Esta é a segunda forma como você mais se sente valorizado(a). Em relacionamentos próximos, ambas as linguagens contam.</p>
+        </div>
       </div>
     )
   }

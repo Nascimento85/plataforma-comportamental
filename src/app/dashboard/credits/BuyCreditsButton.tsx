@@ -28,8 +28,15 @@ export default function BuyCreditsButton({ pack, priceId }: { pack: number; pric
   }
 
   return (
-    <button onClick={handleBuy} disabled={loading || !priceId} className="btn-primary w-full mt-auto">
-      {loading ? 'Aguarde...' : `Comprar ${pack} créditos`}
+    <button
+      onClick={handleBuy}
+      disabled={loading || !priceId}
+      className="w-full mt-auto py-2.5 rounded-full text-sm font-sans font-medium text-white
+                 transition-all duration-200 hover:-translate-y-px shadow-terra
+                 disabled:opacity-50 disabled:translate-y-0"
+      style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+    >
+      {loading ? 'Aguarde…' : `Comprar ${pack} créditos`}
     </button>
   )
 }

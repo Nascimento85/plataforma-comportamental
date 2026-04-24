@@ -4,21 +4,15 @@ import Link from 'next/link'
 
 export const metadata: Metadata = { title: 'Admin — Visão Geral' }
 
-function StatCard({ label, value, sub, color = 'brand' }: { label: string; value: number | string; sub?: string; color?: string }) {
-  const colors: Record<string, string> = {
-    brand: 'bg-brand-50 border-brand-200 text-brand-700',
-    green: 'bg-green-50 border-green-200 text-green-700',
-    amber: 'bg-amber-50 border-amber-200 text-amber-700',
-    red:   'bg-red-50 border-red-200 text-red-700',
-    gray:  'bg-gray-50 border-gray-200 text-gray-600',
-  }
-  return (
-    <div className={`rounded-xl border p-5 ${colors[color] ?? colors.gray}`}>
-      <p className="text-xs font-semibold uppercase tracking-wide opacity-70 mb-1">{label}</p>
-      <p className="text-3xl font-bold">{value}</p>
-      {sub && <p className="text-xs mt-1 opacity-60">{sub}</p>}
-    </div>
-  )
+const TEST_LABELS: Record<string, string> = {
+  DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
+  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arq. Femininos', LOVE_LANGUAGES: 'Ling. Amor',
+  BUNDLE: 'Bundle',
+}
+
+const TEST_EMOJI: Record<string, string> = {
+  DISC: '🎭', MBTI: '🧩', ENNEAGRAM: '⬡', TEMPERAMENT: '🌡',
+  ARCHETYPE: '🧭', ARCHETYPE_FEMININE: '🌸', LOVE_LANGUAGES: '💞', BUNDLE: '✨',
 }
 
 export default async function AdminPage() {
@@ -43,102 +37,142 @@ export default async function AdminPage() {
     prisma.assessment.count({ where: { testType: 'ENNEAGRAM' } }),
     prisma.assessment.count({ where: { testType: 'TEMPERAMENT' } }),
     prisma.assessment.findMany({
-      take: 5,
+      take: 6,
       orderBy: { createdAt: 'desc' },
       where: { status: 'COMPLETED' },
       include: {
         employee: { select: { name: true } },
-        company: { select: { name: true } },
+        company:  { select: { name: true } },
       },
     }),
     prisma.company.findMany({
-      take: 5,
+      take: 6,
       orderBy: { createdAt: 'desc' },
       where: { isAdmin: false },
       select: { id: true, name: true, email: true, createdAt: true, _count: { select: { assessments: true } } },
     }),
   ])
 
-  const TEST_LABELS: Record<string, string> = {
-    DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
-  }
+  const conclusionRate = totalAssessments > 0
+    ? `${Math.round((completedCount / totalAssessments) * 100)}%`
+    : '—'
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-7">
+
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Painel Administrativo</h1>
-        <p className="text-gray-500 text-sm mt-1">Visão geral de toda a plataforma</p>
+        <h1 className="font-serif font-light text-3xl text-soul-ink">Painel Administrativo</h1>
+        <p className="text-sm text-soul-ink/45 mt-1 font-sans">Visão geral de toda a plataforma</p>
       </div>
 
       {/* Stats principais */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard label="Empresas cadastradas" value={totalCompanies} color="brand" />
-        <StatCard label="Testes realizados" value={completedCount} sub={`de ${totalAssessments} criados`} color="green" />
-        <StatCard label="Aguardando resposta" value={pendingCount} color="amber" />
-        <StatCard label="Taxa de conclusão" value={totalAssessments > 0 ? `${Math.round((completedCount / totalAssessments) * 100)}%` : '—'} color="gray" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { label: 'Empresas',       value: totalCompanies, emoji: '🏢', color: '#3d4f7c', bg: 'rgba(61,79,124,0.07)',   border: 'rgba(61,79,124,0.15)'   },
+          { label: 'Concluídos',     value: completedCount, emoji: '✓',  color: '#7a9e7e', bg: 'rgba(122,158,126,0.07)', border: 'rgba(122,158,126,0.15)' },
+          { label: 'Aguardando',     value: pendingCount,   emoji: '⏳', color: '#d4943a', bg: 'rgba(212,148,58,0.07)',  border: 'rgba(212,148,58,0.15)'  },
+          { label: 'Taxa conclusão', value: conclusionRate, emoji: '📊', color: '#c4633a', bg: 'rgba(196,99,58,0.07)',   border: 'rgba(196,99,58,0.12)'   },
+        ].map((s) => (
+          <div key={s.label} className="bg-white rounded-3xl p-5"
+               style={{ border: `1px solid ${s.border}` }}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-base">{s.emoji}</span>
+              <span className="text-[10px] font-sans font-semibold uppercase tracking-widest"
+                    style={{ color: 'rgba(28,26,23,0.4)' }}>{s.label}</span>
+            </div>
+            <div className="font-serif font-light leading-none" style={{ fontSize: '36px', color: s.color }}>
+              {s.value}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Por tipo de teste */}
       <div>
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Testes por tipo</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard label="DISC" value={discCount} color="brand" />
-          <StatCard label="MBTI" value={mbtiCount} color="green" />
-          <StatCard label="Eneagrama" value={enneagramCount} color="amber" />
-          <StatCard label="4 Temperamentos" value={temperamentCount} color="red" />
+        <h2 className="text-[10px] font-sans font-semibold text-soul-ink/35 uppercase tracking-[0.15em] mb-3">
+          Testes por tipo
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            { label: 'DISC',           value: discCount,        dot: 'bg-soul-terracota' },
+            { label: 'MBTI',           value: mbtiCount,        dot: 'bg-soul-sage'      },
+            { label: 'Eneagrama',      value: enneagramCount,   dot: 'bg-soul-amber'     },
+            { label: '4 Temperamentos',value: temperamentCount, dot: 'bg-soul-indigo'    },
+          ].map((t) => (
+            <div key={t.label} className="bg-white rounded-2xl px-4 py-3 flex items-center gap-3"
+                 style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+              <div className={`w-2 h-2 rounded-full flex-shrink-0 ${t.dot}`} />
+              <div>
+                <div className="font-serif font-light text-2xl text-soul-ink leading-none">{t.value}</div>
+                <div className="text-[11px] text-soul-ink/40 mt-0.5 font-sans">{t.label}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Testes recentes concluídos */}
-        <div className="card overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-            <h2 className="text-sm font-semibold text-gray-700">Últimos testes concluídos</h2>
-            <Link href="/admin/assessments" className="text-xs text-brand-600 hover:underline">Ver todos →</Link>
+      {/* Listas recentes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        {/* Testes recentes */}
+        <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+          <div className="flex items-center justify-between px-6 py-4"
+               style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
+            <h2 className="font-serif font-light text-lg text-soul-ink flex items-center gap-2">
+              <span>📋</span> Últimos concluídos
+            </h2>
+            <Link href="/admin/assessments"
+                  className="text-xs text-soul-terracota font-sans hover:underline">
+              Ver todos →
+            </Link>
           </div>
-          <div className="divide-y divide-gray-50">
+          <div className="divide-y divide-soul-mist/30">
             {recentAssessments.length === 0 ? (
-              <p className="text-center text-sm text-gray-400 py-8">Nenhum teste concluído ainda.</p>
+              <p className="text-center text-sm text-soul-ink/35 py-8 font-sans">Nenhum teste concluído ainda.</p>
             ) : recentAssessments.map((a) => (
               <Link
                 key={a.id}
                 href={`/admin/assessments/${a.id}`}
-                className="flex items-center justify-between px-6 py-3 hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-between px-6 py-3 hover:bg-soul-cream/40 transition-colors"
               >
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{a.employee.name}</p>
-                  <p className="text-xs text-gray-400">{a.company.name}</p>
+                  <p className="text-sm font-medium text-soul-ink font-sans">{a.employee.name}</p>
+                  <p className="text-[11px] text-soul-ink/35 font-sans">{a.company.name}</p>
                 </div>
-                <span className="text-xs font-medium bg-green-100 text-green-700 px-2.5 py-1 rounded-full">
-                  {TEST_LABELS[a.testType] ?? a.testType}
+                <span className="text-xs font-medium px-2.5 py-1 rounded-full font-sans flex-shrink-0"
+                      style={{ background: 'rgba(122,158,126,0.1)', color: '#5a8a5e' }}>
+                  {TEST_EMOJI[a.testType] ?? '📊'} {TEST_LABELS[a.testType] ?? a.testType}
                 </span>
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Empresas mais recentes */}
-        <div className="card overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100">
-            <h2 className="text-sm font-semibold text-gray-700">Empresas mais recentes</h2>
+        {/* Empresas recentes */}
+        <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+          <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
+            <h2 className="font-serif font-light text-lg text-soul-ink flex items-center gap-2">
+              <span>🏢</span> Empresas recentes
+            </h2>
           </div>
-          <div className="divide-y divide-gray-50">
+          <div className="divide-y divide-soul-mist/30">
             {recentCompanies.length === 0 ? (
-              <p className="text-center text-sm text-gray-400 py-8">Nenhuma empresa cadastrada.</p>
+              <p className="text-center text-sm text-soul-ink/35 py-8 font-sans">Nenhuma empresa cadastrada.</p>
             ) : recentCompanies.map((c) => (
-              <div key={c.id} className="flex items-center justify-between px-6 py-3">
+              <div key={c.id} className="flex items-center justify-between px-6 py-3 hover:bg-soul-cream/40 transition-colors">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{c.name}</p>
-                  <p className="text-xs text-gray-400">{c.email}</p>
+                  <p className="text-sm font-medium text-soul-ink font-sans">{c.name}</p>
+                  <p className="text-[11px] text-soul-ink/35 font-sans">{c.email}</p>
                 </div>
-                <span className="text-xs text-gray-400">
+                <span className="text-[11px] text-soul-ink/30 font-sans flex-shrink-0">
                   {c._count.assessments} teste{c._count.assessments !== 1 ? 's' : ''}
                 </span>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </div>
   )

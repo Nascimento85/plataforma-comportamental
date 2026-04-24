@@ -6,13 +6,14 @@ export const metadata: Metadata = { title: 'Admin — Todos os Testes' }
 
 const TEST_LABELS: Record<string, string> = {
   DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
+  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arq. Femininos', LOVE_LANGUAGES: 'Ling. Amor', BUNDLE: 'Bundle',
 }
 
-const STATUS_MAP: Record<string, { label: string; className: string }> = {
-  PENDING:   { label: 'Pendente',  className: 'bg-gray-100 text-gray-600' },
-  SENT:      { label: 'Enviado',   className: 'bg-blue-100 text-blue-700' },
-  COMPLETED: { label: 'Concluído', className: 'bg-green-100 text-green-700' },
-  EXPIRED:   { label: 'Expirado',  className: 'bg-red-100 text-red-600' },
+const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; border: string }> = {
+  PENDING:   { label: '📨 Pendente',  color: '#d4943a', bg: 'rgba(212,148,58,0.1)',  border: 'rgba(212,148,58,0.25)' },
+  SENT:      { label: '⏳ Enviado',   color: '#3d4f7c', bg: 'rgba(61,79,124,0.1)',   border: 'rgba(61,79,124,0.25)'  },
+  COMPLETED: { label: '✓ Concluído', color: '#7a9e7e', bg: 'rgba(122,158,126,0.1)', border: 'rgba(122,158,126,0.25)' },
+  EXPIRED:   { label: '✕ Expirado',  color: '#c4633a', bg: 'rgba(196,99,58,0.1)',   border: 'rgba(196,99,58,0.2)'   },
 }
 
 interface PageProps {
@@ -48,48 +49,57 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
 
   return (
     <div className="space-y-6">
+
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Todos os Testes</h1>
-          <p className="text-gray-500 text-sm mt-1">
-            {assessments.length} resultado{assessments.length !== 1 ? 's' : ''}
-            {totalCompleted > 0 && ` · ${totalCompleted} concluído${totalCompleted !== 1 ? 's' : ''}`}
-          </p>
-        </div>
+      <div>
+        <h1 className="font-serif font-light text-3xl text-soul-ink">Todos os Testes</h1>
+        <p className="text-sm text-soul-ink/45 mt-1 font-sans">
+          {assessments.length} resultado{assessments.length !== 1 ? 's' : ''}
+          {totalCompleted > 0 && ` · ${totalCompleted} concluído${totalCompleted !== 1 ? 's' : ''}`}
+        </p>
       </div>
 
       {/* Filtros */}
-      <div className="card p-4 flex flex-wrap gap-3 items-end">
-        <form method="GET" className="flex flex-wrap gap-3 flex-1">
-          {/* Busca */}
+      <div className="bg-white rounded-3xl p-5" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+        <form method="GET" className="flex flex-wrap gap-3 items-end">
           <input
             name="q"
             defaultValue={q ?? ''}
-            placeholder="Buscar por funcionário ou empresa..."
-            className="input flex-1 min-w-48 text-sm"
+            placeholder="Buscar por funcionário ou empresa…"
+            className="flex-1 min-w-48 px-4 py-2.5 rounded-xl text-sm font-sans outline-none transition-all"
+            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}
           />
-          {/* Status */}
-          <select name="status" defaultValue={status ?? 'all'} className="input text-sm w-44">
+          <select name="status" defaultValue={status ?? 'all'}
+            className="px-4 py-2.5 rounded-xl text-sm font-sans outline-none w-44"
+            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}>
             <option value="all">Todos os status</option>
             <option value="COMPLETED">Concluído</option>
             <option value="SENT">Enviado</option>
             <option value="PENDING">Pendente</option>
             <option value="EXPIRED">Expirado</option>
           </select>
-          {/* Tipo */}
-          <select name="type" defaultValue={type ?? 'all'} className="input text-sm w-44">
+          <select name="type" defaultValue={type ?? 'all'}
+            className="px-4 py-2.5 rounded-xl text-sm font-sans outline-none w-44"
+            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}>
             <option value="all">Todos os tipos</option>
             <option value="DISC">DISC</option>
             <option value="MBTI">MBTI</option>
             <option value="ENNEAGRAM">Eneagrama</option>
             <option value="TEMPERAMENT">4 Temperamentos</option>
+            <option value="ARCHETYPE">Arquétipos</option>
+            <option value="ARCHETYPE_FEMININE">Arq. Femininos</option>
           </select>
-          <button type="submit" className="btn-primary text-sm px-5">
+          <button type="submit"
+            className="px-5 py-2.5 rounded-full text-sm font-sans font-medium text-soul-ink transition-all hover:-translate-y-px"
+            style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)', boxShadow: '0 3px 12px rgba(201,168,76,0.2)' }}>
             Filtrar
           </button>
           {(status || type || q) && (
-            <Link href="/admin/assessments" className="text-sm text-gray-400 hover:text-gray-600 self-center">
+            <Link href="/admin/assessments"
+              className="text-sm font-sans transition-colors"
+              style={{ color: 'rgba(28,26,23,0.4)' }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#c4633a' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(28,26,23,0.4)' }}>
               Limpar filtros
             </Link>
           )}
@@ -97,42 +107,46 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
       </div>
 
       {/* Tabela */}
-      <div className="card overflow-hidden">
+      <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
         {assessments.length === 0 ? (
-          <div className="py-16 text-center text-gray-400">
+          <div className="py-16 text-center">
             <p className="text-4xl mb-4">🔍</p>
-            <p className="font-medium text-gray-600">Nenhum resultado encontrado</p>
-            <p className="text-sm mt-1">Tente ajustar os filtros</p>
+            <p className="font-serif font-light text-lg text-soul-ink">Nenhum resultado encontrado</p>
+            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.4)' }}>Tente ajustar os filtros</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
-                <tr>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Funcionário</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Empresa</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Teste</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Data</th>
-                  <th className="text-right px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Ações</th>
+              <thead style={{ borderBottom: '1px solid rgba(232,226,214,0.6)' }}>
+                <tr style={{ background: 'rgba(250,247,242,0.8)' }}>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Funcionário</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Empresa</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Teste</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Status</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Data</th>
+                  <th className="text-right px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody>
                 {assessments.map((a) => {
-                  const { label, className } = STATUS_MAP[a.status] ?? { label: a.status, className: 'bg-gray-100 text-gray-500' }
+                  const st = STATUS_CONFIG[a.status] ?? STATUS_CONFIG.PENDING
                   const isCompleted = a.status === 'COMPLETED'
                   return (
-                    <tr key={a.id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={a.id} className="transition-colors hover:bg-soul-cream/40"
+                        style={{ borderBottom: '1px solid rgba(232,226,214,0.4)' }}>
                       <td className="px-6 py-4">
-                        <p className="font-medium text-gray-900">{a.employee.name}</p>
-                        <p className="text-xs text-gray-400">{a.employee.email}</p>
+                        <p className="text-sm font-medium font-sans text-soul-ink">{a.employee.name}</p>
+                        <p className="text-[11px] font-sans" style={{ color: 'rgba(28,26,23,0.4)' }}>{a.employee.email}</p>
                       </td>
-                      <td className="px-6 py-4 text-gray-600 text-sm">{a.company.name}</td>
-                      <td className="px-6 py-4 text-gray-700">{TEST_LABELS[a.testType] ?? a.testType}</td>
+                      <td className="px-6 py-4 font-sans text-sm" style={{ color: 'rgba(28,26,23,0.6)' }}>{a.company.name}</td>
+                      <td className="px-6 py-4 font-sans text-sm text-soul-ink">{TEST_LABELS[a.testType] ?? a.testType}</td>
                       <td className="px-6 py-4">
-                        <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${className}`}>{label}</span>
+                        <span className="text-xs font-medium font-sans px-2.5 py-1 rounded-full"
+                              style={{ background: st.bg, color: st.color, border: `1px solid ${st.border}` }}>
+                          {st.label}
+                        </span>
                       </td>
-                      <td className="px-6 py-4 text-gray-500">
+                      <td className="px-6 py-4 text-sm font-sans" style={{ color: 'rgba(28,26,23,0.45)' }}>
                         {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -140,20 +154,22 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                           <div className="flex items-center justify-end gap-3">
                             <Link
                               href={`/admin/assessments/${a.id}`}
-                              className="text-brand-600 hover:underline text-xs font-semibold"
+                              className="text-xs font-semibold font-sans transition-colors hover:underline"
+                              style={{ color: '#c4633a' }}
                             >
                               Ver devolutiva
                             </Link>
                             <a
                               href={`/api/results/${a.id}/pdf`}
                               target="_blank"
-                              className="text-xs font-medium text-white bg-brand-600 hover:bg-brand-700 px-3 py-1 rounded-lg transition-colors"
+                              className="text-xs font-medium font-sans text-white px-3 py-1 rounded-full transition-all hover:-translate-y-px"
+                              style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
                             >
                               ⬇ PDF
                             </a>
                           </div>
                         ) : (
-                          <span className="text-xs text-gray-400">
+                          <span className="text-xs font-sans" style={{ color: 'rgba(28,26,23,0.35)' }}>
                             {a.status === 'EXPIRED' ? 'Expirado' : `Expira ${new Date(a.expiresAt).toLocaleDateString('pt-BR')}`}
                           </span>
                         )}
