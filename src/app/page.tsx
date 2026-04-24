@@ -9,7 +9,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Plataforma Comportamental — Avaliações DISC, MBTI, Eneagrama e Temperamentos',
+  title: 'Psique — Mapa Comportamental | Avaliações DISC, MBTI, Eneagrama e Temperamentos',
   description:
     'Crie avaliações comportamentais para seus colaboradores em minutos. Relatórios completos em DISC, MBTI, Eneagrama e 4 Temperamentos.',
 }
@@ -133,7 +133,7 @@ export default async function LandingPage() {
               style={{ backgroundColor: '#2a47f5' }}>
               PC
             </div>
-            <span className="font-semibold text-gray-900 text-sm">Plataforma Comportamental</span>
+            <span className="font-semibold text-gray-900 text-sm">Psique — Mapa Comportamental</span>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login"
@@ -316,10 +316,10 @@ export default async function LandingPage() {
               style={{ backgroundColor: '#2a47f5' }}>
               PC
             </div>
-            <span className="text-sm text-gray-500">Plataforma Comportamental</span>
+            <span className="text-sm text-gray-500">Psique — Mapa Comportamental</span>
           </div>
           <p className="text-xs text-gray-400">
-            © {new Date().getFullYear()} Plataforma Comportamental. Todos os direitos reservados.
+            © {new Date().getFullYear()} Psique — Mapa Comportamental. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/login" className="text-sm text-gray-400 hover:text-gray-600 transition-colors">Entrar</Link>

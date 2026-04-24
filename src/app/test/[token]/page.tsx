@@ -179,7 +179,7 @@ function TestShell({ children }: { children: React.ReactNode }) {
               <circle cx="45" cy="45" r="5" fill="white" opacity="0.9"/>
             </svg>
           </div>
-          <span className="font-serif font-light text-base text-soul-ink">Mapa da Alma</span>
+          <span className="font-serif font-semibold text-base text-soul-ink">Psique <span className="text-soul-ink/60 font-normal">— Mapa Comportamental</span></span>
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-8">{children}</main>

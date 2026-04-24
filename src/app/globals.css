@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════
-   DESIGN SYSTEM — PSIQUE / MAPA DA ALMA
+   DESIGN SYSTEM — PSIQUE / MAPA COMPORTAMENTAL
    Tokens CSS, tipografia e utilitários compartilhados
 ═══════════════════════════════════════════════════════════════ */
 
@@ -35,13 +35,16 @@
 
   html {
     @apply antialiased;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   body {
     background-color: var(--soul-cream);
     color: var(--soul-ink);
     font-family: var(--font-dm-sans);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Scrollbar global suave */
@@ -156,16 +159,16 @@
   /* Tipografia */
   .soul-title {
     font-family: var(--font-fraunces);
-    @apply font-light text-soul-ink leading-tight;
+    @apply font-normal text-soul-ink leading-tight;
   }
 
   .soul-tagline {
     font-family: var(--font-cormorant);
-    @apply italic text-soul-ink/55 leading-relaxed;
+    @apply italic text-soul-ink/75 leading-relaxed;
   }
 
   .soul-label {
-    @apply text-xs font-medium tracking-widest uppercase text-soul-ink/40;
+    @apply text-xs font-semibold tracking-widest uppercase text-soul-ink/65;
   }
 
   /* Progress bars */

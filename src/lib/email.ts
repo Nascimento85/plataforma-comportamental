@@ -5,7 +5,7 @@
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 const APP_URL       = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
-const APP_NAME      = process.env.NEXT_PUBLIC_APP_NAME ?? 'Plataforma Comportamental'
+const APP_NAME      = process.env.NEXT_PUBLIC_APP_NAME ?? 'Psique — Mapa Comportamental'
 
 // Remetente: use seu domínio verificado no Resend em produção.
 // Em desenvolvimento, 'onboarding@resend.dev' funciona para enviar ao seu próprio e-mail.

@@ -123,11 +123,11 @@ function SidebarNavLink({
       href={href}
       onClick={onClick}
       className={[
-        'flex items-center gap-3 px-6 py-2.5 text-sm transition-all duration-200',
+        'flex items-center gap-3 px-6 py-3 text-[15px] transition-all duration-200',
         'relative no-underline',
         isActive
-          ? 'text-white bg-white/[0.06] font-medium'
-          : 'text-white/55 hover:text-white/88 hover:bg-white/[0.04]',
+          ? 'text-white bg-white/[0.08] font-semibold'
+          : 'text-white/80 hover:text-white hover:bg-white/[0.05] font-medium',
       ].join(' ')}
     >
       {/* Active indicator */}
@@ -145,7 +145,7 @@ function SidebarNavLink({
       <span className="flex-1">{label}</span>
 
       {badge !== undefined && badge > 0 && (
-        <span className="bg-soul-terracota text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none">
+        <span className="bg-soul-terracota text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-none">
           {badge}
         </span>
       )}
@@ -171,20 +171,20 @@ function SidebarContent({
     <div className="flex flex-col h-full">
 
       {/* ── Logo ── */}
-      <div className="px-6 pb-7 pt-1 flex items-center gap-3 border-b border-white/[0.07] mb-2">
+      <div className="px-6 pb-7 pt-1 flex items-center gap-3 border-b border-white/[0.12] mb-2">
         <div
-          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0
-                     font-serif text-lg font-semibold text-soul-ink"
+          className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0
+                     font-serif text-xl font-bold text-soul-ink"
           style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
         >
           Ψ
         </div>
         <div>
-          <div className="font-serif text-[15px] font-light text-white/90 leading-none mb-0.5">
+          <div className="font-serif text-[17px] font-semibold text-white leading-none mb-1">
             Psique
           </div>
-          <div className="text-[9px] font-sans uppercase tracking-[0.14em] text-soul-gold font-medium">
-            Mapa da Alma
+          <div className="text-[11px] font-sans uppercase tracking-[0.14em] text-soul-gold font-bold">
+            Mapa Comportamental
           </div>
         </div>
       </div>
@@ -192,17 +192,17 @@ function SidebarContent({
       {/* ── Nav principal ── */}
       <nav className="flex-1 overflow-y-auto py-2">
         <div className="px-6 pb-2 pt-2">
-          <p className="text-[9.5px] font-sans uppercase tracking-[0.14em] text-white/28 font-medium">
+          <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
             Principal
           </p>
         </div>
 
         <SidebarNavLink href="/dashboard"              label="Dashboard"      iconKey="dashboard"   onClick={onNavClick} />
-        <SidebarNavLink href="/dashboard/assessments"  label="Minha Jornada"  iconKey="assessments" badge={3} onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/journey"      label="Minha Jornada"  iconKey="assessments" onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/archetypes"   label="Arquétipos"     iconKey="archetypes"  onClick={onNavClick} />
 
         <div className="px-6 pb-2 pt-4">
-          <p className="text-[9.5px] font-sans uppercase tracking-[0.14em] text-white/28 font-medium">
+          <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
             Gestão
           </p>
         </div>
@@ -212,7 +212,7 @@ function SidebarContent({
         <SidebarNavLink href="/dashboard/reports"      label="Relatórios"    iconKey="reports"     onClick={onNavClick} />
 
         <div className="px-6 pb-2 pt-4">
-          <p className="text-[9.5px] font-sans uppercase tracking-[0.14em] text-white/28 font-medium">
+          <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
             Conta
           </p>
         </div>
@@ -223,7 +223,7 @@ function SidebarContent({
         {session.isAdmin && (
           <>
             <div className="px-6 pb-2 pt-4">
-              <p className="text-[9.5px] font-sans uppercase tracking-[0.14em] text-white/28 font-medium">
+              <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
                 Admin
               </p>
             </div>
@@ -249,18 +249,18 @@ function SidebarContent({
 
           {/* Info */}
           <div className="flex-1 min-w-0">
-            <div className="text-[12.5px] text-white/85 truncate font-sans">
+            <div className="text-[14px] font-semibold text-white truncate font-sans">
               {session.name}
             </div>
             {arch ? (
               <div
-                className="text-[10.5px] font-display italic"
-                style={{ color: '#c9a84c' }}
+                className="text-[12px] font-display italic font-semibold"
+                style={{ color: '#d4b85c' }}
               >
                 {arch.emoji} {arch.label}
               </div>
             ) : (
-              <div className="text-[10.5px] text-white/35 font-sans truncate">
+              <div className="text-[12px] text-white/60 font-sans font-medium truncate">
                 {session.email}
               </div>
             )}
@@ -354,12 +354,12 @@ export default function AppShell({ children, session, maxWidth = '1180px' }: App
         {/* Logo inline mobile */}
         <div className="flex items-center gap-2">
           <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center font-serif text-sm font-semibold text-soul-ink"
+            className="w-8 h-8 rounded-lg flex items-center justify-center font-serif text-base font-bold text-soul-ink"
             style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
           >
             Ψ
           </div>
-          <span className="font-serif text-sm font-light text-soul-ink">Psique</span>
+          <span className="font-serif text-base font-semibold text-soul-ink">Psique</span>
         </div>
       </header>
 

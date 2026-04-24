@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import LoginForm from './LoginForm'
 
-export const metadata: Metadata = { title: 'Entrar — Mapa da Alma' }
+export const metadata: Metadata = { title: 'Entrar — Psique' }
 
 interface PageProps {
   searchParams: { registered?: string }
@@ -51,8 +51,11 @@ export default function LoginPage({ searchParams }: PageProps) {
               <circle cx="45" cy="45" r="4" fill="white" opacity="0.9"/>
             </svg>
           </div>
-          <h1 className="font-serif font-light text-2xl text-white mb-1">Mapa da Alma</h1>
-          <p className="text-[12px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <h1 className="font-serif font-semibold text-3xl text-white mb-1">Psique</h1>
+          <p className="text-[12px] font-bold uppercase tracking-[0.2em]" style={{ color: '#c9a84c' }}>
+            Mapa Comportamental
+          </p>
+          <p className="text-sm font-sans font-medium mt-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
             Entre com a conta da sua empresa
           </p>
         </div>
@@ -96,7 +99,7 @@ export default function LoginPage({ searchParams }: PageProps) {
 
         {/* Rodapé */}
         <p className="text-center text-[11px] mt-6 font-sans" style={{ color: 'rgba(255,255,255,0.2)' }}>
-          Plataforma Comportamental Arquetípica
+          Mapa Comportamental Arquetípico
         </p>
       </div>
     </main>

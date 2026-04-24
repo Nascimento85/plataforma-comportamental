@@ -133,7 +133,7 @@ export interface GenerateReportInput {
 function Footer() {
   return React.createElement(
     View, { style: styles.footer, fixed: true },
-    React.createElement(Text, { style: styles.footerText }, 'Plataforma Comportamental — Relatório Confidencial'),
+    React.createElement(Text, { style: styles.footerText }, 'Psique — Mapa Comportamental — Relatório Confidencial'),
     React.createElement(Text, {
       style: styles.footerText,
       render: ({ pageNumber, totalPages }: { pageNumber: number; totalPages: number }) => `${pageNumber} / ${totalPages}`,
@@ -150,7 +150,7 @@ function ReportHeader({ title, name, company }: { title: string; name: string; c
       View, { style: { flex: 1 } },
       HAS_LOGO
         ? React.createElement(Image, { src: LOGO_SRC!, style: { height: 32, marginBottom: 6, objectFit: 'contain', alignSelf: 'flex-start' } })
-        : React.createElement(Text, { style: { fontSize: 9, color: GRAY_500, marginBottom: 4 } }, 'Plataforma Comportamental'),
+        : React.createElement(Text, { style: { fontSize: 9, color: GRAY_500, marginBottom: 4 } }, 'Psique — Mapa Comportamental'),
       React.createElement(Text, { style: styles.headerTitle }, title),
       React.createElement(Text, { style: styles.headerSubtitle }, `Avaliado: ${name}`)
     ),

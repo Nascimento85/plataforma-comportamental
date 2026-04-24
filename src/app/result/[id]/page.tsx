@@ -671,7 +671,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
 
   const resultData   = parseResultData(assessment.result.resultData)
   const testLabel    = TEST_LABELS[assessment.testType] ?? assessment.testType
-  const APP_NAME     = process.env.NEXT_PUBLIC_APP_NAME ?? 'Plataforma Comportamental'
+  const APP_NAME     = process.env.NEXT_PUBLIC_APP_NAME ?? 'Psique — Mapa Comportamental'
   const finishedAt   = assessment.completedAt
     ? new Date(assessment.completedAt).toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' })
     : null

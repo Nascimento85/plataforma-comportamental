@@ -35,19 +35,19 @@ export default function OnboardingHero({ firstName, credits }: Props) {
       {/* Content */}
       <div className="relative z-10 max-w-xl">
         <div
-          className="text-[10px] font-sans font-medium tracking-[0.2em] uppercase mb-3"
-          style={{ color: '#c9a84c' }}
+          className="text-[12px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
+          style={{ color: '#d4b85c' }}
         >
-          Bem-vindo ao Mapa da Alma
+          Bem-vindo à Psique — Mapa Comportamental
         </div>
 
-        <h2 className="font-serif font-light text-3xl text-white leading-tight mb-3">
-          Olá, <em className="not-italic" style={{ color: '#c9a84c' }}>{firstName}</em>!
+        <h2 className="font-serif font-semibold text-3xl md:text-4xl text-white leading-tight mb-3">
+          Olá, <em className="not-italic" style={{ color: '#d4b85c' }}>{firstName}</em>!
           <br/>Sua jornada começa aqui.
         </h2>
 
-        <p className="text-sm text-white/55 leading-relaxed mb-6 max-w-md">
-          Você tem <strong className="text-white font-medium">{credits} créditos</strong> prontos para usar.
+        <p className="text-[16px] text-white/85 leading-relaxed font-medium mb-6 max-w-md">
+          Você tem <strong className="text-white font-bold">{credits} créditos</strong> prontos para usar.
           Convide candidatos e descubra os arquétipos que constroem times extraordinários.
         </p>
 
@@ -65,7 +65,7 @@ export default function OnboardingHero({ firstName, credits }: Props) {
               >
                 {s.num}
               </div>
-              <p className="text-xs text-white/50 leading-snug max-w-[140px]">{s.text}</p>
+              <p className="text-[13px] text-white/80 leading-snug max-w-[150px] font-semibold">{s.text}</p>
             </div>
           ))}
         </div>
@@ -73,8 +73,8 @@ export default function OnboardingHero({ firstName, credits }: Props) {
         {/* CTAs */}
         <div className="flex gap-3 flex-wrap">
           <Link
-            href="/dashboard/assessments/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-sans font-medium text-soul-ink
+            href="/dashboard/assessments"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-sans font-bold text-soul-ink
                        shadow-gold transition-all duration-200 hover:-translate-y-px hover:brightness-105"
             style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
           >

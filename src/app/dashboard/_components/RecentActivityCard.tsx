@@ -57,13 +57,13 @@ export default function RecentActivityCard({ assessments }: Props) {
         </h2>
         <div className="py-8 text-center">
           <div className="text-3xl mb-3">🗺️</div>
-          <p className="text-sm text-soul-ink/45 mb-4">
+          <p className="text-[15px] text-soul-ink/75 font-semibold mb-4">
             Nenhuma atividade ainda. Convide o primeiro candidato para começar.
           </p>
           <Link
-            href="/dashboard/assessments/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                       bg-soul-terracota text-white text-sm font-medium font-sans
+            href="/dashboard/assessments"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full
+                       bg-soul-terracota text-white text-[14px] font-bold font-sans
                        hover:bg-soul-terracota-dark transition-all duration-200"
           >
             + Criar primeira avaliação

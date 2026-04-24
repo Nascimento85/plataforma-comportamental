@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 // -- Design System Arquetipico --------------------------------------------
 const dmSans = DM_Sans({
     subsets: ['latin'],
-    weight: ['300', '400', '500'],
+    weight: ['400', '500', '600', '700'],
     style: ['normal', 'italic'],
     variable: '--font-dm-sans',
     display: 'swap',
@@ -16,7 +16,7 @@ const dmSans = DM_Sans({
 
 const fraunces = Fraunces({
     subsets: ['latin'],
-    weight: ['300', '400', '600'],
+    weight: ['400', '500', '600', '700'],
     style: ['normal', 'italic'],
     variable: '--font-fraunces',
     display: 'swap',
@@ -32,12 +32,12 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Psique — Mapa da Alma',
+        default: 'Psique — Mapa Comportamental',
         template: '%s | Psique',
     },
     description:
-        'Avaliacoes comportamentais arquetipicas: DISC, MBTI, Eneagrama, Arquetipos Junguianos e Linguagens do Amor.',
-    keywords: ['DISC', 'MBTI', 'Eneagrama', 'arquetipos', 'Jung', 'avaliacao comportamental', 'RH'],
+        'Plataforma de mapeamento comportamental para empresas: DISC, MBTI, Eneagrama, Arquetipos Junguianos, Temperamentos e Linguagens do Amor.',
+    keywords: ['DISC', 'MBTI', 'Eneagrama', 'arquetipos', 'Jung', 'avaliacao comportamental', 'RH', 'mapeamento comportamental'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

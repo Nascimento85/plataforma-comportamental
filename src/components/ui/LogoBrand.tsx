@@ -41,8 +41,8 @@ export default function LogoBrand({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }
       >
         PC
       </div>
-      <span className={`font-semibold text-gray-900 ${textSizes[size]}`}>
-        Plataforma Comportamental
+      <span className={`font-bold text-gray-900 ${textSizes[size]}`}>
+        Psique <span className="font-normal text-gray-600">— Mapa Comportamental</span>
       </span>
     </div>
   )

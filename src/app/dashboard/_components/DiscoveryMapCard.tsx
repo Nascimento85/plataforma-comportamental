@@ -178,8 +178,8 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
         >
           <div className="text-2xl">🏆</div>
           <div>
-            <div className="text-sm font-medium text-soul-ink">Jornada completa!</div>
-            <div className="text-xs text-soul-ink/40 mt-0.5">Seu Mapa da Alma está pronto para explorar</div>
+            <div className="text-[15px] font-bold text-soul-ink">Jornada completa!</div>
+            <div className="text-[13px] text-soul-ink/75 font-medium mt-0.5">Seu Mapa Comportamental está pronto para explorar</div>
           </div>
           <Link
             href="/dashboard/reports"

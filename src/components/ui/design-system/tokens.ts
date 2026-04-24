@@ -1,5 +1,5 @@
 /**
- * Design tokens do sistema Psique / Mapa da Alma
+ * Design tokens do sistema Psique — Mapa Comportamental
  * Exportados como constantes TypeScript para uso em código (cn, style, etc.)
  */
 

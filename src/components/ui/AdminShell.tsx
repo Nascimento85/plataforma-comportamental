@@ -19,19 +19,19 @@ function NavLink({ href, label, icon, onClick }: {
     <Link
       href={href}
       onClick={onClick}
-      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-sans font-medium transition-all duration-150"
+      className="flex items-center gap-3 px-3 py-3 rounded-xl text-[15px] font-sans font-semibold transition-all duration-150"
       style={isActive ? {
-        background: 'rgba(201,168,76,0.12)',
-        color: '#c9a84c',
-        borderLeft: '2px solid #c9a84c',
-        paddingLeft: '10px',
+        background: 'rgba(201,168,76,0.18)',
+        color: '#e8c878',
+        borderLeft: '3px solid #c9a84c',
+        paddingLeft: '9px',
       } : {
-        color: 'rgba(255,255,255,0.5)',
+        color: 'rgba(255,255,255,0.82)',
       }}
-      onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.8)' }}
-      onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)' }}
+      onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,1)' }}
+      onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.82)' }}
     >
-      <span className="text-base w-5 text-center flex-shrink-0">{icon}</span>
+      <span className="text-lg w-5 text-center flex-shrink-0">{icon}</span>
       <span>{label}</span>
     </Link>
   )
@@ -45,10 +45,10 @@ function SignOut() {
   return (
     <button
       onClick={handleSignOut}
-      className="w-full text-left text-xs font-sans transition-colors"
-      style={{ color: 'rgba(255,255,255,0.3)' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(196,122,114,0.8)' }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.3)' }}
+      className="w-full text-left text-[13px] font-sans font-semibold transition-colors"
+      style={{ color: 'rgba(255,255,255,0.65)' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(212,148,58,1)' }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)' }}
     >
       Sair da conta
     </button>
@@ -72,9 +72,9 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
             </svg>
           </div>
           <div>
-            <div className="text-sm font-serif font-light text-white leading-none">Mapa da Alma</div>
-            <div className="text-[10px] font-sans uppercase tracking-widest mt-0.5"
-                 style={{ color: '#c9a84c' }}>Admin</div>
+            <div className="text-base font-serif font-semibold text-white leading-none">Psique</div>
+            <div className="text-[11px] font-sans uppercase tracking-widest mt-1 font-bold"
+                 style={{ color: '#c9a84c' }}>Painel Admin</div>
           </div>
         </div>
       </div>
@@ -82,8 +82,8 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
       {/* Nav */}
       <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         <div className="px-3 py-2 mb-1">
-          <span className="text-[10px] font-sans font-bold uppercase tracking-[0.15em]"
-                style={{ color: 'rgba(255,255,255,0.25)' }}>
+          <span className="text-[11px] font-sans font-bold uppercase tracking-[0.16em]"
+                style={{ color: 'rgba(255,255,255,0.55)' }}>
             Administração
           </span>
         </div>
@@ -91,8 +91,8 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
         <NavLink href="/admin/assessments" label="Todos os testes" icon="📋" onClick={onNavClick} />
 
         <div className="px-3 py-2 mt-3 mb-1">
-          <span className="text-[10px] font-sans font-bold uppercase tracking-[0.15em]"
-                style={{ color: 'rgba(255,255,255,0.25)' }}>
+          <span className="text-[11px] font-sans font-bold uppercase tracking-[0.16em]"
+                style={{ color: 'rgba(255,255,255,0.55)' }}>
             Minha conta
           </span>
         </div>
@@ -109,8 +109,8 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
             {session.name.charAt(0).toUpperCase()}
           </div>
           <div className="min-w-0">
-            <div className="text-xs font-medium text-white truncate font-sans">{session.name}</div>
-            <div className="text-[10px] truncate font-sans" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <div className="text-sm font-semibold text-white truncate font-sans">{session.name}</div>
+            <div className="text-[12px] font-medium truncate font-sans" style={{ color: 'rgba(255,255,255,0.62)' }}>
               {session.email}
             </div>
           </div>

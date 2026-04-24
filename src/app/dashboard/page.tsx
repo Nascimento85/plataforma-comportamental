@@ -8,6 +8,7 @@ import RecentActivityCard from './_components/RecentActivityCard'
 import CreditsWidget from './_components/CreditsWidget'
 import ArchetypeHero from './_components/ArchetypeHero'
 import OnboardingHero from './_components/OnboardingHero'
+import NewAssessmentButton from './assessments/NewAssessmentButton'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
@@ -78,42 +79,31 @@ export default async function DashboardPage() {
       {/* ══════════════════════════════════════════════════════
           TOP BAR
       ══════════════════════════════════════════════════════ */}
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-serif font-light text-3xl text-soul-ink leading-tight">
+          <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
             {greeting},{' '}
             <em className="not-italic text-soul-terracota">{firstName}</em>{' '}
             <span className="text-2xl">✦</span>
           </h1>
-          <p className="text-sm text-soul-ink/45 mt-1 capitalize">{today}</p>
+          <p className="text-[15px] text-soul-ink/75 mt-1.5 capitalize font-semibold">{today}</p>
         </div>
 
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <Link
-            href="/dashboard/assessments"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full
-                       border border-soul-mist bg-white text-sm text-soul-ink/70 font-sans
+            href="/dashboard/candidates"
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full
+                       border-2 border-soul-mist bg-white text-[14px] text-soul-ink font-sans font-bold
                        hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
           >
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-              <path d="M13.5 8C13.5 11.04 11.04 13.5 8 13.5C4.96 13.5 2.5 11.04 2.5 8C2.5 4.96 4.96 2.5 8 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M11 2L14 5L11 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M13.5 8C13.5 11.04 11.04 13.5 8 13.5C4.96 13.5 2.5 11.04 2.5 8C2.5 4.96 4.96 2.5 8 2.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+              <path d="M11 2L14 5L11 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            Importar CSV
+            Ver candidatos
           </Link>
 
-          <Link
-            href="/dashboard/assessments/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full
-                       bg-soul-terracota text-white text-sm font-sans font-medium
-                       hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px
-                       shadow-[0_4px_12px_rgba(196,99,58,0.22)]"
-          >
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-              <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            Convidar candidato
-          </Link>
+          <NewAssessmentButton />
         </div>
       </div>
 
