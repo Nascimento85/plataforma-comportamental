@@ -12,14 +12,7 @@ const CREDIT_PACKS = [
   { pack: 50, price: 'R$ 349,90', priceId: process.env.STRIPE_PRICE_PACK_50, highlight: false },
 ]
 
-interface PageProps {
-  searchParams: { success?: string; canceled?: string }
-}
-
-export default async function CreditsPage({ searchParams }: PageProps) {
-  const justPurchased = searchParams.success === '1'
-  const wasCanceled   = searchParams.canceled === '1'
-
+export default async function CreditsPage() {
   const session = await getSession()
   const companyId = session!.id
 
@@ -38,34 +31,14 @@ export default async function CreditsPage({ searchParams }: PageProps) {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Créditos</h1>
-        <p className="text-gray-500 mt-1">Cada crédito gera um relatório completo</p>
+        <p className="text-gray-500 text-sm mt-1">Cada crédito gera um relatório completo</p>
       </div>
-
-      {/* Banners de feedback do Stripe */}
-      {justPurchased && (
-        <div className="flex items-start gap-3 bg-green-50 border border-green-200 rounded-2xl px-5 py-4">
-          <span className="text-2xl flex-shrink-0">🎉</span>
-          <div>
-            <p className="font-semibold text-green-800">Pagamento confirmado!</p>
-            <p className="text-sm text-green-700 mt-0.5">Seus créditos já foram adicionados ao saldo e estão disponíveis para uso imediato.</p>
-          </div>
-        </div>
-      )}
-      {wasCanceled && (
-        <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl px-5 py-4">
-          <span className="text-2xl flex-shrink-0">⚠️</span>
-          <div>
-            <p className="font-semibold text-amber-800">Pagamento cancelado</p>
-            <p className="text-sm text-amber-700 mt-0.5">Nenhum valor foi cobrado. Você pode tentar novamente quando quiser.</p>
-          </div>
-        </div>
-      )}
 
       <div className="card p-6 flex items-center justify-between">
         <div>
-          <p className="font-medium text-gray-500">Saldo atual</p>
+          <p className="text-sm font-medium text-gray-500">Saldo atual</p>
           <p className="text-5xl font-bold text-brand-600 mt-1">{credits}</p>
-          <p className="text-gray-400 mt-1">créditos disponíveis</p>
+          <p className="text-sm text-gray-400 mt-1">créditos disponíveis</p>
         </div>
         <div className="text-6xl">💳</div>
       </div>
@@ -79,8 +52,8 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                 <span className="text-xs font-semibold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full self-start mb-3">Mais popular</span>
               )}
               <p className="text-3xl font-bold text-gray-900">{pack.pack}</p>
-              <p className="text-gray-500 mb-1">créditos</p>
-              <p className="text-xl font-semibold text-gray-800 mb-4">{pack.price}</p>
+              <p className="text-sm text-gray-500 mb-1">créditos</p>
+              <p className="text-lg font-semibold text-gray-800 mb-4">{pack.price}</p>
               <BuyCreditsButton pack={pack.pack} priceId={pack.priceId ?? ''} />
             </div>
           ))}
@@ -98,10 +71,10 @@ export default async function CreditsPage({ searchParams }: PageProps) {
             {transactions.map((t) => (
               <li key={t.id} className="px-6 py-4 flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-gray-900">
+                  <p className="text-sm font-medium text-gray-900">
                     {t.type === 'PURCHASE' ? 'Compra de créditos' : 'Uso de crédito — relatório'}
                   </p>
-                  <p className="text-sm text-gray-400 mt-0.5">
+                  <p className="text-xs text-gray-400 mt-0.5">
                     {new Date(t.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
                   </p>
                 </div>

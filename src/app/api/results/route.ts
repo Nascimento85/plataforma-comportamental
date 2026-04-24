@@ -9,7 +9,6 @@ import { calculateArchetypeMixed } from '@/lib/engines/archetype-mixed'
 import { calculateArchetypeFeminine } from '@/lib/engines/archetype-feminine'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
-import { sendTestCompletionNotifications } from '@/lib/email'
 
 const schema = z.object({
   token: z.string().min(1),
@@ -31,7 +30,7 @@ export async function POST(request: NextRequest) {
       where: { token },
       include: {
         employee: { select: { name: true, email: true } },
-        company: { select: { name: true, email: true } },
+        company: { select: { name: true } },
       },
     })
 
@@ -162,16 +161,8 @@ export async function POST(request: NextRequest) {
       return r
     })
 
-    // Gera PDF e envia notificações em background (não bloqueia resposta)
+    // Gera PDF em background (não bloqueia resposta)
     generateAndUploadReport(assessment, resultData, result.id).catch(console.error)
-    sendTestCompletionNotifications({
-      employeeName:  assessment.employee.name,
-      employeeEmail: assessment.employee.email,
-      companyName:   assessment.company.name,
-      companyEmail:  assessment.company.email,
-      testType:      assessment.testType,
-      assessmentId:  assessment.id,
-    }).catch(console.error)
 
     return NextResponse.json({ resultId: result.id, result: resultData }, { status: 201 })
   } catch (err) {
@@ -187,7 +178,7 @@ async function generateAndUploadReport(
     companyId: string
     testType: string
     employee: { name: string; email: string }
-    company: { name: string; email: string }
+    company: { name: string }
   },
   resultData: Record<string, unknown>,
   resultId: string

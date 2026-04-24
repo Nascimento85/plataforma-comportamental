@@ -138,19 +138,19 @@ export default function NewAssessmentButton() {
                 <h3 className="font-bold text-lg text-gray-900 mb-1">Avaliação criada!</h3>
 
                 {success.emailSent ? (
-                  <div className="flex items-center justify-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-2 mb-4 text-base">
+                  <div className="flex items-center justify-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-2 mb-4 text-sm">
                     <span>📧</span>
                     <span>E-mail enviado para <strong>{success.employeeEmail}</strong></span>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center gap-2 text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-4 text-base">
+                  <div className="flex items-center justify-center gap-2 text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 mb-4 text-sm">
                     <span>⚠️</span>
                     <span>E-mail não enviado — compartilhe o link manualmente</span>
                   </div>
                 )}
 
-                <p className="text-base text-gray-500 mb-2">Link do teste:</p>
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm font-mono break-all text-gray-700 mb-4 text-left">
+                <p className="text-sm text-gray-500 mb-2">Link do teste:</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs font-mono break-all text-gray-700 mb-4 text-left">
                   {success.link}
                 </div>
 
@@ -168,13 +168,13 @@ export default function NewAssessmentButton() {
 
                 <form onSubmit={handleCreate} className="space-y-4">
                   {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-700 text-base rounded-lg px-4 py-3">
+                    <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
                       {error}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-base font-medium text-gray-700 mb-1">Nome do colaborador</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Nome do colaborador</label>
                     <input
                       type="text" required value={form.employeeName}
                       onChange={(e) => update('employeeName', e.target.value)}
@@ -183,7 +183,7 @@ export default function NewAssessmentButton() {
                   </div>
 
                   <div>
-                    <label className="block text-base font-medium text-gray-700 mb-1">E-mail do colaborador</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">E-mail do colaborador</label>
                     <input
                       type="email" required value={form.employeeEmail}
                       onChange={(e) => update('employeeEmail', e.target.value)}
@@ -192,7 +192,7 @@ export default function NewAssessmentButton() {
                   </div>
 
                   <div>
-                    <label className="block text-base font-medium text-gray-700 mb-2">Tipo de avaliação</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de avaliação</label>
                     <div className="grid grid-cols-2 gap-2">
                       {TEST_TYPES.map((t) => (
                         <button
@@ -206,14 +206,14 @@ export default function NewAssessmentButton() {
                           }`}
                         >
                           {t.badge && (
-                            <span className="absolute top-2 right-2 text-xs font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">
+                            <span className="absolute top-2 right-2 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700">
                               {t.badge}
                             </span>
                           )}
-                          <p className={`text-sm font-bold mb-0.5 ${form.testType === t.value ? 'text-brand-700' : 'text-gray-700'}`}>
+                          <p className={`text-xs font-bold mb-0.5 ${form.testType === t.value ? 'text-brand-700' : 'text-gray-700'}`}>
                             {t.short}
                           </p>
-                          <p className="text-xs text-gray-400">
+                          <p className="text-[11px] text-gray-400">
                             {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
                           </p>
                         </button>
@@ -231,8 +231,8 @@ export default function NewAssessmentButton() {
                     />
                     <div className="p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <p className="text-base font-bold text-gray-900">{selectedTest.label}</p>
-                        <span className={`text-sm font-semibold px-2 py-1 rounded-full ${
+                        <p className="text-sm font-bold text-gray-900">{selectedTest.label}</p>
+                        <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
                           selectedTest.credits > 1
                             ? 'bg-amber-100 text-amber-700'
                             : 'bg-brand-50 text-brand-700'
@@ -240,7 +240,7 @@ export default function NewAssessmentButton() {
                           {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-500 leading-relaxed">{selectedTest.description}</p>
+                      <p className="text-xs text-gray-500 leading-relaxed">{selectedTest.description}</p>
                     </div>
                   </div>
 
