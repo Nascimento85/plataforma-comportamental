@@ -31,22 +31,22 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-                            title: {
-                              default: 'Psique — Mapa da Alma',
-                                  template: '%s | Psique',
-                            },
+    title: {
+        default: 'Psique — Mapa da Alma',
+        template: '%s | Psique',
+    },
     description:
-          'Avaliacoes comportamentais arquetipicas: DISC, MBTI, Eneagrama, Arquetipos Junguianos e Linguagens do Amor.',
+        'Avaliacoes comportamentais arquetipicas: DISC, MBTI, Eneagrama, Arquetipos Junguianos e Linguagens do Amor.',
     keywords: ['DISC', 'MBTI', 'Eneagrama', 'arquetipos', 'Jung', 'avaliacao comportamental', 'RH'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-          <html
-                  lang="pt-BR"
-                  className={`${inter.variable} ${dmSans.variable} ${fraunces.variable} ${cormorant.variable}`}
-                >
-                <body>{children}</body>body>
-          </html>html>
-        )
-}</html>
+        <html
+            lang="pt-BR"
+            className={`${inter.variable} ${dmSans.variable} ${fraunces.variable} ${cormorant.variable}`}
+        >
+            <body>{children}</body>
+        </html>
+    )
+}
