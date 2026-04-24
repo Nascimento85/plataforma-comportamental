@@ -4,7 +4,7 @@ nixPkgs = [
   "nss",
   "freetype",
   "harfbuzz",
-  "ca-certificates",
+  "cacert",
   "glib",
   "dbus",
   "libdrm",
@@ -22,8 +22,7 @@ nixPkgs = [
   "at-spi2-atk",
   "cups",
   "expat",
-  "fontconfig",
-  "udev"
+  "fontconfig"
 ]
 
 [phases.install]
