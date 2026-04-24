@@ -1,29 +1,2 @@
-[phases.setup]
-nixPkgs = [
-  "chromium",
-  "nss",
-  "freetype",
-  "harfbuzz",
-  "cacert",
-  "glib",
-  "dbus",
-  "libdrm",
-  "mesa",
-  "xorg.libX11",
-  "xorg.libXcomposite",
-  "xorg.libXdamage",
-  "xorg.libXext",
-  "xorg.libXfixes",
-  "xorg.libXrandr",
-  "xorg.libxcb",
-  "libxkbcommon",
-  "pango",
-  "alsa-lib",
-  "at-spi2-atk",
-  "cups",
-  "expat",
-  "fontconfig"
-]
-
 [phases.install]
 cmds = ["npm install"]
