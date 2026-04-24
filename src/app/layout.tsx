@@ -6,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 // ── Design System Arquetípico ──────────────────────────────────────────
-const dmSans = DM_Sans({
+const dmSans = DM_Sans({h
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   style: ['normal', 'italic'],
@@ -20,8 +20,7 @@ const fraunces = Fraunces({
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
   display: 'swap',
-  axes: ['opsz'],
-})
+
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
