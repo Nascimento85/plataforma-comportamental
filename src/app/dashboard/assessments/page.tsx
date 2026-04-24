@@ -82,56 +82,16 @@ export default async function AssessmentsPage() {
             Avaliações
           </h1>
           <p className="text-[16px] text-soul-ink/85 mt-2 font-medium max-w-2xl">
-            Escolha a categoria mais adequada ao que você precisa decifrar — arquétipo, performance ou relacionamento — e envie o teste em menos de 30 segundos.
+            Escolha a categoria mais adequada ao que você precisa decifrar — performance, relacionamento ou arquétipo — e envie o teste em menos de 30 segundos.
           </p>
         </div>
         <NewAssessmentButton />
       </div>
 
-      {/* ── 3 CATEGORIAS (HERO) ───────────────────────────────── */}
+      {/* ── 3 CATEGORIAS (HERO) — ordem corporativa: Performance → Cultura → Profundidade ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-        {/* ── Categoria 1: Arquétipos ── */}
-        <article
-          className="relative overflow-hidden rounded-3xl p-7 text-white flex flex-col"
-          style={{
-            background: 'linear-gradient(135deg, #1c1a17 0%, #2a2015 55%, #3d2a1c 100%)',
-            minHeight: '340px',
-          }}
-        >
-          <div
-            className="absolute top-0 right-0 w-60 h-60 rounded-full opacity-[0.1] pointer-events-none"
-            style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}
-          />
-          <div className="relative z-10 flex flex-col h-full">
-            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
-                  style={{ background: 'rgba(201,168,76,0.2)', color: '#e8c878' }}>
-              Categoria 1 · Profundidade
-            </span>
-
-            <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-3">
-              Arquétipos Junguianos
-            </h2>
-
-            <p className="text-[15px] leading-relaxed font-medium text-white/90 mb-5 flex-1">
-              Os padrões psíquicos universais que Carl Jung mapeou. Não descrevem o que a pessoa faz — descrevem a força invisível que decide por ela. A lente mais profunda da plataforma para posicionamento de carreira, sucessão e liderança de alta complexidade.
-            </p>
-
-            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-white/85">
-              <p>· Arquétipos Junguianos (12 padrões universais)</p>
-              <p>· Arquétipos Femininos (7 energias de liderança)</p>
-            </div>
-
-            <NewAssessmentButton initialCategory="ARCHETYPE">
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-              </svg>
-              Descobrir Arquétipo
-            </NewAssessmentButton>
-          </div>
-        </article>
-
-        {/* ── Categoria 2: Análises Comportamentais ── */}
+        {/* ── Categoria 1: Análises Comportamentais (DISC é o carro chefe) ── */}
         <article
           className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
           style={{
@@ -147,7 +107,7 @@ export default async function AssessmentsPage() {
           <div className="relative z-10 flex flex-col h-full">
             <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
-              Categoria 2 · Performance
+              Categoria 1 · Performance
             </span>
 
             <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
@@ -162,7 +122,7 @@ export default async function AssessmentsPage() {
             </p>
 
             <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
-              <p>· DISC — Perfil Comportamental</p>
+              <p>· DISC — Perfil Comportamental <span className="text-soul-terracota font-bold">(carro chefe)</span></p>
               <p>· MBTI — 16 Tipos de Personalidade</p>
               <p>· Eneagrama de Personalidade</p>
               <p>· 4 Personalidades (Temperamentos)</p>
@@ -177,7 +137,7 @@ export default async function AssessmentsPage() {
           </div>
         </article>
 
-        {/* ── Categoria 3: Inteligência em Relacionamentos ── */}
+        {/* ── Categoria 2: Inteligência em Relacionamentos ── */}
         <article
           className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
           style={{
@@ -193,24 +153,24 @@ export default async function AssessmentsPage() {
           <div className="relative z-10 flex flex-col h-full">
             <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(196,122,114,0.18)', color: '#7a3d35' }}>
-              Categoria 3 · Cultura
+              Categoria 2 · Vida Pessoal
             </span>
 
             <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
-              Inteligência em Relacionamentos
+              Linguagem do Amor
             </h2>
             <p className="font-display italic text-[15px] font-semibold mb-3" style={{ color: '#9b4d43' }}>
-              Harmonia, pertencimento e comunicação afetiva
+              Casais, família e relacionamentos que importam
             </p>
 
             <p className="text-[15px] leading-relaxed font-medium text-soul-ink mb-5 flex-1">
-              Como um colaborador se sente reconhecido é o que define engajamento, retenção e espírito de equipe. Esta categoria mapeia a dimensão afetiva — a linguagem em que cada pessoa recebe valorização — e converte cultura em resultado operacional.
+              Baseado no best-seller de Gary Chapman. Revela como cada pessoa recebe amor — e por que, às vezes, você faz tudo pela sua parceria e ela ainda não se sente amada. A resposta muda relacionamentos reais.
             </p>
 
             <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
-              <p>· 5 Linguagens do Amor aplicadas à liderança</p>
-              <p>· Guia de reconhecimento individualizado</p>
-              <p>· Aplicação em retenção e cultura</p>
+              <p>· Descubra a sua linguagem primária e secundária</p>
+              <p>· Entenda a de quem você ama</p>
+              <p>· Guia prático de como amar no dia a dia</p>
             </div>
 
             <NewAssessmentButton initialCategory="RELATIONSHIPS">
@@ -218,6 +178,47 @@ export default async function AssessmentsPage() {
                 <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
               </svg>
               Relacionamentos
+            </NewAssessmentButton>
+          </div>
+        </article>
+
+        {/* ── Categoria 3: Arquétipos (ticket premium) ── */}
+        <article
+          className="relative overflow-hidden rounded-3xl p-7 text-white flex flex-col"
+          style={{
+            background: 'linear-gradient(135deg, #1c1a17 0%, #2a2015 55%, #3d2a1c 100%)',
+            minHeight: '340px',
+          }}
+        >
+          <div
+            className="absolute top-0 right-0 w-60 h-60 rounded-full opacity-[0.1] pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}
+          />
+          <div className="relative z-10 flex flex-col h-full">
+            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+                  style={{ background: 'rgba(201,168,76,0.2)', color: '#e8c878' }}>
+              Categoria 3 · Profundidade
+            </span>
+
+            <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-3">
+              Arquétipos Junguianos
+            </h2>
+
+            <p className="text-[15px] leading-relaxed font-medium text-white/90 mb-5 flex-1">
+              Os padrões psíquicos universais que Carl Jung mapeou. Não descrevem o que a pessoa faz — descrevem a força invisível que decide por ela. A lente mais profunda da plataforma para posicionamento de carreira, sucessão e liderança de alta complexidade.
+            </p>
+
+            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-white/85">
+              <p>· Arquétipos da Liderança (4 estilos)</p>
+              <p>· Arquétipos Junguianos (12 padrões universais)</p>
+              <p>· Arquétipos Femininos (7 energias)</p>
+            </div>
+
+            <NewAssessmentButton initialCategory="ARCHETYPE">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+              </svg>
+              Descobrir Arquétipo
             </NewAssessmentButton>
           </div>
         </article>

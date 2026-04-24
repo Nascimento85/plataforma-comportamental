@@ -199,7 +199,16 @@ function SidebarContent({
 
         <SidebarNavLink href="/dashboard"              label="Dashboard"      iconKey="dashboard"   onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/journey"      label="Minha Jornada"  iconKey="assessments" onClick={onNavClick} />
-        <SidebarNavLink href="/dashboard/archetypes"   label="Arquétipos"     iconKey="archetypes"  onClick={onNavClick} />
+
+        <div className="px-6 pb-2 pt-4">
+          <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
+            Avaliações
+          </p>
+        </div>
+
+        <SidebarNavLink href="/dashboard/behavioral"     label="Comportamentais"  iconKey="assessments" onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/love-languages" label="Linguagem do Amor" iconKey="reports"    onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/archetypes"     label="Arquétipos"       iconKey="archetypes"  onClick={onNavClick} />
 
         <div className="px-6 pb-2 pt-4">
           <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">

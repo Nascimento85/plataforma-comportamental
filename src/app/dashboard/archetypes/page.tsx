@@ -259,21 +259,21 @@ export default function ArchetypesPage() {
       </div>
 
       <Section
+        title="Arquétipos da Liderança"
+        subtitle="Os quatro estilos arquetípicos que definem como alguém exerce autoridade. Reconhecer o seu é o primeiro passo para liderar com maturidade e calibrar sucessão em qualquer organização."
+        items={LEADERSHIP}
+      />
+
+      <Section
         title="Arquétipos Masculinos — As 4 Energias"
-        subtitle="Robert Moore e Douglas Gillette mapearam quatro polos arquetípicos da psique masculina madura. Estão presentes em toda pessoa, independentemente do gênero."
+        subtitle="Robert Moore e Douglas Gillette mapearam quatro polos arquetípicos da psique masculina madura. Estão presentes em toda pessoa, independentemente do gênero, e são úteis para entender como alguém exerce força, visão e conexão no trabalho."
         items={MASCULINE}
       />
 
       <Section
         title="Arquétipos Femininos — As 7 Energias"
-        subtitle="Do divino feminino — energias que governam ciclos de criação, poder e intuição. Uma delas predomina em cada fase da vida."
+        subtitle="As energias arquetípicas que governam ciclos de criação, poder e intuição. Base de programas de liderança feminina e mentoria — uma delas predomina em cada fase profissional."
         items={FEMININE}
-      />
-
-      <Section
-        title="Arquétipos da Liderança"
-        subtitle="Os quatro estilos arquetípicos que definem como alguém exerce autoridade. Reconhecer o seu é o primeiro passo para liderar com maturidade."
-        items={LEADERSHIP}
       />
     </div>
   )

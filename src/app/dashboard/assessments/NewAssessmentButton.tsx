@@ -142,23 +142,22 @@ const TEST_TYPES: TestType[] = [
     badge: 'Mais completo',
   },
 
-  // ── Categoria 3: Inteligência em Relacionamentos ────────────
+  // ── Categoria: Vida Pessoal · Casais · Família ───────────────
   {
     value: 'LOVE_LANGUAGES',
-    label: 'As 5 Linguagens do Amor — Aplicadas à Liderança',
+    label: 'As 5 Linguagens do Amor — Gary Chapman',
     short: 'Ling. do Amor',
     category: 'RELATIONSHIPS',
     credits: 4,
     image: '/tests/linguagens-amor.jpg',
-    hook: 'Comunicação afetiva convertida em cultura.',
+    hook: 'Como você ama — e como precisa ser amado.',
     description:
-      'Baseado no best-seller de Gary Chapman. Identifica como cada colaborador se sente mais reconhecido: palavras de afirmação, tempo de qualidade, presentes, atos de serviço ou toque/proximidade. Em liderança, é o guia preciso para elogiar, motivar e construir pertencimento real — convertendo afeto em retenção e espírito de equipe.',
+      'Baseado no best-seller mundial de Gary Chapman. Identifica como cada pessoa recebe amor: palavras de afirmação, tempo de qualidade, presentes, atos de serviço ou toque físico. Responde à pergunta mais comum dos relacionamentos: por que às vezes eu faço tudo e a pessoa que amo não se sente amada? É porque estou falando em uma língua que ela não entende.',
     bullets: [
       'Ranking completo das 5 linguagens com percentuais',
-      'Aplicação direta em reconhecimento, feedback e retenção',
-      'Ferramenta de harmonização para times e relações profissionais',
+      'Linguagem primária + secundária de cada pessoa',
+      'Aplicação em casais, família e relações pessoais',
     ],
-    badge: 'Exclusivo',
   },
 ]
 
@@ -172,12 +171,13 @@ const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = 
     subtitle: 'Foco em performance e produtividade',
   },
   RELATIONSHIPS: {
-    title: 'Inteligência em Relacionamentos',
-    subtitle: 'Harmonia, pertencimento e comunicação',
+    title: 'Linguagem do Amor',
+    subtitle: 'Casais, família e vida pessoal',
   },
 }
 
-const CATEGORY_ORDER: CategoryKey[] = ['ARCHETYPE', 'BEHAVIORAL', 'RELATIONSHIPS']
+// Ordem corporativa: Performance (DISC = carro chefe) → Cultura (Linguagem = campeão) → Profundidade (Arquétipos = premium)
+const CATEGORY_ORDER: CategoryKey[] = ['BEHAVIORAL', 'RELATIONSHIPS', 'ARCHETYPE']
 
 // ═══════════════════════════════════════════════════════════════
 // Componente
@@ -200,8 +200,9 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
+  // Default corporativo: DISC (carro chefe). Se initialCategory for passado, usa o primeiro teste da categoria.
   const defaultTest =
-    (initialCategory && TEST_TYPES.find((t) => t.category === initialCategory)?.value) ?? 'ARCHETYPE'
+    (initialCategory && TEST_TYPES.find((t) => t.category === initialCategory)?.value) ?? 'DISC'
 
   const [form, setForm] = useState({
     employeeName: '',
