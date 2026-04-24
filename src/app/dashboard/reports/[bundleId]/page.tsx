@@ -4,8 +4,7 @@
 // ============================================================
 
 import { redirect, notFound } from 'next/navigation'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import BundleReportClient from './BundleReportClient'
 
@@ -14,16 +13,16 @@ interface PageProps {
 }
 
 export default async function BundleReportPage({ params }: PageProps) {
-  const session = await getServerSession(authOptions)
-  if (!session?.user?.id) redirect('/login')
+  const session = await getSession()
+  if (!session?.id) redirect('/login')
 
-  const report = await prisma.bundleReport.findUnique({
+  const report = await (prisma as any).bundleReport.findUnique({
     where:   { bundleId: params.bundleId },
     include: { employee: { select: { name: true, email: true } } },
   })
 
   if (!report) notFound()
-  if (report.companyId !== session.user.id) notFound()
+  if (report.companyId !== session.id) notFound()
 
   const content = report.content ? JSON.parse(report.content) : null
 

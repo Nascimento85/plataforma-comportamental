@@ -5,21 +5,23 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
+import { getSession } from '@/lib/session'
 import { generateBundleReport } from '@/lib/bundle-report/generate'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prismaAny = prisma as any
 
 export async function GET(
   _req: NextRequest,
   { params }: { params: { bundleId: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
+    const session = await getSession()
+    if (!session?.id) {
       return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
     }
 
-    const report = await prisma.bundleReport.findUnique({
+    const report = await prismaAny.bundleReport.findUnique({
       where: { bundleId: params.bundleId },
       include: {
         employee: { select: { name: true, email: true } },
@@ -31,7 +33,7 @@ export async function GET(
     }
 
     // Verifica que pertence à empresa autenticada
-    if (report.companyId !== session.user.id) {
+    if (report.companyId !== session.id) {
       return NextResponse.json({ error: 'Acesso negado.' }, { status: 403 })
     }
 
@@ -50,8 +52,8 @@ export async function POST(
   { params }: { params: { bundleId: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-    if (!session?.user?.id) {
+    const session = await getSession()
+    if (!session?.id) {
       return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
     }
 
@@ -61,7 +63,7 @@ export async function POST(
       select: { companyId: true },
     })
 
-    if (!assessment || assessment.companyId !== session.user.id) {
+    if (!assessment || assessment.companyId !== session.id) {
       return NextResponse.json({ error: 'Bundle não encontrado ou acesso negado.' }, { status: 404 })
     }
 
