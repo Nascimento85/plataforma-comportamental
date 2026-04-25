@@ -7,6 +7,8 @@ import EnneagramTest from '@/components/tests/EnneagramTest'
 import TemperamentTest from '@/components/tests/TemperamentTest'
 import ArchetypeTest from '@/components/tests/ArchetypeTest'
 import LoveLanguagesTest from '@/components/tests/LoveLanguagesTest'
+import CareerAnchorTest from '@/components/tests/CareerAnchorTest'
+import EmotionalIntelligenceTest from '@/components/tests/EmotionalIntelligenceTest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -169,6 +171,46 @@ const INTROS: Record<string, {
     duration: '15–20 min',
     questions: 49,
   },
+  CAREER_ANCHOR: {
+    title: 'Âncoras de Carreira — Edgar Schein',
+    subtitle: 'O que realmente motiva você no trabalho',
+    image: '/tests/ancora-carreira.png',
+    description: 'Desenvolvido pelo Dr. Edgar Schein (MIT), o teste de Âncoras de Carreira identifica o "auto-conceito profissional" — os valores inegociáveis que sustentam suas decisões de longo prazo. Descubra se sua âncora é autonomia, segurança, desafio técnico, liderança ou outra das 8 forças que regem o que você não abre mão na carreira.',
+    tips: [
+      { icon: '⚓', text: 'Pense na sua trajetória profissional como um todo — o que se mantém constante nas suas escolhas?' },
+      { icon: '🎯', text: 'Vá pela primeira reação. Não tente "encaixar" sua resposta no que parece desejável.' },
+      { icon: '🔓', text: 'Não há âncora melhor. Cada uma representa uma forma legítima de viver a carreira.' },
+    ],
+    discovers: [
+      'Sua âncora primária — o valor profissional inegociável',
+      'Sua âncora secundária — a influência complementar',
+      'Como alinhar trabalho e empresa ao que realmente te motiva',
+      'Estratégias práticas para gestores que lideram seu perfil',
+    ],
+    cta: 'Descobrir minha Âncora',
+    duration: '8–12 min',
+    questions: 40,
+  },
+  EMOTIONAL_INTELLIGENCE: {
+    title: 'Inteligência Emocional — Daniel Goleman',
+    subtitle: 'Como você reage sob pressão',
+    image: '/tests/inteligencia-emocional.png',
+    description: 'Baseado no modelo de Daniel Goleman, este teste avalia os 5 domínios da Inteligência Emocional — Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais. Descubra como você percebe, usa e gerencia suas emoções para impulsionar relacionamentos e performance profissional.',
+    tips: [
+      { icon: '🧠', text: 'Pense em situações reais do seu cotidiano profissional — não em como gostaria de ser.' },
+      { icon: '⚡', text: 'Vá pela primeira reação. Sua resposta instintiva é a mais precisa.' },
+      { icon: '🔓', text: 'Inteligência emocional é desenvolvível. O resultado é diagnóstico, não rótulo.' },
+    ],
+    discovers: [
+      'Seu radar das 5 dimensões — onde você é forte e onde precisa desenvolver',
+      'Sua principal força emocional — o domínio em que você se destaca',
+      'Seu principal vetor de desenvolvimento — onde focar nos próximos 90 dias',
+      'Aplicações práticas em liderança, gestão de conflitos e trabalho em equipe',
+    ],
+    cta: 'Avaliar meu QE',
+    duration: '6–10 min',
+    questions: 25,
+  },
 }
 
 // ── Componente principal ──────────────────────────────────────
@@ -307,6 +349,12 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'LOVE_LANGUAGES') return (
     <LoveLanguagesTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'CAREER_ANCHOR') return (
+    <CareerAnchorTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'EMOTIONAL_INTELLIGENCE') return (
+    <EmotionalIntelligenceTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

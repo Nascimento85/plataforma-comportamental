@@ -207,6 +207,7 @@ function SidebarContent({
         </div>
 
         <SidebarNavLink href="/dashboard/behavioral"     label="Comportamentais"  iconKey="assessments" onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/career"         label="Carreira"         iconKey="reports"     onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/love-languages" label="Linguagem do Amor" iconKey="reports"    onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/archetypes"     label="Arquétipos"       iconKey="archetypes"  onClick={onNavClick} />
 

@@ -15,6 +15,8 @@ const TEST_LABELS: Record<string, { label: string; short: string; color: string;
   LOVE_LANGUAGES:     { label: '5 Linguagens do Amor',             short: 'Ling. Amor',   color: '#c47a72', emoji: '❤' },
 }
 
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
+
 async function getJourney(companyId: string) {
   const assessments = await prisma.assessment.findMany({
     where: { companyId },
@@ -98,30 +100,43 @@ export default async function JourneyPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink">
             Em andamento
           </h2>
+          <p className="text-[14px] text-soul-ink/80 font-medium -mt-2">
+            Testes enviados aguardando o candidato responder. Use &ldquo;Continuar teste&rdquo; para abrir o link direto.
+          </p>
           <div className="space-y-2">
             {inProgress.map((a) => {
               const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#c4633a', emoji: '✦' }
               return (
-                <div key={a.id} className="soul-panel flex items-center gap-4">
+                <div key={a.id} className="soul-panel flex flex-wrap items-center gap-4">
                   <div
                     className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl font-bold flex-shrink-0"
                     style={{ background: `${t.color}22`, color: t.color }}
                   >
                     {t.emoji}
                   </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-[180px]">
                     <p className="font-semibold text-[15px] text-soul-ink truncate">{a.employee.name}</p>
-                    <p className="text-[13px] text-soul-ink/70 font-medium">{t.label}</p>
+                    <p className="text-[13px] text-soul-ink/75 font-medium">{t.label}</p>
                   </div>
                   <div className="text-right flex-shrink-0">
                     <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                          style={{ background: 'rgba(212,148,58,0.18)', color: '#8a5c1e' }}>
+                          style={{ background: 'rgba(212,148,58,0.2)', color: '#7a4f17' }}>
                       {a.status === 'PENDING' ? 'Pendente' : 'Enviado'}
                     </span>
-                    <p className="text-[12px] text-soul-ink/60 font-medium mt-1">
+                    <p className="text-[12px] text-soul-ink/75 font-semibold mt-1">
                       Expira {a.expiresAt.toLocaleDateString('pt-BR')}
                     </p>
                   </div>
+                  <a
+                    href={`${APP_URL}/test/${a.token}`}
+                    target="_blank"
+                    rel="noopener"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-bold text-white
+                               transition-all hover:-translate-y-px shadow-terra flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+                  >
+                    Continuar teste →
+                  </a>
                 </div>
               )
             })}

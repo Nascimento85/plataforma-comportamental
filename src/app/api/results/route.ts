@@ -8,6 +8,8 @@ import { calculateTemperament } from '@/lib/engines/temperament'
 import { calculateArchetypeMixed } from '@/lib/engines/archetype-mixed'
 import { calculateArchetypeFeminine } from '@/lib/engines/archetype-feminine'
 import { calculateLoveLanguages } from '@/lib/engines/love-languages'
+import { calculateCareerAnchor } from '@/lib/engines/career-anchor'
+import { calculateEmotionalIntelligence } from '@/lib/engines/emotional-intelligence'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -88,6 +90,16 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; selected: 'A' | 'B' }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'CAREER_ANCHOR':
+        resultData = calculateCareerAnchor(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
+      case 'EMOTIONAL_INTELLIGENCE':
+        resultData = calculateEmotionalIntelligence(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -133,8 +145,13 @@ export async function POST(request: NextRequest) {
         })
       }
 
-      // Arquétipos usam o mesmo formato do Eneagrama (questionId + value 1-5)
-      if (assessment.testType === 'ARCHETYPE' || assessment.testType === 'ARCHETYPE_FEMININE') {
+      // Arquétipos, Career Anchor e IE usam o mesmo formato do Eneagrama (questionId + value 1-5)
+      if (
+        assessment.testType === 'ARCHETYPE' ||
+        assessment.testType === 'ARCHETYPE_FEMININE' ||
+        assessment.testType === 'CAREER_ANCHOR' ||
+        assessment.testType === 'EMOTIONAL_INTELLIGENCE'
+      ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({
             assessmentId: assessment.id,
@@ -151,11 +168,14 @@ export async function POST(request: NextRequest) {
           testType: assessment.testType,
           resultData: JSON.stringify(resultData),
           primaryProfile: String(
-            // DISC → predominant | MBTI → type | ENNEAGRAM → predominant (number) | TEMPERAMENT → primaryType (string)
+            // DISC → predominant | MBTI → type | ENNEAGRAM → predominant (number) | TEMPERAMENT → primaryType
+            // CAREER_ANCHOR → primaryAnchor | EMOTIONAL_INTELLIGENCE → primaryStrength
             (resultData as { predominant?: string | number }).predominant ??
             (resultData as { type?: string }).type ??
             (resultData as { primaryType?: string }).primaryType ??
             (resultData as { primaryLanguage?: string }).primaryLanguage ??
+            (resultData as { primaryAnchor?: string }).primaryAnchor ??
+            (resultData as { primaryStrength?: string }).primaryStrength ??
             ''
           ),
         },

@@ -11,6 +11,18 @@ import {
   LOVE_LANGUAGE_COLORS,
   type LoveLanguage,
 } from '@/lib/engines/love-languages'
+import {
+  CAREER_ANCHOR_LABELS,
+  CAREER_ANCHOR_EMOJIS,
+  CAREER_ANCHOR_COLORS,
+  type CareerAnchor,
+} from '@/lib/engines/career-anchor'
+import {
+  EI_DOMAIN_LABELS,
+  EI_DOMAIN_EMOJIS,
+  EI_DOMAIN_COLORS,
+  type EIDomain,
+} from '@/lib/engines/emotional-intelligence'
 
 interface TestResultCardProps {
   testType: string
@@ -464,6 +476,211 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
             {LOVE_LANGUAGE_EMOJIS[r.secondaryLanguage]} Sua linguagem secundária: {LOVE_LANGUAGE_LABELS[r.secondaryLanguage]}
           </p>
           <p className="text-sm text-rose-800">Esta é a segunda forma como você mais se sente valorizado(a). Em relacionamentos próximos, ambas as linguagens contam.</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (testType === 'CAREER_ANCHOR') {
+    const r = result as {
+      primaryAnchor: CareerAnchor
+      secondaryAnchor: CareerAnchor
+      scores: Record<CareerAnchor, number>
+      percentages: Record<CareerAnchor, number>
+      ranking: Array<{ anchor: CareerAnchor; score: number; percentage: number }>
+      primaryReport: { name: string; tagline: string; summary: string; motivation: string; idealRoles: string[] }
+      secondaryReport: { name: string; tagline: string }
+    }
+
+    const primaryColor = CAREER_ANCHOR_COLORS[r.primaryAnchor]
+
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full text-3xl text-white mb-4"
+               style={{ background: primaryColor }}>
+            {CAREER_ANCHOR_EMOJIS[r.primaryAnchor]}
+          </div>
+          <p className="text-xs uppercase tracking-widest font-semibold mb-1" style={{ color: primaryColor }}>
+            Sua Âncora de Carreira
+          </p>
+          <h2 className="text-2xl font-bold text-gray-900">{r.primaryReport.name}</h2>
+          <p className="text-sm text-gray-500 italic mt-1">{r.primaryReport.tagline}</p>
+        </div>
+
+        {/* Ranking das 8 âncoras */}
+        <div className="card p-5 space-y-3">
+          <h3 className="font-semibold text-gray-800 text-sm">Suas 8 âncoras — do mais ao menos forte</h3>
+          {r.ranking.map(({ anchor, score, percentage }) => (
+            <div key={anchor}>
+              <div className="flex justify-between text-xs text-gray-600 mb-1">
+                <span className="font-medium">{CAREER_ANCHOR_EMOJIS[anchor]} {CAREER_ANCHOR_LABELS[anchor]}</span>
+                <span>{score} / 25</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full"
+                  style={{ width: `${percentage}%`, background: CAREER_ANCHOR_COLORS[anchor] }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Resumo */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-2">O que isso significa</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{r.primaryReport.summary}</p>
+        </div>
+
+        {/* Motivação */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-2">O que te motiva</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{r.primaryReport.motivation}</p>
+        </div>
+
+        {/* Cargos ideais */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Cargos e ambientes alinhados</h3>
+          <ul className="space-y-2">
+            {r.primaryReport.idealRoles.map((role, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <span className="font-bold mt-0.5" style={{ color: primaryColor }}>✓</span>
+                {role}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Âncora secundária */}
+        <div className="card p-4" style={{ background: `${CAREER_ANCHOR_COLORS[r.secondaryAnchor]}11`, borderColor: `${CAREER_ANCHOR_COLORS[r.secondaryAnchor]}33` }}>
+          <p className="text-xs font-semibold mb-1" style={{ color: CAREER_ANCHOR_COLORS[r.secondaryAnchor] }}>
+            {CAREER_ANCHOR_EMOJIS[r.secondaryAnchor]} Sua âncora secundária: {r.secondaryReport.name}
+          </p>
+          <p className="text-sm text-gray-700">{r.secondaryReport.tagline} — Esta é a segunda força que rege suas decisões profissionais.</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (testType === 'EMOTIONAL_INTELLIGENCE') {
+    const r = result as {
+      primaryStrength: EIDomain
+      primaryDevelopment: EIDomain
+      averagePercentage: number
+      globalLevel: 'high' | 'mid' | 'low'
+      scores: Record<EIDomain, number>
+      percentages: Record<EIDomain, number>
+      domains: Array<{
+        domain: EIDomain
+        score: number
+        percentage: number
+        level: 'high' | 'mid' | 'low'
+        feedback: string
+      }>
+      radarData: Array<{ domain: EIDomain; label: string; value: number; max: number }>
+    }
+
+    const strengthColor = EI_DOMAIN_COLORS[r.primaryStrength]
+
+    // SVG radar chart (5 pontas)
+    const cx = 130, cy = 120, R = 90
+    const angles = [-Math.PI / 2, -Math.PI / 2 + (2 * Math.PI) / 5, -Math.PI / 2 + (4 * Math.PI) / 5, -Math.PI / 2 + (6 * Math.PI) / 5, -Math.PI / 2 + (8 * Math.PI) / 5]
+    const radarPoints = r.radarData.map((d, i) => {
+      const radius = (d.value / 100) * R
+      const x = cx + Math.cos(angles[i]) * radius
+      const y = cy + Math.sin(angles[i]) * radius
+      return `${x},${y}`
+    }).join(' ')
+    const labelPositions = r.radarData.map((d, i) => {
+      const labelR = R + 22
+      const x = cx + Math.cos(angles[i]) * labelR
+      const y = cy + Math.sin(angles[i]) * labelR
+      return { x, y, label: d.label, value: d.value, color: EI_DOMAIN_COLORS[d.domain] }
+    })
+
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full text-3xl text-white mb-4"
+               style={{ background: strengthColor }}>
+            {EI_DOMAIN_EMOJIS[r.primaryStrength]}
+          </div>
+          <p className="text-xs uppercase tracking-widest font-semibold mb-1" style={{ color: strengthColor }}>
+            QE Geral · {r.averagePercentage}%
+          </p>
+          <h2 className="text-2xl font-bold text-gray-900">
+            {r.globalLevel === 'high' ? 'Inteligência Emocional Elevada' : r.globalLevel === 'mid' ? 'IE em Desenvolvimento' : 'Espaço Importante de Crescimento'}
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Sua força: <strong>{EI_DOMAIN_LABELS[r.primaryStrength]}</strong> · A desenvolver: <strong>{EI_DOMAIN_LABELS[r.primaryDevelopment]}</strong>
+          </p>
+        </div>
+
+        {/* Radar de competências */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-4 text-center">Radar das 5 dimensões de Goleman</h3>
+          <div className="flex justify-center">
+            <svg viewBox="0 0 260 260" className="w-full max-w-xs">
+              {/* Grid pentagonal */}
+              {[0.25, 0.5, 0.75, 1].map((scale) => (
+                <polygon
+                  key={scale}
+                  points={angles.map((a) => `${cx + Math.cos(a) * R * scale},${cy + Math.sin(a) * R * scale}`).join(' ')}
+                  fill="none"
+                  stroke="#e5e7eb"
+                  strokeWidth="1"
+                />
+              ))}
+              {/* Eixos */}
+              {angles.map((a, i) => (
+                <line key={i}
+                  x1={cx} y1={cy}
+                  x2={cx + Math.cos(a) * R} y2={cy + Math.sin(a) * R}
+                  stroke="#e5e7eb" strokeWidth="1"/>
+              ))}
+              {/* Polígono de pontuação */}
+              <polygon points={radarPoints} fill={strengthColor} fillOpacity="0.25" stroke={strengthColor} strokeWidth="2"/>
+              {/* Pontos */}
+              {r.radarData.map((d, i) => {
+                const radius = (d.value / 100) * R
+                const x = cx + Math.cos(angles[i]) * radius
+                const y = cy + Math.sin(angles[i]) * radius
+                return <circle key={i} cx={x} cy={y} r="4" fill={EI_DOMAIN_COLORS[d.domain]}/>
+              })}
+              {/* Labels */}
+              {labelPositions.map((p, i) => (
+                <text key={i} x={p.x} y={p.y} textAnchor="middle" fontSize="10" fontWeight="700" fill={p.color}>
+                  {p.label}
+                  <tspan x={p.x} dy="12" fontSize="11" fill="#374151">{p.value}%</tspan>
+                </text>
+              ))}
+            </svg>
+          </div>
+        </div>
+
+        {/* Breakdown por domínio */}
+        <div className="card p-5 space-y-4">
+          <h3 className="font-semibold text-gray-800 text-sm">Análise por domínio</h3>
+          {r.domains.map((d) => (
+            <div key={d.domain} className="space-y-1.5">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-semibold" style={{ color: EI_DOMAIN_COLORS[d.domain] }}>
+                  {EI_DOMAIN_EMOJIS[d.domain]} {EI_DOMAIN_LABELS[d.domain]}
+                </span>
+                <span className="text-xs font-bold" style={{ color: EI_DOMAIN_COLORS[d.domain] }}>
+                  {d.percentage}% · {d.level === 'high' ? 'Alto' : d.level === 'mid' ? 'Médio' : 'Baixo'}
+                </span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full rounded-full"
+                     style={{ width: `${d.percentage}%`, background: EI_DOMAIN_COLORS[d.domain] }}/>
+              </div>
+              <p className="text-xs text-gray-600 leading-relaxed">{d.feedback}</p>
+            </div>
+          ))}
         </div>
       </div>
     )

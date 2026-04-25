@@ -160,12 +160,12 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
             </div>
           </div>
           <Link
-            href="/dashboard/assessments"
+            href="/dashboard/journey"
             className="flex-shrink-0 px-5 py-2.5 rounded-full bg-soul-terracota text-white text-[13px] font-bold font-sans
                        hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px whitespace-nowrap
                        shadow-[0_4px_12px_rgba(196,99,58,0.28)]"
           >
-            Continuar →
+            Ver pendentes →
           </Link>
         </div>
       )}

@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 // CATÁLOGO DE TESTES — 3 Categorias Executivas
 // ═══════════════════════════════════════════════════════════════
 
-export type CategoryKey = 'ARCHETYPE' | 'BEHAVIORAL' | 'RELATIONSHIPS'
+export type CategoryKey = 'ARCHETYPE' | 'BEHAVIORAL' | 'RELATIONSHIPS' | 'CAREER'
 
 interface TestType {
   value: string
@@ -142,6 +142,41 @@ const TEST_TYPES: TestType[] = [
     badge: 'Mais completo',
   },
 
+  // ── Categoria 4: Carreira & Performance ─────────────────────
+  {
+    value: 'CAREER_ANCHOR',
+    label: 'Âncoras de Carreira — Edgar Schein',
+    short: 'Âncoras de Carreira',
+    category: 'CAREER',
+    credits: 1,
+    image: '/tests/ancora-carreira.png',
+    hook: 'O que realmente motiva você no trabalho.',
+    description:
+      'Desenvolvido pelo Dr. Edgar Schein (MIT), o teste de Âncoras de Carreira identifica os valores profissionais inegociáveis que sustentam suas decisões de longo prazo. Revela se sua âncora é autonomia, segurança, desafio técnico, liderança ou outra das 8 forças que regem o que você não abre mão na carreira. Ferramenta-chave para retenção, PDI e planos de carreira realistas.',
+    bullets: [
+      '40 afirmações cobrindo as 8 âncoras clássicas de Schein',
+      'Âncora primária + secundária com aplicação corporativa',
+      'Estratégias práticas de gestão e desenvolvimento por âncora',
+    ],
+  },
+  {
+    value: 'EMOTIONAL_INTELLIGENCE',
+    label: 'Inteligência Emocional — Daniel Goleman',
+    short: 'QE · Goleman',
+    category: 'CAREER',
+    credits: 1,
+    image: '/tests/inteligencia-emocional.png',
+    hook: 'Como você reage sob pressão.',
+    description:
+      'Baseado no modelo de Daniel Goleman, este teste avalia os 5 domínios da Inteligência Emocional — Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais. Resultado em radar de competências mostrando força e vetor de desenvolvimento. Ferramenta essencial para liderança humana, gestão de conflitos e formação de soft skills.',
+    bullets: [
+      'Radar das 5 dimensões de Goleman com pontuação detalhada',
+      'Identifica força emocional dominante e vetor de desenvolvimento',
+      'Aplicação prática em liderança, conflitos e relacionamentos profissionais',
+    ],
+    badge: 'Novo',
+  },
+
   // ── Categoria: Vida Pessoal · Casais · Família ───────────────
   {
     value: 'LOVE_LANGUAGES',
@@ -162,22 +197,26 @@ const TEST_TYPES: TestType[] = [
 ]
 
 const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = {
-  ARCHETYPE: {
-    title: 'Arquétipos',
-    subtitle: 'O mapa profundo da motivação',
-  },
   BEHAVIORAL: {
     title: 'Análises Comportamentais',
     subtitle: 'Foco em performance e produtividade',
+  },
+  CAREER: {
+    title: 'Carreira & Performance',
+    subtitle: 'Motivação profissional e soft skills',
   },
   RELATIONSHIPS: {
     title: 'Linguagem do Amor',
     subtitle: 'Casais, família e vida pessoal',
   },
+  ARCHETYPE: {
+    title: 'Arquétipos',
+    subtitle: 'O mapa profundo da motivação',
+  },
 }
 
-// Ordem corporativa: Performance (DISC = carro chefe) → Cultura (Linguagem = campeão) → Profundidade (Arquétipos = premium)
-const CATEGORY_ORDER: CategoryKey[] = ['BEHAVIORAL', 'RELATIONSHIPS', 'ARCHETYPE']
+// Ordem corporativa: Performance (DISC) → Carreira (PDI) → Cultura (Linguagem) → Profundidade (Arquétipos)
+const CATEGORY_ORDER: CategoryKey[] = ['BEHAVIORAL', 'CAREER', 'RELATIONSHIPS', 'ARCHETYPE']
 
 // ═══════════════════════════════════════════════════════════════
 // Componente
