@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import { getSession } from '@/lib/session'
+import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = { title: 'Análises Comportamentais' }
 
@@ -15,6 +17,13 @@ interface Lens {
   bullets: string[]
   color: string
   emoji: string
+  /** Identificador do teste no NewAssessmentButton (ex: "MBTI", "ENNEAGRAM", "TEMPERAMENT") */
+  testType: string
+}
+
+// CTA label condicional ao tipo de conta (PJ envia para funcionário, PF faz pra si)
+function ctaLabel(accountType: 'PF' | 'PJ', testShort: string): string {
+  return accountType === 'PF' ? `Fazer teste ${testShort}` : `Enviar teste ${testShort}`
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -23,6 +32,7 @@ interface Lens {
 
 const DISC: Lens = {
   key: 'disc',
+  testType: 'DISC',
   name: 'DISC — Perfil Comportamental',
   tagline: 'A ferramenta mais usada no mundo corporativo',
   short: 'DISC',
@@ -49,6 +59,7 @@ const DISC: Lens = {
 const LENSES: Lens[] = [
   {
     key: 'mbti',
+    testType: 'MBTI',
     name: 'MBTI — 16 Tipos de Personalidade',
     tagline: 'Baseado em Carl Jung. Usado por Fortune 500.',
     short: 'MBTI',
@@ -69,6 +80,7 @@ const LENSES: Lens[] = [
   },
   {
     key: 'enneagram',
+    testType: 'ENNEAGRAM',
     name: 'Eneagrama — 9 Tipos',
     tagline: 'Usado pela NASA e pelo Vale do Silício.',
     short: 'Eneagrama',
@@ -89,6 +101,7 @@ const LENSES: Lens[] = [
   },
   {
     key: 'temperament',
+    testType: 'TEMPERAMENT',
     name: '4 Personalidades — Temperamentos',
     tagline: 'A matéria-prima comportamental inata.',
     short: 'Temperamentos',
@@ -113,7 +126,7 @@ const LENSES: Lens[] = [
 // UI
 // ═══════════════════════════════════════════════════════════════════
 
-function LensCard({ lens }: { lens: Lens }) {
+function LensCard({ lens, accountType }: { lens: Lens; accountType: 'PF' | 'PJ' }) {
   return (
     <article className="soul-panel flex flex-col gap-4 h-full relative overflow-hidden">
       <div
@@ -157,11 +170,40 @@ function LensCard({ lens }: { lens: Lens }) {
           </div>
         ))}
       </div>
+
+      {/* ── CTA: nomenclatura condicional PJ/PF ── */}
+      <div className="relative pt-3 mt-auto border-t border-soul-mist/60 flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
+          <p className="font-serif text-lg font-bold text-soul-ink leading-none">
+            {lens.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{lens.credits > 1 ? 's' : ''}</span>
+          </p>
+        </div>
+        <NewAssessmentButton initialTestType={lens.testType}>
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+            <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+          </svg>
+          {ctaLabel(accountType, lens.short)}
+        </NewAssessmentButton>
+      </div>
     </article>
   )
 }
 
-export default function BehavioralPage() {
+async function getAccountType(): Promise<'PF' | 'PJ'> {
+  const session = await getSession()
+  if (!session) return 'PJ' // fallback seguro
+  const company = await prisma.company.findUnique({
+    where: { id: session.id },
+    select: { type: true },
+  })
+  return (company?.type === 'PF' ? 'PF' : 'PJ')
+}
+
+export default async function BehavioralPage() {
+  const accountType = await getAccountType()
+  const discCtaLabel = ctaLabel(accountType, 'DISC')
+
   return (
     <div className="space-y-8">
 
@@ -247,11 +289,11 @@ export default function BehavioralPage() {
               </span>
             </div>
 
-            <NewAssessmentButton initialCategory="BEHAVIORAL">
+            <NewAssessmentButton initialTestType="DISC">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
               </svg>
-              Enviar teste DISC
+              {discCtaLabel}
             </NewAssessmentButton>
           </div>
         </div>
@@ -268,7 +310,7 @@ export default function BehavioralPage() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {LENSES.map((l) => <LensCard key={l.key} lens={l} />)}
+          {LENSES.map((l) => <LensCard key={l.key} lens={l} accountType={accountType} />)}
         </div>
       </section>
 

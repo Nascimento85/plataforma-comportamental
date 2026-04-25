@@ -29,7 +29,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Arquétipos Junguianos — Os 12 Padrões Universais',
     short: 'Arquétipos',
     category: 'ARCHETYPE',
-    credits: 2,
+    credits: 4,
     image: '/tests/arquetipo-misto.jpg',
     hook: 'O mapa mais profundo da plataforma.',
     description:
@@ -46,7 +46,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Arquétipos Femininos — As 7 Energias',
     short: 'Arq. Femininos',
     category: 'ARCHETYPE',
-    credits: 2,
+    credits: 4,
     image: '/tests/arquetipo-feminino.jpg',
     hook: 'O divino feminino aplicado à liderança.',
     description:
@@ -233,15 +233,19 @@ interface Props {
   variant?: 'primary' | 'secondary'
   /** Pré-seleciona a primeira avaliação da categoria ao abrir o modal */
   initialCategory?: CategoryKey
+  /** Pré-seleciona um teste específico (tem precedência sobre initialCategory). Ex: "MBTI", "ENNEAGRAM" */
+  initialTestType?: string
 }
 
-export default function NewAssessmentButton({ children, variant = 'primary', initialCategory }: Props) {
+export default function NewAssessmentButton({ children, variant = 'primary', initialCategory, initialTestType }: Props) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  // Default corporativo: DISC (carro chefe). Se initialCategory for passado, usa o primeiro teste da categoria.
+  // Prioridade de pré-seleção: testType específico → primeiro teste da categoria → DISC (carro chefe).
   const defaultTest =
-    (initialCategory && TEST_TYPES.find((t) => t.category === initialCategory)?.value) ?? 'DISC'
+    (initialTestType && TEST_TYPES.find((t) => t.value === initialTestType)?.value) ??
+    (initialCategory && TEST_TYPES.find((t) => t.category === initialCategory)?.value) ??
+    'DISC'
 
   const [form, setForm] = useState({
     employeeName: '',

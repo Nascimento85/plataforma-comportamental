@@ -1,7 +1,23 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import { getSession } from '@/lib/session'
+import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = { title: 'Arquétipos' }
+
+function ctaLabel(accountType: 'PF' | 'PJ', testShort: string): string {
+  return accountType === 'PF' ? `Fazer teste ${testShort}` : `Enviar teste ${testShort}`
+}
+
+async function getAccountType(): Promise<'PF' | 'PJ'> {
+  const session = await getSession()
+  if (!session) return 'PJ'
+  const company = await prisma.company.findUnique({
+    where: { id: session.id },
+    select: { type: true },
+  })
+  return company?.type === 'PF' ? 'PF' : 'PJ'
+}
 
 interface Archetype {
   key: string
@@ -207,16 +223,44 @@ function ArchetypeCard({ a }: { a: Archetype }) {
   )
 }
 
-function Section({ title, subtitle, items }: { title: string; subtitle: string; items: Archetype[] }) {
+function Section({
+  title,
+  subtitle,
+  items,
+  cta,
+}: {
+  title: string
+  subtitle: string
+  items: Archetype[]
+  cta?: { testType: string; label: string; credits: number }
+}) {
   return (
     <section className="space-y-4">
-      <div>
-        <h2 className="font-serif text-3xl font-semibold text-soul-ink leading-tight">
-          {title}
-        </h2>
-        <p className="text-[15px] text-soul-ink/75 font-medium mt-1 max-w-3xl">
-          {subtitle}
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex-1 min-w-[280px]">
+          <h2 className="font-serif text-3xl font-semibold text-soul-ink leading-tight">
+            {title}
+          </h2>
+          <p className="text-[15px] text-soul-ink/75 font-medium mt-1 max-w-3xl">
+            {subtitle}
+          </p>
+        </div>
+        {cta && (
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="text-right">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
+              <p className="font-serif text-lg font-bold text-soul-ink leading-none">
+                {cta.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{cta.credits > 1 ? 's' : ''}</span>
+              </p>
+            </div>
+            <NewAssessmentButton initialTestType={cta.testType}>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+              </svg>
+              {cta.label}
+            </NewAssessmentButton>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((a) => <ArchetypeCard key={a.key} a={a} />)}
@@ -225,7 +269,9 @@ function Section({ title, subtitle, items }: { title: string; subtitle: string; 
   )
 }
 
-export default function ArchetypesPage() {
+export default async function ArchetypesPage() {
+  const accountType = await getAccountType()
+
   return (
     <div className="space-y-10">
       {/* Header */}
@@ -239,23 +285,22 @@ export default function ArchetypesPage() {
         </p>
       </div>
 
-      {/* CTA teste */}
+      {/* CTA principal: Arquétipos completos (Junguianos — 12 padrões) */}
       <div className="rounded-3xl p-6 flex flex-wrap items-center justify-between gap-4"
            style={{ background: 'linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.12))', border: '1px solid rgba(201,168,76,0.25)' }}>
-        <div>
+        <div className="max-w-xl">
           <p className="font-serif text-xl font-semibold text-soul-ink">Descubra seu arquétipo dominante</p>
           <p className="text-[14px] text-soul-ink/75 font-medium mt-1">
-            Responda o teste e receba um relatório detalhado com as suas duas energias mais presentes.
+            Teste completo dos 12 Arquétipos Junguianos com leitura integrada do dominante + secundário, sombra e jornada de amadurecimento.
           </p>
+          <p className="text-[12px] text-soul-ink/55 font-semibold mt-1">4 créditos · O mais completo</p>
         </div>
-        <Link
-          href="/dashboard/assessments"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-bold text-white
-                     transition-all hover:-translate-y-px shadow-terra"
-          style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
-        >
-          Fazer o teste de Arquétipos →
-        </Link>
+        <NewAssessmentButton initialTestType="ARCHETYPE">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+          </svg>
+          {ctaLabel(accountType, 'Arquétipos')}
+        </NewAssessmentButton>
       </div>
 
       <Section
@@ -274,6 +319,7 @@ export default function ArchetypesPage() {
         title="Arquétipos Femininos — As 7 Energias"
         subtitle="As energias arquetípicas que governam ciclos de criação, poder e intuição. Base de programas de liderança feminina e mentoria — uma delas predomina em cada fase profissional."
         items={FEMININE}
+        cta={{ testType: 'ARCHETYPE_FEMININE', label: ctaLabel(accountType, 'Femininos'), credits: 4 }}
       />
     </div>
   )

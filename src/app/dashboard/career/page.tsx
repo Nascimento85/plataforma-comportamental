@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import { getSession } from '@/lib/session'
+import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = { title: 'Carreira & Performance' }
 
 interface CareerTest {
   key: string
+  /** Teste ID usado no NewAssessmentButton (ex: CAREER_ANCHOR) — mesmo valor do `key` aqui */
+  short: string
   name: string
   tagline: string
   description: string
@@ -17,9 +21,14 @@ interface CareerTest {
   badge?: string
 }
 
+function ctaLabel(accountType: 'PF' | 'PJ', testShort: string): string {
+  return accountType === 'PF' ? `Fazer teste ${testShort}` : `Enviar teste ${testShort}`
+}
+
 const TESTS: CareerTest[] = [
   {
     key: 'CAREER_ANCHOR',
+    short: 'Âncoras',
     name: 'Âncoras de Carreira',
     tagline: 'Edgar Schein · MIT · 1970',
     description:
@@ -39,6 +48,7 @@ const TESTS: CareerTest[] = [
   },
   {
     key: 'EMOTIONAL_INTELLIGENCE',
+    short: 'IE',
     name: 'Inteligência Emocional',
     tagline: 'Daniel Goleman · 5 Domínios',
     description:
@@ -58,7 +68,19 @@ const TESTS: CareerTest[] = [
   },
 ]
 
-export default function CareerPage() {
+async function getAccountType(): Promise<'PF' | 'PJ'> {
+  const session = await getSession()
+  if (!session) return 'PJ'
+  const company = await prisma.company.findUnique({
+    where: { id: session.id },
+    select: { type: true },
+  })
+  return company?.type === 'PF' ? 'PF' : 'PJ'
+}
+
+export default async function CareerPage() {
+  const accountType = await getAccountType()
+
   return (
     <div className="space-y-8">
 
@@ -139,11 +161,11 @@ export default function CareerPage() {
                     {test.credits} <span className="text-base font-medium text-soul-ink/70">crédito{test.credits > 1 ? 's' : ''}</span>
                   </p>
                 </div>
-                <NewAssessmentButton initialCategory="CAREER">
+                <NewAssessmentButton initialTestType={test.key}>
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                     <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
                   </svg>
-                  Enviar teste
+                  {ctaLabel(accountType, test.short)}
                 </NewAssessmentButton>
               </div>
             </div>
