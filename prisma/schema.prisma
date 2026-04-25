@@ -26,20 +26,55 @@ model Company {
   passwordHash String
   type         String    @default("PJ") // PF | PJ
   phone        String?
+  whatsapp     String?
   instagram    String?
+  linkedin     String?
   birthDate    DateTime?
-  active       Boolean   @default(true)
-  isAdmin      Boolean   @default(false)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
 
-  employees          Employee[]
-  assessments        Assessment[]
-  creditBalance      CreditBalance?
-  creditPurchases    CreditPurchase[]
-  creditTransactions CreditTransaction[]
-  reports            Report[]
-  bundleReports      BundleReport[]
+  // Endereço
+  addressStreet String?
+  addressCity   String?
+  addressState  String?
+  addressZip    String?
+
+  // Dados profissionais
+  jobTitle    String?
+  companyName String?
+
+  // Gamificação de onboarding
+  isOnboardingCredited       Boolean @default(false)
+  isProfileCompletedRewarded Boolean @default(false)
+
+  active    Boolean  @default(true)
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees              Employee[]
+  assessments            Assessment[]
+  creditBalance          CreditBalance?
+  creditPurchases        CreditPurchase[]
+  creditTransactions     CreditTransaction[]
+  reports                Report[]
+  bundleReports          BundleReport[]
+  profileValidationCodes ProfileValidationCode[]
+}
+
+// ============================================================
+// CÓDIGO DE VALIDAÇÃO DE PERFIL (Gamificação +6 créditos)
+// ============================================================
+model ProfileValidationCode {
+  id        String   @id @default(cuid())
+  companyId String
+  code      String   // 6 dígitos
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([code])
 }
 
 // ============================================================
@@ -198,7 +233,7 @@ model CreditPurchase {
 model CreditTransaction {
   id          String   @id @default(cuid())
   companyId   String
-  type        String   // PURCHASE | DEBIT
+  type        String   // PURCHASE | DEBIT | BONUS
   amount      Int
   description String   @default("")
   createdAt   DateTime @default(now())
