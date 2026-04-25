@@ -421,6 +421,127 @@ export async function sendPasswordResetEmail(
   }
 }
 
+// ── E-mail de código de validação de perfil (Gamificação) ────────────────────
+
+function buildProfileValidationCodeHtml(name: string, code: string): string {
+  const firstName = name.split(' ')[0]
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"/><title>Seu código de validação — ${APP_NAME}</title></head>
+<body style="margin:0;padding:0;background:#faf7f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#faf7f2;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+        <!-- Header dourado -->
+        <tr>
+          <td style="background:linear-gradient(135deg,#c9a84c,#d4943a);border-radius:14px 14px 0 0;padding:36px 40px;text-align:center;">
+            <div style="font-size:44px;line-height:1;margin-bottom:12px;">🎁</div>
+            <h1 style="margin:0;color:#1c1a17;font-size:26px;font-weight:700;letter-spacing:-0.3px;">
+              Seu código de validação
+            </h1>
+            <p style="margin:8px 0 0;color:rgba(28,26,23,0.7);font-size:14px;font-weight:500;">
+              Libere +6 créditos extras na plataforma
+            </p>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="background:#ffffff;padding:40px;">
+            <p style="margin:0 0 12px;font-size:20px;font-weight:700;color:#1c1a17;">
+              Olá, ${firstName}!
+            </p>
+            <p style="margin:0 0 28px;font-size:15px;color:#4b5563;line-height:1.65;">
+              Você completou seu perfil — parabéns! Use o código abaixo na plataforma
+              para liberar <strong>+6 créditos extras</strong> automaticamente.
+            </p>
+
+            <!-- Código destacado -->
+            <div style="text-align:center;background:linear-gradient(135deg,#f5ede1,#faf0e6);
+                        border:2px dashed rgba(196,99,58,0.35);border-radius:14px;
+                        padding:28px 20px;margin-bottom:24px;">
+              <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.18em;
+                        text-transform:uppercase;color:#8f3f1e;">
+                Seu código
+              </p>
+              <p style="margin:0;font-family:'Courier New',monospace;font-size:42px;font-weight:700;
+                        letter-spacing:0.3em;color:#a8522e;line-height:1;">
+                ${code}
+              </p>
+            </div>
+
+            <!-- Aviso de validade -->
+            <div style="background:#fef9ec;border:1px solid #f6d860;border-radius:8px;
+                        padding:14px 18px;margin-bottom:24px;">
+              <p style="margin:0;font-size:13px;color:#92400e;line-height:1.5;">
+                ⏰ <strong>Válido por 30 minutos.</strong> Após esse prazo, solicite um novo código na página do seu perfil.
+              </p>
+            </div>
+
+            <!-- Como usar -->
+            <div style="border-top:1px solid #e5e7eb;padding-top:24px;">
+              <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#1c1a17;text-transform:uppercase;letter-spacing:0.06em;">
+                Como usar:
+              </p>
+              <ol style="margin:0;padding-left:20px;font-size:13px;color:#4b5563;line-height:1.7;">
+                <li>Acesse <strong>Meu Perfil</strong> na plataforma</li>
+                <li>Cole o código de 6 dígitos no campo de validação</li>
+                <li>Pronto! +6 créditos caem na sua conta na hora</li>
+              </ol>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#f9fafb;border-radius:0 0 14px 14px;padding:20px 40px;border-top:1px solid #e5e7eb;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;text-align:center;">
+              © ${new Date().getFullYear()} ${APP_NAME} — Se você não solicitou este código, ignore este e-mail.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+}
+
+export async function sendProfileValidationCode(
+  toEmail: string,
+  name: string,
+  code: string
+): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada — código não enviado.')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [toEmail],
+        subject: `[${APP_NAME}] Seu código de validação: ${code}`,
+        html: buildProfileValidationCodeHtml(name, code),
+      }),
+    })
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      const msg = (body as { message?: string }).message ?? `HTTP ${res.status}`
+      return { sent: false, error: msg }
+    }
+
+    return { sent: true }
+  } catch (err) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
+
 // ── Função principal ──────────────────────────────────────────────────────────
 
 export async function sendAssessmentEmail(

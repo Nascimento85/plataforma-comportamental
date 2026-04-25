@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
     // Hash da senha
     const passwordHash = await bcrypt.hash(password, 12)
 
-    // Cria empresa + saldo de créditos inicial (4 créditos de bônus = 1 de cada teste)
+    // Cria empresa + saldo inicial de 4 créditos (bônus de boas-vindas)
+    // isOnboardingCredited=true marca que o bônus já foi pago (idempotência)
     const company = await prisma.$transaction(async (tx) => {
       const c = await tx.company.create({
         data: {
@@ -47,10 +48,19 @@ export async function POST(request: NextRequest) {
           phone: phone,
           instagram: instagram ?? null,
           birthDate: birthDate ? new Date(birthDate) : null,
+          isOnboardingCredited: true,
         },
       })
       await tx.creditBalance.create({
         data: { companyId: c.id, balance: 4 },
+      })
+      await tx.creditTransaction.create({
+        data: {
+          companyId: c.id,
+          type: 'BONUS',
+          amount: 4,
+          description: 'Bônus de boas-vindas (cadastro)',
+        },
       })
       return c
     })
