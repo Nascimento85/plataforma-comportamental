@@ -10,6 +10,8 @@ interface StatCardProps {
   deltaUp?: boolean
   accent?: Accent
   className?: string
+  /** Texto explicativo mostrado em tooltip nativo + ícone (?) ao lado do label */
+  tooltip?: string
 }
 
 const accentStyles: Record<Accent, { bar: string; icon: string }> = {
@@ -47,6 +49,7 @@ export default function StatCard({
   deltaUp,
   accent = 'terracota',
   className = '',
+  tooltip,
 }: StatCardProps) {
   const { bar, icon: iconBg } = accentStyles[accent]
 
@@ -84,7 +87,19 @@ export default function StatCard({
       </div>
 
       {/* Label */}
-      <div className="text-xs text-soul-ink/45 font-sans">{label}</div>
+      <div className="text-xs text-soul-ink/45 font-sans flex items-center gap-1">
+        {label}
+        {tooltip && (
+          <span
+            title={tooltip}
+            aria-label={tooltip}
+            className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-[9px] font-bold cursor-help select-none"
+            style={{ background: 'rgba(28,26,23,0.08)', color: 'rgba(28,26,23,0.55)' }}
+          >
+            ?
+          </span>
+        )}
+      </div>
 
       {/* Delta */}
       {delta && (

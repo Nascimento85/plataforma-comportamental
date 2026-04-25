@@ -85,6 +85,13 @@ function NavIcon({ path }: { path: string }) {
           stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
+    profile: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <circle cx="10" cy="7" r="3.5" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M3.5 17C3.5 13.96 6.46 11.5 10 11.5C13.54 11.5 16.5 13.96 16.5 17"
+          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
     admin: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
         <path d="M10 2L12 7H17L13 10.5L14.5 16L10 12.5L5.5 16L7 10.5L3 7H8L10 2Z"
@@ -227,6 +234,7 @@ function SidebarContent({
           </p>
         </div>
 
+        <SidebarNavLink href="/dashboard/profile"      label="Meu Perfil"    iconKey="profile"     onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/credits"      label="Créditos"      iconKey="credits"     onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/settings"     label="Configurações" iconKey="settings"    onClick={onNavClick} />
 

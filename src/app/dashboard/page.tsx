@@ -8,7 +8,10 @@ import RecentActivityCard from './_components/RecentActivityCard'
 import CreditsWidget from './_components/CreditsWidget'
 import ArchetypeHero from './_components/ArchetypeHero'
 import OnboardingHero from './_components/OnboardingHero'
+import WelcomeModal from './_components/WelcomeModal'
+import ProfileGamificationBanner from './_components/ProfileGamificationBanner'
 import NewAssessmentButton from './assessments/NewAssessmentButton'
+import { calculateProfileCompletion } from '@/lib/profile'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
@@ -17,9 +20,12 @@ export const metadata: Metadata = { title: 'Dashboard' }
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function getDashboardData(companyId: string) {
-  const [creditBalance, recentAssessments, totalCompleted, totalPending] =
+  const [company, recentAssessments, totalCompleted, totalPending] =
     await Promise.all([
-      prisma.creditBalance.findUnique({ where: { companyId } }),
+      prisma.company.findUnique({
+        where: { id: companyId },
+        include: { creditBalance: true },
+      }),
 
       prisma.assessment.findMany({
         where: { companyId },
@@ -37,12 +43,17 @@ async function getDashboardData(companyId: string) {
       }),
     ])
 
+  const profileCompletion = company ? calculateProfileCompletion(company) : 0
+
   return {
-    credits:           creditBalance?.balance ?? 0,
+    company,
+    credits:                    company?.creditBalance?.balance ?? 0,
+    profileCompletion,
+    isProfileRewarded:          company?.isProfileCompletedRewarded ?? false,
     recentAssessments,
     totalCompleted,
     totalPending,
-    totalCandidates:   recentAssessments.length,
+    totalCandidates:            recentAssessments.length,
   }
 }
 
@@ -55,8 +66,15 @@ export default async function DashboardPage() {
   const companyId   = session!.id
   const firstName   = session!.name?.split(' ')[0] ?? 'explorador'
 
-  const { credits, recentAssessments, totalCompleted, totalPending, totalCandidates } =
-    await getDashboardData(companyId)
+  const {
+    credits,
+    profileCompletion,
+    isProfileRewarded,
+    recentAssessments,
+    totalCompleted,
+    totalPending,
+    totalCandidates,
+  } = await getDashboardData(companyId)
 
   const isNewAccount = recentAssessments.length === 0
 
@@ -75,6 +93,14 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
+
+      {/* ══════════════════════════════════════════════════════
+          WELCOME MODAL — só aparece no primeiro login
+          (controlado por localStorage no cliente)
+      ══════════════════════════════════════════════════════ */}
+      {!isProfileRewarded && (
+        <WelcomeModal companyId={companyId} firstName={firstName} />
+      )}
 
       {/* ══════════════════════════════════════════════════════
           TOP BAR
@@ -108,6 +134,13 @@ export default async function DashboardPage() {
       </div>
 
       {/* ══════════════════════════════════════════════════════
+          BANNER GAMIFICAÇÃO — só aparece se ainda não resgatou +6 créditos
+      ══════════════════════════════════════════════════════ */}
+      {!isProfileRewarded && (
+        <ProfileGamificationBanner completion={profileCompletion} />
+      )}
+
+      {/* ══════════════════════════════════════════════════════
           HERO: onboarding para conta nova / arquétipo para conta ativa
       ══════════════════════════════════════════════════════ */}
       {isNewAccount ? (
@@ -130,6 +163,7 @@ export default async function DashboardPage() {
           accent={credits <= 3 ? 'rose' : 'terracota'}
           delta={credits <= 3 ? '⚠ Recarregar em breve' : undefined}
           deltaUp={credits > 3 ? true : false}
+          tooltip="Cada teste possui um valor diferente em créditos (1 a 4 créditos). Veja a página de Créditos para detalhes."
         />
         <StatCard
           value={totalCompleted}
