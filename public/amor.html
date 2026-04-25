@@ -1,870 +1,724 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Linguagens do Amor + Arquétipos Femininos — Plataforma Comportamental</title>
-<meta name="description" content="Descubra sua Linguagem do Amor e seu Arquétipo Feminino gratuitamente. Metodologia validada em 70+ países. 4 créditos de cortesia no cadastro." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conexão & Essência | Psique — Decifre o código secreto do seu relacionamento</title>
+  <meta name="description" content="Descubra seu Arquétipo, sua Linguagem do Amor e aprenda a decifrar o comportamento do seu parceiro. Comece com 4 créditos gratuitos." />
+  <meta name="keywords" content="Linguagens do Amor, Arquétipos Femininos, autoconhecimento, casais, relacionamento, Gary Chapman" />
+  <meta property="og:title" content="Conexão & Essência | Psique" />
+  <meta property="og:description" content="Descubra o código secreto do seu relacionamento — Arquétipos e Linguagens do Amor." />
+  <meta property="og:type" content="website" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500&family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          ink:        '#101820',
-          smoke:      '#2A3139',
-          fog:        '#86868B',
-          line:       '#E5E5E7',
-          mist:       '#FDF6F8',
-          rose:       '#D64D76',
-          'rose-deep':'#B03660',
-          blush:      '#F9EEF2',
-          mauve:      '#7C4B6B',
-          gold:       '#C9A84C',
-          'gold-light':'#E8C97A',
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold:       '#c5a059',
+            'gold-light': '#d4b85c',
+            'gold-soft': 'rgba(197,160,89,0.12)',
+            cream:      '#faf6f1',
+            'cream-2':  '#f5ede1',
+            nude:       '#e8d4c0',
+            'nude-2':   '#d9bfa3',
+            rose:       '#c89090',
+            'rose-soft':'#e8d0cc',
+            ink:        '#2a1f1c',
+            'ink-soft': '#5a4a44',
+          },
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+          },
         },
-        fontFamily: {
-          display: ['Urbanist', 'system-ui', 'sans-serif'],
-          sans:    ['Ubuntu',   'system-ui', 'sans-serif'],
-        },
-        letterSpacing: {
-          tightest:   '-0.04em',
-          'tighter-2':'-0.03em',
-        }
-      }
+      },
     }
-  }
-</script>
+  </script>
 
-<style>
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Ubuntu', system-ui, sans-serif;
-    background: #FFFFFF;
-    color: #101820;
-    -webkit-font-smoothing: antialiased;
-  }
-  .font-display { font-family: 'Urbanist', system-ui, sans-serif; letter-spacing: -0.03em; }
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #faf6f1;
+      color: #2a1f1c;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 500;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-  .bg-dot {
-    background-image: radial-gradient(circle, rgba(214,77,118,0.08) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #c5a059 0%, #a8843a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-  .noise::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.04;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-  }
+    /* Botão dourado */
+    .btn-gold {
+      background: linear-gradient(135deg, #d4b85c 0%, #c5a059 100%);
+      color: #2a1f1c;
+      font-weight: 700;
+      box-shadow: 0 6px 24px rgba(197,160,89,0.3), inset 0 1px 0 rgba(255,255,255,0.4);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(197,160,89,0.45), inset 0 1px 0 rgba(255,255,255,0.5);
+      filter: brightness(1.05);
+    }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .reveal   { animation: fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
-  .reveal-1 { animation-delay: 0.1s; }
-  .reveal-2 { animation-delay: 0.25s; }
-  .reveal-3 { animation-delay: 0.4s; }
-  .reveal-4 { animation-delay: 0.55s; }
+    .btn-outline {
+      background: transparent;
+      color: #2a1f1c;
+      border: 1.5px solid rgba(42,31,28,0.25);
+      transition: all 0.25s ease;
+    }
+    .btn-outline:hover {
+      border-color: #c5a059;
+      color: #a8843a;
+      background: rgba(197,160,89,0.06);
+    }
 
-  .btn-rose {
-    background: #D64D76;
-    color: white;
-    transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
-  }
-  .btn-rose:hover { background: #B03660; transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(214,77,118,0.4); }
-  .btn-rose:active { transform: translateY(0); }
+    /* Card elegante */
+    .card-elegant {
+      background: white;
+      border: 1px solid rgba(197,160,89,0.18);
+      border-radius: 1.25rem;
+      box-shadow: 0 4px 24px rgba(42,31,28,0.06);
+      transition: all 0.3s ease;
+    }
+    .card-elegant:hover {
+      border-color: rgba(197,160,89,0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(42,31,28,0.1);
+    }
 
-  .btn-dark {
-    background: #101820;
-    color: white;
-    transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
-  }
-  .btn-dark:hover { background: #D64D76; transform: translateY(-2px); }
+    .card-cream {
+      background: linear-gradient(180deg, #faf6f1 0%, #f5ede1 100%);
+      border: 1px solid rgba(197,160,89,0.22);
+      border-radius: 1.25rem;
+    }
 
-  .btn-ghost-rose {
-    border: 1.5px solid #D64D76;
-    color: #D64D76;
-    background: transparent;
-    transition: all 0.2s ease;
-  }
-  .btn-ghost-rose:hover { background: #D64D76; color: white; }
+    .card-highlight {
+      background: linear-gradient(180deg, #faf6f1 0%, #f0e0d0 100%);
+      border: 1.5px solid rgba(197,160,89,0.6);
+      box-shadow: 0 12px 40px rgba(197,160,89,0.18);
+    }
 
-  .card-hover { transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
-  .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 40px -12px rgba(214,77,118,0.2); }
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .lang-card { border-left: 3px solid transparent; transition: all 0.2s ease; }
-  .lang-card:hover { border-left-color: #D64D76; background: #FDF6F8; }
+    /* Floral pulse — para os ornamentos */
+    @keyframes floralBreathe {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50%      { opacity: 0.8; transform: scale(1.04); }
+    }
+    .floral-breathe { animation: floralBreathe 8s ease-in-out infinite; }
 
-  @keyframes pulseRose {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(214,77,118,0.5); }
-    50%       { box-shadow: 0 0 0 10px rgba(214,77,118,0); }
-  }
-  .glow-rose { animation: pulseRose 2s infinite; }
-
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14%       { transform: scale(1.15); }
-    28%       { transform: scale(1); }
-    42%       { transform: scale(1.08); }
-    70%       { transform: scale(1); }
-  }
-  .heart { display: inline-block; animation: heartbeat 1.8s ease infinite; }
-
-  .bloco-num {
-    font-family: 'Urbanist', sans-serif;
-    font-size: 6rem;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.05em;
-    color: rgba(214,77,118,0.08);
-    position: absolute;
-    top: -10px;
-    left: -8px;
-    pointer-events: none;
-  }
-
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #FDF6F8; }
-  ::-webkit-scrollbar-thumb { background: #D64D76; border-radius: 8px; }
-  ::selection { background: #D64D76; color: white; }
-</style>
+    /* Linha decorativa dourada */
+    .gold-line {
+      background: linear-gradient(90deg, transparent, #c5a059 30%, #c5a059 70%, transparent);
+      height: 1px;
+    }
+  </style>
 </head>
-<body class="antialiased">
 
-<!-- NAV -->
-<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-rose/10">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-2.5">
-      <img src="logo-mark.png" alt="Plataforma Comportamental" class="h-7 w-auto" />
-      <div class="hidden sm:flex flex-col leading-none">
-        <span class="font-display text-[13px] font-semibold text-ink tracking-tight">Plataforma Comportamental</span>
-        <span class="text-[10px] text-ink/45 tracking-wide">por Kênio Nascimento</span>
+<body class="bg-cream">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-nude/40 backdrop-blur-xl" style="background: rgba(250,246,241,0.85);">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center font-serif text-lg font-bold text-cream"
+           style="background: linear-gradient(135deg, #d4b85c, #c5a059);">Ψ</div>
+      <div>
+        <div class="font-serif font-semibold text-base text-ink leading-none">Psique</div>
+        <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-gold leading-none mt-0.5">Conexão &amp; Essência</div>
       </div>
     </a>
-    <div class="flex items-center gap-3">
-      <a href="https://plataforma-comportamental-production.up.railway.app/login"
-         class="hidden sm:block text-sm text-ink/55 hover:text-ink transition">Entrar</a>
-      <a href="https://plataforma-comportamental-production.up.railway.app/register"
-         class="btn-rose inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold">
-        Começar grátis
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+    <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-ink/75">
+      <a href="#dor"      class="hover:text-gold transition-colors">A Conexão</a>
+      <a href="#metodo"   class="hover:text-gold transition-colors">A Jornada</a>
+      <a href="#planos"   class="hover:text-gold transition-colors">Planos</a>
+      <a href="#faq"      class="hover:text-gold transition-colors">FAQ</a>
+    </div>
+    <div class="flex items-center gap-2.5">
+      <a href="/login" class="hidden sm:inline-flex btn-outline px-4 py-2 rounded-full text-sm font-bold">Entrar</a>
+      <a href="/register" class="btn-gold px-4 py-2 rounded-full text-sm">Começar grátis</a>
     </div>
   </div>
 </nav>
 
-<!-- ══════════════════════════════════════════════
-     HERO — Novo headline + Gancho do Dialeto
-══════════════════════════════════════════════ -->
-<section class="relative overflow-hidden bg-white pt-16 pb-24 sm:pt-24 sm:pb-36">
-  <div class="absolute inset-0 bg-dot pointer-events-none"></div>
-  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blush/60 to-transparent pointer-events-none"></div>
+<!-- ═══════════════════════════════════════════════════════════════
+     1. HERO — A Revelação
+═══════════════════════════════════════════════════════════════ -->
+<header class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
 
-  <div class="relative max-w-[1200px] mx-auto px-5 sm:px-8">
-    <div class="reveal reveal-1 flex items-center gap-3 mb-10">
-      <span class="w-2 h-2 rounded-full bg-rose glow-rose"></span>
-      <span class="text-[11px] uppercase tracking-[0.2em] text-rose/70 font-semibold">Linguagens do Amor + Arquétipos Femininos · 4 créditos grátis</span>
-    </div>
+  <!-- Glow rose suave -->
+  <div class="absolute top-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none opacity-40 floral-breathe"
+       style="background: radial-gradient(circle, rgba(232,208,204,0.6) 0%, transparent 65%); transform: translate(25%,-30%);"></div>
+  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none opacity-50 floral-breathe"
+       style="background: radial-gradient(circle, rgba(232,212,192,0.5) 0%, transparent 65%); transform: translate(-30%,30%); animation-delay: 2s;"></div>
 
-    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-      <div class="lg:col-span-7">
-        <h1 class="reveal reveal-2 font-display text-4xl sm:text-5xl lg:text-[68px] font-extrabold text-ink leading-[0.98] tracking-tightest">
-          Você não tem um<br>
-          <span class="text-rose italic font-light">problema de comunicação.</span><br>
-          Você fala um dialeto<br>emocional diferente.
-        </h1>
-        <h2 class="reveal reveal-3 font-display text-xl sm:text-2xl font-light text-ink/50 leading-snug tracking-tight mt-5">
-          Descubra sua Linguagem do Amor e o Arquétipo que governa seus relacionamentos.
-        </h2>
+  <div class="relative max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 items-center">
 
-        <p class="reveal reveal-4 mt-7 text-base sm:text-lg text-ink/65 leading-relaxed max-w-xl">
-          Amor não é apenas sentimento — é um <strong class="text-ink font-medium">padrão invisível</strong>. Por que algumas mulheres parecem ter o "toque de Midas" nas relações enquanto outras vivem em ciclos de frustração? A resposta está na sua linguagem emocional e no arquétipo que a governa.
-        </p>
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-6 px-3 py-1.5 rounded-full"
+            style="background: rgba(197,160,89,0.1); border: 1px solid rgba(197,160,89,0.3);">
+        ✦ Conexão &amp; Essência · Psique
+      </span>
 
-        <div class="reveal reveal-4 mt-8 flex flex-col sm:flex-row gap-3">
-          <a href="#cadastro"
-             class="btn-rose inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base font-semibold">
-            Descobrir minha linguagem grátis
-            <span class="heart">♥</span>
-          </a>
-          <a href="#mapeamento"
-             class="btn-ghost-rose inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base font-semibold">
-            Ver o Mapeamento 360°
-          </a>
-        </div>
+      <h1 class="font-serif font-semibold text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6 text-ink">
+        Descubra o <span class="italic text-gold-gradient">código secreto</span> do seu relacionamento.
+      </h1>
 
-        <p class="reveal reveal-4 mt-5 text-[13px] text-ink/45 flex items-center gap-2">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Sem cartão · 4 créditos gratuitos no cadastro
-        </p>
-      </div>
+      <p class="text-lg md:text-xl text-ink-soft leading-relaxed font-medium mb-8 max-w-2xl">
+        Entenda seus arquétipos, descubra sua verdadeira <strong class="text-ink">Linguagem do Amor</strong>
+        e aprenda a decifrar o comportamento do seu parceiro — para uma conexão sem conflitos.
+      </p>
 
-      <!-- CARD CADASTRO -->
-      <div class="lg:col-span-5 reveal reveal-3">
-        <div class="bg-blush rounded-2xl p-7 sm:p-8 border border-rose/15 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-rose/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose text-white text-[10px] uppercase tracking-widest font-bold mb-5">
-            <span>♥</span>
-            Oferta de boas-vindas
-          </div>
-
-          <h3 class="font-display text-2xl sm:text-[28px] font-bold text-ink leading-[1.1] tracking-tight mb-3">
-            Ganhe <span class="text-rose">4 créditos</span> grátis — use para descobrir sua Linguagem do Amor agora.
-          </h3>
-          <p class="text-[14px] text-ink/60 leading-relaxed mb-6">
-            Cada teste custa 1–2 créditos. Com 4 grátis, você já começa sua jornada sem pagar nada.
-          </p>
-
-          <form action="https://plataforma-comportamental-production.up.railway.app/register" method="get" class="space-y-3">
-            <input type="email" name="email" placeholder="seu@email.com" required
-              class="w-full px-4 py-3.5 rounded-xl bg-white border border-rose/20 text-ink placeholder:text-ink/35 focus:outline-none focus:border-rose focus:ring-2 focus:ring-rose/15 transition text-base" />
-            <button type="submit" class="btn-rose w-full font-semibold px-6 py-3.5 rounded-xl text-base flex items-center justify-center gap-2">
-              Resgatar meus 4 créditos grátis
-              <span class="heart">♥</span>
-            </button>
-          </form>
-
-          <div class="mt-6 grid grid-cols-3 gap-2 text-center pt-5 border-t border-rose/10">
-            <div>
-              <div class="font-display text-xl font-bold text-ink">5</div>
-              <div class="text-[10px] text-ink/45 mt-0.5">Linguagens</div>
-            </div>
-            <div class="border-x border-rose/10">
-              <div class="font-display text-xl font-bold text-ink">12</div>
-              <div class="text-[10px] text-ink/45 mt-0.5">Arquétipos</div>
-            </div>
-            <div>
-              <div class="font-display text-xl font-bold text-ink">PDF</div>
-              <div class="text-[10px] text-ink/45 mt-0.5">Detalhado</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
-     BLOCO 1 — A DOR
-     "Por que você se sente exausta tentando ser compreendida?"
-══════════════════════════════════════════════ -->
-<section class="bg-ink text-white py-20 sm:py-28 relative overflow-hidden noise">
-  <div class="relative max-w-[1200px] mx-auto px-5 sm:px-8">
-    <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-8">— Bloco 1 · A raiz da dor</p>
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div>
-        <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl font-light leading-[1.1] tracking-tight">
-          Por que você se sente<br>
-          <span class="italic font-semibold text-rose">exausta</span> tentando<br>
-          <span class="text-white/35">ser compreendida?</span>
-        </h2>
-        <p class="mt-8 text-white/65 text-lg leading-relaxed">
-          Você se esforça. Você demonstra. Você cuida. E mesmo assim a sensação é de <em class="text-white">invisibilidade emocional</em>. Não é falha sua — é que você e quem você ama falam dialetos diferentes do afeto.
-        </p>
-        <p class="mt-4 text-white/65 text-lg leading-relaxed">
-          Nossa metodologia, <strong class="text-white">validada em mais de 70 países</strong> e refinada por especialistas em psicanálise e desenvolvimento humano, revela as camadas invisíveis da sua personalidade que moldam quem você atrai e como você ama.
-        </p>
-      </div>
-      <div class="grid grid-cols-1 gap-4">
-        <div class="border border-white/10 p-6 rounded-sm flex items-start gap-4">
-          <span class="text-rose text-2xl flex-shrink-0">✕</span>
-          <div>
-            <p class="font-display font-bold text-white mb-1">Sem clareza</p>
-            <p class="text-white/50 text-sm leading-relaxed">Ciclos repetidos de frustração. Sensação de que o outro "nunca entende". Esforço que não é reconhecido. Relacionamentos que desgastam em vez de nutrir.</p>
-          </div>
-        </div>
-        <div class="border border-rose/30 bg-rose/5 p-6 rounded-sm flex items-start gap-4">
-          <span class="text-rose text-2xl flex-shrink-0">✓</span>
-          <div>
-            <p class="font-display font-bold text-white mb-1">Com seu mapa emocional</p>
-            <p class="text-white/70 text-sm leading-relaxed">Você para de adivinhar. Entende seus padrões, comunica suas necessidades com precisão e escolhe com quem e como investir sua energia afetiva.</p>
-          </div>
-        </div>
-        <div class="border border-white/10 bg-white/3 p-5 rounded-sm text-center">
-          <p class="text-[11px] uppercase tracking-[0.2em] text-white/35 mb-2">Autoridade</p>
-          <p class="text-white/70 text-sm leading-relaxed italic">"Metodologia curada por especialistas em psicanálise e validada em mais de 70 países. Ciência, não misticismo."</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
-     BLOCO 2 — A SOLUÇÃO: 5 LINGUAGENS DO AMOR
-     "Identifique como você doa e recebe afeto"
-══════════════════════════════════════════════ -->
-<section id="linguagens" class="py-20 sm:py-32 bg-white">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8">
-    <div class="grid lg:grid-cols-12 gap-8 mb-16">
-      <div class="lg:col-span-5">
-        <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-4">— Bloco 2 · A solução</p>
-        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink leading-[0.95] tracking-tighter-2">
-          Identifique como<br>
-          você doa e recebe<br>
-          <span class="italic font-light text-ink/40">afeto.</span>
-        </h2>
-        <div class="mt-6 inline-flex items-center gap-2 px-3 py-2 bg-blush border border-rose/20 rounded-lg">
-          <span class="text-rose font-bold text-sm">♥</span>
-          <span class="text-[13px] text-ink/70 font-medium">Use seus 4 créditos de boas-vindas</span>
-        </div>
-      </div>
-      <div class="lg:col-span-6 lg:col-start-7 lg:pt-12">
-        <p class="text-lg text-ink/60 leading-relaxed">
-          Desenvolvida pelo Dr. Gary Chapman e validada em mais de 70 países, a teoria das 5 Linguagens do Amor é a ferramenta mais precisa para entender como você — e quem você ama — expressam e recebem afeto. Nossa plataforma transforma isso em um diagnóstico científico e acionável.
-        </p>
-      </div>
-    </div>
-
-    <div class="space-y-0 border-t border-line">
-      <div class="lang-card px-6 py-7 border-b border-line flex items-start gap-6">
-        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blush flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D64D76" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline gap-3 mb-1">
-            <span class="text-[10px] font-mono text-rose/60">01</span>
-            <h3 class="font-display text-xl font-bold text-ink tracking-tight">Palavras de Afirmação</h3>
-          </div>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Elogios, "eu te amo", reconhecimento verbal. Para quem tem essa linguagem, as palavras têm peso imenso — e a ausência delas machuca profundamente.</p>
-        </div>
-      </div>
-
-      <div class="lang-card px-6 py-7 border-b border-line flex items-start gap-6">
-        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blush flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D64D76" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline gap-3 mb-1">
-            <span class="text-[10px] font-mono text-rose/60">02</span>
-            <h3 class="font-display text-xl font-bold text-ink tracking-tight">Tempo de Qualidade</h3>
-          </div>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Presença total, atenção indivisível. Não é quantidade de tempo — é estar 100% presente. Celular no bolso, olho no olho, coração na conversa.</p>
-        </div>
-      </div>
-
-      <div class="lang-card px-6 py-7 border-b border-line flex items-start gap-6">
-        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blush flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D64D76" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline gap-3 mb-1">
-            <span class="text-[10px] font-mono text-rose/60">03</span>
-            <h3 class="font-display text-xl font-bold text-ink tracking-tight">Receber Presentes</h3>
-          </div>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Não é materialismo — é simbolismo. Um presente diz "eu pensei em você". Para quem tem essa linguagem, esquecer datas é uma mensagem poderosa de descaso.</p>
-        </div>
-      </div>
-
-      <div class="lang-card px-6 py-7 border-b border-line flex items-start gap-6">
-        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blush flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D64D76" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline gap-3 mb-1">
-            <span class="text-[10px] font-mono text-rose/60">04</span>
-            <h3 class="font-display text-xl font-bold text-ink tracking-tight">Atos de Serviço</h3>
-          </div>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Fazer coisas práticas por amor. Lavar a louça, resolver um problema, ir buscar na chuva. Para quem tem essa linguagem, "te amo" se diz com ações — não com flores.</p>
-        </div>
-      </div>
-
-      <div class="lang-card px-6 py-7 border-b border-line flex items-start gap-6">
-        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-blush flex items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D64D76" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-baseline gap-3 mb-1">
-            <span class="text-[10px] font-mono text-rose/60">05</span>
-            <h3 class="font-display text-xl font-bold text-ink tracking-tight">Toque Físico</h3>
-          </div>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Abraços, beijos, segurar a mão. Não necessariamente sexual — é conexão física como forma de amor. Para quem tem essa linguagem, a distância física é fria e desamorosa.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA inline -->
-    <div class="mt-12 text-center">
-      <a href="https://plataforma-comportamental-production.up.railway.app/register"
-         class="btn-rose inline-flex items-center gap-2 px-8 py-4 rounded-full text-base font-semibold">
-        Descobrir minha Linguagem do Amor grátis
-        <span class="heart">♥</span>
-      </a>
-      <p class="mt-3 text-[12px] text-ink/40">4 créditos grátis · Resultado em minutos · PDF personalizado</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
-     BLOCO 3 — O APROFUNDAMENTO: ARQUÉTIPOS FEMININOS
-     "Vá além do comportamento — descubra a força feminina"
-══════════════════════════════════════════════ -->
-<section class="py-20 sm:py-28 bg-ink text-white relative overflow-hidden noise">
-  <div class="relative max-w-[1200px] mx-auto px-5 sm:px-8">
-    <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-8">— Bloco 3 · O aprofundamento</p>
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-rose/30 text-[10px] uppercase tracking-widest font-bold text-rose mb-6">
-          ★ Vá além da superfície
-        </div>
-        <h2 class="font-display text-4xl sm:text-5xl font-extrabold leading-[0.95] tracking-tighter-2">
-          Vá além do<br>comportamento.<br>
-          <span class="italic font-light text-white/45">Descubra a força</span><br>
-          feminina que governa<br>suas escolhas afetivas.
-        </h2>
-        <p class="mt-6 text-white/60 text-lg leading-relaxed">
-          Baseado nas 12 energias arquetípicas de Jung, o teste de Arquétipos Femininos revela os padrões profundos que moldam sua identidade — <em class="text-white">quem você atrai, como você ama e onde estão seus pontos cegos</em>.
-        </p>
-        <p class="mt-4 text-white/60 text-lg leading-relaxed">
-          Enquanto as Linguagens do Amor mostram <em class="text-white">como</em> você ama, os Arquétipos revelam <em class="text-white">por que</em> você ama quem ama. O cruzamento das duas é único no mercado.
-        </p>
-        <div class="mt-6 flex items-center gap-3 text-[13px] text-white/50">
-          <span class="px-2 py-1 border border-rose/40 text-rose text-[10px] font-bold uppercase tracking-widest rounded">2 créditos · Premium</span>
-          <span>Disponível após as Linguagens do Amor</span>
-        </div>
-        <a href="https://plataforma-comportamental-production.up.railway.app/register"
-           class="inline-flex items-center gap-2 mt-8 btn-rose px-7 py-4 rounded-full font-semibold text-base">
-          Descobrir meu Arquétipo Feminino
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      <div class="flex flex-col sm:flex-row gap-3 mb-5">
+        <a href="/register" class="btn-gold inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base">
+          QUERO MEUS 4 CRÉDITOS PARA COMEÇAR
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#metodo" class="btn-outline inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base font-bold">
+          Como funciona
         </a>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="border border-white/8 p-4 rounded-sm hover:border-rose/30 transition">
-          <p class="font-display font-bold text-white text-base mb-1">A Cuidadora</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Amor como missão. Coloca os outros antes de si — frequentemente ao custo de si mesma.</p>
-        </div>
-        <div class="border border-white/8 p-4 rounded-sm hover:border-rose/30 transition">
-          <p class="font-display font-bold text-white text-base mb-1">A Maga</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Transformação e poder de criar realidades. Seduz com profundidade e mistério.</p>
-        </div>
-        <div class="border border-white/8 p-4 rounded-sm hover:border-rose/30 transition">
-          <p class="font-display font-bold text-white text-base mb-1">A Governante</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Estrutura, controle e autoridade. Lidera relacionamentos com força e visão.</p>
-        </div>
-        <div class="border border-white/8 p-4 rounded-sm hover:border-rose/30 transition">
-          <p class="font-display font-bold text-white text-base mb-1">A Amante</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Paixão e beleza como formas de existir. Vive plenamente suas emoções.</p>
-        </div>
-        <div class="border border-white/8 p-4 rounded-sm hover:border-rose/30 transition">
-          <p class="font-display font-bold text-white text-base mb-1">A Exploradora</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Liberdade e autenticidade. Atrai quem respeita sua independência.</p>
-        </div>
-        <div class="border border-rose/20 bg-rose/5 p-4 rounded-sm">
-          <p class="font-display font-bold text-rose text-base mb-1">+ 7 outros</p>
-          <p class="text-white/40 text-[12px] leading-relaxed">Qual padrão está no controle da sua vida afetiva hoje?</p>
-        </div>
+
+      <div class="flex items-center gap-2 text-sm text-ink-soft font-semibold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Resgate agora e faça seu primeiro teste gratuitamente
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ══════════════════════════════════════════════
-     BLOCO 4 — A PROVA: MAPEAMENTO 360°
-     "O que você recebe · Relatório profissional"
-══════════════════════════════════════════════ -->
-<section id="mapeamento" class="py-20 sm:py-32 bg-mist">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8">
-    <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-4">— Bloco 4 · A prova</p>
-    <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+    <!-- Visual: ornamento abstrato feminino -->
+    <div class="reveal relative h-[420px] lg:h-[520px]">
+      <svg viewBox="0 0 400 500" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="goldOrb" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#d4b85c" stop-opacity="0.6"/>
+            <stop offset="40%" stop-color="#c5a059" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#c5a059" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="roseOrb" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"  stop-color="#d4a3a0" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#c89090" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="petalGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%"   stop-color="#c5a059" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#d4a3a0" stop-opacity="0.85"/>
+          </linearGradient>
+        </defs>
 
-      <!-- MOCKUP DO RELATÓRIO -->
-      <div class="lg:col-span-6 order-2 lg:order-1">
-        <div class="relative">
-          <div class="absolute -right-3 -bottom-3 w-full h-full bg-rose/10 rounded-sm"></div>
-          <div class="relative bg-white border border-rose/15 p-7 sm:p-9">
-            <div class="flex items-center justify-between mb-7 pb-5 border-b border-ink/8">
-              <div>
-                <p class="text-[10px] uppercase tracking-[0.2em] text-ink/35 mb-1">Devolutiva · Mapeamento 360°</p>
-                <h4 class="font-display text-xl font-bold text-ink tracking-tight">Ana Beatriz Santos</h4>
-              </div>
-              <div class="text-right text-[11px] text-ink/35 font-mono">
-                <p>PDF · 12 páginas</p>
-                <p>22.10.25</p>
-              </div>
-            </div>
+        <!-- Aura central -->
+        <circle cx="200" cy="250" r="200" fill="url(#goldOrb)"/>
+        <circle cx="200" cy="250" r="120" fill="url(#roseOrb)" opacity="0.7"/>
 
-            <!-- Linguagem principal -->
-            <div class="mb-5 p-4 bg-blush rounded-lg border border-rose/15">
-              <p class="text-[10px] uppercase tracking-widest text-rose font-bold mb-2">Linguagem do Amor Principal</p>
-              <p class="font-display text-2xl font-extrabold text-ink">Palavras de Afirmação</p>
-              <p class="text-[13px] text-ink/60 mt-1">Você se sente mais amada quando recebe reconhecimento verbal.</p>
-            </div>
+        <!-- Flor mandala dourada (8 pétalas) -->
+        <g transform="translate(200, 250)" opacity="0.9">
+          <g>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-90" rx="22" ry="80" fill="url(#petalGrad)" opacity="0.55" transform="rotate(315)"/>
+          </g>
 
-            <!-- Arquétipo -->
-            <div class="mb-6 p-4 bg-ink rounded-lg border border-ink/20">
-              <p class="text-[10px] uppercase tracking-widest text-rose font-bold mb-2">Arquétipo Dominante</p>
-              <p class="font-display text-2xl font-extrabold text-white">A Cuidadora</p>
-              <p class="text-[13px] text-white/50 mt-1">Ponto cego: você cuida tanto que esquece de cobrar cuidado de volta.</p>
-            </div>
+          <!-- Anéis circulares -->
+          <circle cx="0" cy="0" r="28" fill="none" stroke="#c5a059" stroke-width="1.5" opacity="0.7"/>
+          <circle cx="0" cy="0" r="44" fill="none" stroke="#c5a059" stroke-width="0.8" opacity="0.4" stroke-dasharray="3 4"/>
+          <circle cx="0" cy="0" r="62" fill="none" stroke="#c5a059" stroke-width="0.6" opacity="0.3"/>
 
-            <!-- Gráfico de distribuição -->
-            <div class="mb-6">
-              <p class="text-[10px] font-mono text-ink/35 uppercase tracking-widest mb-4">Distribuição das Linguagens</p>
-              <div class="space-y-2.5">
-                <div class="flex items-center gap-3">
-                  <span class="text-[11px] text-ink/60 w-36 text-right">Palavras de Afirmação</span>
-                  <div class="flex-1 h-4 bg-blush relative rounded-sm overflow-hidden">
-                    <div class="h-full bg-rose flex items-center justify-end pr-2 rounded-sm" style="width:82%">
-                      <span class="text-[9px] font-mono text-white font-bold">82%</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="text-[11px] text-ink/60 w-36 text-right">Tempo de Qualidade</span>
-                  <div class="flex-1 h-4 bg-blush relative rounded-sm overflow-hidden">
-                    <div class="h-full bg-ink flex items-center justify-end pr-2 rounded-sm" style="width:61%">
-                      <span class="text-[9px] font-mono text-white font-bold">61%</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <span class="text-[11px] text-ink/60 w-36 text-right">Atos de Serviço</span>
-                  <div class="flex-1 h-4 bg-blush relative rounded-sm overflow-hidden">
-                    <div class="h-full bg-rose/50 flex items-center justify-end pr-2 rounded-sm" style="width:44%">
-                      <span class="text-[9px] font-mono text-white font-bold">44%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <!-- Centro dourado sólido -->
+          <circle cx="0" cy="0" r="18" fill="#c5a059"/>
+          <circle cx="0" cy="0" r="12" fill="#d4b85c"/>
 
-            <!-- Recomendações -->
-            <div class="border-t border-ink/8 pt-5">
-              <p class="text-[10px] font-mono text-ink/35 uppercase tracking-widest mb-3">Insights práticos</p>
-              <div class="grid grid-cols-1 gap-px bg-rose/8">
-                <div class="bg-white p-3 text-[12px] text-ink/70">→ Sua Linguagem + Seu Arquétipo: como eles interagem</div>
-                <div class="bg-white p-3 text-[12px] text-ink/70">→ Pontos cegos que sabotam seus relacionamentos</div>
-                <div class="bg-white p-3 text-[12px] text-ink/70">→ Scripts práticos de comunicação emocional</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          <!-- Símbolo Vênus ♀ no centro (feminino) -->
+          <text x="0" y="6" text-anchor="middle" fill="#faf6f1" font-family="Cormorant Garamond" font-size="20" font-weight="700">♀</text>
+        </g>
 
-      <!-- TEXTO -->
-      <div class="lg:col-span-6 order-1 lg:order-2">
-        <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-ink leading-[0.95] tracking-tighter-2">
-          Um relatório profissional<br>
-          <span class="italic font-light text-ink/40">que prova que você<br>está investindo em<br>ciência, não misticismo.</span>
-        </h2>
-        <p class="mt-6 text-lg text-ink/60 leading-relaxed">
-          A Plataforma Comportamental utiliza metodologias consagradas e validadas em mais de 70 países por instituições de alto prestígio acadêmico. Cada relatório entrega não apenas um gráfico — mas um <strong class="text-ink">mapeamento profundo e preciso da sua psique</strong>.
-        </p>
-
-        <!-- O que está incluso -->
-        <div class="mt-8 space-y-4">
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-rose text-white flex items-center justify-center text-[11px] font-bold font-mono mt-0.5">01</span>
-            <div>
-              <h4 class="font-display font-bold text-ink text-lg tracking-tight">Linguagem do Amor revelada</h4>
-              <p class="text-ink/55 text-[15px] leading-relaxed mt-1">Sua linguagem principal com gráfico de distribuição percentual das 5 dimensões.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-rose text-white flex items-center justify-center text-[11px] font-bold font-mono mt-0.5">02</span>
-            <div>
-              <h4 class="font-display font-bold text-ink text-lg tracking-tight">Arquétipo dominante + pontos cegos</h4>
-              <p class="text-ink/55 text-[15px] leading-relaxed mt-1">A energia junguiana que governa suas escolhas afetivas — e o que ela esconde de você.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-rose text-white flex items-center justify-center text-[11px] font-bold font-mono mt-0.5">03</span>
-            <div>
-              <h4 class="font-display font-bold text-ink text-lg tracking-tight">Devolutiva integrada (PDF)</h4>
-              <p class="text-ink/55 text-[15px] leading-relaxed mt-1">Como sua identidade arquetípica influencia a forma como você expressa afeto — e scripts práticos para agir.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-rose text-white flex items-center justify-center text-[11px] font-bold font-mono mt-0.5">04</span>
-            <div>
-              <h4 class="font-display font-bold text-ink text-lg tracking-tight">Compartilhável e profissional</h4>
-              <p class="text-ink/55 text-[15px] leading-relaxed mt-1">Visual de dashboard corporativo. Não é um "quiz de revista" — é ciência que você pode compartilhar orgulhosamente.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        <!-- Pequenos corações flutuantes -->
+        <g fill="#c89090" opacity="0.55">
+          <path d="M70 130 c -3 -8 -12 -8 -12 0 c 0 5 6 10 12 14 c 6 -4 12 -9 12 -14 c 0 -8 -9 -8 -12 0 z" />
+          <path d="M340 100 c -2 -6 -9 -6 -9 0 c 0 4 4.5 8 9 11 c 4.5 -3 9 -7 9 -11 c 0 -6 -7 -6 -9 0 z" opacity="0.7"/>
+          <path d="M60 380 c -2 -6 -9 -6 -9 0 c 0 4 4.5 8 9 11 c 4.5 -3 9 -7 9 -11 c 0 -6 -7 -6 -9 0 z" opacity="0.7"/>
+          <path d="M345 405 c -3 -8 -12 -8 -12 0 c 0 5 6 10 12 14 c 6 -4 12 -9 12 -14 c 0 -8 -9 -8 -12 0 z" />
+          <path d="M200 60 c -2 -5 -8 -5 -8 0 c 0 3 4 7 8 10 c 4 -3 8 -7 8 -10 c 0 -5 -6 -5 -8 0 z" opacity="0.6"/>
+          <path d="M200 460 c -2 -5 -8 -5 -8 0 c 0 3 4 7 8 10 c 4 -3 8 -7 8 -10 c 0 -5 -6 -5 -8 0 z" opacity="0.6"/>
+        </g>
+      </svg>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ══════════════════════════════════════════════
-     MAPEAMENTO 360° — A JORNADA COMPLETA
-══════════════════════════════════════════════ -->
-<section class="py-20 sm:py-28 bg-white border-t border-line">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8">
-    <div class="max-w-3xl mb-16">
-      <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-4">— Mapeamento 360° da Mulher Moderna</p>
-      <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink leading-[0.95] tracking-tighter-2">
-        A jornada completa<br>
-        <span class="italic font-light text-ink/40">em dois passos.</span>
+<!-- ═══════════════════════════════════════════════════════════════
+     2. DOR — Identificação
+═══════════════════════════════════════════════════════════════ -->
+<section id="dor" class="relative py-20 md:py-28">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">A Conexão</span>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-ink leading-tight max-w-3xl mx-auto">
+        Por que parece que vocês falam <span class="italic text-gold-gradient">línguas diferentes</span>?
       </h2>
-      <p class="mt-5 text-lg text-ink/55 leading-relaxed max-w-2xl">
-        Ninguém no mercado oferece o cruzamento de "Linguagens do Amor" com "Arquétipos de Jung" em uma plataforma profissional com visual de dashboard corporativo. Essa é a sua vantagem.
+    </div>
+
+    <div class="card-cream p-7 md:p-10 reveal">
+      <p class="text-[15px] font-bold uppercase tracking-widest text-gold mb-5">Identifique-se</p>
+
+      <ul class="space-y-4 mb-8">
+        <li class="flex items-start gap-3">
+          <span class="mt-1 flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-cream text-[12px] font-bold"
+                style="background: linear-gradient(135deg, #d4b85c, #c5a059);">✓</span>
+          <p class="text-[16px] md:text-[17px] text-ink font-medium leading-relaxed">
+            Você se sente <strong>sobrecarregada</strong> e não compreendida.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-cream text-[12px] font-bold"
+                style="background: linear-gradient(135deg, #d4b85c, #c5a059);">✓</span>
+          <p class="text-[16px] md:text-[17px] text-ink font-medium leading-relaxed">
+            Sente que <strong>doa muito</strong> e não recebe o reconhecimento que merece.
+          </p>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-1 flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-cream text-[12px] font-bold"
+                style="background: linear-gradient(135deg, #d4b85c, #c5a059);">✓</span>
+          <p class="text-[16px] md:text-[17px] text-ink font-medium leading-relaxed">
+            Seu parceiro parece <strong>distante</strong> ou reage de formas que você não entende.
+          </p>
+        </li>
+      </ul>
+
+      <div class="gold-line mb-6"></div>
+
+      <p class="font-serif text-2xl md:text-3xl italic text-ink leading-snug text-center max-w-3xl mx-auto">
+        &ldquo;O problema não é falta de amor.
+        É <span class="text-gold-gradient not-italic font-semibold">falta de um manual</span>.
+        Nós entregamos esse manual para vocês.&rdquo;
       </p>
     </div>
+  </div>
+</section>
 
-    <div class="grid lg:grid-cols-2 gap-0 border border-line">
+<!-- ═══════════════════════════════════════════════════════════════
+     3. MÉTODO — A Jornada do Casal
+═══════════════════════════════════════════════════════════════ -->
+<section id="metodo" class="relative py-20 md:py-28" style="background: linear-gradient(180deg, #faf6f1 0%, #f5ede1 100%);">
+
+  <div class="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full pointer-events-none opacity-30"
+       style="background: radial-gradient(circle, rgba(232,208,204,0.5), transparent 65%); transform: translate(-50%, -50%);"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">A Jornada do Casal</span>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-ink leading-tight max-w-3xl mx-auto">
+        Em <span class="italic text-gold-gradient">três passos</span>, vocês falam a mesma língua.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
       <!-- Passo 1 -->
-      <div class="border-r border-line p-8 sm:p-10 relative">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blush border border-rose/20 text-[10px] uppercase tracking-widest font-bold text-rose mb-6">
-          Passo 1 · 4 créditos gratuitos
+      <article class="card-elegant p-7 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center font-serif text-xl font-bold text-cream"
+               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 6px 20px rgba(197,160,89,0.3);">1</div>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-gold">Passo 1</p>
         </div>
-        <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-ink tracking-tight leading-tight mb-4">
-          Conexão Externa:<br>5 Linguagens do Amor
-        </h3>
-        <p class="text-ink/60 leading-relaxed mb-6">
-          Descubra <em class="text-ink font-medium">como você expressa e recebe amor</em>. Use seus 4 créditos de boas-vindas — o teste completo, sem pagar nada.
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-2">O Seu Despertar</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          Use os créditos para descobrir <strong class="text-ink">seu Arquétipo</strong> e <strong class="text-ink">sua Linguagem do Amor</strong>.
+          Entenda suas necessidades reais — antes de explicá-las a alguém.
         </p>
-        <ul class="space-y-2 text-[14px] text-ink/60">
-          <li class="flex gap-2">→ 30 perguntas · 8 minutos</li>
-          <li class="flex gap-2">→ PDF personalizado na hora</li>
-          <li class="flex gap-2">→ Distribuição percentual das 5 dimensões</li>
-          <li class="flex gap-2">→ Scripts práticos de comunicação</li>
-        </ul>
-        <div class="mt-8 p-4 bg-blush rounded-lg border border-rose/15">
-          <p class="text-[12px] text-rose font-bold uppercase tracking-widest mb-1">Coberto pelos créditos grátis</p>
-          <p class="text-[14px] text-ink/70">Seus 4 créditos de boas-vindas cobrem exatamente este teste.</p>
-        </div>
-      </div>
+      </article>
 
       <!-- Passo 2 -->
-      <div class="p-8 sm:p-10 relative bg-ink text-white">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose/20 border border-rose/30 text-[10px] uppercase tracking-widest font-bold text-rose mb-6">
-          Passo 2 · Aprofundamento
+      <article class="card-elegant p-7 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center font-serif text-xl font-bold text-cream"
+               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 6px 20px rgba(197,160,89,0.3);">2</div>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-gold">Passo 2</p>
         </div>
-        <h3 class="font-display text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight mb-4">
-          Identidade Interna:<br>Arquétipos Femininos
-        </h3>
-        <p class="text-white/60 leading-relaxed mb-6">
-          Um mergulho nos padrões de Jung refinados para a mulher atual. Descubra <em class="text-white">por que</em> você ama quem ama — e os pontos cegos que nenhuma outra metodologia revela.
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-2">O Convite</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          Envie o teste para ele. Descubra se a energia dele é do <strong class="text-ink">Protetor</strong>,
+          do <strong class="text-ink">Explorador</strong> ou do <strong class="text-ink">Sábio</strong>.
         </p>
-        <ul class="space-y-2 text-[14px] text-white/60">
-          <li class="flex gap-2">→ 12 energias arquetípicas femininas</li>
-          <li class="flex gap-2">→ Integração com o resultado das Linguagens</li>
-          <li class="flex gap-2">→ PDF com devolutiva cruzada</li>
-          <li class="flex gap-2">→ Como seu arquétipo molda seus relacionamentos</li>
-        </ul>
-        <div class="mt-8 p-4 bg-white/5 rounded-lg border border-white/10">
-          <p class="text-[12px] text-rose font-bold uppercase tracking-widest mb-1">Próximo passo natural</p>
-          <p class="text-[14px] text-white/60">Após receber seu resultado das Linguagens, complete com os Arquétipos.</p>
-        </div>
-      </div>
-    </div>
+      </article>
 
-    <!-- Resultado combinado -->
-    <div class="mt-0 border border-t-0 border-line p-8 bg-blush/50">
-      <div class="flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left">
-        <div class="text-4xl">✨</div>
-        <div class="flex-1">
-          <h4 class="font-display text-xl font-bold text-ink mb-2">Resultado: PDF integrado</h4>
-          <p class="text-ink/60 text-[15px] leading-relaxed">Um único documento que mostra como sua identidade arquetípica influencia a forma como você expressa afeto — o mapeamento emocional mais completo disponível no mercado.</p>
+      <!-- Passo 3 -->
+      <article class="card-elegant p-7 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center font-serif text-xl font-bold text-cream"
+               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 6px 20px rgba(197,160,89,0.3);">3</div>
+          <p class="text-[11px] font-bold uppercase tracking-widest text-gold">Passo 3</p>
         </div>
-        <div class="flex-shrink-0">
-          <a href="https://plataforma-comportamental-production.up.railway.app/register"
-             class="btn-rose inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-sm font-semibold whitespace-nowrap">
-            Iniciar minha jornada <span class="heart">♥</span>
-          </a>
-        </div>
-      </div>
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-2">A Harmonia</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          Com os dois mapas em mãos, vocês <strong class="text-ink">param de cobrar</strong> o que o outro não pode dar
+          — e começam a falar a mesma língua.
+        </p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════
-     PREÇOS — Kit Casal em destaque
-══════════════════════════════════════════════ -->
-<section id="precos" class="py-20 sm:py-32 bg-white border-t border-line">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8">
-    <div class="max-w-3xl mb-16">
-      <p class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold mb-4">— Créditos adicionais</p>
-      <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-ink leading-[0.95] tracking-tighter-2">
-        Pague apenas pelo que<br>
-        <span class="italic font-light text-ink/40">usar de verdade.</span>
+<!-- ═══════════════════════════════════════════════════════════════
+     4. CONTEÚDO — O que a plataforma oferece
+═══════════════════════════════════════════════════════════════ -->
+<section class="relative py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">A Plataforma</span>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-ink leading-tight max-w-3xl mx-auto">
+        O que você vai <span class="italic text-gold-gradient">descobrir sobre vocês</span>.
       </h2>
-      <p class="mt-5 text-lg text-ink/55 leading-relaxed">
-        Você começa com 4 créditos grátis. Após o teste das Linguagens do Amor, complete com os Arquétipos Femininos — ou compre um pacote para levar sua jornada mais longe.
-      </p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-line">
-      <div class="card-hover border-r border-b border-line p-6 bg-white flex flex-col">
-        <p class="text-[10px] uppercase tracking-widest text-ink/35 font-bold mb-4">Starter</p>
-        <div class="font-display text-5xl font-extrabold text-ink tracking-tightest mb-1">05</div>
-        <p class="text-xs text-ink/40 uppercase tracking-widest mb-5">créditos</p>
-        <div class="mb-5 pb-5 border-b border-line">
-          <span class="text-xs text-ink/40">R$</span>
-          <span class="font-display text-3xl font-extrabold text-ink">49<span class="text-xl">,90</span></span>
-          <p class="text-[11px] text-ink/40 font-mono mt-1">R$ 9,98 / crédito</p>
-        </div>
-        <ul class="space-y-2 text-[13px] text-ink/60 mb-6 flex-1">
-          <li class="flex gap-2">→ 5 testes individuais</li>
-          <li class="flex gap-2">→ Linguagens + Arquétipo</li>
-          <li class="flex gap-2">→ Relatórios em PDF</li>
-        </ul>
-        <a href="https://plataforma-comportamental-production.up.railway.app/register" class="btn-ghost-rose text-center py-2.5 rounded-xl font-semibold text-sm">Comprar</a>
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-      <div class="card-hover relative border-r border-b border-line p-6 bg-rose text-white flex flex-col">
-        <div class="absolute top-0 left-0 right-0 bg-rose-deep text-white text-[10px] uppercase tracking-[0.2em] font-bold py-1.5 text-center">
-          ♥ Mais Popular
+      <!-- Destaque 1 -->
+      <article class="card-elegant p-7 reveal">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+             style="background: rgba(197,160,89,0.12); border: 1px solid rgba(197,160,89,0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18M3 12h18"/>
+          </svg>
         </div>
-        <div class="pt-5">
-          <p class="text-[10px] uppercase tracking-widest text-white/60 font-bold mb-4">Jornada Completa</p>
-          <div class="font-display text-5xl font-extrabold tracking-tightest mb-1">10</div>
-          <p class="text-xs text-white/50 uppercase tracking-widest mb-5">créditos</p>
-          <div class="mb-5 pb-5 border-b border-white/20">
-            <span class="text-xs text-white/50">R$</span>
-            <span class="font-display text-3xl font-extrabold">89<span class="text-xl">,90</span></span>
-            <p class="text-[11px] text-white/60 font-mono mt-1">R$ 8,99 / crédito · -10%</p>
-          </div>
-          <ul class="space-y-2 text-[13px] text-white/80 mb-6 flex-1">
-            <li class="flex gap-2">→ Linguagens + Arquétipos (×3 pessoas)</li>
-            <li class="flex gap-2">→ Devolutiva cruzada integrada</li>
-            <li class="flex gap-2">→ Para você e mais alguém especial</li>
-            <li class="flex gap-2">→ PDF completo de cada perfil</li>
-          </ul>
-          <a href="https://plataforma-comportamental-production.up.railway.app/register" class="bg-white text-rose font-bold text-center py-2.5 rounded-xl text-sm block hover:bg-blush transition">Comprar agora</a>
-        </div>
-      </div>
-
-      <div class="card-hover relative border-r border-b border-line p-6 flex flex-col" style="background: #0d1426">
-        <div class="absolute top-0 left-0 right-0 text-white text-[10px] uppercase tracking-[0.2em] font-bold py-1.5 text-center" style="background: #C9A84C; color: #0d1426">
-          ♥ Kit Casal
-        </div>
-        <div class="pt-5">
-          <p class="text-[10px] uppercase tracking-widest font-bold mb-4" style="color: #C9A84C">Mapeamento de Casal</p>
-          <div class="font-display text-5xl font-extrabold tracking-tightest mb-1 text-white">25</div>
-          <p class="text-xs uppercase tracking-widest mb-5 text-white/50">créditos</p>
-          <div class="mb-5 pb-5 border-b border-white/10">
-            <span class="text-xs text-white/50">R$</span>
-            <span class="font-display text-3xl font-extrabold text-white">199<span class="text-xl">,90</span></span>
-            <p class="text-[11px] font-mono mt-1" style="color: #C9A84C">R$ 7,99 / crédito · -20%</p>
-          </div>
-          <ul class="space-y-2 text-[13px] text-white/70 mb-6 flex-1">
-            <li class="flex gap-2">→ Mapeamento completo para 2</li>
-            <li class="flex gap-2">→ Linguagens + Arquétipos de cada um</li>
-            <li class="flex gap-2">→ Compatibilidade emocional</li>
-            <li class="flex gap-2">→ Ainda sobram créditos extras</li>
-          </ul>
-          <a href="https://plataforma-comportamental-production.up.railway.app/register" class="font-bold text-center py-2.5 rounded-xl text-sm block transition text-white" style="background: #C9A84C; color: #0d1426">Kit Casal</a>
-        </div>
-      </div>
-
-      <div class="card-hover relative border-r border-b border-line p-6 bg-white flex flex-col">
-        <div class="absolute top-0 left-0 right-0 bg-ink text-white text-[10px] uppercase tracking-[0.2em] font-bold py-1.5 text-center">
-          Melhor Valor
-        </div>
-        <div class="pt-5">
-          <p class="text-[10px] uppercase tracking-widest text-ink/35 font-bold mb-4">Profissional</p>
-          <div class="font-display text-5xl font-extrabold text-ink tracking-tightest mb-1">50</div>
-          <p class="text-xs text-ink/40 uppercase tracking-widest mb-5">créditos</p>
-          <div class="mb-5 pb-5 border-b border-line">
-            <span class="text-xs text-ink/40">R$</span>
-            <span class="font-display text-3xl font-extrabold text-ink">349<span class="text-xl">,90</span></span>
-            <p class="text-[11px] text-rose font-mono font-bold mt-1">R$ 6,99 / crédito · -30%</p>
-          </div>
-          <ul class="space-y-2 text-[13px] text-ink/60 mb-6 flex-1">
-            <li class="flex gap-2">→ Para coaches e terapeutas</li>
-            <li class="flex gap-2">→ 25 mapeamentos completos</li>
-            <li class="flex gap-2">→ Máxima economia</li>
-          </ul>
-          <a href="https://plataforma-comportamental-production.up.railway.app/register" class="btn-dark text-center py-2.5 rounded-xl font-semibold text-sm block">Comprar</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-10 p-5 bg-blush border border-rose/15 rounded-lg text-center">
-      <p class="text-[14px] text-ink/65">
-        <span class="text-rose font-bold">Lembre-se:</span> você já ganha <strong class="text-ink">4 créditos grátis</strong> no cadastro — suficiente para o teste das Linguagens do Amor. O Arquétipo Feminino (2 créditos) é o próximo passo natural após o primeiro resultado.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════
-     CTA FINAL
-══════════════════════════════════════════════ -->
-<section id="cadastro" class="relative py-24 sm:py-32 bg-ink text-white overflow-hidden noise">
-  <div class="relative max-w-[1200px] mx-auto px-5 sm:px-8">
-    <div class="grid lg:grid-cols-12 gap-12 items-center">
-      <div class="lg:col-span-7">
-        <div class="inline-flex items-center gap-2 mb-8">
-          <span class="w-2 h-2 rounded-full bg-rose glow-rose"></span>
-          <span class="text-[11px] uppercase tracking-[0.25em] text-rose font-semibold">4 créditos esperando por você</span>
-        </div>
-
-        <h2 class="font-display text-5xl sm:text-6xl lg:text-[76px] font-extrabold leading-[0.95] tracking-tightest">
-          Você não precisa<br>de sorte no amor.<br>
-          <span class="italic font-light text-white/40">Você precisa de<br>clareza.</span>
-        </h2>
-
-        <p class="mt-8 text-lg text-white/55 leading-relaxed max-w-xl">
-          Um e-mail. Oito minutos para responder. Um PDF que pode mudar a forma como você se relaciona pelo resto da vida. Metodologia validada em 70+ países, refinada por especialistas em psicanálise.
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Destaque 1</p>
+        <h3 class="font-serif font-semibold text-xl text-ink mb-2">Arquétipos Femininos &amp; Masculinos</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          As energias que regem a atração e a forma como cada um se posiciona no relacionamento.
         </p>
+      </article>
 
-        <div class="mt-10 grid grid-cols-3 gap-6 max-w-xs">
-          <div class="text-center">
-            <div class="font-display text-2xl font-extrabold text-rose">4</div>
-            <div class="text-[10px] text-white/35 uppercase tracking-widest mt-1">créditos grátis</div>
-          </div>
-          <div class="text-center border-x border-white/10">
-            <div class="font-display text-2xl font-extrabold text-white">8min</div>
-            <div class="text-[10px] text-white/35 uppercase tracking-widest mt-1">duração</div>
-          </div>
-          <div class="text-center">
-            <div class="font-display text-2xl font-extrabold text-white">PDF</div>
-            <div class="text-[10px] text-white/35 uppercase tracking-widest mt-1">relatório</div>
-          </div>
+      <!-- Destaque 2 -->
+      <article class="card-elegant p-7 reveal" style="background: linear-gradient(180deg, white 0%, #faf0ed 100%); border-color: rgba(200,144,144,0.35);">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+             style="background: rgba(200,144,144,0.18); border: 1px solid rgba(200,144,144,0.4);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c89090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
         </div>
-      </div>
+        <p class="text-[11px] font-bold uppercase tracking-widest mb-1" style="color: #9b4d43;">Destaque 2</p>
+        <h3 class="font-serif font-semibold text-xl text-ink mb-2">As 5 Linguagens do Amor</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          Como cada um se sente <strong class="text-ink">amado de verdade</strong> — e por que às vezes você faz tudo e ele não sente.
+        </p>
+      </article>
 
-      <div class="lg:col-span-5">
-        <form action="https://plataforma-comportamental-production.up.railway.app/register" method="get"
-              class="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur-sm">
-          <label class="block text-[10px] uppercase tracking-[0.25em] text-rose font-bold mb-3">Resgate sua oferta ♥</label>
-          <input type="email" name="email" placeholder="seu@email.com" required
-            class="w-full px-4 py-4 rounded-xl bg-white/10 border border-white/15 text-white placeholder:text-white/35 focus:outline-none focus:border-rose focus:ring-2 focus:ring-rose/25 transition text-base mb-3" />
-          <button type="submit" class="w-full bg-rose hover:bg-rose-deep text-white font-bold px-6 py-4 rounded-xl text-base flex items-center justify-center gap-2 transition">
-            Descobrir minha Linguagem do Amor grátis
-            <span class="heart">♥</span>
-          </button>
-          <p class="text-[11px] text-white/35 mt-4 flex items-center gap-1.5 justify-center">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            Cadastro em 30 segundos · sem cartão de crédito
-          </p>
-        </form>
-      </div>
+      <!-- Destaque 3 -->
+      <article class="card-elegant p-7 reveal">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+             style="background: rgba(197,160,89,0.12); border: 1px solid rgba(197,160,89,0.3);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Destaque 3</p>
+        <h3 class="font-serif font-semibold text-xl text-ink mb-2">Relatórios Instantâneos</h3>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed">
+          Leitura fácil, prática e profunda. Em PDF, prontos para aplicar <strong class="text-ink">hoje mesmo</strong> na sua relação.
+        </p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-ink text-white/40 py-10 border-t border-white/8">
-  <div class="max-w-[1200px] mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-    <div class="flex items-center gap-3">
-      <img src="logo-mark.png" alt="Plataforma Comportamental" class="h-6 w-auto opacity-70" style="filter:invert(1);" />
-      <div class="flex flex-col leading-tight">
-        <span class="font-display text-sm text-white/70 font-medium">Plataforma Comportamental</span>
-        <span class="text-[10px] text-white/35 tracking-wide">por Kênio Nascimento · kenionascimento.com</span>
+<!-- ═══════════════════════════════════════════════════════════════
+     5. PLANOS
+═══════════════════════════════════════════════════════════════ -->
+<section id="planos" class="relative py-20 md:py-28" style="background: linear-gradient(180deg, #faf6f1 0%, #f0e0d0 100%);">
+
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-14 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">Sua Oportunidade</span>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-ink leading-tight max-w-3xl mx-auto">
+        Comece grátis. Aprofunde <span class="italic text-gold-gradient">no seu ritmo</span>.
+      </h2>
+      <p class="text-lg text-ink-soft font-medium mt-5 max-w-2xl mx-auto">
+        Cada teste consome de 1 a 4 créditos. Você escolhe quais aplicar — em você, no seu casal ou na sua família.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+
+      <!-- Pack Individual -->
+      <article class="card-elegant p-7 flex flex-col reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-ink/60 mb-1">Pack Individual</p>
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-3">Sua descoberta pessoal</h3>
+        <div class="mb-5">
+          <span class="font-serif font-semibold text-5xl text-ink">R$ 49</span>
+          <span class="font-serif font-semibold text-2xl text-ink/60">,90</span>
+        </div>
+        <p class="text-sm text-ink-soft font-semibold mb-6">5 créditos · ideal para sua descoberta pessoal</p>
+
+        <ul class="space-y-2.5 mb-7 flex-1">
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            5 testes para você se conhecer
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Acesso a Arquétipos e Linguagens
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Relatórios PDF prontos
+          </li>
+        </ul>
+
+        <a href="/register" class="btn-outline px-5 py-3 rounded-full text-sm font-bold text-center">
+          Começar com este plano
+        </a>
+      </article>
+
+      <!-- Pack Casal (DESTAQUE) -->
+      <article class="card-elegant card-highlight p-7 flex flex-col relative reveal">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest text-cream"
+              style="background: linear-gradient(135deg, #d4b85c, #c5a059);">
+          ✦ O Mais Escolhido
+        </span>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Pack Casal</p>
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-3">Mapeamento dos dois</h3>
+        <div class="mb-5">
+          <span class="font-serif font-semibold text-5xl text-gold-gradient">R$ 89</span>
+          <span class="font-serif font-semibold text-2xl text-ink/60">,90</span>
+        </div>
+        <p class="text-sm text-ink-soft font-semibold mb-6">10 créditos · perfeito para mapear vocês dois</p>
+
+        <ul class="space-y-2.5 mb-7 flex-1">
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            10 testes para os dois
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Linguagens do Amor + Arquétipos
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Comparativo do casal lado a lado
+          </li>
+        </ul>
+
+        <a href="/register" class="btn-gold px-5 py-3 rounded-full text-sm text-center">
+          Escolher Pack Casal
+        </a>
+      </article>
+
+      <!-- Pack Evolução -->
+      <article class="card-elegant p-7 flex flex-col reveal">
+        <p class="text-[11px] font-bold uppercase tracking-widest text-ink/60 mb-1">Pack Evolução</p>
+        <h3 class="font-serif font-semibold text-2xl text-ink mb-3">Mergulho completo</h3>
+        <div class="mb-5">
+          <span class="font-serif font-semibold text-5xl text-ink">R$ 199</span>
+          <span class="font-serif font-semibold text-2xl text-ink/60">,90</span>
+        </div>
+        <p class="text-sm text-ink-soft font-semibold mb-6">25 créditos · todos os perfis do seu universo</p>
+
+        <ul class="space-y-2.5 mb-7 flex-1">
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            25 testes para sua jornada
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Mapeamento de filhos e família
+          </li>
+          <li class="flex items-start gap-2.5 text-[14px] text-ink font-medium">
+            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Bundle Completo (4 testes em 1 link)
+          </li>
+        </ul>
+
+        <a href="/register" class="btn-outline px-5 py-3 rounded-full text-sm font-bold text-center">
+          Escolher Evolução
+        </a>
+      </article>
+    </div>
+
+    <p class="text-center text-sm text-ink-soft font-medium mt-8 reveal">
+      Créditos não expiram · Pagamento seguro via Stripe · NF-e disponível
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     6. FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section id="faq" class="relative py-20 md:py-28">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">Perguntas Frequentes</span>
+      <h2 class="font-serif font-semibold text-3xl md:text-5xl text-ink leading-tight">
+        Suas <span class="italic text-gold-gradient">dúvidas</span>, respondidas.
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+
+      <details class="card-elegant p-6 group reveal">
+        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
+          <h3 class="font-serif font-semibold text-lg md:text-xl text-ink">E se ele não quiser fazer?</h3>
+          <span class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
+                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #a8843a;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </summary>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed mt-4">
+          O segredo está na <strong class="text-ink">curiosidade</strong>. Ao ver o seu relatório — claro, visual e revelador —
+          ele naturalmente sentirá vontade de descobrir o dele. Use seus 4 créditos grátis para dar o primeiro passo. A jornada começa por você.
+        </p>
+      </details>
+
+      <details class="card-elegant p-6 group reveal">
+        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
+          <h3 class="font-serif font-semibold text-lg md:text-xl text-ink">É difícil de entender?</h3>
+          <span class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
+                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #a8843a;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </summary>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed mt-4">
+          De forma alguma. Nossos relatórios são feitos para serem <strong class="text-ink">aplicados hoje mesmo na sua rotina</strong>.
+          Linguagem clara, exemplos práticos do dia a dia, sem jargão técnico. Você lê, entende e já sabe o que mudar.
+        </p>
+      </details>
+
+      <details class="card-elegant p-6 group reveal">
+        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
+          <h3 class="font-serif font-semibold text-lg md:text-xl text-ink">Posso usar para entender minha família, não só meu parceiro?</h3>
+          <span class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
+                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #a8843a;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </summary>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed mt-4">
+          Com certeza. Muitas mulheres usam para mapear <strong class="text-ink">filhos, irmãos, pais e amigas próximas</strong>.
+          Cada teste vira um link único — você envia para quem quiser e recebe o relatório no seu painel.
+        </p>
+      </details>
+
+      <details class="card-elegant p-6 group reveal">
+        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
+          <h3 class="font-serif font-semibold text-lg md:text-xl text-ink">Os créditos têm validade?</h3>
+          <span class="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
+                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #a8843a;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </summary>
+        <p class="text-[15px] text-ink-soft font-medium leading-relaxed mt-4">
+          <strong class="text-ink">Não.</strong> Os créditos não expiram. Você compra uma vez e usa quando se sentir pronta — sem pressão, no seu ritmo.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     7. CTA FINAL
+═══════════════════════════════════════════════════════════════ -->
+<section class="relative py-24 md:py-32 overflow-hidden" style="background: linear-gradient(180deg, #faf6f1 0%, #f0d8d4 100%);">
+
+  <div class="absolute inset-0 pointer-events-none opacity-60"
+       style="background: radial-gradient(ellipse at center, rgba(197,160,89,0.18) 0%, transparent 60%);"></div>
+
+  <div class="relative max-w-4xl mx-auto px-5 md:px-8 text-center reveal">
+    <h2 class="font-serif font-semibold text-4xl md:text-6xl text-ink leading-tight mb-6">
+      Transforme sua conexão
+      <span class="block italic text-gold-gradient">hoje.</span>
+    </h2>
+    <p class="text-lg md:text-xl text-ink-soft font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
+      4 créditos grátis. Sem cartão. Em 30 segundos você está dentro da plataforma — e mais perto do amor que você merece.
+    </p>
+
+    <a href="/register" class="btn-gold inline-flex items-center justify-center gap-3 px-9 py-5 rounded-full text-lg">
+      COMEÇAR MINHA JORNADA AGORA
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<footer class="border-t border-nude/40 py-10 md:py-14" style="background: #f5ede1;">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center font-serif text-lg font-bold text-cream"
+             style="background: linear-gradient(135deg, #d4b85c, #c5a059);">Ψ</div>
+        <div>
+          <div class="font-serif font-semibold text-base text-ink leading-none">Psique</div>
+          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-gold leading-none mt-0.5">Mapa Comportamental</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-ink/75">
+        <a href="#dor"     class="hover:text-gold transition-colors">A Conexão</a>
+        <a href="#metodo"  class="hover:text-gold transition-colors">A Jornada</a>
+        <a href="#planos"  class="hover:text-gold transition-colors">Planos</a>
+        <a href="#faq"     class="hover:text-gold transition-colors">FAQ</a>
+        <a href="/login"   class="hover:text-gold transition-colors">Entrar</a>
       </div>
     </div>
-    <div class="flex items-center gap-4 text-[11px] text-white/30">
-      <a href="/empresas" class="hover:text-white/50 transition">Versão Corporativa →</a>
-      <span>·</span>
-      <span class="uppercase tracking-widest">© 2025</span>
+
+    <div class="mt-8 pt-6 border-t border-nude/40 text-center">
+      <p class="text-[13px] font-medium text-ink-soft">
+        © <span id="year"></span> Psique — Mapa Comportamental. Todos os direitos reservados.
+      </p>
     </div>
   </div>
 </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
