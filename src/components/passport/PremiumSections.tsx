@@ -6,9 +6,13 @@
 
 import { DISC_PREMIUM, type DiscProfileKey } from '@/content/disc'
 
-interface Props { profileKey: DiscProfileKey }
+interface Props {
+  profileKey: DiscProfileKey
+  /** ID do Report (necessário para autorizar download) */
+  reportId?: string
+}
 
-export default function PremiumSections({ profileKey }: Props) {
+export default function PremiumSections({ profileKey, reportId }: Props) {
   const c = DISC_PREMIUM[profileKey]
   if (!c) return null
 
@@ -165,22 +169,37 @@ export default function PremiumSections({ profileKey }: Props) {
       {/* 5) DOWNLOADS */}
       <Section number={5} title="Materiais para Download" accent={c.paletteHex}>
         <div className="grid sm:grid-cols-3 gap-4">
-          {c.downloads.map(d => (
-            <a key={d.slug} href={d.signedUrl ?? '#'}
-               className="block rounded-2xl bg-white p-5 border border-soul-mist/60 hover:-translate-y-0.5 transition-all">
-              <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: c.paletteHex }}>
-                {d.kind} · {d.pages} pp
-              </div>
-              <h4 className="font-serif text-lg font-bold text-soul-ink mb-2">{d.title}</h4>
-              <p className="text-sm text-soul-ink/65 mb-3">{d.pitch}</p>
-              <ul className="text-[12px] text-soul-ink/55 space-y-0.5">
-                {d.toc.slice(0, 4).map((t, i) => <li key={i}>· {t}</li>)}
-                {d.toc.length > 4 && <li className="italic">+ {d.toc.length - 4} tópicos</li>}
-              </ul>
-              <div className="mt-3 text-sm font-bold" style={{ color: c.paletteHex }}>↓ Baixar PDF</div>
-            </a>
-          ))}
+          {c.downloads.map(d => {
+            const href = reportId
+              ? `/api/downloads/${d.slug}?reportId=${encodeURIComponent(reportId)}`
+              : '#'
+            return (
+              <a
+                key={d.slug}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl bg-white p-5 border border-soul-mist/60 hover:-translate-y-0.5 transition-all"
+              >
+                <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: c.paletteHex }}>
+                  {d.kind} · {d.pages} pp
+                </div>
+                <h4 className="font-serif text-lg font-bold text-soul-ink mb-2">{d.title}</h4>
+                <p className="text-sm text-soul-ink/65 mb-3">{d.pitch}</p>
+                <ul className="text-[12px] text-soul-ink/55 space-y-0.5">
+                  {d.toc.slice(0, 4).map((t, i) => <li key={i}>· {t}</li>)}
+                  {d.toc.length > 4 && <li className="italic">+ {d.toc.length - 4} tópicos</li>}
+                </ul>
+                <div className="mt-3 text-sm font-bold" style={{ color: c.paletteHex }}>
+                  {reportId ? '↓ Baixar PDF personalizado' : '🔒 Desbloqueie o Premium'}
+                </div>
+              </a>
+            )
+          })}
         </div>
+        <p className="mt-3 text-[11px] text-soul-ink/45 italic">
+          Cada PDF abre com uma capa personalizada com seu nome — distribuição autorizada apenas para você.
+        </p>
       </Section>
     </article>
   )

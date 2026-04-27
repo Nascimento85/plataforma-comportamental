@@ -82,8 +82,14 @@ export interface DownloadAsset {
   pitch:      string
   pages:      number
   toc:        string[]            // sumário
-  fileName:   string              // arquivo a entregar
-  signedUrl?: string              // preenchido em runtime via Supabase Storage
+  fileName:   string              // arquivo final entregue ao usuário
+  /**
+   * Caminho do PDF base (diagramado no Canva) no Supabase Storage.
+   * Bucket privado: 'downloads'.
+   * Ex.: 'disc/dominant/playbook-comando-vs-situacional.pdf'
+   */
+  storagePath: string
+  signedUrl?: string              // preenchido em runtime
 }
 
 export interface PremiumProfileContent {

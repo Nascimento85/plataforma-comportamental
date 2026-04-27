@@ -332,6 +332,7 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Manual operacional para o Dominante que quer escalar de gestor de tarefas para arquiteto de times.',
       pages:    24,
       fileName: 'mapa-comportamental_D_playbook-lideranca.pdf',
+      storagePath: 'disc/dominant/playbook-comando-vs-situacional.pdf',
       toc: [
         '1. O paradoxo do Executor — por que sua eficiência tem teto',
         '2. Os 4 níveis de delegação — quando cada um se aplica',
@@ -352,6 +353,7 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Sua produtividade do dia inteiro é decidida nos primeiros 90 min. Checklist editável com campos para imprimir e marcar.',
       pages:    4,
       fileName: 'mapa-comportamental_D_checklist-manha.pdf',
+      storagePath: 'disc/dominant/checklist-manha-do-executor.pdf',
       toc: [
         'Bloco 1 (5–25 min): movimento físico + hidratação',
         'Bloco 2 (25–35 min): revisão escrita do dia (3 prioridades)',
@@ -368,6 +370,7 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Scripts prontos para conversas difíceis: feedback negativo, conflito com sócio, pedido de desculpa público, dispensar sem destruir.',
       pages:    32,
       fileName: 'mapa-comportamental_D_apostila-cnv.pdf',
+      storagePath: 'disc/dominant/apostila-cnv-dominantes.pdf',
       toc: [
         '1. Por que CNV é arma estratégica, não fragilidade',
         '2. As 4 etapas (observação, sentimento, necessidade, pedido)',

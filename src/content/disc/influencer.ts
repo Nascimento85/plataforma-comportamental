@@ -226,6 +226,7 @@ export const influencerContent: PremiumProfileContent = {
       slug: 'ebook-carisma-ao-lucro', kind: 'EBOOK', title: 'Do Carisma ao Lucro — como vender sem virar palhaço',
       pitch: 'Um manual para Influentes que querem ser pagos pelo que falam, não apenas ouvidos.',
       pages: 28, fileName: 'mapa-comportamental_I_ebook-carisma-lucro.pdf',
+      storagePath: 'disc/influencer/ebook-carisma-ao-lucro.pdf',
       toc: [
         '1. Por que carisma sem método empobrece',
         '2. As 5 tipologias de cliente que gostam de você',
@@ -242,6 +243,7 @@ export const influencerContent: PremiumProfileContent = {
       title: 'Organização para Criativos — checklist editável',
       pitch: 'Sistema mínimo viável de organização para quem detesta planilha.',
       pages: 6, fileName: 'mapa-comportamental_I_checklist-organizacao.pdf',
+      storagePath: 'disc/influencer/checklist-organizacao-criativos.pdf',
       toc: [
         'Manhã: 3 prioridades em 5 min',
         'Bloco profundo: 90 min, modo avião',
@@ -256,6 +258,7 @@ export const influencerContent: PremiumProfileContent = {
       title: 'Narrativa de Marca para o Influente',
       pitch: 'Como construir uma marca pessoal que não precisa de você o tempo todo.',
       pages: 22, fileName: 'mapa-comportamental_I_apostila-narrativa.pdf',
+      storagePath: 'disc/influencer/apostila-narrativa-de-marca.pdf',
       toc: [
         '1. A diferença entre presença e autoridade',
         '2. Sua história em 3 atos',

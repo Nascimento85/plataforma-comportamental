@@ -248,6 +248,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'O Poder da Liderança Silenciosa',
       pitch: 'Como liderar sem precisar gritar — manual estratégico para o Estável que quer crescer sem virar quem ele não é.',
       pages: 22, fileName: 'mapa-comportamental_S_playbook-lideranca-silenciosa.pdf',
+      storagePath: 'disc/stable/playbook-lideranca-silenciosa.pdf',
       toc: [
         '1. O paradoxo do Estável: forte mas invisível',
         '2. Princípios da Liderança Silenciosa',
@@ -264,6 +265,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'Questionário de Saúde Emocional no Trabalho',
       pitch: 'Check-in editável para preencher toda sexta-feira — você acompanha sua estabilidade real, não a aparente.',
       pages: 4, fileName: 'mapa-comportamental_S_questionario-saude.pdf',
+      storagePath: 'disc/stable/questionario-saude-emocional.pdf',
       toc: [
         'Como me senti essa semana? (escala 0–10)',
         'Quantas vezes disse "sim" sem querer dizer? (contador)',
@@ -278,6 +280,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'Decisão Rápida Sem Perder a Sabedoria',
       pitch: 'Guia para o S que se cobra por demorar — sem virar Dominante atropelador.',
       pages: 26, fileName: 'mapa-comportamental_S_apostila-decisao-rapida.pdf',
+      storagePath: 'disc/stable/apostila-decisao-rapida.pdf',
       toc: [
         '1. Diferença entre PRECIPITAÇÃO e VELOCIDADE inteligente',
         '2. Regra dos 70%: decida com 70% das informações',
