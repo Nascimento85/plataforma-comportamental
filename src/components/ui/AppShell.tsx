@@ -235,7 +235,7 @@ function SidebarContent({
         </div>
 
         <SidebarNavLink href="/dashboard/profile"      label="Meu Perfil"    iconKey="profile"     onClick={onNavClick} />
-        <SidebarNavLink href="/dashboard/credits"      label="Créditos"      iconKey="credits"     onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/credits"      label="Passaporte"    iconKey="credits"     onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/settings"     label="Configurações" iconKey="settings"    onClick={onNavClick} />
 
         {session.isAdmin && (

@@ -2,8 +2,10 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
 import BuyCreditsButton from './BuyCreditsButton'
+import { getPassportState } from '@/lib/passport'
+import PassportWidget from '@/components/passport/PassportWidget'
 
-export const metadata: Metadata = { title: 'Créditos' }
+export const metadata: Metadata = { title: 'Passaporte de Autoconhecimento' }
 
 const CREDIT_PACKS = [
   { pack: 5,  price: 'R$ 49,90',  per: 'R$9,98/crédito', priceId: process.env.STRIPE_PRICE_PACK_5,  highlight: false },
@@ -23,8 +25,8 @@ export default async function CreditsPage({ searchParams }: PageProps) {
   const session = await getSession()
   const companyId = session!.id
 
-  const [creditBalance, transactions] = await Promise.all([
-    prisma.creditBalance.findUnique({ where: { companyId } }),
+  const [passport, transactions] = await Promise.all([
+    getPassportState(companyId),
     prisma.creditTransaction.findMany({
       where: { companyId },
       orderBy: { createdAt: 'desc' },
@@ -32,19 +34,24 @@ export default async function CreditsPage({ searchParams }: PageProps) {
     }),
   ])
 
-  const credits = creditBalance?.balance ?? 0
-  const isLow = credits <= 5
+  const credits = passport.total
+  const isLow   = credits <= 5
 
   return (
     <div className="space-y-6">
 
       {/* ── Header ── */}
       <div>
-        <h1 className="font-serif font-semibold text-3xl text-soul-ink">Créditos</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink">
+          Passaporte de Autoconhecimento
+        </h1>
         <p className="text-sm text-soul-ink/45 mt-1 font-sans">
-          Cada crédito gera um relatório comportamental completo
+          Seu passe de acesso aos testes. Bônus expiram em 7 dias — créditos pagos não.
         </p>
       </div>
+
+      {/* ── Widget do Passaporte ── */}
+      <PassportWidget state={passport} />
 
       {/* ── Stripe feedback banners ── */}
       {justPurchased && (
@@ -71,38 +78,6 @@ export default async function CreditsPage({ searchParams }: PageProps) {
           </div>
         </div>
       )}
-
-      {/* ── Balance hero ── */}
-      <div
-        className="rounded-3xl p-6 flex items-center justify-between gap-6"
-        style={{
-          background: isLow
-            ? 'linear-gradient(135deg, #f5e8e1, #faf0ec)'
-            : 'linear-gradient(135deg, #f5ede1, #faf0e6)',
-          border: `1px solid ${isLow ? 'rgba(196,99,58,0.2)' : 'rgba(196,99,58,0.12)'}`,
-        }}
-      >
-        <div>
-          <div className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1"
-               style={{ color: 'rgba(196,99,58,0.55)' }}>
-            Saldo atual
-          </div>
-          <div className="font-serif font-semibold leading-none mb-1"
-               style={{ fontSize: '56px', color: isLow ? '#b3522e' : '#c4633a' }}>
-            {credits}
-          </div>
-          <div className="text-sm font-sans" style={{ color: 'rgba(28,26,23,0.45)' }}>
-            créditos disponíveis
-          </div>
-          {isLow && (
-            <div className="mt-2 text-xs font-sans flex items-center gap-1.5"
-                 style={{ color: '#c4633a' }}>
-              ⚠ Saldo baixo — recomendamos recarregar em breve
-            </div>
-          )}
-        </div>
-        <div className="text-6xl opacity-60 flex-shrink-0">🪙</div>
-      </div>
 
       {/* ── Credit packs ── */}
       <div>

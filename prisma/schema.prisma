@@ -58,6 +58,10 @@ model Company {
   reports                Report[]
   bundleReports          BundleReport[]
   profileValidationCodes ProfileValidationCode[]
+  // Passaporte de Autoconhecimento
+  bonusGrants       BonusGrant[]
+  reportUnlocks     ReportUnlock[]
+  scheduledOutreach ScheduledOutreach[]
 }
 
 // ============================================================
@@ -201,9 +205,10 @@ model Report {
   pdfUrl       String?
   createdAt    DateTime @default(now())
 
-  assessment Assessment @relation(fields: [assessmentId], references: [id])
-  result     Result     @relation(fields: [resultId], references: [id])
-  company    Company    @relation(fields: [companyId], references: [id])
+  assessment Assessment    @relation(fields: [assessmentId], references: [id])
+  result     Result        @relation(fields: [resultId], references: [id])
+  company    Company       @relation(fields: [companyId], references: [id])
+  unlock     ReportUnlock?
 }
 
 // ============================================================
@@ -212,10 +217,19 @@ model Report {
 model CreditBalance {
   id        String   @id @default(cuid())
   companyId String   @unique
+  // saldo PAGO (Stripe) — sem expiração
   balance   Int      @default(0)
-  updatedAt DateTime @updatedAt
+  // saldo BÔNUS (passaporte/gamificação) — cache de SUM(bonusGrants.remaining)
+  bonusBalance       Int       @default(0)
+  bonusNextExpiresAt DateTime?
+  passportStatus     String    @default("INACTIVE") // ACTIVE | EXPIRED | CONSUMED | INACTIVE
+  updatedAt          DateTime  @updatedAt
 
-  company Company @relation(fields: [companyId], references: [id])
+  company     Company      @relation(fields: [companyId], references: [id])
+  bonusGrants BonusGrant[]
+
+  @@index([bonusNextExpiresAt])
+  @@index([passportStatus])
 }
 
 model CreditPurchase {
@@ -231,14 +245,20 @@ model CreditPurchase {
 }
 
 model CreditTransaction {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   companyId   String
-  type        String   // PURCHASE | DEBIT | BONUS
+  type        String    // PURCHASE | DEBIT | BONUS | EXPIRE | REFUND
+  source      String    @default("PAID") // PAID | BONUS
   amount      Int
-  description String   @default("")
-  createdAt   DateTime @default(now())
+  description String    @default("")
+  expiresAt   DateTime? // preenchido em type=BONUS
+  grantId     String?   // FK p/ BonusGrant (opcional)
+  createdAt   DateTime  @default(now())
 
   company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, type])
+  @@index([expiresAt])
 }
 
 // ============================================================
@@ -257,4 +277,65 @@ model BundleReport {
 
   company  Company  @relation(fields: [companyId], references: [id])
   employee Employee @relation(fields: [employeeId], references: [id])
+}
+
+// ============================================================
+// PASSAPORTE DE AUTOCONHECIMENTO — Bônus por lote (FIFO)
+// Todo crédito não-comprado expira em 7 dias.
+// ============================================================
+model BonusGrant {
+  id              String    @id @default(cuid())
+  companyId       String
+  creditBalanceId String
+  source          String    // WELCOME_PASSPORT | PROFILE_COMPLETE | REFERRAL | GIFT | PROMO
+  amount          Int
+  remaining       Int
+  grantedAt       DateTime  @default(now())
+  expiresAt       DateTime
+  expiredAt       DateTime?
+  description     String    @default("")
+
+  creditBalance CreditBalance @relation(fields: [creditBalanceId], references: [id], onDelete: Cascade)
+  company       Company       @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, expiresAt])
+  @@index([companyId, remaining, expiresAt])
+}
+
+// ============================================================
+// Premium gate — desbloqueio individual de relatório
+// ============================================================
+model ReportUnlock {
+  id              String   @id @default(cuid())
+  reportId        String   @unique
+  companyId       String
+  stripeSessionId String?  @unique
+  amountBrl       Int
+  unlockedAt      DateTime @default(now())
+
+  report  Report  @relation(fields: [reportId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId])
+}
+
+// ============================================================
+// Outreach (ManyChat) — agendamento e envio
+// ============================================================
+model ScheduledOutreach {
+  id           String    @id @default(cuid())
+  companyId    String
+  type         String    // ZERO_BALANCE_DAY7 | FIRST_TEST_DAY7 | PASSPORT_EXPIRED
+  scheduledFor DateTime
+  sentAt       DateTime?
+  status       String    @default("PENDING") // PENDING | SENT | FAILED | CANCELED
+  attempts     Int       @default(0)
+  payload      Json
+  errorMsg     String?
+  createdAt    DateTime  @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([status, scheduledFor])
+  @@index([companyId, type])
 }

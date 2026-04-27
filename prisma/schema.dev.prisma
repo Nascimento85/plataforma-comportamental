@@ -58,6 +58,10 @@ model Company {
   creditTransactions     CreditTransaction[]
   reports                Report[]
   profileValidationCodes ProfileValidationCode[]
+  // Passaporte de Autoconhecimento
+  bonusGrants       BonusGrant[]
+  reportUnlocks     ReportUnlock[]
+  scheduledOutreach ScheduledOutreach[]
 }
 
 // ============================================================
@@ -186,9 +190,10 @@ model Report {
   pdfUrl       String?
   createdAt    DateTime @default(now())
 
-  assessment Assessment @relation(fields: [assessmentId], references: [id])
-  result     Result     @relation(fields: [resultId], references: [id])
-  company    Company    @relation(fields: [companyId], references: [id])
+  assessment Assessment    @relation(fields: [assessmentId], references: [id])
+  result     Result        @relation(fields: [resultId], references: [id])
+  company    Company       @relation(fields: [companyId], references: [id])
+  unlock     ReportUnlock?
 }
 
 // ============================================================
@@ -198,9 +203,16 @@ model CreditBalance {
   id        String   @id @default(cuid())
   companyId String   @unique
   balance   Int      @default(0)
-  updatedAt DateTime @updatedAt
+  bonusBalance       Int       @default(0)
+  bonusNextExpiresAt DateTime?
+  passportStatus     String    @default("INACTIVE")
+  updatedAt          DateTime  @updatedAt
 
-  company Company @relation(fields: [companyId], references: [id])
+  company     Company      @relation(fields: [companyId], references: [id])
+  bonusGrants BonusGrant[]
+
+  @@index([bonusNextExpiresAt])
+  @@index([passportStatus])
 }
 
 model CreditPurchase {
@@ -216,12 +228,72 @@ model CreditPurchase {
 }
 
 model CreditTransaction {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   companyId   String
-  type        String   // PURCHASE | DEBIT | BONUS
+  type        String    // PURCHASE | DEBIT | BONUS | EXPIRE | REFUND
+  source      String    @default("PAID") // PAID | BONUS
   amount      Int
-  description String   @default("")
-  createdAt   DateTime @default(now())
+  description String    @default("")
+  expiresAt   DateTime?
+  grantId     String?
+  createdAt   DateTime  @default(now())
 
   company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, type])
+  @@index([expiresAt])
+}
+
+// ============================================================
+// PASSAPORTE DE AUTOCONHECIMENTO
+// ============================================================
+model BonusGrant {
+  id              String    @id @default(cuid())
+  companyId       String
+  creditBalanceId String
+  source          String
+  amount          Int
+  remaining       Int
+  grantedAt       DateTime  @default(now())
+  expiresAt       DateTime
+  expiredAt       DateTime?
+  description     String    @default("")
+
+  creditBalance CreditBalance @relation(fields: [creditBalanceId], references: [id], onDelete: Cascade)
+  company       Company       @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, expiresAt])
+  @@index([companyId, remaining, expiresAt])
+}
+
+model ReportUnlock {
+  id              String   @id @default(cuid())
+  reportId        String   @unique
+  companyId       String
+  stripeSessionId String?  @unique
+  amountBrl       Int
+  unlockedAt      DateTime @default(now())
+
+  report  Report  @relation(fields: [reportId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId])
+}
+
+model ScheduledOutreach {
+  id           String    @id @default(cuid())
+  companyId    String
+  type         String
+  scheduledFor DateTime
+  sentAt       DateTime?
+  status       String    @default("PENDING")
+  attempts     Int       @default(0)
+  payload      String    // JSON serializado (SQLite não tem Json nativo)
+  errorMsg     String?
+  createdAt    DateTime  @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([status, scheduledFor])
+  @@index([companyId, type])
 }

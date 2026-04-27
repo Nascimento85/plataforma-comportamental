@@ -31,6 +31,16 @@ async function main() {
   console.log('🌱 Iniciando seed...\n')
 
   // ── Limpa dados anteriores ─────────────────────────────
+  // Ordem importa por causa de FKs:
+  //  1) ScheduledOutreach -> Company
+  //  2) ReportUnlock      -> Report + Company
+  //  3) BonusGrant        -> CreditBalance + Company
+  //  4) CreditTransaction -> Company
+  //  5) CreditPurchase    -> Company
+  //  6) CreditBalance     -> Company
+  await prisma.scheduledOutreach.deleteMany().catch(() => {})
+  await prisma.reportUnlock.deleteMany().catch(() => {})
+  await prisma.bonusGrant.deleteMany().catch(() => {})
   await prisma.creditTransaction.deleteMany()
   await prisma.creditPurchase.deleteMany()
   await prisma.creditBalance.deleteMany()
@@ -57,19 +67,13 @@ async function main() {
   })
   console.log(`  🏢 Empresa criada: ${company1.name} (${company1.email})`)
 
-  // Saldo inicial: 10 créditos
-  await prisma.creditBalance.create({
-    data: { companyId: company1.id, balance: 10 },
+  // 🎟️ Passaporte de Autoconhecimento: 10 créditos / 7 dias (importado em runtime
+  // para compatibilidade com schema dev/prod — usa transação tx)
+  const { grantWelcomePassport } = await import('../src/lib/passport')
+  await prisma.$transaction(async (tx) => {
+    await grantWelcomePassport(tx, company1.id)
   })
-  await prisma.creditTransaction.create({
-    data: {
-      companyId: company1.id,
-      type: 'PURCHASE',
-      amount: 10,
-      description: 'Créditos iniciais de boas-vindas',
-    },
-  })
-  console.log(`  💳 Saldo: 10 créditos`)
+  console.log(`  🎟️ Passaporte ativado: 10 créditos (válidos por 7 dias)`)
 
   // ── Funcionários ───────────────────────────────────────
   const employees = await Promise.all([
@@ -136,8 +140,11 @@ async function main() {
       passwordHash: await bcrypt.hash('beta123', 10),
     },
   })
-  await prisma.creditBalance.create({ data: { companyId: company2.id, balance: 3 } })
-  console.log(`  🏢 Empresa 2: ${company2.name} (${company2.email})`)
+  // Empresa 2 também ganha Passaporte
+  await prisma.$transaction(async (tx) => {
+    await grantWelcomePassport(tx, company2.id)
+  })
+  console.log(`  🏢 Empresa 2: ${company2.name} (${company2.email}) — Passaporte ativado`)
 
   // ── Resumo final ───────────────────────────────────────
   console.log('\n' + '═'.repeat(52))

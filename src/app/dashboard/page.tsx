@@ -5,7 +5,8 @@ import type { Metadata } from 'next'
 import { StatCard } from '@/components/ui/design-system'
 import DiscoveryMapCard from './_components/DiscoveryMapCard'
 import RecentActivityCard from './_components/RecentActivityCard'
-import CreditsWidget from './_components/CreditsWidget'
+import PassportWidget from '@/components/passport/PassportWidget'
+import { getPassportState } from '@/lib/passport'
 import ArchetypeHero from './_components/ArchetypeHero'
 import OnboardingHero from './_components/OnboardingHero'
 import WelcomeModal from './_components/WelcomeModal'
@@ -20,7 +21,7 @@ export const metadata: Metadata = { title: 'Dashboard' }
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function getDashboardData(companyId: string) {
-  const [company, recentAssessments, totalCompleted, totalPending] =
+  const [company, recentAssessments, totalCompleted, totalPending, passport] =
     await Promise.all([
       prisma.company.findUnique({
         where: { id: companyId },
@@ -41,13 +42,16 @@ async function getDashboardData(companyId: string) {
       prisma.assessment.count({
         where: { companyId, status: { in: ['PENDING', 'SENT'] } },
       }),
+
+      getPassportState(companyId),
     ])
 
   const profileCompletion = company ? calculateProfileCompletion(company) : 0
 
   return {
     company,
-    credits:                    company?.creditBalance?.balance ?? 0,
+    credits:                    passport.total,
+    passport,
     profileCompletion,
     isProfileRewarded:          company?.isProfileCompletedRewarded ?? false,
     recentAssessments,
@@ -68,6 +72,7 @@ export default async function DashboardPage() {
 
   const {
     credits,
+    passport,
     profileCompletion,
     isProfileRewarded,
     recentAssessments,
@@ -201,7 +206,7 @@ export default async function DashboardPage() {
 
         {/* Lateral direita */}
         <div className="flex flex-col gap-5">
-          <CreditsWidget credits={credits} />
+          <PassportWidget state={passport} />
 
           {/* Insight card */}
           <div

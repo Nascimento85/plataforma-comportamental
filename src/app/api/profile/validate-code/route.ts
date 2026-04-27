@@ -14,8 +14,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
+import { grantProfileCompleteBonus, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
 
-const BONUS_CREDITS = 6
+const BONUS_CREDITS = PROFILE_COMPLETE_AMOUNT // 6 — bônus por completar perfil (expira em 7 dias)
 
 const schema = z.object({
   code: z
@@ -75,30 +76,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Transação atômica: marca código + aumenta saldo + registra transação + marca flag
-    await prisma.$transaction([
-      prisma.profileValidationCode.update({
+    // Transação atômica: marca código + concede bônus (expira em 7 dias) + marca flag
+    await prisma.$transaction(async (tx) => {
+      await tx.profileValidationCode.update({
         where: { id: validCode.id },
         data: { used: true },
-      }),
-      prisma.creditBalance.upsert({
-        where: { companyId: company.id },
-        create: { companyId: company.id, balance: BONUS_CREDITS },
-        update: { balance: { increment: BONUS_CREDITS } },
-      }),
-      prisma.creditTransaction.create({
-        data: {
-          companyId: company.id,
-          type: 'BONUS',
-          amount: BONUS_CREDITS,
-          description: 'Bônus por completar perfil (validação por e-mail)',
-        },
-      }),
-      prisma.company.update({
+      })
+
+      // Passaporte: bônus de 6 créditos com expiração em 7 dias
+      await grantProfileCompleteBonus(tx, company.id)
+
+      await tx.company.update({
         where: { id: company.id },
         data: { isProfileCompletedRewarded: true },
-      }),
-    ])
+      })
+    })
 
     return NextResponse.json({
       ok: true,

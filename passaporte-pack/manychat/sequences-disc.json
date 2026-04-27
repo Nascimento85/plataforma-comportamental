@@ -1,0 +1,126 @@
+{
+  "$comment": "Sequências de mensagens ManyChat por perfil DISC. Importe como Flow / use os textos como External Request payload.",
+  "global": {
+    "channel_priority": ["whatsapp", "instagram_dm"],
+    "filters": {
+      "do_not_send_if_tag": "tag_comprador"
+    },
+    "ctas": {
+      "primary_button":  "Quero meu PDI",
+      "secondary_button": "Ver meu relatório"
+    }
+  },
+
+  "sequences": {
+    "perfil_D": {
+      "trigger_tag": "perfil_D",
+      "messages": [
+        {
+          "wait": "0m",
+          "text": "Resultado liberado! Você é um Dominante. Isso explica sua busca por resultados, mas cuidado: sua velocidade pode estar atropelando oportunidades. Liberei um resumo no seu e-mail, mas se você quer o Plano de Guerra para liderar e dobrar sua eficiência, o Relatório Premium é o seu próximo passo. Quer o link para dominar seu mercado?",
+          "buttons": [
+            { "label": "Quero meu Plano de Guerra", "url_field": "result_url" },
+            { "label": "Ver resumo no e-mail",      "action":    "close" }
+          ]
+        },
+        {
+          "wait": "24h",
+          "skip_if_tag": "tag_comprador",
+          "text": "Executores não perdem tempo. O seu 'ponto cego' está custando caro agora mesmo. O Relatório Premium + PDI está disponível. Vai deixar o controle da sua carreira na mão da sorte ou da ciência?",
+          "buttons": [
+            { "label": "Tomar o controle agora", "url_field": "result_url" }
+          ]
+        }
+      ]
+    },
+
+    "perfil_I": {
+      "trigger_tag": "perfil_I",
+      "messages": [
+        {
+          "wait": "0m",
+          "text": "Uau! Seu perfil é Influente. 🌟 Você tem um brilho natural, mas já sentiu que às vezes começa mil coisas e não termina nenhuma? O seu Passaporte Premium mostra como transformar seu carisma em autoridade real e foco absoluto. Vamos levar seu magnetismo para o próximo nível?",
+          "buttons": [
+            { "label": "Quero meu Premium",       "url_field": "result_url" },
+            { "label": "Mais tarde",              "action":    "close" }
+          ]
+        },
+        {
+          "wait": "24h",
+          "skip_if_tag": "tag_comprador",
+          "text": "Todo mundo ama um Influente, mas poucos Influentes são realmente produtivos. Preparei um Playbook exclusivo no Relatório Premium para você organizar suas ideias e ser reconhecido como uma fera na sua área. Olha o que te espera lá: {{result_url}}",
+          "buttons": [
+            { "label": "Ver o Playbook", "url_field": "result_url" }
+          ]
+        }
+      ]
+    },
+
+    "perfil_S": {
+      "trigger_tag": "perfil_S",
+      "messages": [
+        {
+          "wait": "0m",
+          "text": "Teste concluído! Você é um Estável. O mundo precisa da sua calma e lealdade. Mas eu sei que às vezes é difícil dizer 'não' e você acaba sobrecarregado, certo? No Relatório Premium, eu te ensino técnicas de assertividade para você se proteger e crescer com segurança. Posso te mostrar como funciona?",
+          "buttons": [
+            { "label": "Sim, quero ver", "url_field": "result_url" },
+            { "label": "Depois",         "action":    "close" }
+          ]
+        },
+        {
+          "wait": "24h",
+          "skip_if_tag": "tag_comprador",
+          "text": "Mudar gera medo, mas estagnar dói mais. O Relatório Premium foi feito para que você evolua no seu ritmo, sem pressões desnecessárias, mas com passos firmes. Garanta seu guia de segurança e crescimento aqui: {{result_url}}",
+          "buttons": [
+            { "label": "Quero crescer com segurança", "url_field": "result_url" }
+          ]
+        }
+      ]
+    },
+
+    "perfil_C": {
+      "trigger_tag": "perfil_C",
+      "messages": [
+        {
+          "wait": "0m",
+          "text": "Análise finalizada com precisão. Seu perfil é Analista. Sua atenção aos detalhes é cirúrgica, mas você já sentiu a 'paralisia por análise'? O Relatório Premium entrega os dados que faltavam para você tomar decisões rápidas e seguras, eliminando o medo de errar. Acesse a documentação completa do seu perfil aqui.",
+          "buttons": [
+            { "label": "Ver documentação completa", "url_field": "result_url" },
+            { "label": "Mais tarde",                "action":    "close" }
+          ]
+        },
+        {
+          "wait": "24h",
+          "skip_if_tag": "tag_comprador",
+          "text": "Fatos são melhores que opiniões. O Relatório Premium contém o Plano de Desenvolvimento Individual baseado em ciência comportamental para otimizar sua performance técnica. Verifique os módulos inclusos e os manuais de download: {{result_url}}",
+          "buttons": [
+            { "label": "Verificar módulos",  "url_field": "result_url" }
+          ]
+        }
+      ]
+    },
+
+    "passaporte_expirado": {
+      "trigger_event": "PASSPORT_EXPIRED",
+      "messages": [
+        {
+          "wait": "0m",
+          "text": "Seu Passaporte de Autoconhecimento expirou hoje. 🕒 Mas notei que você ainda não mapeou sua equipe ou família. Como sei que você busca evolução, liberei um lote especial: 50% de desconto no Pacote de 20 Créditos. É a chance de levar essa clareza para quem está ao seu redor. Quer o cupom?",
+          "buttons": [
+            { "label": "Quero o cupom",  "url_field": "coupon_url" },
+            { "label": "Outra hora",     "action":    "close" }
+          ]
+        }
+      ]
+    }
+  },
+
+  "setup_checklist": [
+    "1. Crie a Tag 'tag_comprador' e adicione automaticamente quando o webhook do Stripe confirma uma compra.",
+    "2. Crie 4 Tags por DISC (perfil_D, perfil_I, perfil_S, perfil_C). O backend adiciona via lib/manychat-tags.ts.",
+    "3. Crie 5 Custom Fields: external_id, test_type, profile_key, result_url, coupon_url.",
+    "4. Crie 5 Flows com os textos acima e atrele cada flow à respectiva Tag (Trigger: 'When tag is added').",
+    "5. Em cada flow, configure delay de 24h e filtro 'skip if tag = tag_comprador' antes da 2ª mensagem.",
+    "6. Para o flow PASSPORT_EXPIRED, dispare via External Request a partir do cron /api/cron/process-outreach."
+  ]
+}

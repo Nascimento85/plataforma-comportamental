@@ -1,0 +1,190 @@
+// ============================================================
+// PASSAPORTE DE AUTOCONHECIMENTO — Adições ao schema.prisma
+// ------------------------------------------------------------
+// REGRA: TODOS os créditos NÃO-COMPRADOS (bônus de cadastro,
+// gamificação, indicação, brinde, presente) expiram em 7 dias.
+// Créditos PAGOS (Stripe) NUNCA expiram.
+// ------------------------------------------------------------
+// Cada concessão de bônus vira um "lote" (BonusGrant) com seu
+// próprio expiresAt. O consumo é FIFO (lote mais antigo primeiro).
+// O bonusBalance em CreditBalance é apenas um cache denormalizado.
+// ============================================================
+
+// ----- 1) Substitua o model CreditBalance pelo abaixo -----
+model CreditBalance {
+  id        String   @id @default(cuid())
+  companyId String   @unique
+  // Saldo PAGO (compras Stripe) — sem expiração
+  balance   Int      @default(0)
+  // Saldo BÔNUS (cache: SUM(bonusGrants.remaining WHERE expiresAt > now))
+  bonusBalance Int   @default(0)
+  // Próxima expiração — usada para banner / badge / cron
+  bonusNextExpiresAt DateTime?
+  // ACTIVE | EXPIRED | CONSUMED | INACTIVE
+  passportStatus String   @default("INACTIVE")
+  updatedAt      DateTime @updatedAt
+
+  company     Company       @relation(fields: [companyId], references: [id])
+  bonusGrants BonusGrant[]
+
+  @@index([bonusNextExpiresAt])
+  @@index([passportStatus])
+}
+
+// ----- 2) NOVO model BonusGrant — cada bônus é um lote ------
+//
+// Sources possíveis:
+//   WELCOME_PASSPORT  – cadastro: 10 créditos
+//   PROFILE_COMPLETE  – completar perfil: +6 créditos (já existe na app)
+//   REFERRAL          – indicação
+//   GIFT              – presente manual
+//   PROMO             – campanha
+//
+model BonusGrant {
+  id              String   @id @default(cuid())
+  companyId       String
+  creditBalanceId String
+  source          String   // WELCOME_PASSPORT | PROFILE_COMPLETE | REFERRAL | GIFT | PROMO
+  amount          Int      // total concedido neste lote
+  remaining       Int      // saldo que ainda não foi consumido
+  grantedAt       DateTime @default(now())
+  expiresAt       DateTime
+  expiredAt       DateTime?     // marcado quando o cron expira
+  description     String   @default("")
+
+  creditBalance CreditBalance @relation(fields: [creditBalanceId], references: [id], onDelete: Cascade)
+  company       Company       @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, expiresAt])
+  @@index([companyId, remaining, expiresAt])
+}
+
+// ----- 3) Substitua o model CreditTransaction pelo abaixo -----
+model CreditTransaction {
+  id          String    @id @default(cuid())
+  companyId   String
+  type        String    // PURCHASE | DEBIT | BONUS | EXPIRE | REFUND
+  source      String    @default("PAID")  // PAID | BONUS
+  amount      Int
+  description String    @default("")
+  expiresAt   DateTime? // só preenchido quando type=BONUS, copia de BonusGrant.expiresAt
+  grantId     String?   // FK p/ BonusGrant (quando aplicável)
+  createdAt   DateTime  @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId, type])
+  @@index([expiresAt])
+}
+
+// ----- 4) Premium gate — desbloqueio individual por relatório -----
+model ReportUnlock {
+  id              String   @id @default(cuid())
+  reportId        String   @unique
+  companyId       String
+  stripeSessionId String?  @unique
+  amountBrl       Int      // centavos
+  unlockedAt      DateTime @default(now())
+
+  report  Report  @relation(fields: [reportId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId])
+}
+
+// ----- 5) Outreach (camada 5) ---------------------------------
+model ScheduledOutreach {
+  id           String    @id @default(cuid())
+  companyId    String
+  type         String    // ZERO_BALANCE_DAY7 | FIRST_TEST_DAY7 | PASSPORT_EXPIRED
+  scheduledFor DateTime
+  sentAt       DateTime?
+  status       String    @default("PENDING")  // PENDING | SENT | FAILED | CANCELED
+  attempts     Int       @default(0)
+  payload      Json
+  errorMsg     String?
+  createdAt    DateTime  @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+
+  @@index([status, scheduledFor])
+  @@index([companyId, type])
+}
+
+// ----- 6) Em Company { ... } adicione as relações --------------
+//   bonusGrants       BonusGrant[]
+//   reportUnlocks     ReportUnlock[]
+//   scheduledOutreach ScheduledOutreach[]
+
+// ----- 7) Em Report { ... } adicione --------------------------
+//   unlock ReportUnlock?
+
+// ============================================================
+// MIGRATION SQL (PostgreSQL)
+// ============================================================
+/*
+-- 1) CreditBalance
+ALTER TABLE "CreditBalance"
+  ADD COLUMN "bonusBalance"       INTEGER NOT NULL DEFAULT 0,
+  ADD COLUMN "bonusNextExpiresAt" TIMESTAMP(3),
+  ADD COLUMN "passportStatus"     TEXT NOT NULL DEFAULT 'INACTIVE';
+
+CREATE INDEX "CreditBalance_bonusNextExpiresAt_idx" ON "CreditBalance"("bonusNextExpiresAt");
+CREATE INDEX "CreditBalance_passportStatus_idx"     ON "CreditBalance"("passportStatus");
+
+-- 2) BonusGrant
+CREATE TABLE "BonusGrant" (
+  "id"              TEXT PRIMARY KEY,
+  "companyId"       TEXT NOT NULL,
+  "creditBalanceId" TEXT NOT NULL,
+  "source"          TEXT NOT NULL,
+  "amount"          INTEGER NOT NULL,
+  "remaining"       INTEGER NOT NULL,
+  "grantedAt"       TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "expiresAt"       TIMESTAMP(3) NOT NULL,
+  "expiredAt"       TIMESTAMP(3),
+  "description"     TEXT NOT NULL DEFAULT '',
+  CONSTRAINT "BonusGrant_companyId_fkey"       FOREIGN KEY ("companyId")       REFERENCES "Company"("id")       ON DELETE CASCADE,
+  CONSTRAINT "BonusGrant_creditBalanceId_fkey" FOREIGN KEY ("creditBalanceId") REFERENCES "CreditBalance"("id") ON DELETE CASCADE
+);
+CREATE INDEX "BonusGrant_companyId_expiresAt_idx" ON "BonusGrant"("companyId", "expiresAt");
+CREATE INDEX "BonusGrant_companyId_remaining_expiresAt_idx" ON "BonusGrant"("companyId", "remaining", "expiresAt");
+
+-- 3) CreditTransaction
+ALTER TABLE "CreditTransaction"
+  ADD COLUMN "source"    TEXT NOT NULL DEFAULT 'PAID',
+  ADD COLUMN "expiresAt" TIMESTAMP(3),
+  ADD COLUMN "grantId"   TEXT;
+CREATE INDEX "CreditTransaction_companyId_type_idx" ON "CreditTransaction"("companyId","type");
+CREATE INDEX "CreditTransaction_expiresAt_idx"      ON "CreditTransaction"("expiresAt");
+
+-- 4) ReportUnlock
+CREATE TABLE "ReportUnlock" (
+  "id"              TEXT PRIMARY KEY,
+  "reportId"        TEXT NOT NULL UNIQUE,
+  "companyId"       TEXT NOT NULL,
+  "stripeSessionId" TEXT UNIQUE,
+  "amountBrl"       INTEGER NOT NULL,
+  "unlockedAt"      TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "ReportUnlock_reportId_fkey"  FOREIGN KEY ("reportId")  REFERENCES "Report"("id")  ON DELETE CASCADE,
+  CONSTRAINT "ReportUnlock_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id")
+);
+CREATE INDEX "ReportUnlock_companyId_idx" ON "ReportUnlock"("companyId");
+
+-- 5) ScheduledOutreach
+CREATE TABLE "ScheduledOutreach" (
+  "id"           TEXT PRIMARY KEY,
+  "companyId"    TEXT NOT NULL,
+  "type"         TEXT NOT NULL,
+  "scheduledFor" TIMESTAMP(3) NOT NULL,
+  "sentAt"       TIMESTAMP(3),
+  "status"       TEXT NOT NULL DEFAULT 'PENDING',
+  "attempts"     INTEGER NOT NULL DEFAULT 0,
+  "payload"      JSONB NOT NULL,
+  "errorMsg"     TEXT,
+  "createdAt"    TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "ScheduledOutreach_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE CASCADE
+);
+CREATE INDEX "ScheduledOutreach_status_scheduledFor_idx" ON "ScheduledOutreach"("status","scheduledFor");
+CREATE INDEX "ScheduledOutreach_companyId_type_idx"      ON "ScheduledOutreach"("companyId","type");
+*/

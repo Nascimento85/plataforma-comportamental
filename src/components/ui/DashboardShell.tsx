@@ -43,7 +43,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
       <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
         <NavLink href="/dashboard" label="Dashboard" icon="📊" onClick={onNavClick} />
         <NavLink href="/dashboard/assessments" label="Avaliações" icon="📋" onClick={onNavClick} />
-        <NavLink href="/dashboard/credits" label="Créditos" icon="💳" onClick={onNavClick} />
+        <NavLink href="/dashboard/credits" label="Passaporte" icon="🎟️" onClick={onNavClick} />
         {session.isAdmin && (
           <>
             <div className="pt-4 pb-1 px-4">

@@ -1,0 +1,227 @@
+// ============================================================
+// schema.dev.prisma — Ambiente de desenvolvimento local
+// Usa SQLite em vez do PostgreSQL (Supabase)
+// ============================================================
+// Como usar:
+//   cp prisma/schema.dev.prisma prisma/schema.prisma
+//   npx prisma db push
+//   npm run seed
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// ============================================================
+// EMPRESA (cliente do SaaS)
+// ============================================================
+model Company {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  type         String    @default("PJ") // PF | PJ
+  phone        String?
+  whatsapp     String?
+  instagram    String?
+  linkedin     String?
+  birthDate    DateTime?
+
+  // Endereço
+  addressStreet String?
+  addressCity   String?
+  addressState  String?
+  addressZip    String?
+
+  // Dados profissionais
+  jobTitle    String?
+  companyName String?
+
+  // Gamificação de onboarding
+  isOnboardingCredited       Boolean @default(false)
+  isProfileCompletedRewarded Boolean @default(false)
+
+  active    Boolean  @default(true)
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees              Employee[]
+  assessments            Assessment[]
+  creditBalance          CreditBalance?
+  creditPurchases        CreditPurchase[]
+  creditTransactions     CreditTransaction[]
+  reports                Report[]
+  profileValidationCodes ProfileValidationCode[]
+}
+
+// ============================================================
+// CÓDIGO DE VALIDAÇÃO DE PERFIL (Gamificação +6 créditos)
+// ============================================================
+model ProfileValidationCode {
+  id        String   @id @default(cuid())
+  companyId String
+  code      String   // 6 dígitos
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([code])
+}
+
+// ============================================================
+// FUNCIONÁRIO / AVALIADO
+// ============================================================
+model Employee {
+  id        String   @id @default(cuid())
+  companyId String
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+
+  company     Company      @relation(fields: [companyId], references: [id])
+  assessments Assessment[]
+
+  @@unique([companyId, email])
+}
+
+// ============================================================
+// AVALIAÇÃO (instância de um teste)
+// ============================================================
+model Assessment {
+  id          String           @id @default(cuid())
+  companyId   String
+  employeeId  String
+  testType    String           // DISC | MBTI | ENNEAGRAM | TEMPERAMENT
+  token       String           @unique
+  status      String           @default("PENDING") // PENDING | SENT | COMPLETED | EXPIRED
+  expiresAt   DateTime
+  completedAt DateTime?
+  createdAt   DateTime         @default(now())
+
+  company     Company          @relation(fields: [companyId], references: [id])
+  employee    Employee         @relation(fields: [employeeId], references: [id])
+  discAnswers DiscAnswer[]
+  mbtiAnswers MbtiAnswer[]
+  enneagramAnswers EnneagramAnswer[]
+  temperamentAnswers TemperamentAnswer[]
+  result      Result?
+  report      Report?
+}
+
+// ============================================================
+// RESPOSTAS por tipo de teste
+// ============================================================
+model DiscAnswer {
+  id           String @id @default(cuid())
+  assessmentId String
+  groupId      Int
+  profileD     Int
+  profileI     Int
+  profileS     Int
+  profileC     Int
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+}
+
+model MbtiAnswer {
+  id           String @id @default(cuid())
+  assessmentId String
+  questionId   Int
+  scoreA       Int
+  scoreB       Int
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+}
+
+model EnneagramAnswer {
+  id           String @id @default(cuid())
+  assessmentId String
+  questionId   Int
+  value        Int    // 1–5
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+}
+
+model TemperamentAnswer {
+  id           String @id @default(cuid())
+  assessmentId String
+  questionId   Int
+  selected     String // A | C | I | O
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+}
+
+// ============================================================
+// RESULTADO CALCULADO
+// ============================================================
+model Result {
+  id             String   @id @default(cuid())
+  assessmentId   String   @unique
+  testType       String
+  resultData     String   // JSON serializado (SQLite não tem Json nativo)
+  primaryProfile String
+  createdAt      DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+  report     Report?
+}
+
+// ============================================================
+// RELATÓRIO PDF
+// ============================================================
+model Report {
+  id           String   @id @default(cuid())
+  assessmentId String   @unique
+  resultId     String   @unique
+  companyId    String
+  pdfUrl       String?
+  createdAt    DateTime @default(now())
+
+  assessment Assessment @relation(fields: [assessmentId], references: [id])
+  result     Result     @relation(fields: [resultId], references: [id])
+  company    Company    @relation(fields: [companyId], references: [id])
+}
+
+// ============================================================
+// SISTEMA DE CRÉDITOS
+// ============================================================
+model CreditBalance {
+  id        String   @id @default(cuid())
+  companyId String   @unique
+  balance   Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model CreditPurchase {
+  id              String   @id @default(cuid())
+  companyId       String
+  stripeSessionId String   @unique
+  amount          Int
+  pricePaid       Int
+  status          String   @default("PENDING") // PENDING | PAID | REFUNDED
+  createdAt       DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model CreditTransaction {
+  id          String   @id @default(cuid())
+  companyId   String
+  type        String   // PURCHASE | DEBIT | BONUS
+  amount      Int
+  description String   @default("")
+  createdAt   DateTime @default(now())
+
+  company Company @relation(fields: [companyId], references: [id])
+}
