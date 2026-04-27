@@ -30,8 +30,9 @@ export const TEST_PRICE: Record<string, number> = {
 
 // ─── Constantes do Passaporte ──────────────────────────────
 export const PASSPORT_TTL_DAYS         = 7
-export const WELCOME_BONUS_AMOUNT      = 10
-export const PROFILE_COMPLETE_AMOUNT   = 6   // gamificação existente
+export const WELCOME_BONUS_AMOUNT      = 4   // 4 créditos no cadastro
+export const PROFILE_COMPLETE_AMOUNT   = 6   // +6 ao completar perfil
+// Total potencial: 10 créditos, todos válidos por 7 dias.
 
 // ─── Sources possíveis ────────────────────────────────────
 export type BonusSource =

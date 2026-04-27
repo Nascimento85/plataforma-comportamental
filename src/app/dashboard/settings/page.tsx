@@ -108,8 +108,8 @@ export default async function SettingsPage() {
             description="Receba e-mail assim que uma devolutiva estiver pronta para download."
           />
           <PreferenceRow
-            title="Saldo de créditos baixo"
-            description="Seja avisado quando seu saldo cair abaixo de 3 créditos."
+            title="Passaporte com saldo baixo"
+            description="Seja avisado quando seu Passaporte cair abaixo de 3 créditos ou estiver perto de expirar."
           />
           <PreferenceRow
             title="Relatório mensal"

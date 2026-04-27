@@ -68,9 +68,9 @@ export default function LoginPage({ searchParams }: PageProps) {
           >
             <span className="text-2xl flex-shrink-0">🎉</span>
             <div>
-              <p className="text-sm font-semibold" style={{ color: '#96bf9a' }}>Conta criada com sucesso!</p>
+              <p className="text-sm font-semibold" style={{ color: '#96bf9a' }}>🎟️ Passaporte de Autoconhecimento ativado!</p>
               <p className="text-xs mt-0.5 leading-relaxed" style={{ color: 'rgba(150,191,154,0.8)' }}>
-                Você já tem <strong>4 créditos de bônus</strong> para explorar a plataforma.
+                Você ganhou <strong>4 créditos válidos por 7 dias</strong>. Complete seu perfil para ganhar +6 créditos extras.
               </p>
             </div>
           </div>

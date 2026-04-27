@@ -82,19 +82,19 @@ export default function WelcomeModal({
             </svg>
           </button>
 
-          <div className="text-5xl mb-2">🎉</div>
+          <div className="text-5xl mb-2">🎟️</div>
           <h2 className="font-serif font-bold text-2xl text-soul-ink leading-tight">
             Bem-vindo(a), {firstName}!
           </h2>
           <p className="text-[14px] font-semibold text-soul-ink/80 mt-1">
-            Sua jornada de autoconhecimento começa aqui
+            Seu Passaporte de Autoconhecimento foi ativado
           </p>
         </div>
 
         {/* Body */}
         <div className="px-7 py-7">
 
-          {/* Créditos ganhos */}
+          {/* Passaporte ativado */}
           <div
             className="rounded-2xl p-5 mb-5 text-center"
             style={{
@@ -103,28 +103,28 @@ export default function WelcomeModal({
             }}
           >
             <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-soul-ink/65 mb-1">
-              Você ganhou
+              🎟️ Passaporte Ativo
             </p>
             <p className="font-serif font-bold leading-none"
                style={{ fontSize: '54px', color: '#a8522e' }}>
               +{initialCredits}
             </p>
             <p className="text-[14px] font-bold text-soul-ink/80 mt-1">
-              créditos de boas-vindas
+              créditos válidos por 7 dias
             </p>
-            <p className="text-[12px] font-medium text-soul-ink/60 mt-1.5">
-              Já estão no seu saldo, prontos para uso
+            <p className="text-[12px] font-medium mt-1.5" style={{ color: '#a8522e' }}>
+              ⏳ Use antes que expirem — depois disso, zeram automaticamente
             </p>
           </div>
 
           {/* Próximo passo */}
           <div className="text-center mb-5">
             <p className="text-[15px] font-semibold text-soul-ink leading-snug">
-              <span className="font-serif italic">E ainda dá pra ganhar mais:</span>
+              <span className="font-serif italic">Quer dobrar seu Passaporte?</span>
             </p>
             <p className="text-[14px] text-soul-ink/70 font-medium leading-relaxed mt-1.5">
-              Complete seu perfil e ganhe <strong className="text-soul-terracota">+{bonusCredits} créditos extras</strong>.
-              Total de <strong>{total} créditos</strong> grátis para começar a explorar a plataforma.
+              Complete seu perfil e ganhe <strong className="text-soul-terracota">+{bonusCredits} créditos extras</strong> (também válidos por 7 dias).
+              Total de <strong>{total} créditos</strong> para iniciar sua jornada.
             </p>
           </div>
 

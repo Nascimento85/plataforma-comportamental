@@ -163,12 +163,17 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           value={credits}
-          label="Créditos disponíveis"
-          icon="🪙"
-          accent={credits <= 3 ? 'rose' : 'terracota'}
-          delta={credits <= 3 ? '⚠ Recarregar em breve' : undefined}
-          deltaUp={credits > 3 ? true : false}
-          tooltip="Cada teste possui um valor diferente em créditos (1 a 4 créditos). Veja a página de Créditos para detalhes."
+          label="Passaporte"
+          icon="🎟️"
+          accent={passport.status === 'EXPIRED' ? 'rose' : credits <= 3 ? 'rose' : 'terracota'}
+          delta={
+            passport.status === 'EXPIRED' ? '⚠ Expirado — recarregar' :
+            passport.status === 'ACTIVE' && passport.hoursRemaining !== null && passport.hoursRemaining < 48
+              ? `⏳ Expira em ${passport.hoursRemaining < 24 ? passport.hoursRemaining + 'h' : Math.ceil(passport.hoursRemaining/24) + ' dias'}`
+              : credits <= 3 ? '⚠ Recarregar em breve' : undefined
+          }
+          deltaUp={credits > 3 && passport.status !== 'EXPIRED'}
+          tooltip="Bônus expiram em 7 dias. Créditos pagos não expiram. Cada teste custa de 1 a 5 créditos."
         />
         <StatCard
           value={totalCompleted}

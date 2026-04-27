@@ -590,10 +590,10 @@ function ProgressBanner({
           </p>
         </div>
 
-        {/* Saldo atual */}
+        {/* Passaporte */}
         <div className="text-right sm:text-left sm:border-l sm:border-soul-mist/60 sm:pl-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-soul-ink/55">
-            Saldo atual
+            🎟️ Passaporte
           </p>
           <p className="font-serif text-3xl sm:text-4xl font-bold leading-none mt-1"
              style={{ color: '#a8522e' }}>
