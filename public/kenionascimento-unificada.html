@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inteligência Humana Aplicada | Psicanálise + Ciência Comportamental</title>
+  <meta name="description" content="Decifre os padrões invisíveis que moldam seus resultados e suas relações. Plataforma de inteligência humana com DISC, MBTI, Eneagrama, Arquétipos e Linguagens do Amor. 5 metodologias globais validadas em mais de 70 países." />
+  <meta name="keywords" content="psicanálise, DISC, MBTI, eneagrama, arquétipos, linguagens do amor, avaliação comportamental, mapa comportamental, liderança, autoconhecimento" />
+
+  <meta property="og:title" content="Inteligência Humana Aplicada" />
+  <meta property="og:description" content="Psicanálise + 5 metodologias globais em uma só plataforma. Para líderes, casais e quem quer se conhecer de verdade." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kenionascimento.com" />
+  <link rel="canonical" href="https://kenionascimento.com" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            royal: {
+              50:  '#EFF6FF',
+              100: '#DBEAFE',
+              200: '#BFDBFE',
+              500: '#3B82F6',
+              600: '#2563EB',
+              700: '#1D4ED8',
+              800: '#1E40AF',
+              900: '#1E3A8A',
+              950: '#172554',
+            },
+            ink:   '#0B1220',
+            paper: '#FFFFFF',
+            mist:  '#F8FAFC',
+            line:  '#E2E8F0',
+            warm:  '#B45309',
+          },
+          fontFamily: {
+            sans:    ['Inter', 'ui-sans-serif', 'system-ui'],
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -6px rgba(30,64,175,0.10)',
+            lift: '0 2px 4px rgba(15,23,42,0.05), 0 18px 40px -8px rgba(30,64,175,0.18)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { background:#fff; color:#0B1220; font-family:'Inter',sans-serif; }
+    .grain {
+      background-image: radial-gradient(rgba(30,64,175,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gradient-royal {
+      background: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 60%, #172554 100%);
+    }
+    .text-gradient-royal {
+      background: linear-gradient(135deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ring-royal { box-shadow: 0 0 0 1px rgba(30,64,175,0.10), 0 24px 60px -20px rgba(30,64,175,0.25); }
+    .divider-dot::before { content:'·'; margin: 0 .5rem; color:#94A3B8; }
+    .underline-royal {
+      background-image: linear-gradient(transparent 62%, rgba(37,99,235,0.18) 0);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ────────────────────────────────  HEADER  ──────────────────────────────── -->
+  <header class="sticky top-0 z-50 bg-paper/80 backdrop-blur border-b border-line">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span class="w-9 h-9 rounded-lg gradient-royal flex items-center justify-center shadow-soft">
+          <span class="text-white font-display text-lg leading-none">Ψ</span>
+        </span>
+        <span class="font-semibold tracking-tight text-ink">Inteligência Humana</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-8 text-sm text-slate-600">
+        <li><a href="#caminhos"   class="hover:text-royal-800 transition">Caminhos</a></li>
+        <li><a href="#ferramentas" class="hover:text-royal-800 transition">Ferramentas</a></li>
+        <li><a href="#relatorio"  class="hover:text-royal-800 transition">Relatório</a></li>
+        <li><a href="#creditos"   class="hover:text-royal-800 transition">Créditos</a></li>
+        <li><a href="#autoridade" class="hover:text-royal-800 transition">Fontes</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href="https://mapacomportamental.com/login"
+           class="hidden sm:inline-flex text-sm text-slate-700 hover:text-royal-800 px-3 py-2 rounded-lg transition">
+          Entrar
+        </a>
+        <a href="https://mapacomportamental.com/register"
+           class="inline-flex items-center gap-2 bg-royal-800 hover:bg-royal-900 text-white text-sm font-semibold px-4 py-2.5 rounded-lg shadow-soft transition">
+          Começar grátis
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ────────────────────────────────  HERO  ──────────────────────────────── -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 grain opacity-60 pointer-events-none"></div>
+    <div class="absolute -top-40 -right-32 w-[36rem] h-[36rem] rounded-full bg-royal-100/60 blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-40 -left-32 w-[32rem] h-[32rem] rounded-full bg-royal-50 blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 lg:pt-28 lg:pb-32">
+      <div class="max-w-3xl">
+
+        <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-royal-800 bg-royal-50 border border-royal-100 px-3 py-1.5 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-royal-700"></span>
+          Psicanálise + Ciência Comportamental
+        </span>
+
+        <h1 class="mt-7 font-display text-[2.6rem] sm:text-5xl lg:text-[4.2rem] leading-[1.05] tracking-tight text-ink">
+          Decifre os <em class="italic font-medium text-gradient-royal">padrões invisíveis</em>
+          que moldam seus resultados e suas relações.
+        </h1>
+
+        <p class="mt-7 text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl">
+          Uma plataforma completa de inteligência humana, refinada por especialistas e
+          baseada nas <span class="font-semibold text-ink">5 metodologias mais respeitadas do mundo</span>.
+          Validada em mais de 70 países, adaptada à sua liderança, ao seu relacionamento, à sua psique.
+        </p>
+
+        <div class="mt-10 flex flex-wrap items-center gap-4">
+          <a href="https://mapacomportamental.com/register"
+             class="inline-flex items-center gap-2 bg-royal-800 hover:bg-royal-900 text-white font-semibold px-6 py-4 rounded-xl shadow-lift transition">
+            Começar agora
+            <span class="text-xs font-medium opacity-80 ml-1 px-2 py-1 rounded-md bg-white/10">+4 créditos cortesia</span>
+          </a>
+          <a href="#ferramentas"
+             class="inline-flex items-center gap-2 text-royal-800 hover:text-royal-900 font-semibold px-2 py-3 transition">
+            Conhecer as 5 metodologias
+            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-slate-500">
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-royal-700" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 5.96L18.5 7.5l-4.75 4.13L15.27 18 10 14.77 4.73 18l1.52-6.37L1.5 7.5l6.11-.54L10 1z"/></svg> Validada em 70+ países</span>
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-royal-700" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0a10 10 0 100 20 10 10 0 000-20zm4.7 7.7l-5.4 5.4a1 1 0 01-1.4 0L5.3 10.5a1 1 0 011.4-1.4L8.6 11l4.7-4.7a1 1 0 011.4 1.4z"/></svg> Sem cartão pra começar</span>
+          <span class="inline-flex items-center gap-2"><svg class="w-4 h-4 text-royal-700" viewBox="0 0 20 20" fill="currentColor"><path d="M3 3h14a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1zm2 4v8h10V7H5z"/></svg> Relatório PDF profissional</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  TWO PATHS  ──────────────────────────── -->
+  <section id="caminhos" class="bg-mist border-y border-line">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <div class="max-w-2xl">
+        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-royal-800">Escolha sua jornada</p>
+        <h2 class="mt-3 font-display text-3xl lg:text-5xl tracking-tight text-ink leading-tight">
+          Duas trilhas, <span class="underline-royal">um só método</span>.
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Você pode entrar pela porta da liderança ou pela porta de dentro.
+          As duas levam ao mesmo lugar: a inteligência sobre quem você é e sobre quem está à sua volta.
+        </p>
+      </div>
+
+      <div class="mt-14 grid lg:grid-cols-2 gap-6">
+
+        <!-- BLOCO A — PROFISSIONAL -->
+        <article class="group relative bg-white rounded-2xl border border-line p-8 lg:p-10 shadow-soft hover:shadow-lift transition">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.16em] uppercase text-royal-800 bg-royal-50 border border-royal-100 px-3 py-1 rounded-full">
+              Para líderes & RH
+            </span>
+            <span class="text-xs text-slate-400">01 / Profissional</span>
+          </div>
+
+          <h3 class="mt-7 font-display text-2xl lg:text-3xl text-ink leading-tight">
+            Contrate com precisão. <br/>
+            <span class="text-royal-800">Lidere com estratégia.</span>
+          </h3>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            Avaliações <strong>DISC</strong>, <strong>MBTI</strong> e <strong>Eneagrama</strong>
+            aplicadas em processos seletivos, formação de times e desenvolvimento de liderança.
+            Cada relatório é um diagnóstico, não uma estatística.
+          </p>
+
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-royal-700 shrink-0"></span> Mapeamento DISC para perfis de comunicação e decisão</li>
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-royal-700 shrink-0"></span> MBTI aplicado a fit cultural e composição de times</li>
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-royal-700 shrink-0"></span> Eneagrama como bússola de desenvolvimento individual</li>
+          </ul>
+
+          <a href="https://mapacomportamental.com/empresas.html"
+             class="mt-8 inline-flex items-center gap-2 text-royal-800 hover:text-royal-900 font-semibold transition">
+            Explorar trilha profissional
+            <svg class="w-4 h-4 transition group-hover:translate-x-1" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <!-- BLOCO B — PESSOAL -->
+        <article class="group relative bg-white rounded-2xl border border-line p-8 lg:p-10 shadow-soft hover:shadow-lift transition">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.16em] uppercase text-warm bg-amber-50 border border-amber-100 px-3 py-1 rounded-full">
+              Para você & sua família
+            </span>
+            <span class="text-xs text-slate-400">02 / Pessoal</span>
+          </div>
+
+          <h3 class="mt-7 font-display text-2xl lg:text-3xl text-ink leading-tight">
+            Entenda como você ama. <br/>
+            <span class="text-warm">Descubra quem você é.</span>
+          </h3>
+
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            As <strong>Linguagens do Amor</strong> revelam o código do seu afeto.
+            Os <strong>Arquétipos Femininos</strong> mostram a mulher que mora dentro de você.
+            Casais e pessoas em jornada de autoconhecimento encontram aqui um espelho preciso.
+          </p>
+
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-warm shrink-0"></span> 5 Linguagens do Amor mapeadas em par ou individualmente</li>
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-warm shrink-0"></span> 13 Arquétipos Femininos com leitura cruzada</li>
+            <li class="flex items-start gap-3"><span class="mt-1 w-1.5 h-1.5 rounded-full bg-warm shrink-0"></span> Devolutiva guiada por leitura psicanalítica</li>
+          </ul>
+
+          <a href="https://mapacomportamental.com/amor.html"
+             class="mt-8 inline-flex items-center gap-2 text-warm hover:text-amber-800 font-semibold transition">
+            Explorar trilha pessoal
+            <svg class="w-4 h-4 transition group-hover:translate-x-1" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  TOOLS SHOWCASE  ──────────────────────────── -->
+  <section id="ferramentas" class="bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <div class="max-w-3xl">
+        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-royal-800">O ecossistema</p>
+        <h2 class="mt-3 font-display text-3xl lg:text-5xl tracking-tight text-ink leading-tight">
+          Cinco metodologias. <br/>
+          <span class="text-gradient-royal">Um mapa da sua psique.</span>
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Cada ferramenta sozinha já é poderosa.
+          Combinadas, formam o diagnóstico mais completo que você já viu sobre si.
+        </p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- DISC -->
+        <article class="group relative bg-white rounded-xl border border-line p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl text-royal-900 tracking-tight">DISC</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400">01</span>
+          </div>
+          <h3 class="mt-3 font-semibold text-ink">Performance e comunicação</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Como você decide, lidera e se relaciona sob pressão. O modelo mais usado no mundo corporativo,
+            agora com leitura refinada por psicanálise.
+          </p>
+        </article>
+
+        <!-- MBTI -->
+        <article class="group relative bg-white rounded-xl border border-line p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl text-royal-900 tracking-tight">MBTI</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400">02</span>
+          </div>
+          <h3 class="mt-3 font-semibold text-ink">Preferências cognitivas</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Os 16 tipos que organizam o modo como você pensa, sente e age. Útil para fit de time, escolha de
+            carreira e leitura de conflitos.
+          </p>
+        </article>
+
+        <!-- ENEAGRAMA -->
+        <article class="group relative bg-white rounded-xl border border-line p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl text-royal-900 tracking-tight">Eneagrama</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400">03</span>
+          </div>
+          <h3 class="mt-3 font-semibold text-ink">Motivações profundas</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            As 9 forças inconscientes que movem você, e os caminhos concretos para amadurecer cada uma delas
+            ao longo da vida.
+          </p>
+        </article>
+
+        <!-- ARQUÉTIPOS -->
+        <article class="group relative bg-white rounded-xl border border-line p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl text-royal-900 tracking-tight">Arquétipos</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400">04</span>
+          </div>
+          <h3 class="mt-3 font-semibold text-ink">Padrões universais</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            As figuras simbólicas que moldam suas escolhas, sua liderança e seus relacionamentos,
+            de Jung à sua próxima reunião.
+          </p>
+        </article>
+
+        <!-- LINGUAGENS DO AMOR -->
+        <article class="group relative bg-white rounded-xl border border-line p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <div class="flex items-center justify-between">
+            <span class="font-display text-2xl text-royal-900 tracking-tight">Linguagens do Amor</span>
+            <span class="text-[11px] font-bold tracking-widest uppercase text-slate-400">05</span>
+          </div>
+          <h3 class="mt-3 font-semibold text-ink">O código do afeto</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+            Como você dá e recebe amor. Por que tantos casais falam línguas diferentes sem perceber,
+            e como reaprender a se ouvir.
+          </p>
+        </article>
+
+        <!-- "+ vem aí" / placeholder de evolução -->
+        <article class="relative rounded-xl border border-dashed border-royal-200 bg-royal-50/40 p-7 flex flex-col justify-between">
+          <div>
+            <span class="font-display text-2xl text-royal-800 tracking-tight">+ Em evolução</span>
+            <p class="mt-3 text-sm text-royal-900/80 leading-relaxed">
+              Inteligência Emocional, Âncoras de Carreira e Temperamentos chegando aos pacotes em breve.
+              Quem assina hoje, evolui junto.
+            </p>
+          </div>
+          <span class="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-royal-800">
+            <span class="w-1.5 h-1.5 rounded-full bg-royal-700 animate-pulse"></span>
+            Roadmap aberto
+          </span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  REPORT  ──────────────────────────── -->
+  <section id="relatorio" class="relative bg-royal-950 text-white overflow-hidden">
+    <div class="absolute inset-0 grain opacity-20 pointer-events-none"></div>
+    <div class="absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full bg-royal-700/30 blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28 grid lg:grid-cols-2 gap-14 items-center">
+
+      <div>
+        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-royal-200">A entrega</p>
+        <h2 class="mt-3 font-display text-3xl lg:text-5xl tracking-tight leading-tight">
+          Um relatório feito pra ser <em class="italic font-medium">lido</em>.
+          <br/>E, principalmente, <span class="underline decoration-royal-500/60 decoration-4 underline-offset-4">aplicado</span>.
+        </h2>
+
+        <p class="mt-5 text-royal-100/80 text-lg leading-relaxed">
+          Cada teste gera um PDF profissional com gráficos de distribuição, pontos fortes,
+          desafios e plano de ação. Não é dado solto. É interpretação refinada
+          por especialistas em psicanálise e ciência comportamental.
+        </p>
+
+        <ul class="mt-8 space-y-3 text-royal-50">
+          <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-royal-300 shrink-0"></span> <span><strong class="text-white">Gráficos de distribuição:</strong> visual claro de onde sua energia se concentra</span></li>
+          <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-royal-300 shrink-0"></span> <span><strong class="text-white">Pontos fortes e desafios:</strong> sem maquiagem, sem cliché</span></li>
+          <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-royal-300 shrink-0"></span> <span><strong class="text-white">Plano de desenvolvimento:</strong> o que fazer com isso a partir de amanhã</span></li>
+          <li class="flex items-start gap-3"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-royal-300 shrink-0"></span> <span><strong class="text-white">Linguagem clara:</strong> sem jargão acadêmico, sem reduções de coach</span></li>
+        </ul>
+
+        <a href="https://mapacomportamental.com/register"
+           class="mt-10 inline-flex items-center gap-2 bg-white text-royal-900 hover:bg-royal-50 font-semibold px-6 py-4 rounded-xl shadow-lift transition">
+          Receber meu primeiro relatório
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- MOCKUP visual de relatório -->
+      <div class="relative">
+        <div class="absolute -inset-6 bg-royal-700/20 rounded-3xl blur-2xl"></div>
+        <div class="relative bg-white text-ink rounded-2xl shadow-2xl p-7 lg:p-9 ring-1 ring-white/10">
+          <div class="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase text-slate-400">
+            <span>Relatório · DISC + MBTI</span>
+            <span>v 1.0</span>
+          </div>
+          <h4 class="mt-4 font-display text-2xl text-ink leading-tight">
+            Mapa Comportamental de <span class="text-royal-800">Ana M.</span>
+          </h4>
+          <p class="text-sm text-slate-500">Gerado em 26/04/2026 · 18 páginas</p>
+
+          <!-- gráfico fake -->
+          <div class="mt-6 space-y-2.5">
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Dominância</span><span>72%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-royal-800 rounded-full" style="width:72%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Influência</span><span>56%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-royal-700 rounded-full" style="width:56%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Estabilidade</span><span>34%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-royal-600 rounded-full" style="width:34%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Conformidade</span><span>61%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-royal-500 rounded-full" style="width:61%"></div></div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            <div class="rounded-lg border border-line p-4">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-royal-800">Tipo MBTI</p>
+              <p class="mt-1 font-display text-2xl text-ink">ENTJ</p>
+              <p class="text-xs text-slate-500">A Comandante</p>
+            </div>
+            <div class="rounded-lg border border-line p-4">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-royal-800">Eixo Eneagrama</p>
+              <p class="mt-1 font-display text-2xl text-ink">8w7</p>
+              <p class="text-xs text-slate-500">Tríade Visceral</p>
+            </div>
+          </div>
+
+          <div class="mt-5 rounded-lg bg-royal-50 border border-royal-100 p-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-royal-800 mb-1">Próximo passo sugerido</p>
+            <p class="text-sm text-slate-700 leading-relaxed">Reduzir o reflexo de controle em reuniões individuais, escutando 30s antes de propor solução. Métrica principal: feedback dos pares no próximo ciclo.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  CREDITS  ──────────────────────────── -->
+  <section id="creditos" class="bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <div class="max-w-3xl">
+        <p class="text-xs font-semibold tracking-[0.18em] uppercase text-royal-800">Sistema de créditos</p>
+        <h2 class="mt-3 font-display text-3xl lg:text-5xl tracking-tight text-ink leading-tight">
+          Você só paga pelos relatórios <br/>
+          <span class="text-gradient-royal">que precisar gerar.</span>
+        </h2>
+        <p class="mt-4 text-slate-600 text-lg">
+          Sem assinatura. Sem mensalidade.
+          Compre créditos em pacotes de 5 a 50 e use quando quiser, para mapear sua equipe,
+          sua família ou apenas você.
+        </p>
+      </div>
+
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- 5 -->
+        <div class="rounded-2xl border border-line bg-white p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-slate-400">Essencial</p>
+          <p class="mt-3 font-display text-4xl text-ink">5</p>
+          <p class="text-sm text-slate-500">créditos</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Pra começar a se conhecer. Cobre 1 a 2 relatórios profundos.
+          </p>
+        </div>
+
+        <!-- 10 -->
+        <div class="rounded-2xl border border-line bg-white p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-slate-400">Pessoal</p>
+          <p class="mt-3 font-display text-4xl text-ink">10</p>
+          <p class="text-sm text-slate-500">créditos</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Mapeamento completo: você + parceiro(a), com leitura cruzada.
+          </p>
+        </div>
+
+        <!-- 25 — destaque -->
+        <div class="relative rounded-2xl border-2 border-royal-700 bg-royal-50/50 p-7 ring-royal">
+          <span class="absolute -top-3 left-7 inline-flex bg-royal-800 text-white text-[10px] font-bold tracking-[0.18em] uppercase px-2.5 py-1 rounded-md shadow-soft">
+            Mais escolhido
+          </span>
+          <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-royal-800">Família & Time</p>
+          <p class="mt-3 font-display text-4xl text-ink">25</p>
+          <p class="text-sm text-slate-500">créditos</p>
+          <p class="mt-4 text-sm text-slate-700 leading-relaxed">
+            Família inteira mapeada ou um time de até 6 pessoas. Bônus de IA cruzada incluso.
+          </p>
+        </div>
+
+        <!-- 50 -->
+        <div class="rounded-2xl border border-line bg-white p-7 hover:border-royal-200 hover:shadow-soft transition">
+          <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-slate-400">Empresarial</p>
+          <p class="mt-3 font-display text-4xl text-ink">50</p>
+          <p class="text-sm text-slate-500">créditos</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Mapeamento de departamento ou processo seletivo robusto com devolutiva premium.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl bg-royal-50 border border-royal-100 px-6 py-5">
+        <p class="text-sm text-slate-700">
+          <span class="font-semibold text-royal-900">Cada relatório custa entre 1 e 4 créditos</span>,
+          conforme a profundidade da análise.
+          Você ganha <strong>4 créditos cortesia</strong> só de criar a conta.
+        </p>
+        <a href="https://mapacomportamental.com/register"
+           class="inline-flex items-center gap-2 bg-royal-800 hover:bg-royal-900 text-white text-sm font-semibold px-5 py-3 rounded-lg shadow-soft transition">
+          Criar conta e ganhar 4 créditos
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  SOURCES & VALIDATIONS  ──────────────────────────── -->
+  <section id="autoridade" class="bg-mist border-y border-line">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+
+      <!-- Cabeçalho da seção -->
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-royal-800 bg-white border border-royal-100 px-3 py-1.5 rounded-full shadow-soft">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 5.96L18.5 7.5l-4.75 4.13L15.27 18 10 14.77 4.73 18l1.52-6.37L1.5 7.5l6.11-.54L10 1z"/></svg>
+          Metodologia Global Refinada
+        </span>
+
+        <h2 class="mt-5 font-display text-3xl lg:text-5xl tracking-tight text-ink leading-tight">
+          Fontes que sustentam <br/>
+          <span class="text-gradient-royal">a leitura.</span>
+        </h2>
+
+        <p class="mt-5 text-slate-700 leading-relaxed text-lg">
+          Cinco metodologias com origem rastreável, validadas por décadas de pesquisa
+          e aplicadas em mais de 70 países. Cada teste aqui carrega o nome,
+          o ano e a tradição científica de quem o criou.
+        </p>
+      </div>
+
+      <!-- Stats agregados -->
+      <div class="mt-10 grid grid-cols-3 gap-3 max-w-2xl">
+        <div class="rounded-xl border border-line bg-white p-5 text-center">
+          <p class="font-display text-3xl text-royal-900">5</p>
+          <p class="text-[11px] uppercase tracking-widest text-slate-500 mt-1">Metodologias</p>
+        </div>
+        <div class="rounded-xl border border-line bg-white p-5 text-center">
+          <p class="font-display text-3xl text-royal-900">70+</p>
+          <p class="text-[11px] uppercase tracking-widest text-slate-500 mt-1">Países</p>
+        </div>
+        <div class="rounded-xl border border-line bg-white p-5 text-center">
+          <p class="font-display text-3xl text-royal-900">100<span class="text-base">a</span></p>
+          <p class="text-[11px] uppercase tracking-widest text-slate-500 mt-1">De pesquisa</p>
+        </div>
+      </div>
+
+      <!-- Cards de fontes -->
+      <div class="mt-14 grid lg:grid-cols-2 gap-5">
+
+        <!-- DISC -->
+        <article class="rounded-2xl border border-line bg-white p-7 lg:p-8 shadow-soft">
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-display text-2xl text-royal-900 tracking-tight">DISC</h3>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-royal-800">1928</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-ink">William Moulton Marston</p>
+          <p class="text-xs text-slate-500">Psicólogo de Harvard, autor de "Emotions of Normal People"</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Modelo de quatro dimensões comportamentais aplicado em mais de 80% das empresas
+            da Fortune 500 desde os anos 1950. Validado em estudos de seleção, comunicação
+            e desenvolvimento de liderança ao longo de quase um século.
+          </p>
+        </article>
+
+        <!-- MBTI -->
+        <article class="rounded-2xl border border-line bg-white p-7 lg:p-8 shadow-soft">
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-display text-2xl text-royal-900 tracking-tight">MBTI</h3>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-royal-800">1944</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-ink">Katharine Cook Briggs e Isabel Briggs Myers</p>
+          <p class="text-xs text-slate-500">A partir da tipologia de Carl Gustav Jung (1921)</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Indicador de tipos psicológicos mais aplicado do mundo, com mais de 50 milhões
+            de respondentes em mais de 100 países. Utilizado por universidades, exércitos,
+            consultorias de RH e clínicas de aconselhamento de carreira.
+          </p>
+        </article>
+
+        <!-- ENEAGRAMA -->
+        <article class="rounded-2xl border border-line bg-white p-7 lg:p-8 shadow-soft">
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-display text-2xl text-royal-900 tracking-tight">Eneagrama</h3>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-royal-800">Anos 1960-70</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-ink">Oscar Ichazo e Claudio Naranjo</p>
+          <p class="text-xs text-slate-500">Refinado por Helen Palmer, Don Riso e Russ Hudson</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Sistema de nove tipos de personalidade focado em motivações inconscientes
+            e padrões de defesa. Aplicado em formação clínica, programas de desenvolvimento
+            de liderança e práticas espirituais em mais de 30 países.
+          </p>
+        </article>
+
+        <!-- ARQUÉTIPOS -->
+        <article class="rounded-2xl border border-line bg-white p-7 lg:p-8 shadow-soft">
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-display text-2xl text-royal-900 tracking-tight">Arquétipos</h3>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-royal-800">1919</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-ink">Carl Gustav Jung</p>
+          <p class="text-xs text-slate-500">Fundador da Psicologia Analítica</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Teoria das figuras simbólicas universais que organizam o inconsciente coletivo.
+            Expandida por Jean Shinoda Bolen e Carol Pearson para leituras de identidade
+            feminina e perfis de liderança contemporâneos.
+          </p>
+        </article>
+
+        <!-- LINGUAGENS DO AMOR (full width on desktop) -->
+        <article class="lg:col-span-2 rounded-2xl border border-line bg-white p-7 lg:p-8 shadow-soft">
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-display text-2xl text-royal-900 tracking-tight">Linguagens do Amor</h3>
+            <span class="text-xs font-bold tracking-[0.18em] uppercase text-royal-800">1992</span>
+          </div>
+          <p class="mt-2 text-sm font-semibold text-ink">Dr. Gary Chapman</p>
+          <p class="text-xs text-slate-500">Conselheiro de casais e pesquisador relacional</p>
+          <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+            Modelo das cinco formas primárias de expressão e recepção do afeto.
+            Best-seller traduzido em 49 idiomas, com mais de 20 milhões de cópias vendidas
+            globalmente. Citado em literatura acadêmica de psicologia relacional e usado
+            em programas de terapia de casais nos cinco continentes.
+          </p>
+        </article>
+      </div>
+
+      <!-- Closing trust statement -->
+      <div class="mt-12 rounded-2xl bg-white border border-royal-100 shadow-soft p-7 lg:p-9 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <p class="text-slate-700 leading-relaxed lg:max-w-2xl">
+          A plataforma combina essas cinco fontes em uma <strong class="text-ink">única leitura cruzada</strong>,
+          alinhada à tradição psicanalítica e à pesquisa comportamental contemporânea.
+          Cada relatório respeita o rigor da metodologia original e adiciona uma camada
+          de interpretação clínica.
+        </p>
+        <a href="https://mapacomportamental.com/register"
+           class="inline-flex items-center gap-2 bg-royal-800 hover:bg-royal-900 text-white font-semibold px-6 py-3.5 rounded-xl shadow-soft transition shrink-0">
+          Começar minha leitura
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  FINAL CTA  ──────────────────────────── -->
+  <section class="bg-white">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-28 text-center">
+      <p class="text-xs font-semibold tracking-[0.18em] uppercase text-royal-800">Pronto pra começar?</p>
+      <h2 class="mt-4 font-display text-3xl lg:text-5xl tracking-tight text-ink leading-tight">
+        Quatro créditos cortesia.
+        <br/>
+        <span class="text-gradient-royal">Zero compromisso.</span>
+      </h2>
+      <p class="mt-5 text-slate-600 text-lg max-w-2xl mx-auto">
+        Cria a conta, faz seu primeiro teste e leve seu primeiro relatório completo,
+        sem cartão, sem trial, sem letras miúdas.
+      </p>
+      <a href="https://mapacomportamental.com/register"
+         class="mt-9 inline-flex items-center gap-2 bg-royal-800 hover:bg-royal-900 text-white font-semibold px-7 py-4 rounded-xl shadow-lift transition">
+        Quero meus 4 créditos cortesia
+        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none"><path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────  FOOTER  ──────────────────────────── -->
+  <footer class="gradient-royal text-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14 grid md:grid-cols-3 gap-10">
+
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center">
+            <span class="text-white font-display text-lg leading-none">Ψ</span>
+          </span>
+          <span class="font-semibold tracking-tight">Inteligência Humana</span>
+        </div>
+        <p class="mt-4 text-sm text-royal-100/80 leading-relaxed">
+          Inteligência humana aplicada. <br/>
+          Psicanálise + ciência comportamental para líderes, casais e pessoas em processo.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-bold tracking-widest uppercase text-royal-200">Plataforma</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="https://mapacomportamental.com/empresas.html" class="hover:text-white text-royal-100/90 transition">Para Empresas</a></li>
+          <li><a href="https://mapacomportamental.com/amor.html"      class="hover:text-white text-royal-100/90 transition">Para Casais</a></li>
+          <li><a href="https://mapacomportamental.com/login"          class="hover:text-white text-royal-100/90 transition">Entrar</a></li>
+          <li><a href="https://mapacomportamental.com/register"       class="hover:text-white text-royal-100/90 transition">Criar conta</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-bold tracking-widest uppercase text-royal-200">Contato</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="mailto:contato@mapacomportamental.com" class="hover:text-white text-royal-100/90 transition">contato@mapacomportamental.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-royal-200">
+        <span>© 2026 Inteligência Humana. Todos os direitos reservados.</span>
+        <span class="flex items-center gap-3">
+          <a href="#" class="hover:text-white transition">Termos</a>
+          <span class="opacity-40">·</span>
+          <a href="#" class="hover:text-white transition">Privacidade</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
