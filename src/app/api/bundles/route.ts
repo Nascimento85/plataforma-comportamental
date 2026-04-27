@@ -4,10 +4,12 @@ import { v4 as uuidv4 } from 'uuid'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
+import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
+import { onPassportConsumed } from '@/lib/passport-triggers'
 
-// Bundle fixo: 4 testes comportamentais em sequência
+// Bundle Combo (DISC + MBTI + Eneagrama + Temperamento) custa 10 créditos
 const BUNDLE_TESTS = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT'] as const
-const BUNDLE_CREDIT_COST = 4 // 1 crédito por teste
+const BUNDLE_CREDIT_COST = TEST_PRICE.COMBO_BUNDLE  // 10 créditos
 
 const schema = z.object({
   employeeName:  z.string().min(2),
@@ -34,12 +36,12 @@ export async function POST(request: NextRequest) {
     })
     const isAdmin = company?.isAdmin ?? false
 
-    // Verifica saldo (4 créditos para o bundle)
+    // Verifica Passaporte (saldo total = bônus + pago)
     if (!isAdmin) {
-      const creditBalance = await prisma.creditBalance.findUnique({ where: { companyId } })
-      if (!creditBalance || creditBalance.balance < BUNDLE_CREDIT_COST) {
+      const passport = await getPassportState(companyId)
+      if (passport.total < BUNDLE_CREDIT_COST) {
         return NextResponse.json(
-          { error: `Saldo insuficiente. O bundle de 4 testes custa ${BUNDLE_CREDIT_COST} créditos.` },
+          { error: `Passaporte insuficiente. O Combo Bundler custa ${BUNDLE_CREDIT_COST} créditos. Você tem ${passport.total}.` },
           { status: 402 }
         )
       }
@@ -59,9 +61,9 @@ export async function POST(request: NextRequest) {
     // Gera tokens para cada teste
     const tokens = BUNDLE_TESTS.map(() => uuidv4())
 
-    // Cria os 4 assessments + debita créditos em transação atômica
-    const assessments = await prisma.$transaction(async (tx) => {
-      const created = await Promise.all(
+    // Cria os 4 assessments
+    const assessments = await prisma.$transaction(async (tx) =>
+      Promise.all(
         BUNDLE_TESTS.map((testType, i) =>
           tx.assessment.create({
             data: {
@@ -77,24 +79,31 @@ export async function POST(request: NextRequest) {
           })
         )
       )
+    )
 
-      if (!isAdmin) {
-        await tx.creditBalance.update({
-          where: { companyId },
-          data: { balance: { decrement: BUNDLE_CREDIT_COST } },
-        })
-        await tx.creditTransaction.create({
-          data: {
-            companyId,
-            type: 'DEBIT',
-            amount: -BUNDLE_CREDIT_COST,
-            description: `Bundle 4 Testes Comportamentais — ${employeeName}`,
-          },
-        })
+    // Cobra do Passaporte (FIFO: bônus mais antigo primeiro)
+    if (!isAdmin) {
+      try {
+        const r = await consumeCredits(
+          companyId,
+          BUNDLE_CREDIT_COST,
+          `Combo Bundler (DISC+MBTI+Eneagrama+Temperamento) — ${employeeName}`,
+        )
+        if (r.passportNowConsumed) {
+          await onPassportConsumed(companyId).catch(err => console.error('[trigger]', err))
+        }
+      } catch (err) {
+        if (err instanceof InsufficientCreditsError) {
+          // Race: rollback dos 4 assessments criados
+          await prisma.assessment.deleteMany({ where: { id: { in: assessments.map(a => a.id) } } }).catch(() => {})
+          return NextResponse.json(
+            { error: `Passaporte insuficiente. O Combo Bundler custa ${BUNDLE_CREDIT_COST} créditos.` },
+            { status: 402 }
+          )
+        }
+        throw err
       }
-
-      return created
-    })
+    }
 
     // Link de entrada = token do primeiro teste (DISC)
     const firstToken = assessments[0].token

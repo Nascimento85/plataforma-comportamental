@@ -78,17 +78,20 @@ export default function PassportWidget({ state }: Props) {
         </div>
       )}
 
-      {(isLow || isExpired) && (
-        <Link
-          href="/dashboard/credits"
-          className="mt-3 w-full flex items-center justify-center gap-2 py-3 rounded-full
-                     text-[14px] font-sans font-bold text-white transition-all duration-200
-                     hover:-translate-y-px shadow-terra"
-          style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
-        >
-          🪙 Recarregar passaporte
-        </Link>
-      )}
+      {/* Botão sempre visível — primary se saldo baixo/expirado, secondary se OK */}
+      <Link
+        href="/dashboard/credits"
+        className={`mt-3 w-full flex items-center justify-center gap-2 py-3 rounded-full
+                   text-[14px] font-sans font-bold transition-all duration-200
+                   hover:-translate-y-px ${(isLow || isExpired) ? 'text-white shadow-terra' : ''}`}
+        style={
+          isLow || isExpired
+            ? { background: 'linear-gradient(135deg, #c4633a, #d4943a)' }
+            : { background: 'rgba(255,255,255,0.85)', color: '#a8522e', border: '1px solid rgba(196,99,58,0.3)' }
+        }
+      >
+        🪙 {isLow || isExpired ? 'Recarregar passaporte' : 'Comprar créditos'}
+      </Link>
     </div>
   )
 }

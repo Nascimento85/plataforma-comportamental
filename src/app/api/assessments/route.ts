@@ -4,22 +4,26 @@ import { v4 as uuidv4 } from 'uuid'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
+import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
+import { onPassportConsumed } from '@/lib/passport-triggers'
 
-// Custo em créditos por tipo de teste
+// Custo em créditos por tipo de teste — fonte única em lib/passport.ts (TEST_PRICE)
 const CREDIT_COST: Record<string, number> = {
-  DISC: 1,
-  MBTI: 1,
-  ENNEAGRAM: 1,
-  TEMPERAMENT: 1,
-  ARCHETYPE: 2,
-  ARCHETYPE_FEMININE: 2,
-  LOVE_LANGUAGES: 4,
+  DISC:                  TEST_PRICE.DISC,                    // 3
+  MBTI:                  TEST_PRICE.MBTI,                    // 2
+  ENNEAGRAM:             TEST_PRICE.ENNEAGRAM,               // 2
+  TEMPERAMENT:           TEST_PRICE.TEMPERAMENT,             // 2
+  ARCHETYPE:             TEST_PRICE.ARCHETYPE,               // 3
+  ARCHETYPE_FEMININE:    TEST_PRICE.ARCHETYPE,               // 3
+  LOVE_LANGUAGES:        TEST_PRICE.LOVE_LANGUAGES,          // 5
+  CAREER_ANCHOR:         TEST_PRICE.CAREER_ANCHOR,           // 1
+  EMOTIONAL_INTELLIGENCE: TEST_PRICE.EMOTIONAL_INTELLIGENCE, // 2
 }
 
 const schema = z.object({
   employeeName: z.string().min(2),
   employeeEmail: z.string().email(),
-  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES']),
+  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE']),
 })
 
 export async function POST(request: NextRequest) {
@@ -44,12 +48,12 @@ export async function POST(request: NextRequest) {
     // Custo do teste
     const creditCost = CREDIT_COST[testType] ?? 1
 
-    // Verifica saldo de créditos (apenas para não-admins)
+    // Verifica Passaporte (saldo total = bônus + pago) — só não-admins
     if (!isAdmin) {
-      const creditBalance = await prisma.creditBalance.findUnique({ where: { companyId } })
-      if (!creditBalance || creditBalance.balance < creditCost) {
+      const passport = await getPassportState(companyId)
+      if (passport.total < creditCost) {
         return NextResponse.json(
-          { error: `Saldo insuficiente. Este teste custa ${creditCost} crédito${creditCost > 1 ? 's' : ''}. Compre mais créditos para continuar.` },
+          { error: `Passaporte insuficiente. Este teste custa ${creditCost} crédito${creditCost > 1 ? 's' : ''}. Você tem ${passport.total}. Recarregue para continuar.` },
           { status: 402 }
         )
       }
@@ -69,38 +73,38 @@ export async function POST(request: NextRequest) {
     const token = uuidv4()
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
-    // Cria assessment + debita 1 crédito se não for admin (transação atômica)
-    const assessment = await prisma.$transaction(async (tx) => {
-      const a = await tx.assessment.create({
-        data: {
-          companyId,
-          employeeId: employee!.id,
-          testType,
-          token,
-          expiresAt,
-          status: 'SENT',
-        },
-      })
-
-      if (!isAdmin) {
-        // Debita créditos
-        await tx.creditBalance.update({
-          where: { companyId },
-          data: { balance: { decrement: creditCost } },
-        })
-
-        await tx.creditTransaction.create({
-          data: {
-            companyId,
-            type: 'DEBIT',
-            amount: -creditCost,
-            description: `Avaliação ${testType} — ${employeeName}`,
-          },
-        })
-      }
-
-      return a
+    // Cria assessment
+    const assessment = await prisma.assessment.create({
+      data: {
+        companyId,
+        employeeId: employee!.id,
+        testType,
+        token,
+        expiresAt,
+        status: 'SENT',
+      },
     })
+
+    // Cobra do Passaporte (FIFO: bônus mais antigo primeiro, depois pago)
+    if (!isAdmin) {
+      try {
+        const r = await consumeCredits(companyId, creditCost, `Avaliação ${testType} — ${employeeName}`)
+        if (r.passportNowConsumed) {
+          // Saldo bônus zerou → agenda outreach 7d
+          await onPassportConsumed(companyId).catch(err => console.error('[trigger]', err))
+        }
+      } catch (err) {
+        if (err instanceof InsufficientCreditsError) {
+          // Race condition raro — rollback do assessment criado
+          await prisma.assessment.delete({ where: { id: assessment.id } }).catch(() => {})
+          return NextResponse.json(
+            { error: `Passaporte insuficiente. Este teste custa ${creditCost} créditos.` },
+            { status: 402 }
+          )
+        }
+        throw err
+      }
+    }
 
     const testLink = `${process.env.NEXT_PUBLIC_APP_URL}/test/${token}`
 
