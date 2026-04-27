@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 const PUBLIC_ROUTES = [
-  '/',                 // landing page
+  '/',                 // landing page (LP unificada via rewrite)
   '/login',
   '/register',
   '/forgot-password',  // recuperação de senha
@@ -13,8 +13,8 @@ const PUBLIC_ROUTES = [
   '/amor.html',
   '/empresas',         // landing page corporativa
   '/empresas.html',
-  '/kenionascimento-unificada',         // LP unificada (acesso direto)
-  '/kenionascimento-unificada.html',
+  '/lp',               // LP unificada (acesso direto)
+  '/lp.html',
   '/api/auth/login',
   '/api/auth/logout',
   '/api/auth/register',
@@ -23,18 +23,12 @@ const PUBLIC_ROUTES = [
   '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
 ]
 
-const KENIO_HOSTS = new Set([
-  'kenionascimento.com',
-  'www.kenionascimento.com',
-])
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const host = (request.headers.get('host') || '').toLowerCase()
 
-  // Routing por hostname: kenionascimento.com serve a LP unificada na raiz
-  if (KENIO_HOSTS.has(host) && pathname === '/') {
-    return NextResponse.rewrite(new URL('/kenionascimento-unificada.html', request.url))
+  // Homepage: serve a LP unificada (substitui a antiga page.tsx azul/branca)
+  if (pathname === '/') {
+    return NextResponse.rewrite(new URL('/lp.html', request.url))
   }
 
   // Rotas públicas (sem auth)
