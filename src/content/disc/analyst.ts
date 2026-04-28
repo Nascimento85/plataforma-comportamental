@@ -3,6 +3,9 @@
 // ============================================================
 
 import type { PremiumProfileContent } from './types'
+import { analystSimplifyingBody }   from './downloads/analyst-simplifying'
+import { analystCommunicationBody } from './downloads/analyst-communication'
+import { analystChecklistBody }     from './downloads/analyst-checklist'
 
 export const analystContent: PremiumProfileContent = {
   key:        'C',
@@ -244,6 +247,7 @@ export const analystContent: PremiumProfileContent = {
       title: 'Simplificando a Perfeição',
       pitch: 'Manual para o Analista que quer entregar 5x mais sem trair seus padrões.',
       pages: 28, fileName: 'mapa-comportamental_C_apostila-simplificando.pdf',
+      body:        analystSimplifyingBody,
       storagePath: 'disc/analyst/apostila-simplificando-perfeicao.pdf',
       toc: [
         '1. Por que 80% bem feito vence 100% adiado',
@@ -261,6 +265,7 @@ export const analystContent: PremiumProfileContent = {
       title: 'Comunicação Ágil para Mentes Analíticas',
       pitch: 'Como falar com não-técnicos sem desonestar a complexidade.',
       pages: 24, fileName: 'mapa-comportamental_C_guia-comunicacao-agil.pdf',
+      body:        analystCommunicationBody,
       storagePath: 'disc/analyst/guia-comunicacao-agil.pdf',
       toc: [
         '1. A regra "5–25–95"',
@@ -277,6 +282,7 @@ export const analystContent: PremiumProfileContent = {
       title: 'Checklist de Decisão Rápida',
       pitch: 'Editável: marque os critérios e tome a decisão em 10 minutos.',
       pages: 4, fileName: 'mapa-comportamental_C_checklist-decisao.pdf',
+      body:        analystChecklistBody,
       storagePath: 'disc/analyst/checklist-criterios-decisao.pdf',
       toc: [
         'A decisão é reversível? (sim/não)',

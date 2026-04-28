@@ -3,6 +3,9 @@
 // ============================================================
 
 import type { PremiumProfileContent } from './types'
+import { stablePlaybookBody }      from './downloads/stable-playbook'
+import { stableQuestionnaireBody } from './downloads/stable-questionnaire'
+import { stableDecisionBody }      from './downloads/stable-decision'
 
 export const stableContent: PremiumProfileContent = {
   key:        'S',
@@ -248,6 +251,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'O Poder da Liderança Silenciosa',
       pitch: 'Como liderar sem precisar gritar — manual estratégico para o Estável que quer crescer sem virar quem ele não é.',
       pages: 22, fileName: 'mapa-comportamental_S_playbook-lideranca-silenciosa.pdf',
+      body:        stablePlaybookBody,
       storagePath: 'disc/stable/playbook-lideranca-silenciosa.pdf',
       toc: [
         '1. O paradoxo do Estável: forte mas invisível',
@@ -265,6 +269,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'Questionário de Saúde Emocional no Trabalho',
       pitch: 'Check-in editável para preencher toda sexta-feira — você acompanha sua estabilidade real, não a aparente.',
       pages: 4, fileName: 'mapa-comportamental_S_questionario-saude.pdf',
+      body:        stableQuestionnaireBody,
       storagePath: 'disc/stable/questionario-saude-emocional.pdf',
       toc: [
         'Como me senti essa semana? (escala 0–10)',
@@ -280,6 +285,7 @@ export const stableContent: PremiumProfileContent = {
       title: 'Decisão Rápida Sem Perder a Sabedoria',
       pitch: 'Guia para o S que se cobra por demorar — sem virar Dominante atropelador.',
       pages: 26, fileName: 'mapa-comportamental_S_apostila-decisao-rapida.pdf',
+      body:        stableDecisionBody,
       storagePath: 'disc/stable/apostila-decisao-rapida.pdf',
       toc: [
         '1. Diferença entre PRECIPITAÇÃO e VELOCIDADE inteligente',
