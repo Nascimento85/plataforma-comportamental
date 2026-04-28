@@ -222,10 +222,11 @@ function buildCompletionHtmlForCompany(input: TestCompletionInput): string {
 
 /** HTML para o colaborador: "Seu resultado está pronto" */
 function buildResultHtmlForEmployee(input: TestCompletionInput): string {
-  const { employeeName, companyName, testType, resultId } = input
+  const { employeeName, companyName, testType, assessmentId } = input
   const firstName   = employeeName.split(' ')[0]
   const testLabel   = TEST_LABELS[testType] ?? testType
-  const publicLink  = `${APP_URL}/result/${resultId}`
+  // /result/[id] espera o assessmentId, não o resultId. Usar resultId aqui causa 404.
+  const publicLink  = `${APP_URL}/result/${assessmentId}`
   const today       = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
 
   return `<!DOCTYPE html>

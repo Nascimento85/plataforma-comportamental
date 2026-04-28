@@ -54,7 +54,7 @@ export async function sendProfileTagToManyChat(args: {
   companyId:      string
   testType:       string  // 'DISC' | 'TEMPERAMENT' | …
   primaryProfile: string  // 'D' | 'COLERICO' | …
-  resultId:       string
+  assessmentId:   string  // a página /result/[id] usa o ID do Assessment
 }) {
   const token = process.env.MANYCHAT_API_TOKEN
   if (!token) return { ok: false, error: 'MANYCHAT_API_TOKEN ausente' }
@@ -100,7 +100,7 @@ export async function sendProfileTagToManyChat(args: {
           { field_id: process.env.MANYCHAT_FIELD_TEST_TYPE,    field_value: args.testType },
           { field_id: process.env.MANYCHAT_FIELD_PROFILE_KEY,  field_value: args.primaryProfile },
           { field_id: process.env.MANYCHAT_FIELD_RESULT_URL,
-            field_value: `${process.env.NEXT_PUBLIC_APP_URL}/result/${args.resultId}` },
+            field_value: `${process.env.NEXT_PUBLIC_APP_URL}/result/${args.assessmentId}` },
         ],
       }),
     })

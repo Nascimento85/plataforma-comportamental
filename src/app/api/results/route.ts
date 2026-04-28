@@ -14,6 +14,7 @@ import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
 import { generateBundleReport } from '@/lib/bundle-report/generate'
+import { sendProfileTagToManyChat } from '@/lib/manychat-tags'
 
 const schema = z.object({
   token: z.string().min(1),
@@ -207,6 +208,18 @@ export async function POST(request: NextRequest) {
       assessmentId:  assessment.id,
       resultId:      result.id,
     }).catch(console.error)
+
+    // ManyChat: dispara a tag do perfil para o flow de re-engajamento.
+    // Falha silenciosamente se MANYCHAT_API_TOKEN não estiver setado, ou
+    // se o subscriber/tag ainda não existir — não bloqueia a resposta.
+    if (result.primaryProfile) {
+      sendProfileTagToManyChat({
+        companyId:      assessment.companyId,
+        testType:       assessment.testType,
+        primaryProfile: result.primaryProfile,
+        assessmentId:   assessment.id,
+      }).catch((err) => console.error('[manychat-tags]', err))
+    }
 
     return NextResponse.json({ resultId: result.id, result: resultData }, { status: 201 })
   } catch (err) {
