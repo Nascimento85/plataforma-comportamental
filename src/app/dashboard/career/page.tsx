@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { TEST_PRICE } from '@/lib/passport'
 
 export const metadata: Metadata = { title: 'Carreira & Performance' }
 
@@ -41,7 +42,7 @@ const TESTS: CareerTest[] = [
       'Estratégias práticas de gestão por âncora — como liderar cada perfil',
     ],
     image: '/tests/ancora-carreira.png',
-    credits: 1,
+    credits: TEST_PRICE.CAREER_ANCHOR,
     color: '#3d4f7c',
     emoji: '⚓',
     badge: 'Schein/MIT',
@@ -61,7 +62,7 @@ const TESTS: CareerTest[] = [
       'Identifica força emocional dominante + vetor de desenvolvimento prioritário',
     ],
     image: '/tests/inteligencia-emocional.png',
-    credits: 1,
+    credits: TEST_PRICE.EMOTIONAL_INTELLIGENCE,
     color: '#c4633a',
     emoji: '◈',
     badge: 'Goleman',

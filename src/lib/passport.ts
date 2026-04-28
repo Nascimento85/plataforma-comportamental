@@ -13,20 +13,10 @@
 
 import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { TEST_PRICE } from '@/lib/test-pricing'
 
-// ─── Tabela de preços (créditos por teste) ─────────────────
-export const TEST_PRICE: Record<string, number> = {
-  COMBO_BUNDLE:           10,
-  DISC:                    3,
-  TEMPERAMENT:             2,
-  ENNEAGRAM:               2,
-  MBTI:                    2,
-  CAREER_ANCHOR:           1,
-  LOVE_LANGUAGES:          5,
-  ARCHETYPE:               3,
-  EMOTIONAL_INTELLIGENCE:  2,
-  PREMIUM_REPORT:         10, // só com créditos PAGOS
-}
+// Re-exporta para manter compatibilidade com chamadas existentes
+export { TEST_PRICE }
 
 // ─── Constantes do Passaporte ──────────────────────────────
 export const PASSPORT_TTL_DAYS         = 7

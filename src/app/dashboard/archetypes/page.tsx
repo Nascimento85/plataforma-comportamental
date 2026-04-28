@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { TEST_PRICE } from '@/lib/passport'
 
 export const metadata: Metadata = { title: 'Arquétipos' }
 
@@ -293,7 +294,7 @@ export default async function ArchetypesPage() {
           <p className="text-[14px] text-soul-ink/75 font-medium mt-1">
             Teste completo dos 12 Arquétipos Junguianos com leitura integrada do dominante + secundário, sombra e jornada de amadurecimento.
           </p>
-          <p className="text-[12px] text-soul-ink/55 font-semibold mt-1">4 créditos · O mais completo</p>
+          <p className="text-[12px] text-soul-ink/55 font-semibold mt-1">{TEST_PRICE.ARCHETYPE} créditos · O mais completo</p>
         </div>
         <NewAssessmentButton initialTestType="ARCHETYPE">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -319,7 +320,7 @@ export default async function ArchetypesPage() {
         title="Arquétipos Femininos — As 7 Energias"
         subtitle="As energias arquetípicas que governam ciclos de criação, poder e intuição. Base de programas de liderança feminina e mentoria — uma delas predomina em cada fase profissional."
         items={FEMININE}
-        cta={{ testType: 'ARCHETYPE_FEMININE', label: ctaLabel(accountType, 'Femininos'), credits: 4 }}
+        cta={{ testType: 'ARCHETYPE_FEMININE', label: ctaLabel(accountType, 'Femininos'), credits: TEST_PRICE.ARCHETYPE_FEMININE }}
       />
     </div>
   )

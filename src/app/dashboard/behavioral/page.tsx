@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { TEST_PRICE } from '@/lib/passport'
 
 export const metadata: Metadata = { title: 'Análises Comportamentais' }
 
@@ -36,7 +37,7 @@ const DISC: Lens = {
   name: 'DISC — Perfil Comportamental',
   tagline: 'A ferramenta mais usada no mundo corporativo',
   short: 'DISC',
-  credits: 1,
+  credits: TEST_PRICE.DISC,
   pillar: 'Dominância · Influência · Estabilidade · Conformidade',
   description:
     'O mapa comportamental mais amplamente adotado pelas maiores organizações do mundo. Revela as quatro forças que regem como uma pessoa age no trabalho — como decide sob pressão, comunica, lidera, executa e o que a trava em função. É a lente de entrada para qualquer processo sério de gestão de pessoas.',
@@ -63,7 +64,7 @@ const LENSES: Lens[] = [
     name: 'MBTI — 16 Tipos de Personalidade',
     tagline: 'Baseado em Carl Jung. Usado por Fortune 500.',
     short: 'MBTI',
-    credits: 1,
+    credits: TEST_PRICE.MBTI,
     pillar: 'Extroversão · Sensação · Pensamento · Julgamento',
     description:
       'Decodifica as preferências cognitivas em 4 dimensões para identificar entre 16 tipos de personalidade. Revela como cada pessoa pensa, decide, se energiza e absorve informação — o sistema operacional cognitivo do colaborador.',
@@ -84,7 +85,7 @@ const LENSES: Lens[] = [
     name: 'Eneagrama — 9 Tipos',
     tagline: 'Usado pela NASA e pelo Vale do Silício.',
     short: 'Eneagrama',
-    credits: 1,
+    credits: TEST_PRICE.ENNEAGRAM,
     pillar: '9 tipos · asas · instintos · níveis de saúde',
     description:
       'Vai além do comportamento visível: revela a motivação raiz e o medo nuclear que travam maturidade profissional. Adotado por lideranças de alta complexidade para acelerar desenvolvimento, identificar pontos cegos e direcionar o caminho exato para a versão mais madura da pessoa.',
@@ -105,7 +106,7 @@ const LENSES: Lens[] = [
     name: '4 Personalidades — Temperamentos',
     tagline: 'A matéria-prima comportamental inata.',
     short: 'Temperamentos',
-    credits: 1,
+    credits: TEST_PRICE.TEMPERAMENT,
     pillar: 'Colérico · Sanguíneo · Melancólico · Fleumático',
     description:
       'Identifica as quatro inclinações naturais baseadas em Hipócrates — a "matéria-prima" comportamental que nenhum outro teste captura com tanta precisão. Como alguém reage ao mundo de forma inata, antes de qualquer verniz profissional.',
@@ -281,7 +282,7 @@ export default async function BehavioralPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-[12px] font-bold uppercase tracking-widest text-white/60">Investimento</p>
-                <p className="font-serif text-3xl font-semibold text-white mt-1">1 <span className="text-lg font-medium text-white/75">crédito</span></p>
+                <p className="font-serif text-3xl font-semibold text-white mt-1">{DISC.credits} <span className="text-lg font-medium text-white/75">crédito{DISC.credits > 1 ? 's' : ''}</span></p>
               </div>
               <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[12px] font-bold"
                     style={{ background: 'rgba(212,184,92,0.2)', color: '#e8c878' }}>

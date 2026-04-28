@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import { TEST_PRICE } from '@/lib/passport'
 
 export const metadata: Metadata = { title: 'Linguagem do Amor' }
 
@@ -180,7 +181,7 @@ export default function LoveLanguagesPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/75">Investimento</p>
-                <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">4 <span className="text-lg font-medium text-soul-ink/75">créditos</span></p>
+                <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{TEST_PRICE.LOVE_LANGUAGES} <span className="text-lg font-medium text-soul-ink/75">créditos</span></p>
               </div>
               <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[12px] font-bold"
                     style={{ background: 'rgba(155,77,67,0.15)', color: '#9b4d43' }}>

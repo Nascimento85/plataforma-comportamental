@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { TEST_PRICE } from '@/lib/test-pricing'
 
 // ═══════════════════════════════════════════════════════════════
 // CATÁLOGO DE TESTES — 3 Categorias Executivas
@@ -29,7 +30,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Arquétipos Junguianos — Os 12 Padrões Universais',
     short: 'Arquétipos',
     category: 'ARCHETYPE',
-    credits: 4,
+    credits: TEST_PRICE.ARCHETYPE,
     image: '/tests/arquetipo-misto.jpg',
     hook: 'O mapa mais profundo da plataforma.',
     description:
@@ -46,7 +47,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Arquétipos Femininos — As 7 Energias',
     short: 'Arq. Femininos',
     category: 'ARCHETYPE',
-    credits: 4,
+    credits: TEST_PRICE.ARCHETYPE_FEMININE,
     image: '/tests/arquetipo-feminino.jpg',
     hook: 'O divino feminino aplicado à liderança.',
     description:
@@ -65,7 +66,7 @@ const TEST_TYPES: TestType[] = [
     label: 'DISC — Perfil Comportamental Completo',
     short: 'DISC',
     category: 'BEHAVIORAL',
-    credits: 1,
+    credits: TEST_PRICE.DISC,
     image: '/tests/disc.jpg',
     hook: 'A ferramenta mais usada no mundo corporativo.',
     description:
@@ -81,7 +82,7 @@ const TEST_TYPES: TestType[] = [
     label: 'MBTI — 16 Tipos de Personalidade',
     short: 'MBTI',
     category: 'BEHAVIORAL',
-    credits: 1,
+    credits: TEST_PRICE.MBTI,
     image: '/tests/mbti.jpg',
     hook: 'Baseado em Carl Jung. Usado por Fortune 500.',
     description:
@@ -97,7 +98,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Eneagrama de Personalidade — Os 9 Tipos',
     short: 'Eneagrama',
     category: 'BEHAVIORAL',
-    credits: 1,
+    credits: TEST_PRICE.ENNEAGRAM,
     image: '/tests/eneagrama.jpg',
     hook: 'Usado pela NASA e pelo Vale do Silício.',
     description:
@@ -113,7 +114,7 @@ const TEST_TYPES: TestType[] = [
     label: '4 Personalidades — Temperamentos Clássicos',
     short: 'Temperamentos',
     category: 'BEHAVIORAL',
-    credits: 1,
+    credits: TEST_PRICE.TEMPERAMENT,
     image: '/tests/temperamentos.jpg',
     hook: 'A matéria-prima comportamental inata.',
     description:
@@ -129,7 +130,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Bundle Completo — 4 Testes Comportamentais',
     short: 'Bundle 4',
     category: 'BEHAVIORAL',
-    credits: 4,
+    credits: TEST_PRICE.COMBO_BUNDLE,
     image: '/tests/disc.jpg',
     hook: 'O raio-X comportamental definitivo. Um link, quatro testes.',
     description:
@@ -148,7 +149,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Âncoras de Carreira — Edgar Schein',
     short: 'Âncoras de Carreira',
     category: 'CAREER',
-    credits: 1,
+    credits: TEST_PRICE.CAREER_ANCHOR,
     image: '/tests/ancora-carreira.png',
     hook: 'O que realmente motiva você no trabalho.',
     description:
@@ -164,7 +165,7 @@ const TEST_TYPES: TestType[] = [
     label: 'Inteligência Emocional — Daniel Goleman',
     short: 'QE · Goleman',
     category: 'CAREER',
-    credits: 1,
+    credits: TEST_PRICE.EMOTIONAL_INTELLIGENCE,
     image: '/tests/inteligencia-emocional.png',
     hook: 'Como você reage sob pressão.',
     description:
@@ -183,7 +184,7 @@ const TEST_TYPES: TestType[] = [
     label: 'As 5 Linguagens do Amor — Gary Chapman',
     short: 'Ling. do Amor',
     category: 'RELATIONSHIPS',
-    credits: 4,
+    credits: TEST_PRICE.LOVE_LANGUAGES,
     image: '/tests/linguagens-amor.jpg',
     hook: 'Como você ama — e como precisa ser amado.',
     description:
