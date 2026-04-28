@@ -6,6 +6,7 @@
 
 import type { PremiumProfileContent } from './types'
 import { dominantPlaybookBody } from './downloads/dominant-playbook'
+import { dominantCnvBody }      from './downloads/dominant-cnv'
 
 export const dominantContent: PremiumProfileContent = {
   key:        'D',
@@ -374,6 +375,7 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Scripts prontos para conversas difíceis: feedback negativo, conflito com sócio, pedido de desculpa público, dispensar sem destruir.',
       pages:    32,
       fileName: 'mapa-comportamental_D_apostila-cnv.pdf',
+      body:        dominantCnvBody,
       storagePath: 'disc/dominant/apostila-cnv-dominantes.pdf',
       toc: [
         '1. Por que CNV é arma estratégica, não fragilidade',
