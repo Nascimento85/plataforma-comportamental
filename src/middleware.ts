@@ -21,6 +21,7 @@ const PUBLIC_ROUTES = [
   '/api/auth/forgot-password',
   '/api/auth/reset-password',
   '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
+  '/api/cron',             // crons protegidos por Bearer CRON_SECRET, não por cookie
 ]
 
 export function middleware(request: NextRequest) {
