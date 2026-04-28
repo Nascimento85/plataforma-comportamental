@@ -98,6 +98,12 @@ function NavIcon({ path }: { path: string }) {
           stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
+    downloads: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <path d="M10 3V13M10 13L6 9M10 13L14 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 15V16C3 16.5523 3.44772 17 4 17H16C16.5523 17 17 16.5523 17 16V15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
   }
   return <>{icons[path] ?? null}</>
 }
@@ -227,6 +233,7 @@ function SidebarContent({
         <SidebarNavLink href="/dashboard/candidates"   label="Candidatos"    iconKey="candidates"  onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/teams"        label="Times"         iconKey="archetypes"  onClick={onNavClick} />
         <SidebarNavLink href="/dashboard/reports"      label="Relatórios"    iconKey="reports"     onClick={onNavClick} />
+        <SidebarNavLink href="/dashboard/downloads"    label="Downloads"     iconKey="downloads"   onClick={onNavClick} />
 
         <div className="px-6 pb-2 pt-4">
           <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
