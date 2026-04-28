@@ -7,6 +7,7 @@
 import type { PremiumProfileContent } from './types'
 import { dominantPlaybookBody } from './downloads/dominant-playbook'
 import { dominantCnvBody }      from './downloads/dominant-cnv'
+import { dominantChecklistBody } from './downloads/dominant-checklist'
 
 export const dominantContent: PremiumProfileContent = {
   key:        'D',
@@ -358,6 +359,7 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Sua produtividade do dia inteiro é decidida nos primeiros 90 min. Checklist editável com campos para imprimir e marcar.',
       pages:    4,
       fileName: 'mapa-comportamental_D_checklist-manha.pdf',
+      body:        dominantChecklistBody,
       storagePath: 'disc/dominant/checklist-manha-do-executor.pdf',
       toc: [
         'Bloco 1 (5–25 min): movimento físico + hidratação',
