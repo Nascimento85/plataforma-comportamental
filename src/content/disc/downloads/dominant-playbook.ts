@@ -90,7 +90,6 @@ export const dominantPlaybookBody: PdfBody = {
             'você adapta o estilo: ora delega total, ora supervisiona, ora ensina, ora ' +
             'apenas chancela. Não é "ser legal". É ser preciso.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Por que isso vale dinheiro',
@@ -200,7 +199,6 @@ export const dominantPlaybookBody: PdfBody = {
             'Nível 4 sem confiança ganha gera caos. Confiança ganha sem Nível 4 gera ' +
             'micromanagement. Suba o nível mensalmente como você subiria um salário.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Como COMUNICAR o nível (script)',
@@ -301,7 +299,6 @@ export const dominantPlaybookBody: PdfBody = {
             'Para cada Q4: a tarefa pode SUBIR para uma mais estratégica?',
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Reuniões de calibração trimestral',
@@ -389,7 +386,6 @@ export const dominantPlaybookBody: PdfBody = {
             'Compromisso: na próxima venda acima de R$ 30k, você me chama ANTES de ' +
             'fechar desconto. Combinado?"',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Regras de ouro do feedback',
@@ -483,7 +479,6 @@ export const dominantPlaybookBody: PdfBody = {
             'Se você tivesse 4h livres na agenda, o que faria?',
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Erros mais comuns do Dominante em 1:1',
@@ -576,7 +571,6 @@ export const dominantPlaybookBody: PdfBody = {
             'Duração total: 15 a 20 minutos. Não mais.',
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Comunicação ao time pós-desligamento',
@@ -666,7 +660,6 @@ export const dominantPlaybookBody: PdfBody = {
             { k: 'Frequência', v: 'Pulse anônimo mensal' },
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'KPI 4 — Taxa de retenção (12 meses)',
@@ -745,7 +738,6 @@ export const dominantPlaybookBody: PdfBody = {
             { k: 'Padrão #3',  v: 'Diário pessoal de 5 min/dia com 3 perguntas' },
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Caso 2 — Carla, 38 → 44 anos',

@@ -76,7 +76,6 @@ export const dominantCnvBody: PdfBody = {
             { k: 'É',      v: 'Estrutura precisa para entregar a mensagem dura sem ativar defesa do outro' },
           ],
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Quando especificamente usar',
@@ -169,7 +168,6 @@ export const dominantCnvBody: PdfBody = {
             'pressionado, esgotado, hesitante, contrariado, ressentido, enfadado, ' +
             'ferido, melancólico, perturbado, indignado, perplexo.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'ETAPA 3 — NECESSIDADE',
@@ -293,7 +291,6 @@ export const dominantCnvBody: PdfBody = {
             'material parcial. Em duas dessas reuniões, perdi a chance de aprovar a ' +
             'estratégia.',
         },
-        { type: 'pageBreak' },
         {
           type: 'script',
           role: '4. Necessidade',
@@ -404,7 +401,6 @@ export const dominantCnvBody: PdfBody = {
             'liderar com clareza. Não é sobre quem está certo. É sobre o que vamos comunicar ' +
             'para o time como direção única.',
         },
-        { type: 'pageBreak' },
         {
           type: 'script',
           role: 'Pedido — Definir processo, não decisão',
@@ -505,7 +501,6 @@ export const dominantCnvBody: PdfBody = {
             'quando estou frustrado. A partir de agora, se eu sentir que vou explodir, ' +
             'vou pausar a reunião e voltar depois. Combinado entre nós? Obrigado.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Princípios da desculpa que funciona',
@@ -587,7 +582,6 @@ export const dominantCnvBody: PdfBody = {
             'Eu reconheço o que você entregou em [exemplo concreto, não inventado]. ' +
             'Isso fica. Carrego com gratidão.',
         },
-        { type: 'pageBreak' },
         {
           type: 'script',
           role: 'Detalhes práticos',
@@ -691,7 +685,6 @@ export const dominantCnvBody: PdfBody = {
             'Trazer SOLUÇÃO antes de OUVIR. "Já marquei jantar, terapeuta, viagem" — ' +
             'isso afasta. O outro precisa primeiro saber que VOCÊ enxergou.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'Roteiro inicial (curto)',
@@ -787,7 +780,6 @@ export const dominantCnvBody: PdfBody = {
             '"Você poderia ser mais comunicativo?" — não é pedido. É reclamação. Pedido = ' +
             'ação concreta, observável, com prazo.',
         },
-        { type: 'pageBreak' },
         {
           type: 'h2',
           text: 'ERRO 4 — Esperar gratidão',

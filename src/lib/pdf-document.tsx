@@ -334,52 +334,33 @@ function renderBlock(b: PdfBlock, i: number): React.ReactNode {
       return <View key={i} style={{ height: { sm: 6, md: 12, lg: 24 }[b.size ?? 'md'] }} />
 
     case 'pageBreak':
-      // tratado no nível superior — divide em pages
-      return null
+      // Força quebra de página dentro do flow (wrap nativo do @react-pdf)
+      // Só usa SE realmente quiser forçar; senão, deixa o wrap automático
+      return <View key={i} break />
   }
 }
 
-// ─── Quebra blocks por pageBreak ───────────────────────────
-function chunksByPageBreak(blocks: PdfBlock[]): PdfBlock[][] {
-  const chunks: PdfBlock[][] = []
-  let cur: PdfBlock[] = []
-  for (const b of blocks) {
-    if (b.type === 'pageBreak') {
-      if (cur.length) chunks.push(cur)
-      cur = []
-    } else cur.push(b)
-  }
-  if (cur.length) chunks.push(cur)
-  return chunks
-}
-
-// ─── Componente: Capítulo ─────────────────────────────────
+// ─── Componente: Capítulo (1 Page com wrap automático) ────
 function ChapterPages({ chapter, logoSrc, runningTitle }: {
   chapter: PdfChapter
   logoSrc?: string
   runningTitle: string
 }) {
-  const blockChunks = chunksByPageBreak(chapter.blocks)
   return (
-    <>
-      {blockChunks.map((chunk, idx) => (
-        <Page size="A4" style={styles.page} key={idx}>
-          <Header logoSrc={logoSrc} runningTitle={runningTitle} />
-          {idx === 0 && (
-            <>
-              {chapter.number !== undefined && (
-                <Text style={styles.chapterNumber}>Capítulo {chapter.number}</Text>
-              )}
-              <Text style={styles.chapterTitle}>{chapter.title}</Text>
-              {chapter.subtitle && <Text style={styles.chapterSubtitle}>{chapter.subtitle}</Text>}
-              <View style={styles.chapterDivider} />
-            </>
-          )}
-          {chunk.map(renderBlock)}
-          <Footer />
-        </Page>
-      ))}
-    </>
+    <Page size="A4" style={styles.page} wrap>
+      <Header logoSrc={logoSrc} runningTitle={runningTitle} />
+      {/* Cabeçalho do capítulo aparece só na 1ª página dele */}
+      <View>
+        {chapter.number !== undefined && (
+          <Text style={styles.chapterNumber}>Capítulo {chapter.number}</Text>
+        )}
+        <Text style={styles.chapterTitle}>{chapter.title}</Text>
+        {chapter.subtitle && <Text style={styles.chapterSubtitle}>{chapter.subtitle}</Text>}
+        <View style={styles.chapterDivider} />
+      </View>
+      {chapter.blocks.map(renderBlock)}
+      <Footer />
+    </Page>
   )
 }
 
