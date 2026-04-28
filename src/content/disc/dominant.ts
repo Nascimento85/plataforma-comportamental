@@ -5,6 +5,7 @@
 // ============================================================
 
 import type { PremiumProfileContent } from './types'
+import { dominantPlaybookBody } from './downloads/dominant-playbook'
 
 export const dominantContent: PremiumProfileContent = {
   key:        'D',
@@ -332,6 +333,9 @@ export const dominantContent: PremiumProfileContent = {
       pitch:    'Manual operacional para o Dominante que quer escalar de gestor de tarefas para arquiteto de times.',
       pages:    24,
       fileName: 'mapa-comportamental_D_playbook-lideranca.pdf',
+      // Conteúdo programático completo (preferido — gera PDF de 24+ páginas)
+      body:        dominantPlaybookBody,
+      // Fallback se body não existir
       storagePath: 'disc/dominant/playbook-comando-vs-situacional.pdf',
       toc: [
         '1. O paradoxo do Executor — por que sua eficiência tem teto',

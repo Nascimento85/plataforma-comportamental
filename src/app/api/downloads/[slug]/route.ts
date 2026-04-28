@@ -1,21 +1,30 @@
 // ============================================================
 // /api/downloads/[slug]?reportId=...
-// ------------------------------------------------------------
-// Entrega o PDF Premium personalizado:
-//   1) Valida que existe ReportUnlock para o reportId
-//   2) Busca asset pelo slug em DISC_PREMIUM
-//   3) Gera capa dinâmica (nome + perfil) via @react-pdf
-//   4) Mescla com PDF base do Supabase Storage
+// Entrega o PDF Premium personalizado.
+//
+// Estratégia:
+//   1) Valida ReportUnlock para o reportId
+//   2) Resolve o asset por slug em DISC_PREMIUM
+//   3) Se asset.body existir → gera PDF programático completo
+//      (capa + sumário + capítulos) via @react-pdf/renderer
+//   4) Senão (fallback): mescla capa dinâmica + PDF estático do
+//      Supabase Storage (pdf-lib)
 //   5) Retorna como attachment com filename amigável
 // ============================================================
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { findDownloadBySlug } from '@/lib/downloads-registry'
+import { renderFullPdf } from '@/lib/pdf-document'
 import { buildPersonalizedPdf } from '@/lib/pdf-merge'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+
+// URL pública da logo (mesmo bucket público do Supabase). Pode ser sobrescrita por env.
+const LOGO_URL =
+  process.env.NEXT_PUBLIC_LOGO_URL ??
+  'https://idywcxeuhaulwipekani.supabase.co/storage/v1/object/public/logo%20mapa%20comportamental/logo%20o%20mapa%20comportamental.png'
 
 export async function GET(
   request: NextRequest,
@@ -50,22 +59,44 @@ export async function GET(
       return NextResponse.json({ error: 'Material não encontrado' }, { status: 404 })
     }
 
-    // 3+4) Gera capa + mescla
     const userName =
       unlock.report.assessment.employee.name ??
       unlock.report.company.name ??
       'Usuário Mapa Comportamental'
 
-    const buffer = await buildPersonalizedPdf({
-      storagePath: resolved.asset.storagePath,
-      cover: {
-        userName,
-        profileLabel:  resolved.profileLabel,
+    let buffer: Buffer
+
+    // 3) Estratégia A — PDF programático (preferida quando há body)
+    if (resolved.asset.body) {
+      buffer = await renderFullPdf({
+        body: resolved.asset.body,
         materialTitle: resolved.asset.title,
         materialKind:  resolved.asset.kind,
+        profileLabel:  resolved.profileLabel,
         paletteHex:    resolved.paletteHex,
-      },
-    })
+        userName,
+        logoSrc:       LOGO_URL,
+      })
+    }
+    // 4) Estratégia B — fallback Storage (PDF do Canva)
+    else if (resolved.asset.storagePath) {
+      buffer = await buildPersonalizedPdf({
+        storagePath: resolved.asset.storagePath,
+        cover: {
+          userName,
+          profileLabel:  resolved.profileLabel,
+          materialTitle: resolved.asset.title,
+          materialKind:  resolved.asset.kind,
+          paletteHex:    resolved.paletteHex,
+        },
+      })
+    }
+    else {
+      return NextResponse.json(
+        { error: 'Material sem conteúdo configurado (body nem storagePath)' },
+        { status: 503 },
+      )
+    }
 
     // 5) Entrega
     return new NextResponse(buffer, {
@@ -79,7 +110,6 @@ export async function GET(
   } catch (err) {
     console.error('[api/downloads]', err)
     const msg = err instanceof Error ? err.message : 'Erro inesperado'
-    // Distingue erro do storage (asset não disponível) de erro do server
     if (msg.includes('Storage:')) {
       return NextResponse.json(
         { error: 'PDF base ainda não foi enviado para o servidor.', detail: msg },

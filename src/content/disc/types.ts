@@ -75,6 +75,48 @@ export interface PdiPlan {
   }>
 }
 
+// ────────────────────────────────────────────────────────────
+// Conteúdo do PDF (gerado programaticamente via @react-pdf/renderer)
+// ────────────────────────────────────────────────────────────
+export type PdfBlock =
+  | { type: 'h1';        text: string }
+  | { type: 'h2';        text: string }
+  | { type: 'h3';        text: string }
+  | { type: 'p';         text: string }
+  | { type: 'lead';      text: string }     // parágrafo destaque (italic + cor)
+  | { type: 'quote';     text: string; author?: string }
+  | { type: 'callout';   tone: 'do' | 'dont' | 'tip' | 'warning'; text: string }
+  | { type: 'list';      items: string[]; ordered?: boolean }
+  | { type: 'check';     items: string[] }    // checklist com ☐
+  | { type: 'kv';        items: Array<{ k: string; v: string }> } // "Key: Value"
+  | { type: 'table';     headers: string[]; rows: string[][] }
+  | { type: 'script';    role?: string; sayThis: string; notThis?: string } // bloco de script de fala
+  | { type: 'spacer';    size?: 'sm' | 'md' | 'lg' }
+  | { type: 'pageBreak' } // força nova página
+
+export interface PdfChapter {
+  number?:  number    // 1, 2, 3…
+  title:    string
+  subtitle?: string
+  blocks:   PdfBlock[]
+}
+
+export interface PdfBody {
+  /**
+   * Subtítulo da capa (ex.: "PLAYBOOK · PERFIL DOMINANTE (D)").
+   * Também aparece no header de cada página.
+   */
+  runningTitle: string
+  /** Frase de impacto que aparece logo após a capa. */
+  epigraph?:    { text: string; attribution?: string }
+  /** Capítulos / seções principais. */
+  chapters:     PdfChapter[]
+  /** Anexos opcionais (vão depois dos capítulos, ainda numerados como capítulos). */
+  appendices?:  PdfChapter[]
+  /** Frase final (página de fechamento). */
+  closing?:     { headline: string; subtext?: string }
+}
+
 export interface DownloadAsset {
   slug:       string
   kind:       'PLAYBOOK' | 'CHECKLIST' | 'EBOOK' | 'WORKSHEET'
@@ -84,12 +126,17 @@ export interface DownloadAsset {
   toc:        string[]            // sumário
   fileName:   string              // arquivo final entregue ao usuário
   /**
-   * Caminho do PDF base (diagramado no Canva) no Supabase Storage.
-   * Bucket privado: 'downloads'.
-   * Ex.: 'disc/dominant/playbook-comando-vs-situacional.pdf'
+   * Conteúdo programático do PDF. Quando presente, o endpoint gera o PDF
+   * inteiro via @react-pdf/renderer (paleta + logo + capa dinâmica).
+   * Fallback: storagePath (PDF estático no Supabase Storage).
    */
-  storagePath: string
-  signedUrl?: string              // preenchido em runtime
+  body?:       PdfBody
+  /**
+   * Caminho de PDF estático (ex.: diagramado no Canva e subido no Supabase).
+   * Usado como fallback quando `body` não está definido.
+   */
+  storagePath?: string
+  signedUrl?:   string              // preenchido em runtime
 }
 
 export interface PremiumProfileContent {
