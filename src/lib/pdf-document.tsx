@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
   },
 
   // ─── CAPA ─────────────────────────────────────────────────
+  coverPage: {
+    // Sobrescreve paddingTop da page padrão para dar espaço à logo no topo
+    paddingTop: 130,
+  },
   coverBrand: {
     fontSize: 9, letterSpacing: 3, textTransform: 'uppercase',
     color: PALETTE.gold, fontWeight: 700, marginBottom: 22,
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     textAlign: 'center', fontSize: 7,
     letterSpacing: 1.5, textTransform: 'uppercase', color: '#9b9484',
   },
-  coverLogo: { position: 'absolute', top: 60, right: 60, width: 110, height: 32, objectFit: 'contain' },
+  coverLogo: { position: 'absolute', top: 40, right: 60, width: 100, height: 30, objectFit: 'contain' },
 
   // ─── Epígrafe (após a capa) ──────────────────────────────
   epigraphPage: {
@@ -400,7 +404,7 @@ function CoverPage({
     day: '2-digit', month: 'long', year: 'numeric',
   })
   return (
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={[styles.page, styles.coverPage]}>
       {logoSrc && <Image src={logoSrc} style={styles.coverLogo} />}
       <Text style={styles.coverBrand}>Mapa Comportamental · Passaporte de Autoconhecimento</Text>
       <Text style={[styles.coverKindTag, { color: paletteHex }]}>{materialKind} · {body.runningTitle}</Text>
