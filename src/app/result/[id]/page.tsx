@@ -10,9 +10,43 @@ import CopyLinkButton      from './CopyLinkButton'
 import PrintButton         from './PrintButton'
 import { parseResultData } from '@/lib/parseResult'
 
+/**
+ * Resolve um identificador genérico para o Assessment correspondente.
+ * Aceita: Assessment.id (preferido), Result.id ou Report.id.
+ * Isso garante que links antigos do email — que vinham com Result.id —
+ * continuem funcionando depois do fix.
+ */
+async function resolveAssessmentId(id: string): Promise<string | null> {
+  // 1) Tenta como Assessment direto (caso novo)
+  const asAssessment = await prisma.assessment.findUnique({
+    where: { id },
+    select: { id: true },
+  })
+  if (asAssessment) return asAssessment.id
+
+  // 2) Tenta como Result (links antigos do email)
+  const asResult = await prisma.result.findUnique({
+    where: { id },
+    select: { assessmentId: true },
+  })
+  if (asResult) return asResult.assessmentId
+
+  // 3) Tenta como Report (caso o ID compartilhado seja do Report)
+  const asReport = await prisma.report.findUnique({
+    where: { id },
+    select: { assessmentId: true },
+  })
+  if (asReport) return asReport.assessmentId
+
+  return null
+}
+
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const assessmentId = await resolveAssessmentId(params.id)
+  if (!assessmentId) return { title: 'Resultado não encontrado' }
+
   const a = await prisma.assessment.findUnique({
-    where: { id: params.id },
+    where: { id: assessmentId },
     include: { employee: { select: { name: true } } },
   })
   if (!a) return { title: 'Resultado não encontrado' }
@@ -649,8 +683,13 @@ interface PageProps {
 export default async function PublicResultPage({ params, searchParams }: PageProps) {
   const isPrint = searchParams.print === '1'
 
+  // Resolve o ID — pode vir como Assessment.id, Result.id ou Report.id.
+  // Garante que emails antigos (que vinham com Result.id) sigam funcionando.
+  const assessmentId = await resolveAssessmentId(params.id)
+  if (!assessmentId) return notFound()
+
   const assessment = await prisma.assessment.findUnique({
-    where: { id: params.id },
+    where: { id: assessmentId },
     include: {
       employee: { select: { name: true, email: true } },
       company:  { select: { name: true } },
@@ -699,7 +738,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
             </div>
             <div className="flex items-center gap-2">
               <CopyLinkButton />
-              <PrintButton assessmentId={params.id} />
+              <PrintButton assessmentId={assessmentId} />
             </div>
           </div>
         </header>
