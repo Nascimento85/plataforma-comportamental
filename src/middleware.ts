@@ -22,6 +22,7 @@ const PUBLIC_ROUTES = [
   '/api/auth/reset-password',
   '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
   '/api/cron',             // crons protegidos por Bearer CRON_SECRET, não por cookie
+  '/api/premium/checkout', // checkout chamado da página pública /result/[id]
 ]
 
 export function middleware(request: NextRequest) {

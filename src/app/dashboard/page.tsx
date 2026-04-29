@@ -6,7 +6,7 @@ import { StatCard } from '@/components/ui/design-system'
 import DiscoveryMapCard from './_components/DiscoveryMapCard'
 import RecentActivityCard from './_components/RecentActivityCard'
 import PassportWidget from '@/components/passport/PassportWidget'
-import { getPassportState } from '@/lib/passport'
+import { getPassportState, WELCOME_BONUS_AMOUNT, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
 import ArchetypeHero from './_components/ArchetypeHero'
 import OnboardingHero from './_components/OnboardingHero'
 import WelcomeModal from './_components/WelcomeModal'
@@ -104,7 +104,12 @@ export default async function DashboardPage() {
           (controlado por localStorage no cliente)
       ══════════════════════════════════════════════════════ */}
       {!isProfileRewarded && (
-        <WelcomeModal companyId={companyId} firstName={firstName} />
+        <WelcomeModal
+          companyId={companyId}
+          firstName={firstName}
+          initialCredits={WELCOME_BONUS_AMOUNT}
+          bonusCredits={PROFILE_COMPLETE_AMOUNT}
+        />
       )}
 
       {/* ══════════════════════════════════════════════════════
@@ -142,7 +147,7 @@ export default async function DashboardPage() {
           BANNER GAMIFICAÇÃO — só aparece se ainda não resgatou +6 créditos
       ══════════════════════════════════════════════════════ */}
       {!isProfileRewarded && (
-        <ProfileGamificationBanner completion={profileCompletion} />
+        <ProfileGamificationBanner completion={profileCompletion} bonusAmount={PROFILE_COMPLETE_AMOUNT} />
       )}
 
       {/* ══════════════════════════════════════════════════════

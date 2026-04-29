@@ -1,11 +1,11 @@
 // ============================================================
-// ENGINE — 4 Temperamentos
+// ENGINE, 4 Temperamentos
 // ============================================================
 // 25 questões, 4 opções por questão (A/C/I/O)
 // Cada opção corresponde a um temperamento:
 //   A = Colérico   | C = Sanguíneo
 //   I = Melancólico | O = Fleumático
-// Pontuação: soma simples — max 25 por temperamento
+// Pontuação: soma simples, max 25 por temperamento
 // Perfil predominante = maior pontuação
 // ============================================================
 
@@ -419,7 +419,7 @@ export const TEMPERAMENT_PROFILES: Record<TemperamentType, TemperamentProfile> =
 }
 
 // ============================================================
-// QUESTÕES V2 — mesmas dimensões A/C/I/O, formulação alternativa
+// QUESTÕES V2, mesmas dimensões A/C/I/O, formulação alternativa
 // ============================================================
 export const TEMPERAMENT_QUESTIONS_V2: TemperamentQuestion[] = [
   {
@@ -668,24 +668,24 @@ export const TEMPERAMENT_QUESTIONS_V2: TemperamentQuestion[] = [
     options: {
       A: 'Precioso demais para desperdiçar',
       C: 'Algo para aproveitar com outras pessoas',
-      I: 'Relativo — depende do que estou criando',
+      I: 'Relativo, depende do que estou criando',
       O: 'Algo que deve ser bem administrado',
     },
   },
 ]
 
 // ============================================================
-// QUESTÕES V3 — situacionais e metafóricas, mesmas dimensões
+// QUESTÕES V3, situacionais e metafóricas, mesmas dimensões
 // ============================================================
 export const TEMPERAMENT_QUESTIONS_V3: TemperamentQuestion[] = [
   {
     id: 1,
     question: 'Se eu fosse um animal, seria...',
     options: {
-      A: 'Um leão — liderança e poder',
-      C: 'Um golfinho — sociável e alegre',
-      I: 'Uma águia — visão ampla e solitária',
-      O: 'Uma tartaruga — calma e constante',
+      A: 'Um leão, liderança e poder',
+      C: 'Um golfinho, sociável e alegre',
+      I: 'Uma águia, visão ampla e solitária',
+      O: 'Uma tartaruga, calma e constante',
     },
   },
   {
@@ -862,10 +862,10 @@ export const TEMPERAMENT_QUESTIONS_V3: TemperamentQuestion[] = [
     id: 19,
     question: 'Numa situação ambígua, me sinto...',
     options: {
-      A: 'Estimulado — vejo uma oportunidade',
-      C: 'Curioso — quero ouvir o que os outros acham',
-      I: 'Instigado — quero explorar as possibilidades',
-      O: 'Desconfortável — prefiro clareza',
+      A: 'Estimulado, vejo uma oportunidade',
+      C: 'Curioso, quero ouvir o que os outros acham',
+      I: 'Instigado, quero explorar as possibilidades',
+      O: 'Desconfortável, prefiro clareza',
     },
   },
   {

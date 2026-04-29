@@ -1,6 +1,6 @@
 // ============================================================
 // Engine: Arquétipos Femininos (7 tipos)
-// 49 afirmações — 7 por arquétipo — escala 1 a 5
+// 49 afirmações, 7 por arquétipo, escala 1 a 5
 // ============================================================
 
 export type ArchetypeFeminineType =
@@ -38,23 +38,23 @@ export const ARCHETYPE_FEMININE_QUESTIONS: ArchetypeFeminineQuestion[] = [
   { id: 17, text: 'Quando defino um objetivo, tenho foco e determinação até alcançá-lo.', archetype: 'HUNTRESS' },
   { id: 18, text: 'Me sinto poderosa quando estou no controle da minha trajetória e das minhas decisões.', archetype: 'HUNTRESS' },
   { id: 19, text: 'Prefiro resolver problemas sozinha antes de pedir ajuda.', archetype: 'HUNTRESS' },
-  { id: 20, text: 'Não me esquivo de ambientes competitivos — eles me motivam a dar o meu melhor.', archetype: 'HUNTRESS' },
+  { id: 20, text: 'Não me esquivo de ambientes competitivos, eles me motivam a dar o meu melhor.', archetype: 'HUNTRESS' },
   { id: 21, text: 'Às vezes minha intensidade e foco podem parecer frios para as pessoas mais emotivas.', archetype: 'HUNTRESS' },
 
   // ── Soberana (SOVEREIGN) ────────────────────────────────
   { id: 22, text: 'Tenho uma presença natural que faz as pessoas me respeitarem e seguirem.', archetype: 'SOVEREIGN' },
   { id: 23, text: 'Assumir a responsabilidade pelo coletivo é algo que faço com orgulho.', archetype: 'SOVEREIGN' },
   { id: 24, text: 'Tomo decisões difíceis com clareza, mesmo quando isso é desconfortável para todos.', archetype: 'SOVEREIGN' },
-  { id: 25, text: 'Construir algo que dure além de mim — um legado — é uma das minhas maiores motivações.', archetype: 'SOVEREIGN' },
+  { id: 25, text: 'Construir algo que dure além de mim, um legado, é uma das minhas maiores motivações.', archetype: 'SOVEREIGN' },
   { id: 26, text: 'Confio no meu julgamento mesmo quando os outros discordam.', archetype: 'SOVEREIGN' },
   { id: 27, text: 'Me sinto responsável pelo bem-estar e pelo desenvolvimento das pessoas que lidero.', archetype: 'SOVEREIGN' },
   { id: 28, text: 'Tenho clareza sobre meus valores e raramente os abro mão por pressão social.', archetype: 'SOVEREIGN' },
 
   // ── Amante (LOVER) ──────────────────────────────────────
-  { id: 29, text: 'Busco conexões profundas e intensas — relacionamentos superficiais não me satisfazem.', archetype: 'LOVER' },
+  { id: 29, text: 'Busco conexões profundas e intensas, relacionamentos superficiais não me satisfazem.', archetype: 'LOVER' },
   { id: 30, text: 'A beleza, a estética e o prazer são dimensões importantes da minha vida.', archetype: 'LOVER' },
-  { id: 31, text: 'Me entrego de forma intensa em tudo que faço — trabalho, relacionamentos e paixões.', archetype: 'LOVER' },
-  { id: 32, text: 'Sinto as emoções de forma muito intensa — tanto a alegria quanto a dor.', archetype: 'LOVER' },
+  { id: 31, text: 'Me entrego de forma intensa em tudo que faço, trabalho, relacionamentos e paixões.', archetype: 'LOVER' },
+  { id: 32, text: 'Sinto as emoções de forma muito intensa, tanto a alegria quanto a dor.', archetype: 'LOVER' },
   { id: 33, text: 'Ser desejada, valorizada e amada é importante para o meu bem-estar.', archetype: 'LOVER' },
   { id: 34, text: 'Prefiro uma vida intensa e apaixonada do que uma vida segura e sem emoção.', archetype: 'LOVER' },
   { id: 35, text: 'Às vezes me perco em relacionamentos ou projetos por me envolver demais.', archetype: 'LOVER' },
@@ -72,9 +72,9 @@ export const ARCHETYPE_FEMININE_QUESTIONS: ArchetypeFeminineQuestion[] = [
   { id: 43, text: 'Tenho uma conexão profunda com minha intuição e confio nela mesmo sem explicação racional.', archetype: 'CRONE' },
   { id: 44, text: 'Experiências de perda e transformação me tornaram mais forte e profunda.', archetype: 'CRONE' },
   { id: 45, text: 'Tenho um lado espiritual ou filosófico que me conecta a algo maior do que eu mesma.', archetype: 'CRONE' },
-  { id: 46, text: 'Sinto-me confortável com os ciclos de fim e começo — com o que precisa ser soltado.', archetype: 'CRONE' },
+  { id: 46, text: 'Sinto-me confortável com os ciclos de fim e começo, com o que precisa ser soltado.', archetype: 'CRONE' },
   { id: 47, text: 'Prefiro a profundidade e a solidão de vez em quando à superficialidade constante.', archetype: 'CRONE' },
-  { id: 48, text: 'Tenho uma perspectiva de vida que vai além do imediato — penso em legado e impacto.', archetype: 'CRONE' },
+  { id: 48, text: 'Tenho uma perspectiva de vida que vai além do imediato, penso em legado e impacto.', archetype: 'CRONE' },
   { id: 49, text: 'Às vezes me sinto incompreendida porque opero em uma frequência que poucos alcançam.', archetype: 'CRONE' },
 ]
 
@@ -115,8 +115,8 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Pode aceitar situações ruins por evitar conflito',
       'A ingenuidade pode ser explorada por outros',
     ],
-    description: 'A Donzela é a energia do começo — receptiva, aberta e cheia de possibilidades. Não é fraqueza; é a coragem de se permitir ser tocada pelo mundo sem se fechar. Quando integrada, combina essa abertura com limites saudáveis e torna-se irresistivelmente autêntica.',
-    activationTip: 'Pratique dizer sim ao que a entusiasma genuinamente — e aprenda a dizer não sem culpa ao que a diminui.',
+    description: 'A Donzela é a energia do começo, receptiva, aberta e cheia de possibilidades. Não é fraqueza; é a coragem de se permitir ser tocada pelo mundo sem se fechar. Quando integrada, combina essa abertura com limites saudáveis e torna-se irresistivelmente autêntica.',
+    activationTip: 'Pratique dizer sim ao que a entusiasma genuinamente, e aprenda a dizer não sem culpa ao que a diminui.',
   },
 
   MOTHER: {
@@ -139,7 +139,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Dificuldade em estabelecer limites com quem cuida',
       'Pode criar dependência onde deveria fomentar autonomia',
     ],
-    description: 'A Mãe é o arquétipo do cuidado em sua forma mais poderosa. Sua força não está em se sacrificar — está em criar as condições para que outros floresçam. Quando equilibrada, cuida com limites, nutre sem criar dependência e encontra tempo para se renovar.',
+    description: 'A Mãe é o arquétipo do cuidado em sua forma mais poderosa. Sua força não está em se sacrificar, está em criar as condições para que outros floresçam. Quando equilibrada, cuida com limites, nutre sem criar dependência e encontra tempo para se renovar.',
     activationTip: 'O cuidado começa em si mesma. Pratique nutrir sua própria essência com a mesma dedicação que oferece ao mundo.',
   },
 
@@ -147,7 +147,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
     name: 'A Caçadora',
     title: 'A Força do Foco',
     goddess: 'Ártemis',
-    tagline: 'Independência não é solidão — é soberania sobre a própria vida.',
+    tagline: 'Independência não é solidão, é soberania sobre a própria vida.',
     essence: 'Foco e autonomia',
     keyword: 'Independência',
     shadow: 'Distanciamento emocional e frieza relacional.',
@@ -163,7 +163,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Relacionamentos podem sofrer pela prioridade ao foco',
       'Pode suprimir necessidades emocionais por eficiência',
     ],
-    description: 'A Caçadora é a arquétipo da mulher que traça seu próprio caminho sem pedir permissão. Sua força está na clareza de propósito e na recusa de deixar que o olhar alheio defina seus limites. Quando integrada, combina foco com conexão — e torna-se uma líder que inspira sem intimidar.',
+    description: 'A Caçadora é a arquétipo da mulher que traça seu próprio caminho sem pedir permissão. Sua força está na clareza de propósito e na recusa de deixar que o olhar alheio defina seus limites. Quando integrada, combina foco com conexão, e torna-se uma líder que inspira sem intimidar.',
     activationTip: 'Permita-se ser vulnerável com pessoas de confiança. A força real inclui a coragem de mostrar o que está por baixo da armadura.',
   },
 
@@ -171,7 +171,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
     name: 'A Soberana',
     title: 'A Força da Liderança',
     goddess: 'Hera',
-    tagline: 'Liderar não é controlar — é criar condições para que o melhor emerja.',
+    tagline: 'Liderar não é controlar, é criar condições para que o melhor emerja.',
     essence: 'Poder e estrutura',
     keyword: 'Liderança',
     shadow: 'Autoritarismo e arrogância de poder.',
@@ -187,7 +187,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Tendência ao perfeccionismo que pode paralisar a equipe',
       'Pode confundir controle com liderança',
     ],
-    description: 'A Soberana é a arquétipo da mulher que lidera com autoridade legítima — não pelo medo que inspira, mas pela clareza que oferece. Sua força está em saber quem é, o que defende e para onde vai. Quando integrada, lidera com poder e humildade, criando impérios que perduram.',
+    description: 'A Soberana é a arquétipo da mulher que lidera com autoridade legítima, não pelo medo que inspira, mas pela clareza que oferece. Sua força está em saber quem é, o que defende e para onde vai. Quando integrada, lidera com poder e humildade, criando impérios que perduram.',
     activationTip: 'Verdadeira soberania é interna. Pratique liderar a partir dos seus valores, não do seu ego.',
   },
 
@@ -211,7 +211,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Dificuldade em manter equilíbrio e estabelecer limites',
       'Busca de validação pode criar vulnerabilidade',
     ],
-    description: 'A Amante vive com o coração aberto ao mundo. Não busca apenas prazer — busca significado através da conexão e da intensidade. Quando integrada, ama com plenitude sem se perder, e cria ao seu redor um campo de magnetismo e presença que transforma tudo que toca.',
+    description: 'A Amante vive com o coração aberto ao mundo. Não busca apenas prazer, busca significado através da conexão e da intensidade. Quando integrada, ama com plenitude sem se perder, e cria ao seu redor um campo de magnetismo e presença que transforma tudo que toca.',
     activationTip: 'Cultive amor próprio antes de tudo. A conexão mais transformadora começa com a relação que você tem consigo mesma.',
   },
 
@@ -235,7 +235,7 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Pode parecer fria ou arrogante ao discordar',
       'Paralisia analítica diante de decisões com muitas variáveis',
     ],
-    description: 'A Sábia não busca apenas saber — busca compreender para poder transformar. É a conselheira, a estrategista, a mentora. Quando integrada, equilibra razão e intuição, e usa seu conhecimento não para se destacar, mas para elevar os que estão ao seu redor.',
+    description: 'A Sábia não busca apenas saber, busca compreender para poder transformar. É a conselheira, a estrategista, a mentora. Quando integrada, equilibra razão e intuição, e usa seu conhecimento não para se destacar, mas para elevar os que estão ao seu redor.',
     activationTip: 'Permita que sua sabedoria inclua a sabedoria emocional. O coração sabe o que a mente ainda está processando.',
   },
 
@@ -259,8 +259,8 @@ export const ARCHETYPE_FEMININE_PROFILES: Record<ArchetypeFeminineType, Archetyp
       'Dificuldade em se conectar com quem está em fases mais leves',
       'Pode ser percebida como intensa ou soturna',
     ],
-    description: 'A Anciã é a arquétipo da mulher que foi transformada pelo fogo da vida — e que emergiu não apenas sobrevivente, mas sábia. Sua força está na profundidade que só quem atravessou seus próprios abismos possui. Quando integrada, é um farol para outras mulheres em jornada.',
-    activationTip: 'Compartilhe sua profundidade com quem está pronto para recebê-la. Sua sabedoria não é para ser guardada — é para iluminar o caminho de outras.',
+    description: 'A Anciã é a arquétipo da mulher que foi transformada pelo fogo da vida, e que emergiu não apenas sobrevivente, mas sábia. Sua força está na profundidade que só quem atravessou seus próprios abismos possui. Quando integrada, é um farol para outras mulheres em jornada.',
+    activationTip: 'Compartilhe sua profundidade com quem está pronto para recebê-la. Sua sabedoria não é para ser guardada, é para iluminar o caminho de outras.',
   },
 }
 
@@ -319,7 +319,7 @@ export function calculateArchetypeFeminine(answers: ArchetypeFeminineAnswer[]): 
 }
 
 // ============================================================
-// VARIAÇÃO V2 — Reformulações alternativas (mesmos id/archetype)
+// VARIAÇÃO V2, Reformulações alternativas (mesmos id/archetype)
 // ============================================================
 export const ARCHETYPE_FEMININE_QUESTIONS_V2: ArchetypeFeminineQuestion[] = [
   // ── Donzela (MAIDEN) ────────────────────────────────────
@@ -334,23 +334,23 @@ export const ARCHETYPE_FEMININE_QUESTIONS_V2: ArchetypeFeminineQuestion[] = [
   // ── Mãe (MOTHER) ─────────────────────────────────────────
   { id: 8,  text: 'Contribuir para o crescimento e o florescimento de outras pessoas é o que me dá mais sentido.', archetype: 'MOTHER' },
   { id: 9,  text: 'Quando vejo alguém vulnerável ou em dificuldades, algo em mim se ativa automaticamente para ajudar.', archetype: 'MOTHER' },
-  { id: 10, text: 'Cuidar dos outros antes de mim não é um sacrifício — é simplesmente como funciono.', archetype: 'MOTHER' },
+  { id: 10, text: 'Cuidar dos outros antes de mim não é um sacrifício, é simplesmente como funciono.', archetype: 'MOTHER' },
   { id: 11, text: 'Criar espaços onde as pessoas se sentem seguras para ser quem são é algo que faço com prazer.', archetype: 'MOTHER' },
   { id: 12, text: 'Quando alguém próximo sofre e eu não consigo ajudar, sinto uma angústia genuína e persistente.', archetype: 'MOTHER' },
-  { id: 13, text: 'Percebo com facilidade o estado emocional das pessoas ao meu redor — mesmo quando não dizem nada.', archetype: 'MOTHER' },
+  { id: 13, text: 'Percebo com facilidade o estado emocional das pessoas ao meu redor, mesmo quando não dizem nada.', archetype: 'MOTHER' },
   { id: 14, text: 'Já me vi negligenciando minhas próprias necessidades porque estava completamente voltada para as dos outros.', archetype: 'MOTHER' },
 
   // ── Caçadora (HUNTRESS) ─────────────────────────────────
   { id: 15, text: 'Prefiro muito mais conquistar algo por conta própria do que receber de presente ou depender de alguém.', archetype: 'HUNTRESS' },
-  { id: 16, text: 'Minha independência não é um luxo — é uma condição essencial para o meu bem-estar.', archetype: 'HUNTRESS' },
+  { id: 16, text: 'Minha independência não é um luxo, é uma condição essencial para o meu bem-estar.', archetype: 'HUNTRESS' },
   { id: 17, text: 'Quando tenho um objetivo claro, meu foco e minha determinação são quase inabaláveis.', archetype: 'HUNTRESS' },
   { id: 18, text: 'Me sinto mais poderosa quando estou no controle das minhas escolhas e do meu caminho.', archetype: 'HUNTRESS' },
   { id: 19, text: 'Minha tendência é tentar resolver o problema sozinha antes de buscar ajuda nos outros.', archetype: 'HUNTRESS' },
-  { id: 20, text: 'Ambientes competitivos não me amedruntam — eles me estimulam a extrair o meu melhor.', archetype: 'HUNTRESS' },
-  { id: 21, text: 'Minha intensidade e objetividade às vezes parecem frias para pessoas mais emotivas — e eu entendo isso.', archetype: 'HUNTRESS' },
+  { id: 20, text: 'Ambientes competitivos não me amedruntam, eles me estimulam a extrair o meu melhor.', archetype: 'HUNTRESS' },
+  { id: 21, text: 'Minha intensidade e objetividade às vezes parecem frias para pessoas mais emotivas, e eu entendo isso.', archetype: 'HUNTRESS' },
 
   // ── Soberana (SOVEREIGN) ────────────────────────────────
-  { id: 22, text: 'As pessoas naturalmente me respeitam e me seguem — não preciso exigir essa postura.', archetype: 'SOVEREIGN' },
+  { id: 22, text: 'As pessoas naturalmente me respeitam e me seguem, não preciso exigir essa postura.', archetype: 'SOVEREIGN' },
   { id: 23, text: 'Assumir responsabilidade pelo coletivo e pelo bem comum é algo que faço com orgulho genuíno.', archetype: 'SOVEREIGN' },
   { id: 24, text: 'Quando preciso tomar uma decisão difícil que afeta outros, sou capaz de fazê-lo com clareza.', archetype: 'SOVEREIGN' },
   { id: 25, text: 'Construir um legado que dure além de mim é uma das motivações mais profundas da minha vida.', archetype: 'SOVEREIGN' },
@@ -359,17 +359,17 @@ export const ARCHETYPE_FEMININE_QUESTIONS_V2: ArchetypeFeminineQuestion[] = [
   { id: 28, text: 'Quando valores essenciais estão em jogo, não os abro mão por pressão social ou conveniência.', archetype: 'SOVEREIGN' },
 
   // ── Amante (LOVER) ──────────────────────────────────────
-  { id: 29, text: 'Relacionamentos superficiais ou conexões vazias não me satisfazem — preciso de profundidade real.', archetype: 'LOVER' },
-  { id: 30, text: 'A beleza — em qualquer forma — tem um poder genuíno sobre mim: me afeta e me inspira.', archetype: 'LOVER' },
-  { id: 31, text: 'Me entrego completamente naquilo que amo — sem reservas e sem meias-medidas.', archetype: 'LOVER' },
-  { id: 32, text: 'Minhas emoções são intensas — tanto a alegria quanto a tristeza me atravessam de forma profunda.', archetype: 'LOVER' },
+  { id: 29, text: 'Relacionamentos superficiais ou conexões vazias não me satisfazem, preciso de profundidade real.', archetype: 'LOVER' },
+  { id: 30, text: 'A beleza, em qualquer forma, tem um poder genuíno sobre mim: me afeta e me inspira.', archetype: 'LOVER' },
+  { id: 31, text: 'Me entrego completamente naquilo que amo, sem reservas e sem meias-medidas.', archetype: 'LOVER' },
+  { id: 32, text: 'Minhas emoções são intensas, tanto a alegria quanto a tristeza me atravessam de forma profunda.', archetype: 'LOVER' },
   { id: 33, text: 'Ser valorizada, desejada e amada é uma necessidade real para o meu bem-estar emocional.', archetype: 'LOVER' },
   { id: 34, text: 'Uma vida intensa e apaixonada é muito mais atraente para mim do que uma vida segura e sem emoção.', archetype: 'LOVER' },
   { id: 35, text: 'Já me perdi em relacionamentos ou projetos porque me envolvi além do que era saudável.', archetype: 'LOVER' },
 
   // ── Sábia (WISE) ─────────────────────────────────────────
-  { id: 36, text: 'Antes de agir, preciso entender — não me sinto confortável tomando decisões sem análise sólida.', archetype: 'WISE' },
-  { id: 37, text: 'As pessoas costumam me procurar quando precisam de clareza — percebem que penso com cuidado.', archetype: 'WISE' },
+  { id: 36, text: 'Antes de agir, preciso entender, não me sinto confortável tomando decisões sem análise sólida.', archetype: 'WISE' },
+  { id: 37, text: 'As pessoas costumam me procurar quando precisam de clareza, percebem que penso com cuidado.', archetype: 'WISE' },
   { id: 38, text: 'Aprender e crescer intelectualmente é uma necessidade, não apenas uma preferência.', archetype: 'WISE' },
   { id: 39, text: 'Tenho facilidade de perceber o que está por trás de situações que outros processam de forma superficial.', archetype: 'WISE' },
   { id: 40, text: 'Prefiro análise e raciocínio lógico a tomar decisões puramente pelo feeling.', archetype: 'WISE' },
@@ -377,24 +377,24 @@ export const ARCHETYPE_FEMININE_QUESTIONS_V2: ArchetypeFeminineQuestion[] = [
   { id: 42, text: 'Para manter objetividade, às vezes preciso me distanciar emocionalmente de situações que me afetam.', archetype: 'WISE' },
 
   // ── Anciã / Mística (CRONE) ─────────────────────────────
-  { id: 43, text: 'Confio na minha intuição com segurança — mesmo quando não consigo explicar racionalmente o que sinto.', archetype: 'CRONE' },
+  { id: 43, text: 'Confio na minha intuição com segurança, mesmo quando não consigo explicar racionalmente o que sinto.', archetype: 'CRONE' },
   { id: 44, text: 'Perdas e transformações difíceis me aprofundaram de formas que experiências fáceis nunca poderiam.', archetype: 'CRONE' },
   { id: 45, text: 'Há em mim uma dimensão espiritual ou filosófica que me conecta a algo maior do que minha vida cotidiana.', archetype: 'CRONE' },
-  { id: 46, text: 'Os finais e os começos me parecem naturais — sei soltar o que precisa ser liberado.', archetype: 'CRONE' },
+  { id: 46, text: 'Os finais e os começos me parecem naturais, sei soltar o que precisa ser liberado.', archetype: 'CRONE' },
   { id: 47, text: 'De vez em quando, a solitude e a profundidade valem muito mais para mim do que qualquer companhia superficial.', archetype: 'CRONE' },
-  { id: 48, text: 'Penso em impacto de longo prazo — o legado que quero deixar é mais importante do que o reconhecimento imediato.', archetype: 'CRONE' },
+  { id: 48, text: 'Penso em impacto de longo prazo, o legado que quero deixar é mais importante do que o reconhecimento imediato.', archetype: 'CRONE' },
   { id: 49, text: 'Às vezes me sinto operando em uma frequência de percepção que poucas pessoas ao meu redor conseguem acompanhar.', archetype: 'CRONE' },
 ]
 
 // ============================================================
-// VARIAÇÃO V3 — Cenários situacionais (mesmos id/archetype)
+// VARIAÇÃO V3, Cenários situacionais (mesmos id/archetype)
 // ============================================================
 export const ARCHETYPE_FEMININE_QUESTIONS_V3: ArchetypeFeminineQuestion[] = [
   // ── Donzela (MAIDEN) ────────────────────────────────────
   { id: 1,  text: 'Ao conhecer alguém novo, você naturalmente parte do pressuposto de que a pessoa tem boas intenções.', archetype: 'MAIDEN' },
   { id: 2,  text: 'Em situações cotidianas, você frequentemente imagina versões mais belas ou perfeitas das coisas.', archetype: 'MAIDEN' },
-  { id: 3,  text: 'Quando surge uma nova oportunidade ou começo, você sente uma animação imediata — mesmo sem ter clareza total.', archetype: 'MAIDEN' },
-  { id: 4,  text: 'Pequenos detalhes do dia a dia — uma flor, um pôr do sol, um gesto gentil — ainda te encantam genuinamente.', archetype: 'MAIDEN' },
+  { id: 3,  text: 'Quando surge uma nova oportunidade ou começo, você sente uma animação imediata, mesmo sem ter clareza total.', archetype: 'MAIDEN' },
+  { id: 4,  text: 'Pequenos detalhes do dia a dia, uma flor, um pôr do sol, um gesto gentil, ainda te encantam genuinamente.', archetype: 'MAIDEN' },
   { id: 5,  text: 'Quando enfrenta decisões difíceis, você se sente mais segura ao ter o apoio de pessoas em quem confia.', archetype: 'MAIDEN' },
   { id: 6,  text: 'Em situações de conflito, você instintivamente busca o caminho que preserve a harmonia e o relacionamento.', archetype: 'MAIDEN' },
   { id: 7,  text: 'Você já ficou em situações desconfortáveis mais tempo do que devia porque não queria decepcionar alguém.', archetype: 'MAIDEN' },
@@ -402,38 +402,38 @@ export const ARCHETYPE_FEMININE_QUESTIONS_V3: ArchetypeFeminineQuestion[] = [
   // ── Mãe (MOTHER) ─────────────────────────────────────────
   { id: 8,  text: 'Quando vê alguém crescendo e florescendo graças ao seu suporte, você sente uma realização profunda.', archetype: 'MOTHER' },
   { id: 9,  text: 'Em qualquer grupo, você tende a ser a primeira a perceber quem está precisando de atenção ou apoio.', archetype: 'MOTHER' },
-  { id: 10, text: 'Colocar o bem-estar dos outros à frente do seu é algo que você faz naturalmente — quase sem perceber.', archetype: 'MOTHER' },
+  { id: 10, text: 'Colocar o bem-estar dos outros à frente do seu é algo que você faz naturalmente, quase sem perceber.', archetype: 'MOTHER' },
   { id: 11, text: 'Você tende a criar, em qualquer ambiente que frequenta, uma atmosfera de acolhimento e segurança.', archetype: 'MOTHER' },
   { id: 12, text: 'Quando alguém que você se importa sofre e você não consegue ajudar, sente uma dor genuína.', archetype: 'MOTHER' },
   { id: 13, text: 'Você consegue perceber o estado emocional das pessoas ao redor mesmo quando elas não dizem nada.', archetype: 'MOTHER' },
   { id: 14, text: 'Você já chegou ao limite do esgotamento porque estava tão ocupada cuidando dos outros que esqueceu de você.', archetype: 'MOTHER' },
 
   // ── Caçadora (HUNTRESS) ─────────────────────────────────
-  { id: 15, text: 'Quando conquista algo por conta própria — sem ajuda — a satisfação é muito maior do que quando recebe.', archetype: 'HUNTRESS' },
+  { id: 15, text: 'Quando conquista algo por conta própria, sem ajuda, a satisfação é muito maior do que quando recebe.', archetype: 'HUNTRESS' },
   { id: 16, text: 'Quando sua independência está sendo limitada de alguma forma, você sente uma necessidade urgente de recuperá-la.', archetype: 'HUNTRESS' },
-  { id: 17, text: 'Quando define uma meta, dificilmente para antes de alcançá-la — sua determinação é uma das suas marcas.', archetype: 'HUNTRESS' },
+  { id: 17, text: 'Quando define uma meta, dificilmente para antes de alcançá-la, sua determinação é uma das suas marcas.', archetype: 'HUNTRESS' },
   { id: 18, text: 'Você se sente mais em si mesma quando está tomando suas próprias decisões e traçando seu próprio caminho.', archetype: 'HUNTRESS' },
   { id: 19, text: 'Quando enfrenta um problema, sua tendência é tentar resolvê-lo sozinha antes de buscar ajuda.', archetype: 'HUNTRESS' },
-  { id: 20, text: 'Ambientes competitivos não te intimidam — você tende a se motivar ainda mais quando há uma disputa real.', archetype: 'HUNTRESS' },
-  { id: 21, text: 'Você já recebeu o feedback de que é intensa ou difícil de se aproximar — e entende de onde isso vem.', archetype: 'HUNTRESS' },
+  { id: 20, text: 'Ambientes competitivos não te intimidam, você tende a se motivar ainda mais quando há uma disputa real.', archetype: 'HUNTRESS' },
+  { id: 21, text: 'Você já recebeu o feedback de que é intensa ou difícil de se aproximar, e entende de onde isso vem.', archetype: 'HUNTRESS' },
 
   // ── Soberana (SOVEREIGN) ────────────────────────────────
   { id: 22, text: 'Quando entra num novo ambiente, as pessoas tendem a te enxergar como alguém de autoridade naturalmente.', archetype: 'SOVEREIGN' },
-  { id: 23, text: 'Você sente responsabilidade genuína pelo bem do coletivo — não apenas pelo seu próprio sucesso.', archetype: 'SOVEREIGN' },
+  { id: 23, text: 'Você sente responsabilidade genuína pelo bem do coletivo, não apenas pelo seu próprio sucesso.', archetype: 'SOVEREIGN' },
   { id: 24, text: 'Em momentos de crise que exigem decisões difíceis, você consegue agir com clareza mesmo sob pressão.', archetype: 'SOVEREIGN' },
   { id: 25, text: 'O que te motiva a longo prazo é construir algo que dure e que impacte além da sua própria vida.', archetype: 'SOVEREIGN' },
   { id: 26, text: 'Quando a maioria discorda de você mas você sabe que está certa, mantém sua posição com serenidade.', archetype: 'SOVEREIGN' },
   { id: 27, text: 'Você assume responsabilidade pelo desenvolvimento das pessoas que estão sob sua liderança.', archetype: 'SOVEREIGN' },
-  { id: 28, text: 'Quando seus valores estão em jogo, você não os negocia — mesmo que isso traga conflito.', archetype: 'SOVEREIGN' },
+  { id: 28, text: 'Quando seus valores estão em jogo, você não os negocia, mesmo que isso traga conflito.', archetype: 'SOVEREIGN' },
 
   // ── Amante (LOVER) ──────────────────────────────────────
   { id: 29, text: 'Quando percebe que um relacionamento ou conexão é superficial, você perde o interesse rapidamente.', archetype: 'LOVER' },
-  { id: 30, text: 'Ambientes com beleza estética — seja arte, música, natureza ou design — te afetam de forma real e física.', archetype: 'LOVER' },
-  { id: 31, text: 'Quando você decide se envolver em algo, faz isso com toda a sua energia — sem meias-medidas.', archetype: 'LOVER' },
+  { id: 30, text: 'Ambientes com beleza estética, seja arte, música, natureza ou design, te afetam de forma real e física.', archetype: 'LOVER' },
+  { id: 31, text: 'Quando você decide se envolver em algo, faz isso com toda a sua energia, sem meias-medidas.', archetype: 'LOVER' },
   { id: 32, text: 'Você sente emoções com uma intensidade que nem sempre as pessoas ao seu redor conseguem acompanhar.', archetype: 'LOVER' },
   { id: 33, text: 'Sentir-se desejada e valorizada pelas pessoas que importam para você é algo essencial ao seu bem-estar.', archetype: 'LOVER' },
   { id: 34, text: 'Uma vida com paixão, beleza e profundidade é muito mais atraente para você do que estabilidade sem emoção.', archetype: 'LOVER' },
-  { id: 35, text: 'Você já se envolveu em algo com tal intensidade que perdeu a perspectiva — e só percebeu depois.', archetype: 'LOVER' },
+  { id: 35, text: 'Você já se envolveu em algo com tal intensidade que perdeu a perspectiva, e só percebeu depois.', archetype: 'LOVER' },
 
   // ── Sábia (WISE) ─────────────────────────────────────────
   { id: 36, text: 'Antes de tomar uma decisão importante, você naturalmente analisa todos os ângulos e implicações.', archetype: 'WISE' },
@@ -445,12 +445,12 @@ export const ARCHETYPE_FEMININE_QUESTIONS_V3: ArchetypeFeminineQuestion[] = [
   { id: 42, text: 'Para pensar com clareza em situações que te afetam emocionalmente, você precisa de algum distanciamento.', archetype: 'WISE' },
 
   // ── Anciã / Mística (CRONE) ─────────────────────────────
-  { id: 43, text: 'Quando sua intuição aponta algo fortemente, você a segue — mesmo sem conseguir explicar o motivo.', archetype: 'CRONE' },
+  { id: 43, text: 'Quando sua intuição aponta algo fortemente, você a segue, mesmo sem conseguir explicar o motivo.', archetype: 'CRONE' },
   { id: 44, text: 'Olhando para as fases mais difíceis da sua vida, você percebe que elas te transformaram de forma profunda.', archetype: 'CRONE' },
   { id: 45, text: 'Você tem uma vida interior rica e uma dimensão espiritual ou filosófica que te ancora nos momentos difíceis.', archetype: 'CRONE' },
-  { id: 46, text: 'Você consegue encerrar ciclos com mais naturalidade do que a maioria — sabe quando é hora de soltar.', archetype: 'CRONE' },
+  { id: 46, text: 'Você consegue encerrar ciclos com mais naturalidade do que a maioria, sabe quando é hora de soltar.', archetype: 'CRONE' },
   { id: 47, text: 'Há momentos em que prefere a profundidade da solidão criativa à companhia de conversas superficiais.', archetype: 'CRONE' },
-  { id: 48, text: 'Você pensa sobre legado com frequência — o impacto que suas ações terão além do seu tempo.', archetype: 'CRONE' },
+  { id: 48, text: 'Você pensa sobre legado com frequência, o impacto que suas ações terão além do seu tempo.', archetype: 'CRONE' },
   { id: 49, text: 'Você já teve a experiência de perceber algo com clareza que o ambiente ao seu redor ainda não conseguia ver.', archetype: 'CRONE' },
 ]
 

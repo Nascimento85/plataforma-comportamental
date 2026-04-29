@@ -1,5 +1,5 @@
 // ============================================================
-// ENGINE — Âncoras de Carreira (Edgar Schein, MIT)
+// ENGINE, Âncoras de Carreira (Edgar Schein, MIT)
 // ============================================================
 // 40 questões Likert 5 níveis (1=Discordo Totalmente, 5=Concordo Totalmente)
 // 8 âncoras × 5 questões cada (Q1+8k → âncora k+1)
@@ -69,7 +69,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     name: 'Competência Técnico-Funcional',
     tagline: 'A maestria como propósito.',
     summary:
-      'Você é movido pelo prazer da especialização. O que te realiza é tornar-se referência indiscutível na sua área de domínio técnico — não pela hierarquia, mas pela profundidade do conhecimento. Sua identidade profissional está atrelada ao "fazer com excelência".',
+      'Você é movido pelo prazer da especialização. O que te realiza é tornar-se referência indiscutível na sua área de domínio técnico, não pela hierarquia, mas pela profundidade do conhecimento. Sua identidade profissional está atrelada ao "fazer com excelência".',
     motivation:
       'Aprofundar conhecimento, dominar técnicas, ser consultado como autoridade no assunto. O reconhecimento que mais te toca é o respeito de pares qualificados.',
     aversion:
@@ -84,10 +84,10 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
       'Invista em certificações e cursos avançados na sua área',
       'Participe de conferências e congressos do seu campo',
       'Construa visibilidade técnica (palestras, artigos, código aberto)',
-      'Negocie carreira em Y na empresa — ganhar como gestor sem deixar a técnica',
+      'Negocie carreira em Y na empresa, ganhar como gestor sem deixar a técnica',
     ],
     managementApproach:
-      'Não promova essa pessoa para gestão pura — ofereça trilhas de especialista com reconhecimento financeiro equivalente. Invista em educação contínua e dê visibilidade técnica.',
+      'Não promova essa pessoa para gestão pura, ofereça trilhas de especialista com reconhecimento financeiro equivalente. Invista em educação contínua e dê visibilidade técnica.',
   },
   GG: {
     name: 'Gerência Geral',
@@ -95,7 +95,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     summary:
       'Você foi feito para conduzir. Sua satisfação vem de integrar pessoas, áreas e processos para gerar resultados de impacto amplo. Quanto maior a complexidade e mais altos os stakes, mais você se realiza. Visão sistêmica é seu diferencial.',
     motivation:
-      'Liderar pessoas, tomar decisões estratégicas, integrar funções, ser responsável por resultados globais. Subir na hierarquia não é vaidade — é onde sua energia rende mais.',
+      'Liderar pessoas, tomar decisões estratégicas, integrar funções, ser responsável por resultados globais. Subir na hierarquia não é vaidade, é onde sua energia rende mais.',
     aversion:
       'Ficar restrito a uma única área técnica ou funcional. Trabalhos que não te exponham a decisão estratégica, gestão de pessoas e responsabilidade ampla.',
     idealRoles: [
@@ -132,10 +132,10 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
       'Negocie modelos de trabalho com flexibilidade total de horário',
       'Construa portfólio próprio para ter opções de migração',
       'Desenvolva disciplina de auto-gestão (você é responsável pelos seus prazos)',
-      'Aprenda a comunicar resultados claramente — substituindo a "presença" por entregas visíveis',
+      'Aprenda a comunicar resultados claramente, substituindo a "presença" por entregas visíveis',
     ],
     managementApproach:
-      'Defina o "quê" (resultado esperado) com clareza absoluta — e libere totalmente o "como". Trabalho remoto, horários flexíveis e autonomia sobre projeto inteiro. Reuniões só por exceção.',
+      'Defina o "quê" (resultado esperado) com clareza absoluta, e libere totalmente o "como". Trabalho remoto, horários flexíveis e autonomia sobre projeto inteiro. Reuniões só por exceção.',
   },
   SE: {
     name: 'Segurança & Estabilidade',
@@ -165,7 +165,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     name: 'Criatividade Empreendedora',
     tagline: 'A obra própria como assinatura.',
     summary:
-      'Você precisa criar. Não basta executar bem — você precisa que o resultado leve sua marca, sua autoria, sua visão. Empreender, lançar produtos novos, deixar legado autoral é o que te energiza. Trabalhar para realizar a visão de outro é um caminho temporário.',
+      'Você precisa criar. Não basta executar bem, você precisa que o resultado leve sua marca, sua autoria, sua visão. Empreender, lançar produtos novos, deixar legado autoral é o que te energiza. Trabalhar para realizar a visão de outro é um caminho temporário.',
     motivation:
       'Criar do zero, ver uma ideia virar realidade, ser dono da obra. Empreendedorismo, inovação radical, projetos com identidade própria.',
     aversion:
@@ -178,9 +178,9 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     ],
     developmentTips: [
       'Comece projetos paralelos para validar o veio empreendedor',
-      'Estude finanças de negócios — entender unit economics é vital',
+      'Estude finanças de negócios, entender unit economics é vital',
       'Construa rede de mentores empreendedores e investidores',
-      'Aprenda a vender sua visão — pitch é habilidade essencial',
+      'Aprenda a vender sua visão, pitch é habilidade essencial',
     ],
     managementApproach:
       'Dê espaço para iniciativas próprias, intra-empreendedorismo e autoria visível. Reconheça pelo nome em projetos. Considere modelos de equity ou bônus por novos produtos.',
@@ -189,7 +189,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     name: 'Serviço & Dedicação',
     tagline: 'O propósito como combustível.',
     summary:
-      'Você só se realiza quando o trabalho serve a algo maior do que lucro. Causas, impacto social, valores éticos profundos — esses são seus motores. Você prefere ganhar menos em algo que tenha sentido a ganhar muito em algo vazio.',
+      'Você só se realiza quando o trabalho serve a algo maior do que lucro. Causas, impacto social, valores éticos profundos, esses são seus motores. Você prefere ganhar menos em algo que tenha sentido a ganhar muito em algo vazio.',
     motivation:
       'Contribuir para o bem-estar coletivo, defender causas, ajudar pessoas, alinhar trabalho com valores pessoais profundos.',
     aversion:
@@ -204,7 +204,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
       'Identifique a causa ou conjunto de valores que mais te move',
       'Vincule sua escolha de empregadores à coerência com seus valores',
       'Desenvolva habilidades de impacto mensurável (sua causa precisa render resultados)',
-      'Construa rede no campo do impacto — comunidades de propósito',
+      'Construa rede no campo do impacto, comunidades de propósito',
     ],
     managementApproach:
       'Conecte os objetivos de negócio com o propósito maior da função. Reconheça contribuições para a causa. Permita tempo para projetos voluntários ou de impacto.',
@@ -213,7 +213,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     name: 'Desafio Puro',
     tagline: 'A adversidade como combustível.',
     summary:
-      'Você precisa de obstáculos à altura. O que te energiza é vencer o "impossível", competir em níveis altos, resolver problemas que outros consideram insolúveis. Rotina te entedia rapidamente — você precisa de fronteiras para escalar.',
+      'Você precisa de obstáculos à altura. O que te energiza é vencer o "impossível", competir em níveis altos, resolver problemas que outros consideram insolúveis. Rotina te entedia rapidamente, você precisa de fronteiras para escalar.',
     motivation:
       'Resolver problemas extremamente difíceis, competir em níveis máximos, vencer obstáculos. A vitória contra a adversidade é o que te realiza.',
     aversion:
@@ -225,9 +225,9 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
       'Liderança em crises ou transformações radicais',
     ],
     developmentTips: [
-      'Busque desafios progressivamente maiores — evite estagnar',
+      'Busque desafios progressivamente maiores, evite estagnar',
       'Desenvolva resiliência emocional para lidar com derrotas',
-      'Aprenda a colaborar — sua competitividade pode afastar parceiros',
+      'Aprenda a colaborar, sua competitividade pode afastar parceiros',
       'Cuidado com burnout: saiba reconhecer quando o desafio virou auto-sabotagem',
     ],
     managementApproach:
@@ -237,7 +237,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
     name: 'Estilo de Vida',
     tagline: 'A integração como inegociável.',
     summary:
-      'Para você, trabalho e vida pessoal não são compartimentos separados — são uma única equação que precisa estar em equilíbrio. Você não aceita sacrificar família, saúde ou tempo livre por nenhuma promoção. O trabalho deve servir à vida, não o contrário.',
+      'Para você, trabalho e vida pessoal não são compartimentos separados, são uma única equação que precisa estar em equilíbrio. Você não aceita sacrificar família, saúde ou tempo livre por nenhuma promoção. O trabalho deve servir à vida, não o contrário.',
     motivation:
       'Equilíbrio entre trabalho, família e tempo pessoal. Flexibilidade, autonomia geográfica e temporal, integração entre os papéis da vida.',
     aversion:
@@ -249,10 +249,10 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
       'Carreiras com possibilidade de pausas e sabáticos',
     ],
     developmentTips: [
-      'Defina seus limites claramente desde a entrevista — não negocie depois',
+      'Defina seus limites claramente desde a entrevista, não negocie depois',
       'Avalie cultura de equilíbrio antes de aceitar propostas (não confie no marketing)',
-      'Invista em produtividade dentro do horário — entregue mais em menos tempo',
-      'Construa identidades fortes fora do trabalho — protegem nos momentos difíceis',
+      'Invista em produtividade dentro do horário, entregue mais em menos tempo',
+      'Construa identidades fortes fora do trabalho, protegem nos momentos difíceis',
     ],
     managementApproach:
       'Respeite limites de horário e disponibilidade. Ofereça flexibilidade real (não só no papel). Reconheça produtividade, não horas trabalhadas. Promova sem exigir sacrifício pessoal.',
@@ -260,7 +260,7 @@ export const CAREER_ANCHOR_REPORTS: Record<CareerAnchor, CareerAnchorReport> = {
 }
 
 // ============================================================
-// 40 QUESTÕES — Schein adaptado, escala Likert 1-5
+// 40 QUESTÕES, Schein adaptado, escala Likert 1-5
 // Mapeamento: Q1+8k → âncora ordem [TF, GG, AU, SE, CE, SD, DP, EV]
 // ============================================================
 
@@ -407,7 +407,7 @@ export function calculateCareerAnchor(answers: CareerAnchorAnswer[]): CareerAnch
 }
 
 // ============================================================
-// SHUFFLE DETERMINÍSTICO — para versões variáveis
+// SHUFFLE DETERMINÍSTICO, para versões variáveis
 // Mesmo seed = mesma ordem (consistência se reabrir)
 // Seed diferente (assessment.id) = ordem diferente em testes novos
 // ============================================================

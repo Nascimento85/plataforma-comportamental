@@ -9,6 +9,8 @@ import type { Metadata }   from 'next'
 import CopyLinkButton      from './CopyLinkButton'
 import PrintButton         from './PrintButton'
 import { parseResultData } from '@/lib/parseResult'
+import UpsellPopup         from '@/components/passport/UpsellPopup'
+import UnlockPremiumButton from './UnlockPremiumButton'
 
 /**
  * Resolve um identificador genérico para o Assessment correspondente.
@@ -694,6 +696,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
       employee: { select: { name: true, email: true } },
       company:  { select: { name: true } },
       result:   true,
+      report:   { include: { unlock: { select: { id: true } } } },
     },
   })
 
@@ -717,6 +720,22 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const finishedAt   = assessment.completedAt
     ? new Date(assessment.completedAt).toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' })
     : null
+
+  // ─── Premium upsell ───────────────────────────────────────
+  const reportId          = assessment.report?.id ?? null
+  const isPremiumUnlocked = !!assessment.report?.unlock
+  // Pega nome do perfil pra usar no popup ("Você é Influenciador" etc.)
+  const profileName = String(
+    (resultData as { report?: { name?: string } }).report?.name ??
+    (resultData as { profile?: { name?: string } }).profile?.name ??
+    (resultData as { combination?: string }).combination ??
+    (resultData as { type?: string }).type ??
+    assessment.result.primaryProfile ??
+    'seu perfil'
+  )
+  // Preço Premium em BRL (cents → "47,00")
+  const priceCents = Number(process.env.PREMIUM_REPORT_PRICE_CENTS ?? '4700')
+  const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   return (
     <div className="min-h-screen" style={{ background: '#faf7f2' }}>
@@ -799,6 +818,11 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        d={resultData} />}
         {assessment.testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva d={resultData} />}
 
+        {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
+        {!isPrint && reportId && !isPremiumUnlocked && (
+          <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
+        )}
+
         {/* Footer */}
         {!isPrint && (
           <div className="text-center pb-6 space-y-1">
@@ -807,6 +831,16 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
           </div>
         )}
       </main>
+
+      {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
+      {!isPrint && reportId && !isPremiumUnlocked && (
+        <UpsellPopup
+          reportId={reportId}
+          assessmentId={assessmentId}
+          profileName={profileName}
+          priceBrl={priceBrl}
+        />
+      )}
     </div>
   )
 }

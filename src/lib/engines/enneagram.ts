@@ -1,5 +1,5 @@
 // ============================================================
-// ENGINE ENEAGRAMA — 9 Tipos de Personalidade
+// ENGINE ENEAGRAMA, 9 Tipos de Personalidade
 // 135 afirmações (15 por tipo) | Escala 1-5 por afirmação
 // Fonte: Riso & Hudson, A Sabedoria do Eneagrama
 // ============================================================
@@ -48,7 +48,7 @@ export interface EnneagramResult {
 // ============================================================
 
 export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
-  // TIPO 1 — PERFECCIONISTA
+  // TIPO 1, PERFECCIONISTA
   { id: 1,  localId: 1,  type: 1, text: 'A maioria das pessoas me vê como alguém sério e sensato. E no fim das contas, creio que sou assim mesmo.' },
   { id: 2,  localId: 2,  type: 1, text: 'Sempre procurei ser honesto e objetivo com relação a mim mesmo e estou decidido a seguir minha consciência, não importa a que preço.' },
   { id: 3,  localId: 3,  type: 1, text: 'Embora eu possa ter um lado desregrado, de modo geral, ele nunca prevaleceu em meu estilo.' },
@@ -65,7 +65,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 14, localId: 14, type: 1, text: 'Tenho sobre os ombros muitas responsabilidades. Deus sabe o que aconteceria se eu não estivesse à altura das expectativas.' },
   { id: 15, localId: 15, type: 1, text: 'Manter a elegância e a nobreza, mesmo sob pressão, é algo que sempre me comove.' },
 
-  // TIPO 2 — AJUDADORA (DOADORA)
+  // TIPO 2, AJUDADORA (DOADORA)
   { id: 16, localId: 1,  type: 2, text: 'Meu interesse pelas pessoas me leva a me envolver profundamente com elas, com seus sonhos, esperanças e necessidades.' },
   { id: 17, localId: 2,  type: 2, text: 'Para mim, ser amigável é natural: puxo conversa facilmente e chamo todo mundo pelo nome.' },
   { id: 18, localId: 3,  type: 2, text: 'Descobri que as pessoas reagem com afeto quando lhes dou atenção e incentivo.' },
@@ -82,7 +82,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 29, localId: 14, type: 2, text: 'Minha saúde e meu bolso já sofreram muitas vezes por eu ter colocado as necessidades e interesses dos outros acima dos meus.' },
   { id: 30, localId: 15, type: 2, text: 'Adoro me desdobrar para fazer as pessoas se sentirem bem-vindas e queridas.' },
 
-  // TIPO 3 — REALIZADORA
+  // TIPO 3, REALIZADORA
   { id: 31, localId: 1,  type: 3, text: 'Vejo-me como uma pessoa extremamente competente. Fico muito aborrecido se não sou, no mínimo, eficiente.' },
   { id: 32, localId: 2,  type: 3, text: 'Quando as coisas vão bem, eu praticamente irradio uma espécie de alegria interior em ser quem eu sou e ter a vida que tenho.' },
   { id: 33, localId: 3,  type: 3, text: 'Tento me apresentar da melhor forma possível. Mas não é isso que todos fazem?' },
@@ -99,7 +99,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 44, localId: 14, type: 3, text: 'Sempre tenho algum objetivo em mente e sei como me motivar para atingí-lo.' },
   { id: 45, localId: 15, type: 3, text: 'Sou um pouco viciado em trabalho, fico perdido quando não estou realizando coisas.' },
 
-  // TIPO 4 — ROMÂNTICA (INDIVIDUALISTA)
+  // TIPO 4, ROMÂNTICA (INDIVIDUALISTA)
   { id: 46, localId: 1,  type: 4, text: 'Muita gente me acha enigmático, difícil e contraditório. E eu gosto de ser assim!' },
   { id: 47, localId: 2,  type: 4, text: 'Geralmente remôo os sentimentos negativos por muito tempo antes de conseguir me livrar deles.' },
   { id: 48, localId: 3,  type: 4, text: 'Costumo me sentir solitário e sozinho, mesmo quando estou com as pessoas mais próximas.' },
@@ -116,7 +116,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 59, localId: 14, type: 4, text: 'Não gosto de ser líder nem seguidor.' },
   { id: 60, localId: 15, type: 4, text: 'Sempre tenho uma noção muito clara das minhas intuições, mesmo que não eu tenha coragem de agir de acordo com elas.' },
 
-  // TIPO 5 — OBSERVADORA
+  // TIPO 5, OBSERVADORA
   { id: 61, localId: 1,  type: 5, text: 'Gosto de analisar as coisas em profundidade, estudando minuciosamente cada detalhe, até compreendê-las o mais inteiramente possível.' },
   { id: 62, localId: 2,  type: 5, text: 'Sou uma pessoa extremamente reservada, que não libera para muitos a entrada em seu mundo.' },
   { id: 63, localId: 3,  type: 5, text: 'Não me sinto particularmente grande ou poderoso, mas pequeno e invisível: acho que daria um bom espião!' },
@@ -133,7 +133,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 74, localId: 14, type: 5, text: 'Minha mente trabalha tanto que às vezes acho que está pegando fogo.' },
   { id: 75, localId: 15, type: 5, text: 'Muitas vezes perco a noção do tempo, pois estou sempre muito concentrado no que faço.' },
 
-  // TIPO 6 — PRECAVIDA (LEAL)
+  // TIPO 6, PRECAVIDA (LEAL)
   { id: 76, localId: 1,  type: 6, text: 'Sinto-me atraído pela autoridade e, ao mesmo tempo, descrente dela.' },
   { id: 77, localId: 2,  type: 6, text: 'Sou muito afetivo, apesar de quase nunca demonstrar o que sinto. A não ser para os mais íntimos e, mesmo assim, nem sempre.' },
   { id: 78, localId: 3,  type: 6, text: 'Se cometo um erro, tenho medo que todos pulem na minha garganta.' },
@@ -150,7 +150,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 89, localId: 14, type: 6, text: 'É realmente curioso: muitas vezes sou cético, até cínico, em relação a muitas coisas. E, de repente, mudo e começo a acreditar completamente em tudo.' },
   { id: 90, localId: 15, type: 6, text: 'Meu sobrenome deveria ser Ansiedade.' },
 
-  // TIPO 7 — SONHADORA (ENTUSIASTA)
+  // TIPO 7, SONHADORA (ENTUSIASTA)
   { id: 91,  localId: 1,  type: 7, text: 'Adoro viajar e descobrir diferentes tipos de pratos, de pessoas, de experiências. Todo o fantástico turbilhão da vida!' },
   { id: 92,  localId: 2,  type: 7, text: 'Minha agenda normalmente é cheia e eu gosto que seja assim. Não quero que a grama cresça debaixo de meus pés!' },
   { id: 93,  localId: 3,  type: 7, text: 'Para mim importa mais a emoção e a variedade do que o conforto e a segurança, embora eu não despreze a segurança quando a encontro.' },
@@ -167,7 +167,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 104, localId: 14, type: 7, text: 'Tenho tendência a gastar mais do que deveria.' },
   { id: 105, localId: 15, type: 7, text: 'Acho ótimo estar com as pessoas, contanto que elas queiram ir aonde eu quero.' },
 
-  // TIPO 8 — CONTROLADORA (DESAFIADORA)
+  // TIPO 8, CONTROLADORA (DESAFIADORA)
   { id: 106, localId: 1,  type: 8, text: 'Sou extremamente independente e não gosto de precisar de ninguém para as coisas realmente importantes.' },
   { id: 107, localId: 2,  type: 8, text: 'Sou da opinião que "é preciso quebrar alguns ovos quando se quer fazer um omelete".' },
   { id: 108, localId: 3,  type: 8, text: 'Quando gosto das pessoas, geralmente penso nelas como "minha gente" e acho que devo estar atento aos seus interesses.' },
@@ -184,7 +184,7 @@ export const ENNEAGRAM_QUESTIONS: EnneagramQuestion[] = [
   { id: 119, localId: 14, type: 8, text: 'Sinto-me mais vivo quando faço o que os outros julgam impossível. Gosto de ir até o limite e ver se consigo desafiar as probabilidades.' },
   { id: 120, localId: 15, type: 8, text: 'A corda sempre tem de estourar de um lado, e eu não quero que seja do meu.' },
 
-  // TIPO 9 — PACIFICADORA
+  // TIPO 9, PACIFICADORA
   { id: 121, localId: 1,  type: 9, text: 'O que as pessoas gostam em mim é a sensação de segurança que lhes transmito.' },
   { id: 122, localId: 2,  type: 9, text: 'Não me incomodo de estar com as pessoas nem de estar só, para mim tanto faz. Contanto que esteja em paz comigo mesmo.' },
   { id: 123, localId: 3,  type: 9, text: 'Encontrei um certo equilíbrio na vida e não vejo razão para perturbá-lo.' },
@@ -354,14 +354,14 @@ export function calculateEnneagram(answers: EnneagramAnswer[]): EnneagramResult 
 }
 
 // ============================================================
-// VARIAÇÃO V2 — Reformulações alternativas (mesmos id/type)
+// VARIAÇÃO V2, Reformulações alternativas (mesmos id/type)
 // ============================================================
 export const ENNEAGRAM_QUESTIONS_V2: EnneagramQuestion[] = [
-  // TIPO 1 — PERFECCIONISTA
+  // TIPO 1, PERFECCIONISTA
   { id: 1,  localId: 1,  type: 1, text: 'As pessoas ao meu redor geralmente me descrevem como alguém criterioso e confiável, e eu concordo com essa visão.' },
   { id: 2,  localId: 2,  type: 1, text: 'Tenho um compromisso profundo com a verdade e com a integridade, mesmo quando isso me custa algo.' },
   { id: 3,  localId: 3,  type: 1, text: 'Embora tenha impulsos mais espontâneos de vez em quando, no geral mantenho um estilo controlado e disciplinado.' },
-  { id: 4,  localId: 4,  type: 1, text: 'Existe uma voz interna constante que avalia e julga minhas ações — às vezes útil, às vezes exigente demais.' },
+  { id: 4,  localId: 4,  type: 1, text: 'Existe uma voz interna constante que avalia e julga minhas ações, às vezes útil, às vezes exigente demais.' },
   { id: 5,  localId: 5,  type: 1, text: 'Já me cobrei excessivamente pela perfeição e reconheço que isso cobrou um preço da minha saúde ou bem-estar.' },
   { id: 6,  localId: 6,  type: 1, text: 'Aprecio momentos de leveza e humor, embora nem sempre me permita vivê-los plenamente.' },
   { id: 7,  localId: 7,  type: 1, text: 'Meus valores e ideais são o que me motiva a agir e dão propósito profundo à minha vida.' },
@@ -369,17 +369,17 @@ export const ENNEAGRAM_QUESTIONS_V2: EnneagramQuestion[] = [
   { id: 9,  localId: 9,  type: 1, text: 'Tendo a assumir mais responsabilidades do que o necessário porque confio mais no meu próprio rigor do que no dos outros.' },
   { id: 10, localId: 10, type: 1, text: 'Sinto que tenho algo importante a oferecer ao mundo e aspiro a uma contribuição que vá além do ordinário.' },
   { id: 11, localId: 11, type: 1, text: 'Sou rigoroso comigo mesmo e com os processos porque acredito que a qualidade do trabalho reflete o caráter de quem o faz.' },
-  { id: 12, localId: 12, type: 1, text: 'Para mim, a ética não é negociável — há comportamentos que simplesmente estão dentro ou fora dos limites aceitáveis.' },
+  { id: 12, localId: 12, type: 1, text: 'Para mim, a ética não é negociável, há comportamentos que simplesmente estão dentro ou fora dos limites aceitáveis.' },
   { id: 13, localId: 13, type: 1, text: 'Tenho dificuldade em aceitar o status quo quando enxergo claramente uma maneira melhor de fazer as coisas.' },
   { id: 14, localId: 14, type: 1, text: 'Carrego um peso considerável de responsabilidades e às vezes me pergunto o que aconteceria se eu diminuísse o ritmo.' },
   { id: 15, localId: 15, type: 1, text: 'Admiro profundamente quem mantém dignidade e compostura mesmo nas situações mais difíceis.' },
 
-  // TIPO 2 — AJUDADORA
+  // TIPO 2, AJUDADORA
   { id: 16, localId: 1,  type: 2, text: 'Tenho um interesse genuíno nas histórias e nas vidas das pessoas, o que me leva a criar laços profundos com facilidade.' },
-  { id: 17, localId: 2,  type: 2, text: 'Me relaciono bem com pessoas de perfis muito diferentes — criar conexão parece algo natural para mim.' },
+  { id: 17, localId: 2,  type: 2, text: 'Me relaciono bem com pessoas de perfis muito diferentes, criar conexão parece algo natural para mim.' },
   { id: 18, localId: 3,  type: 2, text: 'Percebo que quando ofereço atenção e apoio sinceros, as pessoas respondem com afeto e se abrem mais.' },
   { id: 19, localId: 4,  type: 2, text: 'Tenho grande dificuldade em ver alguém sofrendo sem querer fazer algo imediatamente para ajudar.' },
-  { id: 20, localId: 5,  type: 2, text: 'Cuidar das pessoas e ser generoso faz parte da minha identidade — é algo que me define.' },
+  { id: 20, localId: 5,  type: 2, text: 'Cuidar das pessoas e ser generoso faz parte da minha identidade, é algo que me define.' },
   { id: 21, localId: 6,  type: 2, text: 'Não costumo dizer abertamente que faço muito pelos outros, mas fico magoado quando isso não é percebido.' },
   { id: 22, localId: 7,  type: 2, text: 'Com frequência me dedico demais às necessidades alheias e negligencio as minhas próprias.' },
   { id: 23, localId: 8,  type: 2, text: 'Sinto um impulso de conquistar pessoas que, de início, parecem distantes ou indiferentes a mim.' },
@@ -391,43 +391,43 @@ export const ENNEAGRAM_QUESTIONS_V2: EnneagramQuestion[] = [
   { id: 29, localId: 14, type: 2, text: 'Já sacrifiquei minha saúde, tempo ou recursos financeiros por colocar as necessidades dos outros acima das minhas.' },
   { id: 30, localId: 15, type: 2, text: 'Encontro grande satisfação em criar momentos onde as pessoas se sintam bem-vindas e valorizadas.' },
 
-  // TIPO 3 — REALIZADORA
+  // TIPO 3, REALIZADORA
   { id: 31, localId: 1,  type: 3, text: 'Tenho um padrão de exigência alto comigo mesmo e fico visivelmente incomodado quando entrego menos do que meu melhor.' },
   { id: 32, localId: 2,  type: 3, text: 'Quando estou em estado de fluxo, tenho uma energia e uma presença que as pessoas ao redor conseguem sentir.' },
-  { id: 33, localId: 3,  type: 3, text: 'Cuido da minha imagem e de como sou percebido — mas acredito que todos, de alguma forma, fazem isso.' },
+  { id: 33, localId: 3,  type: 3, text: 'Cuido da minha imagem e de como sou percebido, mas acredito que todos, de alguma forma, fazem isso.' },
   { id: 34, localId: 4,  type: 3, text: 'Tenho uma relação complexa com minhas emoções: elas surgem com intensidade, mas logo as coloco de lado para focar no que precisa ser feito.' },
-  { id: 35, localId: 5,  type: 3, text: 'Conquistas e reconhecimento são importantes para mim — mesmo que eu ainda não tenha chegado onde quero.' },
-  { id: 36, localId: 6,  type: 3, text: 'Tenho uma habilidade apurada de esconder vulnerabilidades — as pessoas raramente conseguem ver o que estou sentindo por dentro.' },
+  { id: 35, localId: 5,  type: 3, text: 'Conquistas e reconhecimento são importantes para mim, mesmo que eu ainda não tenha chegado onde quero.' },
+  { id: 36, localId: 6,  type: 3, text: 'Tenho uma habilidade apurada de esconder vulnerabilidades, as pessoas raramente conseguem ver o que estou sentindo por dentro.' },
   { id: 37, localId: 7,  type: 3, text: 'Me preocupo com as impressões que causo e costumo investir em ser percebido de forma positiva.' },
   { id: 38, localId: 8,  type: 3, text: 'É natural para mim observar o desempenho das pessoas ao meu redor e me comparar com elas.' },
-  { id: 39, localId: 9,  type: 3, text: 'Tenho a tendência de só investir naquilo onde posso me destacar — quando o sucesso parece improvável, perco o interesse.' },
+  { id: 39, localId: 9,  type: 3, text: 'Tenho a tendência de só investir naquilo onde posso me destacar, quando o sucesso parece improvável, perco o interesse.' },
   { id: 40, localId: 10, type: 3, text: 'Já me vi simplificando ou ajustando a verdade quando isso facilitava alcançar um objetivo importante.' },
   { id: 41, localId: 11, type: 3, text: 'Quando me sinto ameaçado ou vulnerável, me afasto das pessoas e me torno mais frio e distante.' },
   { id: 42, localId: 12, type: 3, text: 'Me incomoda profundamente quando meu trabalho é ignorado ou não reconhecido por quem deveria notá-lo.' },
   { id: 43, localId: 13, type: 3, text: 'Tenho uma capacidade natural de me reinventar e ajustar minha abordagem quando algo não está funcionando.' },
   { id: 44, localId: 14, type: 3, text: 'Tenho sempre algum projeto ou meta em andamento e sei como me motivar para avançar neles.' },
-  { id: 45, localId: 15, type: 3, text: 'Me importo profundamente com a imagem que deixo — quero que as pessoas me lembrem com admiração.' },
+  { id: 45, localId: 15, type: 3, text: 'Me importo profundamente com a imagem que deixo, quero que as pessoas me lembrem com admiração.' },
 
-  // TIPO 4 — INDIVIDUALISTA
+  // TIPO 4, INDIVIDUALISTA
   { id: 46, localId: 1,  type: 4, text: 'Tenho uma sensação constante de que algo fundamental está faltando em minha vida, embora não saiba ao certo o quê.' },
   { id: 47, localId: 2,  type: 4, text: 'Preciso expressar minha individualidade e não consigo me sentir bem fingindo ser outra coisa que não sou.' },
-  { id: 48, localId: 3,  type: 4, text: 'Tenho sentimentos muito intensos — tanto a alegria quanto a dor me afetam de forma profunda e duradoura.' },
+  { id: 48, localId: 3,  type: 4, text: 'Tenho sentimentos muito intensos, tanto a alegria quanto a dor me afetam de forma profunda e duradoura.' },
   { id: 49, localId: 4,  type: 4, text: 'Me sinto mais vivo e autêntico quando estou engajado em algo criativo ou em experiências de grande significado pessoal.' },
   { id: 50, localId: 5,  type: 4, text: 'Muitas vezes me sinto diferente dos outros de uma forma que é difícil de explicar.' },
-  { id: 51, localId: 6,  type: 4, text: 'Não me interessa o superficial — quero relações, experiências e conversas que tenham profundidade real.' },
+  { id: 51, localId: 6,  type: 4, text: 'Não me interessa o superficial, quero relações, experiências e conversas que tenham profundidade real.' },
   { id: 52, localId: 7,  type: 4, text: 'Alimento um senso estético refinado e me preocupo com a beleza e o significado nas coisas que faço e escolho.' },
   { id: 53, localId: 8,  type: 4, text: 'Sinto uma melancolia de fundo que, ao mesmo tempo, me parece um sinal de que sou alguém com profundidade.' },
   { id: 54, localId: 9,  type: 4, text: 'Fico perturbado quando as pessoas não conseguem captar as nuances do que estou sentindo ou comunicando.' },
-  { id: 55, localId: 10, type: 4, text: 'Tenho uma relação tensa com a inveja — quando vejo alguém ter o que sinto que me falta, sinto uma dor real.' },
+  { id: 55, localId: 10, type: 4, text: 'Tenho uma relação tensa com a inveja, quando vejo alguém ter o que sinto que me falta, sinto uma dor real.' },
   { id: 56, localId: 11, type: 4, text: 'Preciso ter um senso de identidade e autenticidade muito claros para me sentir estável.' },
-  { id: 57, localId: 12, type: 4, text: 'Minha vida interior é rica e complexa — muita coisa que me afeta não é visível ao mundo externo.' },
+  { id: 57, localId: 12, type: 4, text: 'Minha vida interior é rica e complexa, muita coisa que me afeta não é visível ao mundo externo.' },
   { id: 58, localId: 13, type: 4, text: 'Quando alguém compreende o que realmente estou sentindo, experimento um alívio e uma conexão profundas.' },
-  { id: 59, localId: 14, type: 4, text: 'Tenho dificuldade em me sentir bem no dia a dia comum — parece que algo especial ou significativo sempre está faltando.' },
-  { id: 60, localId: 15, type: 4, text: 'Tenho a impressão de que fui feito para algo singular — uma missão ou expressão que poucos entenderiam.' },
+  { id: 59, localId: 14, type: 4, text: 'Tenho dificuldade em me sentir bem no dia a dia comum, parece que algo especial ou significativo sempre está faltando.' },
+  { id: 60, localId: 15, type: 4, text: 'Tenho a impressão de que fui feito para algo singular, uma missão ou expressão que poucos entenderiam.' },
 
-  // TIPO 5 — INVESTIGADORA
+  // TIPO 5, INVESTIGADORA
   { id: 61, localId: 1,  type: 5, text: 'Preciso entender o mundo de forma aprofundada antes de me sentir confortável para agir ou opinar.' },
-  { id: 62, localId: 2,  type: 5, text: 'Meu espaço pessoal e meu tempo de solitude não são negociáveis — são essenciais para o meu funcionamento.' },
+  { id: 62, localId: 2,  type: 5, text: 'Meu espaço pessoal e meu tempo de solitude não são negociáveis, são essenciais para o meu funcionamento.' },
   { id: 63, localId: 3,  type: 5, text: 'Prefiro ter menos e manter minha independência do que depender dos outros para cobrir minhas necessidades.' },
   { id: 64, localId: 4,  type: 5, text: 'A tendência de me retirar em situações emocionalmente intensas é algo que reconheço em mim.' },
   { id: 65, localId: 5,  type: 5, text: 'Me sinto muito mais à vontade analisando e compreendendo do que sentindo e expressando emoções.' },
@@ -442,15 +442,15 @@ export const ENNEAGRAM_QUESTIONS_V2: EnneagramQuestion[] = [
   { id: 74, localId: 14, type: 5, text: 'Tenho um certo orgulho em ser alguém que pensa por si mesmo e não segue modas ou tendências.' },
   { id: 75, localId: 15, type: 5, text: 'Quando sinto que uma situação social está me consumindo energia, me retiro discretamente sem muita explicação.' },
 
-  // TIPO 6 — LEAL
+  // TIPO 6, LEAL
   { id: 76, localId: 1,  type: 6, text: 'Estou sempre avaliando os possíveis riscos e problemas antes de tomar uma decisão importante.' },
   { id: 77, localId: 2,  type: 6, text: 'Minha lealdade a grupos e pessoas em quem confio é sólida e difícil de abalar.' },
-  { id: 78, localId: 3,  type: 6, text: 'Confiar em alguém completamente é algo que levo tempo para fazer — preciso de provas concretas antes.' },
+  { id: 78, localId: 3,  type: 6, text: 'Confiar em alguém completamente é algo que levo tempo para fazer, preciso de provas concretas antes.' },
   { id: 79, localId: 4,  type: 6, text: 'Tenho uma capacidade de identificar intenções ocultas ou armadilhas que a maioria das pessoas não percebe.' },
   { id: 80, localId: 5,  type: 6, text: 'Ao mesmo tempo que questiono autoridades, também sinto um impulso de buscar orientação de quem é mais experiente.' },
   { id: 81, localId: 6,  type: 6, text: 'Quando me comprometo com algo ou com alguém, honro esse compromisso com muita seriedade.' },
   { id: 82, localId: 7,  type: 6, text: 'Sinto ansiedade quando as situações ficam incertas ou quando não tenho clareza sobre o que esperar.' },
-  { id: 83, localId: 8,  type: 6, text: 'Para mim, segurança e previsibilidade não são luxos — são necessidades reais.' },
+  { id: 83, localId: 8,  type: 6, text: 'Para mim, segurança e previsibilidade não são luxos, são necessidades reais.' },
   { id: 84, localId: 9,  type: 6, text: 'Tendo a colocar em questão motivações das pessoas, especialmente quando elas parecem boas demais.' },
   { id: 85, localId: 10, type: 6, text: 'Quando preciso enfrentar o medo de frente, sou capaz de uma coragem que surpreende até a mim mesmo.' },
   { id: 86, localId: 11, type: 6, text: 'Me identifico com grupos e sistemas que compartilham meus valores e oferecem senso de pertencimento.' },
@@ -459,63 +459,63 @@ export const ENNEAGRAM_QUESTIONS_V2: EnneagramQuestion[] = [
   { id: 89, localId: 14, type: 6, text: 'Questiono autoridades quando percebo que podem estar erradas, mas também valorizo a orientação de pessoas confiáveis.' },
   { id: 90, localId: 15, type: 6, text: 'Quando sinto que algo pode dar errado, fico em estado de alerta mesmo que os outros pareçam tranquilos.' },
 
-  // TIPO 7 — ENTUSIASTA
-  { id: 91,  localId: 1,  type: 7, text: 'Tenho uma sede constante por novas experiências, ideias e horizontes — a monotonia me pesa muito.' },
+  // TIPO 7, ENTUSIASTA
+  { id: 91,  localId: 1,  type: 7, text: 'Tenho uma sede constante por novas experiências, ideias e horizontes, a monotonia me pesa muito.' },
   { id: 92,  localId: 2,  type: 7, text: 'Sou capaz de fazer conexões entre ideias e áreas que parecem não ter relação, o que me gera grande entusiasmo.' },
   { id: 93,  localId: 3,  type: 7, text: 'Me animo facilmente com novas possibilidades e começos, mas nem sempre mantenho o mesmo entusiasmo no longo prazo.' },
-  { id: 94,  localId: 4,  type: 7, text: 'A ideia de ficar preso ou aprisionado — em uma rotina, em uma obrigação ou em uma situação — me é quase insuportável.' },
+  { id: 94,  localId: 4,  type: 7, text: 'A ideia de ficar preso ou aprisionado, em uma rotina, em uma obrigação ou em uma situação, me é quase insuportável.' },
   { id: 95,  localId: 5,  type: 7, text: 'Consigo reinterpretar experiências difíceis de forma mais positiva quase instintivamente.' },
   { id: 96,  localId: 6,  type: 7, text: 'Minha agenda tende a ficar superlotada porque tenho dificuldade de dizer não para oportunidades interessantes.' },
   { id: 97,  localId: 7,  type: 7, text: 'Quando algo começa a ficar entediante ou repetitivo, minha atenção naturalmente migra para outra coisa.' },
-  { id: 98,  localId: 8,  type: 7, text: 'Sou naturalmente otimista — mesmo em situações difíceis, consigo enxergar o que pode ser positivo.' },
+  { id: 98,  localId: 8,  type: 7, text: 'Sou naturalmente otimista, mesmo em situações difíceis, consigo enxergar o que pode ser positivo.' },
   { id: 99,  localId: 9,  type: 7, text: 'Tenho muitos projetos e interesses em paralelo e às vezes me vejo dispersando minha energia entre eles.' },
-  { id: 100, localId: 10, type: 7, text: 'O futuro me empolga muito mais do que o passado — estou sempre pensando no que vem a seguir.' },
-  { id: 101, localId: 11, type: 7, text: 'Não me sinto bem quando estou confinado a uma única opção ou direção — preciso de alternativas abertas.' },
+  { id: 100, localId: 10, type: 7, text: 'O futuro me empolga muito mais do que o passado, estou sempre pensando no que vem a seguir.' },
+  { id: 101, localId: 11, type: 7, text: 'Não me sinto bem quando estou confinado a uma única opção ou direção, preciso de alternativas abertas.' },
   { id: 102, localId: 12, type: 7, text: 'Quando me sinto sobrecarregado emocionalmente, busco distração em atividades prazerosas ou estimulantes.' },
   { id: 103, localId: 13, type: 7, text: 'Tenho um talento natural para tornar situações pesadas mais leves e para animar os ambientes onde estou.' },
   { id: 104, localId: 14, type: 7, text: 'Fico facilmente entusiasmado com novos projetos, mas o desafio está em manter o foco quando a novidade passa.' },
   { id: 105, localId: 15, type: 7, text: 'Para mim, a vida é uma aventura e desperdiçá-la em sofrimento desnecessário seria uma tragédia.' },
 
-  // TIPO 8 — CONTROLADORA
-  { id: 106, localId: 1,  type: 8, text: 'Valorizo minha independência acima de quase tudo — não gostar de depender dos outros é algo que me define.' },
+  // TIPO 8, CONTROLADORA
+  { id: 106, localId: 1,  type: 8, text: 'Valorizo minha independência acima de quase tudo, não gostar de depender dos outros é algo que me define.' },
   { id: 107, localId: 2,  type: 8, text: 'Acredito que resultados importantes raramente vêm sem alguma fricção ou desconforto no processo.' },
   { id: 108, localId: 3,  type: 8, text: 'Quando me importo com alguém, sinto uma responsabilidade natural de protegê-lo e de estar no seu lado.' },
   { id: 109, localId: 4,  type: 8, text: 'Sei com clareza como motivar, pressionar ou recompensar pessoas para que entreguem o que precisa ser feito.' },
   { id: 110, localId: 5,  type: 8, text: 'Tenho pouca paciência com pessoas que demonstram fraqueza diante de desafios que exigem firmeza.' },
-  { id: 111, localId: 6,  type: 8, text: 'Uma vez que decido algo, vou até o final — recuar me parece quase impossível.' },
+  { id: 111, localId: 6,  type: 8, text: 'Uma vez que decido algo, vou até o final, recuar me parece quase impossível.' },
   { id: 112, localId: 7,  type: 8, text: 'Nada me dá mais satisfação do que ver alguém que apoiei crescer e conquistar sua própria independência.' },
   { id: 113, localId: 8,  type: 8, text: 'Tenho um lado sensível e protetor que pouquíssimas pessoas chegam a ver.' },
-  { id: 114, localId: 9,  type: 8, text: 'Aprecia quando as pessoas me dizem diretamente o que pensam — a honestidade brutal me respeita mais do que a diplomacia vazia.' },
-  { id: 115, localId: 10, type: 8, text: 'Batalhar por algo difícil me fortalece — sem desafios reais, me sinto estagnado.' },
+  { id: 114, localId: 9,  type: 8, text: 'Aprecia quando as pessoas me dizem diretamente o que pensam, a honestidade brutal me respeita mais do que a diplomacia vazia.' },
+  { id: 115, localId: 10, type: 8, text: 'Batalhar por algo difícil me fortalece, sem desafios reais, me sinto estagnado.' },
   { id: 116, localId: 11, type: 8, text: 'Me vejo como alguém que confronta a realidade de frente e não permite que as pessoas se acomodem.' },
   { id: 117, localId: 12, type: 8, text: 'Meu humor é direto e sem rodeios, e nem sempre as pessoas mais sensíveis conseguem apreciar isso.' },
-  { id: 118, localId: 13, type: 8, text: 'Quando explodo de raiva, passa rapidamente — guardo rancor por muito pouco tempo.' },
+  { id: 118, localId: 13, type: 8, text: 'Quando explodo de raiva, passa rapidamente, guardo rancor por muito pouco tempo.' },
   { id: 119, localId: 14, type: 8, text: 'Sinto-me mais vivo quando estou superando limites e desafiando o que parece impossível.' },
   { id: 120, localId: 15, type: 8, text: 'Prefiro ser quem tem controle sobre a situação do que estar à mercê das decisões dos outros.' },
 
-  // TIPO 9 — PACIFICADORA
+  // TIPO 9, PACIFICADORA
   { id: 121, localId: 1,  type: 9, text: 'As pessoas buscam minha companhia em parte porque transmito uma sensação de calma e estabilidade.' },
-  { id: 122, localId: 2,  type: 9, text: 'Não tenho muita preferência entre estar rodeado de pessoas ou em solitude — ambas as situações me parecem confortáveis.' },
+  { id: 122, localId: 2,  type: 9, text: 'Não tenho muita preferência entre estar rodeado de pessoas ou em solitude, ambas as situações me parecem confortáveis.' },
   { id: 123, localId: 3,  type: 9, text: 'Alcancei um equilíbrio satisfatório na vida e não sinto necessidade de agitá-lo com mudanças desnecessárias.' },
-  { id: 124, localId: 4,  type: 9, text: 'Estar confortável — no corpo, na casa, nas relações — é algo que valorizo profundamente.' },
+  { id: 124, localId: 4,  type: 9, text: 'Estar confortável, no corpo, na casa, nas relações, é algo que valorizo profundamente.' },
   { id: 125, localId: 5,  type: 9, text: 'Evito confrontos porque, na maioria das vezes, o custo do conflito parece maior do que o benefício de ganhar a discussão.' },
   { id: 126, localId: 6,  type: 9, text: 'Desenvolvi uma habilidade de não deixar que as coisas externas perturbem meu equilíbrio interno.' },
-  { id: 127, localId: 7,  type: 9, text: 'Não preciso de muita coisa para ser feliz — geralmente me satisfaço com o que a vida oferece.' },
+  { id: 127, localId: 7,  type: 9, text: 'Não preciso de muita coisa para ser feliz, geralmente me satisfaço com o que a vida oferece.' },
   { id: 128, localId: 8,  type: 9, text: 'As pessoas às vezes me descrevem como distraído, mas a verdade é que processo as coisas de um jeito próprio e no meu tempo.' },
-  { id: 129, localId: 9,  type: 9, text: 'Quando decido algo, costumo manter minha posição mesmo sob pressão — o que algumas pessoas interpretam como teimosia.' },
-  { id: 130, localId: 10, type: 9, text: 'Mantenho uma estabilidade emocional que muitas pessoas ao meu redor não conseguem — sou afetado, mas raramente desestabilizado.' },
+  { id: 129, localId: 9,  type: 9, text: 'Quando decido algo, costumo manter minha posição mesmo sob pressão, o que algumas pessoas interpretam como teimosia.' },
+  { id: 130, localId: 10, type: 9, text: 'Mantenho uma estabilidade emocional que muitas pessoas ao meu redor não conseguem, sou afetado, mas raramente desestabilizado.' },
   { id: 131, localId: 11, type: 9, text: 'Acredito que há um ritmo natural nas coisas e que resistir a ele raramente resolve algo.' },
-  { id: 132, localId: 12, type: 9, text: 'Tenho facilidade de ver o lado de todos numa discussão, o que me torna um bom mediador — mas às vezes dificulta tomar partido.' },
+  { id: 132, localId: 12, type: 9, text: 'Tenho facilidade de ver o lado de todos numa discussão, o que me torna um bom mediador, mas às vezes dificulta tomar partido.' },
   { id: 133, localId: 13, type: 9, text: 'Prefiro focar no que funciona e no que é positivo do que ficar ressaltando problemas e falhas.' },
   { id: 134, localId: 14, type: 9, text: 'Tenho uma sabedoria de vida acumulada que me ampara especialmente nos momentos mais difíceis.' },
   { id: 135, localId: 15, type: 9, text: 'Trabalho com foco e consistência durante o dia, mas ao final sei me desligar completamente e descansar de verdade.' },
 ]
 
 // ============================================================
-// VARIAÇÃO V3 — Cenários situacionais (mesmos id/type)
+// VARIAÇÃO V3, Cenários situacionais (mesmos id/type)
 // ============================================================
 export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
-  // TIPO 1 — PERFECCIONISTA
+  // TIPO 1, PERFECCIONISTA
   { id: 1,  localId: 1,  type: 1, text: 'Quando termino um trabalho, minha primeira reação é verificar se ele poderia ter sido feito melhor.' },
   { id: 2,  localId: 2,  type: 1, text: 'Se descobrisse que um colega estava sendo desonesto, me sentiria no dever de agir, mesmo que fosse impopular.' },
   { id: 3,  localId: 3,  type: 1, text: 'Em situações de estresse, minha tendência é manter o controle e seguir os procedimentos corretos.' },
@@ -527,16 +527,16 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 9,  localId: 9,  type: 1, text: 'Prefere fazer sozinho do que delegar, porque tem dificuldade de confiar que os outros farão com o mesmo cuidado.' },
   { id: 10, localId: 10, type: 1, text: 'Sente que seu trabalho tem um propósito maior e que isso o distingue de pessoas que simplesmente cumprem tarefas.' },
   { id: 11, localId: 11, type: 1, text: 'Quando algo sai abaixo do padrão esperado, sente vergonha ou frustração mesmo que os outros não notem.' },
-  { id: 12, localId: 12, type: 1, text: 'Situações moralmente ambíguas te causam desconforto — você precisa de clareza sobre o que é certo.' },
+  { id: 12, localId: 12, type: 1, text: 'Situações moralmente ambíguas te causam desconforto, você precisa de clareza sobre o que é certo.' },
   { id: 13, localId: 13, type: 1, text: 'Quando vê uma forma melhor de fazer algo, tem dificuldade de simplesmente deixar passar sem ao menos mencionar.' },
   { id: 14, localId: 14, type: 1, text: 'Com frequência sente que, se você parar ou diminuir o ritmo, as coisas simplesmente não serão feitas corretamente.' },
   { id: 15, localId: 15, type: 1, text: 'Se admira por pessoas que mantêm sua integridade e postura mesmo quando estão sob grande pressão.' },
 
-  // TIPO 2 — AJUDADORA
+  // TIPO 2, AJUDADORA
   { id: 16, localId: 1,  type: 2, text: 'Quando alguém está passando por algo difícil, você tende a ser uma das primeiras pessoas que ele procura.' },
   { id: 17, localId: 2,  type: 2, text: 'Em uma festa com pessoas desconhecidas, você geralmente é quem inicia conversas e cria conexões.' },
   { id: 18, localId: 3,  type: 2, text: 'Quando você ajuda alguém e essa pessoa demonstra gratidão, sente um prazer genuíno e profundo.' },
-  { id: 19, localId: 4,  type: 2, text: 'Ao ver notícias de sofrimento — em qualquer escala — sente uma necessidade quase física de fazer algo.' },
+  { id: 19, localId: 4,  type: 2, text: 'Ao ver notícias de sofrimento, em qualquer escala, sente uma necessidade quase física de fazer algo.' },
   { id: 20, localId: 5,  type: 2, text: 'Parte de como você se descreve envolve ser uma pessoa generosa e presente para os outros.' },
   { id: 21, localId: 6,  type: 2, text: 'Quando você faz muito por alguém e ele não percebe ou não demonstra, sente uma dor silenciosa.' },
   { id: 22, localId: 7,  type: 2, text: 'Já se viu tão focado nas necessidades dos outros que só percebeu o quanto estava esgotado quando foi longe demais.' },
@@ -549,10 +549,10 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 29, localId: 14, type: 2, text: 'Olhando para trás, percebe momentos em que sacrificou seu próprio bem-estar para não decepcionar alguém importante.' },
   { id: 30, localId: 15, type: 2, text: 'Quando as pessoas saem de uma conversa com você se sentindo melhor, isso representa uma das suas maiores satisfações.' },
 
-  // TIPO 3 — REALIZADORA
+  // TIPO 3, REALIZADORA
   { id: 31, localId: 1,  type: 3, text: 'Em qualquer projeto ou função, você naturalmente assume um padrão de excelência que nem sempre é pedido.' },
   { id: 32, localId: 2,  type: 3, text: 'Quando está em fluxo e as coisas funcionando, as pessoas ao seu redor sentem sua energia e confiança.' },
-  { id: 33, localId: 3,  type: 3, text: 'Você pensa em como está sendo percebido em situações profissionais importantes — e isso influencia suas escolhas.' },
+  { id: 33, localId: 3,  type: 3, text: 'Você pensa em como está sendo percebido em situações profissionais importantes, e isso influencia suas escolhas.' },
   { id: 34, localId: 4,  type: 3, text: 'Em situações de alta pressão, você coloca suas emoções de lado e foca no que precisa ser feito.' },
   { id: 35, localId: 5,  type: 3, text: 'Metas e conquistas são parte central de como você mede o valor da sua vida e da sua carreira.' },
   { id: 36, localId: 6,  type: 3, text: 'Há uma habilidade que tem de não deixar que sua vulnerabilidade apareça em momentos onde precisa parecer forte.' },
@@ -566,7 +566,7 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 44, localId: 14, type: 3, text: 'Você sempre tem alguma meta em andamento e sabe como se motivar quando sente que está estagnado.' },
   { id: 45, localId: 15, type: 3, text: 'A ideia de ser lembrado como alguém bem-sucedido e admirado é importante para você.' },
 
-  // TIPO 4 — INDIVIDUALISTA
+  // TIPO 4, INDIVIDUALISTA
   { id: 46, localId: 1,  type: 4, text: 'Em momentos de calma, frequentemente surge um senso de que algo importante ainda está faltando na sua vida.' },
   { id: 47, localId: 2,  type: 4, text: 'Quando te pedem para agir de um jeito que não se sente autêntico, sente um desconforto visceral.' },
   { id: 48, localId: 3,  type: 4, text: 'Você experimenta alegrias e tristezas com uma intensidade que nem sempre as pessoas ao seu redor entendem.' },
@@ -577,13 +577,13 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 53, localId: 8,  type: 4, text: 'Você tem uma melancolia habitual que paradoxalmente lhe parece um sinal de profundidade.' },
   { id: 54, localId: 9,  type: 4, text: 'Sente frustração quando as pessoas não conseguem captar a profundidade do que você está tentando comunicar.' },
   { id: 55, localId: 10, type: 4, text: 'Quando vê alguém tendo algo que você sente que lhe falta, experimenta uma dor genuína.' },
-  { id: 56, localId: 11, type: 4, text: 'Saber quem você realmente é — sua identidade — é uma das suas prioridades mais profundas.' },
+  { id: 56, localId: 11, type: 4, text: 'Saber quem você realmente é, sua identidade, é uma das suas prioridades mais profundas.' },
   { id: 57, localId: 12, type: 4, text: 'Existe toda uma vida interior complexa em você que o mundo externo raramente consegue ver.' },
   { id: 58, localId: 13, type: 4, text: 'Quando alguém realmente entende o que você sente, experimenta um alívio e uma conexão raros.' },
-  { id: 59, localId: 14, type: 4, text: 'A rotina comum do dia a dia raramente lhe parece suficiente — você anseia por algo mais especial.' },
+  { id: 59, localId: 14, type: 4, text: 'A rotina comum do dia a dia raramente lhe parece suficiente, você anseia por algo mais especial.' },
   { id: 60, localId: 15, type: 4, text: 'Você sente que tem uma história, uma visão ou uma expressão singular que poucas pessoas chegariam a compreender.' },
 
-  // TIPO 5 — INVESTIGADORA
+  // TIPO 5, INVESTIGADORA
   { id: 61, localId: 1,  type: 5, text: 'Antes de opinar sobre algo importante, precisa ter estudado o tema com profundidade.' },
   { id: 62, localId: 2,  type: 5, text: 'Sem tempo e espaço para si mesmo regularmente, você se sente esgotado e irritado.' },
   { id: 63, localId: 3,  type: 5, text: 'Prefere ter uma vida mais simples e autônoma a ter muito, mas depender dos outros.' },
@@ -600,10 +600,10 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 74, localId: 14, type: 5, text: 'Há um certo orgulho em ser alguém que pensa de forma independente e não segue a corrente.' },
   { id: 75, localId: 15, type: 5, text: 'Em eventos sociais longos, você tende a se retirar antes que sua energia se esgote completamente.' },
 
-  // TIPO 6 — LEAL
+  // TIPO 6, LEAL
   { id: 76, localId: 1,  type: 6, text: 'Antes de tomar decisões importantes, você naturalmente pensa nos riscos e no que pode dar errado.' },
   { id: 77, localId: 2,  type: 6, text: 'Com pessoas em quem confia, você é capaz de um comprometimento e de uma lealdade raros.' },
-  { id: 78, localId: 3,  type: 6, text: 'Você demora para confiar completamente em alguém — precisa de consistência ao longo do tempo.' },
+  { id: 78, localId: 3,  type: 6, text: 'Você demora para confiar completamente em alguém, precisa de consistência ao longo do tempo.' },
   { id: 79, localId: 4,  type: 6, text: 'Você tem um olhar aguçado para identificar quando algo ou alguém não é o que parece.' },
   { id: 80, localId: 5,  type: 6, text: 'Questiona autoridades, mas também busca orientação de pessoas confiáveis em momentos de incerteza.' },
   { id: 81, localId: 6,  type: 6, text: 'Quando assume um compromisso com alguém, honra esse compromisso com muita seriedade.' },
@@ -617,24 +617,24 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 89, localId: 14, type: 6, text: 'Você questiona autoridades quando parece errado, mas ainda valoriza a orientação de quem considera sábio.' },
   { id: 90, localId: 15, type: 6, text: 'Quando sua intuição aponta que algo está errado, você fica alerta mesmo que os outros pareçam tranquilos.' },
 
-  // TIPO 7 — ENTUSIASTA
+  // TIPO 7, ENTUSIASTA
   { id: 91,  localId: 1,  type: 7, text: 'Quando a rotina começa a se repetir por muito tempo, você sente uma inquietação e uma necessidade de mudança.' },
-  { id: 92,  localId: 2,  type: 7, text: 'Você frequentemente percebe conexões entre ideias que parecem não ter relação — isso te empolga.' },
+  { id: 92,  localId: 2,  type: 7, text: 'Você frequentemente percebe conexões entre ideias que parecem não ter relação, isso te empolga.' },
   { id: 93,  localId: 3,  type: 7, text: 'O início de um novo projeto ou fase sempre te energiza, mas manter o ritmo quando a novidade passa é um desafio.' },
-  { id: 94,  localId: 4,  type: 7, text: 'A ideia de ficar preso — em uma situação, obrigação ou relacionamento difícil — te causa uma angústia real.' },
+  { id: 94,  localId: 4,  type: 7, text: 'A ideia de ficar preso, em uma situação, obrigação ou relacionamento difícil, te causa uma angústia real.' },
   { id: 95,  localId: 5,  type: 7, text: 'Você tem um talento para encontrar o ângulo positivo mesmo em situações que outros considerariam apenas difíceis.' },
   { id: 96,  localId: 6,  type: 7, text: 'Sua agenda tende a ficar superlotada porque você tem dificuldade de recusar oportunidades interessantes.' },
   { id: 97,  localId: 7,  type: 7, text: 'Quando algo começa a se tornar repetitivo, sua atenção naturalmente começa a migrar para outra coisa.' },
   { id: 98,  localId: 8,  type: 7, text: 'Mesmo em situações difíceis, você consegue enxergar o que pode dar certo e isso contagia quem está ao seu redor.' },
-  { id: 99,  localId: 9,  type: 7, text: 'Você tem vários projetos e interesses em andamento ao mesmo tempo — o desafio é focar em um.' },
+  { id: 99,  localId: 9,  type: 7, text: 'Você tem vários projetos e interesses em andamento ao mesmo tempo, o desafio é focar em um.' },
   { id: 100, localId: 10, type: 7, text: 'O futuro te entusiasma muito mais do que refletir sobre o passado ou permanecer no presente.' },
   { id: 101, localId: 11, type: 7, text: 'Você se sente melhor quando tem opções abertas do que quando está comprometido com um único caminho.' },
   { id: 102, localId: 12, type: 7, text: 'Quando fica sobrecarregado emocionalmente, você tende a buscar atividades prazerosas para se distrair.' },
   { id: 103, localId: 13, type: 7, text: 'Em situações tensas, você frequentemente traz leveza e humor que ajudam a aliviar o ambiente.' },
-  { id: 104, localId: 14, type: 7, text: 'Você se anima facilmente com novas ideias — o desafio está em executar e sustentar quando a fase inicial passa.' },
+  { id: 104, localId: 14, type: 7, text: 'Você se anima facilmente com novas ideias, o desafio está em executar e sustentar quando a fase inicial passa.' },
   { id: 105, localId: 15, type: 7, text: 'Quando percebe que está desperdiçando tempo em algo sofrido e sem propósito, sente uma urgência de mudar.' },
 
-  // TIPO 8 — CONTROLADORA
+  // TIPO 8, CONTROLADORA
   { id: 106, localId: 1,  type: 8, text: 'Quando depende de outros para algo importante, sente uma certa vulnerabilidade que lhe é incômoda.' },
   { id: 107, localId: 2,  type: 8, text: 'Você acredita que conquistas verdadeiras raramente vêm sem alguma resistência ou dificuldade.' },
   { id: 108, localId: 3,  type: 8, text: 'Quando alguém passa a fazer parte do seu círculo próximo, sente uma responsabilidade real pela sua segurança.' },
@@ -642,20 +642,20 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 110, localId: 5,  type: 8, text: 'Você não tem muita paciência com pessoas que recuam facilmente diante de desafios.' },
   { id: 111, localId: 6,  type: 8, text: 'Uma vez que se compromete com uma direção, é muito difícil para você simplesmente desistir.' },
   { id: 112, localId: 7,  type: 8, text: 'Uma das coisas que mais te dá satisfação é ver alguém que você apoiou conquistar a própria independência.' },
-  { id: 113, localId: 8,  type: 8, text: 'Existe um lado seu protetor e sensível que você raramente mostra — é reservado para muito poucos.' },
+  { id: 113, localId: 8,  type: 8, text: 'Existe um lado seu protetor e sensível que você raramente mostra, é reservado para muito poucos.' },
   { id: 114, localId: 9,  type: 8, text: 'Prefere uma conversa direta e às vezes dura a uma comunicação cheia de rodeios e eufemismos.' },
-  { id: 115, localId: 10, type: 8, text: 'Enfrentar e superar desafios difíceis te fortalece — sem isso, você tende a se sentir estagnado.' },
+  { id: 115, localId: 10, type: 8, text: 'Enfrentar e superar desafios difíceis te fortalece, sem isso, você tende a se sentir estagnado.' },
   { id: 116, localId: 11, type: 8, text: 'Você é o tipo de pessoa que confronta a realidade de frente e não deixa que outros se acomodem.' },
   { id: 117, localId: 12, type: 8, text: 'Seu estilo de comunicação é direto e pode parecer rude para pessoas mais delicadas.' },
-  { id: 118, localId: 13, type: 8, text: 'Quando explode de raiva, o sentimento passa rapidamente — você não costuma guardar mágoa.' },
+  { id: 118, localId: 13, type: 8, text: 'Quando explode de raiva, o sentimento passa rapidamente, você não costuma guardar mágoa.' },
   { id: 119, localId: 14, type: 8, text: 'Você se sente mais vivo quando está superando limites e alcançando o que parecia impossível.' },
-  { id: 120, localId: 15, type: 8, text: 'Você se sente mais seguro quando é você quem tem o controle — depender das decisões dos outros é desconfortável.' },
+  { id: 120, localId: 15, type: 8, text: 'Você se sente mais seguro quando é você quem tem o controle, depender das decisões dos outros é desconfortável.' },
 
-  // TIPO 9 — PACIFICADORA
+  // TIPO 9, PACIFICADORA
   { id: 121, localId: 1,  type: 9, text: 'Em grupos tensos, sua presença naturalmente tende a acalmar o ambiente.' },
-  { id: 122, localId: 2,  type: 9, text: 'Você funciona bem tanto em companhia quanto em solitude — sua paz interior não depende do contexto externo.' },
+  { id: 122, localId: 2,  type: 9, text: 'Você funciona bem tanto em companhia quanto em solitude, sua paz interior não depende do contexto externo.' },
   { id: 123, localId: 3,  type: 9, text: 'Você encontrou um ritmo de vida que funciona bem e tende a protegê-lo de mudanças desnecessárias.' },
-  { id: 124, localId: 4,  type: 9, text: 'Pequenos confortos — uma boa refeição, um ambiente agradável, um ritual simples — têm grande valor para você.' },
+  { id: 124, localId: 4,  type: 9, text: 'Pequenos confortos, uma boa refeição, um ambiente agradável, um ritual simples, têm grande valor para você.' },
   { id: 125, localId: 5,  type: 9, text: 'Quando há um conflito, você tende a ceder ou encontrar um meio-termo em vez de insistir na sua posição.' },
   { id: 126, localId: 6,  type: 9, text: 'Você desenvolveu uma habilidade de não se perturbar com o que acontece ao seu redor.' },
   { id: 127, localId: 7,  type: 9, text: 'Você raramente sente que precisa de mais do que tem para estar satisfeito.' },
@@ -666,7 +666,7 @@ export const ENNEAGRAM_QUESTIONS_V3: EnneagramQuestion[] = [
   { id: 132, localId: 12, type: 9, text: 'Em conflitos entre pessoas, você consegue ver o ponto de vista de cada lado com clareza.' },
   { id: 133, localId: 13, type: 9, text: 'Você naturalmente foca no que está funcionando em vez de amplificar o que está errado.' },
   { id: 134, localId: 14, type: 9, text: 'Você tem uma filosofia ou visão de vida que te ampara especialmente nos momentos mais difíceis.' },
-  { id: 135, localId: 15, type: 9, text: 'Você consegue separar bem o tempo de trabalho do tempo de descanso — quando é para relaxar, você relaxa de verdade.' },
+  { id: 135, localId: 15, type: 9, text: 'Você consegue separar bem o tempo de trabalho do tempo de descanso, quando é para relaxar, você relaxa de verdade.' },
 ]
 
 // ============================================================

@@ -1,5 +1,5 @@
 // ============================================================
-// ENGINE MBTI — Myers-Briggs Type Indicator
+// ENGINE MBTI, Myers-Briggs Type Indicator
 // 70 perguntas | 4 dimensões | 16 tipos de personalidade
 // ============================================================
 
@@ -147,7 +147,7 @@ export const MBTI_TYPES: Record<MbtiType, MbtiTypeReport> = {
   ENTJ: { type: 'ENTJ', name: 'O Imperador', tagline: 'Comandante', description: 'Líderes natos com habilidade de reunir pessoas em torno de um objetivo.', strengths: ['Eficiente', 'Confiante', 'Estratégico', 'Carismático'], weaknesses: ['Teimoso', 'Dominador', 'Intolerante'], careers: ['CEO', 'Advogado', 'Gestor', 'Empresário'] },
   ENTP: { type: 'ENTP', name: 'O Inovador', tagline: 'Debatedor', description: 'Pensadores rápidos e engenhosos, sempre em busca de novas ideias.', strengths: ['Inovador', 'Estratégico', 'Carismático', 'Direto'], weaknesses: ['Argumentativo', 'Intolerante', 'Procrastinador'], careers: ['Empreendedor', 'Advogado', 'Analista', 'Engenheiro'] },
   ESFJ: { type: 'ESFJ', name: 'O Cônsul', tagline: 'Provedor', description: 'Pessoas que se importam muito com os outros e com a harmonia social.', strengths: ['Atencioso', 'Leal', 'Sensível', 'Organizado'], weaknesses: ['Necessita de aprovação', 'Inflexível', 'Vulnerável à crítica'], careers: ['Enfermeiro', 'Professor', 'RH', 'Assistente Social'] },
-  ESFP: { type: 'ESFP', name: 'O Motivador', tagline: 'Animador', description: 'Espontâneos, enérgicos e entusiásticos — a vida nunca é entediante perto deles.', strengths: ['Ousado', 'Original', 'Estético', 'Prático'], weaknesses: ['Sensível', 'Entediável', 'Impulsivo'], careers: ['Artista', 'Músico', 'Ator', 'Vendedor'] },
+  ESFP: { type: 'ESFP', name: 'O Motivador', tagline: 'Animador', description: 'Espontâneos, enérgicos e entusiásticos, a vida nunca é entediante perto deles.', strengths: ['Ousado', 'Original', 'Estético', 'Prático'], weaknesses: ['Sensível', 'Entediável', 'Impulsivo'], careers: ['Artista', 'Músico', 'Ator', 'Vendedor'] },
   ESTJ: { type: 'ESTJ', name: 'O Executivo', tagline: 'Supervisor', description: 'Gestores naturais que prezam pela tradição, ordem e regras claras.', strengths: ['Dedicado', 'Organizado', 'Honesto', 'Paciente'], weaknesses: ['Inflexível', 'Obstinado', 'Difícil de relaxar'], careers: ['Gerente', 'Policial', 'Juiz', 'Militar'] },
   ESTP: { type: 'ESTP', name: 'O Empreendedor', tagline: 'Promotor', description: 'Pessoas que preferem ação a reflexão, com olho aguçado para oportunidades.', strengths: ['Ousado', 'Racional', 'Direto', 'Sociável'], weaknesses: ['Impaciente', 'Arriscado', 'Não estruturado'], careers: ['Empreendedor', 'Vendedor', 'Atleta', 'Policial'] },
   INFJ: { type: 'INFJ', name: 'O Conselheiro', tagline: 'Defensor', description: 'Silenciosos e místicos, com grande criatividade e princípios fortes.', strengths: ['Criativo', 'Perspicaz', 'Principiado', 'Apaixonado'], weaknesses: ['Sensível à crítica', 'Introvertido em excesso', 'Perfeccionista'], careers: ['Escritor', 'Conselheiro', 'Psicólogo', 'Médico'] },
@@ -206,7 +206,7 @@ export function calculateMBTI(answers: MbtiAnswer[]): MbtiResult {
 }
 
 // ============================================================
-// QUESTÕES V2 — mesmas dimensões e polos, formulação alternativa
+// QUESTÕES V2, mesmas dimensões e polos, formulação alternativa
 // ============================================================
 export const MBTI_QUESTIONS_V2: MbtiQuestion[] = [
   { id: 1,  theme: 'Em um evento social você tende a:', optionA: { text: 'Circular e conhecer novas pessoas', pole: 'E' }, optionB: { text: 'Preferir conversar profundamente com poucos', pole: 'I' }, dimension: 'EI' },
@@ -282,7 +282,7 @@ export const MBTI_QUESTIONS_V2: MbtiQuestion[] = [
 ]
 
 // ============================================================
-// QUESTÕES V3 — situacionais e cenários do cotidiano
+// QUESTÕES V3, situacionais e cenários do cotidiano
 // ============================================================
 export const MBTI_QUESTIONS_V3: MbtiQuestion[] = [
   { id: 1,  theme: 'Você é convidado para um jantar com pessoas que não conhece. Você:', optionA: { text: 'Chega animado e logo faz amizade com todos', pole: 'E' }, optionB: { text: 'Escolhe alguém e tem uma conversa mais profunda', pole: 'I' }, dimension: 'EI' },
@@ -290,7 +290,7 @@ export const MBTI_QUESTIONS_V3: MbtiQuestion[] = [
   { id: 3,  theme: 'Ao estudar um assunto novo, você prefere:', optionA: { text: 'Um guia prático passo a passo', pole: 'S' }, optionB: { text: 'Entender o conceito geral antes dos detalhes', pole: 'N' }, dimension: 'SN' },
   { id: 4,  theme: 'Seu amigo errou sério numa situação. Você:', optionA: { text: 'Diz o que acha de forma direta e honesta', pole: 'T' }, optionB: { text: 'Prioriza apoiá-lo emocionalmente primeiro', pole: 'F' }, dimension: 'TF' },
   { id: 5,  theme: 'Ao avaliar a proposta de alguém, você foca mais em:', optionA: { text: 'Se os números e a lógica fazem sentido', pole: 'T' }, optionB: { text: 'Se as pessoas se sentirão bem com a mudança', pole: 'F' }, dimension: 'TF' },
-  { id: 6,  theme: 'Alguém propõe um passeio de última hora. Você:', optionA: { text: 'Topa animado — adoras o improviso', pole: 'P' }, optionB: { text: 'Fica desconfortável — você já tinha planos', pole: 'J' }, dimension: 'JP' },
+  { id: 6,  theme: 'Alguém propõe um passeio de última hora. Você:', optionA: { text: 'Topa animado, adoras o improviso', pole: 'P' }, optionB: { text: 'Fica desconfortável, você já tinha planos', pole: 'J' }, dimension: 'JP' },
   { id: 7,  theme: 'Ao escolher um presente para alguém, você:', optionA: { text: 'Pesquisa com antecedência e compra com cuidado', pole: 'J' }, optionB: { text: 'Decide na hora com base no que parece certo', pole: 'P' }, dimension: 'JP' },
   { id: 8,  theme: 'Você passa um fim de semana sozinho. Você:', optionA: { text: 'Logo busca amigos ou sai para ver gente', pole: 'E' }, optionB: { text: 'Aproveita para descansar e recarregar', pole: 'I' }, dimension: 'EI' },
   { id: 9,  theme: 'Quando uma amiga está passando por algo difícil, você:', optionA: { text: 'Fica do lado e a escuta sem julgamentos', pole: 'F' }, optionB: { text: 'Apresenta soluções práticas para o problema', pole: 'T' }, dimension: 'TF' },
@@ -326,7 +326,7 @@ export const MBTI_QUESTIONS_V3: MbtiQuestion[] = [
   { id: 39, theme: 'Ao montar uma equipe, você daria mais peso para:', optionA: { text: 'Competência técnica e entregas', pole: 'T' }, optionB: { text: 'Perfil colaborativo e valores pessoais', pole: 'F' }, dimension: 'TF' },
   { id: 40, theme: 'Quando alguém erra por terceira vez, você:', optionA: { text: 'Conversa com firmeza e estabelece consequências', pole: 'T' }, optionB: { text: 'Tenta entender o que está impedindo a mudança', pole: 'F' }, dimension: 'TF' },
   { id: 41, theme: 'Você prefere trabalhar num projeto com:', optionA: { text: 'Prazo fixo, escopo claro e critérios definidos', pole: 'J' }, optionB: { text: 'Flexibilidade para descobrir o caminho no processo', pole: 'P' }, dimension: 'JP' },
-  { id: 42, theme: 'Sua mesa de trabalho é geralmente:', optionA: { text: 'Organizada — cada coisa em seu lugar', pole: 'J' }, optionB: { text: 'Com pilhas e itens espalhados, mas você sabe onde está tudo', pole: 'P' }, dimension: 'JP' },
+  { id: 42, theme: 'Sua mesa de trabalho é geralmente:', optionA: { text: 'Organizada, cada coisa em seu lugar', pole: 'J' }, optionB: { text: 'Com pilhas e itens espalhados, mas você sabe onde está tudo', pole: 'P' }, dimension: 'JP' },
   { id: 43, theme: 'Em relação à sua rede de contatos, você:', optionA: { text: 'Tem muitos conhecidos e faz conexões facilmente', pole: 'E' }, optionB: { text: 'Prefere poucos contatos, mas muito significativos', pole: 'I' }, dimension: 'EI' },
   { id: 44, theme: 'Ao apresentar uma ideia para o time, você prefere:', optionA: { text: 'Mostrar cases e exemplos reais do que funciona', pole: 'S' }, optionB: { text: 'Explorar o potencial e visão de futuro da ideia', pole: 'N' }, dimension: 'SN' },
   { id: 45, theme: 'Ao final do dia, você se sente realizado quando:', optionA: { text: 'Concluiu tarefas práticas e objetivas', pole: 'S' }, optionB: { text: 'Avançou na construção de algo maior e mais complexo', pole: 'N' }, dimension: 'SN' },
@@ -354,7 +354,7 @@ export const MBTI_QUESTIONS_V3: MbtiQuestion[] = [
   { id: 67, theme: 'Ao gerir uma equipe em crise, você:', optionA: { text: 'Foca no problema e na solução objetiva', pole: 'T' }, optionB: { text: 'Cuida das pessoas enquanto resolve o problema', pole: 'F' }, dimension: 'TF' },
   { id: 68, theme: 'Ao demitir alguém por necessidade da empresa, você:', optionA: { text: 'Explica os motivos com objetividade e clareza', pole: 'T' }, optionB: { text: 'Cuida do impacto emocional e oferece suporte', pole: 'F' }, dimension: 'TF' },
   { id: 69, theme: 'Ao analisar uma proposta comercial, você:', optionA: { text: 'Decide logo depois de ver o essencial', pole: 'J' }, optionB: { text: 'Prefere explorar mais antes de decidir', pole: 'P' }, dimension: 'JP' },
-  { id: 70, theme: 'Sua abordagem geral à vida é mais:', optionA: { text: 'Estruturada — você gosta de ter controle e ordem', pole: 'J' }, optionB: { text: 'Fluida — você prefere se adaptar ao que vem', pole: 'P' }, dimension: 'JP' },
+  { id: 70, theme: 'Sua abordagem geral à vida é mais:', optionA: { text: 'Estruturada, você gosta de ter controle e ordem', pole: 'J' }, optionB: { text: 'Fluida, você prefere se adaptar ao que vem', pole: 'P' }, dimension: 'JP' },
 ]
 
 // ============================================================

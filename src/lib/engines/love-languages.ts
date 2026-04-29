@@ -1,5 +1,5 @@
 // ============================================================
-// ENGINE — As 5 Linguagens do Amor (Gary Chapman)
+// ENGINE, As 5 Linguagens do Amor (Gary Chapman)
 // 30 questões | Escolha forçada A/B | 12 pontos por linguagem
 // ============================================================
 
@@ -42,24 +42,24 @@ export const LOVE_LANGUAGE_REPORTS: Record<LoveLanguage, LoveLangReport> = {
   PA: {
     name: 'Palavras de Afirmação',
     tagline: 'O poder das palavras que constroem e inspiram',
-    summary: 'Você se sente amado(a) e valorizado(a) através de palavras sinceras — elogios, encorajamentos, reconhecimento verbal e expressões genuínas de carinho. Para você, palavras têm peso emocional profundo e constroem (ou destroem) conexões.',
+    summary: 'Você se sente amado(a) e valorizado(a) através de palavras sinceras, elogios, encorajamentos, reconhecimento verbal e expressões genuínas de carinho. Para você, palavras têm peso emocional profundo e constroem (ou destroem) conexões.',
     professional: 'No ambiente de trabalho, feedbacks positivos, reconhecimento verbal de conquistas e mensagens de incentivo são fundamentais para seu engajamento. Um líder que diz "ótimo trabalho" ou "confio em você" faz uma diferença enorme na sua motivação.',
     personal: 'Em relacionamentos, "eu te amo", elogios genuínos, bilhetes de carinho e palavras de apoio nos momentos difíceis preenchem seu tanque emocional. Críticas duras, mesmo construtivas, têm impacto muito maior em você do que nas outras pessoas.',
     tips: [
       'Comunique às pessoas próximas que palavras de afirmação são importantes para você',
-      'Valorize bilhetes, mensagens e cartas — guarde aquelas que te tocam',
-      'Pratique expressar elogios genuínos — isso fortalece sua conexão com os outros',
+      'Valorize bilhetes, mensagens e cartas, guarde aquelas que te tocam',
+      'Pratique expressar elogios genuínos, isso fortalece sua conexão com os outros',
       'Aprenda a pedir feedbacks positivos quando precisar de encorajamento',
     ],
   },
   TQ: {
     name: 'Tempo de Qualidade',
     tagline: 'A presença plena como forma máxima de amor',
-    summary: 'Você se sente amado(a) quando as pessoas dedicam atenção plena e presença genuína a você — sem celular, sem distrações, olhos nos olhos. O que importa não é a quantidade de tempo, mas a qualidade da presença.',
+    summary: 'Você se sente amado(a) quando as pessoas dedicam atenção plena e presença genuína a você, sem celular, sem distrações, olhos nos olhos. O que importa não é a quantidade de tempo, mas a qualidade da presença.',
     professional: 'No trabalho, reuniões one-on-one, conversas significativas e a presença atenta do seu líder ou equipe aumentam seu senso de pertencimento. Ser ouvido com atenção genuína em reuniões é o que mais te faz sentir valorizado(a).',
-    personal: 'Em relacionamentos, o que toca seu coração é a pessoa estar completamente presente com você — uma conversa profunda, um jantar sem celular, uma atividade compartilhada com engajamento total. Distração e ausência emocional são o que mais te magoa.',
+    personal: 'Em relacionamentos, o que toca seu coração é a pessoa estar completamente presente com você, uma conversa profunda, um jantar sem celular, uma atividade compartilhada com engajamento total. Distração e ausência emocional são o que mais te magoa.',
     tips: [
-      'Proponha momentos de qualidade sem telas — isso diz muito mais do que presentes',
+      'Proponha momentos de qualidade sem telas, isso diz muito mais do que presentes',
       'Mostre presença total em conversas: olhe nos olhos, ouça ativamente, não interrompa',
       'Atividades compartilhadas significativas valem mais do que muito tempo junto sem conexão',
       'Comunique que estar presente e engajado é a forma mais alta de amor para você',
@@ -68,12 +68,12 @@ export const LOVE_LANGUAGE_REPORTS: Record<LoveLanguage, LoveLangReport> = {
   PR: {
     name: 'Presentes',
     tagline: 'O símbolo tangível de que você é lembrado(a)',
-    summary: 'Você se sente amado(a) quando recebe presentes — não pelo valor material, mas pelo pensamento, cuidado e esforço que eles representam. Um presente é a prova tangível de que a pessoa pensou em você.',
-    professional: 'No contexto profissional, reconhecimentos tangíveis — bônus, troféus, lembranças de conquistas ou datas especiais — têm grande impacto na sua satisfação e lealdade. O gesto de ser lembrado pela empresa comunica pertencimento.',
-    personal: 'Em relacionamentos, um presente inesperado — mesmo uma simples flor ou um chocolate favorito — diz "eu pensei em você". O que importa é o gesto de lembrar e presentear, não o preço. Datas importantes esquecidas ou chegadas de mãos vazias te magoam mais do que a maioria percebe.',
+    summary: 'Você se sente amado(a) quando recebe presentes, não pelo valor material, mas pelo pensamento, cuidado e esforço que eles representam. Um presente é a prova tangível de que a pessoa pensou em você.',
+    professional: 'No contexto profissional, reconhecimentos tangíveis, bônus, troféus, lembranças de conquistas ou datas especiais, têm grande impacto na sua satisfação e lealdade. O gesto de ser lembrado pela empresa comunica pertencimento.',
+    personal: 'Em relacionamentos, um presente inesperado, mesmo uma simples flor ou um chocolate favorito, diz "eu pensei em você". O que importa é o gesto de lembrar e presentear, não o preço. Datas importantes esquecidas ou chegadas de mãos vazias te magoam mais do que a maioria percebe.',
     tips: [
-      'Explique às pessoas próximas que presentes são símbolos de amor — não materialismo',
-      'Mantenha mentalmente o que as pessoas que você ama gostam — e surprise-as',
+      'Explique às pessoas próximas que presentes são símbolos de amor, não materialismo',
+      'Mantenha mentalmente o que as pessoas que você ama gostam, e surprise-as',
       'Valorize o pensamento por trás do presente, não o valor monetário',
       'Compartilhe datas importantes com pessoas próximas para que elas possam te surpreender',
     ],
@@ -81,33 +81,33 @@ export const LOVE_LANGUAGE_REPORTS: Record<LoveLanguage, LoveLangReport> = {
   AS: {
     name: 'Atos de Serviço',
     tagline: 'O amor que se mostra em ações concretas',
-    summary: 'Você se sente amado(a) quando as pessoas realizam ações concretas para facilitar sua vida, apoiar seus objetivos ou simplesmente fazer algo por você. Para você, o amor verdadeiro é proativo — não precisa esperar ser pedido.',
+    summary: 'Você se sente amado(a) quando as pessoas realizam ações concretas para facilitar sua vida, apoiar seus objetivos ou simplesmente fazer algo por você. Para você, o amor verdadeiro é proativo, não precisa esperar ser pedido.',
     professional: 'No trabalho, colegas e líderes que colaboram ativamente, removem obstáculos e apoiam com ações concretas fazem você se sentir profundamente valorizado(a). Palavras bonitas sem ações correspondentes soam vazias para você.',
-    personal: 'Em relacionamentos, quando alguém faz algo por você sem precisar pedir — lava a louça, resolve uma tarefa difícil, cuida de você quando está doente — você sente amor genuíno. A negligência com suas necessidades práticas é o que mais te desmotiva.',
+    personal: 'Em relacionamentos, quando alguém faz algo por você sem precisar pedir, lava a louça, resolve uma tarefa difícil, cuida de você quando está doente, você sente amor genuíno. A negligência com suas necessidades práticas é o que mais te desmotiva.',
     tips: [
-      'Expresse claramente o que seria útil — nem todos têm Atos de Serviço como linguagem primária',
+      'Expresse claramente o que seria útil, nem todos têm Atos de Serviço como linguagem primária',
       'Valorize e reconheça em voz alta quando alguém faz algo por você, mesmo que pequeno',
-      'Pratique atos de serviço pelas pessoas que você ama — é assim que você se expressa melhor',
-      'Lembre que "ajudar" não é obrigação — é amor em ação quando vem do coração',
+      'Pratique atos de serviço pelas pessoas que você ama, é assim que você se expressa melhor',
+      'Lembre que "ajudar" não é obrigação, é amor em ação quando vem do coração',
     ],
   },
   TF: {
     name: 'Toque Físico',
     tagline: 'A conexão que se sente na pele',
-    summary: 'Você se sente amado(a) e seguro(a) através do contato físico — abraços longos, beijos, carícias, mãos dadas, proximidade corporal. O toque não é apenas prazer; é uma necessidade emocional real e profunda.',
+    summary: 'Você se sente amado(a) e seguro(a) através do contato físico, abraços longos, beijos, carícias, mãos dadas, proximidade corporal. O toque não é apenas prazer; é uma necessidade emocional real e profunda.',
     professional: 'No ambiente profissional, apertos de mão firmes, tapinhas nas costas em momentos de conquista e a proximidade física dos colegas criam seu senso de confiança e conexão. Ambientes muito formais e frios podem te deixar desconectado(a).',
     personal: 'Em relacionamentos íntimos, o contato físico frequente é o principal combustível do seu tanque emocional. Um abraço longo, carícias espontâneas ou simplesmente sentar bem próximo diz mais do que mil palavras para você. Ausência de toque físico te faz sentir distante e não amado(a).',
     tips: [
-      'Comunique sua necessidade de contato físico — é uma necessidade legítima, não frescura',
-      'O toque não precisa ser íntimo — abraços em amigos e família também te recarregam',
+      'Comunique sua necessidade de contato físico, é uma necessidade legítima, não frescura',
+      'O toque não precisa ser íntimo, abraços em amigos e família também te recarregam',
       'Em contextos profissionais, seja intencional: handshakes, high-fives e proximidade física constroem sua confiança',
-      'Lembre que pessoas com outras linguagens podem não perceber sua necessidade — comunique',
+      'Lembre que pessoas com outras linguagens podem não perceber sua necessidade, comunique',
     ],
   },
 }
 
 // ============================================================
-// AS 30 QUESTÕES — Escolha forçada A ou B
+// AS 30 QUESTÕES, Escolha forçada A ou B
 // Distribuição: 12 ocorrências por linguagem (5×12 = 60 = 30×2)
 // ============================================================
 
@@ -174,7 +174,7 @@ export const LOVE_LANGUAGES_QUESTIONS: LoveLangQuestion[] = [
   // Q9: TQ × PR
   {
     id: 9,
-    optionA: { text: 'Gosto de passar tempo de qualidade com quem eu amo — conversando ou fazendo algo juntos.', language: 'TQ' },
+    optionA: { text: 'Gosto de passar tempo de qualidade com quem eu amo, conversando ou fazendo algo juntos.', language: 'TQ' },
     optionB: { text: 'Gosto de receber presentinhos de amigos e pessoas queridas.', language: 'PR' },
   },
   // Q10: PA × AS
@@ -235,13 +235,13 @@ export const LOVE_LANGUAGES_QUESTIONS: LoveLangQuestion[] = [
   {
     id: 19,
     optionA: { text: 'Tenho uma necessidade natural de tocar e ser tocado(a) pelas pessoas que amo.', language: 'TF' },
-    optionB: { text: 'Atos de serviço — ajuda prática no dia a dia — fazem com que eu me sinta genuinamente amado(a).', language: 'AS' },
+    optionB: { text: 'Atos de serviço, ajuda prática no dia a dia, fazem com que eu me sinta genuinamente amado(a).', language: 'AS' },
   },
   // Q20: AS × PR
   {
     id: 20,
     optionA: { text: 'Aprecio muito quando as pessoas que amo fazem gestos de serviço e apoio por mim.', language: 'AS' },
-    optionB: { text: 'Gosto de presentear e ser presenteado(a) — é uma das minhas formas favoritas de conexão.', language: 'PR' },
+    optionB: { text: 'Gosto de presentear e ser presenteado(a), é uma das minhas formas favoritas de conexão.', language: 'PR' },
   },
   // Q21: TQ × AS
   {
@@ -271,7 +271,7 @@ export const LOVE_LANGUAGES_QUESTIONS: LoveLangQuestion[] = [
   {
     id: 25,
     optionA: { text: 'Gosto de saber que as pessoas que amo estão dispostas a me ajudar quando preciso.', language: 'AS' },
-    optionB: { text: 'Gosto de passar tempo significativo com alguém especial — seja viajando, conversando ou simplesmente estando juntos.', language: 'TQ' },
+    optionB: { text: 'Gosto de passar tempo significativo com alguém especial, seja viajando, conversando ou simplesmente estando juntos.', language: 'TQ' },
   },
   // Q26: TF × PR
   {
