@@ -50,6 +50,7 @@ export default function LoveLanguagesTest({
 
     setSubmitting(true)
     setError('')
+      "
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
       setResultData(outcome.result ?? null)
@@ -58,6 +59,7 @@ export default function LoveLanguagesTest({
       setError(outcome.error)
     }
     setSubmitting(false)
+"
       }
 
   if (done && resultData) {

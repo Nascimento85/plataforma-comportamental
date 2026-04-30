@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import TestResultCard from '@/components/tests/TestResultCard'
-import { submitTestWithFallback } from '@/lib/submit-test'
 
 export interface ArchetypeQuestion {
   id: number
@@ -58,15 +57,22 @@ export default function ArchetypeTest({ assessmentId, token, questions, testType
     }
     setSubmitting(true)
     setError('')
-    const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
-    if (outcome.ok) {
-      setResultData(outcome.result ?? null)
+    try {
+      const res = await fetch('/api/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, answers: Object.values(answers) }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setError(data.error ?? 'Erro ao enviar respostas.'); return }
+      setResultData(data.result)
       setDone(true)
-    } else {
-      setError(outcome.error)
+    } catch {
+      setError('Erro ao conectar. Tente novamente.')
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
-      }
+  }
 
   if (done && resultData) {
     return (

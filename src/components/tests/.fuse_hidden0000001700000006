@@ -59,6 +59,7 @@ export default function EnneagramTest({
 
     setSubmitting(true)
     setError('')
+      "
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
       setResultData(outcome.result ?? null)
@@ -67,6 +68,7 @@ export default function EnneagramTest({
       setError(outcome.error)
     }
     setSubmitting(false)
+"
       }
 
   if (done) {

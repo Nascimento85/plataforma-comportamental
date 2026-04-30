@@ -6,6 +6,7 @@ import {
   shuffleCareerAnchorQuestions,
 } from '@/lib/engines'
 import TestResultCard from '@/components/tests/TestResultCard'
+import { submitTestWithFallback } from '@/lib/submit-test'
 
 interface CareerAnchorAnswer {
   questionId: number
@@ -62,26 +63,15 @@ export default function CareerAnchorTest({
 
     setSubmitting(true)
     setError('')
-    try {
-      const res = await fetch('/api/results', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, answers: Object.values(answers) }),
-      })
-      if (!res.ok) {
-        const data = await res.json()
-        setError(data.error ?? 'Erro ao enviar respostas.')
-        return
-      }
-      const data = await res.json()
-      setResultData(data.result ?? null)
+    const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
+    if (outcome.ok) {
+      setResultData(outcome.result ?? null)
       setDone(true)
-    } catch {
-      setError('Erro de conexão. Tente novamente.')
-    } finally {
-      setSubmitting(false)
+    } else {
+      setError(outcome.error)
     }
-  }
+    setSubmitting(false)
+      }
 
   if (done) {
     return (

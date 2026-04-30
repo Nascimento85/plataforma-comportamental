@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { DISC_GROUP_SETS, getDiscVersion } from '@/lib/engines/disc'
 import TestResultCard from '@/components/tests/TestResultCard'
+import { submitTestWithFallback } from '@/lib/submit-test'
 
 interface DISCAnswer {
   groupId: number
@@ -120,27 +121,14 @@ export default function DISCTest({
       }
     })
 
-    try {
-      const res = await fetch('/api/results', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, answers }),
-      })
-
-      if (!res.ok) {
-        const data = await res.json()
-        setError(data.error ?? 'Erro ao enviar respostas.')
-        return
-      }
-
-      const data = await res.json()
-      setResultData(data.result ?? null)
+    const outcome = await submitTestWithFallback({ token, answers })
+    if (outcome.ok) {
+      setResultData(outcome.result ?? null)
       setDone(true)
-    } catch {
-      setError('Erro de conexão. Tente novamente.')
-    } finally {
-      setSubmitting(false)
+    } else {
+      setError(outcome.error)
     }
+    setSubmitting(false)
   }
 
   if (done) {

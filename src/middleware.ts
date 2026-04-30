@@ -23,6 +23,7 @@ const PUBLIC_ROUTES = [
   '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
   '/api/cron',             // crons protegidos por Bearer CRON_SECRET, não por cookie
   '/api/premium/checkout', // checkout chamado da página pública /result/[id]
+  '/api/results',          // submissão de teste — protegido por token único do Assessment
 ]
 
 export function middleware(request: NextRequest) {
