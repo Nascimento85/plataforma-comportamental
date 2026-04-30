@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Fraunces, DM_Sans, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
+import CookieBanner from '@/components/legal/CookieBanner'
 
 // -- Legado (mantido para compatibilidade) ---------------------------------
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -46,7 +47,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             lang="pt-BR"
             className={`${inter.variable} ${dmSans.variable} ${fraunces.variable} ${cormorant.variable}`}
         >
-            <body>{children}</body>
+            <body>
+                {children}
+                <CookieBanner />
+            </body>
         </html>
     )
 }

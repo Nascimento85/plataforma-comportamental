@@ -15,6 +15,9 @@ const PUBLIC_ROUTES = [
   '/empresas.html',
   '/lp',               // LP unificada (acesso direto)
   '/lp.html',
+  '/politica-de-privacidade',  // documento legal LGPD
+  '/politica-de-cookies',       // documento legal LGPD
+  '/termos-de-uso',             // documento legal
   '/api/auth/login',
   '/api/auth/logout',
   '/api/auth/register',
