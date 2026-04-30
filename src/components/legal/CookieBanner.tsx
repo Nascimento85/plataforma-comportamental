@@ -13,19 +13,31 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useCookieConsent, type CookieCategory } from '@/lib/cookie-consent'
 
 export default function CookieBanner() {
   const { needsDecision, acceptAll, rejectAll, update } = useCookieConsent()
   const [expanded, setExpanded] = useState(false)
-  const [prefs, setPrefs] = useState({
+  const [hidden, setHidden]     = useState(true)
+  const [prefs, setPrefs]       = useState({
     analytics:   false,
     marketing:   false,
     preferences: false,
   })
 
+  // Esconde em renderizações de PDF / impressão / Puppeteer
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const isPrint = params.get('print') === '1'
+    const isHeadless =
+      /HeadlessChrome/i.test(navigator.userAgent) ||
+      navigator.webdriver === true
+    setHidden(isPrint || isHeadless)
+  }, [])
+
+  if (hidden) return null
   if (!needsDecision) return null
 
   function savePrefs() {
@@ -42,7 +54,7 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-label="Aviso de cookies"
-      className="fixed inset-x-0 bottom-0 z-[70] p-3 sm:p-4 pointer-events-none"
+      className="fixed inset-x-0 bottom-0 z-[70] p-3 sm:p-4 pointer-events-none print:hidden"
     >
       <div
         className="max-w-3xl mx-auto rounded-2xl shadow-2xl pointer-events-auto"

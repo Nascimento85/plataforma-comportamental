@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import ShareResultButton from './ShareResultButton'
+import LogoutAndLoginButton from './LogoutAndLoginButton'
 import { parseResultData } from '@/lib/parseResult'
 
 export const metadata: Metadata = { title: 'Devolutiva Comportamental' }
@@ -571,7 +572,54 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
     },
   })
 
-  if (!assessment || assessment.companyId !== companyId) return notFound()
+  // Assessment não existe → 404 padrão
+  if (!assessment) return notFound()
+
+  // Assessment existe, mas pertence a outra conta → tela explicativa
+  if (assessment.companyId !== companyId) {
+    return (
+      <div className="max-w-2xl mx-auto py-16">
+        <div
+          className="bg-white rounded-3xl p-8 sm:p-10 text-center"
+          style={{ border: '1px solid rgba(232,226,214,0.6)' }}
+        >
+          <div className="text-5xl mb-5">🔒</div>
+          <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
+            Esta avaliação pertence a outra conta
+          </h1>
+          <p className="text-[14px] text-soul-ink/65 font-sans leading-relaxed mb-2">
+            Você está logado como <strong>{session.email}</strong>, mas esta devolutiva
+            está vinculada a uma conta diferente.
+          </p>
+          <p className="text-[14px] text-soul-ink/65 font-sans leading-relaxed mb-7">
+            Para visualizar com seus controles administrativos, faça logout e entre
+            com a conta correta. Ou abra a versão pública do relatório (sem login)
+            usando o link abaixo.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href={`/result/${assessment.id}`}
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold text-white shadow-terra hover:-translate-y-px transition-all"
+              style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+            >
+              Ver versão pública →
+            </Link>
+            <LogoutAndLoginButton
+              callbackUrl={`/dashboard/assessments/${assessment.id}`}
+            />
+          </div>
+
+          <Link
+            href="/dashboard"
+            className="inline-block mt-6 text-[13px] text-soul-ink/50 hover:text-soul-ink/80 font-sans"
+          >
+            ← Voltar para o dashboard
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   if (assessment.status !== 'COMPLETED' || !assessment.result) {
     return (
