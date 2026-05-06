@@ -45,7 +45,6 @@ export default function TemperamentTest({
   assessmentId: string
   token: string
 }) {
-  const router = useRouter()
   // Deriva a versão do conjunto de questões deterministicamente a partir do token.
   // Isso garante que o mesmo avaliado sempre veja o mesmo set sem precisar salvar no banco.
   const version = getTemperamentVersion(token)
@@ -84,12 +83,13 @@ export default function TemperamentTest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
-      return
+      setResultData(outcome.result ?? null)
+      setDone(true)
+    } else {
+      setError(outcome.error)
     }
-    setError(outcome.error)
     setSubmitting(false)
-  }
+      }
 
   if (done) {
     return (

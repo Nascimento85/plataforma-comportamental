@@ -123,11 +123,10 @@ export default function DISCTest({
 
     const outcome = await submitTestWithFallback({ token, answers })
     if (outcome.ok) {
-      setResultData(outcome.result ?? null)
-      setDone(true)
-    } else {
-      setError(outcome.error)
+      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
+      return
     }
+    setError(outcome.error)
     setSubmitting(false)
   }
 

@@ -22,6 +22,7 @@ interface SubmitResult {
   ok: true
   result: Record<string, unknown>
   resultId?: string
+  assessmentId?: string
   recovered?: boolean // true se foi recuperado via /check (não pelo POST direto)
 }
 
@@ -50,7 +51,12 @@ export async function submitTestWithFallback(
 
     if (res.ok) {
       const data = await res.json()
-      return { ok: true, result: data.result, resultId: data.resultId }
+      return {
+        ok:           true,
+        result:       data.result,
+        resultId:     data.resultId,
+        assessmentId: data.assessmentId,
+      }
     }
 
     // 409 = já concluído. O servidor já tem o Result salvo.
@@ -95,10 +101,11 @@ async function recoverViaCheck(token: string): Promise<SubmitResult | SubmitErro
     const data = await res.json()
     if (data?.completed && data?.result) {
       return {
-        ok: true,
-        result: data.result,
-        resultId: data.resultId,
-        recovered: true,
+        ok:           true,
+        result:       data.result,
+        resultId:     data.resultId,
+        assessmentId: data.assessmentId,
+        recovered:    true,
       }
     }
     return {

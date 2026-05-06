@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   EI_QUESTIONS,
   shuffleEIQuestions,
@@ -24,12 +25,13 @@ const LIKERT = [
 const PAGE_SIZE = 9  // 18 questões / 9 = 2 páginas
 
 export default function EmotionalIntelligenceTest({
-  assessmentId: _assessmentId,
+  assessmentId,
   token,
 }: {
   assessmentId: string
   token: string
 }) {
+  const router = useRouter()
   const QUESTIONS = useMemo(
     () => shuffleEIQuestions(EI_QUESTIONS, token),
     [token],
@@ -63,13 +65,12 @@ export default function EmotionalIntelligenceTest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      setResultData(outcome.result ?? null)
-      setDone(true)
-    } else {
-      setError(outcome.error)
+      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
+      return
     }
+    setError(outcome.error)
     setSubmitting(false)
-      }
+  }
 
   if (done) {
     return (

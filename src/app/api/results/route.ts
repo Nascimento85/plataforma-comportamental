@@ -221,7 +221,10 @@ export async function POST(request: NextRequest) {
       }).catch((err) => console.error('[manychat-tags]', err))
     }
 
-    return NextResponse.json({ resultId: result.id, result: resultData }, { status: 201 })
+    return NextResponse.json(
+      { resultId: result.id, assessmentId: assessment.id, result: resultData },
+      { status: 201 },
+    )
   } catch (err) {
     console.error('[results POST]', err)
     return NextResponse.json({ error: 'Erro interno.' }, { status: 500 })

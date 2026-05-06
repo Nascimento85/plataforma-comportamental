@@ -30,7 +30,6 @@ export default function EnneagramTest({
   assessmentId: string
   token: string
 }) {
-  const router = useRouter()
   const ENNEAGRAM_QUESTIONS = ENNEAGRAM_QUESTION_SETS[getEnneagramVersion(token)]
 
   const [answers, setAnswers] = useState<Record<number, EnneagramAnswer>>({})
@@ -63,12 +62,13 @@ export default function EnneagramTest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
-      return
+      setResultData(outcome.result ?? null)
+      setDone(true)
+    } else {
+      setError(outcome.error)
     }
-    setError(outcome.error)
     setSubmitting(false)
-  }
+      }
 
   if (done) {
     return (

@@ -28,7 +28,6 @@ export default function MBTITest({
   assessmentId: string
   token: string
 }) {
-  const router = useRouter()
   const MBTI_QUESTIONS = MBTI_QUESTION_SETS[getMbtiVersion(token)]
 
   const [answers, setAnswers] = useState<Record<number, MBTIAnswer>>({})
@@ -65,12 +64,13 @@ export default function MBTITest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
-      return
+      setResultData(outcome.result ?? null)
+      setDone(true)
+    } else {
+      setError(outcome.error)
     }
-    setError(outcome.error)
     setSubmitting(false)
-  }
+      }
 
   if (done) {
     return (

@@ -34,7 +34,6 @@ interface Props {
 }
 
 export default function ArchetypeTest({ assessmentId, token, questions, testType }: Props) {
-  const router = useRouter()
   const [answers, setAnswers] = useState<Record<number, ArchetypeAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -62,12 +61,13 @@ export default function ArchetypeTest({ assessmentId, token, questions, testType
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
-      return
+      setResultData(outcome.result ?? null)
+      setDone(true)
+    } else {
+      setError(outcome.error)
     }
-    setError(outcome.error)
     setSubmitting(false)
-  }
+      }
 
   if (done && resultData) {
     return (
@@ -162,4 +162,7 @@ export default function ArchetypeTest({ assessmentId, token, questions, testType
             {submitting ? 'Enviando...' : 'Finalizar avaliação ✓'}
           </button>
         )}
- 
+      </div>
+    </div>
+  )
+}

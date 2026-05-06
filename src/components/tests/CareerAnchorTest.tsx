@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   CAREER_ANCHOR_QUESTIONS,
   shuffleCareerAnchorQuestions,
@@ -24,12 +25,13 @@ const LIKERT = [
 const PAGE_SIZE = 8  // 40 questões / 8 = 5 páginas
 
 export default function CareerAnchorTest({
-  assessmentId: _assessmentId,
+  assessmentId,
   token,
 }: {
   assessmentId: string
   token: string
 }) {
+  const router = useRouter()
   // Shuffle determinístico baseado no token (mesma ordem se reabrir)
   const QUESTIONS = useMemo(
     () => shuffleCareerAnchorQuestions(CAREER_ANCHOR_QUESTIONS, token),
@@ -65,13 +67,12 @@ export default function CareerAnchorTest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      setResultData(outcome.result ?? null)
-      setDone(true)
-    } else {
-      setError(outcome.error)
+      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
+      return
     }
+    setError(outcome.error)
     setSubmitting(false)
-      }
+  }
 
   if (done) {
     return (

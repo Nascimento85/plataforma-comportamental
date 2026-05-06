@@ -21,7 +21,6 @@ export default function LoveLanguagesTest({
   assessmentId: string
   token: string
 }) {
-  const router = useRouter()
   const [answers, setAnswers] = useState<Record<number, LoveLangAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)
@@ -54,12 +53,13 @@ export default function LoveLanguagesTest({
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
-      return
+      setResultData(outcome.result ?? null)
+      setDone(true)
+    } else {
+      setError(outcome.error)
     }
-    setError(outcome.error)
     setSubmitting(false)
-  }
+      }
 
   if (done && resultData) {
     return <TestResultCard testType="LOVE_LANGUAGES" result={resultData} />
