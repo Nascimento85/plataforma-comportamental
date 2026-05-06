@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import TestResultCard from '@/components/tests/TestResultCard'
 import { submitTestWithFallback } from '@/lib/submit-test'
 
 export interface ArchetypeQuestion {
@@ -16,14 +15,7 @@ interface ArchetypeAnswer {
   value: number
 }
 
-const LIKERT = [
-  { value: 1, label: 'Discordo totalmente' },
-  { value: 2, label: 'Discordo' },
-  { value: 3, label: 'Neutro' },
-  { value: 4, label: 'Concordo' },
-  { value: 5, label: 'Concordo totalmente' },
-]
-
+const LIKERT = [1, 2, 3, 4, 5]
 const PAGE_SIZE = 7
 
 interface Props {
@@ -33,14 +25,12 @@ interface Props {
   testType: string
 }
 
-export default function ArchetypeTest({ assessmentId, token, questions, testType }: Props) {
+export default function ArchetypeTest({ assessmentId, token, questions }: Props) {
   const router = useRouter()
   const [answers, setAnswers] = useState<Record<number, ArchetypeAnswer>>({})
   const [page, setPage] = useState(0)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
-  const [done, setDone] = useState(false)
-  const [resultData, setResultData] = useState<Record<string, unknown> | null>(null)
 
   const totalPages = Math.ceil(questions.length / PAGE_SIZE)
   const pageQuestions = questions.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
@@ -55,111 +45,73 @@ export default function ArchetypeTest({ assessmentId, token, questions, testType
   async function handleSubmit() {
     const unanswered = questions.filter((q) => !answers[q.id])
     if (unanswered.length > 0) {
-      setError(`${unanswered.length} afirmação(ões) ainda não respondida(s).`)
+      setError(unanswered.length + ' afirmacoes ainda nao respondidas.')
       return
     }
     setSubmitting(true)
     setError('')
     const outcome = await submitTestWithFallback({ token, answers: Object.values(answers) })
     if (outcome.ok) {
-      router.push(`/result/${outcome.assessmentId ?? assessmentId}`)
+      router.push('/result/' + (outcome.assessmentId ?? assessmentId))
       return
     }
     setError(outcome.error)
     setSubmitting(false)
   }
 
-  if (done && resultData) {
-    return (
-      <div className="space-y-6">
-        <div className="text-center">
-          <div className="text-5xl mb-3">🎉</div>
-          <h2 className="text-xl font-bold text-gray-900">Avaliação concluída!</h2>
-          <p className="text-gray-500 text-sm mt-1">Aqui está o resumo do seu perfil:</p>
-        </div>
-        <TestResultCard testType={testType} result={resultData} />
-        <div className="rounded-xl border border-brand-200 bg-brand-50 p-4 text-center text-sm text-brand-700">
-          O relatório completo será disponibilizado pela sua empresa.
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="space-y-6">
-      {/* Progresso */}
       <div>
         <div className="flex justify-between text-xs text-gray-500 mb-1">
           <span>{answered} de {questions.length} respondidas</span>
-          <span>Página {page + 1} de {totalPages}</span>
+          <span>Pagina {page + 1} de {totalPages}</span>
         </div>
         <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-brand-600 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="h-full bg-brand-600 rounded-full transition-all" style={{ width: progress + '%' }} />
         </div>
       </div>
 
-      {/* Instrução */}
-      <div className="bg-brand-50 border border-brand-200 rounded-xl px-4 py-3 text-sm text-brand-700">
-        <strong>Como responder:</strong> Para cada afirmação, escolha o quanto ela se aplica a você — de <strong>1 (discordo totalmente)</strong> até <strong>5 (concordo totalmente)</strong>. Responda pelo que realmente sente, não pelo que acha ideal.
-      </div>
-
-      {/* Questões */}
       <div className="space-y-5">
         {pageQuestions.map((q) => (
           <div key={q.id} className="card p-5">
-            <p className="text-sm font-medium text-gray-800 mb-4 leading-relaxed">
+            <p className="text-sm font-medium text-gray-800 mb-4">
               <span className="text-brand-400 font-bold mr-2">{q.id}.</span>
               {q.text}
             </p>
             <div className="flex gap-2 flex-wrap">
-              {LIKERT.map(({ value, label }) => (
+              {LIKERT.map((v) => (
                 <button
-                  key={value}
-                  onClick={() => handleAnswer(q.id, value)}
-                  className={`flex-1 min-w-[52px] py-2 rounded-lg border text-sm font-semibold transition-all ${
-                    answers[q.id]?.value === value
-                      ? 'bg-brand-600 border-brand-600 text-white shadow-sm'
-                      : 'border-gray-200 text-gray-600 hover:border-brand-300 hover:bg-brand-50'
-                  }`}
-                  title={label}
+                  key={v}
+                  onClick={() => handleAnswer(q.id, v)}
+                  className={'flex-1 min-w-[52px] py-2 rounded-lg border text-sm font-semibold ' + (answers[q.id]?.value === v ? 'bg-brand-600 border-brand-600 text-white' : 'border-gray-200 text-gray-600')}
                 >
-                  {value}
+                  {v}
                 </button>
               ))}
-            </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1 px-1">
-              <span>Discordo totalmente</span>
-              <span>Concordo totalmente</span>
             </div>
           </div>
         ))}
       </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">{error}</div>
-      )}
+      {error && <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">{error}</div>}
 
-      {/* Navegação */}
       <div className="flex gap-3">
         {page > 0 && (
-          <button onClick={() => setPage((p) => p - 1)} className="btn-secondary flex-1">
-            ← Anterior
-          </button>
+          <button onClick={() => setPage((p) => p - 1)} className="btn-secondary flex-1">Anterior</button>
         )}
         {page < totalPages - 1 ? (
           <button
-            onClick={() => { if (pageComplete) setPage((p) => p + 1); else setError('Responda todas as afirmações desta página antes de continuar.') }}
+            onClick={() => { if (pageComplete) setPage((p) => p + 1); else setError('Responda todas as afirmacoes antes de continuar.') }}
             className="btn-primary flex-1"
           >
-            Próxima →
+            Proxima
           </button>
         ) : (
-          <button
-            onClick={handleSubmit}
-            disabled={submitting}
-            className="btn-primary flex-1"
-          >
-            {submitting ? 'Enviando...' : 'Finalizar avaliação ✓'}
+          <button onClick={handleSubmit} disabled={submitting} className="btn-primary flex-1">
+            {submitting ? 'Enviando...' : 'Finalizar'}
           </button>
         )}
- 
+      </div>
+    </div>
+  )
+}
