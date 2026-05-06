@@ -675,6 +675,98 @@ function ArchetypeFeminineDevolutiva({ d }: { d: Record<string, unknown> }) {
   )
 }
 
+// ── Devolutiva 5 Linguagens do Amor ──────────────────────────
+
+function LoveLanguagesDevolutiva({ d }: { d: Record<string, unknown> }) {
+  const r = d as {
+    primaryLanguage: 'PA' | 'TQ' | 'PR' | 'AS' | 'TF'
+    secondaryLanguage: 'PA' | 'TQ' | 'PR' | 'AS' | 'TF'
+    percentages: Record<string, number>
+    scores: Record<string, number>
+    ranking: ('PA' | 'TQ' | 'PR' | 'AS' | 'TF')[]
+    report: {
+      name: string
+      tagline: string
+      summary: string
+      professional: string
+      personal: string
+      tips: string[]
+    }
+  }
+
+  const LABELS: Record<string, string> = {
+    PA: 'Palavras de Afirmacao',
+    TQ: 'Tempo de Qualidade',
+    PR: 'Presentes',
+    AS: 'Atos de Servico',
+    TF: 'Toque Fisico',
+  }
+  const COLORS: Record<string, string> = {
+    PA: '#8b5cf6',
+    TQ: '#f59e0b',
+    PR: '#ec4899',
+    AS: '#14b8a6',
+    TF: '#f43f5e',
+  }
+  const EMOJIS: Record<string, string> = {
+    PA: 'PA', TQ: 'TQ', PR: 'PR', AS: 'AS', TF: 'TF',
+  }
+
+  const pc = COLORS[r.primaryLanguage] ?? '#2a47f5'
+  const sc = COLORS[r.secondaryLanguage] ?? '#94a3b8'
+
+  return (
+    <div className="space-y-5">
+      <Card><div className="p-6 flex items-start gap-5">
+        <div className="min-w-[72px] min-h-[72px] rounded-2xl flex items-center justify-center text-white text-xl font-bold"
+             style={{ backgroundColor: pc }}>
+          {EMOJIS[r.primaryLanguage]}
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
+            Linguagem primaria - Secundaria: {LABELS[r.secondaryLanguage]}
+          </p>
+          <h2 className="text-2xl font-bold text-gray-900">{r.report.name}</h2>
+          <p className="font-semibold mt-1 italic" style={{ color: pc }}>"{r.report.tagline}"</p>
+          <p className="text-sm text-gray-600 mt-2 leading-relaxed">{r.report.summary}</p>
+        </div>
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Distribuicao das 5 linguagens</SectionTitle>
+        {r.ranking.map((lang) => (
+          <Bar key={lang}
+            label={LABELS[lang]}
+            pct={Math.round((r.percentages[lang] ?? 0) * 100)}
+            color={COLORS[lang]}
+            bold={lang === r.primaryLanguage} />
+        ))}
+      </div></Card>
+
+      <Grid2>
+        <InfoBox label="No ambiente profissional" text={r.report.professional}
+                 bg="#eff6ff" labelColor="#2563eb" textColor="#1e40af" />
+        <InfoBox label="Em relacionamentos pessoais" text={r.report.personal}
+                 bg="#fdf4ff" labelColor="#a855f7" textColor="#6b21a8" />
+      </Grid2>
+
+      <Card><div className="p-6">
+        <SectionTitle>Como cultivar sua linguagem do amor</SectionTitle>
+        <BulletList items={r.report.tips} color={pc} />
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Influencia secundaria: {LABELS[r.secondaryLanguage]}</SectionTitle>
+        <p className="text-sm text-gray-700 leading-relaxed" style={{ borderLeft: '4px solid ' + sc, paddingLeft: '12px' }}>
+          Sua segunda linguagem mais expressiva e <strong>{LABELS[r.secondaryLanguage]}</strong>.
+          Quando combinada a linguagem primaria, ela amplia as formas pelas quais voce
+          da e recebe afeto - vale comunicar isso as pessoas proximas.
+        </p>
+      </div></Card>
+    </div>
+  )
+}
+
 // ── Página principal ─────────────────────────────────────────
 
 interface PageProps {
@@ -817,6 +909,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'TEMPERAMENT'        && <TemperamentDevolutiva      d={resultData} />}
         {assessment.testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        d={resultData} />}
         {assessment.testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva d={resultData} />}
+        {assessment.testType === 'LOVE_LANGUAGES'     && <LoveLanguagesDevolutiva    d={resultData} />}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (
