@@ -12,3 +12,6 @@ Thumbs.db
 *.log
 
 tsconfig.tsbuildinfo
+
+# FUSE filesystem leftovers (occur when files are open while being saved)
+.fuse_hidden*
