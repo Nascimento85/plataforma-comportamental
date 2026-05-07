@@ -767,6 +767,224 @@ function LoveLanguagesDevolutiva({ d }: { d: Record<string, unknown> }) {
   )
 }
 
+// ── Devolutiva Ancoras de Carreira ───────────────────────────
+
+function CareerAnchorDevolutiva({ d }: { d: Record<string, unknown> }) {
+  const r = d as {
+    primaryAnchor: string
+    secondaryAnchor: string
+    percentages: Record<string, number>
+    scores: Record<string, number>
+    ranking: Array<{ anchor: string; score: number; percentage: number }>
+    primaryReport: {
+      name: string; tagline: string; summary: string
+      motivation: string; aversion: string
+      idealRoles: string[]; developmentTips: string[]
+      managementApproach: string
+    }
+    secondaryReport: {
+      name: string; tagline: string; summary: string
+    }
+  }
+
+  const LABELS: Record<string, string> = {
+    TF: 'Competencia Tecnico-Funcional',
+    GG: 'Gerencia Geral',
+    AU: 'Autonomia e Independencia',
+    SE: 'Seguranca e Estabilidade',
+    CE: 'Criatividade Empreendedora',
+    SD: 'Servico e Dedicacao',
+    DP: 'Desafio Puro',
+    EV: 'Estilo de Vida',
+  }
+  const COLORS: Record<string, string> = {
+    TF: '#3d4f7c', GG: '#c9a84c', AU: '#c4633a', SE: '#7a9e7e',
+    CE: '#d4943a', SD: '#c47a72', DP: '#a8522e', EV: '#6b8a7e',
+  }
+
+  const pc = COLORS[r.primaryAnchor] ?? '#2a47f5'
+  const sc = COLORS[r.secondaryAnchor] ?? '#94a3b8'
+
+  return (
+    <div className="space-y-5">
+      <Card><div className="p-6 flex items-start gap-5">
+        <div className="min-w-[72px] min-h-[72px] rounded-2xl flex items-center justify-center text-white text-xl font-bold"
+             style={{ backgroundColor: pc }}>
+          {r.primaryAnchor}
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
+            Ancora primaria - Secundaria: {LABELS[r.secondaryAnchor]}
+          </p>
+          <h2 className="text-2xl font-bold text-gray-900">{r.primaryReport.name}</h2>
+          <p className="font-semibold mt-1 italic" style={{ color: pc }}>"{r.primaryReport.tagline}"</p>
+          <p className="text-sm text-gray-600 mt-2 leading-relaxed">{r.primaryReport.summary}</p>
+        </div>
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Distribuicao das 8 ancoras</SectionTitle>
+        {r.ranking.map((item) => (
+          <Bar key={item.anchor}
+            label={LABELS[item.anchor]}
+            pct={item.percentage}
+            color={COLORS[item.anchor]}
+            bold={item.anchor === r.primaryAnchor} />
+        ))}
+      </div></Card>
+
+      <Grid2>
+        <InfoBox label="O que te motiva" text={r.primaryReport.motivation}
+                 bg="#f0fdf4" labelColor="#16a34a" textColor="#166534" />
+        <InfoBox label="O que te desmotiva" text={r.primaryReport.aversion}
+                 bg="#fef2f2" labelColor="#dc2626" textColor="#991b1b" />
+      </Grid2>
+
+      <Card><div className="p-6">
+        <SectionTitle>Funcoes e cargos ideais</SectionTitle>
+        <BulletList items={r.primaryReport.idealRoles} color={pc} />
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Caminhos de desenvolvimento</SectionTitle>
+        <BulletList items={r.primaryReport.developmentTips} color="#2a47f5" />
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Como gerir alguem com essa ancora</SectionTitle>
+        <p className="text-sm text-gray-700 leading-relaxed" style={{ borderLeft: '4px solid ' + pc, paddingLeft: '12px' }}>
+          {r.primaryReport.managementApproach}
+        </p>
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Influencia secundaria: {r.secondaryReport.name}</SectionTitle>
+        <p className="text-sm text-gray-700 leading-relaxed" style={{ borderLeft: '4px solid ' + sc, paddingLeft: '12px' }}>
+          <em>{r.secondaryReport.tagline}</em>
+        </p>
+        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{r.secondaryReport.summary}</p>
+      </div></Card>
+    </div>
+  )
+}
+
+// ── Devolutiva Inteligencia Emocional ────────────────────────
+
+function EmotionalIntelligenceDevolutiva({ d }: { d: Record<string, unknown> }) {
+  const r = d as {
+    primaryStrength: string
+    primaryDevelopment: string
+    averagePercentage: number
+    globalLevel: 'high' | 'mid' | 'low'
+    percentages: Record<string, number>
+    domains: Array<{
+      domain: string
+      score: number
+      percentage: number
+      level: 'high' | 'mid' | 'low'
+      report: { name: string; tagline: string; description: string; subthemes: string[]; developmentTips: string[]; applicationCorporate: string }
+      feedback: string
+    }>
+  }
+
+  const LABELS: Record<string, string> = {
+    AUC: 'Autoconsciencia',
+    AUR: 'Autorregulacao',
+    MOT: 'Motivacao',
+    EMP: 'Empatia',
+    HAS: 'Habilidades Sociais',
+  }
+  const COLORS: Record<string, string> = {
+    AUC: '#c4633a', AUR: '#3d4f7c', MOT: '#c9a84c', EMP: '#c47a72', HAS: '#7a9e7e',
+  }
+  const LEVEL_LABEL: Record<string, string> = {
+    high: 'Alto',
+    mid:  'Medio',
+    low:  'Em desenvolvimento',
+  }
+  const LEVEL_COLOR: Record<string, string> = {
+    high: '#16a34a',
+    mid:  '#d97706',
+    low:  '#dc2626',
+  }
+
+  const pc = COLORS[r.primaryStrength] ?? '#2a47f5'
+  const dev = COLORS[r.primaryDevelopment] ?? '#94a3b8'
+  const primaryDom = r.domains.find((x) => x.domain === r.primaryStrength)
+  const devDom = r.domains.find((x) => x.domain === r.primaryDevelopment)
+
+  return (
+    <div className="space-y-5">
+      <Card><div className="p-6 flex items-start gap-5">
+        <div className="min-w-[72px] min-h-[72px] rounded-2xl flex items-center justify-center text-white text-2xl font-bold"
+             style={{ backgroundColor: pc }}>
+          {r.averagePercentage}%
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-1">
+            Inteligencia Emocional Global - Nivel: <span className="font-semibold" style={{ color: LEVEL_COLOR[r.globalLevel] }}>{LEVEL_LABEL[r.globalLevel]}</span>
+          </p>
+          <h2 className="text-2xl font-bold text-gray-900">Forca: {LABELS[r.primaryStrength]}</h2>
+          {primaryDom && (
+            <p className="font-semibold mt-1 italic" style={{ color: pc }}>"{primaryDom.report.tagline}"</p>
+          )}
+          <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+            Sua media nos 5 dominios da Inteligencia Emocional e <strong>{r.averagePercentage}%</strong>.
+            Sua maior forca e <strong>{LABELS[r.primaryStrength]}</strong> e o dominio com maior potencial
+            de desenvolvimento e <strong>{LABELS[r.primaryDevelopment]}</strong>.
+          </p>
+        </div>
+      </div></Card>
+
+      <Card><div className="p-6">
+        <SectionTitle>Pontuacao nos 5 dominios</SectionTitle>
+        {r.domains.map((dm) => (
+          <Bar key={dm.domain}
+            label={LABELS[dm.domain] + ' - ' + LEVEL_LABEL[dm.level]}
+            pct={dm.percentage}
+            color={COLORS[dm.domain]}
+            bold={dm.domain === r.primaryStrength} />
+        ))}
+      </div></Card>
+
+      {primaryDom && (
+        <Card><div className="p-6">
+          <SectionTitle>Sua maior forca: {LABELS[primaryDom.domain]}</SectionTitle>
+          <p className="text-sm text-gray-700 leading-relaxed mb-3">{primaryDom.report.description}</p>
+          <div className="rounded-xl p-3 mb-3" style={{ backgroundColor: pc + '15', borderLeft: '4px solid ' + pc, paddingLeft: '12px' }}>
+            <p className="text-sm leading-relaxed" style={{ color: pc }}>{primaryDom.feedback}</p>
+          </div>
+          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 mt-4">Sub-temas avaliados</p>
+          <TagRow items={primaryDom.report.subthemes} bg={pc + '15'} textColor={pc} />
+        </div></Card>
+      )}
+
+      {devDom && (
+        <Card><div className="p-6">
+          <SectionTitle>Foco de desenvolvimento: {LABELS[devDom.domain]}</SectionTitle>
+          <div className="rounded-xl p-3 mb-3" style={{ backgroundColor: '#fef3c7', borderLeft: '4px solid #d97706', paddingLeft: '12px' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#92400e' }}>{devDom.feedback}</p>
+          </div>
+          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 mt-4">Praticas recomendadas</p>
+          <BulletList items={devDom.report.developmentTips} color={dev} />
+        </div></Card>
+      )}
+
+      <Card><div className="p-6">
+        <SectionTitle>Detalhamento por dominio</SectionTitle>
+        <div className="space-y-3">
+          {r.domains.map((dm) => (
+            <div key={dm.domain} className="rounded-xl p-3" style={{ backgroundColor: COLORS[dm.domain] + '10', borderLeft: '4px solid ' + COLORS[dm.domain] }}>
+              <p className="font-semibold text-sm" style={{ color: COLORS[dm.domain] }}>{LABELS[dm.domain]} ({dm.percentage}%)</p>
+              <p className="text-sm text-gray-700 leading-relaxed mt-1">{dm.feedback}</p>
+            </div>
+          ))}
+        </div>
+      </div></Card>
+    </div>
+  )
+}
+
 // ── Página principal ─────────────────────────────────────────
 
 interface PageProps {
@@ -910,6 +1128,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        d={resultData} />}
         {assessment.testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva d={resultData} />}
         {assessment.testType === 'LOVE_LANGUAGES'     && <LoveLanguagesDevolutiva    d={resultData} />}
+        {assessment.testType === 'CAREER_ANCHOR'      && <CareerAnchorDevolutiva     d={resultData} />}
+        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' && <EmotionalIntelligenceDevolutiva d={resultData} />}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (
