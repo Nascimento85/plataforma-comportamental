@@ -17,7 +17,7 @@ const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
   TEMPERAMENT:        { label: '4 Temperamentos',     emoji: '🌡' },
   ARCHETYPE:          { label: 'Arquétipos',          emoji: '🧭' },
   ARCHETYPE_FEMININE: { label: 'Arq. Femininos',      emoji: '🌸' },
-  LOVE_LANGUAGES:     { label: 'Ling. do Amor',       emoji: '💞' },
+  LOVE_LANGUAGES:     { label: 'Relacionamentos',     emoji: '💞' },
   BUNDLE:             { label: 'Bundle Completo',     emoji: '✨' },
 }
 
