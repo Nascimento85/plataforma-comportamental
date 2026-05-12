@@ -167,7 +167,10 @@ export async function POST(request: NextRequest) {
         data: {
           assessmentId: assessment.id,
           testType: assessment.testType,
-          resultData: JSON.stringify(resultData),
+          // Prisma serializa o objeto direto para JSONB nativo.
+          // Stringificar aqui transforma em JSONB-string e quebra queries SQL
+          // como resultData->'percentages'.
+          resultData: resultData as object,
           primaryProfile: String(
             // DISC → predominant | MBTI → type | ENNEAGRAM → predominant (number) | TEMPERAMENT → primaryType
             // CAREER_ANCHOR → primaryAnchor | EMOTIONAL_INTELLIGENCE → primaryStrength
