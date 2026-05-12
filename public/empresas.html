@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Psique — Mapa Comportamental | Decifre o comportamento humano com precisão</title>
-  <meta name="description" content="Plataforma que une Ciência Comportamental, Arquétipos e Inteligência Emocional. Transforme contratações em resultados e autoconhecimento em poder. Comece com 4 créditos grátis." />
-  <meta name="keywords" content="DISC, MBTI, Eneagrama, Arquétipos, Linguagens do Amor, avaliação comportamental, RH, autoconhecimento" />
-  <meta property="og:title" content="Psique — Mapa Comportamental" />
-  <meta property="og:description" content="Decifre o comportamento humano com a precisão que sua gestão (ou sua vida) precisa." />
+  <title>Mapa Comportamental · Ciência aplicada à contratação</title>
+  <meta name="description" content="Três camadas de análise científica em cada candidato. Comportamental, Carreira e Inteligência Emocional. Pare de perder dinheiro com contratação errada." />
+  <meta name="keywords" content="DISC, MBTI, Eneagrama, ancoras de carreira, inteligencia emocional, avaliacao comportamental, RH, contratacao" />
+  <meta property="og:title" content="Mapa Comportamental · Contratar deixou de ser loteria" />
+  <meta property="og:description" content="Ciencia comportamental, analise de carreira e inteligencia emocional em cada candidato. Antes da contratacao." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -20,762 +21,658 @@
       theme: {
         extend: {
           colors: {
-            gold:       '#c5a059',
-            'gold-light': '#d4b85c',
-            'gold-dark':  '#a8843a',
-            'gold-glow':  'rgba(197,160,89,0.18)',
-            ink:        '#0a0a0a',
-            'ink-2':    '#141414',
-            'ink-3':    '#1c1c1c',
+            gold:        '#c9a84c',
+            'gold-warm': '#d4943a',
+            'gold-soft': 'rgba(201,168,76,0.18)',
+            'gold-line': 'rgba(201,168,76,0.35)',
+            ink:         '#0a0a0a',
+            'ink-2':     '#14110d',
+            'ink-3':     '#1c1a17',
+            'cream':     '#faf7f2',
           },
           fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
             sans:    ['Inter', 'system-ui', 'sans-serif'],
-            display: ['Space Grotesk', 'Inter', 'sans-serif'],
           },
-        },
-      },
+        }
+      }
     }
   </script>
 
   <style>
-    html { scroll-behavior: smooth; }
-    body {
-      background: #0a0a0a;
-      color: #f5f5f5;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-weight: 500;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .bg-grid {
-      background-image:
-        linear-gradient(rgba(197,160,89,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(197,160,89,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-
-    .gold-glow {
-      box-shadow: 0 0 0 1px rgba(197,160,89,0.18), 0 8px 32px rgba(197,160,89,0.12);
-    }
-
-    .text-gradient-gold {
-      background: linear-gradient(135deg, #d4b85c 0%, #c5a059 50%, #a8843a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, #d4b85c 0%, #c5a059 100%);
-      color: #0a0a0a;
-      font-weight: 700;
-      box-shadow: 0 4px 20px rgba(197,160,89,0.35), inset 0 1px 0 rgba(255,255,255,0.25);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(197,160,89,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
-      filter: brightness(1.08);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: #f5f5f5;
-      border: 1.5px solid rgba(245,245,245,0.18);
-      transition: all 0.25s ease;
-    }
-    .btn-ghost:hover {
-      border-color: rgba(197,160,89,0.6);
-      color: #d4b85c;
-      background: rgba(197,160,89,0.06);
-    }
-
-    .card-tech {
-      background: linear-gradient(180deg, rgba(28,28,28,0.7) 0%, rgba(20,20,20,0.7) 100%);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 1.25rem;
-      backdrop-filter: blur(20px);
-      transition: all 0.3s ease;
-    }
-    .card-tech:hover {
-      border-color: rgba(197,160,89,0.35);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(197,160,89,0.18);
-    }
-
-    .card-highlight {
-      background: linear-gradient(180deg, rgba(197,160,89,0.12) 0%, rgba(168,132,58,0.08) 100%);
-      border: 1.5px solid rgba(197,160,89,0.5);
-      box-shadow: 0 0 40px rgba(197,160,89,0.2);
-    }
-
-    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes pulseSoft {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50%      { opacity: 0.45; transform: scale(1.05); }
-    }
-    .pulse-soft { animation: pulseSoft 6s ease-in-out infinite; }
-
-    @keyframes neuronPulse {
-      0%, 100% { opacity: 0.3; }
-      50%      { opacity: 1; }
-    }
-    .neuron-dot { animation: neuronPulse 3s ease-in-out infinite; }
+    html, body { background: #0a0a0a; color: #faf7f2; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .grain { position: relative; }
+    .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+    .gold-gradient { background: linear-gradient(135deg, #d4943a 0%, #c9a84c 50%, #c9a84c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gold-border { background: linear-gradient(#0a0a0a, #0a0a0a) padding-box, linear-gradient(135deg, #c9a84c, #6b4f1d) border-box; border: 1px solid transparent; }
+    .btn-primary { background: linear-gradient(135deg, #d4943a, #c9a84c); color: #0a0a0a; font-weight: 700; transition: transform .25s ease, box-shadow .25s ease; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px rgba(201,168,76,0.55); }
+    .btn-ghost { border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; transition: background .25s ease, border-color .25s ease; }
+    .btn-ghost:hover { background: rgba(201,168,76,0.08); border-color: #c9a84c; }
+    .pulse-glow { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); animation: pulse 2.6s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 22px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
+    .faq-item[open] summary svg { transform: rotate(45deg); }
+    summary { list-style: none; cursor: pointer; }
+    summary::-webkit-details-marker { display: none; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
   </style>
 </head>
 
-<body class="bg-ink">
+<body class="bg-ink text-cream">
 
-<!-- ═══════════════════════════════════════════════════════════════
-     NAV
-═══════════════════════════════════════════════════════════════ -->
-<nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-xl bg-ink/70">
-  <div class="max-w-7xl mx-auto px-5 md:px-8 h-16 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2.5">
-      <div class="w-9 h-9 rounded-lg flex items-center justify-center font-display text-lg font-bold text-ink"
-           style="background: linear-gradient(135deg, #d4b85c, #c5a059);">Ψ</div>
-      <div>
-        <div class="font-display font-bold text-base text-white leading-none">Psique</div>
-        <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-gold leading-none mt-0.5">Mapa Comportamental</div>
-      </div>
-    </a>
-    <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-white/80">
-      <a href="#solucao"     class="hover:text-gold transition-colors">A Plataforma</a>
-      <a href="#como-funciona" class="hover:text-gold transition-colors">Como Funciona</a>
-      <a href="#planos"      class="hover:text-gold transition-colors">Planos</a>
-      <a href="#faq"         class="hover:text-gold transition-colors">FAQ</a>
+  <!-- Nav -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-ink/70 border-b border-gold-line/40">
+    <div class="max-w-7xl mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #d4943a, #c9a84c);">
+          <svg viewBox="0 0 90 90" fill="none" class="w-5 h-5"><path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z" fill="rgba(10,10,10,0.4)" stroke="#0a0a0a" stroke-width="2" stroke-linejoin="round"/><circle cx="45" cy="45" r="5" fill="#0a0a0a"/></svg>
+        </div>
+        <span class="font-display font-semibold text-lg tracking-tight">Mapa Comportamental</span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-9 text-sm text-cream/70">
+        <a href="#pilares" class="hover:text-gold transition">Pilares</a>
+        <a href="#funciona" class="hover:text-gold transition">Como funciona</a>
+        <a href="#pricing" class="hover:text-gold transition">Preços</a>
+        <a href="#faq" class="hover:text-gold transition">FAQ</a>
+      </nav>
+      <a href="#cta" class="btn-primary px-5 py-2.5 rounded-full text-sm">Agendar demonstração</a>
     </div>
-    <div class="flex items-center gap-2.5">
-      <a href="/login" class="hidden sm:inline-flex btn-ghost px-4 py-2 rounded-full text-sm font-bold">Entrar</a>
-      <a href="/register" class="btn-gold px-4 py-2 rounded-full text-sm">Começar grátis</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative pt-32 lg:pt-44 pb-24 lg:pb-32 grain overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full opacity-30" style="background: radial-gradient(circle, rgba(201,168,76,0.25) 0%, rgba(10,10,10,0) 60%);"></div>
     </div>
-  </div>
-</nav>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     1. HERO
-═══════════════════════════════════════════════════════════════ -->
-<header class="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+    <div class="relative max-w-5xl mx-auto px-5 lg:px-10 text-center">
+      <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-7">
+        Ciência comportamental aplicada
+      </p>
 
-  <div class="absolute inset-0 bg-grid opacity-40 pointer-events-none"></div>
-
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pulse-soft pointer-events-none"
-       style="background: radial-gradient(circle, rgba(197,160,89,0.18) 0%, transparent 65%); transform: translate(25%,-30%);"></div>
-
-  <div class="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full pointer-events-none opacity-20"
-       style="background: radial-gradient(circle, rgba(197,160,89,0.4) 0%, transparent 65%); transform: translateY(50%);"></div>
-
-  <div class="relative max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 items-center">
-
-    <div class="reveal">
-      <span class="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-6 px-3 py-1.5 rounded-full"
-            style="background: rgba(197,160,89,0.1); border: 1px solid rgba(197,160,89,0.3);">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold neuron-dot"></span>
-        Psique · Mapa Comportamental
-      </span>
-
-      <h1 class="font-display font-bold text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6 text-white">
-        Decifre o comportamento humano com a
-        <span class="text-gradient-gold">precisão</span> que a sua gestão
-        <span class="italic font-normal text-white/85">(ou sua vida)</span> precisa.
+      <h1 class="reveal font-display text-5xl lg:text-7xl leading-[1.05] font-medium mb-7">
+        Contratar deixou de ser
+        <span class="gold-gradient italic">loteria.</span>
       </h1>
 
-      <p class="text-lg md:text-xl text-white/75 leading-relaxed font-medium mb-8 max-w-2xl">
-        Acesse a plataforma que une <strong class="text-white">Ciência Comportamental, Arquétipos e Inteligência Emocional</strong>
-        para transformar contratações em resultados e autoconhecimento em poder.
+      <p class="reveal text-lg lg:text-xl text-cream/70 max-w-2xl mx-auto leading-relaxed mb-3">
+        A Mapa Comportamental aplica ciência comportamental, análise de carreira e inteligência emocional em cada candidato.
+      </p>
+      <p class="reveal text-base text-cream/55 max-w-2xl mx-auto leading-relaxed mb-12">
+        Antes da contratação. Antes da promoção. Antes do prejuízo.
       </p>
 
-      <div class="flex flex-col sm:flex-row gap-3 mb-5">
-        <a href="/register" class="btn-gold inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base">
-          QUERO MEUS 4 CRÉDITOS GRÁTIS
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a href="#cta" class="btn-primary pulse-glow px-8 py-4 rounded-full text-base inline-flex items-center gap-2">
+          Quero blindar meu time
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
-        <a href="#solucao" class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-base font-bold">
-          Conhecer a plataforma
-        </a>
+        <a href="#funciona" class="btn-ghost px-8 py-4 rounded-full text-base">Ver demonstração ao vivo</a>
       </div>
 
-      <div class="flex items-center gap-2 text-sm text-white/60 font-semibold">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-        Sem cartão de crédito · Teste agora
-      </div>
-    </div>
-
-    <!-- Visual: rede neural abstrata -->
-    <div class="reveal relative h-[420px] lg:h-[520px]">
-      <svg viewBox="0 0 400 500" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="orbGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"  stop-color="#d4b85c" stop-opacity="0.6"/>
-            <stop offset="50%" stop-color="#c5a059" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#c5a059" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#c5a059" stop-opacity="0.6"/>
-            <stop offset="100%" stop-color="#c5a059" stop-opacity="0.1"/>
-          </linearGradient>
-        </defs>
-
-        <circle cx="200" cy="250" r="180" fill="url(#orbGrad)" opacity="0.4"/>
-
-        <g stroke="url(#lineGrad)" stroke-width="0.8" fill="none" opacity="0.9">
-          <line x1="200" y1="250" x2="80"  y2="120"/>
-          <line x1="200" y1="250" x2="320" y2="100"/>
-          <line x1="200" y1="250" x2="60"  y2="280"/>
-          <line x1="200" y1="250" x2="340" y2="220"/>
-          <line x1="200" y1="250" x2="100" y2="400"/>
-          <line x1="200" y1="250" x2="320" y2="420"/>
-          <line x1="200" y1="250" x2="200" y2="80"/>
-          <line x1="200" y1="250" x2="200" y2="450"/>
-          <line x1="80"  y1="120" x2="200" y2="80"/>
-          <line x1="320" y1="100" x2="200" y2="80"/>
-          <line x1="60"  y1="280" x2="100" y2="400"/>
-          <line x1="340" y1="220" x2="320" y2="420"/>
-          <line x1="80"  y1="120" x2="60"  y2="280"/>
-          <line x1="320" y1="100" x2="340" y2="220"/>
-          <line x1="100" y1="400" x2="200" y2="450"/>
-          <line x1="320" y1="420" x2="200" y2="450"/>
-        </g>
-
-        <circle cx="200" cy="250" r="12" fill="#c5a059" class="neuron-dot"/>
-        <circle cx="200" cy="250" r="22" fill="none" stroke="#c5a059" stroke-width="1" opacity="0.5"/>
-        <circle cx="200" cy="250" r="32" fill="none" stroke="#c5a059" stroke-width="0.5" opacity="0.3"/>
-
-        <circle cx="80"  cy="120" r="6" fill="#d4b85c" class="neuron-dot" style="animation-delay: 0.3s"/>
-        <circle cx="320" cy="100" r="7" fill="#c5a059" class="neuron-dot" style="animation-delay: 0.6s"/>
-        <circle cx="60"  cy="280" r="5" fill="#d4b85c" class="neuron-dot" style="animation-delay: 0.9s"/>
-        <circle cx="340" cy="220" r="6" fill="#c5a059" class="neuron-dot" style="animation-delay: 1.2s"/>
-        <circle cx="100" cy="400" r="7" fill="#d4b85c" class="neuron-dot" style="animation-delay: 1.5s"/>
-        <circle cx="320" cy="420" r="5" fill="#c5a059" class="neuron-dot" style="animation-delay: 1.8s"/>
-        <circle cx="200" cy="80"  r="4" fill="#d4b85c" class="neuron-dot" style="animation-delay: 2.1s"/>
-        <circle cx="200" cy="450" r="6" fill="#c5a059" class="neuron-dot" style="animation-delay: 2.4s"/>
-
-        <text x="200" y="265" text-anchor="middle" fill="#0a0a0a" font-family="Space Grotesk" font-size="20" font-weight="900">Ψ</text>
-      </svg>
-    </div>
-
-  </div>
-
-  <div class="relative max-w-6xl mx-auto px-5 md:px-8 mt-16 lg:mt-24">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
-      <div class="text-center">
-        <div class="font-display text-3xl md:text-4xl font-bold text-gradient-gold">7</div>
-        <div class="text-[12px] font-bold uppercase tracking-widest text-white/65 mt-1">Metodologias</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl md:text-4xl font-bold text-gradient-gold">+50</div>
-        <div class="text-[12px] font-bold uppercase tracking-widest text-white/65 mt-1">Páginas/Relatório</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl md:text-4xl font-bold text-gradient-gold">PDF</div>
-        <div class="text-[12px] font-bold uppercase tracking-widest text-white/65 mt-1">Devolutiva pronta</div>
-      </div>
-      <div class="text-center">
-        <div class="font-display text-3xl md:text-4xl font-bold text-gradient-gold">B2B + B2C</div>
-        <div class="text-[12px] font-bold uppercase tracking-widest text-white/65 mt-1">Empresas e Pessoas</div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     2. AUTORIDADE E DOR
-═══════════════════════════════════════════════════════════════ -->
-<section class="relative py-20 md:py-28 border-t border-white/5">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-
-    <div class="text-center mb-14 reveal">
-      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">A Realidade</span>
-      <h2 class="font-display font-bold text-3xl md:text-5xl text-white leading-tight max-w-3xl mx-auto">
-        Você ainda toma decisões baseadas no <span class="italic text-gradient-gold">"feeling"</span>?
-      </h2>
-      <p class="text-lg text-white/70 font-medium mt-5 max-w-2xl mx-auto">
-        Existem dois custos invisíveis no &ldquo;agir no escuro&rdquo; — um cobra o seu negócio, outro cobra a sua vida.
+      <p class="reveal text-xs text-cream/40 tracking-wide">
+        3 testes científicos · 1 relatório executivo · 7 minutos para decidir
       </p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-      <article class="card-tech p-7 md:p-9 reveal">
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center"
-               style="background: rgba(197,160,89,0.12); border: 1px solid rgba(197,160,89,0.3);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="6" width="18" height="13" rx="2"/>
-              <path d="M3 10h18M9 6V3m6 3V3"/>
-            </svg>
-          </div>
-          <div>
-            <p class="text-[11px] font-bold uppercase tracking-widest text-gold">Para Empresas</p>
-            <h3 class="font-display font-bold text-xl text-white">Custo da contratação errada</h3>
-          </div>
+      <div class="reveal mt-14 pt-8 border-t border-gold-line/30">
+        <p class="text-[10px] tracking-[0.28em] uppercase text-cream/35 mb-5">Baseado em</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-cream/55 font-medium">
+          <span>DISC</span><span class="text-gold/50">·</span>
+          <span>MBTI</span><span class="text-gold/50">·</span>
+          <span>Eneagrama</span><span class="text-gold/50">·</span>
+          <span>Schein/MIT</span><span class="text-gold/50">·</span>
+          <span>Goleman</span><span class="text-gold/50">·</span>
+          <span>Chapman</span>
         </div>
-        <p class="text-[16px] text-white/85 font-medium leading-relaxed mb-4">
-          Contratar a pessoa errada custa até <strong class="text-gold">3x o salário anual</strong> do colaborador.
-          O &ldquo;olhômetro&rdquo; não revela o que está por trás do currículo.
-        </p>
-        <p class="text-[15px] text-white/70 font-medium leading-relaxed">
-          Reduza turnover, calibre lideranças e construa cultura intencional com <strong class="text-white">dados, não com palpite</strong>.
-        </p>
-      </article>
-
-      <article class="card-tech p-7 md:p-9 reveal">
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center"
-               style="background: rgba(197,160,89,0.12); border: 1px solid rgba(197,160,89,0.3);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9"/>
-              <path d="M12 7v5l3 2"/>
-            </svg>
-          </div>
-          <div>
-            <p class="text-[11px] font-bold uppercase tracking-widest text-gold">Para Entusiastas</p>
-            <h3 class="font-display font-bold text-xl text-white">Custo do piloto automático</h3>
-          </div>
-        </div>
-        <p class="text-[16px] text-white/85 font-medium leading-relaxed mb-4">
-          Agir no automático sem entender seus padrões de comportamento é o que te <strong class="text-gold">impede de avançar</strong>
-          — em carreira, decisão e relacionamento.
-        </p>
-        <p class="text-[15px] text-white/70 font-medium leading-relaxed">
-          Autoconhecimento não é luxo. É o seu <strong class="text-white">maior ativo</strong> — e o ponto onde toda mudança real começa.
-        </p>
-      </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     3. SOLUÇÃO — 3 PILARES
-═══════════════════════════════════════════════════════════════ -->
-<section id="solucao" class="relative py-20 md:py-28 border-t border-white/5">
-  <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
-
-  <div class="relative max-w-6xl mx-auto px-5 md:px-8">
-    <div class="text-center mb-14 reveal">
-      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">A Plataforma</span>
-      <h2 class="font-display font-bold text-3xl md:text-5xl text-white leading-tight max-w-3xl mx-auto">
-        Três <span class="text-gradient-gold">pilares científicos</span>. Um só painel.
-      </h2>
-      <p class="text-lg text-white/70 font-medium mt-5 max-w-2xl mx-auto">
-        Cada metodologia revela uma camada diferente. Juntas, formam o mapa mais completo já feito sobre comportamento humano.
+  <!-- Dor -->
+  <section class="relative py-24 lg:py-32 border-t border-gold-line/20">
+    <div class="max-w-5xl mx-auto px-5 lg:px-10">
+      <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 text-center mb-6">
+        Antes de prosseguir
       </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-      <article class="card-tech p-7 reveal">
-        <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
-             style="background: rgba(197,160,89,0.14); border: 1px solid rgba(197,160,89,0.35);">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3v18h18"/>
-            <path d="M7 14l4-4 4 4 5-5"/>
-          </svg>
-        </div>
-        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Pilar 1</p>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Análise Comportamental</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed">
-          Entenda o perfil dominante, competências e reações sob pressão. <strong class="text-white">DISC, MBTI, Eneagrama
-          e 4 Temperamentos</strong> em uma metodologia de precisão.
-        </p>
-      </article>
-
-      <article class="card-tech p-7 reveal">
-        <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
-             style="background: rgba(197,160,89,0.14); border: 1px solid rgba(197,160,89,0.35);">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
-          </svg>
-        </div>
-        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Pilar 2</p>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Arquétipos</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed">
-          Descubra a imagem e a energia psíquica que regem a personalidade e a marca pessoal.
-          <strong class="text-white">12 padrões junguianos</strong> + arquétipos de liderança e femininos.
-        </p>
-      </article>
-
-      <article class="card-tech p-7 reveal">
-        <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
-             style="background: rgba(197,160,89,0.14); border: 1px solid rgba(197,160,89,0.35);">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </div>
-        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Pilar 3</p>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Linguagens do Amor</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed">
-          Otimize a comunicação e a conexão emocional em todos os níveis. Baseado em <strong class="text-white">Gary Chapman</strong>:
-          a chave do reconhecimento real.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     4. COMO FUNCIONA
-═══════════════════════════════════════════════════════════════ -->
-<section id="como-funciona" class="relative py-20 md:py-28 border-t border-white/5">
-  <div class="max-w-6xl mx-auto px-5 md:px-8">
-
-    <div class="text-center mb-14 reveal">
-      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">3 Passos</span>
-      <h2 class="font-display font-bold text-3xl md:text-5xl text-white leading-tight max-w-3xl mx-auto">
-        Do cadastro ao relatório <span class="text-gradient-gold">em minutos</span>.
+      <h2 class="reveal font-display text-4xl lg:text-5xl text-center font-medium leading-tight mb-14">
+        Toda contratação errada custa, em média,<br/>
+        <span class="gold-gradient">nove meses de salário.</span>
       </h2>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
-
-      <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-px pointer-events-none"
-           style="background: linear-gradient(90deg, transparent, rgba(197,160,89,0.4), rgba(197,160,89,0.4), transparent);"></div>
-
-      <div class="text-center reveal relative">
-        <div class="relative mx-auto w-24 h-24 mb-5">
-          <div class="absolute inset-0 rounded-full" style="background: rgba(197,160,89,0.08);"></div>
-          <div class="absolute inset-2 rounded-full flex items-center justify-center"
-               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 8px 32px rgba(197,160,89,0.35);">
-            <span class="font-display text-3xl font-bold text-ink">1</span>
-          </div>
-        </div>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Resgate</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed max-w-xs mx-auto">
-          Cadastre-se em 30 segundos e ganhe <strong class="text-gold">4 créditos imediatamente</strong> — sem cartão, sem fricção.
-        </p>
+      <div class="reveal max-w-3xl mx-auto space-y-5 text-lg text-cream/70 leading-relaxed mb-16 text-center">
+        <p>Você lembra do último colaborador que entrou e não engajou.</p>
+        <p>Pagou onboarding. Pagou treinamento. Pagou o tempo do gestor.</p>
+        <p>E quando ele saiu, voluntariamente ou não, pagou de novo. Recrutamento, vaga aberta, equipe sobrecarregada, cliente atendido por quem está esgotado.</p>
+        <p class="text-cream/85 pt-4"><strong>Isso não foi azar. Foi falta de dado.</strong></p>
       </div>
 
-      <div class="text-center reveal relative">
-        <div class="relative mx-auto w-24 h-24 mb-5">
-          <div class="absolute inset-0 rounded-full" style="background: rgba(197,160,89,0.08);"></div>
-          <div class="absolute inset-2 rounded-full flex items-center justify-center"
-               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 8px 32px rgba(197,160,89,0.35);">
-            <span class="font-display text-3xl font-bold text-ink">2</span>
-          </div>
+      <div class="reveal grid md:grid-cols-3 gap-5">
+        <div class="gold-border rounded-2xl p-7">
+          <p class="font-display text-4xl font-bold text-gold mb-2">9×</p>
+          <p class="text-sm text-cream/55 leading-relaxed">Salário mensal é o custo médio de uma má contratação.</p>
+          <p class="text-[10px] uppercase tracking-widest text-cream/30 mt-4">SHRM</p>
         </div>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Aplique</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed max-w-xs mx-auto">
-          Escolha o mapeamento e <strong class="text-white">realize você mesmo</strong> ou envie o link único para um terceiro.
-        </p>
-      </div>
-
-      <div class="text-center reveal relative">
-        <div class="relative mx-auto w-24 h-24 mb-5">
-          <div class="absolute inset-0 rounded-full" style="background: rgba(197,160,89,0.08);"></div>
-          <div class="absolute inset-2 rounded-full flex items-center justify-center"
-               style="background: linear-gradient(135deg, #d4b85c, #c5a059); box-shadow: 0 8px 32px rgba(197,160,89,0.35);">
-            <span class="font-display text-3xl font-bold text-ink">3</span>
-          </div>
+        <div class="gold-border rounded-2xl p-7">
+          <p class="font-display text-4xl font-bold text-gold mb-2">38%</p>
+          <p class="text-sm text-cream/55 leading-relaxed">Turnover voluntário anual em PMEs brasileiras.</p>
+          <p class="text-[10px] uppercase tracking-widest text-cream/30 mt-4">Catho · 2025</p>
         </div>
-        <h3 class="font-display font-bold text-xl text-white mb-2">Analise</h3>
-        <p class="text-[15px] text-white/75 font-medium leading-relaxed max-w-xs mx-auto">
-          Receba um <strong class="text-white">relatório detalhado, visual e em PDF</strong> direto no seu painel — pronto pra devolutiva.
-        </p>
+        <div class="gold-border rounded-2xl p-7">
+          <p class="font-display text-4xl font-bold text-gold mb-2">4 a 7</p>
+          <p class="text-sm text-cream/55 leading-relaxed">Meses até detectar baixo encaixe cultural após a admissão.</p>
+          <p class="text-[10px] uppercase tracking-widest text-cream/30 mt-4">Gallup</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     5. PLANOS
-═══════════════════════════════════════════════════════════════ -->
-<section id="planos" class="relative py-20 md:py-28 border-t border-white/5">
-  <div class="absolute top-0 left-1/2 w-[500px] h-[500px] rounded-full pointer-events-none opacity-30"
-       style="background: radial-gradient(circle, rgba(197,160,89,0.18) 0%, transparent 65%); transform: translate(-50%, -30%);"></div>
-
-  <div class="relative max-w-6xl mx-auto px-5 md:px-8">
-
-    <div class="text-center mb-14 reveal">
-      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">Planos & Créditos</span>
-      <h2 class="font-display font-bold text-3xl md:text-5xl text-white leading-tight max-w-3xl mx-auto">
-        Comece grátis. Escale <span class="text-gradient-gold">quando precisar</span>.
+  <!-- Virada -->
+  <section class="relative py-24 lg:py-32 border-t border-gold-line/20 bg-ink-2">
+    <div class="max-w-5xl mx-auto px-5 lg:px-10 text-center">
+      <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight mb-5">
+        Três camadas de análise.<br/>
+        Um relatório que diz <span class="gold-gradient italic">se contrata, promove ou passa.</span>
       </h2>
-      <p class="text-lg text-white/70 font-medium mt-5 max-w-2xl mx-auto">
-        Você compra créditos avulsos. Cada teste consome 1 a 4 créditos — você decide onde aplicar.
+      <p class="reveal text-lg text-cream/55 mb-16">
+        Não vendemos testes. Vendemos a decisão certa.
       </p>
-    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-
-      <article class="card-tech p-7 flex flex-col reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-white/60 mb-1">Plano Individual</p>
-        <h3 class="font-display font-bold text-2xl text-white mb-3">Para começar</h3>
-        <div class="mb-5">
-          <span class="font-display font-bold text-5xl text-white">R$ 49</span>
-          <span class="font-display font-bold text-2xl text-white/60">,90</span>
+      <div class="reveal grid md:grid-cols-3 gap-6">
+        <div class="p-7 rounded-2xl border border-gold-line/30">
+          <div class="w-12 h-12 mx-auto mb-5 rounded-xl flex items-center justify-center" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" class="w-6 h-6"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2 text-cream">Decisão em minutos</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Relatório executivo pronto para ler em pé, antes da reunião.</p>
         </div>
-        <p class="text-sm text-white/65 font-semibold mb-6">5 créditos · R$ 9,98 por crédito</p>
-
-        <ul class="space-y-2.5 mb-7 flex-1">
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            5 testes para usar quando quiser
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Acesso a todas as 7 metodologias
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Relatórios PDF ilimitados
-          </li>
-        </ul>
-
-        <a href="/register" class="btn-ghost px-5 py-3 rounded-full text-sm font-bold text-center">
-          Começar com este plano
-        </a>
-      </article>
-
-      <article class="card-tech card-highlight p-7 flex flex-col relative reveal">
-        <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest text-ink"
-              style="background: linear-gradient(135deg, #d4b85c, #c5a059);">
-          ✦ Mais Popular
-        </span>
-        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-1">Plano Crescimento</p>
-        <h3 class="font-display font-bold text-2xl text-white mb-3">Para times pequenos</h3>
-        <div class="mb-5">
-          <span class="font-display font-bold text-5xl text-gradient-gold">R$ 89</span>
-          <span class="font-display font-bold text-2xl text-white/60">,90</span>
+        <div class="p-7 rounded-2xl border border-gold-line/30">
+          <div class="w-12 h-12 mx-auto mb-5 rounded-xl flex items-center justify-center" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2 text-cream">Risco mapeado</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Sombras, pontos cegos e gatilhos sob pressão, visíveis antes do problema.</p>
         </div>
-        <p class="text-sm text-white/65 font-semibold mb-6">10 créditos · R$ 8,99 por crédito</p>
-
-        <ul class="space-y-2.5 mb-7 flex-1">
-          <li class="flex items-start gap-2.5 text-[14px] text-white/95 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            10 testes — economia de 10%
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/95 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Bundle Completo (4 testes em 1 link)
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/95 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d4b85c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Suporte prioritário por e-mail
-          </li>
-        </ul>
-
-        <a href="/register" class="btn-gold px-5 py-3 rounded-full text-sm text-center">
-          Escolher Crescimento
-        </a>
-      </article>
-
-      <article class="card-tech p-7 flex flex-col reveal">
-        <p class="text-[11px] font-bold uppercase tracking-widest text-white/60 mb-1">Plano Business</p>
-        <h3 class="font-display font-bold text-2xl text-white mb-3">Melhor para RHs</h3>
-        <div class="mb-5">
-          <span class="font-display font-bold text-5xl text-white">R$ 349</span>
-          <span class="font-display font-bold text-2xl text-white/60">,90</span>
+        <div class="p-7 rounded-2xl border border-gold-line/30">
+          <div class="w-12 h-12 mx-auto mb-5 rounded-xl flex items-center justify-center" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5" class="w-6 h-6"><path d="M3 7v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><polyline points="3 7 12 13 21 7"/><path d="M3 7l9-4 9 4"/></svg>
+          </div>
+          <h3 class="font-display text-xl mb-2 text-cream">Cultura blindada</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Encaixe cultural deixa de ser intuição. Vira evidência documentada.</p>
         </div>
-        <p class="text-sm text-white/65 font-semibold mb-6">50 créditos · R$ 6,99 por crédito</p>
-
-        <ul class="space-y-2.5 mb-7 flex-1">
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            50 testes — economia de 30%
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Mapeamento de equipes inteiras
-          </li>
-          <li class="flex items-start gap-2.5 text-[14px] text-white/85 font-medium">
-            <svg class="mt-0.5 flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Devolutiva integrada gerada por IA
-          </li>
-        </ul>
-
-        <a href="/register" class="btn-ghost px-5 py-3 rounded-full text-sm font-bold text-center">
-          Escolher Business
-        </a>
-      </article>
+      </div>
     </div>
+  </section>
 
-    <p class="text-center text-sm text-white/55 font-medium mt-8 reveal">
-      Créditos não expiram · Pagamento seguro via Stripe · NF-e disponível
-    </p>
-  </div>
-</section>
+  <!-- Pilares -->
+  <section id="pilares" class="relative py-24 lg:py-32 border-t border-gold-line/20">
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
 
-<!-- ═══════════════════════════════════════════════════════════════
-     6. FAQ
-═══════════════════════════════════════════════════════════════ -->
-<section id="faq" class="relative py-20 md:py-28 border-t border-white/5">
-  <div class="max-w-4xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-20">
+        <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-5">Os três pilares</p>
+        <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight">
+          O coração da análise.
+        </h2>
+      </div>
 
-    <div class="text-center mb-12 reveal">
-      <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-gold mb-4">Perguntas Frequentes</span>
-      <h2 class="font-display font-bold text-3xl md:text-5xl text-white leading-tight">
-        Quebrando suas <span class="text-gradient-gold">objeções</span>.
-      </h2>
-    </div>
-
-    <div class="space-y-3">
-
-      <details class="card-tech p-6 group reveal">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <h3 class="font-display font-bold text-lg text-white">Nunca fiz esse tipo de teste, vou entender?</h3>
-          <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
-                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #d4b85c;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          </span>
-        </summary>
-        <p class="text-[15px] text-white/80 font-medium leading-relaxed mt-4">
-          Sim! Os relatórios são <strong class="text-white">claros, visuais e acionáveis</strong>, sem &ldquo;psicologês&rdquo; difícil. Cada teste vem
-          com explicação dos resultados, exemplos práticos e direcionamentos de aplicação no dia a dia.
-        </p>
-      </details>
-
-      <details class="card-tech p-6 group reveal">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <h3 class="font-display font-bold text-lg text-white">Posso usar os créditos em qualquer teste?</h3>
-          <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
-                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #d4b85c;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          </span>
-        </summary>
-        <p class="text-[15px] text-white/80 font-medium leading-relaxed mt-4">
-          Sim, você tem <strong class="text-white">liberdade total</strong>. Cada teste consome de 1 a 4 créditos (DISC, MBTI, Eneagrama
-          e Temperamentos custam 1; Arquétipos custa 2; Linguagens do Amor e Bundle Completo custam 4). Use como quiser.
-        </p>
-      </details>
-
-      <details class="card-tech p-6 group reveal">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <h3 class="font-display font-bold text-lg text-white">É só para empresas? Pessoa física pode usar?</h3>
-          <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
-                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #d4b85c;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          </span>
-        </summary>
-        <p class="text-[15px] text-white/80 font-medium leading-relaxed mt-4">
-          Os dois. <strong class="text-white">Empresas</strong> usam para contratação, desenvolvimento de líderes e cultura.
-          <strong class="text-white">Pessoas físicas</strong> usam para autoconhecimento, coaching e desenvolvimento pessoal.
-          A plataforma serve igualmente bem aos dois.
-        </p>
-      </details>
-
-      <details class="card-tech p-6 group reveal">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <h3 class="font-display font-bold text-lg text-white">Os créditos têm validade?</h3>
-          <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
-                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #d4b85c;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          </span>
-        </summary>
-        <p class="text-[15px] text-white/80 font-medium leading-relaxed mt-4">
-          <strong class="text-white">Não.</strong> Os créditos não expiram. Você compra uma vez e usa quando precisar — no seu ritmo, sem pressão.
-        </p>
-      </details>
-
-      <details class="card-tech p-6 group reveal">
-        <summary class="flex items-center justify-between cursor-pointer list-none gap-4">
-          <h3 class="font-display font-bold text-lg text-white">Como funciona o envio para um terceiro?</h3>
-          <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-transform group-open:rotate-45"
-                style="background: rgba(197,160,89,0.15); border: 1px solid rgba(197,160,89,0.4); color: #d4b85c;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-          </span>
-        </summary>
-        <p class="text-[15px] text-white/80 font-medium leading-relaxed mt-4">
-          Você cadastra o nome e e-mail da pessoa, escolhe o teste e a plataforma <strong class="text-white">gera um link único</strong>.
-          O candidato recebe por e-mail (ou você compartilha manualmente), responde quando quiser, e o relatório aparece direto no seu painel.
-        </p>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     7. CTA FINAL
-═══════════════════════════════════════════════════════════════ -->
-<section class="relative py-24 md:py-32 overflow-hidden border-t border-white/5">
-
-  <div class="absolute inset-0 pointer-events-none opacity-50"
-       style="background: radial-gradient(ellipse at center, rgba(197,160,89,0.18) 0%, transparent 60%);"></div>
-
-  <div class="absolute inset-0 bg-grid opacity-30 pointer-events-none"></div>
-
-  <div class="relative max-w-4xl mx-auto px-5 md:px-8 text-center reveal">
-    <h2 class="font-display font-bold text-4xl md:text-6xl text-white leading-tight mb-6">
-      Pare de adivinhar.
-      <span class="block text-gradient-gold">Comece a mapear.</span>
-    </h2>
-    <p class="text-lg md:text-xl text-white/75 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-      4 créditos grátis. Sem cartão. Sem fricção. Em 30 segundos você está dentro da plataforma.
-    </p>
-
-    <a href="/register" class="btn-gold inline-flex items-center justify-center gap-3 px-9 py-5 rounded-full text-lg">
-      CRIAR MINHA CONTA AGORA
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="5" y1="12" x2="19" y2="12"/>
-        <polyline points="12 5 19 12 12 19"/>
-      </svg>
-    </a>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════════════════════ -->
-<footer class="border-t border-white/5 py-10 md:py-14 bg-ink-2">
-  <div class="max-w-7xl mx-auto px-5 md:px-8">
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-lg flex items-center justify-center font-display text-lg font-bold text-ink"
-             style="background: linear-gradient(135deg, #d4b85c, #c5a059);">Ψ</div>
+      <!-- Pilar 1 -->
+      <div class="reveal grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
         <div>
-          <div class="font-display font-bold text-base text-white leading-none">Psique</div>
-          <div class="text-[10px] font-bold uppercase tracking-[0.18em] text-gold leading-none mt-0.5">Mapa Comportamental</div>
+          <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-4">Pilar 1 · Como a pessoa age</p>
+          <h3 class="font-display text-3xl lg:text-4xl font-medium leading-tight mb-7">
+            O comportamento sob pressão é o único que importa.
+          </h3>
+          <div class="space-y-4 text-cream/65 leading-relaxed mb-7">
+            <p>Currículo conta passado. Entrevista mostra ensaio. Comportamento revela quem a pessoa é quando ninguém está olhando.</p>
+            <p>Aplicamos as 4 escolas comportamentais mais validadas do mundo. DISC, MBTI, Eneagrama e 4 Temperamentos. Cruzamos os resultados em um relatório único. Quatro lentes científicas convergindo na mesma pessoa.</p>
+          </div>
+          <ul class="space-y-2.5 text-sm text-cream/60 mb-7">
+            <li class="flex gap-3"><span class="text-gold">✓</span>Perfil dominante e secundário (12 padrões DISC)</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Tipo psicológico Myers Briggs com função cognitiva</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Eneatipo com asas e linhas de integração</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Temperamento clássico (Colérico, Sanguíneo, Melancólico, Fleumático)</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Comportamento sob pressão, ambiente ideal, gatilhos de conflito</li>
+          </ul>
+          <p class="text-sm italic text-gold/80">Decisões erradas custam 9 meses de salário. Esse relatório custa minutos.</p>
+        </div>
+
+        <!-- SVG Cubo DISC -->
+        <div class="relative h-[420px] lg:h-[480px] flex items-center justify-center">
+          <div class="absolute inset-0 rounded-3xl" style="background: radial-gradient(circle at center, rgba(201,168,76,0.12) 0%, transparent 65%);"></div>
+          <svg viewBox="0 0 400 400" class="w-full max-w-md relative z-10">
+            <defs>
+              <linearGradient id="cubeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#d4943a" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.1"/>
+              </linearGradient>
+              <filter id="glow1"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <g transform="translate(200 200)">
+              <!-- 4 facetas DISC -->
+              <g transform="rotate(0)">
+                <polygon points="0,-130 100,-30 0,0" fill="url(#cubeGrad)" stroke="#c9a84c" stroke-width="1.5" opacity="0.9"/>
+                <text x="55" y="-65" font-family="Inter" font-weight="800" font-size="22" fill="#c9a84c">D</text>
+              </g>
+              <g transform="rotate(90)">
+                <polygon points="0,-130 100,-30 0,0" fill="url(#cubeGrad)" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+                <text x="55" y="-65" font-family="Inter" font-weight="800" font-size="22" fill="#c9a84c" transform="rotate(-90 55 -65)">I</text>
+              </g>
+              <g transform="rotate(180)">
+                <polygon points="0,-130 100,-30 0,0" fill="url(#cubeGrad)" stroke="#c9a84c" stroke-width="1.5" opacity="0.8"/>
+                <text x="55" y="-65" font-family="Inter" font-weight="800" font-size="22" fill="#c9a84c" transform="rotate(-180 55 -65)">S</text>
+              </g>
+              <g transform="rotate(270)">
+                <polygon points="0,-130 100,-30 0,0" fill="url(#cubeGrad)" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+                <text x="55" y="-65" font-family="Inter" font-weight="800" font-size="22" fill="#c9a84c" transform="rotate(90 55 -65)">C</text>
+              </g>
+              <circle r="8" fill="#d4943a" filter="url(#glow1)"/>
+              <circle r="3" fill="#faf7f2"/>
+            </g>
+          </svg>
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold text-white/70">
-        <a href="#solucao"        class="hover:text-gold transition-colors">A Plataforma</a>
-        <a href="#como-funciona"  class="hover:text-gold transition-colors">Como Funciona</a>
-        <a href="#planos"         class="hover:text-gold transition-colors">Planos</a>
-        <a href="#faq"            class="hover:text-gold transition-colors">FAQ</a>
-        <a href="/login"          class="hover:text-gold transition-colors">Entrar</a>
+      <!-- Pilar 2 -->
+      <div class="reveal grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-32">
+        <div class="lg:order-2">
+          <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-4">Pilar 2 · O que a pessoa quer</p>
+          <h3 class="font-display text-3xl lg:text-4xl font-medium leading-tight mb-7">
+            Saber o que motiva é mais barato do que descobrir o que afasta.
+          </h3>
+          <div class="space-y-4 text-cream/65 leading-relaxed mb-7">
+            <p>Todo gestor já promoveu o melhor técnico para liderança e perdeu os dois. O técnico, que odeia gerir. O time, que ficou órfão de referência. Isso não é falha do colaborador. É falha de leitura.</p>
+            <p>A metodologia das Âncoras de Carreira, criada por Edgar Schein no MIT, identifica os oito motivadores profissionais inegociáveis que sustentam qualquer decisão de longo prazo.</p>
+          </div>
+          <ul class="space-y-2.5 text-sm text-cream/60 mb-7">
+            <li class="flex gap-3"><span class="text-gold">✓</span>Âncora primária e secundária entre 8 padrões Schein</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Distribuição percentual nas 8 âncoras</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Funções e cargos com maior aderência</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Estilo de gestão recomendado para essa pessoa</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Cenários de retenção e gatilhos de saída</li>
+          </ul>
+          <p class="text-sm italic text-gold/80">Promoção certa não é prêmio. É posição alinhada com a âncora.</p>
+        </div>
+
+        <!-- SVG Ancora com raios -->
+        <div class="relative h-[420px] lg:h-[480px] flex items-center justify-center lg:order-1">
+          <div class="absolute inset-0 rounded-3xl" style="background: radial-gradient(circle at center, rgba(201,168,76,0.12) 0%, transparent 65%);"></div>
+          <svg viewBox="0 0 400 400" class="w-full max-w-md relative z-10">
+            <defs>
+              <linearGradient id="anchorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#d4943a"/>
+                <stop offset="100%" stop-color="#a8843a"/>
+              </linearGradient>
+              <radialGradient id="anchorGlow"><stop offset="0%" stop-color="#c9a84c" stop-opacity="0.45"/><stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/></radialGradient>
+            </defs>
+            <circle cx="200" cy="200" r="180" fill="url(#anchorGlow)"/>
+            <!-- 8 raios -->
+            <g stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.55">
+              <line x1="200" y1="200" x2="200" y2="40"/>
+              <line x1="200" y1="200" x2="313" y2="87"/>
+              <line x1="200" y1="200" x2="360" y2="200"/>
+              <line x1="200" y1="200" x2="313" y2="313"/>
+              <line x1="200" y1="200" x2="200" y2="360"/>
+              <line x1="200" y1="200" x2="87" y2="313"/>
+              <line x1="200" y1="200" x2="40" y2="200"/>
+              <line x1="200" y1="200" x2="87" y2="87"/>
+            </g>
+            <!-- Pontos das ancoras -->
+            <g fill="#c9a84c">
+              <circle cx="200" cy="40"  r="4"/><circle cx="313" cy="87"  r="4"/>
+              <circle cx="360" cy="200" r="4"/><circle cx="313" cy="313" r="4"/>
+              <circle cx="200" cy="360" r="4"/><circle cx="87"  cy="313" r="4"/>
+              <circle cx="40"  cy="200" r="4"/><circle cx="87"  cy="87"  r="4"/>
+            </g>
+            <!-- Ancora estilizada -->
+            <g transform="translate(200 200)" fill="url(#anchorGrad)" stroke="#d4943a" stroke-width="1.2">
+              <circle cx="0" cy="-55" r="14" fill="none" stroke-width="3"/>
+              <rect x="-2" y="-40" width="4" height="75"/>
+              <rect x="-26" y="-30" width="52" height="4"/>
+              <path d="M-45 35 Q-45 60 0 60 Q45 60 45 35 L40 35 Q40 50 0 50 Q-40 50 -40 35 Z"/>
+              <line x1="-40" y1="35" x2="-50" y2="25" stroke-width="3"/>
+              <line x1="40" y1="35" x2="50" y2="25" stroke-width="3"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Pilar 3 -->
+      <div class="reveal grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-4">Pilar 3 · Como a pessoa se relaciona</p>
+          <h3 class="font-display text-3xl lg:text-4xl font-medium leading-tight mb-7">
+            Habilidade técnica forma o profissional. Inteligência emocional forma o líder.
+          </h3>
+          <div class="space-y-4 text-cream/65 leading-relaxed mb-7">
+            <p>Daniel Goleman documentou na Harvard Business Review. 90% dos líderes de alta performance têm inteligência emocional desenvolvida. Não é talento. É medível.</p>
+            <p>Avaliamos os cinco domínios Goleman classicamente validados em 25 questões calibradas. Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais.</p>
+          </div>
+          <ul class="space-y-2.5 text-sm text-cream/60 mb-7">
+            <li class="flex gap-3"><span class="text-gold">✓</span>Score global em IE com nível (Alto, Médio, Em desenvolvimento)</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Pontuação detalhada nos 5 domínios</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Maior força e maior gap individual</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Práticas recomendadas para o domínio crítico</li>
+            <li class="flex gap-3"><span class="text-gold">✓</span>Aplicação corporativa em cargos de gestão</li>
+          </ul>
+          <p class="text-sm italic text-gold/80">A diferença entre um gerente e um líder está em cinco números mensuráveis.</p>
+        </div>
+
+        <!-- SVG Silhueta com 5 cameras -->
+        <div class="relative h-[420px] lg:h-[480px] flex items-center justify-center">
+          <div class="absolute inset-0 rounded-3xl" style="background: radial-gradient(circle at center, rgba(201,168,76,0.12) 0%, transparent 65%);"></div>
+          <svg viewBox="0 0 400 400" class="w-full max-w-md relative z-10">
+            <defs>
+              <linearGradient id="headGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1c1a17"/><stop offset="100%" stop-color="#0a0a0a"/>
+              </linearGradient>
+              <radialGradient id="chamberGlow"><stop offset="0%" stop-color="#d4943a"/><stop offset="100%" stop-color="#c9a84c" stop-opacity="0"/></radialGradient>
+            </defs>
+            <!-- Silhueta cabeça -->
+            <path d="M150 90 Q150 50 200 50 Q260 50 270 100 Q280 150 270 200 Q260 230 230 250 L235 290 L250 295 L250 360 L130 360 L130 295 L160 285 L165 245 Q140 220 138 180 Q135 130 150 90 Z"
+                  fill="url(#headGrad)" stroke="#c9a84c" stroke-width="1.2" opacity="0.95"/>
+            <!-- 5 câmaras -->
+            <g>
+              <circle cx="200" cy="120" r="13" fill="url(#chamberGlow)"/><circle cx="200" cy="120" r="6" fill="#d4943a"/>
+              <circle cx="175" cy="160" r="11" fill="url(#chamberGlow)"/><circle cx="175" cy="160" r="5" fill="#d4943a"/>
+              <circle cx="225" cy="160" r="11" fill="url(#chamberGlow)"/><circle cx="225" cy="160" r="5" fill="#d4943a"/>
+              <circle cx="200" cy="200" r="12" fill="url(#chamberGlow)"/><circle cx="200" cy="200" r="6" fill="#d4943a"/>
+              <circle cx="200" cy="320" r="14" fill="url(#chamberGlow)"/><circle cx="200" cy="320" r="6" fill="#d4943a"/>
+            </g>
+            <!-- Linhas conectando -->
+            <g stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.55">
+              <line x1="200" y1="120" x2="175" y2="160"/>
+              <line x1="200" y1="120" x2="225" y2="160"/>
+              <line x1="175" y1="160" x2="200" y2="200"/>
+              <line x1="225" y1="160" x2="200" y2="200"/>
+              <line x1="200" y1="200" x2="200" y2="320"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section id="funciona" class="py-24 lg:py-32 border-t border-gold-line/20 bg-ink-2">
+    <div class="max-w-6xl mx-auto px-5 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-5">Como funciona</p>
+        <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight">
+          Quatro passos. <span class="gold-gradient">Sete minutos.</span> Uma decisão.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="reveal gold-border rounded-2xl p-7">
+          <p class="font-display text-5xl font-bold text-gold/35 mb-4">01</p>
+          <h3 class="font-display text-xl mb-2">Você envia o link</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Em 30 segundos. O candidato recebe um link único por WhatsApp, email ou SMS.</p>
+        </div>
+        <div class="reveal gold-border rounded-2xl p-7">
+          <p class="font-display text-5xl font-bold text-gold/35 mb-4">02</p>
+          <h3 class="font-display text-xl mb-2">O candidato responde</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">De 7 a 12 minutos por teste. Otimizado para celular. Sem login. Sem cadastro.</p>
+        </div>
+        <div class="reveal gold-border rounded-2xl p-7">
+          <p class="font-display text-5xl font-bold text-gold/35 mb-4">03</p>
+          <h3 class="font-display text-xl mb-2">A plataforma calcula</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">O motor científico cruza os três pilares e gera o relatório executivo automaticamente.</p>
+        </div>
+        <div class="reveal gold-border rounded-2xl p-7">
+          <p class="font-display text-5xl font-bold text-gold/35 mb-4">04</p>
+          <h3 class="font-display text-xl mb-2">Você decide</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Abre o relatório no celular, na reunião ou no carro. Em 3 minutos, com dado.</p>
+        </div>
+      </div>
+
+      <p class="reveal text-center text-cream/45 text-sm mt-12 italic">
+        Nenhum especialista interno. Nenhuma planilha. Nenhum atraso.
+      </p>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="py-24 lg:py-32 border-t border-gold-line/20">
+    <div class="max-w-6xl mx-auto px-5 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-5">Diferenciais competitivos</p>
+        <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight">
+          A ferramenta usada por gente que decide sério.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">Ciência, não achismo</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Metodologia validada academicamente. Schein/MIT, Goleman/Harvard, Chapman, Jung, Marston.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">Quatro lentes, um relatório</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Quatro escolas comportamentais cruzadas. Não é um DISC genérico de plataforma comum.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">Relatório executivo</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Não é PDF de 60 páginas. É 1 página de decisão e 1 página de detalhamento. Pronto para a reunião.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">Otimizado para celular</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Candidato responde no celular. Gestor decide no celular. Velocidade real.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">Devolutiva cruzada</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Quando aplicado um bundle, a IA cruza os resultados e entrega análise combinada. Única no mercado brasileiro.</p>
+        </div>
+        <div class="reveal p-7 rounded-2xl border border-gold-line/30">
+          <h3 class="font-display text-xl mb-2 text-gold">LGPD compliant</h3>
+          <p class="text-sm text-cream/55 leading-relaxed">Banco no Brasil. Consentimento documentado. Anonimização opcional. Tranquilidade jurídica de fábrica.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="mt-8 pt-6 border-t border-white/5 text-center">
-      <p class="text-[13px] font-medium text-white/55">
-        © <span id="year"></span> Psique — Mapa Comportamental. Todos os direitos reservados.
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 lg:py-32 border-t border-gold-line/20 bg-ink-2">
+    <div class="max-w-6xl mx-auto px-5 lg:px-10">
+      <div class="text-center mb-16">
+        <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-5">Preços</p>
+        <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight mb-4">
+          Plano por crédito. <span class="gold-gradient">Sem mensalidade.</span>
+        </h2>
+        <p class="reveal text-cream/55 text-lg">Cada avaliação consome créditos. Sem assinatura. Sem fidelidade. Sem surpresa.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="reveal p-8 rounded-2xl border border-gold-line/30 bg-ink">
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-cream/45 mb-3">Starter</p>
+          <p class="font-display text-4xl font-bold text-cream mb-1">R$ <span class="text-gold">···</span></p>
+          <p class="text-xs text-cream/35 mb-7">a definir</p>
+          <ul class="space-y-3 text-sm text-cream/60 mb-8">
+            <li class="flex gap-2"><span class="text-gold">+</span>20 créditos</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Aplicável em qualquer teste</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Acesso a todos os relatórios</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Suporte por email</li>
+          </ul>
+          <p class="text-xs italic text-cream/40 mb-6">Para a primeira leva de contratações.</p>
+          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold">Começar com Starter</a>
+        </div>
+
+        <div class="reveal p-8 rounded-2xl gold-border bg-ink relative" style="transform: scale(1.03);">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full text-ink" style="background: linear-gradient(135deg, #d4943a, #c9a84c);">Mais escolhido</span>
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-gold mb-3">Crescimento</p>
+          <p class="font-display text-4xl font-bold text-cream mb-1">R$ <span class="text-gold">···</span></p>
+          <p class="text-xs text-cream/35 mb-7">a definir</p>
+          <ul class="space-y-3 text-sm text-cream/65 mb-8">
+            <li class="flex gap-2"><span class="text-gold">+</span>60 créditos e 10 de bônus</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Bundle Completo desbloqueado</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Devolutiva cruzada por IA</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Suporte prioritário WhatsApp</li>
+          </ul>
+          <p class="text-xs italic text-cream/40 mb-6">Para PMEs em expansão de time.</p>
+          <a href="#cta" class="btn-primary block text-center py-3 rounded-full text-sm">Quero o Crescimento</a>
+        </div>
+
+        <div class="reveal p-8 rounded-2xl border border-gold-line/30 bg-ink">
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-cream/45 mb-3">Performance</p>
+          <p class="font-display text-4xl font-bold text-cream mb-1">R$ <span class="text-gold">···</span></p>
+          <p class="text-xs text-cream/35 mb-7">a definir</p>
+          <ul class="space-y-3 text-sm text-cream/60 mb-8">
+            <li class="flex gap-2"><span class="text-gold">+</span>150 créditos e 30 de bônus</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>API e integrações</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Relatório Premium PDI</li>
+            <li class="flex gap-2"><span class="text-gold">+</span>Account manager dedicado</li>
+          </ul>
+          <p class="text-xs italic text-cream/40 mb-6">Para holdings, franquias e grupos.</p>
+          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold">Falar com vendas</a>
+        </div>
+      </div>
+
+      <p class="reveal text-center text-xs text-cream/40 mt-10">Crédito não expira em 12 meses. Aplique quando precisar.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24 lg:py-32 border-t border-gold-line/20">
+    <div class="max-w-3xl mx-auto px-5 lg:px-10">
+      <div class="text-center mb-14">
+        <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 mb-5">Perguntas frequentes</p>
+        <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight">
+          Objeções vencidas.
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>Em quanto tempo eu vejo resultado?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Você vê o relatório do primeiro candidato no mesmo dia. Vê redução de turnover em 6 a 9 meses, na média dos clientes.</p>
+        </details>
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>Preciso de psicólogo interno?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Não. O relatório é redigido em linguagem de negócio. Você lê na reunião, sem intérprete.</p>
+        </details>
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>Posso aplicar em quem já está na empresa?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Sim, e recomendamos. Promoção e movimentação interna são onde a Mapa Comportamental devolve mais valor.</p>
+        </details>
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>E se o candidato não topar fazer o teste?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Você já sabe a primeira coisa sobre ele. Resistência a avaliação estruturada é sinal comportamental.</p>
+        </details>
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>Como funciona em termos de LGPD?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Banco no Brasil. Consentimento explícito antes do teste. Dados anonimizados ao final do processo. Documentação jurídica completa entregue.</p>
+        </details>
+        <details class="faq-item reveal rounded-2xl border border-gold-line/30 p-5 bg-ink-2">
+          <summary class="flex items-center justify-between text-cream font-semibold">
+            <span>Posso cancelar quando quiser?</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" class="w-5 h-5 transition-transform"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <p class="mt-4 text-sm text-cream/60 leading-relaxed">Não há contrato. O crédito que você comprou é seu. Fica no saldo, aplicável quando quiser, dentro de 12 meses.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section id="cta" class="relative py-24 lg:py-36 border-t border-gold-line/30 grain overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, transparent, #c9a84c, transparent);"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full" style="background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 60%);"></div>
+    </div>
+
+    <div class="relative max-w-3xl mx-auto px-5 lg:px-10 text-center">
+      <h2 class="reveal font-display text-4xl lg:text-6xl font-medium leading-[1.1] mb-6">
+        A próxima contratação errada custa
+        <span class="gold-gradient italic">nove meses de salário.</span>
+      </h2>
+      <p class="reveal text-xl text-cream/65 mb-12">
+        A demonstração custa quinze minutos do seu dia.
       </p>
-      <p class="mt-2 text-[12px] flex items-center justify-center gap-3 flex-wrap text-white/50">
-        <a href="/termos-de-uso" class="hover:text-gold transition-colors">Termos de Uso</a>
-        <span class="opacity-40">·</span>
-        <a href="/politica-de-privacidade" class="hover:text-gold transition-colors">Privacidade</a>
-        <span class="opacity-40">·</span>
-        <a href="/politica-de-cookies" class="hover:text-gold transition-colors">Cookies</a>
+
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+        <a href="https://wa.me/5500000000000?text=Quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20Mapa%20Comportamental" class="btn-primary pulse-glow px-9 py-4 rounded-full text-base inline-flex items-center gap-2">
+          Agendar demonstração
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="/dashboard/credits" class="btn-ghost px-9 py-4 rounded-full text-base">Comprar primeiros créditos</a>
+      </div>
+
+      <p class="reveal text-xs text-cream/40 tracking-wide">
+        Sem cadastro para ver a demonstração. Sem cartão para o trial. Sem letra miúda.
       </p>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- Footer -->
+  <footer class="border-t border-gold-line/20 py-14 bg-ink-2">
+    <div class="max-w-7xl mx-auto px-5 lg:px-10">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #d4943a, #c9a84c);">
+              <svg viewBox="0 0 90 90" fill="none" class="w-5 h-5"><path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z" fill="rgba(10,10,10,0.4)" stroke="#0a0a0a" stroke-width="2" stroke-linejoin="round"/><circle cx="45" cy="45" r="5" fill="#0a0a0a"/></svg>
+            </div>
+            <span class="font-display font-semibold text-base">Mapa Comportamental</span>
+          </div>
+          <p class="text-xs text-cream/45 leading-relaxed">Ciência comportamental aplicada à contratação, promoção e retenção em PMEs.</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-cream/45 mb-4">Plataforma</p>
+          <ul class="space-y-2 text-sm text-cream/55">
+            <li><a href="#funciona" class="hover:text-gold">Como funciona</a></li>
+            <li><a href="#pilares" class="hover:text-gold">Pilares</a></li>
+            <li><a href="#pricing" class="hover:text-gold">Preços</a></li>
+            <li><a href="#faq" class="hover:text-gold">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-cream/45 mb-4">Empresa</p>
+          <ul class="space-y-2 text-sm text-cream/55">
+            <li><a href="/sobre" class="hover:text-gold">Sobre</a></li>
+            <li><a href="/metodologia" class="hover:text-gold">Metodologia</a></li>
+            <li><a href="mailto:contato@mapacomportamental.com" class="hover:text-gold">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold tracking-[0.28em] uppercase text-cream/45 mb-4">Legal</p>
+          <ul class="space-y-2 text-sm text-cream/55">
+            <li><a href="/termos" class="hover:text-gold">Termos</a></li>
+            <li><a href="/privacidade" class="hover:text-gold">Privacidade</a></li>
+            <li><a href="/cookies" class="hover:text-gold">Cookies</a></li>
+            <li><a href="mailto:contato@mapacomportamental.com" class="hover:text-gold">DPO LGPD</a></li>
+          </ul>
+        </div>
+      </div>
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      <div class="pt-8 border-t border-gold-line/15 flex flex-col md:flex-row justify-between gap-4 text-xs text-cream/40">
+        <p>© 2026 Mapa Comportamental · Todos os direitos reservados</p>
+        <p>Dados hospedados no Brasil · SSL · LGPD compliant</p>
+      </div>
+    </div>
+  </footer>
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
+  <!-- Reveal on scroll -->
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
