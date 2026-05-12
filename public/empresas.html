@@ -2,6 +2,26 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+
+  <script>
+    // ============================================================
+    // A/B Test: headline_variant (A vs B)
+    // Sticky via localStorage. Set ANTES do paint para evitar flash.
+    // ============================================================
+    (function(){
+      var KEY = 'mc:ab:headline';
+      var v;
+      try {
+        v = localStorage.getItem(KEY);
+        if (v !== 'A' && v !== 'B') {
+          v = Math.random() < 0.5 ? 'A' : 'B';
+          localStorage.setItem(KEY, v);
+        }
+      } catch { v = 'A'; }
+      document.documentElement.setAttribute('data-ab-headline', v);
+      window.MC_AB = { headline: v };
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mapa Comportamental · Ciência aplicada à contratação</title>
   <meta name="description" content="Três camadas de análise científica em cada candidato. Comportamental, Carreira e Inteligência Emocional. Pare de perder dinheiro com contratação errada." />
@@ -57,6 +77,10 @@
     summary { list-style: none; cursor: pointer; }
     summary::-webkit-details-marker { display: none; }
     .scrollbar-hide::-webkit-scrollbar { display: none; }
+    /* A/B test: headline variants */
+    [data-ab-headline="A"] .ab-b { display: none; }
+    [data-ab-headline="B"] .ab-a { display: none; }
+
   </style>
 </head>
 
@@ -95,9 +119,13 @@
         Ciência comportamental aplicada
       </p>
 
-      <h1 class="reveal font-display text-5xl lg:text-7xl leading-[1.05] font-medium mb-7">
+      <h1 class="ab-a reveal font-display text-5xl lg:text-7xl leading-[1.05] font-medium mb-7">
         Contratar deixou de ser
         <span class="gold-gradient italic">loteria.</span>
+      </h1>
+      <h1 class="ab-b reveal font-display text-5xl lg:text-7xl leading-[1.05] font-medium mb-7">
+        <span class="gold-gradient italic">O fim do erro</span><br/>
+        na contratação.
       </h1>
 
       <p class="reveal text-lg lg:text-xl text-cream/70 max-w-2xl mx-auto leading-relaxed mb-3">
@@ -707,6 +735,11 @@
       document.head.appendChild(s);
       gtag('js', new Date());
       gtag('config', id, { anonymize_ip: true, send_page_view: true });
+      try {
+        var ab = (window.MC_AB && window.MC_AB.headline) || 'A';
+        gtag('set', 'user_properties', { headline_variant: ab });
+        gtag('event', 'experiment_view', { experiment_id: 'headline_v1', variant_id: ab });
+      } catch {}
     }
 
     function mcLoadHotjar() {
@@ -741,9 +774,12 @@
     // ─── Helper unificado para eventos ─────────────────────────
     function mcTrackEvent(name, params) {
       params = params || {};
+      // Anexa variante do A/B test em todo evento
+      var ab = (window.MC_AB && window.MC_AB.headline) || 'A';
+      params.headline_variant = ab;
       try {
         if (window.gtag) gtag('event', name, params);
-        if (window.hj)   hj('event', name);
+        if (window.hj)   hj('event', name + '_' + ab);
       } catch(err) { /* swallow */ }
     }
 
