@@ -77,7 +77,7 @@
         <a href="#pricing" class="hover:text-gold transition">Preços</a>
         <a href="#faq" class="hover:text-gold transition">FAQ</a>
       </nav>
-      <a href="#cta" class="btn-primary px-5 py-2.5 rounded-full text-sm">Agendar demonstração</a>
+      <a href="#cta" class="btn-primary px-5 py-2.5 rounded-full text-sm" data-track="cta_nav_demo">Agendar demonstração</a>
     </div>
   </header>
 
@@ -105,11 +105,11 @@
       </p>
 
       <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-        <a href="#cta" class="btn-primary pulse-glow px-8 py-4 rounded-full text-base inline-flex items-center gap-2">
+        <a href="#cta" class="btn-primary pulse-glow px-8 py-4 rounded-full text-base inline-flex items-center gap-2" data-track="cta_hero_primary">
           Quero blindar meu time
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
-        <a href="#funciona" class="btn-ghost px-8 py-4 rounded-full text-base">Ver demonstração ao vivo</a>
+        <a href="#funciona" class="btn-ghost px-8 py-4 rounded-full text-base" data-track="cta_hero_secondary">Ver demonstração ao vivo</a>
       </div>
 
       <p class="reveal text-xs text-cream/40 tracking-wide">
@@ -131,7 +131,7 @@
   </section>
 
   <!-- Dor -->
-  <section class="relative py-24 lg:py-32 border-t border-gold-line/20">
+  <section data-section="dor" class="relative py-24 lg:py-32 border-t border-gold-line/20">
     <div class="max-w-5xl mx-auto px-5 lg:px-10">
       <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/70 text-center mb-6">
         Antes de prosseguir
@@ -495,7 +495,7 @@
             <li class="flex gap-2"><span class="text-gold">+</span>Suporte por email</li>
           </ul>
           <p class="text-xs italic text-cream/40 mb-6">Para a primeira leva de contratações.</p>
-          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold">Começar com Starter</a>
+          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold" data-track="pricing_starter">Começar com Starter</a>
         </div>
 
         <div class="reveal p-8 rounded-2xl gold-border bg-ink relative" style="transform: scale(1.03);">
@@ -510,7 +510,7 @@
             <li class="flex gap-2"><span class="text-gold">+</span>Suporte prioritário WhatsApp</li>
           </ul>
           <p class="text-xs italic text-cream/40 mb-6">Para PMEs em expansão de time.</p>
-          <a href="#cta" class="btn-primary block text-center py-3 rounded-full text-sm">Quero o Crescimento</a>
+          <a href="#cta" class="btn-primary block text-center py-3 rounded-full text-sm" data-track="pricing_growth">Quero o Crescimento</a>
         </div>
 
         <div class="reveal p-8 rounded-2xl border border-gold-line/30 bg-ink">
@@ -524,7 +524,7 @@
             <li class="flex gap-2"><span class="text-gold">+</span>Account manager dedicado</li>
           </ul>
           <p class="text-xs italic text-cream/40 mb-6">Para holdings, franquias e grupos.</p>
-          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold">Falar com vendas</a>
+          <a href="#cta" class="btn-ghost block text-center py-3 rounded-full text-sm font-semibold" data-track="pricing_performance">Falar com vendas</a>
         </div>
       </div>
 
@@ -606,11 +606,11 @@
       </p>
 
       <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-        <a href="https://wa.me/5500000000000?text=Quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20Mapa%20Comportamental" class="btn-primary pulse-glow px-9 py-4 rounded-full text-base inline-flex items-center gap-2">
+        <a href="https://wa.me/5500000000000?text=Quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20Mapa%20Comportamental" class="btn-primary pulse-glow px-9 py-4 rounded-full text-base inline-flex items-center gap-2" data-track="cta_final_demo">
           Agendar demonstração
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
-        <a href="/dashboard/credits" class="btn-ghost px-9 py-4 rounded-full text-base">Comprar primeiros créditos</a>
+        <a href="/dashboard/credits" class="btn-ghost px-9 py-4 rounded-full text-base" data-track="cta_final_credits">Comprar primeiros créditos</a>
       </div>
 
       <p class="reveal text-xs text-cream/40 tracking-wide">
@@ -666,6 +666,138 @@
       </div>
     </div>
   </footer>
+
+  
+  <!-- ============================================================ -->
+  <!-- Tracking: GA4 + Hotjar (LGPD compliant)                       -->
+  <!-- Carrega apenas se usuário consentiu com analytics             -->
+  <!-- Substitua os IDs abaixo pelos valores reais antes do deploy   -->
+  <!-- ============================================================ -->
+  <script>
+    window.MC_TRACKING = {
+      GA4_ID:    'G-GR1ZSRHH76',     // Mapa Comportamental Web · GA4
+      HOTJAR_ID: 6710062,            // Mapa Comportamental · Hotjar Site ID
+    };
+
+    // Checa consentimento usando a mesma chave do app Next.js
+    function mcHasAnalyticsConsent() {
+      try {
+        const raw = localStorage.getItem('mc:cookie-consent');
+        if (!raw) return false;
+        const c = JSON.parse(raw);
+        return c && c.analytics === true;
+      } catch { return false; }
+    }
+
+    // GA4 stub que enfileira eventos antes do script carregar
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+
+    function mcLoadGA4() {
+      const id = window.MC_TRACKING.GA4_ID;
+      if (!id || id.indexOf('XXXX') > -1) return;
+      if (window.__ga4Loaded) return;
+      window.__ga4Loaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', id, { anonymize_ip: true, send_page_view: true });
+    }
+
+    function mcLoadHotjar() {
+      const hjid = window.MC_TRACKING.HOTJAR_ID;
+      if (!hjid || hjid === 0) return;
+      if (window.__hotjarLoaded) return;
+      window.__hotjarLoaded = true;
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:hjid,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    }
+
+    function mcInitTracking() {
+      if (!mcHasAnalyticsConsent()) return;
+      mcLoadGA4();
+      mcLoadHotjar();
+    }
+
+    // Tenta logo no load (se consentimento já existe)
+    mcInitTracking();
+
+    // Reage a mudança de consentimento (vinda do banner do Next.js)
+    window.addEventListener('mc:cookie-consent-changed', function(e){
+      if (e.detail && e.detail.analytics === true) mcInitTracking();
+    });
+
+    // ─── Helper unificado para eventos ─────────────────────────
+    function mcTrackEvent(name, params) {
+      params = params || {};
+      try {
+        if (window.gtag) gtag('event', name, params);
+        if (window.hj)   hj('event', name);
+      } catch(err) { /* swallow */ }
+    }
+
+    // ─── Cliques em CTAs com data-track ────────────────────────
+    document.addEventListener('click', function(e){
+      const el = e.target.closest('[data-track]');
+      if (!el) return;
+      const name = el.getAttribute('data-track');
+      mcTrackEvent(name, {
+        link_url:  el.getAttribute('href') || '',
+        link_text: (el.textContent || '').trim().slice(0, 60),
+      });
+    });
+
+    // ─── Scroll milestones em seções-chave ─────────────────────
+    const sectionObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id || entry.target.getAttribute('data-section') || '';
+        if (!id) return;
+        if (entry.target.__seen) return;
+        entry.target.__seen = true;
+        mcTrackEvent('section_view', { section_id: id });
+        sectionObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.45 });
+
+    ['pilares', 'funciona', 'pricing', 'faq', 'cta'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) sectionObs.observe(el);
+    });
+    document.querySelectorAll('[data-section]').forEach(el => sectionObs.observe(el));
+
+    // ─── Scroll depth (25 / 50 / 75 / 100) ─────────────────────
+    const depthMarks = [25, 50, 75, 100];
+    let lastMark = 0;
+    window.addEventListener('scroll', function(){
+      const h = document.documentElement;
+      const pct = Math.round((h.scrollTop + window.innerHeight) / h.scrollHeight * 100);
+      depthMarks.forEach(m => {
+        if (pct >= m && lastMark < m) {
+          lastMark = m;
+          mcTrackEvent('scroll_depth', { percent: m });
+        }
+      });
+    }, { passive: true });
+
+    // ─── FAQ accordion ────────────────────────────────────────
+    document.querySelectorAll('.faq-item').forEach((d, i) => {
+      d.addEventListener('toggle', function(){
+        if (d.open) {
+          const q = (d.querySelector('summary span') || {}).textContent || '';
+          mcTrackEvent('faq_open', { question_index: i + 1, question: q.slice(0, 80) });
+        }
+      });
+    });
+  </script>
 
   <!-- Reveal on scroll -->
   <script>
