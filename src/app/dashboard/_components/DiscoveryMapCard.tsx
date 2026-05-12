@@ -8,7 +8,7 @@ const JOURNEY_NODES = [
   { key: 'disc',          label: 'Perfil DISC',         emoji: '🎭', xp: 320 },
   { key: 'mbti',          label: 'Myers-Briggs',         emoji: '🧩', xp: 380 },
   { key: 'enneagram',     label: 'Eneagrama',            emoji: '⬡',  xp: 420 },
-  { key: 'love',          label: 'Ling. do Amor',        emoji: '💞', xp: 280 },
+  { key: 'love',          label: 'Relacionamentos',      emoji: '💞', xp: 280 },
   { key: 'shadow',        label: 'Arquétipo Sombra',     emoji: '🌌', xp: 500 },
   { key: 'full',          label: 'Perfil Completo',      emoji: '🏆', xp: 800 },
 ] as const

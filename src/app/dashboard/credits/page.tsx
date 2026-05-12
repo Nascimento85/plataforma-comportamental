@@ -96,7 +96,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
             { label: 'Eneagrama',               emoji: '🔢', cost: 2 },
             { label: 'MBTI',                    emoji: '🧠', cost: 2 },
             { label: 'Âncoras de Carreira',     emoji: '⚓', cost: 1 },
-            { label: 'Linguagem do Amor',       emoji: '💞', cost: 5 },
+            { label: 'Relacionamentos',         emoji: '💞', cost: 5 },
             { label: 'Arquétipos',              emoji: '🎭', cost: 3 },
             { label: 'Inteligência Emocional',  emoji: '💡', cost: 2 },
             { label: 'Relatório Premium + PDI', emoji: '🔓', cost: 10, hint: 'Apenas com créditos pagos' },

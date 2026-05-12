@@ -182,7 +182,7 @@ const TEST_TYPES: TestType[] = [
   {
     value: 'LOVE_LANGUAGES',
     label: 'As 5 Linguagens do Amor — Gary Chapman',
-    short: 'Ling. do Amor',
+    short: 'Relacionamentos',
     category: 'RELATIONSHIPS',
     credits: TEST_PRICE.LOVE_LANGUAGES,
     image: '/tests/linguagens-amor.jpg',
@@ -207,7 +207,7 @@ const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = 
     subtitle: 'Motivação profissional e soft skills',
   },
   RELATIONSHIPS: {
-    title: 'Linguagem do Amor',
+    title: 'Relacionamentos',
     subtitle: 'Casais, família e vida pessoal',
   },
   ARCHETYPE: {

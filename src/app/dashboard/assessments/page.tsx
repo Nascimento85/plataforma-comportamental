@@ -157,7 +157,7 @@ export default async function AssessmentsPage() {
             </span>
 
             <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
-              Linguagem do Amor
+              Relacionamentos
             </h2>
             <p className="font-display italic text-[15px] font-semibold mb-3" style={{ color: '#9b4d43' }}>
               Casais, família e relacionamentos que importam

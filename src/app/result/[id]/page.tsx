@@ -75,6 +75,16 @@ const ARCHETYPE_PT: Record<string, string> = {
   ORPHAN:    'ORFÃO',
 }
 
+const FEMININE_ARCHETYPE_PT: Record<string, string> = {
+  MAIDEN:    'DONZELA',
+  MOTHER:    'MÃE',
+  HUNTRESS:  'CAÇADORA',
+  SOVEREIGN: 'SOBERANA',
+  LOVER:     'AMANTE',
+  WISE:      'SÁBIA',
+  CRONE:     'ANCIÃ',
+}
+
 const TEST_LABELS: Record<string, string> = {
   DISC:                   'DISC — Perfil Comportamental',
   MBTI:                   'MBTI — 16 Tipos de Personalidade',
@@ -641,7 +651,7 @@ function ArchetypeFeminineDevolutiva({ d }: { d: Record<string, unknown> }) {
       <Card><div className="p-6">
         <SectionTitle>Distribuição das energias</SectionTitle>
         {sorted.map(([name, pct]) => (
-          <Bar key={name} label={name} pct={pct} color={VIOLET} bold={name === r.dominant} />
+          <Bar key={name} label={FEMININE_ARCHETYPE_PT[name] ?? name} pct={pct} color={VIOLET} bold={name === r.dominant} />
         ))}
       </div></Card>
 

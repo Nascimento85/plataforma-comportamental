@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
 import { TEST_PRICE } from '@/lib/passport'
 
-export const metadata: Metadata = { title: 'Linguagem do Amor' }
+export const metadata: Metadata = { title: 'Relacionamentos' }
 
 interface Language {
   key: string
