@@ -57,6 +57,7 @@ model Company {
   creditTransactions     CreditTransaction[]
   reports                Report[]
   bundleReports          BundleReport[]
+  integratedReports      EmployeeIntegratedReport[]
   profileValidationCodes ProfileValidationCode[]
   // Passaporte de Autoconhecimento
   bonusGrants       BonusGrant[]
@@ -103,9 +104,10 @@ model Employee {
   email     String
   createdAt DateTime @default(now())
 
-  company       Company        @relation(fields: [companyId], references: [id])
-  assessments   Assessment[]
-  bundleReports BundleReport[]
+  company           Company                    @relation(fields: [companyId], references: [id])
+  assessments       Assessment[]
+  bundleReports     BundleReport[]
+  integratedReports EmployeeIntegratedReport[]
 
   @@unique([companyId, email])
 }
@@ -259,6 +261,35 @@ model CreditTransaction {
 
   @@index([companyId, type])
   @@index([expiresAt])
+}
+
+// ============================================================
+// DEVOLUTIVA INTEGRADA POR FUNCIONÁRIO (Frente B)
+// Cruza TODOS os testes que o employee fez, escalando em profundidade:
+//   - 2 testes  → BASIC      (~500 palavras)
+//   - 3 testes  → SYNTHETIC  (~1000 palavras, 3 dimensões cruzadas)
+//   - 4-5 testes → EXECUTIVE (~2000 palavras, radar + PDI)
+//   - 6+ testes → PREMIUM    (~3500 palavras, mapa estratégico)
+// ============================================================
+model EmployeeIntegratedReport {
+  id            String   @id @default(cuid())
+  employeeId    String
+  companyId     String
+  status        String   @default("PENDING") // PENDING | GENERATING | COMPLETED | FAILED
+  depth         String   @default("BASIC")   // BASIC | SYNTHETIC | EXECUTIVE | PREMIUM
+  testCount     Int      @default(0)
+  includedTests String?  @db.Text            // JSON array dos testTypes incluídos
+  content       String?  @db.Text            // JSON com seções do relatório
+  pdfUrl        String?
+  generatedAt   DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+  company  Company  @relation(fields: [companyId], references: [id])
+
+  @@unique([companyId, employeeId])
+  @@index([companyId])
+  @@index([status])
 }
 
 // ============================================================

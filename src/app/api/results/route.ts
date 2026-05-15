@@ -14,6 +14,7 @@ import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
 import { generateBundleReport } from '@/lib/bundle-report/generate'
+import { triggerIntegratedReportRegeneration } from '@/lib/integrated-report/trigger'
 import { sendProfileTagToManyChat } from '@/lib/manychat-tags'
 
 const schema = z.object({
@@ -202,6 +203,11 @@ export async function POST(request: NextRequest) {
       checkAndGenerateBundleReport(assessment.bundleId).catch(console.error)
     }
 
+    // Frente B: trigger fire-and-forget para regenerar a devolutiva integrada
+    // do funcionário (cruza TODOS os testes que ele já fez). Engine internamente
+    // decide se há testes suficientes (mín 2) e calcula profundidade.
+    triggerIntegratedReportRegeneration(assessment.companyId, assessment.employeeId)
+
     sendTestCompletionNotifications({
       employeeName:  assessment.employee.name,
       employeeEmail: assessment.employee.email,
@@ -280,7 +286,7 @@ async function checkAndGenerateBundleReport(bundleId: string): Promise<void> {
     bundleAssessments.every(a => a.status === 'COMPLETED')
 
   if (allDone) {
-    console.log(`[bundleReport] 🎉 Bundle ${bundleId} completo — gerando devolutiva cruzada...`)
+    console.log(`[bundleReport] Bundle ${bundleId} completo — gerando devolutiva cruzada...`)
     await generateBundleReport(bundleId)
   }
 }

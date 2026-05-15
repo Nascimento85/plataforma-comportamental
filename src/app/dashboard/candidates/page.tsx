@@ -125,6 +125,9 @@ export default async function CandidatesPage() {
                   <th className="text-left px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70">
                     Status
                   </th>
+                  <th className="text-right px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70">
+                    Ações
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -155,6 +158,14 @@ export default async function CandidatesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <StatusBadge status={c.latestStatus} />
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <Link
+                        href={`/dashboard/candidates/${c.id}`}
+                        className="text-[13px] font-bold text-soul-terracota hover:underline font-sans"
+                      >
+                        Ver perfil →
+                      </Link>
                     </td>
                   </tr>
                 ))}
