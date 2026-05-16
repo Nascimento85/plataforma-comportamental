@@ -1,0 +1,194 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+interface Props {
+  coletaId: string
+  algumSetorAtingiu: boolean
+  relatorioExistente: {
+    status: string
+    content: RelatorioContent | null
+    generatedAt: string
+  } | null
+}
+
+interface RelatorioContent {
+  geradoEm: string
+  totalRespondentes: number
+  setoresAvaliados: number
+  setores: SetorAgregado[]
+}
+
+interface SetorAgregado {
+  setorId: string
+  setorNome: string
+  totalRespondentes: number
+  karasek: {
+    mediaControle: number
+    mediaDemanda: number
+    quadranteDominante: string
+    distribuicao: Record<string, number>
+    risco: string
+  }
+  eri: { razaoMedia: number; pctAcimaUm: number; risco: string }
+  copsoq: { dimensoes: Array<{ dimensao: string; mediaPontuacao: number; risco: string }>; riscoGlobal: string }
+  perfilDiscDominante?: string
+  recomendacoes: Array<{ prioridade: string; area: string; acao: string; porque: string }>
+}
+
+const RISCO_COR: Record<string, { bg: string; color: string; label: string }> = {
+  BAIXO:    { bg: 'rgba(122,158,126,0.22)', color: '#4a7a4e', label: 'Baixo'    },
+  MODERADO: { bg: 'rgba(212,148,58,0.22)',  color: '#8a5c1e', label: 'Moderado' },
+  ALTO:     { bg: 'rgba(196,99,58,0.22)',   color: '#a8522e', label: 'Alto'     },
+}
+
+const DIM_LABEL: Record<string, string> = {
+  DEMANDAS_PSICOLOGICAS:      'Demandas Psicológicas',
+  ORGANIZACAO_TRABALHO:       'Organização do Trabalho',
+  RELACOES_LIDERANCA:         'Relações e Liderança',
+  INTERFACE_TRABALHO_FAMILIA: 'Trabalho-Família',
+  SAUDE_BEM_ESTAR:            'Saúde e Bem-Estar',
+  COMPORTAMENTOS_OFENSIVOS:   'Comportamentos Ofensivos',
+}
+
+export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorioExistente }: Props) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+  const [erro, setErro] = useState('')
+  const [conteudo, setConteudo] = useState<RelatorioContent | null>(relatorioExistente?.content ?? null)
+
+  async function gerarRelatorio() {
+    setLoading(true); setErro('')
+    try {
+      const res = await fetch(`/api/nr1/coletas/${coletaId}/relatorio`, { method: 'POST' })
+      const data = await res.json()
+      if (!res.ok) { setErro(data.error ?? 'Falha ao gerar.'); setLoading(false); return }
+      setConteudo(data.content)
+      router.refresh()
+    } catch { setErro('Erro de conexão.') }
+    finally { setLoading(false) }
+  }
+
+  return (
+    <section className="soul-panel">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div>
+          <h2 className="font-serif font-semibold text-xl text-soul-ink">Relatório executivo</h2>
+          {conteudo && (
+            <p className="text-[12px] text-soul-ink/70 font-medium mt-0.5">
+              Gerado em {new Date(conteudo.geradoEm).toLocaleString('pt-BR')} ·
+              {' '}{conteudo.totalRespondentes} respondentes ·
+              {' '}{conteudo.setoresAvaliados} setor{conteudo.setoresAvaliados !== 1 ? 'es' : ''}
+            </p>
+          )}
+        </div>
+        <button onClick={gerarRelatorio} disabled={loading || !algumSetorAtingiu}
+                className="px-4 py-2 rounded-full text-[13px] font-bold text-white shadow-terra disabled:opacity-60"
+                style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+          {loading ? 'Gerando…' : conteudo ? '↻ Atualizar relatório' : '✦ Gerar relatório'}
+        </button>
+      </div>
+
+      {!algumSetorAtingiu && !conteudo && (
+        <p className="text-[14px] text-soul-ink/75 font-medium">
+          Aguardando respondentes. O relatório só é liberado quando ao menos um setor atingir o mínimo de respondentes (proteção do anonimato).
+        </p>
+      )}
+
+      {erro && (
+        <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold mt-3"
+             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+          {erro}
+        </div>
+      )}
+
+      {conteudo && (
+        <div className="space-y-5 mt-4">
+          {conteudo.setores.map(s => (
+            <div key={s.setorId} className="rounded-2xl p-5"
+                 style={{ background: 'rgba(196,99,58,0.04)', border: '1px solid rgba(196,99,58,0.18)' }}>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div>
+                  <h3 className="font-serif font-semibold text-lg text-soul-ink">{s.setorNome}</h3>
+                  <p className="text-[12px] text-soul-ink/65 font-medium">
+                    {s.totalRespondentes} respondentes
+                    {s.perfilDiscDominante ? ` · DISC ${s.perfilDiscDominante}` : ''}
+                  </p>
+                </div>
+              </div>
+
+              {/* Cards de risco por instrumento */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                <RiscoCard titulo="Karasek (Tensão)" risco={s.karasek.risco}
+                           detalhe={`Controle ${s.karasek.mediaControle} · Demanda ${s.karasek.mediaDemanda}`}
+                           extra={`${s.karasek.distribuicao.ALTA_TENSAO ?? 0}% em Alta Tensão`} />
+                <RiscoCard titulo="ERI (Esforço-Recompensa)" risco={s.eri.risco}
+                           detalhe={`Razão média ${s.eri.razaoMedia.toFixed(2)}`}
+                           extra={`${s.eri.pctAcimaUm}% acima de 1.0`} />
+                <RiscoCard titulo="COPSOQ Global" risco={s.copsoq.riscoGlobal}
+                           detalhe={`${s.copsoq.dimensoes.length} dimensões avaliadas`} />
+              </div>
+
+              {/* Heatmap COPSOQ */}
+              <div className="mb-4">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-2">COPSOQ por dimensão</p>
+                <div className="space-y-1.5">
+                  {s.copsoq.dimensoes.map(d => {
+                    const cor = RISCO_COR[d.risco] ?? RISCO_COR.BAIXO
+                    return (
+                      <div key={d.dimensao} className="flex items-center gap-2">
+                        <span className="text-[12px] font-semibold text-soul-ink/85 flex-1">{DIM_LABEL[d.dimensao] ?? d.dimensao}</span>
+                        <span className="text-[12px] font-bold text-soul-ink/80 w-10 text-right">{d.mediaPontuacao}</span>
+                        <span className="inline-block rounded-full px-2 py-0.5 text-[10px] font-bold w-[70px] text-center"
+                              style={{ background: cor.bg, color: cor.color }}>{cor.label}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              {/* Recomendações */}
+              {s.recomendacoes.length > 0 && (
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">Recomendações</p>
+                  <ol className="space-y-2 list-none">
+                    {s.recomendacoes.map((r, i) => (
+                      <li key={i} className="rounded-xl px-3 py-2 flex gap-2 items-start"
+                          style={{ background: 'rgba(122,158,126,0.10)' }}>
+                        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold flex-shrink-0 mt-0.5"
+                              style={{
+                                background: r.prioridade === 'ALTA' ? 'rgba(196,99,58,0.25)' : 'rgba(212,148,58,0.22)',
+                                color: r.prioridade === 'ALTA' ? '#a8522e' : '#8a5c1e',
+                              }}>
+                          {r.prioridade}
+                        </span>
+                        <div>
+                          <p className="text-[12px] font-bold text-soul-ink">{r.area}</p>
+                          <p className="text-[13px] text-soul-ink/90 font-medium">{r.acao}</p>
+                          <p className="text-[11px] text-soul-ink/65 font-medium italic mt-0.5">{r.porque}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}
+
+function RiscoCard({ titulo, risco, detalhe, extra }: { titulo: string; risco: string; detalhe: string; extra?: string }) {
+  const cor = RISCO_COR[risco] ?? RISCO_COR.BAIXO
+  return (
+    <div className="rounded-xl p-3" style={{ background: cor.bg, border: `1px solid ${cor.color}33` }}>
+      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: cor.color }}>{titulo}</p>
+      <p className="text-[15px] font-bold mt-0.5" style={{ color: cor.color }}>{cor.label}</p>
+      <p className="text-[11px] text-soul-ink/75 font-semibold mt-1">{detalhe}</p>
+      {extra && <p className="text-[11px] text-soul-ink/65 font-medium">{extra}</p>}
+    </div>
+  )
+}

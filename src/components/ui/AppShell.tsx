@@ -237,6 +237,14 @@ function SidebarContent({
 
         <div className="px-6 pb-2 pt-4">
           <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
+            Compliance
+          </p>
+        </div>
+
+        <SidebarNavLink href="/dashboard/compliance/nr1" label="NR-1 Psicossocial" iconKey="reports" onClick={onNavClick} />
+
+        <div className="px-6 pb-2 pt-4">
+          <p className="text-[11px] font-sans uppercase tracking-[0.16em] text-white/55 font-bold">
             Conta
           </p>
         </div>

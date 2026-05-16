@@ -63,6 +63,12 @@ model Company {
   bonusGrants       BonusGrant[]
   reportUnlocks     ReportUnlock[]
   scheduledOutreach ScheduledOutreach[]
+  // Frente C — Compliance NR-1 (Diagnostico Psicossocial)
+  nr1Setores    NR1Setor[]
+  nr1Coletas    NR1Coleta[]
+  nr1Convites   NR1Convite[]
+  nr1Respostas  NR1Resposta[]
+  nr1Relatorios NR1Relatorio[]
 }
 
 // ============================================================
@@ -369,4 +375,111 @@ model ScheduledOutreach {
 
   @@index([status, scheduledFor])
   @@index([companyId, type])
+}
+
+// ============================================================
+// FRENTE C - COMPLIANCE NR-1 (Diagnostico de Riscos Psicossociais)
+// Arquitetura de anonimato blindado:
+//   - NR1Convite (Tabela A): identidade do funcionario + token de acesso
+//   - NR1Resposta (Tabela B): respostas brutas SEM FK para usuario/convite
+//     vinculadas apenas via setorId (agregacao por GHE)
+// ============================================================
+
+// ---- Setor / GHE (Grupo Homogeneo de Exposicao) ----
+model NR1Setor {
+  id        String   @id @default(cuid())
+  companyId String
+  nome      String   // ex: "Financeiro", "RH", "Operacoes"
+  perfilDiscDominante String?  // D | I | S | C (opcional — alimenta cruzamento de recomendacoes)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company    Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  convites   NR1Convite[]
+  respostas  NR1Resposta[]
+
+  @@unique([companyId, nome])
+  @@index([companyId])
+}
+
+// ---- Coleta / Campanha de avaliacao ----
+model NR1Coleta {
+  id          String    @id @default(cuid())
+  companyId   String
+  nome        String    // ex: "Diagnostico Psicossocial Q4 2026"
+  status      String    @default("ACTIVE")  // ACTIVE | CLOSED
+  expiresAt   DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  company    Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  convites   NR1Convite[]
+  respostas  NR1Resposta[]
+  relatorios NR1Relatorio[]
+
+  @@index([companyId])
+  @@index([status])
+}
+
+// ---- Tabela A: Convite com identidade (controle) ----
+model NR1Convite {
+  id        String   @id @default(cuid())
+  coletaId  String
+  setorId   String
+  companyId String
+  nome      String
+  email     String
+  token     String   @unique
+  status    String   @default("PENDING")  // PENDING | COMPLETED | EXPIRED
+  completedAt DateTime?
+  createdAt DateTime @default(now())
+
+  coleta  NR1Coleta @relation(fields: [coletaId], references: [id], onDelete: Cascade)
+  setor   NR1Setor  @relation(fields: [setorId], references: [id], onDelete: Cascade)
+  company Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([coletaId])
+  @@index([setorId])
+  @@index([companyId])
+  @@index([status])
+}
+
+// ---- Tabela B: Respostas ANONIMAS (sem FK de identidade) ----
+model NR1Resposta {
+  id          String   @id @default(cuid())
+  coletaId    String   // FK para agregacao por coleta
+  setorId     String   // FK para agregacao por GHE
+  companyId   String   // redundancia para query rapida
+  instrumento String   // KARASEK | ERI | COPSOQ
+  respostas   String   @db.Text  // JSON com {questaoId: valor} bruto
+  scores      String   @db.Text  // JSON com scores calculados (matriz Karasek, razao ERI, dimensoes COPSOQ 0-100)
+  createdAt   DateTime @default(now())
+  // ATENCAO: sem FK para Employee/User/NR1Convite — anonimato blindado
+
+  coleta  NR1Coleta @relation(fields: [coletaId], references: [id], onDelete: Cascade)
+  setor   NR1Setor  @relation(fields: [setorId], references: [id], onDelete: Cascade)
+  company Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([coletaId])
+  @@index([setorId])
+  @@index([companyId])
+  @@index([instrumento])
+}
+
+// ---- Relatorio agregado por coleta ----
+model NR1Relatorio {
+  id           String   @id @default(cuid())
+  coletaId     String   @unique
+  companyId    String
+  status       String   @default("PENDING")  // PENDING | GENERATING | COMPLETED | FAILED
+  content      String?  @db.Text  // JSON com agregacoes, heatmap, recomendacoes
+  pdfUrl       String?  // URL do PDF no Supabase Storage
+  generatedAt  DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  coleta  NR1Coleta @relation(fields: [coletaId], references: [id], onDelete: Cascade)
+  company Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([status])
 }
