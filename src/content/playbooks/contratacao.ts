@@ -1,0 +1,231 @@
+import type { Playbook } from './types'
+
+export const PLAYBOOK_CONTRATACAO: Playbook = {
+  slug: 'contratacao-inteligente',
+  titulo: 'Playbook de Contratação Inteligente',
+  subtitulo: 'Como pequenas e médias empresas podem contratar alta performance sem ter um departamento de RH',
+  badge: 'Gratuito · Contratação',
+
+  abertura:
+    'Contratar errado custa caro. O prejuízo de uma demissão precoce em uma PME não é apenas financeiro (rescisão, exames, treinamento perdido) — é, acima de tudo, um dreno de energia, produtividade e moral. Na maioria das vezes, a contratação falha porque o perfil comportamental da pessoa não combina com a biologia da função. Este playbook foi desenhado para que você, gestor ou empresário, consiga decodificar o comportamento humano usando as cinco ferramentas diagnósticas mais poderosas do mercado: DISC, MBTI, Eneagrama, 4 Temperamentos e Arquétipos.',
+
+  secoes: [
+    {
+      numero: '1.',
+      titulo: 'O Princípio do "Alvo Cognitivo"',
+      blocos: [
+        { tipo: 'callout', variante: 'alerta', titulo: 'Regra de Ouro',
+          conteudo: 'Não existe perfil "bom" ou "ruim". Existe perfil adequado ou inadequado para a meta da função.' },
+        { tipo: 'paragrafo',
+          conteudo: 'A competência técnica (saber mexer no sistema, falar um idioma) é o que o candidato sabe fazer. O perfil comportamental determina como ele realmente vai agir sob pressão, rotina ou tédio.' },
+        { tipo: 'paragrafo',
+          conteudo: 'Contrate pelo comportamento, treine a técnica.' },
+        { tipo: 'paragrafo',
+          conteudo: 'Exemplos práticos do problema: um vendedor excessivamente analítico trava diante da rejeição rápida; um analista financeiro muito impulsivo gera furos críticos no fluxo de caixa; um porteiro hipercomunicativo perde a atenção operacional e a segurança do posto.' },
+      ],
+    },
+    {
+      numero: '2.',
+      titulo: 'O Arsenal de Diagnóstico (Resumo Executivo)',
+      blocos: [
+        { tipo: 'paragrafo',
+          conteudo: 'Para usar este playbook, você não precisa ser um psicólogo com doutorado. Pense nessas ferramentas como lentes complementares:' },
+        { tipo: 'lista', itens: [
+          'DISC — Como a pessoa age e reage ao ambiente (ritmo e foco).',
+          'MBTI — Como a pessoa processa informação e toma decisões (energia mental).',
+          '4 Temperamentos — A raiz biológica/emocional da energia do candidato (a base estrutural).',
+          'Eneagrama — As motivações profundas, medos inconscientes e mecanismos de defesa.',
+          'Arquétipos — A imagem pública e a força motriz de entrega que o indivíduo projeta no mundo.',
+        ]},
+      ],
+    },
+    {
+      numero: '🎯 1.',
+      titulo: 'Vendas (Hunter / Ativo / Expansão Comercial)',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: trazer receita, abrir mercado, tolerar rejeição massiva e fechar contratos rapidamente.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: D (Dominante) alto e I (Influente) alto',
+          'MBTI: ESTP, ENTJ, ENTP, ENFP',
+          'Temperamento: Colérico (foco no resultado) ou Sanguíneo (foco na conexão)',
+          'Eneagrama: Tipo 3 (Realizador) ou Tipo 8 (Desafiador)',
+          'Arquétipo: O Guerreiro ou O Herói',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Ambição clara, agressividade comercial sadia e alta resiliência ao ouvir "não".' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis puramente S (Estável) ou C (Conforme) altos, que sofrem com a rejeição e demoram a tomar iniciativa.' },
+      ],
+    },
+    {
+      numero: '📞 2.',
+      titulo: 'Telemarketing Ativo (Prospecção / Cold Call)',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: alta velocidade de discagem, contorno de objeções imediato e manutenção do entusiasmo apesar de desligadas na cara.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: I (Influente) alto, D (Dominante) moderado',
+          'MBTI: ENFP, ESFP',
+          'Temperamento: Sanguíneo puro',
+          'Eneagrama: Tipo 7 (Entusiasta)',
+          'Arquétipo: O Bobo da Corte / Animador ou O Herói',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Ritmo de fala acelerado, tom de voz entusiasmado e desapego ao ego (não leva o "não" para o lado pessoal).' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Pessoas muito emocionais ou com perfis C ou S muito rígidos, que travam diante da pressão e da rejeição em massa.' },
+      ],
+    },
+    {
+      numero: '🎧 3.',
+      titulo: 'Telemarketing Receptivo / SAC / Suporte',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: acolher o cliente, resolver problemas com paciência, acalmar pessoas irritadas e seguir scripts de solução.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: S (Estável) alto, I (Influente) moderado',
+          'MBTI: ISFJ, ESFJ, INFJ',
+          'Temperamento: Fleumático (imperturbável)',
+          'Eneagrama: Tipo 2 (Ajudador) ou Tipo 6 (Guardião)',
+          'Arquétipo: O Cuidador',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Escuta ativa, tom de voz pausado, empatia genuína e controle emocional.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis com D alto. Eles vão bater boca com clientes arrogantes ou tentar desligar rápido demais para se livrar do problema.' },
+      ],
+    },
+    {
+      numero: '📂 4.',
+      titulo: 'Auxiliar Administrativo',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: alimentar planilhas, organizar arquivos, garantir que os processos internos rodem sem erros de digitação ou prazos perdidos.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: C (Conforme) alto, S (Estável) alto',
+          'MBTI: ISTJ, ISFJ',
+          'Temperamento: Fleumático ou Melancólico',
+          'Eneagrama: Tipo 1 (Perfeccionista) ou Tipo 6 (Cumpridor de Deveres)',
+          'Arquétipo: O Sábio ou O Cidadão Comum',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Gosto por rotinas, atenção extrema aos detalhes, apreço por regras claras e previsibilidade.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis puramente criativos ou sociáveis (I muito alto). Vão se distrair facilmente com conversas ou redes sociais e errar dados por falta de foco.' },
+      ],
+    },
+    {
+      numero: '📊 5.',
+      titulo: 'Auxiliar Financeiro / Contábil',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: precisão cirúrgica no fluxo de caixa, conciliação bancária centavo por centavo, emissão de notas fiscais sem margem de erro.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: C (Conforme) altíssimo (conformidade absoluta)',
+          'MBTI: ISTJ, INTJ',
+          'Temperamento: Melancólico puro (analítico e cético)',
+          'Eneagrama: Tipo 5 (Observador) ou Tipo 1 (Perfeccionista)',
+          'Arquétipo: O Sábio / O Auditor',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Obsessão por organização, raciocínio lógico milimétrico e perfil reservado.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis impulsivos ou muito comunicativos (D e I altos). Um erro de digitação aqui gera prejuízo real no caixa.' },
+      ],
+    },
+    {
+      numero: '🗂️ 6.',
+      titulo: 'Administrador / Gestor / Gerente',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: direcionar o time, cobrar indicadores, tomar decisões difíceis sob pressão e organizar os recursos de forma estratégica.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: D (Dominante) alto, C (Conforme) moderado/alto',
+          'MBTI: ENTJ, ESTJ',
+          'Temperamento: Colérico focado',
+          'Eneagrama: Tipo 8 (Líder) ou Tipo 3 (Executor de Elite)',
+          'Arquétipo: O Governante (ordem, direção, controle)',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Orientação clara para resultados, capacidade de gerenciar conflitos sem recuar e autoridade natural na fala.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis com extrema necessidade de agradar (S ou I sem canalização de liderança). Eles vão travar na hora de cobrar metas ou demitir.' },
+      ],
+    },
+    {
+      numero: '🎨 7.',
+      titulo: 'Marketing (Criativo / Social Media / Copywriter)',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: pensar fora da caixa, criar conexões emocionais com o público, inovar em campanhas e ler tendências de mercado rapidamente.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: I (Influente) alto, D (Dominante) moderado',
+          'MBTI: ENFP, ENTP, INFP',
+          'Temperamento: Sanguíneo criativo ou Melancólico artístico',
+          'Eneagrama: Tipo 7 (Inovador) ou Tipo 4 (Individualista)',
+          'Arquétipo: O Criador ou O Mago',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Portfólio com ideias autênticas, curiosidade intelectual viva e alta capacidade de comunicação visual e verbal.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis excessivamente tradicionais ou engessados (C extremista). Marketing exige testes, riscos e adaptação rápida.' },
+      ],
+    },
+    {
+      numero: '🔑 8.',
+      titulo: 'Secretária / Recepcionista',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: ser o cartão de visitas da empresa, organizar a agenda da liderança, atender fornecedores e clientes com fidalguia e elegância.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: S (Estável) alto (organizar e manter a calma), I (Influente) moderado (acolher bem)',
+          'MBTI: ESFJ, ISFJ',
+          'Temperamento: Sanguíneo leve ou Fleumático diplomático',
+          'Eneagrama: Tipo 2 (Ajudador) ou Tipo 9 (Pacificador)',
+          'Arquétipo: O Cuidador ou O Amante',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Excelente comunicação verbal, postura empática, organização pessoal e agilidade para múltiplas demandas simultâneas.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Pessoas com D muito alto (podem ser ríspidas quando ocupadas) ou C extremo isolado (tratam pessoas como protocolo frio).' },
+      ],
+    },
+    {
+      numero: '🛒 9.',
+      titulo: 'Caixa',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: atenção focada e contínua no manuseio de valores, velocidade operacional e cordialidade rápida na esteira de atendimento.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: C (Conforme) alto, S (Estável) alto',
+          'MBTI: ISTJ, ISFJ',
+          'Temperamento: Fleumático',
+          'Eneagrama: Tipo 6 (alerta a riscos) ou Tipo 1 (seguidor de regras)',
+          'Arquétipo: O Guardião ou O Cidadão Comum',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Alta concentração (tarefas repetitivas sem se perder), honestidade transparente e estabilidade emocional para lidar com filas.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis muito dispersos, inquietos ou aventureiros (I puros). A chance de quebra de caixa por pura distração é altíssima.' },
+      ],
+    },
+    {
+      numero: '🚪 10.',
+      titulo: 'Porteiro',
+      blocos: [
+        { tipo: 'paragrafo', conteudo: 'Objetivo principal: controle rigoroso de acessos, cumprimento cego de protocolos de segurança e presença constante no posto.' },
+        { tipo: 'lista', itens: [
+          'DISC ideal: S (Estável) alto (constância para aguentar plantão), C (Conforme) moderado',
+          'MBTI: ISTJ',
+          'Temperamento: Fleumático pragmático',
+          'Eneagrama: Tipo 6 (Vigilante focado em riscos)',
+          'Arquétipo: O Guardião',
+        ]},
+        { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
+          conteudo: 'Disciplina inabalável, baixa necessidade de socialização durante o turno, foco em protocolo.' },
+        { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
+          conteudo: 'Perfis I (Influente) altos que precisam interagir o tempo todo — vão sair do posto para conversar.' },
+      ],
+    },
+  ],
+
+  fechamento: [
+    { tipo: 'subtitulo', titulo: 'Como aplicar tudo isso na prática' },
+    { tipo: 'paragrafo',
+      conteudo: 'Use a plataforma Psique — Mapa Comportamental para enviar os testes DISC, MBTI, Eneagrama, Temperamentos e Arquétipos aos seus candidatos finais. Em cerca de 15 minutos cada, você recebe relatórios cruzados que mostram exatamente se o perfil bate com a função pretendida. A devolutiva integrada (cruzando 4+ testes) revela convergências e tensões internas que nenhum currículo conta.' },
+    { tipo: 'callout', variante: 'info', titulo: 'Próximo passo',
+      conteudo: 'Cadastre-se gratuitamente na plataforma e ganhe 10 créditos no onboarding para testar com os seus primeiros candidatos.' },
+  ],
+}

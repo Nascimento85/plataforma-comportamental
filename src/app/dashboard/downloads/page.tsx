@@ -13,6 +13,7 @@ import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { DISC_PREMIUM, type DiscProfileKey } from '@/content/disc'
+import { PLAYBOOK_LIST } from '@/content/playbooks'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Meus Downloads' }
@@ -97,6 +98,38 @@ export default async function DownloadsPage() {
         <StatCard label="Relatórios Premium" value={unlocked.length} />
         <StatCard label="Aguardando desbloqueio" value={locked.length} tone={locked.length > 0 ? 'warning' : 'neutral'} />
         <StatCard label="Total de testes" value={reports.length} />
+      </section>
+
+      {/* ── Materiais Gratuitos ── */}
+      <section>
+        <SectionHeading
+          title="Materiais gratuitos"
+          subtitle="Playbooks completos disponíveis para você baixar e compartilhar livremente."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {PLAYBOOK_LIST.map((pb) => (
+            <Link key={pb.slug} href={`/playbook/${pb.slug}`}
+                  className="soul-panel block hover:shadow-soul-lg transition-shadow group">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl"
+                     style={{ background: 'rgba(196,99,58,0.12)' }}>
+                  📘
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-1"
+                        style={{ background: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }}>
+                    {pb.badge}
+                  </span>
+                  <h3 className="font-serif font-semibold text-lg text-soul-ink leading-tight">{pb.titulo}</h3>
+                </div>
+              </div>
+              <p className="text-[13px] text-soul-ink/80 font-medium leading-relaxed mb-3">{pb.subtitulo}</p>
+              <p className="text-[12px] font-bold text-soul-terracota group-hover:underline">
+                Ler playbook →
+              </p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* ── Disponíveis ── */}
@@ -278,36 +311,15 @@ function ReportDownloadGroup({
                 </div>
                 <h4 className="font-serif text-lg font-bold text-soul-ink mb-2 leading-tight">{d.title}</h4>
                 <p className="text-sm text-soul-ink/65 mb-3 line-clamp-3">{d.pitch}</p>
-                <ul className="text-[12px] text-soul-ink/55 space-y-0.5 mb-3">
-                  {d.toc.slice(0, 3).map((t, i) => <li key={i} className="truncate">· {t}</li>)}
-                  {d.toc.length > 3 && <li className="italic">+ {d.toc.length - 3} tópicos</li>}
-                </ul>
-                <div className="text-sm font-bold flex items-center gap-1.5"
-                     style={{ color: profile.paletteHex }}>
-                  ↓ Baixar PDF personalizado
-                </div>
+                <p className="text-[12px] font-bold text-soul-terracota">Baixar PDF →</p>
               </a>
             ))}
           </div>
         )}
-
-        {profile && !unlocked && (
-          <div className="text-center py-6">
-            <p className="text-soul-ink/65 text-sm mb-3">
-              <strong>3 PDFs Premium</strong> ({profile.downloads.map(d => d.kind.toLowerCase()).join(' + ')}) ficam disponíveis assim que o Premium for desbloqueado.
-            </p>
-            <p className="text-[12px] text-soul-ink/45 italic">
-              Total: {profile.downloads.reduce((acc, d) => acc + d.pages, 0)} páginas · capa personalizada
-            </p>
-          </div>
-        )}
-
         {!profile && (
-          <div className="text-center py-4">
-            <p className="text-soul-ink/55 text-sm italic">
-              Materiais Premium estão em produção para este teste — em breve você verá novos downloads aqui.
-            </p>
-          </div>
+          <p className="text-[14px] text-soul-ink/65 font-medium">
+            PDFs personalizados ainda não estão disponíveis para este tipo de teste.
+          </p>
         )}
       </div>
     </article>
