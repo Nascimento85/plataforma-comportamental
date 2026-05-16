@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 const PUBLIC_ROUTES = [
-  '/',                 // landing page (LP unificada via rewrite)
+  '/',                 // landing page (nova home preto/dourado via rewrite p/ /inicio.html)
   '/login',
   '/register',
   '/forgot-password',  // recuperação de senha
@@ -13,8 +13,11 @@ const PUBLIC_ROUTES = [
   '/amor.html',
   '/empresas',         // landing page corporativa
   '/empresas.html',
-  '/lp',               // LP unificada (acesso direto)
+  '/inicio',           // nova home preto/dourado (hub completo)
+  '/inicio.html',
+  '/lp',               // LP antiga (mantida acessível para histórico)
   '/lp.html',
+  '/playbook',         // playbooks gratuitos (contratacao, nr1)
   '/politica-de-privacidade',  // documento legal LGPD
   '/politica-de-cookies',       // documento legal LGPD
   '/termos-de-uso',             // documento legal
@@ -32,9 +35,10 @@ const PUBLIC_ROUTES = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Homepage: serve a LP unificada (substitui a antiga page.tsx azul/branca)
+  // Homepage: serve a NOVA home preto/dourado (hub completo com 9 testes,
+  // NR-1, downloads gratuitos e CTAs neurovendas). Antes apontava p/ /lp.html.
   if (pathname === '/') {
-    return NextResponse.rewrite(new URL('/lp.html', request.url))
+    return NextResponse.rewrite(new URL('/inicio.html', request.url))
   }
 
   // Rotas públicas (sem auth)
