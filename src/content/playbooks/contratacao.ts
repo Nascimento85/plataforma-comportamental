@@ -7,7 +7,7 @@ export const PLAYBOOK_CONTRATACAO: Playbook = {
   badge: 'Gratuito · Contratação',
 
   abertura:
-    'Contratar errado custa caro. O prejuízo de uma demissão precoce em uma PME não é apenas financeiro (rescisão, exames, treinamento perdido) — é, acima de tudo, um dreno de energia, produtividade e moral. Na maioria das vezes, a contratação falha porque o perfil comportamental da pessoa não combina com a biologia da função. Este playbook foi desenhado para que você, gestor ou empresário, consiga decodificar o comportamento humano usando as cinco ferramentas diagnósticas mais poderosas do mercado: DISC, MBTI, Eneagrama, 4 Temperamentos e Arquétipos.',
+    'Contratar errado custa caro. O prejuízo de uma demissão precoce em uma PME não é apenas financeiro (rescisão, exames, treinamento perdido), é, acima de tudo, um dreno de energia, produtividade e moral. Na maioria das vezes, a contratação falha porque o perfil comportamental da pessoa não combina com a biologia da função. Este playbook foi desenhado para que você, gestor ou empresário, consiga decodificar o comportamento humano usando as cinco ferramentas diagnósticas mais poderosas do mercado: DISC, MBTI, Eneagrama, 4 Temperamentos e Arquétipos.',
 
   secoes: [
     {
@@ -31,11 +31,11 @@ export const PLAYBOOK_CONTRATACAO: Playbook = {
         { tipo: 'paragrafo',
           conteudo: 'Para usar este playbook, você não precisa ser um psicólogo com doutorado. Pense nessas ferramentas como lentes complementares:' },
         { tipo: 'lista', itens: [
-          'DISC — Como a pessoa age e reage ao ambiente (ritmo e foco).',
-          'MBTI — Como a pessoa processa informação e toma decisões (energia mental).',
-          '4 Temperamentos — A raiz biológica/emocional da energia do candidato (a base estrutural).',
-          'Eneagrama — As motivações profundas, medos inconscientes e mecanismos de defesa.',
-          'Arquétipos — A imagem pública e a força motriz de entrega que o indivíduo projeta no mundo.',
+          'DISC, Como a pessoa age e reage ao ambiente (ritmo e foco).',
+          'MBTI, Como a pessoa processa informação e toma decisões (energia mental).',
+          '4 Temperamentos, A raiz biológica/emocional da energia do candidato (a base estrutural).',
+          'Eneagrama, As motivações profundas, medos inconscientes e mecanismos de defesa.',
+          'Arquétipos, A imagem pública e a força motriz de entrega que o indivíduo projeta no mundo.',
         ]},
       ],
     },
@@ -216,7 +216,7 @@ export const PLAYBOOK_CONTRATACAO: Playbook = {
         { tipo: 'callout', variante: 'sucesso', titulo: 'O que buscar',
           conteudo: 'Disciplina inabalável, baixa necessidade de socialização durante o turno, foco em protocolo.' },
         { tipo: 'callout', variante: 'alerta', titulo: 'Evite',
-          conteudo: 'Perfis I (Influente) altos que precisam interagir o tempo todo — vão sair do posto para conversar.' },
+          conteudo: 'Perfis I (Influente) altos que precisam interagir o tempo todo, vão sair do posto para conversar.' },
       ],
     },
   ],
@@ -224,7 +224,7 @@ export const PLAYBOOK_CONTRATACAO: Playbook = {
   fechamento: [
     { tipo: 'subtitulo', titulo: 'Como aplicar tudo isso na prática' },
     { tipo: 'paragrafo',
-      conteudo: 'Use a plataforma Psique — Mapa Comportamental para enviar os testes DISC, MBTI, Eneagrama, Temperamentos e Arquétipos aos seus candidatos finais. Em cerca de 15 minutos cada, você recebe relatórios cruzados que mostram exatamente se o perfil bate com a função pretendida. A devolutiva integrada (cruzando 4+ testes) revela convergências e tensões internas que nenhum currículo conta.' },
+      conteudo: 'Use a plataforma Psique, Mapa Comportamental para enviar os testes DISC, MBTI, Eneagrama, Temperamentos e Arquétipos aos seus candidatos finais. Em cerca de 15 minutos cada, você recebe relatórios cruzados que mostram exatamente se o perfil bate com a função pretendida. A devolutiva integrada (cruzando 4+ testes) revela convergências e tensões internas que nenhum currículo conta.' },
     { tipo: 'callout', variante: 'info', titulo: 'Próximo passo',
       conteudo: 'Cadastre-se gratuitamente na plataforma e ganhe 10 créditos no onboarding para testar com os seus primeiros candidatos.' },
   ],

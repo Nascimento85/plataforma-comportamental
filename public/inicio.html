@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mapa Comportamental, Decifre quem entra antes que custe caro</title>
+<meta name="description" content="Plataforma de ciência comportamental aplicada para empresários. 9 testes científicos validados, módulo Compliance NR-1, playbooks gratuitos. Mapeia, decifra, decide." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'ink':         '#0a0a0a',
+          'ink-2':       '#111111',
+          'gold':        '#c9a84c',
+          'gold-soft':   '#d4943a',
+          'gold-line':   'rgba(201,168,76,0.18)',
+          'cream':       '#faf7f2',
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'serif'],
+          sans:    ['Inter', 'system-ui', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html, body { background: #0a0a0a; color: #faf7f2; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .grain::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .06; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' /></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+  .grain { position: relative; }
+  .gold-gradient { background: linear-gradient(135deg, #d4943a 0%, #c9a84c 50%, #c9a84c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .gold-border { background: linear-gradient(#0a0a0a, #0a0a0a) padding-box, linear-gradient(135deg, #c9a84c, #6b4f1d) border-box; border: 1px solid transparent; }
+  .btn-primary { background: linear-gradient(135deg, #d4943a, #c9a84c); color: #0a0a0a; font-weight: 700; transition: transform .25s ease, box-shadow .25s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px rgba(201,168,76,0.55); }
+  .btn-ghost { border: 1px solid rgba(201,168,76,0.35); color: #c9a84c; transition: background .25s ease, border-color .25s ease; }
+  .btn-ghost:hover { background: rgba(201,168,76,0.08); border-color: #c9a84c; }
+  .pulse-glow { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); animation: pulse 2.6s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 22px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
+  .card-test { background: linear-gradient(180deg, #111 0%, #0a0a0a 100%); border: 1px solid rgba(201,168,76,0.14); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+  .card-test:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.45); box-shadow: 0 30px 60px -20px rgba(201,168,76,0.18); }
+  .card-test img { transition: transform .6s ease; }
+  .card-test:hover img { transform: scale(1.04); }
+</style>
+</head>
+
+<body class="bg-ink text-cream">
+
+<!-- ===================== NAV ===================== -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-ink/70 border-b border-gold-line/40">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #d4943a, #c9a84c);">
+        <svg viewBox="0 0 90 90" fill="none" class="w-5 h-5"><path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z" fill="rgba(10,10,10,0.4)" stroke="#0a0a0a" stroke-width="2" stroke-linejoin="round"/><circle cx="45" cy="45" r="5" fill="#0a0a0a"/></svg>
+      </div>
+      <span class="font-display font-semibold text-lg tracking-tight">Mapa Comportamental</span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-9 text-sm text-cream/70">
+      <a href="#catalogo" class="hover:text-gold transition">Testes</a>
+      <a href="#nr1" class="hover:text-gold transition">NR-1</a>
+      <a href="#downloads" class="hover:text-gold transition">Playbooks</a>
+      <a href="/empresas" class="hover:text-gold transition">Empresas</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="/login" class="hidden sm:inline-block text-sm text-cream/70 hover:text-gold transition px-3 py-2">Entrar</a>
+      <a href="/register" class="btn-primary px-5 py-2.5 rounded-full text-sm">Teste grátis</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="relative pt-32 lg:pt-44 pb-20 lg:pb-28 grain overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full opacity-30" style="background: radial-gradient(circle, rgba(201,168,76,0.25) 0%, rgba(10,10,10,0) 60%);"></div>
+  </div>
+  <div class="relative max-w-5xl mx-auto px-5 lg:px-10 text-center">
+    <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-7">
+      Ciência comportamental aplicada
+    </p>
+    <h1 class="reveal font-display text-5xl lg:text-7xl leading-[1.05] font-medium mb-7">
+      Decifre quem entra<br/>
+      <span class="gold-gradient italic">antes que custe caro.</span>
+    </h1>
+    <p class="reveal text-lg lg:text-xl text-cream/70 max-w-2xl mx-auto leading-relaxed mb-3">
+      9 testes científicos validados, módulo de compliance NR-1 e playbooks gratuitos numa única plataforma para empresários que cansaram de contratar no escuro.
+    </p>
+    <p class="reveal text-base text-cream/55 max-w-2xl mx-auto leading-relaxed mb-12">
+      Antes da contratação. Antes da promoção. Antes do passivo trabalhista.
+    </p>
+    <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+      <a href="/register" class="btn-primary pulse-glow px-8 py-4 rounded-full text-base inline-flex items-center gap-2">
+        Criar conta e ganhar 10 créditos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="#downloads" class="btn-ghost px-7 py-4 rounded-full text-base">
+        Baixar playbooks grátis
+      </a>
+    </div>
+    <p class="reveal text-xs text-cream/40 tracking-wide">
+      Sem cartão de crédito · 10 créditos no cadastro · 5 minutos para o primeiro teste
+    </p>
+  </div>
+</section>
+
+<!-- ===================== DOR ===================== -->
+<section class="relative py-20 lg:py-28 border-t border-gold-line/20">
+  <div class="max-w-5xl mx-auto px-5 lg:px-10">
+    <h2 class="reveal font-display text-3xl lg:text-5xl text-center font-medium leading-tight mb-12">
+      Toda contratação errada cobra uma fatura,<br/>
+      <span class="gold-gradient italic">e ela sempre vence.</span>
+    </h2>
+    <div class="grid md:grid-cols-3 gap-6 reveal">
+      <div class="gold-border rounded-2xl p-7">
+        <p class="text-3xl font-display text-gold mb-3">R$ 38 mil</p>
+        <p class="text-sm text-cream/70 leading-relaxed">Custo médio de uma demissão precoce em PMEs, somando rescisão, retrabalho e moral do time.</p>
+      </div>
+      <div class="gold-border rounded-2xl p-7">
+        <p class="text-3xl font-display text-gold mb-3">50x</p>
+        <p class="text-sm text-cream/70 leading-relaxed">Mais caro remediar um processo trabalhista por burnout do que prevenir com diagnóstico comportamental.</p>
+      </div>
+      <div class="gold-border rounded-2xl p-7">
+        <p class="text-3xl font-display text-gold mb-3">9 meses</p>
+        <p class="text-sm text-cream/70 leading-relaxed">Tempo médio para identificar que o perfil contratado é incompatível com a função. Tempo perdido, dinheiro queimado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATÁLOGO DE TESTES ===================== -->
+<section id="catalogo" class="py-20 lg:py-28 border-t border-gold-line/20 bg-ink-2">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-4">Catálogo completo</p>
+      <h2 class="reveal font-display text-4xl lg:text-5xl font-medium leading-tight mb-5">
+        9 testes científicos,<br/>
+        <span class="gold-gradient italic">um único raio-X.</span>
+      </h2>
+      <p class="text-cream/65 text-lg leading-relaxed">
+        Cada lente complementa a outra. Aplicados juntos, revelam o sistema operacional invisível por trás de cada candidato, colaborador e líder.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
+
+      <!-- DISC -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/disc.jpg" alt="DISC" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Carro chefe · Performance</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">DISC</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">A ferramenta mais usada no mundo corporativo. Mapeia as 4 forças que regem o comportamento: Dominância, Influência, Estabilidade e Conformidade.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: contratação, composição de times, devolutiva executiva.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- MBTI -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/mbti.jpg" alt="MBTI" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Cognição · Performance</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">MBTI · 16 Tipos</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Baseado em Carl Jung. Decodifica as preferências cognitivas em 4 dimensões. Usado por empresas Fortune 500 para sucessão e coaching executivo.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: sucessão, formação de times complementares.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Eneagrama -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/eneagrama.jpg" alt="Eneagrama" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Profundidade · Performance</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">Eneagrama · 9 Tipos</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Vai além do comportamento visível. Revela a motivação raiz e o medo nuclear que travam maturidade profissional. Adotado pela NASA e pelo Vale do Silício.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: executivos, fundadores, líderes em transição.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- 4 Temperamentos -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/temperamentos.jpg" alt="4 Temperamentos" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Inato · Performance</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">4 Temperamentos</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Identifica as quatro inclinações naturais baseadas em Hipócrates: Colérico, Sanguíneo, Melancólico e Fleumático. A matéria prima comportamental que nenhum outro teste captura.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: diagnóstico rápido, gestão operacional.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Âncoras de Carreira -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/ancora-carreira.png" alt="Âncoras de Carreira" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Carreira · Edgar Schein</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">Âncoras de Carreira</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Desenvolvido no MIT por Edgar Schein. Identifica os valores inegociáveis que sustentam decisões de longo prazo. Revela se a âncora é autonomia, segurança, desafio técnico ou liderança.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: retenção, PDI, planos de carreira realistas.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Inteligência Emocional -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/inteligencia-emocional.png" alt="Inteligência Emocional" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Soft skill · Daniel Goleman</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">Inteligência Emocional</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Baseado no modelo de Daniel Goleman. Avalia os 5 domínios: Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais. Radar de competências essenciais para liderança humana.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: liderança, gestão de conflitos, soft skills.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Arquétipos Junguianos -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/arquetipo-misto.jpg" alt="Arquétipos Junguianos" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Mais completo · Profundidade</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">Arquétipos Junguianos · 12</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">O mapa mais profundo da plataforma. Identifica qual dos 12 padrões arquetípicos está no comando: Herói, Sábio, Soberano, Criador, Mago, Cuidador, entre outros.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: fundadores, C level, posicionamento de carreira.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Arquétipos Femininos -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/arquetipo-feminino.jpg" alt="Arquétipos Femininos" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Exclusivo · Liderança feminina</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">Arquétipos Femininos · 7</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">As 7 energias arquetípicas femininas: Donzela, Mãe, Caçadora, Rainha, Amante, Sábia e Anciã. Diagnóstico da energia ativa e da que precisa ser ativada para plenitude de comando.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: programas de liderança feminina, mentoria.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+      <!-- Linguagem do Amor -->
+      <a href="/register" class="card-test rounded-2xl overflow-hidden block group">
+        <div class="aspect-[16/10] overflow-hidden bg-ink-2">
+          <img src="/tests/linguagens-amor.jpg" alt="Linguagens do Amor" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-2">Vida pessoal · Gary Chapman</p>
+          <h3 class="font-display text-2xl font-semibold mb-2">As 5 Linguagens do Amor</h3>
+          <p class="text-sm text-cream/65 mb-3 leading-relaxed">Baseado no bestseller mundial de Gary Chapman. Identifica como cada pessoa recebe amor: palavras de afirmação, tempo de qualidade, presentes, atos de serviço ou toque físico.</p>
+          <p class="text-xs text-cream/45 mb-4">Ideal para: casais, família, relacionamentos pessoais.</p>
+          <span class="text-sm font-bold text-gold group-hover:underline">Aplicar este teste →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- CTA neurovendas pós catálogo -->
+    <div class="mt-14 text-center reveal">
+      <p class="text-cream/70 text-lg mb-5 max-w-2xl mx-auto leading-relaxed">
+        Você está a um cadastro de aplicar o primeiro teste hoje mesmo. <span class="text-gold font-semibold">10 créditos grátis</span> aguardam você no onboarding.
+      </p>
+      <a href="/register" class="btn-primary px-8 py-4 rounded-full text-base inline-flex items-center gap-2">
+        Aplicar meu primeiro teste agora
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMPLIANCE NR-1 ===================== -->
+<section id="nr1" class="py-20 lg:py-28 border-t border-gold-line/20">
+  <div class="max-w-6xl mx-auto px-5 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-4">Compliance · NR-1 + NR-17</p>
+        <h2 class="font-display text-4xl lg:text-5xl font-medium leading-tight mb-5">
+          A fiscalização<br/>
+          <span class="gold-gradient italic">mudou de lado.</span>
+        </h2>
+        <p class="text-cream/70 text-lg leading-relaxed mb-4">
+          A NR-1 atualizada obriga toda empresa, independentemente do porte, a gerenciar ativamente os riscos psicossociais. Burnout, ansiedade e depressão já são as principais causas de afastamentos pelo INSS no Brasil.
+        </p>
+        <p class="text-cream/70 text-lg leading-relaxed mb-7">
+          Sem diagnóstico documentado, a Justiça do Trabalho aplica a inversão do ônus da prova. <span class="text-gold font-semibold">É a sua empresa que precisa provar que tomou medidas preventivas.</span>
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex gap-3 text-cream/85"><span class="text-gold flex-shrink-0">✓</span><span>3 instrumentos científicos validados internacionalmente: Karasek (JCQ), ERI Esforço Recompensa e COPSOQ II.</span></li>
+          <li class="flex gap-3 text-cream/85"><span class="text-gold flex-shrink-0">✓</span><span>Anonimato blindado por design conforme LGPD e Conselho Federal de Psicologia.</span></li>
+          <li class="flex gap-3 text-cream/85"><span class="text-gold flex-shrink-0">✓</span><span>Relatório executivo agregado por setor, pronto para anexar ao seu PGR.</span></li>
+          <li class="flex gap-3 text-cream/85"><span class="text-gold flex-shrink-0">✓</span><span>Cruzamento com perfil DISC dominante do setor para recomendações específicas.</span></li>
+        </ul>
+        <a href="/register" class="btn-primary px-7 py-3.5 rounded-full text-base inline-flex items-center gap-2">
+          Blindar minha empresa agora
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="gold-border rounded-3xl p-8 lg:p-10 bg-ink-2">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-3">As 4 sanções reais</p>
+          <ol class="space-y-4 text-cream/80">
+            <li class="flex gap-3">
+              <span class="font-display text-2xl text-gold flex-shrink-0">1</span>
+              <div>
+                <p class="font-semibold mb-1">Multas administrativas pesadas</p>
+                <p class="text-sm text-cream/55">Aplicadas por auditores fiscais. Valores escalam por CPF registrado.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-display text-2xl text-gold flex-shrink-0">2</span>
+              <div>
+                <p class="font-semibold mb-1">Processos trabalhistas inversíveis</p>
+                <p class="text-sm text-cream/55">Ônus da prova invertido: a empresa precisa provar que preveniu.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-display text-2xl text-gold flex-shrink-0">3</span>
+              <div>
+                <p class="font-semibold mb-1">Indenizações por danos morais</p>
+                <p class="text-sm text-cream/55">Cobrem tratamento psiquiátrico, estabilidade provisória e danos pessoais.</p>
+              </div>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-display text-2xl text-gold flex-shrink-0">4</span>
+              <div>
+                <p class="font-semibold mb-1">Explosão de passivos ocultos</p>
+                <p class="text-sm text-cream/55">Turnover, absenteísmo, retrabalho e queda de faturamento.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOWNLOADS GRATUITOS ===================== -->
+<section id="downloads" class="py-20 lg:py-28 border-t border-gold-line/20 bg-ink-2">
+  <div class="max-w-6xl mx-auto px-5 lg:px-10">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-4">Materiais gratuitos</p>
+      <h2 class="font-display text-4xl lg:text-5xl font-medium leading-tight mb-5">
+        Baixe agora.<br/>
+        <span class="gold-gradient italic">Sem cadastro, sem barreira.</span>
+      </h2>
+      <p class="text-cream/65 text-lg leading-relaxed">
+        Dois playbooks completos para empresários e empresárias que precisam decidir hoje, não amanhã.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 reveal">
+      <a href="/playbook/contratacao-inteligente" class="card-test rounded-2xl block group p-7">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background: linear-gradient(135deg, rgba(212,148,58,0.18), rgba(201,168,76,0.10));">📘</div>
+          <div>
+            <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-1">Gratuito · Contratação</p>
+            <h3 class="font-display text-2xl font-semibold leading-tight">Playbook de Contratação Inteligente</h3>
+          </div>
+        </div>
+        <p class="text-sm text-cream/65 leading-relaxed mb-5">
+          Como pequenas e médias empresas podem contratar alta performance sem ter um departamento de RH. Mapeamento de perfil ideal para 10 funções essenciais usando DISC, MBTI, Eneagrama, Temperamentos e Arquétipos.
+        </p>
+        <p class="text-sm font-bold text-gold group-hover:underline">Ler playbook completo →</p>
+      </a>
+
+      <a href="/playbook/nr1-blindagem-psicossocial" class="card-test rounded-2xl block group p-7">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background: linear-gradient(135deg, rgba(212,148,58,0.18), rgba(201,168,76,0.10));">📘</div>
+          <div>
+            <p class="text-[10px] font-bold tracking-widest uppercase text-gold mb-1">Gratuito · NR-1</p>
+            <h3 class="font-display text-2xl font-semibold leading-tight">Playbook NR-1: Blindagem Psicossocial</h3>
+          </div>
+        </div>
+        <p class="text-sm text-cream/65 leading-relaxed mb-5">
+          Guia de conformidade, gestão de riscos emocionais e proteção jurídica para PMEs. As 4 sanções reais que recaem sobre empresas omissas, os 4 erros críticos dos empresários e o caminho prático de blindagem documentada.
+        </p>
+        <p class="text-sm font-bold text-gold group-hover:underline">Ler playbook completo →</p>
+      </a>
+    </div>
+
+    <p class="text-center text-xs text-cream/40 mt-8">
+      Sem cadastro. Sem e-mail. Sem login. Material liberado em PT-BR para download e compartilhamento livre.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== COMO FUNCIONA ===================== -->
+<section class="py-20 lg:py-28 border-t border-gold-line/20">
+  <div class="max-w-5xl mx-auto px-5 lg:px-10">
+    <div class="text-center max-w-3xl mx-auto mb-14 reveal">
+      <p class="text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-4">Como funciona</p>
+      <h2 class="font-display text-4xl lg:text-5xl font-medium leading-tight">
+        Do cadastro à decisão<br/>
+        <span class="gold-gradient italic">em 4 passos.</span>
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 reveal">
+      <div class="gold-border rounded-2xl p-7">
+        <p class="font-display text-3xl text-gold mb-3">01</p>
+        <h3 class="font-display text-xl font-semibold mb-2">Crie sua conta grátis</h3>
+        <p class="text-sm text-cream/65 leading-relaxed">Cadastro em 30 segundos. Você ganha 10 créditos no onboarding para aplicar os primeiros testes sem custo.</p>
+      </div>
+      <div class="gold-border rounded-2xl p-7">
+        <p class="font-display text-3xl text-gold mb-3">02</p>
+        <h3 class="font-display text-xl font-semibold mb-2">Envie o link ao candidato</h3>
+        <p class="text-sm text-cream/65 leading-relaxed">Um link único por funcionário ou candidato. Ele responde no celular, no notebook, onde quiser. Você recebe a notificação automática.</p>
+      </div>
+      <div class="gold-border rounded-2xl p-7">
+        <p class="font-display text-3xl text-gold mb-3">03</p>
+        <h3 class="font-display text-xl font-semibold mb-2">Receba a devolutiva integrada</h3>
+        <p class="text-sm text-cream/65 leading-relaxed">Relatório executivo gerado por IA que cruza os múltiplos testes do candidato, com profundidade adaptativa. Quanto mais testes, mais profunda a leitura.</p>
+      </div>
+      <div class="gold-border rounded-2xl p-7">
+        <p class="font-display text-3xl text-gold mb-3">04</p>
+        <h3 class="font-display text-xl font-semibold mb-2">Decida com base em dados</h3>
+        <p class="text-sm text-cream/65 leading-relaxed">Aplique no PGR, na entrevista final, na promoção, no plano de carreira. Tudo documentado, tudo evidenciado, tudo defensável.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="relative py-24 lg:py-32 border-t border-gold-line/30 grain overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full opacity-30" style="background: radial-gradient(circle, rgba(201,168,76,0.22) 0%, rgba(10,10,10,0) 60%);"></div>
+  </div>
+
+  <div class="relative max-w-4xl mx-auto px-5 lg:px-10 text-center">
+    <p class="reveal text-[11px] font-bold tracking-[0.32em] uppercase text-gold/85 mb-6">
+      A próxima contratação errada não precisa acontecer
+    </p>
+    <h2 class="reveal font-display text-4xl lg:text-6xl font-medium leading-[1.1] mb-7">
+      Pare de adivinhar.<br/>
+      <span class="gold-gradient italic">Comece a mapear.</span>
+    </h2>
+    <p class="reveal text-lg lg:text-xl text-cream/70 max-w-2xl mx-auto leading-relaxed mb-10">
+      Empresários que aplicam ciência comportamental em cada decisão de pessoas não contratam errado por acaso, e não brigam por passivo trabalhista no tribunal. Eles documentam, evidenciam e dormem em paz.
+    </p>
+    <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+      <a href="/register" class="btn-primary pulse-glow px-9 py-4 rounded-full text-base inline-flex items-center gap-2">
+        Criar conta grátis e ganhar 10 créditos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a href="/empresas" class="btn-ghost px-7 py-4 rounded-full text-base">
+        Ver plano para empresas
+      </a>
+    </div>
+    <p class="reveal text-xs text-cream/40 tracking-wide">
+      Sem cartão de crédito. Cancele quando quiser. Suporte humano via WhatsApp.
+    </p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="border-t border-gold-line/30 py-12 bg-ink-2">
+  <div class="max-w-7xl mx-auto px-5 lg:px-10">
+    <div class="grid md:grid-cols-4 gap-8 mb-10">
+      <div>
+        <a href="/" class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #d4943a, #c9a84c);">
+            <svg viewBox="0 0 90 90" fill="none" class="w-4 h-4"><path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z" fill="rgba(10,10,10,0.4)" stroke="#0a0a0a" stroke-width="2" stroke-linejoin="round"/><circle cx="45" cy="45" r="5" fill="#0a0a0a"/></svg>
+          </div>
+          <span class="font-display font-semibold tracking-tight">Mapa Comportamental</span>
+        </a>
+        <p class="text-xs text-cream/50 leading-relaxed">Ciência comportamental aplicada para empresários que decidem com dados, não com achismo.</p>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-3">Produto</p>
+        <ul class="space-y-2 text-sm text-cream/60">
+          <li><a href="#catalogo" class="hover:text-gold transition">Catálogo de testes</a></li>
+          <li><a href="#nr1" class="hover:text-gold transition">Compliance NR-1</a></li>
+          <li><a href="/empresas" class="hover:text-gold transition">Para empresas</a></li>
+          <li><a href="/amor" class="hover:text-gold transition">Para casais</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-3">Recursos gratuitos</p>
+        <ul class="space-y-2 text-sm text-cream/60">
+          <li><a href="/playbook/contratacao-inteligente" class="hover:text-gold transition">Playbook de Contratação</a></li>
+          <li><a href="/playbook/nr1-blindagem-psicossocial" class="hover:text-gold transition">Playbook NR-1</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-widest text-gold mb-3">Conta</p>
+        <ul class="space-y-2 text-sm text-cream/60">
+          <li><a href="/login" class="hover:text-gold transition">Entrar</a></li>
+          <li><a href="/register" class="hover:text-gold transition">Cadastrar grátis</a></li>
+          <li><a href="/politica-de-privacidade" class="hover:text-gold transition">Privacidade</a></li>
+          <li><a href="/termos-de-uso" class="hover:text-gold transition">Termos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gold-line/30 pt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-cream/45">
+      <p>© <script>document.write(new Date().getFullYear())</script> Mapa Comportamental. Todos os direitos reservados.</p>
+      <p>mapacomportamental.com</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } })
+  }, { threshold: 0.15 })
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el))
+</script>
+
+</body>
+</html>
