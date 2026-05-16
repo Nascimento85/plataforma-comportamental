@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import RelatorioClient from './RelatorioClient'
+import CopyLinkButton from './CopyLinkButton'
 import { MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -120,24 +121,31 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
           Envie estes links individualmente. Cada link é único por funcionário; depois de respondido, expira automaticamente.
         </p>
         <div className="space-y-2 max-h-[400px] overflow-y-auto">
-          {coleta.convites.map((c: { id: string; nome: string; email: string; token: string; status: string }) => (
-            <div key={c.id} className="flex flex-wrap items-center gap-3 py-2 border-b border-soul-mist/60 last:border-0">
-              <div className="flex-1 min-w-[200px]">
-                <p className="text-[14px] font-semibold text-soul-ink">{c.nome}</p>
-                <p className="text-[12px] text-soul-ink/65 font-medium">{c.email}</p>
+          {coleta.convites.map((c: { id: string; nome: string; email: string; token: string; status: string }) => {
+            const fullUrl = `${APP_URL}/nr1/${c.token}`
+            return (
+              <div key={c.id} className="flex flex-wrap items-center gap-3 py-2 border-b border-soul-mist/60 last:border-0">
+                <div className="flex-1 min-w-[200px]">
+                  <p className="text-[14px] font-semibold text-soul-ink">{c.nome}</p>
+                  <p className="text-[12px] text-soul-ink/65 font-medium">{c.email}</p>
+                </div>
+                <code
+                  className="text-[12px] text-soul-ink/70 font-mono truncate max-w-[240px] select-all cursor-text"
+                  title={fullUrl}
+                >
+                  {fullUrl}
+                </code>
+                <CopyLinkButton url={fullUrl} />
+                <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold"
+                      style={{
+                        background: c.status === 'COMPLETED' ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',
+                        color: c.status === 'COMPLETED' ? '#4a7a4e' : '#8a5c1e',
+                      }}>
+                  {c.status === 'COMPLETED' ? 'Respondeu' : 'Pendente'}
+                </span>
               </div>
-              <code className="text-[12px] text-soul-ink/70 font-mono truncate max-w-[240px]">
-                {APP_URL}/nr1/{c.token}
-              </code>
-              <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold"
-                    style={{
-                      background: c.status === 'COMPLETED' ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',
-                      color: c.status === 'COMPLETED' ? '#4a7a4e' : '#8a5c1e',
-                    }}>
-                {c.status === 'COMPLETED' ? 'Respondeu' : 'Pendente'}
-              </span>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
