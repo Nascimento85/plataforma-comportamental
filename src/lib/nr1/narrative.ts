@@ -6,7 +6,7 @@ import { buildNarrativePrompt } from './narrative-prompt'
 import type { NR1AgregadoSetor } from './types'
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
-const MODEL         = 'claude-3-5-sonnet-20241022'
+const MODEL         = 'claude-sonnet-4-6'
 const MAX_TOKENS    = 4096
 
 /**
