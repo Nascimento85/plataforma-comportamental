@@ -73,9 +73,13 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
     finally { setLoading(false) }
   }
 
+  function imprimirRelatorio() {
+    if (typeof window !== 'undefined') window.print()
+  }
+
   return (
-    <section className="soul-panel">
-      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+    <section className="soul-panel nr1-report-section">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4 nr1-print-hide">
         <div>
           <h2 className="font-serif font-semibold text-xl text-soul-ink">Relatório executivo</h2>
           {conteudo && (
@@ -86,12 +90,56 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
             </p>
           )}
         </div>
-        <button onClick={gerarRelatorio} disabled={loading || !algumSetorAtingiu}
-                className="px-4 py-2 rounded-full text-[13px] font-bold text-white shadow-terra disabled:opacity-60"
-                style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
-          {loading ? 'Gerando…' : conteudo ? '↻ Atualizar relatório' : '✦ Gerar relatório'}
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {conteudo && (
+            <button
+              type="button"
+              onClick={imprimirRelatorio}
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-colors"
+              style={{
+                background: 'rgba(196,99,58,0.10)',
+                color:      '#8a4a26',
+                border:     '1px solid rgba(196,99,58,0.30)',
+              }}
+              aria-label="Salvar relatório como PDF"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Salvar PDF
+            </button>
+          )}
+          <button onClick={gerarRelatorio} disabled={loading || !algumSetorAtingiu}
+                  className="px-4 py-2 rounded-full text-[13px] font-bold text-white shadow-terra disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+            {loading ? 'Gerando…' : conteudo ? '↻ Atualizar relatório' : '✦ Gerar relatório'}
+          </button>
+        </div>
       </div>
+
+      {/* Cabeçalho que aparece APENAS na impressão */}
+      {conteudo && (
+        <div className="nr1-print-only mb-6">
+          <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#8a4a26' }}>
+            Diagnóstico Psicossocial NR-1
+          </p>
+          <h1 className="font-serif font-semibold text-2xl text-soul-ink mt-1">
+            Relatório Executivo
+          </h1>
+          <p className="text-[12px] text-soul-ink/75 font-medium mt-1">
+            Gerado em {new Date(conteudo.geradoEm).toLocaleString('pt-BR')} ·
+            {' '}{conteudo.totalRespondentes} respondentes ·
+            {' '}{conteudo.setoresAvaliados} setor{conteudo.setoresAvaliados !== 1 ? 'es' : ''}
+          </p>
+          <p className="text-[10px] text-soul-ink/60 font-medium italic mt-2">
+            Documento gerado pela plataforma Psique — Mapa Comportamental ·
+            Instrumentos: Karasek JCQ + ERI Siegrist + COPSOQ II ·
+            Compliance LGPD/CFP/NR-1 — coleta anônima com mínimo de 5 respondentes por setor.
+          </p>
+        </div>
+      )}
 
       {!algumSetorAtingiu && !conteudo && (
         <p className="text-[14px] text-soul-ink/75 font-medium">

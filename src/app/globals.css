@@ -267,3 +267,93 @@
   background: rgba(196, 99, 58, 0.04);
   border-radius: 0 8px 8px 0;
 }
+
+/* Cabeçalho visível APENAS na impressão (PDF do relatório NR-1) */
+.nr1-print-only { display: none; }
+
+@media print {
+  /* Página A4 com margens confortáveis */
+  @page {
+    size: A4;
+    margin: 18mm 14mm 18mm 14mm;
+  }
+
+  /* Reset do body para impressão */
+  html, body {
+    background: white !important;
+    color: #1a1a1a !important;
+    font-size: 11pt;
+  }
+
+  /* Esconde tudo que não é o relatório */
+  aside,
+  nav,
+  header,
+  .soul-sidebar,
+  .nr1-print-hide,
+  [class*="dashboard"] > div:not(:has(.nr1-report-section)) {
+    display: none !important;
+  }
+
+  /* Garante que TODO o relatório apareça (sem scroll containers) */
+  body, main, section, .soul-panel, .nr1-report-section {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  /* Mostra cabeçalho de impressão */
+  .nr1-print-only {
+    display: block !important;
+    border-bottom: 2px solid rgba(196, 99, 58, 0.30);
+    padding-bottom: 12px;
+  }
+
+  /* Painel do relatório fica limpo na impressão */
+  .nr1-report-section,
+  .soul-panel {
+    background: white !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  /* Narrativa consultiva: tipografia legível em papel */
+  .nr1-narrative h2 {
+    font-size: 14pt;
+    page-break-before: auto;
+    page-break-after: avoid;
+    margin-top: 18pt;
+  }
+  .nr1-narrative h3 {
+    font-size: 12pt;
+    page-break-after: avoid;
+  }
+  .nr1-narrative p,
+  .nr1-narrative li {
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #1a1a1a !important;
+    orphans: 3;
+    widows: 3;
+  }
+  .nr1-narrative table {
+    page-break-inside: avoid;
+    font-size: 9.5pt;
+  }
+  .nr1-narrative pre {
+    page-break-inside: avoid;
+    font-size: 8.5pt;
+  }
+
+  /* Evita cortar cards de risco */
+  .grid > * {
+    page-break-inside: avoid;
+  }
+
+  /* Cores de fundo precisam ser preservadas */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
