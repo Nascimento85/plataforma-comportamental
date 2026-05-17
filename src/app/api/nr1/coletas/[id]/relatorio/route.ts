@@ -10,6 +10,7 @@ import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
 import { agregarPorSetor, MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
 import { gerarRecomendacoes } from '@/lib/nr1/recommendations'
+import { generateNarrativesParallel } from '@/lib/nr1/narrative'
 import type { NR1ScoresPorInstrumento, KarasekResultado, ERIResultado, CopsoqResultado } from '@/lib/nr1/types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -93,7 +94,14 @@ export async function POST(_req: NextRequest, { params }: { params: { id: string
     recomendacoes: gerarRecomendacoes(s),
   }))
 
-  // 6) Monta conteudo do relatorio
+  // 6) Gera narrativa consultiva via Claude API (paralelo, falha-tolerante)
+  const narrativas = await generateNarrativesParallel(agregadoPorSetor)
+  const setoresComNarrativa = setoresComRecomendacoes.map(s => ({
+    ...s,
+    narrativa: narrativas.get(s.setorId) ?? null,
+  }))
+
+  // 7) Monta conteudo do relatorio
   const content = {
     geradoEm: new Date().toISOString(),
     coletaId: params.id,
@@ -101,7 +109,7 @@ export async function POST(_req: NextRequest, { params }: { params: { id: string
     totalRespondentes: individuais.length,
     setoresAvaliados: agregadoPorSetor.length,
     minRespondentesPorSetor: MIN_RESPONDENTES_PARA_RELATORIO,
-    setores: setoresComRecomendacoes,
+    setores: setoresComNarrativa,
   }
 
   // 7) Upsert NR1Relatorio

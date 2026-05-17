@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 interface Props {
   coletaId: string
@@ -35,6 +37,7 @@ interface SetorAgregado {
   copsoq: { dimensoes: Array<{ dimensao: string; mediaPontuacao: number; risco: string }>; riscoGlobal: string }
   perfilDiscDominante?: string
   recomendacoes: Array<{ prioridade: string; area: string; acao: string; porque: string }>
+  narrativa?: string | null
 }
 
 const RISCO_COR: Record<string, { bg: string; color: string; label: string }> = {
@@ -148,10 +151,10 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
                 </div>
               </div>
 
-              {/* Recomendações */}
+              {/* Recomendações automáticas (snapshot rápido) */}
               {s.recomendacoes.length > 0 && (
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">Recomendações</p>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">Recomendações rápidas</p>
                   <ol className="space-y-2 list-none">
                     {s.recomendacoes.map((r, i) => (
                       <li key={i} className="rounded-xl px-3 py-2 flex gap-2 items-start"
@@ -172,6 +175,22 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
                     ))}
                   </ol>
                 </div>
+              )}
+
+              {/* Narrativa consultiva (Claude API) */}
+              {s.narrativa && (
+                <div className="mt-5 rounded-2xl p-5 nr1-narrative"
+                     style={{ background: 'rgba(255,255,255,0.65)', border: '1px solid rgba(196,99,58,0.18)' }}>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-3">
+                    Análise consultiva completa
+                  </p>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.narrativa}</ReactMarkdown>
+                </div>
+              )}
+              {s.narrativa === null && (
+                <p className="mt-5 text-[12px] text-soul-ink/60 italic">
+                  Narrativa consultiva indisponível para este setor. Tente Atualizar relatório.
+                </p>
               )}
             </div>
           ))}
