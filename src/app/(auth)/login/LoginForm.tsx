@@ -1,11 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+
+/**
+ * Aceita apenas caminhos relativos seguros como callbackUrl
+ * (evita open redirect — nada que comece com //, http:, etc).
+ */
+function safeCallback(raw: string | null): string {
+  if (!raw) return '/dashboard'
+  if (!raw.startsWith('/')) return '/dashboard'
+  if (raw.startsWith('//')) return '/dashboard'
+  return raw
+}
 
 export default function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = safeCallback(searchParams.get('callbackUrl'))
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -30,7 +43,7 @@ export default function LoginForm() {
         return
       }
 
-      router.push('/dashboard')
+      router.push(callbackUrl)
       router.refresh()
     } catch {
       setError('Erro ao conectar. Tente novamente.')
