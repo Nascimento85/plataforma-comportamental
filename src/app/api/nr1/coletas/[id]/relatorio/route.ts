@@ -11,7 +11,8 @@ import { getSession } from '@/lib/session'
 import { agregarPorSetor, MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
 import { gerarRecomendacoes } from '@/lib/nr1/recommendations'
 import { generateNarrativesParallel } from '@/lib/nr1/narrative'
-import type { NR1ScoresPorInstrumento, KarasekResultado, ERIResultado, CopsoqResultado } from '@/lib/nr1/types'
+import { calcularDiscDominantePorSetor } from '@/lib/nr1/disc-dominante'
+import type { NR1ScoresPorInstrumento, KarasekResultado, ERIResultado, CopsoqResultado, DiscPerfil } from '@/lib/nr1/types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -76,10 +77,23 @@ export async function POST(_req: NextRequest, { params }: { params: { id: string
     }
   }
 
-  // 4) Agrega por setor (min 5 respondentes)
-  const setoresInfo = setores.map((s: { id: string; nome: string; perfilDiscDominante: string | null }) => ({
-    id: s.id, nome: s.nome, perfilDiscDominante: s.perfilDiscDominante,
-  }))
+  // 4) Auto-calcula DISC dominante de cada setor a partir dos testes DISC
+  //    dos funcionarios convidados. Override do campo manual quando houver dado real.
+  const discAutoMap = await calcularDiscDominantePorSetor(
+    setores.map((s: { id: string }) => ({ id: s.id })),
+    session.id,
+  )
+
+  // 5) Agrega por setor (min 5 respondentes), aplicando auto-DISC com fallback p/ manual
+  const setoresInfo = setores.map((s: { id: string; nome: string; perfilDiscDominante: string | null }) => {
+    const auto = discAutoMap.get(s.id) ?? null
+    return {
+      id: s.id,
+      nome: s.nome,
+      // Auto-calculado tem prioridade. Se nao houver dado real, cai no campo manual.
+      perfilDiscDominante: (auto ?? s.perfilDiscDominante) as DiscPerfil | null,
+    }
+  })
   const agregadoPorSetor = agregarPorSetor(setoresInfo, individuais)
 
   if (agregadoPorSetor.length === 0) {

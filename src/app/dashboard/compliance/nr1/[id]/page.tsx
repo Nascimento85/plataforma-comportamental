@@ -12,6 +12,7 @@ import CopyLinkButton from './CopyLinkButton'
 import AddConviteForm from './AddConviteForm'
 import SeedRespostasButton from './SeedRespostasButton'
 import { MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
+import { calcularDiscDominantePorSetor } from '@/lib/nr1/disc-dominante'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -41,12 +42,23 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
     respondentesPorSetor.set(r.setorId, (respondentesPorSetor.get(r.setorId) ?? 0) + 1)
   }
 
+  // Auto-calcula DISC dominante de cada setor (override do campo manual)
+  const discAutoMap = await calcularDiscDominantePorSetor(
+    setores.map((s: { id: string }) => ({ id: s.id })),
+    session.id,
+  )
+
   const porSetor = setores.map((s: { id: string; nome: string; perfilDiscDominante: string | null }) => {
     const conv = coleta.convites.filter((c: { setorId: string }) => c.setorId === s.id)
     // 1 respondente gera 3 NR1Resposta (KARASEK + ERI + COPSOQ)
     const respCount = Math.floor((respondentesPorSetor.get(s.id) ?? 0) / 3)
+    const discAuto = discAutoMap.get(s.id) ?? null
     return {
-      id: s.id, nome: s.nome, perfilDisc: s.perfilDiscDominante,
+      id: s.id,
+      nome: s.nome,
+      // Auto-calculado prevalece; manual eh fallback
+      perfilDisc: discAuto ?? s.perfilDiscDominante,
+      perfilDiscAuto: discAuto !== null,
       totalConvidados: conv.length,
       totalRespondentes: respCount,
       taxaAdesao: conv.length > 0 ? Math.round((respCount / conv.length) * 100) : 0,
@@ -84,13 +96,28 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
           <p className="text-[14px] text-soul-ink/70 font-medium">Nenhum setor convidado.</p>
         ) : (
           <div className="space-y-3">
-            {porSetor.map((s: { id: string; nome: string; perfilDisc: string | null; totalConvidados: number; totalRespondentes: number; taxaAdesao: number; atingiuMinimo: boolean }) => (
+            {porSetor.map((s: { id: string; nome: string; perfilDisc: string | null; perfilDiscAuto: boolean; totalConvidados: number; totalRespondentes: number; taxaAdesao: number; atingiuMinimo: boolean }) => (
               <div key={s.id} className="rounded-2xl p-4" style={{ background: 'rgba(196,99,58,0.04)', border: '1px solid rgba(196,99,58,0.12)' }}>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <div>
                     <p className="font-serif font-semibold text-lg text-soul-ink">{s.nome}</p>
                     {s.perfilDisc && (
-                      <p className="text-[12px] text-soul-ink/70 font-semibold">DISC dominante: {s.perfilDisc}</p>
+                      <p className="text-[12px] text-soul-ink/70 font-semibold flex items-center gap-1.5">
+                        DISC dominante: {s.perfilDisc}
+                        {s.perfilDiscAuto && (
+                          <span
+                            className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wide"
+                            style={{ background: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }}
+                            title="Calculado automaticamente a partir dos testes DISC dos funcionários do setor"
+                          >
+                            <svg width="9" height="9" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                                 strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                            </svg>
+                            auto
+                          </span>
+                        )}
+                      </p>
                     )}
                   </div>
                   <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
