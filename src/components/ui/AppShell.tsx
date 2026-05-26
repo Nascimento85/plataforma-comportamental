@@ -149,6 +149,14 @@ function NavIcon({ path }: { path: string }) {
           stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
+    // Entrevista — clipboard com check
+    interview: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <rect x="5" y="4" width="10" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M8 3.5h4v2H8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M7.5 10.5L9.5 12.5L13 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
   }
   return <>{icons[path] ?? null}</>
 }
@@ -318,6 +326,21 @@ function SidebarContent({
             ))}
           </div>
         ))}
+
+        {session.isAdmin && (
+          <div>
+            <div className="px-6 pb-1.5 pt-3.5 flex items-center justify-between">
+              <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
+                Premium (beta)
+              </p>
+              <span className="text-[8.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded"
+                    style={{ background: 'rgba(201,168,76,0.18)', color: '#d4b85c' }}>
+                PRO
+              </span>
+            </div>
+            <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview" onClick={onNavClick} />
+          </div>
+        )}
 
         {session.isAdmin && (
           <div>
