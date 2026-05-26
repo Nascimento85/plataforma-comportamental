@@ -69,6 +69,8 @@ model Company {
   nr1Convites   NR1Convite[]
   nr1Respostas  NR1Resposta[]
   nr1Relatorios NR1Relatorio[]
+  // Monetizacao B2B (assinatura)
+  subscription  Subscription?
 }
 
 // ============================================================
@@ -482,4 +484,37 @@ model NR1Relatorio {
 
   @@index([companyId])
   @@index([status])
+}
+
+// ============================================================
+// ASSINATURA B2B (monetizacao PJ)
+// 3 planos: ESSENCIAL (R$ 497, ate 10 func) · PROFISSIONAL (R$ 990, ate 50)
+//           · ENTERPRISE (custom, acima de 50)
+// Trial: 7 dias gratuitos SEM cartao na ativacao.
+// Quando ativa, libera: NR-1 + Guia de Entrevista + Testes ilimitados (sem
+// descontar creditos da Company).
+// ============================================================
+
+model Subscription {
+  id                   String   @id @default(cuid())
+  companyId            String   @unique  // 1 assinatura por empresa
+  plan                 String   // ESSENCIAL | PROFISSIONAL | ENTERPRISE
+  status               String   // TRIALING | ACTIVE | PAST_DUE | CANCELED | EXPIRED
+  source               String   @default("STRIPE") // STRIPE | TRIAL_INTERNO | MANUAL
+  stripeCustomerId     String?  // criado quando user vira pagante
+  stripeSubscriptionId String?  @unique // criado no checkout
+  trialStart           DateTime?
+  trialEnd             DateTime?
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  canceledAt           DateTime?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId])
+  @@index([status])
+  @@index([stripeCustomerId])
+  @@index([stripeSubscriptionId])
 }

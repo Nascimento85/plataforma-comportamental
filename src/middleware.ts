@@ -19,6 +19,7 @@ const PUBLIC_ROUTES = [
   '/lp.html',
   '/playbook',         // playbooks gratuitos (contratacao, nr1)
   '/nr1',              // coleta NR-1 anônima por token público (LGPD/CFP)
+  '/precos',           // landing pública de planos PJ
   '/politica-de-privacidade',  // documento legal LGPD
   '/politica-de-cookies',       // documento legal LGPD
   '/termos-de-uso',             // documento legal

@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { hasActiveSubscription } from '@/lib/subscription/check'
+import PaywallPremium from '@/components/ui/PaywallPremium'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -16,6 +18,17 @@ export const metadata: Metadata = { title: 'NR-1 Psicossocial' }
 export default async function NR1IndexPage() {
   const session = await getSession()
   if (!session?.id) redirect('/login')
+
+  // Gate premium: assinatura PJ ativa OU admin
+  const subscriptionOk = await hasActiveSubscription(session.id)
+  if (!session.isAdmin && !subscriptionOk) {
+    return (
+      <PaywallPremium
+        titulo="Diagnóstico Psicossocial NR-1"
+        descricao="Mapeie riscos psicossociais da sua equipe com Karasek + ERI + COPSOQ, anonimato blindado por design e relatório executivo consultivo. Pronto para anexar ao seu PGR."
+      />
+    )
+  }
 
   const [coletas, setores] = await Promise.all([
     prismaAny.nR1Coleta.findMany({

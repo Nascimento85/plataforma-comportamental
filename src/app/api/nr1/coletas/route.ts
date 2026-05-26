@@ -6,6 +6,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
+import { hasActiveSubscription } from '@/lib/subscription/check'
 import { randomBytes } from 'crypto'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -39,6 +40,15 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getSession()
   if (!session?.id) return NextResponse.json({ error: 'Nao autorizado.' }, { status: 401 })
+
+  // Gate premium: criar coleta NR-1 requer assinatura PJ ativa (ou admin)
+  const subscriptionOk = await hasActiveSubscription(session.id)
+  if (!session.isAdmin && !subscriptionOk) {
+    return NextResponse.json(
+      { error: 'Recurso premium. Ative o trial de 7 dias em /dashboard/assinatura.', isPremiumOnly: true },
+      { status: 403 },
+    )
+  }
 
   let body: CreateBody
   try { body = await req.json() } catch { return NextResponse.json({ error: 'JSON invalido.' }, { status: 400 }) }

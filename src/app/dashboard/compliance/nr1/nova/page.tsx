@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { hasActiveSubscription } from '@/lib/subscription/check'
+import PaywallPremium from '@/components/ui/PaywallPremium'
 import NovaColetaForm from './NovaColetaForm'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,6 +19,17 @@ export const metadata: Metadata = { title: 'Nova coleta NR-1' }
 export default async function NovaColetaPage() {
   const session = await getSession()
   if (!session?.id) redirect('/login')
+
+  // Gate premium
+  const subscriptionOk = await hasActiveSubscription(session.id)
+  if (!session.isAdmin && !subscriptionOk) {
+    return (
+      <PaywallPremium
+        titulo="Criar nova coleta NR-1"
+        descricao="A criação de coletas anônimas faz parte do módulo Premium. Ative o trial gratuito de 7 dias para começar."
+      />
+    )
+  }
 
   const setores = await prismaAny.nR1Setor.findMany({
     where: { companyId: session.id },

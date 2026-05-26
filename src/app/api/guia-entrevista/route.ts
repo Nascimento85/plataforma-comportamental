@@ -6,6 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { getSession } from '@/lib/session'
+import { hasActiveSubscription } from '@/lib/subscription/check'
 import { gerarGuiaEntrevista } from '@/lib/entrevista/generate'
 import type { BuildGuiaInput, Senioridade, TomEntrevista } from '@/lib/entrevista/prompt-builder'
 import { PERFIS_DISFUNCIONAIS_MAP, type PerfilDisfuncionalKey } from '@/content/entrevista/perfis-disfuncionais'
@@ -30,10 +31,11 @@ export async function POST(req: NextRequest) {
   if (!session?.id) {
     return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
   }
-  // Gate temporário: só admins. Trocar para session.hasActiveSubscription quando #43 estiver pronta.
-  if (!session.isAdmin) {
+  // Gate: assinatura PJ ativa OU admin
+  const subscriptionOk = await hasActiveSubscription(session.id)
+  if (!session.isAdmin && !subscriptionOk) {
     return NextResponse.json(
-      { error: 'Recurso exclusivo de assinantes Pro.', isPremiumOnly: true },
+      { error: 'Recurso exclusivo de assinantes. Ative o trial de 7 dias em /dashboard/assinatura.', isPremiumOnly: true },
       { status: 403 },
     )
   }
