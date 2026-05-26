@@ -73,8 +73,35 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
     finally { setLoading(false) }
   }
 
-  function imprimirRelatorio() {
-    if (typeof window !== 'undefined') window.print()
+  const [pdfLoading, setPdfLoading] = useState(false)
+
+  async function baixarPdfExecutivo() {
+    setPdfLoading(true)
+    try {
+      const res = await fetch(`/api/nr1/coletas/${coletaId}/relatorio/pdf`)
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({} as { error?: string }))
+        alert(data.error ?? 'Falha ao gerar PDF. Tente atualizar o relatório antes.')
+        return
+      }
+      const blob = await res.blob()
+      // Tenta extrair filename do header; cai num padrao se nao conseguir
+      const cd = res.headers.get('content-disposition') ?? ''
+      const m  = cd.match(/filename="([^"]+)"/)
+      const filename = m ? m[1] : `relatorio-nr1-${new Date().toISOString().slice(0, 10)}.pdf`
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch {
+      alert('Erro de conexão ao baixar o PDF. Tente novamente.')
+    } finally {
+      setPdfLoading(false)
+    }
   }
 
   return (
@@ -94,21 +121,22 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
           {conteudo && (
             <button
               type="button"
-              onClick={imprimirRelatorio}
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-colors"
+              onClick={baixarPdfExecutivo}
+              disabled={pdfLoading}
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-colors disabled:opacity-60"
               style={{
                 background: 'rgba(196,99,58,0.10)',
                 color:      '#8a4a26',
                 border:     '1px solid rgba(196,99,58,0.30)',
               }}
-              aria-label="Salvar relatório como PDF"
+              aria-label="Baixar PDF executivo"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Salvar PDF
+              {pdfLoading ? 'Gerando PDF…' : 'Baixar PDF executivo'}
             </button>
           )}
           <button onClick={gerarRelatorio} disabled={loading || !algumSetorAtingiu}
