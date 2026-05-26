@@ -17,6 +17,7 @@ export interface AppShellSession {
   isAdmin?: boolean
   archetype?: ArchetypeKey  // arquétipo dominante do usuário (para exibir na sidebar)
   credits?: number          // créditos disponíveis (badge opcional)
+  accountType?: 'PF' | 'PJ' // tipo da conta — controla quais itens aparecem na sidebar
 }
 
 interface AppShellProps {
@@ -184,40 +185,50 @@ interface NavGroup {
   items: NavItem[]
 }
 
-const NAV_GROUPS: NavGroup[] = [
-  {
-    title: null,
-    items: [
-      { href: '/dashboard', label: 'Início', iconKey: 'dashboard' },
-    ],
-  },
-  {
-    title: 'Testes',
-    items: [
-      { href: '/dashboard/behavioral',     label: 'Comportamentais', iconKey: 'behavioral'    },
-      { href: '/dashboard/career',         label: 'Carreira',        iconKey: 'career'        },
-      { href: '/dashboard/love-languages', label: 'Relacionamentos', iconKey: 'relationships' },
-      { href: '/dashboard/archetypes',     label: 'Arquétipos',      iconKey: 'archetypes'    },
-      { href: '/dashboard/journey',        label: 'Minha Jornada',   iconKey: 'journey'       },
-    ],
-  },
-  {
-    title: 'Empresa',
-    items: [
-      { href: '/dashboard/candidates', label: 'Candidatos', iconKey: 'candidates' },
-      { href: '/dashboard/teams',      label: 'Times',      iconKey: 'teams'      },
-      { href: '/dashboard/reports',    label: 'Relatórios', iconKey: 'reports'    },
-    ],
-  },
-  {
-    title: 'Recursos',
-    items: [
-      { href: '/dashboard/downloads',  label: 'Downloads',  iconKey: 'downloads' },
-      { href: '/dashboard/credits',    label: 'Créditos',   iconKey: 'credits'   },
-      { href: '/dashboard/assinatura', label: 'Assinatura', iconKey: 'star'      },
-    ],
-  },
-]
+/**
+ * Estrutura da sidebar computada conforme o tipo de conta.
+ * PF: vê Créditos (compra avulsa). PJ: NÃO vê Créditos (usa Assinatura mensal).
+ */
+function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
+  const isPF = accountType === 'PF'
+
+  const recursosItems: NavItem[] = [
+    { href: '/dashboard/downloads',  label: 'Downloads',  iconKey: 'downloads' },
+  ]
+  if (isPF) recursosItems.push({ href: '/dashboard/credits', label: 'Créditos', iconKey: 'credits' })
+  recursosItems.push({ href: '/dashboard/assinatura', label: 'Assinatura', iconKey: 'star' })
+
+  return [
+    {
+      title: null,
+      items: [
+        { href: '/dashboard', label: 'Início', iconKey: 'dashboard' },
+      ],
+    },
+    {
+      title: 'Testes',
+      items: [
+        { href: '/dashboard/behavioral',     label: 'Comportamentais', iconKey: 'behavioral'    },
+        { href: '/dashboard/career',         label: 'Carreira',        iconKey: 'career'        },
+        { href: '/dashboard/love-languages', label: 'Relacionamentos', iconKey: 'relationships' },
+        { href: '/dashboard/archetypes',     label: 'Arquétipos',      iconKey: 'archetypes'    },
+        { href: '/dashboard/journey',        label: 'Minha Jornada',   iconKey: 'journey'       },
+      ],
+    },
+    {
+      title: 'Empresa',
+      items: [
+        { href: '/dashboard/candidates', label: 'Candidatos', iconKey: 'candidates' },
+        { href: '/dashboard/teams',      label: 'Times',      iconKey: 'teams'      },
+        { href: '/dashboard/reports',    label: 'Relatórios', iconKey: 'reports'    },
+      ],
+    },
+    {
+      title: 'Recursos',
+      items: recursosItems,
+    },
+  ]
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // NavLink
@@ -314,7 +325,7 @@ function SidebarContent({
 
       {/* ── Nav principal ── */}
       <nav className="flex-1 overflow-y-auto py-1.5">
-        {NAV_GROUPS.map((group, gi) => (
+        {buildNavGroups(session.accountType ?? 'PJ').map((group, gi) => (
           <div key={group.title ?? `group-${gi}`}>
             {group.title && (
               <div className="px-6 pb-1.5 pt-3.5">
@@ -335,21 +346,21 @@ function SidebarContent({
           </div>
         ))}
 
-        {session.isAdmin && (
-          <div>
-            <div className="px-6 pb-1.5 pt-3.5 flex items-center justify-between">
-              <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
-                Premium (beta)
-              </p>
-              <span className="text-[8.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded"
-                    style={{ background: 'rgba(201,168,76,0.18)', color: '#d4b85c' }}>
-                PRO
-              </span>
-            </div>
-            <SidebarNavLink href="/dashboard/compliance/nr1" label="NR-1 Psicossocial"  iconKey="compliance" onClick={onNavClick} />
-            <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview"  onClick={onNavClick} />
+        {/* PREMIUM: visível pra TODOS. Quem não tem assinatura ativa cai
+            no paywall da página interna, que serve como CTA de conversão. */}
+        <div>
+          <div className="px-6 pb-1.5 pt-3.5 flex items-center justify-between">
+            <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
+              Premium
+            </p>
+            <span className="text-[8.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded"
+                  style={{ background: 'rgba(201,168,76,0.18)', color: '#d4b85c' }}>
+              PRO
+            </span>
           </div>
-        )}
+          <SidebarNavLink href="/dashboard/compliance/nr1"  label="NR-1 Psicossocial"  iconKey="compliance" onClick={onNavClick} />
+          <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview"  onClick={onNavClick} />
+        </div>
 
         {session.isAdmin && (
           <div>
