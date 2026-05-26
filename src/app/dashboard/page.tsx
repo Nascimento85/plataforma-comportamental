@@ -58,6 +58,7 @@ async function getDashboardData(companyId: string) {
     totalCompleted,
     totalPending,
     totalCandidates:            recentAssessments.length,
+    accountType:                (company?.type === 'PF' ? 'PF' : 'PJ') as 'PF' | 'PJ',
   }
 }
 
@@ -79,9 +80,11 @@ export default async function DashboardPage() {
     totalCompleted,
     totalPending,
     totalCandidates,
+    accountType,
   } = await getDashboardData(companyId)
 
   const isNewAccount = recentAssessments.length === 0
+  const isPJ = accountType === 'PJ'
 
   // Hora do dia para saudação
   const hour    = new Date().getHours()
@@ -144,22 +147,62 @@ export default async function DashboardPage() {
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          BANNER GAMIFICAÇÃO — só aparece se ainda não resgatou +6 créditos
+          BANNER GAMIFICAÇÃO — só PF (PJ usa modelo de assinatura, não créditos)
       ══════════════════════════════════════════════════════ */}
-      {!isProfileRewarded && (
+      {!isPJ && !isProfileRewarded && (
         <ProfileGamificationBanner completion={profileCompletion} bonusAmount={PROFILE_COMPLETE_AMOUNT} />
       )}
 
       {/* ══════════════════════════════════════════════════════
-          HERO: onboarding para conta nova / arquétipo para conta ativa
+          HERO: onboarding para PF nova / arquétipo para PF ativa
+          (PJ não usa OnboardingHero porque ele fala de créditos)
       ══════════════════════════════════════════════════════ */}
-      {isNewAccount ? (
+      {!isPJ && isNewAccount && (
         <OnboardingHero firstName={firstName} credits={credits} />
-      ) : (
+      )}
+      {!isPJ && !isNewAccount && (
         <ArchetypeHero
           name={session!.name ?? firstName}
           totalCompleted={totalCompleted}
         />
+      )}
+
+      {/* Hero PJ — empresarial, sem mencionar créditos */}
+      {isPJ && (
+        <div
+          className="rounded-3xl p-7 relative overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 50%, #3d2a1c 100%)' }}
+        >
+          <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
+               style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)', transform: 'translate(20%, -30%)' }} />
+          <div className="relative z-10 max-w-2xl">
+            <p className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
+               style={{ color: '#d4b85c' }}>
+              Bem-vinda, {firstName}
+            </p>
+            <h2 className="font-serif font-semibold text-3xl md:text-4xl text-white leading-[1.15] mb-3">
+              Sua plataforma comportamental{' '}
+              <em className="not-italic" style={{ color: '#d4b85c' }}>em um só lugar.</em>
+            </h2>
+            <p className="text-[15px] text-white/75 font-medium leading-relaxed mb-5 max-w-xl">
+              Avalie candidatos com 9 instrumentos científicos, mapeie riscos psicossociais do time
+              com o módulo NR-1 e gere roteiros de entrevista personalizados.
+              {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
+            </p>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <Link href="/dashboard/candidates"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
+                    style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
+                Convidar candidato
+              </Link>
+              <Link href="/dashboard/compliance/nr1"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-bold text-white no-underline transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
+                Mapear NR-1 do time
+              </Link>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ══════════════════════════════════════════════════════

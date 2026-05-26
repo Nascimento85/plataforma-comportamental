@@ -88,6 +88,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
           </span>
         </div>
         <NavLink href="/admin" label="Visão geral" icon="📊" onClick={onNavClick} />
+        <NavLink href="/admin/empresas" label="Empresas" icon="🏢" onClick={onNavClick} />
         <NavLink href="/admin/assessments" label="Todos os testes" icon="📋" onClick={onNavClick} />
         <NavLink href="/admin/passaporte" label="Passaporte" icon="🎟️" onClick={onNavClick} />
 

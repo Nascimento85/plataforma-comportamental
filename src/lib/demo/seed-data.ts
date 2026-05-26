@@ -132,11 +132,13 @@ export async function seedDemoAccount(): Promise<SeedResult> {
     },
   })
 
-  // 4) CreditBalance (50 creditos para o prospect testar)
+  // 4) CreditBalance (50 creditos pagos + estado de passaporte ativo)
   await prismaAny.creditBalance.create({
     data: {
-      companyId: company.id,
-      amount:    50,
+      companyId:      company.id,
+      balance:        50,
+      bonusBalance:   0,
+      passportStatus: 'INACTIVE',
     },
   })
 
