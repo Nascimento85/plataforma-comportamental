@@ -35,6 +35,16 @@ const PUBLIC_ROUTES = [
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
+  const host = request.headers.get('host') ?? ''
+
+  // Canonical: redireciona www.mapacomportamental.com → mapacomportamental.com
+  // com 301 (permanente, bom para SEO). Preserva path + query.
+  if (host.startsWith('www.')) {
+    const apexHost = host.slice(4) // remove "www."
+    const target = new URL(request.url)
+    target.host = apexHost
+    return NextResponse.redirect(target, 301)
+  }
 
   // Homepage: serve a NOVA home preto/dourado (hub completo com 9 testes,
   // NR-1, downloads gratuitos e CTAs neurovendas). Antes apontava p/ /lp.html.
