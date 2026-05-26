@@ -10,6 +10,7 @@ import { prisma } from '@/lib/prisma'
 import RelatorioClient from './RelatorioClient'
 import CopyLinkButton from './CopyLinkButton'
 import AddConviteForm from './AddConviteForm'
+import SeedRespostasButton from './SeedRespostasButton'
 import { MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -161,6 +162,14 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
           setores={setores.map((s: { id: string; nome: string }) => ({ id: s.id, nome: s.nome }))}
         />
       </section>
+
+      {/* Seed admin-only (QA + demos comerciais) */}
+      {session.isAdmin && (
+        <SeedRespostasButton
+          coletaId={params.id}
+          setores={setores.map((s: { id: string; nome: string }) => ({ id: s.id, nome: s.nome }))}
+        />
+      )}
 
       {/* Relatório */}
       <RelatorioClient
