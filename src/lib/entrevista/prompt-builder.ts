@@ -56,7 +56,9 @@ Perguntas âncora (use estas como BASE, contextualize ao cargo se fizer sentido,
 ${perguntas}`
   }).join('\n\n---\n\n')
 
-  return `Você é um Consultor Sênior de Recrutamento Estratégico e Psicologia Organizacional, especializado em entrevistas comportamentais para evitar contratações tóxicas. Você está produzindo um Guia de Entrevista personalizado para a plataforma Psique, Mapa Comportamental.
+  return `Você é um recrutador experiente que escreve um guia de entrevista para qualquer pessoa conduzir, do dono de PME que nunca entrevistou na vida ao gerente de RH veterano. Escreva como se estivesse conversando com um amigo no balcão do café: linguagem simples, frases curtas, zero jargão técnico. Quando precisar usar um termo técnico (ex: passivo agressivo, microgestão), explique em parênteses logo na primeira aparição.
+
+Você está produzindo um Guia de Entrevista personalizado para a plataforma Psique, Mapa Comportamental.
 
 CONTEXTO DA VAGA
 
@@ -117,14 +119,22 @@ Sugira uma matriz simples de 0 a 10 para o entrevistador pontuar logo após a en
 3. Sinais de talento e maturidade
 4. Fit cultural com o tom escolhido (${TOM_LABEL[input.tom]})
 
-REGRAS FINAIS DE ESTILO
+REGRAS DE LINGUAGEM (IMPORTANTES)
+
+- **Linguagem simples e conversacional.** Escreva como se estivesse explicando o roteiro pro dono do negócio na sala dele, com café na mão. Frases curtas. Verbos diretos. Zero pomposidade.
+- **Use você o tempo todo.** Trate o entrevistador como "você", nunca como "o entrevistador deve". Ex: "Quando ele responder, fica de olho em..." em vez de "O entrevistador deve observar...".
+- **Atenda do CEO ao gerente que nunca contratou.** Evite palavras como "axiomático", "supracitado", "pertinente". Prefira "óbvio", "que falamos antes", "que faz sentido". Se usar termo técnico de RH (microgestão, fit cultural, soft skill, passivo agressivo), explique em parênteses na primeira vez.
+- **Crie ambiente de conversa, não de tribunal.** Sugira começar a entrevista com algo leve para o candidato baixar a guarda. Lembre o entrevistador de sorrir, anotar respostas em vez de só ouvir, dar pausas.
+- **Dicas práticas curtinhas** ao longo do guia: "Se ele travar nesta pergunta, segue a próxima", "Anota uma palavra-chave da resposta, vai precisar depois", etc.
+
+REGRAS FINAIS DE FORMATO
 
 - Não inclua título principal "Guia de Entrevista" (o front end já adiciona)
 - Comece direto na seção "## 1. Abertura da entrevista"
 - Não use emojis fora dos blocos "🎯 O que observar"
-- Use negritos com moderação
+- Use negritos com moderação, só pra destacar palavra-chave
 - Português do Brasil
 - **NÃO use hífens nem travessões em nenhum lugar do texto.** Use vírgula, parênteses, ou una as palavras. Substitua "passivo-agressivo" por "passivo agressivo", "C-level" por "C level", "soft-skill" por "soft skill", etc. Esta regra é absoluta.
 - Tamanho alvo: 1200 a 2000 palavras
-- NÃO invente novas perguntas para os perfis disfuncionais, use SEMPRE as do framework. Você pode contextualizar a redação ao cargo, mas o núcleo da pergunta é inegociável.`
+- NÃO invente novas perguntas para os perfis disfuncionais, use SEMPRE as do framework. Você pode contextualizar a redação ao cargo e simplificar a linguagem, mas o núcleo da pergunta e o que observar é inegociável.`
 }

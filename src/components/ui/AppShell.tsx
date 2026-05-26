@@ -196,10 +196,9 @@ const NAV_GROUPS: NavGroup[] = [
   {
     title: 'Empresa',
     items: [
-      { href: '/dashboard/candidates',     label: 'Candidatos',       iconKey: 'candidates' },
-      { href: '/dashboard/teams',          label: 'Times',            iconKey: 'teams'      },
-      { href: '/dashboard/reports',        label: 'Relatórios',       iconKey: 'reports'    },
-      { href: '/dashboard/compliance/nr1', label: 'NR-1 Psicossocial', iconKey: 'compliance' },
+      { href: '/dashboard/candidates', label: 'Candidatos', iconKey: 'candidates' },
+      { href: '/dashboard/teams',      label: 'Times',      iconKey: 'teams'      },
+      { href: '/dashboard/reports',    label: 'Relatórios', iconKey: 'reports'    },
     ],
   },
   {
@@ -338,7 +337,8 @@ function SidebarContent({
                 PRO
               </span>
             </div>
-            <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview" onClick={onNavClick} />
+            <SidebarNavLink href="/dashboard/compliance/nr1" label="NR-1 Psicossocial"  iconKey="compliance" onClick={onNavClick} />
+            <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview"  onClick={onNavClick} />
           </div>
         )}
 
