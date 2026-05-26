@@ -30,6 +30,10 @@ const SEGMENT_LABELS: Record<string, string> = {
   assessments:      'Avaliações',
 }
 
+// Segmentos que são apenas agrupadores de URL — não têm página própria,
+// então aparecem como rótulo no breadcrumb mas não viram link (evita 404).
+const NON_NAVIGABLE = new Set(['compliance'])
+
 // Detecta segmentos que são IDs (cuid/uuid/hash) — não viram link
 function isDynamicId(seg: string): boolean {
   // cuid (c + 24 alfanum), uuid, ou qualquer string longa sem espaço
@@ -54,10 +58,11 @@ export default function Breadcrumb() {
   const crumbs = segments.map((seg, i) => {
     const href = '/' + segments.slice(0, i + 1).join('/')
     return {
-      label:   labelFor(seg),
+      label:         labelFor(seg),
       href,
-      isLast:  i === segments.length - 1,
-      isId:    isDynamicId(seg),
+      isLast:        i === segments.length - 1,
+      isId:          isDynamicId(seg),
+      isNonNavigable: NON_NAVIGABLE.has(seg),
     }
   })
 
@@ -73,7 +78,7 @@ export default function Breadcrumb() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             )}
-            {c.isLast || c.isId ? (
+            {c.isLast || c.isId || c.isNonNavigable ? (
               <span className={c.isLast ? 'text-soul-ink font-semibold' : 'text-soul-ink/55'}>
                 {c.label}
               </span>
