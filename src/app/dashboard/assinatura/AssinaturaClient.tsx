@@ -24,7 +24,7 @@ const PLAN_LABEL: Record<string, { nome: string; preco: string; cap: string }> =
   ENTERPRISE:   { nome: 'Enterprise',   preco: 'Sob consulta', cap: 'funcionários ilimitados' },
 }
 
-export default function AssinaturaClient({ initial }: { initial: InitialState }) {
+export default function AssinaturaClient({ initial, isAdmin = false }: { initial: InitialState; isAdmin?: boolean }) {
   const router = useRouter()
   const params = useSearchParams()
   const [loading, setLoading] = useState<string | null>(null)
@@ -34,6 +34,24 @@ export default function AssinaturaClient({ initial }: { initial: InitialState })
     params.get('canceled') === '1' ? 'Checkout cancelado. Quando quiser, é só clicar de novo.' :
     null
   )
+  const [demoMsg, setDemoMsg] = useState<{ url: string; email: string; password: string; recreated: boolean } | null>(null)
+
+  async function recriarDemo() {
+    if (!confirm('Isso vai apagar TODOS os dados da conta demo e recriar do zero. Continuar?')) return
+    setLoading('demo'); setErro(null); setOkMsg(null); setDemoMsg(null)
+    try {
+      const res = await fetch('/api/admin/seed-demo', { method: 'POST' })
+      const data = await res.json()
+      if (!res.ok) { setErro(data.error ?? 'Falha ao recriar demo.'); return }
+      setDemoMsg({
+        url:       data.loginUrl,
+        email:     data.credentials.email,
+        password:  data.credentials.password,
+        recreated: data.recreated,
+      })
+    } catch { setErro('Erro de conexão.') }
+    finally { setLoading(null) }
+  }
 
   async function ativarTrial() {
     setLoading('trial'); setErro(null); setOkMsg(null)
@@ -98,6 +116,7 @@ export default function AssinaturaClient({ initial }: { initial: InitialState })
         </section>
 
         <PlanosPagos loading={loading} onCheckout={irParaCheckout} />
+        {isAdmin && <BlocoAdminDemo loading={loading === 'demo'} onClick={recriarDemo} demoMsg={demoMsg} />}
       </div>
     )
   }
@@ -124,6 +143,7 @@ export default function AssinaturaClient({ initial }: { initial: InitialState })
           </p>
           <PlanosPagos loading={loading} onCheckout={irParaCheckout} compacto />
         </section>
+        {isAdmin && <BlocoAdminDemo loading={loading === 'demo'} onClick={recriarDemo} demoMsg={demoMsg} />}
       </div>
     )
   }
@@ -142,6 +162,7 @@ export default function AssinaturaClient({ initial }: { initial: InitialState })
         />
 
         <PlanosPagos loading={loading} onCheckout={irParaCheckout} />
+        {isAdmin && <BlocoAdminDemo loading={loading === 'demo'} onClick={recriarDemo} demoMsg={demoMsg} />}
       </div>
     )
   }
@@ -174,11 +195,67 @@ export default function AssinaturaClient({ initial }: { initial: InitialState })
           {loading === 'portal' ? 'Abrindo…' : 'Abrir portal do Stripe'}
         </button>
       </section>
+      {isAdmin && <BlocoAdminDemo loading={loading === 'demo'} onClick={recriarDemo} demoMsg={demoMsg} />}
     </div>
   )
 }
 
 // ── Sub-componentes ─────────────────────────────────────────
+
+// ── Bloco admin: recriar conta demo ─────────────────────────
+
+export function BlocoAdminDemo({
+  loading, onClick, demoMsg,
+}: {
+  loading: boolean
+  onClick: () => void
+  demoMsg: { url: string; email: string; password: string; recreated: boolean } | null
+}) {
+  return (
+    <section className="mt-4 rounded-2xl p-5"
+             style={{ background: 'rgba(122,99,196,0.04)', border: '1px dashed rgba(122,99,196,0.30)' }}>
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-[10.5px] font-bold uppercase tracking-widest" style={{ color: '#5a4a8a' }}>
+          Admin · Conta demo
+        </p>
+        <span className="text-[10px] text-soul-ink/55 font-medium italic">só visível para administradores</span>
+      </div>
+      <p className="text-[13.5px] text-soul-ink/85 font-medium mb-3 leading-relaxed">
+        Recria a conta demo pré-populada (6 funcionários, 4 com DISC, 1 coleta NR-1 com relatório pronto).
+        Ideal para compartilhar com prospects em demos comerciais. <strong>Apaga tudo e recria do zero.</strong>
+      </p>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={loading}
+        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-bold transition-colors disabled:opacity-60"
+        style={{ background: 'rgba(122,99,196,0.10)', color: '#5a4a8a', border: '1px solid rgba(122,99,196,0.30)' }}
+      >
+        {loading ? 'Recriando...' : '↻ Recriar conta demo'}
+      </button>
+
+      {demoMsg && (
+        <div className="mt-4 rounded-xl p-4"
+             style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.35)' }}>
+          <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: '#3d6b40' }}>
+            {demoMsg.recreated ? 'Conta demo recriada' : 'Conta demo criada'}
+          </p>
+          <p className="text-[13px] text-soul-ink/85 font-medium mb-3">
+            Compartilhe estas credenciais com o prospect:
+          </p>
+          <div className="space-y-1.5 text-[13px] font-mono text-soul-ink">
+            <div><strong>URL:</strong> <a href={demoMsg.url} target="_blank" rel="noreferrer" className="text-soul-terracota hover:underline">{demoMsg.url}</a></div>
+            <div><strong>Email:</strong> {demoMsg.email}</div>
+            <div><strong>Senha:</strong> {demoMsg.password}</div>
+          </div>
+          <p className="text-[11.5px] text-soul-ink/60 font-medium italic mt-3">
+            Dica: copie como mensagem pronta para WhatsApp/email do prospect.
+          </p>
+        </div>
+      )}
+    </section>
+  )
+}
 
 function Alerta({ tipo, children }: { tipo: 'ok' | 'erro'; children: React.ReactNode }) {
   const styles = tipo === 'ok'

@@ -49,7 +49,7 @@ export default async function AssinaturaPage() {
         </p>
       </div>
 
-      <AssinaturaClient initial={initial} />
+      <AssinaturaClient initial={initial} isAdmin={session.isAdmin === true} />
     </div>
   )
 }
