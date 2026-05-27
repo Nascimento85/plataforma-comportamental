@@ -11,15 +11,16 @@ import {
   type PerfilDisfuncionalKey,
 } from '@/content/entrevista/perfis-disfuncionais'
 
-export type Senioridade = 'JUNIOR' | 'PLENO' | 'SENIOR' | 'GERENTE' | 'DIRETOR'
+export type Senioridade = 'SEM_EXPERIENCIA' | 'JUNIOR' | 'PLENO' | 'SENIOR' | 'GERENTE' | 'DIRETOR'
 export type TomEntrevista = 'FORMAL' | 'CONSULTIVO' | 'INFORMAL_HONESTO'
 
 const SENIORIDADE_LABEL: Record<Senioridade, string> = {
-  JUNIOR:   'Júnior (até 2 anos de experiência)',
-  PLENO:    'Pleno (2 a 5 anos de experiência)',
-  SENIOR:   'Sênior (5 anos ou mais, especialista técnico ou de gestão)',
-  GERENTE:  'Gerência (lidera time, reporta a diretoria)',
-  DIRETOR:  'Diretoria ou C level (responsabilidade estratégica e de board)',
+  SEM_EXPERIENCIA: 'Sem experiência profissional (primeiro emprego, estágio, transição de carreira)',
+  JUNIOR:          'Júnior (até 2 anos de experiência)',
+  PLENO:           'Pleno (2 a 5 anos de experiência)',
+  SENIOR:          'Sênior (5 anos ou mais, especialista técnico ou de gestão)',
+  GERENTE:         'Gerência (lidera time, reporta a diretoria)',
+  DIRETOR:         'Diretoria ou C level (responsabilidade estratégica e de board)',
 }
 
 const TOM_LABEL: Record<TomEntrevista, string> = {
@@ -85,13 +86,19 @@ Sugira 2 a 3 perguntas leves de aquecimento adequadas ao cargo e tom (NÃO use p
 
 ## 2. Bloco técnico ou experiencial (15 a 20 min)
 
-Sugira 4 a 6 perguntas comportamentais sobre EXPERIÊNCIA TÉCNICA específica do cargo "${input.cargo}" no nível ${input.senioridade}. Use o método STAR (Situação, Tarefa, Ação, Resultado) sutilmente embutido na pergunta. Não use perguntas dos perfis disfuncionais aqui.
+${input.senioridade === 'SEM_EXPERIENCIA'
+  ? `IMPORTANTE: este candidato é SEM EXPERIÊNCIA profissional (primeiro emprego, estágio ou transição). NÃO pergunte por experiência anterior em empresas. Em vez disso, sugira 4 a 6 perguntas que investiguem comportamento real em CONTEXTOS PRÓXIMOS: faculdade, projetos pessoais, voluntariado, trabalho informal, esporte, vida em casa, situações cotidianas que mostrem postura. Use ainda o método STAR (Situação, Tarefa, Ação, Resultado). Exemplos: "Me conta de algum trabalho em grupo na faculdade onde alguém não entregou a parte dele. O que você fez?" / "Já teve que aprender uma coisa nova sozinho rapidamente? Como foi?" / "Conta de uma situação difícil em casa ou com amigos onde você teve que tomar uma decisão importante."`
+  : `Sugira 4 a 6 perguntas comportamentais sobre EXPERIÊNCIA TÉCNICA específica do cargo "${input.cargo}" no nível ${input.senioridade}. Use o método STAR (Situação, Tarefa, Ação, Resultado) sutilmente embutido na pergunta. Não use perguntas dos perfis disfuncionais aqui.`}
 
 ## 3. Investigação comportamental, Pergunta âncora por perfil (20 a 30 min)
 
 Para cada perfil disfuncional listado no framework acima, apresente APENAS a Pergunta 1 (a âncora). Inclua:
 - A pergunta (contextualizada ao cargo "${input.cargo}" se fizer sentido, sem alterar o núcleo)
 - Bloco "🎯 O que observar" (resuma o sinal de alerta e o comportamento saudável esperado)
+
+${input.senioridade === 'SEM_EXPERIENCIA'
+  ? 'OBS: o candidato é SEM EXPERIÊNCIA profissional. Adapte as perguntas que mencionam "último emprego", "liderança direta", "diretoria", "projeto na empresa" para equivalentes: trabalho em grupo na faculdade, líder de equipe esportiva, professor, coordenador de voluntariado, situação familiar de decisão coletiva. Mantenha o núcleo psicológico da pergunta intacto, só troque o cenário.'
+  : ''}
 
 ## 4. Triangulação, Confirmação dos diagnósticos (20 a 30 min)
 

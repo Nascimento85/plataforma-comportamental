@@ -15,7 +15,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
 
-const SENIORIDADE_VALIDA: Senioridade[] = ['JUNIOR', 'PLENO', 'SENIOR', 'GERENTE', 'DIRETOR']
+const SENIORIDADE_VALIDA: Senioridade[] = ['SEM_EXPERIENCIA', 'JUNIOR', 'PLENO', 'SENIOR', 'GERENTE', 'DIRETOR']
 const TOM_VALIDO: TomEntrevista[] = ['FORMAL', 'CONSULTIVO', 'INFORMAL_HONESTO']
 
 interface InputBody {

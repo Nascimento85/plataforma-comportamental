@@ -7,11 +7,12 @@ import remarkGfm from 'remark-gfm'
 interface PerfilOpt { key: string; nome: string; descricao: string }
 
 const SENIORIDADES: Array<{ value: string; label: string }> = [
-  { value: 'JUNIOR',  label: 'Júnior (até 2 anos)' },
-  { value: 'PLENO',   label: 'Pleno (2 a 5 anos)' },
-  { value: 'SENIOR',  label: 'Sênior (5 anos ou mais)' },
-  { value: 'GERENTE', label: 'Gerência' },
-  { value: 'DIRETOR', label: 'Diretoria ou C level' },
+  { value: 'SEM_EXPERIENCIA', label: 'Sem experiência profissional' },
+  { value: 'JUNIOR',          label: 'Júnior (até 2 anos)' },
+  { value: 'PLENO',           label: 'Pleno (2 a 5 anos)' },
+  { value: 'SENIOR',          label: 'Sênior (5 anos ou mais)' },
+  { value: 'GERENTE',         label: 'Gerência' },
+  { value: 'DIRETOR',         label: 'Diretoria ou C level' },
 ]
 
 const TONS: Array<{ value: string; label: string }> = [
