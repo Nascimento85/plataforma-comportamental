@@ -102,8 +102,11 @@ body {
 .cover-meta-row + .cover-meta-row { border-top: 1px dashed #e8d9b2; }
 .cover-meta-label { width: 42%; font-weight: 600; color: #5b4928; }
 .cover-meta-value { flex: 1; color: #1f1c18; }
+/* Aviso institucional ao final da capa. NÃO usar position:fixed
+   porque o Puppeteer replica fixed em todas as paginas e o texto
+   vaza por cima do conteudo principal. */
 .cover-footer {
-  position: fixed; bottom: 20mm; left: 14mm; right: 14mm;
+  margin-top: 32mm;
   font-size: 8.5pt; color: #6e645a; font-style: italic; line-height: 1.4;
   border-top: 1px solid #e8d9b2; padding-top: 10px;
 }

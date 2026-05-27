@@ -1,8 +1,8 @@
 // ============================================================
 // Framework: Mapeamento de Perfis Disfuncionais (autoria Kênio)
 // 6 grupos, 3 perguntas por grupo, triangulação de evidências.
-// Esse arquivo é a fonte de verdade injetada no prompt da Claude API
-// para gerar roteiros personalizados de entrevista.
+// Versão CURTA: perguntas redigidas para serem lidas, decoradas
+// e ditas com naturalidade pelo entrevistador.
 // ============================================================
 
 export type PerfilDisfuncionalKey =
@@ -38,16 +38,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Me conte sobre uma situação em que você entregou um excelente trabalho, mas o resultado final do projeto deu errado por conta de fatores que fugiam ao seu controle. O que aconteceu e como você lidou com isso?',
+        texto:  'Me conta de uma vez que você fez um trabalho excelente, mas o projeto deu errado por coisas fora do seu controle. O que aconteceu?',
       },
       {
         numero: 2,
-        texto:  'Se você pudesse voltar ao seu último emprego e mudar apenas uma decisão da diretoria ou da sua liderança direta que você sentiu que prejudicou o seu desempenho, qual seria e por quê?',
+        texto:  'Se pudesse voltar no seu último emprego e mudar uma decisão da liderança que te atrapalhou, qual seria e por quê?',
         observar: 'O vitimista usará a pergunta para expor o quanto foi injustiçado. O perfil saudável focará no impacto estratégico da decisão e mostrará empatia com o contexto da liderança na época.',
       },
       {
         numero: 3,
-        texto:  'Descreva uma ocasião em que você recebeu um feedback com o qual discordava totalmente. O que você fez logo após sair da sala de reunião?',
+        texto:  'Conta uma vez que você recebeu um feedback que discordou totalmente. O que fez logo depois de sair da sala?',
         observar: 'Busque o comportamento passivo agressivo. O reclamão aceita o feedback na sala, mas sai reclamando com os colegas de equipe ou reduzindo o ritmo de trabalho por pirraça.',
       },
     ],
@@ -60,16 +60,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Pense em uma mudança repentina de diretriz, tecnologia ou processo na sua última empresa que você, inicialmente, não concordou de forma alguma. Como foi o seu processo de adaptação e como você comunicou isso ao seu time ou gestor?',
+        texto:  'Lembra de uma mudança grande no último emprego que você inicialmente não concordou? Como foi sua adaptação?',
       },
       {
         numero: 2,
-        texto:  'Todos nós já implementamos projetos que, no meio do caminho, percebemos que não trariam o retorno esperado, mas a empresa decidiu continuar assim mesmo. Como você se posicionou do meio para o fim desse projeto?',
+        texto:  'Já participou de algum projeto que no meio do caminho você percebeu que não ia dar certo, mas a empresa seguiu mesmo assim? Como você reagiu?',
         observar: 'O sabotador tende a cruzar os braços e deixar o projeto naufragar para poder dizer "eu avisei". O profissional colaborativo trabalha para mitigar os danos, mesmo sabendo que a ideia original não era sua.',
       },
       {
         numero: 3,
-        texto:  'Me dê um exemplo de uma regra, processo ou burocracia da sua antiga empresa que você achava completamente inútil e o que você fazia a respeito dela no dia a dia.',
+        texto:  'Me dá um exemplo de uma regra que você achava inútil no seu último emprego. O que você fazia com ela no dia a dia?',
         observar: 'O resistente apenas descumpre a regra pelas costas (sabotagem oculta) ou vive reclamando dela. O perfil maduro tenta otimizar o processo pelos canais oficiais ou aceita que algumas regras existem por conformidade jurídica ou compliance.',
       },
     ],
@@ -82,16 +82,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Todos nós já trabalhamos em ambientes onde o clima organizacional ficou pesado ou onde sabíamos de decisões antes que elas fossem oficializadas. Quando você percebia que um boato ou uma insatisfação geral estava correndo nos bastidores da sua equipe, como você agia?',
+        texto:  'Quando o clima do time fica pesado ou começa a rolar um boato nos bastidores, como você costuma reagir?',
       },
       {
         numero: 2,
-        texto:  'Se um colega de trabalho de outra área viesse desabafar com você, de forma recorrente, criticando abertamente o estilo de liderança do gestor dele (que não é o seu), qual seria a sua postura com esse colega?',
+        texto:  'Imagina que um colega de outra área vem reclamar sempre do gestor dele com você. O que você faz nessa situação?',
         observar: 'O fofoqueiro adora ser o "confidente" e alimentar o fogo dando corda ao assunto. O profissional ético corta sutilmente, orientando o colega a conversar diretamente com quem de direito ou mantendo neutralidade estrita.',
       },
       {
         numero: 3,
-        texto:  'Conte uma situação em que você descobriu uma informação confidencial da empresa ou de um colega antes que ela se tornasse pública. O que você fez com essa informação?',
+        texto:  'Conta de uma vez que você ficou sabendo de uma informação confidencial antes da hora. O que fez com ela?',
         observar: 'Avalie o nível de discrição e controle do impulso de compartilhar o segredo para ganhar status ou relevância no grupo.',
       },
     ],
@@ -104,16 +104,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Descreva um período em que o seu volume de demandas ficou completamente fora do controle e você percebeu que não conseguiria entregar tudo no prazo. Como você organizou suas próximas 48 horas e qual foi o impacto real nas entregas?',
+        texto:  'Lembra de um momento em que as demandas saíram do controle e você não ia conseguir entregar tudo? Como organizou as 48 horas seguintes?',
       },
       {
         numero: 2,
-        texto:  'Me conte sobre um projeto ou tarefa específica da sua rotina anterior que você considerava extremamente chata, operacional ou burocrática. Como você geria o seu tempo para garantir que ela fosse feita?',
+        texto:  'Me conta de uma tarefa chata da sua rotina anterior. Como você organizava seu tempo pra ela sair?',
         observar: 'O procrastinador empurra essa tarefa para o final da sexta ou para o último dia do mês. Busque por métodos de disciplina (ex: "eu fazia essa tarefa logo na primeira hora da manhã para me livrar dela").',
       },
       {
         numero: 3,
-        texto:  'Qual foi o prazo mais longo que você já teve para entregar um grande projeto e como foi a sua curva de esforço? Você trabalhou de forma linear ou o ritmo acelerou drasticamente nas semanas finais?',
+        texto:  'Qual foi o projeto mais longo que você entregou? Como foi sua curva de esforço, ritmo constante ou apertou no fim?',
         observar: 'Se o candidato confessar (ou demonstrar na narrativa) que o pico de esforço aconteceu apenas nos últimos 10% do prazo total, há uma forte tendência à procrastinação estrutural.',
       },
     ],
@@ -126,16 +126,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Se você precisasse se afastar abruptamente da sua operação por 15 dias hoje, o que aconteceria com os seus principais projetos? Quem assumiria e quais ferramentas ou rituais garantiriam que o padrão de qualidade fosse mantido?',
+        texto:  'Se você sumisse por 15 dias hoje, o que aconteceria com seus principais projetos? Quem cobriria?',
       },
       {
         numero: 2,
-        texto:  'Me dê um exemplo de uma tarefa que você adorava fazer e executava com maestria, mas que teve que delegar para um liderado ou par para focar em coisas mais estratégicas. Como foi o seu processo de desapego e monitoramento?',
+        texto:  'Me conta de uma tarefa que você adorava fazer, mas teve que delegar pra focar em coisa mais estratégica. Como foi soltar?',
         observar: 'O centralizador sofre para desapegar. Ele costuma dizer que delegou, mas confessa que ficava revisando linha por linha, fazendo microgestão sufocante.',
       },
       {
         numero: 3,
-        texto:  'Pense em uma situação onde um liderado ou colega entregou um trabalho importante fora do padrão que você esperava, e o prazo de entrega final para o cliente era no dia seguinte. O que você fez?',
+        texto:  'Imagina que um liderado entrega algo importante fora do padrão, e o prazo final pro cliente é amanhã. O que você faz?',
         observar: 'O centralizador toma a tarefa para si e passa a noite fazendo ("Deixa que eu faço do meu jeito pra garantir"). O líder desenvolvedor corrige com a pessoa ou dá as diretrizes para que ela ajuste a tempo, usando o erro como aprendizado pedagógico.',
       },
     ],
@@ -148,16 +148,16 @@ export const PERFIS_DISFUNCIONAIS: PerfilDisfuncional[] = [
     perguntas: [
       {
         numero: 1,
-        texto:  'Me fale sobre o projeto de maior orgulho da sua carreira recente. Como foi a divisão de tarefas e qual foi a contribuição específica das outras pessoas envolvidas?',
+        texto:  'Me fala do projeto que você mais orgulha na carreira recente. Como foi a divisão de tarefas e o que cada um fez?',
       },
       {
         numero: 2,
-        texto:  'Se fôssemos premiar a sua equipe pelo resultado do último trimestre, mas o orçamento só permitisse dar o bônus de destaque para um colega seu (excluindo você), quem você indicaria e qual o argumento usaria para defender a indicação perante a diretoria?',
+        texto:  'Se a empresa fosse dar um bônus de destaque pra UM colega seu, excluindo você, quem você indicaria e por quê?',
         observar: 'O ultracompetitivo sente dor física ao elogiar um par ou ao dar destaque legítimo a outra pessoa. Ele tentará relativizar o mérito do colega ou indicar alguém que não represente ameaça ao seu ego.',
       },
       {
         numero: 3,
-        texto:  'Descreva uma situação em que uma ideia sua foi rejeitada pela equipe ou pelo gestor, e a ideia escolhida foi a de um colega. Como você agiu durante a execução da ideia dele?',
+        texto:  'Conta de uma vez que sua ideia foi rejeitada e a do colega foi a escolhida. Como você agiu durante a execução?',
         observar: 'O apropriador ou ultracompetitivo tende a torcer contra a ideia do colega ou a tentar melhorar a ideia do outro de forma invasiva para colocar a sua própria assinatura no sucesso alheio.',
       },
     ],

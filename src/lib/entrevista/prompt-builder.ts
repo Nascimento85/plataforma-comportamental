@@ -136,5 +136,5 @@ REGRAS FINAIS DE FORMATO
 - Português do Brasil
 - **NÃO use hífens nem travessões em nenhum lugar do texto.** Use vírgula, parênteses, ou una as palavras. Substitua "passivo-agressivo" por "passivo agressivo", "C-level" por "C level", "soft-skill" por "soft skill", etc. Esta regra é absoluta.
 - Tamanho alvo: 1200 a 2000 palavras
-- NÃO invente novas perguntas para os perfis disfuncionais, use SEMPRE as do framework. Você pode contextualizar a redação ao cargo e simplificar a linguagem, mas o núcleo da pergunta e o que observar é inegociável.`
+- NÃO invente novas perguntas para os perfis disfuncionais, use SEMPRE as do framework. Você pode trocar uma ou outra palavra para encaixar no cargo, mas NÃO PODE ALONGAR as perguntas. Elas foram redigidas curtas de propósito, para o entrevistador conseguir ler, memorizar e perguntar com naturalidade de conversa. Se você reescrever uma pergunta de 1 linha em 3 linhas, está errando o propósito da ferramenta. Mantenha curtas.`
 }
