@@ -153,7 +153,11 @@ export default function AdminShell({ children, session }: Props) {
       {/* Mobile overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-soul-ink/60 backdrop-blur-sm" onClick={() => setMenuOpen(false)} />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'rgba(28, 26, 23, 0.62)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
+            onClick={() => setMenuOpen(false)}
+          />
           <aside className="absolute left-0 top-0 bottom-0 w-64 flex flex-col z-10" style={sidebarBg}>
             <SidebarContent session={session} onNavClick={() => setMenuOpen(false)} />
           </aside>

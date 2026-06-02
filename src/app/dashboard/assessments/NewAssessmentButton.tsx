@@ -334,7 +334,10 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center bg-soul-ink/60 px-3 md:px-6 py-6 backdrop-blur-sm overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 flex items-start md:items-center justify-center px-3 md:px-6 py-6 overflow-y-auto"
+          style={{ background: 'rgba(28, 26, 23, 0.62)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
+        >
           <div
             className="bg-white rounded-3xl shadow-soul-xl w-full max-w-5xl my-auto"
             style={{ border: '1px solid rgba(232,226,214,0.6)' }}
