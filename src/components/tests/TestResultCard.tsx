@@ -686,6 +686,225 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
     )
   }
 
+  // ────────────────────────────────────────────────────────────
+  // VAC, Mapa Sensorial (Visual / Auditivo / Sinestésico)
+  // ────────────────────────────────────────────────────────────
+  if (testType === 'VAC') {
+    const r = result as {
+      percentages: { V: number; A: number; S: number }
+      scores:      { V: number; A: number; S: number }
+      primaryChannel: 'V' | 'A' | 'S'
+      secondaryChannel: 'V' | 'A' | 'S'
+      primaryReport:   { nome: string; fraseImpacto: string; caracteristicas: string[]; comunicacao: string; pontoDeMelhoria: string; emoji: string; cor: string }
+      secondaryReport: { nome: string; emoji: string; cor: string }
+      combinedReport:  { nome: string; descricao: string; brilhaEm: string; cuidadoCom: string } | null
+    }
+
+    const VAC_LABELS = { V: 'Visual', A: 'Auditivo', S: 'Sinestésico' } as const
+    const channels: Array<'V' | 'A' | 'S'> = ['V', 'A', 'S']
+    const pc = r.primaryReport.cor
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div
+            className="inline-flex items-center justify-center w-20 h-20 rounded-full text-white text-3xl font-bold mb-4"
+            style={{ background: pc }}
+          >
+            {r.primaryReport.emoji}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">Perfil {r.primaryReport.nome}</h2>
+          <p className="font-medium text-sm mt-1" style={{ color: pc }}>{r.primaryReport.fraseImpacto}</p>
+          <p className="text-gray-500 text-xs mt-1">
+            Canal secundário: <strong>{r.secondaryReport.nome}</strong>
+          </p>
+        </div>
+
+        {/* Distribuição dos 3 canais */}
+        <div className="card p-5 space-y-3">
+          <h3 className="font-semibold text-gray-800 text-sm">Intensidade dos canais sensoriais</h3>
+          {channels
+            .slice()
+            .sort((a, b) => r.percentages[b] - r.percentages[a])
+            .map((c) => {
+              const isPrimary = c === r.primaryChannel
+              return (
+                <div key={c}>
+                  <div className="flex justify-between text-xs text-gray-600 mb-1">
+                    <span className={isPrimary ? 'font-bold' : 'font-medium'}>{VAC_LABELS[c]}</span>
+                    <span>{r.percentages[c]}% · {r.scores[c]}/40</span>
+                  </div>
+                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${r.percentages[c]}%`,
+                        background: c === 'V' ? '#3d4f7c' : c === 'A' ? '#c4633a' : '#7a9e7e',
+                      }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+        </div>
+
+        {/* Características */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-3">Características principais</h3>
+          <ul className="space-y-2">
+            {r.primaryReport.caracteristicas.map((c, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <span className="font-bold mt-0.5" style={{ color: pc }}>✓</span>
+                <span>{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Como se comunica + ponto de atenção */}
+        <div className="card p-5 space-y-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-blue-700 mb-1">Como você se comunica melhor</p>
+            <p className="text-sm text-gray-700 leading-relaxed">{r.primaryReport.comunicacao}</p>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-rose-700 mb-1">Ponto de atenção</p>
+            <p className="text-sm text-gray-700 leading-relaxed">{r.primaryReport.pontoDeMelhoria}</p>
+          </div>
+        </div>
+
+        {/* Canal combinado (se houver) */}
+        {r.combinedReport && (
+          <div className="card p-5" style={{ background: 'rgba(212,148,58,0.10)', borderLeft: '4px solid #d4943a' }}>
+            <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#7a4f17' }}>
+              Canal combinado identificado
+            </p>
+            <h4 className="font-bold text-gray-900 mb-2">{r.combinedReport.nome}</h4>
+            <p className="text-sm text-gray-700 leading-relaxed mb-2">{r.combinedReport.descricao}</p>
+            <p className="text-xs text-gray-600"><strong>Brilha em:</strong> {r.combinedReport.brilhaEm}</p>
+            <p className="text-xs text-gray-600 mt-1"><strong>Cuidado com:</strong> {r.combinedReport.cuidadoCom}</p>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // BIG FIVE, Estilo de Liderança
+  // ────────────────────────────────────────────────────────────
+  if (testType === 'BIG_FIVE') {
+    const r = result as {
+      percentages: Record<'EXT' | 'AMB' | 'CON' | 'EST' | 'ABE', number>
+      scoresAvg:   Record<'EXT' | 'AMB' | 'CON' | 'EST' | 'ABE', number>
+      archetype:   string
+      archetypeReport: {
+        emoji: string
+        nome: string
+        combinacao: string
+        visaoGeral: string
+        superpoderes: { titulo: string; descricao: string }[]
+        pontosCegos:  { titulo: string; descricao: string }[]
+        planoDeAcao:  { titulo: string; descricao: string }[]
+        brilhaEm: string
+      }
+    }
+
+    const BF_LABELS: Record<string, string> = {
+      EXT: 'Influência & Comunicação',
+      AMB: 'Gestão de Pessoas & Empatia',
+      CON: 'Foco em Resultados & Execução',
+      EST: 'Estabilidade Emocional',
+      ABE: 'Inovação & Visão Estratégica',
+    }
+    const BF_COLORS: Record<string, string> = {
+      EXT: '#c4633a', AMB: '#7a9e7e', CON: '#3d4f7c', EST: '#c9a84c', ABE: '#c47a72',
+    }
+    const factors: Array<'EXT' | 'AMB' | 'CON' | 'EST' | 'ABE'> = ['EXT', 'AMB', 'CON', 'EST', 'ABE']
+    const a = r.archetypeReport
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full text-4xl mb-4"
+               style={{ background: 'rgba(61,79,124,0.12)' }}>
+            {a.emoji}
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">{a.nome}</h2>
+          <p className="font-medium text-sm mt-1" style={{ color: '#3d4f7c' }}>{a.combinacao}</p>
+        </div>
+
+        {/* Radar dos 5 fatores */}
+        <div className="card p-5 space-y-3">
+          <h3 className="font-semibold text-gray-800 text-sm">Radar dos 5 fatores de liderança</h3>
+          {factors
+            .slice()
+            .sort((x, y) => r.percentages[y] - r.percentages[x])
+            .map((f) => (
+              <div key={f}>
+                <div className="flex justify-between text-xs text-gray-600 mb-1">
+                  <span className="font-medium">{BF_LABELS[f]}</span>
+                  <span>{r.percentages[f]}% · média {r.scoresAvg[f]?.toFixed(2)}</span>
+                </div>
+                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full rounded-full"
+                       style={{ width: `${r.percentages[f]}%`, background: BF_COLORS[f] }}/>
+                </div>
+              </div>
+            ))}
+        </div>
+
+        {/* Visão geral */}
+        <div className="card p-5">
+          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#3d4f7c' }}>Visão geral do seu perfil</p>
+          <p className="text-sm text-gray-700 leading-relaxed">{a.visaoGeral}</p>
+        </div>
+
+        {/* Superpoderes */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-sm mb-3" style={{ color: '#166534' }}>Seus maiores superpoderes</h3>
+          <div className="space-y-3">
+            {a.superpoderes.map((sp, i) => (
+              <div key={i}>
+                <p className="text-sm font-bold text-gray-900">{sp.titulo}</p>
+                <p className="text-xs text-gray-600 leading-relaxed mt-1">{sp.descricao}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pontos cegos */}
+        <div className="card p-5">
+          <h3 className="font-semibold text-sm mb-3" style={{ color: '#991b1b' }}>Seus pontos cegos</h3>
+          <div className="space-y-3">
+            {a.pontosCegos.map((pc, i) => (
+              <div key={i}>
+                <p className="text-sm font-bold text-gray-900">{pc.titulo}</p>
+                <p className="text-xs text-gray-600 leading-relaxed mt-1">{pc.descricao}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Plano de ação */}
+        <div className="card p-5" style={{ background: 'rgba(61,79,124,0.05)', borderLeft: '4px solid #3d4f7c' }}>
+          <h3 className="font-semibold text-sm mb-3" style={{ color: '#3d4f7c' }}>Plano de ação para o próximo trimestre</h3>
+          <div className="space-y-3">
+            {a.planoDeAcao.map((pa, i) => (
+              <div key={i}>
+                <p className="text-sm font-bold text-gray-900">{i + 1}. {pa.titulo}</p>
+                <p className="text-xs text-gray-600 leading-relaxed mt-1">{pa.descricao}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="card p-4" style={{ background: '#f0f9ff' }}>
+          <p className="text-xs"><strong>Onde este arquétipo brilha:</strong> {a.brilhaEm}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="text-center py-8 text-gray-500">
       Resultado processado com sucesso.

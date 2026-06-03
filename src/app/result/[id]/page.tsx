@@ -11,6 +11,7 @@ import PrintButton         from './PrintButton'
 import { parseResultData } from '@/lib/parseResult'
 import UpsellPopup         from '@/components/passport/UpsellPopup'
 import UnlockPremiumButton from './UnlockPremiumButton'
+import TestResultCard      from '@/components/tests/TestResultCard'
 
 /**
  * Resolve um identificador genérico para o Assessment correspondente.
@@ -1140,6 +1141,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'LOVE_LANGUAGES'     && <LoveLanguagesDevolutiva    d={resultData} />}
         {assessment.testType === 'CAREER_ANCHOR'      && <CareerAnchorDevolutiva     d={resultData} />}
         {assessment.testType === 'EMOTIONAL_INTELLIGENCE' && <EmotionalIntelligenceDevolutiva d={resultData} />}
+        {assessment.testType === 'VAC'      && <TestResultCard testType="VAC"      result={resultData as Record<string, unknown>} />}
+        {assessment.testType === 'BIG_FIVE' && <TestResultCard testType="BIG_FIVE" result={resultData as Record<string, unknown>} />}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (
