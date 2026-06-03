@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import SelfStartTestButton from '../assessments/SelfStartTestButton'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { TEST_PRICE } from '@/lib/passport'
@@ -247,19 +248,22 @@ function Section({
           </p>
         </div>
         {cta && (
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-end gap-3 flex-shrink-0">
             <div className="text-right">
               <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
               <p className="font-serif text-lg font-bold text-soul-ink leading-none">
                 {cta.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{cta.credits > 1 ? 's' : ''}</span>
               </p>
             </div>
-            <NewAssessmentButton initialTestType={cta.testType}>
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-              </svg>
-              {cta.label}
-            </NewAssessmentButton>
+            <div className="flex flex-col sm:flex-row gap-2 items-stretch">
+              <SelfStartTestButton testType={cta.testType} label="▶ Fazer agora" />
+              <NewAssessmentButton initialTestType={cta.testType} variant="secondary">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+                </svg>
+                {cta.label}
+              </NewAssessmentButton>
+            </div>
           </div>
         )}
       </div>

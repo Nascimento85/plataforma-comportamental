@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import SelfStartTestButton from '../assessments/SelfStartTestButton'
 import { TEST_PRICE } from '@/lib/passport'
 
 export const metadata: Metadata = { title: 'Relacionamentos' }
@@ -189,12 +190,15 @@ export default function LoveLanguagesPage() {
               </span>
             </div>
 
-            <NewAssessmentButton initialCategory="RELATIONSHIPS">
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-              </svg>
-              Descobrir minha linguagem
-            </NewAssessmentButton>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <SelfStartTestButton testType="LOVE_LANGUAGES" label="▶ Descobrir agora" fullWidth />
+              <NewAssessmentButton initialCategory="RELATIONSHIPS" variant="secondary">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+                </svg>
+                Enviar para outra pessoa
+              </NewAssessmentButton>
+            </div>
           </div>
         </div>
       </section>
