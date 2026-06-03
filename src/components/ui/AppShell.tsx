@@ -150,6 +150,16 @@ function NavIcon({ path }: { path: string }) {
           stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
+    // Liderança — coroa simples
+    leadership: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <path d="M3 6L6 11L10 5L14 11L17 6V15H3V6Z"
+          stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+        <circle cx="3" cy="5" r="1.2" fill="currentColor"/>
+        <circle cx="10" cy="3.8" r="1.2" fill="currentColor"/>
+        <circle cx="17" cy="5" r="1.2" fill="currentColor"/>
+      </svg>
+    ),
     // Entrevista — clipboard com check
     interview: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
@@ -209,6 +219,7 @@ function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
       title: 'Testes',
       items: [
         { href: '/dashboard/behavioral',     label: 'Comportamentais', iconKey: 'behavioral'    },
+        { href: '/dashboard/leadership',     label: 'Liderança',       iconKey: 'leadership'    },
         { href: '/dashboard/career',         label: 'Carreira',        iconKey: 'career'        },
         { href: '/dashboard/love-languages', label: 'Relacionamentos', iconKey: 'relationships' },
         { href: '/dashboard/archetypes',     label: 'Arquétipos',      iconKey: 'archetypes'    },

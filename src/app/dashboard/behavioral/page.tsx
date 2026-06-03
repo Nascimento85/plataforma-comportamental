@@ -121,6 +121,27 @@ const LENSES: Lens[] = [
     color: '#7a9e7e',
     emoji: '⬢',
   },
+  {
+    key: 'vac',
+    testType: 'VAC',
+    name: 'VAC — Mapa Sensorial',
+    tagline: 'Como o cérebro recebe o mundo. Base usada por Apple, Disney e Google.',
+    short: 'VAC',
+    credits: TEST_PRICE.VAC,
+    pillar: 'Visual · Auditivo · Sinestésico',
+    description:
+      'Identifica o canal sensorial predominante de cada pessoa. Saber se o candidato é mais Visual, Auditivo ou Sinestésico muda totalmente a forma de se comunicar, vender, treinar e liderar. Banco rotativo de 60 questões para evitar viés de repetição.',
+    application:
+      'Treinamento de vendedores, adaptação de comunicação de líderes, montagem de squads de atendimento e ajuste fino de programas de onboarding.',
+    bullets: [
+      'Banco rotativo de 60 questões (30 por sessão)',
+      'Perfil predominante + canais combinados (VA, AS, VS)',
+      'Recomendações específicas de comunicação para o gestor',
+      'Devolutiva consultiva enriquecida por Claude AI',
+    ],
+    color: '#d4943a',
+    emoji: '👁',
+  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════

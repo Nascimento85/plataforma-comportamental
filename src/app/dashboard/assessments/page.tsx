@@ -11,14 +11,18 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 export const metadata: Metadata = { title: 'Avaliações' }
 
 const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
-  DISC:               { label: 'DISC',                emoji: '🎭' },
-  MBTI:               { label: 'MBTI',                emoji: '🧩' },
-  ENNEAGRAM:          { label: 'Eneagrama',           emoji: '⬡'  },
-  TEMPERAMENT:        { label: '4 Temperamentos',     emoji: '🌡' },
-  ARCHETYPE:          { label: 'Arquétipos',          emoji: '🧭' },
-  ARCHETYPE_FEMININE: { label: 'Arq. Femininos',      emoji: '🌸' },
-  LOVE_LANGUAGES:     { label: 'Relacionamentos',     emoji: '💞' },
-  BUNDLE:             { label: 'Bundle Completo',     emoji: '✨' },
+  DISC:                   { label: 'DISC',                 emoji: '🎭' },
+  MBTI:                   { label: 'MBTI',                 emoji: '🧩' },
+  ENNEAGRAM:              { label: 'Eneagrama',            emoji: '⬡'  },
+  TEMPERAMENT:            { label: '4 Temperamentos',      emoji: '🌡' },
+  ARCHETYPE:              { label: 'Arquétipos',           emoji: '🧭' },
+  ARCHETYPE_FEMININE:     { label: 'Arq. Femininos',       emoji: '🌸' },
+  LOVE_LANGUAGES:         { label: 'Relacionamentos',      emoji: '💞' },
+  CAREER_ANCHOR:          { label: 'Âncoras de Carreira',  emoji: '⚓' },
+  EMOTIONAL_INTELLIGENCE: { label: 'IE Goleman',           emoji: '◈' },
+  VAC:                    { label: 'VAC Sensorial',        emoji: '👁' },
+  BIG_FIVE:               { label: 'Big Five Liderança',   emoji: '🎯' },
+  BUNDLE:                 { label: 'Bundle Completo',      emoji: '✨' },
 }
 
 type AssessmentStatus = 'PENDING' | 'SENT' | 'COMPLETED' | 'EXPIRED'

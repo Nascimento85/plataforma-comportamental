@@ -10,6 +10,8 @@ import { calculateArchetypeFeminine } from '@/lib/engines/archetype-feminine'
 import { calculateLoveLanguages } from '@/lib/engines/love-languages'
 import { calculateCareerAnchor } from '@/lib/engines/career-anchor'
 import { calculateEmotionalIntelligence } from '@/lib/engines/emotional-intelligence'
+import { calculateVac } from '@/lib/engines/vac'
+import { calculateBigFive } from '@/lib/engines/big-five'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -102,6 +104,16 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; value: number }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'VAC':
+        resultData = calculateVac(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
+      case 'BIG_FIVE':
+        resultData = calculateBigFive(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -147,12 +159,14 @@ export async function POST(request: NextRequest) {
         })
       }
 
-      // Arquétipos, Career Anchor e IE usam o mesmo formato do Eneagrama (questionId + value 1-5)
+      // Arquétipos, Career Anchor, IE, VAC e Big Five usam o mesmo formato do Eneagrama (questionId + value 1-5)
       if (
         assessment.testType === 'ARCHETYPE' ||
         assessment.testType === 'ARCHETYPE_FEMININE' ||
         assessment.testType === 'CAREER_ANCHOR' ||
-        assessment.testType === 'EMOTIONAL_INTELLIGENCE'
+        assessment.testType === 'EMOTIONAL_INTELLIGENCE' ||
+        assessment.testType === 'VAC' ||
+        assessment.testType === 'BIG_FIVE'
       ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({
@@ -181,6 +195,8 @@ export async function POST(request: NextRequest) {
             (resultData as { primaryLanguage?: string }).primaryLanguage ??
             (resultData as { primaryAnchor?: string }).primaryAnchor ??
             (resultData as { primaryStrength?: string }).primaryStrength ??
+            (resultData as { primaryChannel?: string }).primaryChannel ??
+            (resultData as { archetype?: string }).archetype ??
             ''
           ),
         },

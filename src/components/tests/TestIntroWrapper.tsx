@@ -9,6 +9,8 @@ import ArchetypeTest from '@/components/tests/ArchetypeTest'
 import LoveLanguagesTest from '@/components/tests/LoveLanguagesTest'
 import CareerAnchorTest from '@/components/tests/CareerAnchorTest'
 import EmotionalIntelligenceTest from '@/components/tests/EmotionalIntelligenceTest'
+import VACTest from '@/components/tests/VACTest'
+import BigFiveTest from '@/components/tests/BigFiveTest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -211,6 +213,46 @@ const INTROS: Record<string, {
     duration: '6–10 min',
     questions: 25,
   },
+  VAC: {
+    title: 'VAC — Mapa Sensorial da Comunicação',
+    subtitle: 'Visual, Auditivo ou Sinestésico, qual é o seu canal?',
+    image: '/tests/vac.jpg',
+    description: 'Baseado nos estudos de Richard Bandler e John Grinder (PNL, anos 1970), o VAC identifica o canal predominante pelo qual o seu cérebro recebe e processa o mundo. Saber se você é mais Visual, Auditivo ou Sinestésico muda completamente a forma como você se comunica, vende, aprende e lidera. Apple, Disney, Google e McKinsey aplicam esses princípios em treinamentos de comunicação e vendas.',
+    tips: [
+      { icon: '👁', text: 'Pense no seu dia a dia profissional. Vá pela primeira reação, sem calcular.' },
+      { icon: '⚡', text: 'Não existe canal melhor. Cada um tem superpoderes únicos de comunicação.' },
+      { icon: '🔓', text: 'É comum ter dois canais fortes. Isso destrava perfis combinados poderosos.' },
+    ],
+    discovers: [
+      'Seu canal sensorial predominante (Visual, Auditivo ou Sinestésico)',
+      'Como você comunica e absorve informações melhor',
+      'Sua combinação de canais (se houver dois fortes) e o perfil que ela revela',
+      'Como adaptar sua liderança e suas vendas para cada tipo de pessoa',
+    ],
+    cta: 'Mapear meus canais sensoriais',
+    duration: '8–12 min',
+    questions: 30,
+  },
+  BIG_FIVE: {
+    title: 'Big Five — Estilo de Liderança',
+    subtitle: 'A ciência por trás do seu jeito de liderar',
+    image: '/tests/big-five.jpg',
+    description: 'O Big Five é o modelo de personalidade mais cientificamente validado do mundo, desenvolvido por Lewis Goldberg, Paul Costa e Robert McCrae. Esta versão Liderança traduz os 5 fatores em arquétipos comerciais: Inovador, Executor, Humano e Especialista. Usado por Google (Project Oxygen), Microsoft, McKinsey, Deloitte e Hogan em assessment de liderança e planos de sucessão.',
+    tips: [
+      { icon: '🎯', text: 'Responda pelo seu comportamento real no trabalho, não pelo ideal que gostaria de ser.' },
+      { icon: '⚡', text: 'Algumas perguntas têm tom positivo, outras negativo. Isso é proposital, para neutralizar viés.' },
+      { icon: '🔓', text: 'Os 4 arquétipos têm valor único. O importante é saber em qual cenário você brilha.' },
+    ],
+    discovers: [
+      'Seu radar completo dos 5 fatores de liderança',
+      'Seu arquétipo predominante: Inovador, Executor, Humano ou Especialista',
+      'Seus 3 superpoderes naturais e 3 pontos cegos para vigiar',
+      'Plano de ação prático para o próximo trimestre',
+    ],
+    cta: 'Revelar meu estilo de liderança',
+    duration: '12–18 min',
+    questions: 44,
+  },
 }
 
 // ── Componente principal ──────────────────────────────────────
@@ -355,6 +397,12 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'EMOTIONAL_INTELLIGENCE') return (
     <EmotionalIntelligenceTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'VAC') return (
+    <VACTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'BIG_FIVE') return (
+    <BigFiveTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

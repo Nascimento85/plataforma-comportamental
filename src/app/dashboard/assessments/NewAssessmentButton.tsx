@@ -8,7 +8,7 @@ import { TEST_PRICE } from '@/lib/test-pricing'
 // CATÁLOGO DE TESTES — 3 Categorias Executivas
 // ═══════════════════════════════════════════════════════════════
 
-export type CategoryKey = 'ARCHETYPE' | 'BEHAVIORAL' | 'RELATIONSHIPS' | 'CAREER'
+export type CategoryKey = 'ARCHETYPE' | 'BEHAVIORAL' | 'LEADERSHIP' | 'RELATIONSHIPS' | 'CAREER'
 
 interface TestType {
   value: string
@@ -126,6 +126,40 @@ const TEST_TYPES: TestType[] = [
     ],
   },
   {
+    value: 'VAC',
+    label: 'VAC — Mapa Sensorial da Comunicação',
+    short: 'VAC',
+    category: 'BEHAVIORAL',
+    credits: TEST_PRICE.VAC,
+    image: '/tests/vac.jpg',
+    hook: 'Como o cérebro recebe o mundo. Base usada por Apple e McKinsey.',
+    description:
+      'Identifica o canal sensorial predominante do candidato, Visual, Auditivo ou Sinestésico. Saber esse canal muda a forma de comunicar, vender, treinar e liderar a pessoa. Banco rotativo de 60 questões com sorteio determinístico por sessão para evitar viés de repetição. Devolutiva consultiva enriquecida por Claude AI.',
+    bullets: [
+      'Banco rotativo de 60 questões (30 por sessão)',
+      'Perfil predominante + canais combinados (VA, AS, VS)',
+      'Plano prático de comunicação e liderança por canal',
+    ],
+    badge: 'Novo',
+  },
+  {
+    value: 'BIG_FIVE',
+    label: 'Big Five — Estilo de Liderança Corporativa',
+    short: 'Big Five',
+    category: 'LEADERSHIP',
+    credits: TEST_PRICE.BIG_FIVE,
+    image: '/tests/big-five.jpg',
+    hook: 'A ciência da liderança. Usado por Google, McKinsey e Hogan.',
+    description:
+      'O modelo de personalidade mais cientificamente validado do mundo, adaptado para liderança corporativa. Traduz os 5 fatores OCEAN em 4 arquétipos comerciais: Inovador, Executor, Humano e Especialista. Cada arquétipo vem com Superpoderes, Pontos Cegos e Plano de Ação trimestral. Banco rotativo de 90 itens com inversão científica para neutralizar viés.',
+    bullets: [
+      'Banco rotativo de 90 questões (44 por sessão, com itens invertidos)',
+      'Radar dos 5 fatores + arquétipo predominante de liderança',
+      'Plano de ação trimestral pronto para virar PDI',
+    ],
+    badge: 'Premium',
+  },
+  {
     value: 'BUNDLE_4',
     label: 'Bundle Completo — 4 Testes Comportamentais',
     short: 'Bundle 4',
@@ -201,6 +235,10 @@ const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = 
   BEHAVIORAL: {
     title: 'Análises Comportamentais',
     subtitle: 'Foco em performance e produtividade',
+  },
+  LEADERSHIP: {
+    title: 'Liderança',
+    subtitle: 'Estilo de liderança e prontidão para gestão',
   },
   CAREER: {
     title: 'Carreira & Performance',
