@@ -216,7 +216,7 @@ const INTROS: Record<string, {
   VAC: {
     title: 'VAC — Mapa Sensorial da Comunicação',
     subtitle: 'Visual, Auditivo ou Sinestésico, qual é o seu canal?',
-    image: '/tests/vac.jpg',
+    image: '/tests/mbti.jpg',
     description: 'Baseado nos estudos de Richard Bandler e John Grinder (PNL, anos 1970), o VAC identifica o canal predominante pelo qual o seu cérebro recebe e processa o mundo. Saber se você é mais Visual, Auditivo ou Sinestésico muda completamente a forma como você se comunica, vende, aprende e lidera. Apple, Disney, Google e McKinsey aplicam esses princípios em treinamentos de comunicação e vendas.',
     tips: [
       { icon: '👁', text: 'Pense no seu dia a dia profissional. Vá pela primeira reação, sem calcular.' },
@@ -236,7 +236,7 @@ const INTROS: Record<string, {
   BIG_FIVE: {
     title: 'Big Five — Estilo de Liderança',
     subtitle: 'A ciência por trás do seu jeito de liderar',
-    image: '/tests/big-five.jpg',
+    image: '/tests/eneagrama.jpg',
     description: 'O Big Five é o modelo de personalidade mais cientificamente validado do mundo, desenvolvido por Lewis Goldberg, Paul Costa e Robert McCrae. Esta versão Liderança traduz os 5 fatores em arquétipos comerciais: Inovador, Executor, Humano e Especialista. Usado por Google (Project Oxygen), Microsoft, McKinsey, Deloitte e Hogan em assessment de liderança e planos de sucessão.',
     tips: [
       { icon: '🎯', text: 'Responda pelo seu comportamento real no trabalho, não pelo ideal que gostaria de ser.' },

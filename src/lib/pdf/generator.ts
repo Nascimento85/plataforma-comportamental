@@ -763,6 +763,242 @@ function TemperamentReport({ d, name, company }: { d: Record<string, unknown>; n
 }
 
 // ============================================================
+// RELATÓRIO VAC, Visual / Auditivo / Sinestésico
+// ============================================================
+function VACReport({ d, name, company }: { d: Record<string, unknown>; name: string; company: string }) {
+  const percentages    = (d.percentages    ?? {}) as Record<string, number>
+  const scores         = (d.scores         ?? {}) as Record<string, number>
+  const primaryChannel = d.primaryChannel  as 'V' | 'A' | 'S'
+  const primaryReport  = (d.primaryReport  ?? {}) as Record<string, unknown>
+  const secondaryReport = (d.secondaryReport ?? {}) as Record<string, unknown>
+  const combinedReport  = d.combinedReport as Record<string, unknown> | null
+
+  const LABELS: Record<string, string> = { V: 'Visual', A: 'Auditivo', S: 'Sinestésico' }
+  const COLORS: Record<string, string> = { V: '#3d4f7c', A: '#c4633a', S: '#7a9e7e' }
+  const channels: Array<'V' | 'A' | 'S'> = ['V', 'A', 'S']
+  const pc = COLORS[primaryChannel] ?? BRAND
+  const pName = (primaryReport.nome as string) ?? LABELS[primaryChannel] ?? primaryChannel
+
+  return React.createElement(
+    Document, null,
+
+    // ── PÁGINA 1 ──────────────────────────────────────────────
+    React.createElement(
+      Page, { size: 'A4', style: styles.page },
+      React.createElement(ReportHeader, { title: 'VAC, Mapa Sensorial', name, company }),
+
+      // Perfil predominante
+      React.createElement(
+        View, { style: { ...styles.profileCard, backgroundColor: '#f9fafb', borderWidth: 1, borderColor: GRAY_200 } },
+        React.createElement(
+          View, { style: { ...styles.profileBadge, backgroundColor: pc } },
+          React.createElement(Text, { style: { ...styles.profileBadgeText, fontSize: 22 } }, pName.charAt(0))
+        ),
+        React.createElement(
+          View, { style: { flex: 1 } },
+          React.createElement(Text, { style: styles.profileName }, `Perfil ${pName}`),
+          React.createElement(Text, { style: { ...styles.profileTagline, color: pc } }, (primaryReport.fraseImpacto as string) ?? ''),
+          React.createElement(Text, { style: styles.profileSub }, `Secundário: ${(secondaryReport.nome as string) ?? '—'}`)
+        )
+      ),
+
+      // Distribuição dos canais
+      React.createElement(
+        View, { style: styles.section },
+        React.createElement(Text, { style: styles.sectionTitle }, 'Intensidade dos canais sensoriais'),
+        ...channels
+          .slice()
+          .sort((a, b) => (percentages[b] ?? 0) - (percentages[a] ?? 0))
+          .map((c) =>
+            React.createElement(Bar, {
+              key: c,
+              label: `${LABELS[c]} (${scores[c] ?? 0} pts de 40)`,
+              pct: percentages[c] ?? 0,
+              color: COLORS[c],
+              bold: c === primaryChannel,
+            })
+          )
+      ),
+
+      // Características principais
+      React.createElement(
+        View, { style: { ...styles.highlight, backgroundColor: '#f9fafb', borderLeftColor: pc } },
+        React.createElement(Text, { style: { ...styles.highlightTitle, color: pc } }, `Características do perfil ${pName}`),
+        React.createElement(BulletList, { items: (primaryReport.caracteristicas as string[]) ?? [], color: pc })
+      ),
+
+      React.createElement(Footer)
+    ),
+
+    // ── PÁGINA 2 ──────────────────────────────────────────────
+    React.createElement(
+      Page, { size: 'A4', style: styles.page },
+      React.createElement(ReportHeader, { title: 'VAC, Mapa Sensorial', name, company }),
+
+      // Como se comunica melhor
+      React.createElement(
+        View, { style: { ...styles.infoCard, backgroundColor: '#f0f9ff', borderColor: '#bae6fd', marginBottom: 16 } },
+        React.createElement(Text, { style: { ...styles.infoLabel, color: '#0369a1' } }, 'Como se comunica melhor'),
+        React.createElement(Text, { style: { ...styles.infoText, color: '#0c4a6e' } }, (primaryReport.comunicacao as string) ?? '')
+      ),
+
+      // Ponto de melhoria
+      React.createElement(
+        View, { style: { ...styles.infoCard, backgroundColor: '#fef2f2', borderColor: '#fecaca', marginBottom: 16 } },
+        React.createElement(Text, { style: { ...styles.infoLabel, color: '#991b1b' } }, 'Ponto de atenção'),
+        React.createElement(Text, { style: { ...styles.infoText, color: '#7f1d1d' } }, (primaryReport.pontoDeMelhoria as string) ?? '')
+      ),
+
+      // Canal combinado (se houver)
+      combinedReport
+        ? React.createElement(
+            View, { style: { ...styles.highlight, backgroundColor: '#fffbeb', borderLeftColor: '#d4943a' } },
+            React.createElement(Text, { style: { ...styles.highlightTitle, color: '#7a4f17' } },
+              `Canal combinado: ${combinedReport.nome as string}`
+            ),
+            React.createElement(Text, { style: { ...styles.highlightText, marginBottom: 6 } }, combinedReport.descricao as string),
+            React.createElement(Text, { style: { fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#7a4f17', marginBottom: 3 } }, 'Brilha em:'),
+            React.createElement(Text, { style: { ...styles.highlightText, marginBottom: 6 } }, combinedReport.brilhaEm as string),
+            React.createElement(Text, { style: { fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#7a4f17', marginBottom: 3 } }, 'Cuidado com:'),
+            React.createElement(Text, { style: styles.highlightText }, combinedReport.cuidadoCom as string)
+          )
+        : null,
+
+      React.createElement(Footer)
+    )
+  )
+}
+
+// ============================================================
+// RELATÓRIO BIG FIVE, Estilo de Liderança
+// ============================================================
+function BigFiveReport({ d, name, company }: { d: Record<string, unknown>; name: string; company: string }) {
+  const percentages = (d.percentages ?? {}) as Record<string, number>
+  const scoresAvg   = (d.scoresAvg   ?? {}) as Record<string, number>
+  const archetype   = (d.archetypeReport ?? {}) as Record<string, unknown>
+
+  const LABELS: Record<string, string> = {
+    EXT: 'Influência & Comunicação',
+    AMB: 'Gestão de Pessoas & Empatia',
+    CON: 'Foco em Resultados & Execução',
+    EST: 'Estabilidade Emocional',
+    ABE: 'Inovação & Visão Estratégica',
+  }
+  const COLORS: Record<string, string> = {
+    EXT: '#c4633a', AMB: '#7a9e7e', CON: '#3d4f7c', EST: '#c9a84c', ABE: '#c47a72',
+  }
+  const factors = ['EXT', 'AMB', 'CON', 'EST', 'ABE']
+
+  const superpoderes = (archetype.superpoderes ?? []) as Array<{ titulo: string; descricao: string }>
+  const pontosCegos  = (archetype.pontosCegos  ?? []) as Array<{ titulo: string; descricao: string }>
+  const planoDeAcao  = (archetype.planoDeAcao  ?? []) as Array<{ titulo: string; descricao: string }>
+
+  return React.createElement(
+    Document, null,
+
+    // ── PÁGINA 1 ──────────────────────────────────────────────
+    React.createElement(
+      Page, { size: 'A4', style: styles.page },
+      React.createElement(ReportHeader, { title: 'Big Five, Estilo de Liderança', name, company }),
+
+      // Arquétipo identificado
+      React.createElement(
+        View, { style: { ...styles.profileCard, backgroundColor: '#f9fafb', borderWidth: 1, borderColor: GRAY_200 } },
+        React.createElement(
+          View, { style: { flex: 1 } },
+          React.createElement(Text, { style: styles.profileName }, (archetype.nome as string) ?? 'Líder'),
+          React.createElement(Text, { style: { ...styles.profileTagline, color: BRAND } }, (archetype.combinacao as string) ?? '')
+        )
+      ),
+
+      // Visão Geral
+      React.createElement(
+        View, { style: { ...styles.descriptionBox } },
+        React.createElement(Text, { style: styles.descriptionTitle }, 'Visão Geral do seu Perfil'),
+        React.createElement(Text, { style: styles.descriptionText }, (archetype.visaoGeral as string) ?? '')
+      ),
+
+      // Radar dos 5 fatores
+      React.createElement(
+        View, { style: styles.section },
+        React.createElement(Text, { style: styles.sectionTitle }, 'Radar dos 5 fatores de liderança'),
+        ...factors
+          .slice()
+          .sort((a, b) => (percentages[b] ?? 0) - (percentages[a] ?? 0))
+          .map((f) =>
+            React.createElement(Bar, {
+              key: f,
+              label: `${LABELS[f]} (média ${(scoresAvg[f] ?? 0).toFixed(2)} de 5.0)`,
+              pct: percentages[f] ?? 0,
+              color: COLORS[f],
+            })
+          )
+      ),
+
+      React.createElement(Footer)
+    ),
+
+    // ── PÁGINA 2: Superpoderes + Pontos Cegos ─────────────────
+    React.createElement(
+      Page, { size: 'A4', style: styles.page },
+      React.createElement(ReportHeader, { title: 'Big Five, Estilo de Liderança', name, company }),
+
+      React.createElement(
+        View, { style: styles.section },
+        React.createElement(Text, { style: { ...styles.sectionTitle, color: '#166534' } }, 'Seus maiores Superpoderes'),
+        ...superpoderes.map((item, i) =>
+          React.createElement(
+            View, { key: i, style: { marginBottom: 10 } },
+            React.createElement(Text, { style: { fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#166534', marginBottom: 3 } }, item.titulo),
+            React.createElement(Text, { style: { fontSize: 10, color: GRAY_700, lineHeight: 1.55 } }, item.descricao)
+          )
+        )
+      ),
+
+      React.createElement(
+        View, { style: styles.section },
+        React.createElement(Text, { style: { ...styles.sectionTitle, color: '#991b1b' } }, 'Seus Pontos Cegos'),
+        ...pontosCegos.map((item, i) =>
+          React.createElement(
+            View, { key: i, style: { marginBottom: 10 } },
+            React.createElement(Text, { style: { fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#991b1b', marginBottom: 3 } }, item.titulo),
+            React.createElement(Text, { style: { fontSize: 10, color: GRAY_700, lineHeight: 1.55 } }, item.descricao)
+          )
+        )
+      ),
+
+      React.createElement(Footer)
+    ),
+
+    // ── PÁGINA 3: Plano de Ação + Brilha em ───────────────────
+    React.createElement(
+      Page, { size: 'A4', style: styles.page },
+      React.createElement(ReportHeader, { title: 'Big Five, Estilo de Liderança', name, company }),
+
+      React.createElement(
+        View, { style: styles.section },
+        React.createElement(Text, { style: styles.sectionTitle }, 'Plano de Ação Prático'),
+        ...planoDeAcao.map((item, i) =>
+          React.createElement(
+            View, { key: i, style: { marginBottom: 10 } },
+            React.createElement(Text, { style: { fontSize: 10, fontFamily: 'Helvetica-Bold', color: BRAND, marginBottom: 3 } }, `${i + 1}. ${item.titulo}`),
+            React.createElement(Text, { style: { fontSize: 10, color: GRAY_700, lineHeight: 1.55 } }, item.descricao)
+          )
+        )
+      ),
+
+      React.createElement(
+        View, { style: { ...styles.highlight, backgroundColor: '#f0f9ff', borderLeftColor: '#0369a1' } },
+        React.createElement(Text, { style: { ...styles.highlightTitle, color: '#0369a1' } }, 'Onde este arquétipo brilha'),
+        React.createElement(Text, { style: styles.highlightText }, (archetype.brilhaEm as string) ?? '')
+      ),
+
+      React.createElement(Footer)
+    )
+  )
+}
+
+// ============================================================
 // FUNÇÃO PRINCIPAL
 // ============================================================
 export async function generateReport(input: GenerateReportInput): Promise<Buffer> {
@@ -782,6 +1018,12 @@ export async function generateReport(input: GenerateReportInput): Promise<Buffer
       break
     case 'TEMPERAMENT':
       doc = React.createElement(TemperamentReport, { d: resultData, name: employeeName, company: companyName })
+      break
+    case 'VAC':
+      doc = React.createElement(VACReport, { d: resultData, name: employeeName, company: companyName })
+      break
+    case 'BIG_FIVE':
+      doc = React.createElement(BigFiveReport, { d: resultData, name: employeeName, company: companyName })
       break
     default:
       doc = React.createElement(

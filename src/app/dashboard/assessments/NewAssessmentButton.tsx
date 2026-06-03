@@ -131,7 +131,7 @@ const TEST_TYPES: TestType[] = [
     short: 'VAC',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.VAC,
-    image: '/tests/vac.jpg',
+    image: '/tests/mbti.jpg',
     hook: 'Como o cérebro recebe o mundo. Base usada por Apple e McKinsey.',
     description:
       'Identifica o canal sensorial predominante do candidato, Visual, Auditivo ou Sinestésico. Saber esse canal muda a forma de comunicar, vender, treinar e liderar a pessoa. Banco rotativo de 60 questões com sorteio determinístico por sessão para evitar viés de repetição. Devolutiva consultiva enriquecida por Claude AI.',
@@ -148,7 +148,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Big Five',
     category: 'LEADERSHIP',
     credits: TEST_PRICE.BIG_FIVE,
-    image: '/tests/big-five.jpg',
+    image: '/tests/eneagrama.jpg',
     hook: 'A ciência da liderança. Usado por Google, McKinsey e Hogan.',
     description:
       'O modelo de personalidade mais cientificamente validado do mundo, adaptado para liderança corporativa. Traduz os 5 fatores OCEAN em 4 arquétipos comerciais: Inovador, Executor, Humano e Especialista. Cada arquétipo vem com Superpoderes, Pontos Cegos e Plano de Ação trimestral. Banco rotativo de 90 itens com inversão científica para neutralizar viés.',
