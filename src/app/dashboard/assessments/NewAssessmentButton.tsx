@@ -254,8 +254,8 @@ const CATEGORY_META: Record<CategoryKey, { title: string; subtitle: string }> = 
   },
 }
 
-// Ordem corporativa: Performance (DISC) → Carreira (PDI) → Cultura (Linguagem) → Profundidade (Arquétipos)
-const CATEGORY_ORDER: CategoryKey[] = ['BEHAVIORAL', 'CAREER', 'RELATIONSHIPS', 'ARCHETYPE']
+// Ordem corporativa: Performance (DISC) → Liderança → Carreira (PDI) → Cultura (Linguagem) → Profundidade (Arquétipos)
+const CATEGORY_ORDER: CategoryKey[] = ['BEHAVIORAL', 'LEADERSHIP', 'CAREER', 'RELATIONSHIPS', 'ARCHETYPE']
 
 // ═══════════════════════════════════════════════════════════════
 // Componente
@@ -326,6 +326,35 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
         employeeEmail: form.employeeEmail,
       })
       router.refresh()
+    } catch {
+      setError('Erro ao conectar. Tente novamente.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  /**
+   * "Fazer teste agora" — cria assessment auto vinculado ao usuário logado
+   * (servidor pega name/email da session) e redireciona direto pra página do teste.
+   * Não envia e-mail. Não exige preencher nome/email do candidato.
+   */
+  async function handleSelfStart() {
+    setError('')
+    setLoading(true)
+    try {
+      if (form.testType === 'BUNDLE_4') {
+        setError('O Bundle 4 precisa ser enviado por link. Use o botão Criar e enviar link.')
+        return
+      }
+      const res = await fetch('/api/assessments', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ testType: form.testType, selfAssessment: true }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setError(data.error ?? 'Erro ao iniciar o teste.'); return }
+      // Redireciona direto pro fluxo do teste
+      router.push(data.testLink.replace(/^https?:\/\/[^/]+/, ''))
     } catch {
       setError('Erro ao conectar. Tente novamente.')
     } finally {
@@ -460,12 +489,17 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       </div>
                     )}
 
+                    <div className="rounded-2xl px-4 py-3 text-[13px] font-sans font-semibold"
+                         style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#3d5a40' }}>
+                      Preencha os campos abaixo só se for <strong>enviar o teste para outra pessoa</strong>. Para fazer agora você mesmo, basta escolher a avaliação e clicar em <strong>Fazer teste agora</strong>.
+                    </div>
+
                     <div>
                       <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
-                        Nome do candidato
+                        Nome do candidato <span className="text-[10px] font-medium text-soul-ink/55 normal-case tracking-normal">(opcional)</span>
                       </label>
                       <input
-                        type="text" required value={form.employeeName}
+                        type="text" value={form.employeeName}
                         onChange={(e) => update('employeeName', e.target.value)}
                         className="soul-input text-[15px] font-semibold py-3.5" placeholder="João Silva"
                       />
@@ -473,10 +507,10 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                     <div>
                       <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
-                        E-mail do candidato
+                        E-mail do candidato <span className="text-[10px] font-medium text-soul-ink/55 normal-case tracking-normal">(opcional)</span>
                       </label>
                       <input
-                        type="email" required value={form.employeeEmail}
+                        type="email" value={form.employeeEmail}
                         onChange={(e) => update('employeeEmail', e.target.value)}
                         className="soul-input text-[15px] font-semibold py-3.5" placeholder="joao@empresa.com"
                       />
@@ -538,22 +572,29 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       </div>
                     </div>
 
-                    <div className="flex gap-3 pt-2">
+                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
                       <button
-                        type="button" onClick={handleClose}
-                        className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all"
-                        style={{ borderColor: 'rgba(28,26,23,0.25)', color: 'rgba(28,26,23,0.85)' }}
+                        type="button"
+                        onClick={handleSelfStart}
+                        disabled={loading || form.testType === 'BUNDLE_4'}
+                        title={form.testType === 'BUNDLE_4' ? 'O Bundle 4 só funciona por link enviado' : 'Fazer este teste agora mesmo, no seu próprio perfil'}
+                        className="flex-[1.3] py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
+                        style={{ background: 'linear-gradient(135deg, #5e8762, #7a9e7e)', boxShadow: '0 6px 18px rgba(122,158,126,0.30)' }}
                       >
-                        Cancelar
+                        {loading ? 'Abrindo teste…' : '▶ Fazer teste agora'}
                       </button>
                       <button
-                        type="submit" disabled={loading}
-                        className="flex-[1.3] py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px shadow-terra disabled:opacity-60 disabled:translate-y-0"
-                        style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+                        type="submit"
+                        disabled={loading}
+                        className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all disabled:opacity-60"
+                        style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e', background: 'white' }}
                       >
-                        {loading ? 'Criando link…' : 'Criar e enviar link ✦'}
+                        {loading ? 'Criando link…' : '✦ Criar e enviar link'}
                       </button>
                     </div>
+                    <p className="text-[11.5px] text-soul-ink/60 font-medium text-center mt-1">
+                      <strong>Fazer teste agora</strong>: você mesmo responde, sem digitar nada. &nbsp;·&nbsp; <strong>Criar e enviar link</strong>: gera um link para enviar a outra pessoa.
+                    </p>
                   </form>
                 </div>
 

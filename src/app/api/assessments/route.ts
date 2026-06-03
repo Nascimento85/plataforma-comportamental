@@ -23,9 +23,11 @@ const CREDIT_COST: Record<string, number> = {
 }
 
 const schema = z.object({
-  employeeName: z.string().min(2),
-  employeeEmail: z.string().email(),
-  testType: z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE', 'VAC', 'BIG_FIVE']),
+  // Quando selfAssessment=true, name/email são opcionais (usa dados do user logado)
+  employeeName:   z.string().min(2).optional(),
+  employeeEmail:  z.string().email().optional(),
+  testType:       z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE', 'VAC', 'BIG_FIVE']),
+  selfAssessment: z.boolean().optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -41,11 +43,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 })
     }
 
-    const { employeeName, employeeEmail, testType } = parsed.data
+    const { testType, selfAssessment } = parsed.data
 
     // Verifica se é admin (admin não consome créditos)
-    const company = await prisma.company.findUnique({ where: { id: companyId }, select: { isAdmin: true, name: true } })
+    const company = await prisma.company.findUnique({
+      where: { id: companyId },
+      select: { isAdmin: true, name: true, email: true },
+    })
     const isAdmin = company?.isAdmin ?? false
+
+    // Resolve nome/email finais:
+    // - Self assessment: usa dados do user logado (sem precisar digitar nada no form)
+    // - Envio externo: exige employeeName + employeeEmail do form
+    let employeeName:  string
+    let employeeEmail: string
+    if (selfAssessment) {
+      employeeName  = (company?.name  ?? session.name  ?? '').trim()
+      employeeEmail = (company?.email ?? session.email ?? '').trim().toLowerCase()
+      if (!employeeName || !employeeEmail) {
+        return NextResponse.json({ error: 'Não foi possível identificar seu perfil. Tente sair e entrar de novo.' }, { status: 400 })
+      }
+    } else {
+      employeeName  = (parsed.data.employeeName  ?? '').trim()
+      employeeEmail = (parsed.data.employeeEmail ?? '').trim().toLowerCase()
+      if (employeeName.length < 2 || !employeeEmail.includes('@')) {
+        return NextResponse.json({ error: 'Informe nome e e-mail do candidato.' }, { status: 400 })
+      }
+    }
 
     // Custo do teste
     const creditCost = CREDIT_COST[testType] ?? 1
@@ -110,22 +134,25 @@ export async function POST(request: NextRequest) {
 
     const testLink = `${process.env.NEXT_PUBLIC_APP_URL}/test/${token}`
 
-    // Envia e-mail ao colaborador (não bloqueia nem cancela em caso de falha)
-
-    const { sent: emailSent, error: emailError } = await sendAssessmentEmail({
-      employeeName:  employeeName,
-      employeeEmail: employeeEmail,
-      companyName:   company?.name ?? 'sua empresa',
-      testType,
-      testLink,
-      expiresAt,
-    })
-
-    if (emailError) {
-      console.warn('[assessments] E-mail não enviado:', emailError)
+    // Envia e-mail ao colaborador (não bloqueia nem cancela em caso de falha).
+    // No modo selfAssessment NÃO enviamos e-mail: o usuário vai ser redirecionado direto pro teste.
+    let emailSent = false
+    if (!selfAssessment) {
+      const result = await sendAssessmentEmail({
+        employeeName:  employeeName,
+        employeeEmail: employeeEmail,
+        companyName:   company?.name ?? 'sua empresa',
+        testType,
+        testLink,
+        expiresAt,
+      })
+      emailSent = result.sent
+      if (result.error) {
+        console.warn('[assessments] E-mail não enviado:', result.error)
+      }
     }
 
-    return NextResponse.json({ id: assessment.id, testLink, emailSent }, { status: 201 })
+    return NextResponse.json({ id: assessment.id, testLink, emailSent, selfAssessment: !!selfAssessment }, { status: 201 })
   } catch (err) {
     console.error('[assessments POST]', err)
     return NextResponse.json({ error: 'Erro interno.' }, { status: 500 })
