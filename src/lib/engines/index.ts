@@ -27,3 +27,20 @@ export {
   EI_DOMAIN_SUBTHEMES,
   shuffleEIQuestions,
 } from './emotional-intelligence'
+export {
+  calculateVac,
+  getVacSessionQuestions,
+  VAC_QUESTIONS,
+  VAC_CHANNEL_REPORTS,
+  VAC_COMBINED_REPORTS,
+  VAC_CHANNEL_LABELS,
+} from './vac'
+export {
+  calculateBigFive,
+  getBigFiveSessionQuestions,
+  BIG_FIVE_QUESTIONS,
+  BIG_FIVE_FACTOR_LABELS,
+  BIG_FIVE_FACTOR_DESCRIPTIONS,
+  BIG_FIVE_FACTOR_COLORS,
+  BIG_FIVE_ARCHETYPES,
+} from './big-five'
