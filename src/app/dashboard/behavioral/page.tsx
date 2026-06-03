@@ -131,11 +131,11 @@ const LENSES: Lens[] = [
     credits: TEST_PRICE.VAC,
     pillar: 'Visual · Auditivo · Sinestésico',
     description:
-      'Identifica o canal sensorial predominante de cada pessoa. Saber se o candidato é mais Visual, Auditivo ou Sinestésico muda totalmente a forma de se comunicar, vender, treinar e liderar. Banco rotativo de 60 questões para evitar viés de repetição.',
+      'Identifica o canal sensorial predominante de cada pessoa. Saber se o candidato é mais Visual, Auditivo ou Sinestésico muda totalmente a forma de se comunicar, vender, treinar e liderar.',
     application:
       'Treinamento de vendedores, adaptação de comunicação de líderes, montagem de squads de atendimento e ajuste fino de programas de onboarding.',
     bullets: [
-      'Banco rotativo de 60 questões (30 por sessão)',
+      'Inventário sensorial baseado em PNL',
       'Perfil predominante + canais combinados (VA, AS, VS)',
       'Recomendações específicas de comunicação para o gestor',
       'Devolutiva consultiva aprofundada',

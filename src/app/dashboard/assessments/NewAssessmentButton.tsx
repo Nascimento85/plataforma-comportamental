@@ -134,9 +134,9 @@ const TEST_TYPES: TestType[] = [
     image: '/tests/vac.svg',
     hook: 'Como o cérebro recebe o mundo. Base usada por Apple e McKinsey.',
     description:
-      'Identifica o canal sensorial predominante do candidato, Visual, Auditivo ou Sinestésico. Saber esse canal muda a forma de comunicar, vender, treinar e liderar a pessoa. Banco rotativo de 60 questões com sorteio determinístico por sessão para evitar viés de repetição. Devolutiva consultiva aprofundada.',
+      'Identifica o canal sensorial predominante do candidato, Visual, Auditivo ou Sinestésico. Saber esse canal muda a forma de comunicar, vender, treinar e liderar a pessoa. Devolutiva consultiva aprofundada.',
     bullets: [
-      'Banco rotativo de 60 questões (30 por sessão)',
+      'Inventário sensorial baseado em PNL',
       'Perfil predominante + canais combinados (VA, AS, VS)',
       'Plano prático de comunicação e liderança por canal',
     ],
@@ -151,7 +151,7 @@ const TEST_TYPES: TestType[] = [
     image: '/tests/big-five.svg',
     hook: 'A ciência da liderança. Usado por Google, McKinsey e Hogan.',
     description:
-      'O modelo de personalidade mais cientificamente validado do mundo, adaptado para liderança corporativa. Traduz os 5 fatores OCEAN em 4 arquétipos comerciais: Inovador, Executor, Humano e Especialista. Cada arquétipo vem com Superpoderes, Pontos Cegos e Plano de Ação trimestral. Banco rotativo de 90 itens com inversão científica para neutralizar viés.',
+      'O modelo de personalidade mais cientificamente validado do mundo, adaptado para liderança corporativa. Traduz os 5 fatores OCEAN em 4 arquétipos comerciais: Inovador, Executor, Humano e Especialista. Cada arquétipo vem com Superpoderes, Pontos Cegos e Plano de Ação trimestral.',
     bullets: [
       'Teste com 44 questões validadas',
       'Cálculo científico com inversão de itens',

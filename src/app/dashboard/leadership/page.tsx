@@ -40,7 +40,7 @@ const LEADERSHIP_TESTS: LeadershipLens[] = [
     credits: TEST_PRICE.BIG_FIVE,
     pillar: 'Influência · Empatia · Execução · Estabilidade · Inovação',
     description:
-      'O Big Five é o modelo de personalidade mais cientificamente validado do mundo. Esta versão Liderança traduz os 5 fatores em 4 arquétipos corporativos (Inovador, Executor, Humano, Especialista) e entrega um plano de ação concreto para o próximo trimestre. Banco rotativo de 90 itens com inversão científica para neutralizar viés de resposta.',
+      'O Big Five é o modelo de personalidade mais cientificamente validado do mundo. Esta versão Liderança traduz os 5 fatores em 4 arquétipos corporativos (Inovador, Executor, Humano, Especialista) e entrega um plano de ação concreto para o próximo trimestre.',
     application:
       'Planos de sucessão (Succession Planning), assessments de promoção, mapeamento de high potentials, alocação de gestores por arquétipo (Inovador para inovação, Executor para operações, Humano para CS, Especialista para áreas técnicas) e PDIs com Superpoderes, Pontos Cegos e ações trimestrais prontos.',
     bullets: [
