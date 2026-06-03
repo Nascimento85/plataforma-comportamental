@@ -138,7 +138,7 @@ const LENSES: Lens[] = [
       'Banco rotativo de 60 questões (30 por sessão)',
       'Perfil predominante + canais combinados (VA, AS, VS)',
       'Recomendações específicas de comunicação para o gestor',
-      'Devolutiva consultiva enriquecida por Claude AI',
+      'Devolutiva consultiva aprofundada',
     ],
     color: '#d4943a',
     emoji: '👁',

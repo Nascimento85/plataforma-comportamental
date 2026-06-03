@@ -44,10 +44,10 @@ const LEADERSHIP_TESTS: LeadershipLens[] = [
     application:
       'Planos de sucessão (Succession Planning), assessments de promoção, mapeamento de high potentials, alocação de gestores por arquétipo (Inovador para inovação, Executor para operações, Humano para CS, Especialista para áreas técnicas) e PDIs com Superpoderes, Pontos Cegos e ações trimestrais prontos.',
     bullets: [
-      'Banco rotativo de 90 questões (44 por sessão)',
-      'Cálculo científico com inversão de itens (anti viés)',
+      'Teste com 44 questões validadas',
+      'Cálculo científico com inversão de itens',
       '4 arquétipos comerciais de liderança',
-      'Devolutiva consultiva enriquecida por Claude AI',
+      'Devolutiva consultiva com cruzamento de dados',
     ],
     color: '#3d4f7c',
     emoji: '🎯',
