@@ -190,9 +190,9 @@ export default function LoveLanguagesPage() {
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <SelfStartTestButton testType="LOVE_LANGUAGES" label="▶ Descobrir agora" fullWidth />
-              <NewAssessmentButton initialCategory="RELATIONSHIPS" variant="secondary">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <SelfStartTestButton testType="LOVE_LANGUAGES" label="Descobrir agora" fullWidth />
+              <NewAssessmentButton initialCategory="RELATIONSHIPS" variant="secondary" fullWidth>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                   <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
                 </svg>

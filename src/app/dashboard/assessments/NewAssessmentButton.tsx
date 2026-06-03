@@ -274,9 +274,11 @@ interface Props {
   initialCategory?: CategoryKey
   /** Pré-seleciona um teste específico (tem precedência sobre initialCategory). Ex: "MBTI", "ENNEAGRAM" */
   initialTestType?: string
+  /** Faz o trigger ocupar 100% da largura do container (pra ficar simétrico com SelfStartTestButton). */
+  fullWidth?: boolean
 }
 
-export default function NewAssessmentButton({ children, variant = 'primary', initialCategory, initialTestType }: Props) {
+export default function NewAssessmentButton({ children, variant = 'primary', initialCategory, initialTestType, fullWidth }: Props) {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
@@ -379,9 +381,10 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
     setOpen(true)
   }
 
-  const triggerClasses = variant === 'secondary'
-    ? 'inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all'
-    : 'inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra'
+  const widthClass = fullWidth ? 'w-full justify-center' : ''
+  const triggerClasses = (variant === 'secondary'
+    ? `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all bg-white`
+    : `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra`) + ' ' + widthClass
 
   const triggerStyle = variant === 'secondary'
     ? { borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }
@@ -581,7 +584,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                         className="flex-[1.3] py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
                         style={{ background: 'linear-gradient(135deg, #5e8762, #7a9e7e)', boxShadow: '0 6px 18px rgba(122,158,126,0.30)' }}
                       >
-                        {loading ? 'Abrindo teste…' : '▶ Fazer teste agora'}
+                        {loading ? 'Abrindo teste…' : 'Fazer teste agora'}
                       </button>
                       <button
                         type="submit"
@@ -589,7 +592,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                         className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all disabled:opacity-60"
                         style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e', background: 'white' }}
                       >
-                        {loading ? 'Criando link…' : '✦ Criar e enviar link'}
+                        {loading ? 'Criando link…' : 'Criar e enviar link'}
                       </button>
                     </div>
                     <p className="text-[11.5px] text-soul-ink/60 font-medium text-center mt-1">

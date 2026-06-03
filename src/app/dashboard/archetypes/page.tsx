@@ -255,9 +255,9 @@ function Section({
                 {cta.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{cta.credits > 1 ? 's' : ''}</span>
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 items-stretch">
-              <SelfStartTestButton testType={cta.testType} label="▶ Fazer agora" />
-              <NewAssessmentButton initialTestType={cta.testType} variant="secondary">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-[260px]">
+              <SelfStartTestButton testType={cta.testType} label="Fazer agora" fullWidth />
+              <NewAssessmentButton initialTestType={cta.testType} variant="secondary" fullWidth>
                 <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
                   <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
                 </svg>
@@ -300,9 +300,9 @@ export default async function ArchetypesPage() {
           </p>
           <p className="text-[12px] text-soul-ink/55 font-semibold mt-1">{TEST_PRICE.ARCHETYPE} créditos · O mais completo</p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-2 items-stretch">
-          <SelfStartTestButton testType="ARCHETYPE" label="▶ Fazer Arquétipos agora" />
-          <NewAssessmentButton initialTestType="ARCHETYPE" variant="secondary">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-[260px]">
+          <SelfStartTestButton testType="ARCHETYPE" label="Fazer Arquétipos agora" fullWidth />
+          <NewAssessmentButton initialTestType="ARCHETYPE" variant="secondary" fullWidth>
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
               <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
             </svg>

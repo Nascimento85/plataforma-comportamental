@@ -51,11 +51,13 @@ export default function SelfStartTestButton({
     }
   }
 
+  // Mesma altura, padding e tipografia do NewAssessmentButton (primary) para
+  // ficarem perfeitamente alinhados quando aparecem lado a lado.
   const baseClass = variant === 'compact'
-    ? 'inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12.5px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
-    : 'inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13.5px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
+    ? 'inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
+    : 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
 
-  const cls = `${baseClass} ${fullWidth ? 'w-full justify-center' : ''}`
+  const cls = `${baseClass} ${fullWidth ? 'w-full' : ''}`
 
   return (
     <>
@@ -69,7 +71,7 @@ export default function SelfStartTestButton({
           boxShadow:  '0 4px 14px rgba(122,158,126,0.30)',
         }}
       >
-        <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
           <path d="M4 3l9 5-9 5V3z" />
         </svg>
         {loading ? 'Abrindo…' : (label ?? 'Fazer teste agora')}

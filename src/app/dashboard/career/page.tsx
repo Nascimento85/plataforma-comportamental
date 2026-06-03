@@ -157,21 +157,21 @@ export default async function CareerPage() {
               </div>
 
               <div className="mt-auto pt-4 space-y-3 border-t border-soul-mist/60">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/65">Investimento</p>
-                    <p className="font-serif text-2xl font-semibold text-soul-ink">
-                      {test.credits} <span className="text-base font-medium text-soul-ink/70">crédito{test.credits > 1 ? 's' : ''}</span>
-                    </p>
-                  </div>
-                  <SelfStartTestButton testType={test.key} label={`Fazer ${test.short} agora`} />
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/65">Investimento</p>
+                  <p className="font-serif text-2xl font-semibold text-soul-ink">
+                    {test.credits} <span className="text-base font-medium text-soul-ink/70">crédito{test.credits > 1 ? 's' : ''}</span>
+                  </p>
                 </div>
-                <NewAssessmentButton initialTestType={test.key} variant="secondary">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-                  </svg>
-                  {ctaLabel(accountType, test.short)}
-                </NewAssessmentButton>
+                <div className="space-y-2">
+                  <SelfStartTestButton testType={test.key} label={`Fazer ${test.short} agora`} fullWidth />
+                  <NewAssessmentButton initialTestType={test.key} variant="secondary" fullWidth>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+                    </svg>
+                    {ctaLabel(accountType, test.short)}
+                  </NewAssessmentButton>
+                </div>
               </div>
             </div>
           </article>
