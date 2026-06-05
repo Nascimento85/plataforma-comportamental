@@ -70,8 +70,17 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
           <Link href="/dashboard/gestao-times" className="text-[12px] font-semibold text-white/60 hover:text-white/90 no-underline">
             ← Voltar para times
           </Link>
-          <h1 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight mt-2">{teamNome}</h1>
-          {teamDescricao && <p className="text-[14px] text-white/70 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
+          <div className="flex items-start justify-between gap-4 flex-wrap mt-2">
+            <div>
+              <h1 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight">{teamNome}</h1>
+              {teamDescricao && <p className="text-[14px] text-white/70 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
+            </div>
+            <Link href={`/dashboard/gestao-times/${teamId}/team-build`}
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline flex-shrink-0"
+                  style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
+              ◇ Team Build deste time →
+            </Link>
+          </div>
         </div>
       </div>
 
