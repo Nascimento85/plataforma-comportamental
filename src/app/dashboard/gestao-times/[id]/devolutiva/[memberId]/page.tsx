@@ -1,8 +1,7 @@
 // ============================================================
 // /dashboard/gestao-times/[id]/devolutiva/[memberId]
-// Copiloto de devolutiva (consulta). Mostra zona, guia de tom,
-// gargalos e ações de PDI por perfil DISC.
-// (Fase 2 adicionará campos SCI editáveis + salvamento de PDI + IA.)
+// Copiloto de devolutiva: guia de tom + gargalos + ações por perfil,
+// SCI editável, criação de PDI, timeline de check-ins e botão de IA.
 // ============================================================
 
 import type { Metadata } from 'next'
@@ -15,6 +14,7 @@ import {
   ZONAS, PERFIS_LIDERANCA, scoreCombinado, classificarZona,
   type ZonaKey, type DiscKey,
 } from '@/content/gestao-times/disc-lideranca'
+import PdiClient from './PdiClient'
 
 export const metadata: Metadata = { title: 'Preparar Devolutiva · Psique' }
 export const dynamic = 'force-dynamic'
@@ -35,6 +35,29 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
   const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(score)) as ZonaKey | null
   const zona = zonaKey ? ZONAS[zonaKey] : null
   const perfil = member.perfilDisc ? PERFIS_LIDERANCA[member.perfilDisc as DiscKey] : null
+
+  // PDI ativo mais recente + check-ins
+  const pdiRaw = await prismaAny.talentPDI.findFirst({
+    where: { memberId: member.id, companyId: session.id, status: { not: 'ARQUIVADO' } },
+    orderBy: { createdAt: 'desc' },
+    include: { checkIns: { orderBy: { createdAt: 'desc' } } },
+  })
+
+  const pdi = pdiRaw ? {
+    id: pdiRaw.id,
+    sciSituacao: pdiRaw.sciSituacao ?? '',
+    sciComportamento: pdiRaw.sciComportamento ?? '',
+    sciImpacto: pdiRaw.sciImpacto ?? '',
+    acoes: pdiRaw.acoes ? (JSON.parse(pdiRaw.acoes) as string[]) : [],
+    prazo: pdiRaw.prazo ? new Date(pdiRaw.prazo).toISOString().slice(0, 10) : '',
+    frequencia: pdiRaw.frequencia ?? '',
+    status: pdiRaw.status as string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    checkIns: (pdiRaw.checkIns as any[]).map((c) => ({
+      id: c.id, nota: c.nota, statusMeta: c.statusMeta, tendencia: c.tendencia,
+      createdAt: new Date(c.createdAt).toISOString(),
+    })),
+  } : null
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -106,27 +129,14 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
             </ul>
           </div>
 
-          {/* Ações de PDI */}
-          <div className="soul-panel">
-            <h2 className="font-serif text-xl font-semibold text-soul-ink mb-1">Ações de desenvolvimento sugeridas</h2>
-            <p className="text-[13px] text-soul-ink/60 font-medium mb-3">Sob medida para a linguagem do perfil {perfil.apelido}.</p>
-            <div className="space-y-2.5">
-              {perfil.acoesPdi.map((a, i) => (
-                <div key={i} className="rounded-2xl p-3.5 flex items-start gap-3"
-                     style={{ background: 'rgba(245,240,232,0.5)', border: '1px solid rgba(232,226,214,0.8)' }}>
-                  <span className="font-serif font-bold text-lg flex-shrink-0" style={{ color: perfil.cor }}>{i + 1}</span>
-                  <p className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Aviso Fase 2 */}
-          <div className="rounded-2xl px-4 py-3 text-[13px] font-medium"
-               style={{ background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.30)', color: '#7a5f17' }}>
-            Em breve: campos SCI (Situação, Comportamento, Impacto) editáveis, criação do PDI com prazos e
-            acompanhamento na timeline, além do botão de aprofundar a devolutiva com IA.
-          </div>
+          {/* SCI editável + PDI + Timeline + IA (client) */}
+          <PdiClient
+            memberId={member.id}
+            perfilCor={perfil.cor}
+            perfilApelido={perfil.apelido}
+            acoesSugeridas={perfil.acoesPdi}
+            pdi={pdi}
+          />
         </>
       )}
     </div>
