@@ -1,0 +1,106 @@
+// ============================================================
+// /dashboard/gestao-times — landing do módulo Gestão de Times
+// Lista os times do gestor e permite criar novos. Gate premium.
+// ============================================================
+
+import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { getSession } from '@/lib/session'
+import { prisma } from '@/lib/prisma'
+import { hasActiveSubscription } from '@/lib/subscription/check'
+import NovoTimeButton from './NovoTimeButton'
+
+export const metadata: Metadata = { title: 'Gestão de Times · Psique' }
+export const dynamic = 'force-dynamic'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prismaAny = prisma as any
+
+export default async function GestaoTimesPage() {
+  const session = await getSession()
+  if (!session?.id) redirect('/login')
+
+  // Gate premium
+  const subscriptionOk = await hasActiveSubscription(session.id)
+  if (!session.isAdmin && !subscriptionOk) {
+    return (
+      <div className="max-w-2xl mx-auto py-10">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-3">Recurso premium</p>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-4">Gestão de Times</h1>
+        <p className="text-[15.5px] text-soul-ink/85 font-medium leading-relaxed mb-4">
+          Saia da avaliação individual e gerencie a cultura do time inteiro. Monte a Matriz de Talentos (modelo 20-70-10
+          moderno), conduza devolutivas estruturadas e construa planos de desenvolvimento por perfil comportamental.
+        </p>
+        <p className="text-[14.5px] text-soul-ink/80 font-medium leading-relaxed mb-6">
+          Disponível para empresas com assinatura ativa. Comece um trial de 7 dias gratuitos, sem cartão de crédito.
+        </p>
+        <Link href="/dashboard/assinatura"
+              className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold text-white shadow-terra no-underline"
+              style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+          ✦ Começar trial de 7 dias
+        </Link>
+      </div>
+    )
+  }
+
+  const teams = await prismaAny.talentTeam.findMany({
+    where: { companyId: session.id },
+    orderBy: { updatedAt: 'desc' },
+    include: { _count: { select: { members: true } } },
+  }) as Array<{ id: string; nome: string; descricao: string | null; updatedAt: Date; _count: { members: number } }>
+
+  return (
+    <div className="space-y-7">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-widest mb-2" style={{ color: '#c9a84c' }}>
+            Gestão de Times
+          </p>
+          <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
+            Matriz de Talentos <span className="text-soul-terracota italic font-normal">&amp;</span> Desenvolvimento
+          </h1>
+          <p className="text-[15px] text-soul-ink/75 mt-2 font-medium max-w-3xl">
+            Crie um time, cruze a performance de cada pessoa com o perfil comportamental e descubra quem são as
+            referências, quem está em tração e quem precisa de diagnóstico. Sem cota fria de demissão, foco em desenvolvimento.
+          </p>
+        </div>
+        <NovoTimeButton />
+      </div>
+
+      {/* Lista de times */}
+      {teams.length === 0 ? (
+        <div className="rounded-3xl p-8 text-center"
+             style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 60%, #1f2a3d 100%)' }}>
+          <div className="text-5xl mb-4">◫</div>
+          <h2 className="font-serif text-2xl font-semibold text-white mb-2">Nenhum time criado ainda</h2>
+          <p className="text-[14.5px] text-white/75 font-medium max-w-lg mx-auto mb-6">
+            Comece criando seu primeiro time. Você adiciona os colaboradores (vinculando aos que já fizeram teste ou
+            digitando avulsos), dá a nota de performance e a plataforma plota a curva de vitalidade.
+          </p>
+          <NovoTimeButton variant="onDark" />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {teams.map((t) => (
+            <Link key={t.id} href={`/dashboard/gestao-times/${t.id}`}
+                  className="soul-panel block no-underline transition-all hover:-translate-y-0.5"
+                  style={{ borderLeft: '4px solid #c9a84c' }}>
+              <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{t.nome}</p>
+              {t.descricao && (
+                <p className="text-[13px] text-soul-ink/70 font-medium mt-1 line-clamp-2">{t.descricao}</p>
+              )}
+              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-soul-mist/60">
+                <span className="text-[12px] font-bold text-soul-ink/80">
+                  {t._count.members} {t._count.members === 1 ? 'colaborador' : 'colaboradores'}
+                </span>
+                <span className="ml-auto text-[12px] font-semibold" style={{ color: '#c9a84c' }}>Abrir matriz →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

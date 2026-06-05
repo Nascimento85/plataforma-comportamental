@@ -150,6 +150,15 @@ function NavIcon({ path }: { path: string }) {
           stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
+    // Gestão de Times — grade de pessoas / matriz
+    talentgrid: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <rect x="3" y="3" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="11" y="3" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="3" y="11" width="6" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M11 14h6M14 11v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
     // Liderança — coroa simples
     leadership: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
@@ -229,9 +238,10 @@ function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
     {
       title: 'Empresa',
       items: [
-        { href: '/dashboard/candidates', label: 'Candidatos', iconKey: 'candidates' },
-        { href: '/dashboard/teams',      label: 'Times',      iconKey: 'teams'      },
-        { href: '/dashboard/reports',    label: 'Relatórios', iconKey: 'reports'    },
+        { href: '/dashboard/candidates',    label: 'Candidatos',      iconKey: 'candidates' },
+        { href: '/dashboard/teams',         label: 'Times',           iconKey: 'teams'      },
+        { href: '/dashboard/gestao-times',  label: 'Gestão de Times', iconKey: 'talentgrid' },
+        { href: '/dashboard/reports',       label: 'Relatórios',      iconKey: 'reports'    },
       ],
     },
     {
