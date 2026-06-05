@@ -71,6 +71,8 @@ model Company {
   nr1Relatorios NR1Relatorio[]
   // Monetizacao B2B (assinatura)
   subscription  Subscription?
+  // Gestao de Times (20-70-10 + Team Build)
+  talentTeams   TalentTeam[]
 }
 
 // ============================================================
@@ -517,4 +519,101 @@ model Subscription {
   @@index([status])
   @@index([stripeCustomerId])
   @@index([stripeSubscriptionId])
+}
+
+// ============================================================
+// GESTAO DE TIMES (20-70-10 + Team Build)
+// Entidade compartilhada pelos dois modulos. Um TalentTeam agrupa
+// membros (vinculados a um Employee com perfil OU avulsos). A partir
+// do agrupamento, o gestor roda a Matriz de Talentos (20-70-10) e
+// as ferramentas de Team Build (mapa de calor, dinamicas, manual).
+// ============================================================
+
+model TalentTeam {
+  id          String   @id @default(cuid())
+  companyId   String
+  nome        String   // ex: "Time Comercial", "Squad Produto"
+  descricao   String?  @db.Text
+  // Fase atual do time (Tuckman) — usada pelo Team Build
+  faseTuckman String?  // FORMING | STORMING | NORMING | PERFORMING
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  company Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  members TalentMember[]
+
+  @@index([companyId])
+}
+
+model TalentMember {
+  id          String   @id @default(cuid())
+  teamId      String
+  companyId   String   // redundancia para query rapida
+  // Vinculo opcional a um Employee ja avaliado (traz o perfil DISC).
+  // Quando null, e um membro avulso com "fit comportamental pendente".
+  employeeId  String?
+  nome        String
+  cargo       String?
+  // Perfil comportamental dominante (D | I | S | C). Preenchido a partir
+  // do Employee vinculado ou informado manualmente pelo gestor.
+  perfilDisc  String?
+  // Eixo X da matriz: nota de performance/entrega dada pelo gestor (0 a 10)
+  notaPerformance Float?
+  // Eixo Y da matriz: fit comportamental (0 a 10). Calculado ou manual.
+  fitComportamental Float?
+  // Zona na curva de vitalidade: TOP20 | MID70 | BOTTOM10
+  zona        String?
+  // Override manual: true quando o gestor arrastou e fixou a zona,
+  // ignorando a sugestao algoritmica.
+  zonaManual  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  team  TalentTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  pdis  TalentPDI[]
+
+  @@index([teamId])
+  @@index([companyId])
+  @@index([employeeId])
+}
+
+// Plano de Desenvolvimento Individual (esteira 20-70-10, Fase 2/3)
+model TalentPDI {
+  id          String   @id @default(cuid())
+  memberId    String
+  companyId   String
+  // Feedback SCI estruturado (preenchido na Tela 2)
+  sciSituacao     String? @db.Text
+  sciComportamento String? @db.Text
+  sciImpacto      String? @db.Text
+  // Acoes selecionadas (JSON array de strings)
+  acoes       String?  @db.Text
+  prazo       DateTime?
+  frequencia  String?  // SEMANAL | QUINZENAL | MENSAL
+  status      String   @default("ATIVO")  // ATIVO | CONCLUIDO | ATRASADO | ARQUIVADO
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  member   TalentMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  checkIns TalentCheckIn[]
+
+  @@index([memberId])
+  @@index([companyId])
+  @@index([status])
+}
+
+// Check-in de acompanhamento na timeline (Tela 4)
+model TalentCheckIn {
+  id          String   @id @default(cuid())
+  pdiId       String
+  companyId   String
+  nota        String   @db.Text  // anotacao curta do gestor
+  statusMeta  String   @default("EM_ANDAMENTO")  // EM_ANDAMENTO | CONCLUIDO | EM_ATRASO
+  tendencia   String?  // SUBINDO | ESTAVEL | DESCENDO (rumo aos 20%)
+  createdAt   DateTime @default(now())
+
+  pdi TalentPDI @relation(fields: [pdiId], references: [id], onDelete: Cascade)
+
+  @@index([pdiId])
+  @@index([companyId])
 }
