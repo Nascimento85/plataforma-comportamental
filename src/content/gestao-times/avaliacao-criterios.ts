@@ -43,6 +43,9 @@ export const CRITERIOS: CriterioAvaliacao[] = [
   { id: 10, dimensao: 'FIT', texto: 'Recebe feedback com maturidade e se adapta a mudanças.' },
   { id: 11, dimensao: 'FIT', texto: 'Mantém equilíbrio emocional e postura profissional sob estresse.' },
   { id: 12, dimensao: 'FIT', texto: 'Inspira confiança e é um exemplo positivo para os colegas.' },
+  { id: 17, dimensao: 'FIT', texto: 'É pontual e cumpre os horários combinados de forma consistente.' },
+  { id: 18, dimensao: 'FIT', texto: 'Mantém apresentação pessoal adequada ao ambiente de trabalho.' },
+  { id: 19, dimensao: 'FIT', texto: 'É organizado e cuida do seu espaço e do ambiente de trabalho.' },
 
   // ── Potencial ──
   { id: 13, dimensao: 'POTENCIAL', texto: 'Demonstra capacidade de assumir desafios maiores que o cargo atual.' },

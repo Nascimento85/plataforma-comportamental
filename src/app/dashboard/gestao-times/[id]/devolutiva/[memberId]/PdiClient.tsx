@@ -31,12 +31,14 @@ interface Props {
   perfilApelido: string
   acoesSugeridas: string[]
   pdi: PDI | null
+  aiInicial?: string
+  aiInicialEm?: string
 }
 
 const STATUS_META_LABELS: Record<string, string> = { EM_ANDAMENTO: 'Em andamento', CONCLUIDO: 'Concluído', EM_ATRASO: 'Em atraso' }
 const TENDENCIA_LABELS: Record<string, string> = { SUBINDO: '↑ Subindo', ESTAVEL: '→ Estável', DESCENDO: '↓ Descendo' }
 
-export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSugeridas, pdi }: Props) {
+export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSugeridas, pdi, aiInicial, aiInicialEm }: Props) {
   const router = useRouter()
 
   // SCI
@@ -56,9 +58,10 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
   const [savedMsg, setSavedMsg] = useState('')
   const [error, setError] = useState('')
 
-  // IA
+  // IA (carrega a última devolutiva salva, se houver)
   const [aiLoading, setAiLoading] = useState(false)
-  const [aiResult, setAiResult] = useState('')
+  const [aiResult, setAiResult] = useState(aiInicial ?? '')
+  const [aiEm, setAiEm] = useState(aiInicialEm ?? '')
 
   function toggleAcao(a: string) {
     setAcoesSel((prev) => prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])
@@ -102,6 +105,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
       const data = await res.json()
       if (!res.ok) { setError(data.error ?? 'Erro da IA.'); return }
       setAiResult(data.markdown)
+      setAiEm(new Date().toISOString())
     } catch {
       setError('Erro de conexão com a IA.')
     } finally {
@@ -143,14 +147,20 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
           <button onClick={aprofundarIA} disabled={aiLoading}
                   className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold text-white disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #3d4f7c, #6b7fb8)' }}>
-            {aiLoading ? 'Gerando roteiro…' : '✦ Aprofundar devolutiva com IA'}
+            {aiLoading ? 'Gerando roteiro…' : aiResult ? '✦ Gerar novamente com IA' : '✦ Aprofundar devolutiva com IA'}
           </button>
           <span className="text-[12px] text-soul-ink/55 font-medium">Cruza perfil, zona e os fatos SCI para gerar um roteiro completo.</span>
         </div>
 
         {aiResult && (
-          <div className="mt-4 rounded-2xl p-5 nr1-narrative" style={{ background: 'rgba(61,79,124,0.05)', border: '1px solid rgba(61,79,124,0.20)' }}>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiResult}</ReactMarkdown>
+          <div className="mt-4 rounded-2xl p-5" style={{ background: 'rgba(61,79,124,0.05)', border: '1px solid rgba(61,79,124,0.20)' }}>
+            <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#3d4f7c' }}>Devolutiva aprofundada</p>
+              {aiEm && <span className="text-[11px] text-soul-ink/50 font-medium">Gerada em {new Date(aiEm).toLocaleString('pt-BR')}</span>}
+            </div>
+            <div className="nr1-narrative">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiResult}</ReactMarkdown>
+            </div>
           </div>
         )}
       </div>

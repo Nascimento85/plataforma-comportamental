@@ -107,17 +107,20 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
         })}
       </div>
 
-      {/* ── Gráfico de dispersão ── */}
+      {/* ── Gráfico de dispersão + pizza ── */}
       <div className="soul-panel">
         <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 className="font-serif text-xl font-semibold text-soul-ink">Matriz de Talentos</h2>
           <p className="text-[12px] text-soul-ink/55 font-medium">Eixo horizontal: Performance · Eixo vertical: Fit comportamental</p>
         </div>
-        <ScatterMatrix members={members} />
+        <div className="grid lg:grid-cols-[1fr_auto] gap-6 items-center">
+          <ScatterMatrix members={members} />
+          {classificados > 0 && <PieDistribuicao counts={counts} total={classificados} />}
+        </div>
         {pendentes > 0 && (
           <p className="text-[12.5px] text-soul-ink/60 font-medium mt-3">
             {pendentes} {pendentes === 1 ? 'colaborador ainda não foi pontuado' : 'colaboradores ainda não foram pontuados'}.
-            Preencha a nota de performance abaixo para plotar na curva.
+            Preencha a nota de performance abaixo (ou use o botão Avaliar) para plotar na curva.
           </p>
         )}
       </div>
@@ -201,6 +204,52 @@ function ScatterMatrix({ members }: { members: Member[] }) {
           )
         })}
       </svg>
+    </div>
+  )
+}
+
+// ── Donut de distribuição 20/70/10 ─────────────────────────────
+function PieDistribuicao({ counts, total }: { counts: Record<ZonaKey, number>; total: number }) {
+  if (total === 0) return null
+  const ordem: ZonaKey[] = ['TOP20', 'MID70', 'BOTTOM10']
+  const R = 54
+  const C = 2 * Math.PI * R
+  let offset = 0
+
+  return (
+    <div className="flex items-center gap-5 justify-center lg:justify-start">
+      <svg viewBox="0 0 140 140" width="132" height="132" className="flex-shrink-0">
+        <g transform="translate(70 70) rotate(-90)">
+          <circle r={R} fill="none" stroke="rgba(232,226,214,0.7)" strokeWidth="20" />
+          {ordem.map((z) => {
+            const pct = counts[z] / total
+            if (pct === 0) return null
+            const len = pct * C
+            const el = (
+              <circle key={z} r={R} fill="none" stroke={ZONAS[z].cor} strokeWidth="20"
+                      strokeDasharray={`${len} ${C - len}`} strokeDashoffset={-offset} />
+            )
+            offset += len
+            return el
+          })}
+        </g>
+        <text x="70" y="66" textAnchor="middle" fontSize="24" fontWeight="700" fill="#1c1a17">{total}</text>
+        <text x="70" y="83" textAnchor="middle" fontSize="9" fill="#6e645a" fontWeight="600" letterSpacing="0.5">AVALIADOS</text>
+      </svg>
+      <div className="space-y-2">
+        {ordem.map((z) => {
+          const info = ZONAS[z]
+          const pct = Math.round((counts[z] / total) * 100)
+          return (
+            <div key={z} className="flex items-center gap-2 text-[12.5px] min-w-[150px]">
+              <span className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: info.cor }} />
+              <span className="font-bold text-soul-ink w-9">{pct}%</span>
+              <span className="text-soul-ink/70 font-medium">{info.rotulo}</span>
+              <span className="text-soul-ink/45 font-bold ml-auto">{counts[z]}</span>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

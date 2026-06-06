@@ -10,7 +10,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import {
-  PERFIS_LIDERANCA, ZONAS, scoreCombinado, classificarZona,
+  PERFIS_LIDERANCA, ZONAS, classificarZona,
   type DiscKey, type ZonaKey,
 } from '@/content/gestao-times/disc-lideranca'
 
@@ -52,8 +52,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   if (!apiKey) return NextResponse.json({ error: 'IA não configurada no servidor.' }, { status: 500 })
 
   const perfil = PERFIS_LIDERANCA[member.perfilDisc as DiscKey]
-  const score = scoreCombinado(member.notaPerformance, member.fitComportamental)
-  const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(score)) as ZonaKey | null
+  const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(member.notaPerformance, member.fitComportamental)) as ZonaKey | null
   const zona = zonaKey ? ZONAS[zonaKey] : null
 
   const prompt = `Você é um consultor sênior de desenvolvimento de liderança ajudando um gestor a preparar uma conversa de devolutiva com um liderado. Escreva em português do Brasil, linguagem clara e prática, sem jargão acadêmico. NÃO use hífens nem travessões em nenhum lugar do texto, use vírgula ou una as palavras.
@@ -117,6 +116,12 @@ Seja direto e prático. Tamanho alvo: 350 a 600 palavras.`
     const data = await response.json() as { content: Array<{ type: string; text: string }> }
     const text = data.content?.[0]?.text ?? ''
     if (!text.trim()) return NextResponse.json({ error: 'Resposta vazia da IA.' }, { status: 502 })
+
+    // Persiste a devolutiva para reconsulta a qualquer momento
+    await prismaAny.talentMember.update({
+      where: { id: member.id },
+      data: { aiDevolutiva: text.trim(), aiDevolutivaEm: new Date() },
+    }).catch(() => { /* não bloqueia a resposta se a persistência falhar */ })
 
     return NextResponse.json({ markdown: text.trim() }, { status: 200 })
   } catch (err) {

@@ -11,7 +11,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import {
-  ZONAS, PERFIS_LIDERANCA, scoreCombinado, classificarZona,
+  ZONAS, PERFIS_LIDERANCA, classificarZona,
   type ZonaKey, type DiscKey,
 } from '@/content/gestao-times/disc-lideranca'
 import { lerResultado } from '@/content/gestao-times/avaliacao-criterios'
@@ -32,8 +32,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
   const member = await prismaAny.talentMember.findUnique({ where: { id: params.memberId } })
   if (!member || member.companyId !== session.id || member.teamId !== params.id) return notFound()
 
-  const score = scoreCombinado(member.notaPerformance, member.fitComportamental)
-  const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(score)) as ZonaKey | null
+  const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(member.notaPerformance, member.fitComportamental)) as ZonaKey | null
   const zona = zonaKey ? ZONAS[zonaKey] : null
   const perfil = member.perfilDisc ? PERFIS_LIDERANCA[member.perfilDisc as DiscKey] : null
   const leitura = lerResultado(zonaKey, member.potencial ?? 0)
@@ -170,6 +169,8 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
             perfilApelido={perfil.apelido}
             acoesSugeridas={perfil.acoesPdi}
             pdi={pdi}
+            aiInicial={member.aiDevolutiva ?? ''}
+            aiInicialEm={member.aiDevolutivaEm ? new Date(member.aiDevolutivaEm).toISOString() : ''}
           />
         </>
       )}

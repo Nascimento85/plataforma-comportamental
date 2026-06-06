@@ -59,7 +59,7 @@ export default async function MatrizPage({ params }: { params: { id: string } })
   }
   const members = (team.members as RawMember[]).map((m) => {
     const score = scoreCombinado(m.notaPerformance, m.fitComportamental)
-    const zonaAuto = classificarZona(score)
+    const zonaAuto = classificarZona(m.notaPerformance, m.fitComportamental)
     const zonaFinal = m.zonaManual && m.zona ? m.zona : zonaAuto
     let avaliacaoRespostas: Record<number, number> = {}
     if (m.avaliacaoJson) {

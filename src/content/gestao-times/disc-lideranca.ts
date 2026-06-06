@@ -159,23 +159,42 @@ export const ZONAS: Record<ZonaKey, ZonaInfo> = {
 }
 
 // ============================================================
-// CLASSIFICAÇÃO POR FAIXA (versão moderna, sem cota forçada)
-// Score combinado: performance pesa 60%, fit comportamental 40%.
-// Faixas absolutas respeitam a filosofia de NÃO forçar 10% no fundo.
+// CLASSIFICAÇÃO POR DOIS EIXOS (Performance x Comportamento)
+// Regras de triagem (em escala 1 a 5, convertidas aqui para 0 a 10):
+//   20% (A-Players): média >= 4.5 em Performance E >= 4.5 em Comportamento
+//                    => perf >= 9.0 E fit >= 9.0
+//   10% (C-Players): média abaixo de 2.5 em QUALQUER eixo
+//                    => perf < 5.0 OU fit < 5.0
+//   70% (B-Players): todo o resto (inclui nota técnica alta com
+//                    comportamento mediano, que precisa de calibragem)
 // ============================================================
 
+// Mantido por compatibilidade de exibição (média ponderada simples).
 export function scoreCombinado(notaPerformance: number | null | undefined, fit: number | null | undefined): number | null {
   if (notaPerformance == null && fit == null) return null
   const p = notaPerformance ?? 0
   const f = fit ?? notaPerformance ?? 0
-  return +(p * 0.6 + f * 0.4).toFixed(2)
+  return +((p + f) / 2).toFixed(2)
 }
 
-export function classificarZona(score: number | null): ZonaKey | null {
-  if (score == null) return null
-  if (score >= 7.0) return 'TOP20'
-  if (score >= 4.0) return 'MID70'
-  return 'BOTTOM10'
+const LIMIAR_TOP    = 9.0  // 4.5 na escala 1 a 5
+const LIMIAR_BOTTOM = 5.0  // 2.5 na escala 1 a 5
+
+export function classificarZona(
+  notaPerformance: number | null | undefined,
+  fitComportamental?: number | null | undefined,
+): ZonaKey | null {
+  if (notaPerformance == null && fitComportamental == null) return null
+  const p = notaPerformance ?? 0
+  // Se o fit não foi informado, usa a própria performance como proxy.
+  const f = fitComportamental ?? notaPerformance ?? 0
+
+  // 10% primeiro: qualquer eixo muito baixo já é sinal de alerta.
+  if (p < LIMIAR_BOTTOM || f < LIMIAR_BOTTOM) return 'BOTTOM10'
+  // 20%: excelência nos dois eixos.
+  if (p >= LIMIAR_TOP && f >= LIMIAR_TOP) return 'TOP20'
+  // 70%: o restante (a grande maioria, inclui calibragem de perfil).
+  return 'MID70'
 }
 
 export const DISC_LABELS: Record<DiscKey, string> = {

@@ -565,6 +565,9 @@ model TalentMember {
   potencial   Float?
   // Respostas + medias do questionario de avaliacao (JSON)
   avaliacaoJson String? @db.Text
+  // Devolutiva aprofundada gerada por IA (markdown), persistida para reconsulta
+  aiDevolutiva   String?   @db.Text
+  aiDevolutivaEm DateTime?
   // Zona na curva de vitalidade: TOP20 | MID70 | BOTTOM10
   zona        String?
   // Override manual: true quando o gestor arrastou e fixou a zona,
