@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ZONAS, DISC_LABELS, PERFIS_LIDERANCA, type ZonaKey, type DiscKey } from '@/content/gestao-times/disc-lideranca'
+import AvaliacaoModal from './AvaliacaoModal'
 
 interface Member {
   id: string
@@ -12,9 +13,12 @@ interface Member {
   perfilDisc: string | null
   notaPerformance: number | null
   fitComportamental: number | null
+  potencial: number | null
   score: number | null
   zona: string | null
   zonaManual: boolean
+  avaliacaoRespostas: Record<number, number>
+  temAvaliacao: boolean
 }
 
 interface EmployeeOpt { employeeId: string; nome: string; perfilDisc: string }
@@ -212,6 +216,7 @@ function MemberRow({
 }) {
   const [nota, setNota] = useState(m.notaPerformance != null ? String(m.notaPerformance) : '')
   const [fit, setFit] = useState(m.fitComportamental != null ? String(m.fitComportamental) : '')
+  const [avalOpen, setAvalOpen] = useState(false)
 
   const zonaInfo = m.zona ? ZONAS[m.zona as ZonaKey] : null
   const perfil = m.perfilDisc ? PERFIS_LIDERANCA[m.perfilDisc as DiscKey] : null
@@ -264,17 +269,31 @@ function MemberRow({
 
       {/* Ações */}
       <div className="flex items-center gap-1.5 ml-auto">
+        <button onClick={() => setAvalOpen(true)}
+                className="text-[12px] font-bold px-3 py-1.5 rounded-full"
+                style={{ background: m.temAvaliacao ? 'rgba(122,158,126,0.15)' : 'rgba(196,99,58,0.10)', color: m.temAvaliacao ? '#3d5a40' : '#a8522e' }}>
+          {m.temAvaliacao ? '✓ Avaliação' : 'Avaliar'}
+        </button>
         {m.zona && (
           <Link href={`/dashboard/gestao-times/${teamId}/devolutiva/${m.id}`}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-full no-underline"
                 style={{ background: 'rgba(61,79,124,0.10)', color: '#3d4f7c' }}>
-            Preparar devolutiva
+            Devolutiva
           </Link>
         )}
         <button onClick={() => { if (confirm(`Remover ${m.nome} do time?`)) onRemove(m.id) }}
                 aria-label="Remover" title="Remover do time"
                 className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/40 hover:text-rose-600 hover:bg-rose-50 text-lg leading-none">×</button>
       </div>
+
+      {avalOpen && (
+        <AvaliacaoModal
+          memberId={m.id}
+          memberNome={m.nome}
+          respostasIniciais={m.avaliacaoRespostas}
+          onClose={() => setAvalOpen(false)}
+        />
+      )}
     </div>
   )
 }

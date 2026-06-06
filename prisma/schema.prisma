@@ -561,6 +561,10 @@ model TalentMember {
   notaPerformance Float?
   // Eixo Y da matriz: fit comportamental (0 a 10). Calculado ou manual.
   fitComportamental Float?
+  // Potencial (0 a 10), camada 9-box. Calculado pelo questionário.
+  potencial   Float?
+  // Respostas + medias do questionario de avaliacao (JSON)
+  avaliacaoJson String? @db.Text
   // Zona na curva de vitalidade: TOP20 | MID70 | BOTTOM10
   zona        String?
   // Override manual: true quando o gestor arrastou e fixou a zona,

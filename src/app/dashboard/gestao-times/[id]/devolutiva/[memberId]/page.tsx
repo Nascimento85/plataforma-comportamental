@@ -14,6 +14,7 @@ import {
   ZONAS, PERFIS_LIDERANCA, scoreCombinado, classificarZona,
   type ZonaKey, type DiscKey,
 } from '@/content/gestao-times/disc-lideranca'
+import { lerResultado } from '@/content/gestao-times/avaliacao-criterios'
 import PdiClient from './PdiClient'
 
 export const metadata: Metadata = { title: 'Preparar Devolutiva · Psique' }
@@ -35,6 +36,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
   const zonaKey = (member.zonaManual && member.zona ? member.zona : classificarZona(score)) as ZonaKey | null
   const zona = zonaKey ? ZONAS[zonaKey] : null
   const perfil = member.perfilDisc ? PERFIS_LIDERANCA[member.perfilDisc as DiscKey] : null
+  const leitura = lerResultado(zonaKey, member.potencial ?? 0)
 
   // PDI ativo mais recente + check-ins
   const pdiRaw = await prismaAny.talentPDI.findFirst({
@@ -98,6 +100,38 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
               <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: zona.cor }}>{zona.rotulo} · {zona.faixa}</p>
               <p className="text-[14px] text-soul-ink/85 font-medium mt-1 leading-relaxed">{zona.descricao}</p>
               <p className="text-[13px] text-soul-ink/70 font-medium mt-2"><strong>Ação estratégica:</strong> {zona.acaoEstrategica}</p>
+              {/* Notas da avaliação */}
+              {(member.notaPerformance != null || member.potencial != null) && (
+                <div className="flex gap-4 mt-3 pt-3 border-t border-soul-mist/60 text-[12px] font-bold">
+                  {member.notaPerformance != null && <span style={{ color: '#c4633a' }}>Performance {member.notaPerformance.toFixed(1)}</span>}
+                  {member.fitComportamental != null && <span style={{ color: '#3d4f7c' }}>Fit {member.fitComportamental.toFixed(1)}</span>}
+                  {member.potencial != null && member.potencial > 0 && <span style={{ color: '#c9a84c' }}>Potencial {member.potencial.toFixed(1)}</span>}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Leitura do resultado: validação / desenvolvimento / diagnóstico */}
+          {leitura && (
+            <div className="soul-panel" style={{
+              background: leitura.tom === 'VALIDACAO' ? 'rgba(201,168,76,0.08)' : leitura.tom === 'DIAGNOSTICO' ? 'rgba(196,122,114,0.07)' : 'rgba(61,79,124,0.05)',
+              border: `1px solid ${leitura.tom === 'VALIDACAO' ? 'rgba(201,168,76,0.35)' : leitura.tom === 'DIAGNOSTICO' ? 'rgba(196,122,114,0.35)' : 'rgba(61,79,124,0.25)'}`,
+            }}>
+              <p className="text-[11px] font-bold uppercase tracking-widest mb-1"
+                 style={{ color: leitura.tom === 'VALIDACAO' ? '#7a5f17' : leitura.tom === 'DIAGNOSTICO' ? '#7a3d35' : '#3d4f7c' }}>
+                {leitura.tom === 'VALIDACAO' ? '✦ Validação' : leitura.tom === 'DIAGNOSTICO' ? '⚠ Diagnóstico' : '↗ Desenvolvimento'} · {leitura.titulo}
+              </p>
+              <p className="font-serif text-lg font-semibold text-soul-ink leading-snug">{leitura.veredito}</p>
+              <p className="text-[13.5px] text-soul-ink/80 font-medium mt-2 leading-relaxed">{leitura.diagnostico}</p>
+              <p className="text-[12px] font-bold uppercase tracking-wide text-soul-ink/65 mt-4 mb-2">Próximos passos</p>
+              <ul className="space-y-1.5">
+                {leitura.proximosPassos.map((p, i) => (
+                  <li key={i} className="flex items-start gap-2 text-[13.5px] text-soul-ink/85 font-medium">
+                    <span className="font-bold mt-0.5" style={{ color: zona?.cor ?? '#c4633a' }}>{i + 1}.</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

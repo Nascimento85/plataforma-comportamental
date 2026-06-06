@@ -53,13 +53,18 @@ export default async function MatrizPage({ params }: { params: { id: string } })
   // Classifica cada membro (zona automática, a menos que o gestor tenha fixado manualmente)
   type RawMember = {
     id: string; nome: string; cargo: string | null; perfilDisc: string | null
-    notaPerformance: number | null; fitComportamental: number | null
+    notaPerformance: number | null; fitComportamental: number | null; potencial: number | null
+    avaliacaoJson: string | null
     zona: string | null; zonaManual: boolean
   }
   const members = (team.members as RawMember[]).map((m) => {
     const score = scoreCombinado(m.notaPerformance, m.fitComportamental)
     const zonaAuto = classificarZona(score)
     const zonaFinal = m.zonaManual && m.zona ? m.zona : zonaAuto
+    let avaliacaoRespostas: Record<number, number> = {}
+    if (m.avaliacaoJson) {
+      try { avaliacaoRespostas = (JSON.parse(m.avaliacaoJson).respostas ?? {}) as Record<number, number> } catch { /* ignore */ }
+    }
     return {
       id: m.id,
       nome: m.nome,
@@ -67,9 +72,12 @@ export default async function MatrizPage({ params }: { params: { id: string } })
       perfilDisc: m.perfilDisc,
       notaPerformance: m.notaPerformance,
       fitComportamental: m.fitComportamental,
+      potencial: m.potencial,
       score,
       zona: zonaFinal,
       zonaManual: m.zonaManual,
+      avaliacaoRespostas,
+      temAvaliacao: Object.keys(avaliacaoRespostas).length > 0,
     }
   })
 
