@@ -1,64 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice" role="img" aria-label="VAC — Mapa Sensorial da Comunicação">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="VAC — Mapa Sensorial da Comunicação">
   <defs>
     <linearGradient id="bgVAC" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f5f0e8"/>
-      <stop offset="1" stop-color="#e8e0cf"/>
+      <stop offset="0" stop-color="#0e1626"/>
+      <stop offset="1" stop-color="#080d18"/>
     </linearGradient>
+    <radialGradient id="glowVAC" cx="0.62" cy="0.55" r="0.55">
+      <stop offset="0" stop-color="#d4af37" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softVAC" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
   </defs>
 
-  <rect width="800" height="280" fill="url(#bgVAC)"/>
+  <rect width="800" height="500" fill="url(#bgVAC)"/>
+  <rect width="800" height="500" fill="url(#glowVAC)"/>
 
-  <!-- Decorative grain dots -->
-  <g opacity="0.05" fill="#1c1a17">
-    <circle cx="80"  cy="60"  r="1.5"/>
-    <circle cx="60"  cy="220" r="1.5"/>
-    <circle cx="160" cy="240" r="1.5"/>
-    <circle cx="730" cy="50"  r="1.5"/>
-    <circle cx="700" cy="210" r="1.5"/>
-    <circle cx="120" cy="80"  r="1.5"/>
+  <!-- grain dots -->
+  <g opacity="0.10" fill="#ffffff">
+    <circle cx="80"  cy="70"  r="1.6"/>
+    <circle cx="60"  cy="420" r="1.6"/>
+    <circle cx="170" cy="450" r="1.6"/>
+    <circle cx="740" cy="60"  r="1.6"/>
+    <circle cx="710" cy="430" r="1.6"/>
+    <circle cx="130" cy="100" r="1.6"/>
   </g>
 
-  <!-- Venn diagram (3 overlapping channels) -->
-  <g transform="translate(550 140)">
-    <!-- V: Visual (indigo) -->
-    <circle cx="-44" cy="-26" r="78" fill="#3d4f7c" fill-opacity="0.32" stroke="#3d4f7c" stroke-width="2" stroke-opacity="0.55"/>
-    <!-- A: Auditivo (terracota) -->
-    <circle cx="44"  cy="-26" r="78" fill="#c4633a" fill-opacity="0.32" stroke="#c4633a" stroke-width="2" stroke-opacity="0.55"/>
-    <!-- S: Sinestésico (sage) -->
-    <circle cx="0"   cy="44"  r="78" fill="#7a9e7e" fill-opacity="0.32" stroke="#7a9e7e" stroke-width="2" stroke-opacity="0.55"/>
+  <!-- Venn (3 channels) -->
+  <g transform="translate(545 285)">
+    <g filter="url(#softVAC)" opacity="0.5">
+      <circle cx="-58" cy="-34" r="104" fill="#5b7cc4" fill-opacity="0.18"/>
+      <circle cx="58"  cy="-34" r="104" fill="#d98a5a" fill-opacity="0.18"/>
+      <circle cx="0"   cy="58"  r="104" fill="#7fb08a" fill-opacity="0.18"/>
+    </g>
+    <circle cx="-58" cy="-34" r="104" fill="#5b7cc4" fill-opacity="0.20" stroke="#7d9be0" stroke-width="2" stroke-opacity="0.75"/>
+    <circle cx="58"  cy="-34" r="104" fill="#d98a5a" fill-opacity="0.20" stroke="#e8a578" stroke-width="2" stroke-opacity="0.75"/>
+    <circle cx="0"   cy="58"  r="104" fill="#7fb08a" fill-opacity="0.20" stroke="#9fcaa8" stroke-width="2" stroke-opacity="0.75"/>
 
-    <!-- Channel labels (single letter) -->
-    <g font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="34" text-anchor="middle">
-      <text x="-78" y="-48" fill="#3d4f7c">V</text>
-      <text x="78"  y="-48" fill="#c4633a">A</text>
-      <text x="0"   y="100" fill="#7a9e7e">S</text>
+    <g font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="40" text-anchor="middle">
+      <text x="-104" y="-58" fill="#9fb8f0">V</text>
+      <text x="104"  y="-58" fill="#efb78c">A</text>
+      <text x="0"    y="150" fill="#aeddb7">S</text>
     </g>
 
-    <!-- Center dot (convergence point) -->
-    <circle cx="0" cy="0" r="6" fill="#1c1a17" fill-opacity="0.55"/>
-    <circle cx="0" cy="0" r="14" fill="none" stroke="#1c1a17" stroke-opacity="0.25" stroke-width="1.2"/>
+    <circle cx="0" cy="0" r="7"  fill="#d4af37"/>
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#d4af37" stroke-opacity="0.4" stroke-width="1.4"/>
   </g>
 
-  <!-- Title (top left) -->
-  <g font-family="Georgia, 'Times New Roman', serif" fill="#1c1a17">
-    <text x="50" y="80" font-size="34" font-weight="700">VAC</text>
-    <text x="50" y="108" font-size="14" font-style="italic" fill="#6e645a">Visual, Auditivo ou Sinestésico, qual é o seu canal?</text>
+  <!-- Title -->
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="60" y="118" font-size="50" font-weight="700" fill="#f3ede0">VAC</text>
+    <text x="60" y="152" font-size="17" font-style="italic" fill="#9fb0c8">Visual, Auditivo ou Sinestésico, qual é o seu canal?</text>
   </g>
 
-  <!-- Three side tags (left column) -->
-  <g font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2">
-    <g transform="translate(50 150)">
-      <circle cx="6" cy="6" r="5" fill="#3d4f7c"/>
-      <text x="22" y="10" fill="#3d4f7c">VISUAL</text>
+  <!-- Legend left column -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2.5">
+    <g transform="translate(60 250)">
+      <circle cx="7" cy="6" r="6" fill="#5b7cc4"/>
+      <text x="28" y="11" fill="#9fb8f0">VISUAL</text>
     </g>
-    <g transform="translate(50 180)">
-      <circle cx="6" cy="6" r="5" fill="#c4633a"/>
-      <text x="22" y="10" fill="#c4633a">AUDITIVO</text>
+    <g transform="translate(60 300)">
+      <circle cx="7" cy="6" r="6" fill="#d98a5a"/>
+      <text x="28" y="11" fill="#efb78c">AUDITIVO</text>
     </g>
-    <g transform="translate(50 210)">
-      <circle cx="6" cy="6" r="5" fill="#7a9e7e"/>
-      <text x="22" y="10" fill="#7a9e7e">SINESTÉSICO</text>
+    <g transform="translate(60 350)">
+      <circle cx="7" cy="6" r="6" fill="#7fb08a"/>
+      <text x="28" y="11" fill="#aeddb7">SINESTÉSICO</text>
     </g>
+  </g>
+
+  <!-- bottom tag -->
+  <g transform="translate(60 420)">
+    <rect width="214" height="34" rx="17" fill="#d4af37" fill-opacity="0.10" stroke="#d4af37" stroke-opacity="0.30"/>
+    <text x="107" y="22" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#d4af37" letter-spacing="2">COMUNICAÇÃO · PNL</text>
   </g>
 </svg>

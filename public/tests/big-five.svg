@@ -1,90 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Big Five — Estilo de Liderança">
-  <!-- Background gradient (creme/parchment) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Big Five — Estilo de Liderança">
   <defs>
     <linearGradient id="bgBF" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#f5f0e8"/>
-      <stop offset="1" stop-color="#e8e0cf"/>
+      <stop offset="0" stop-color="#0e1626"/>
+      <stop offset="1" stop-color="#080d18"/>
     </linearGradient>
-    <radialGradient id="centerGlow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#c9a84c" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#c9a84c" stop-opacity="0"/>
+    <radialGradient id="centerGlowBF" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d4af37" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0"/>
     </radialGradient>
-    <filter id="dotShadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
-    </filter>
   </defs>
 
-  <rect width="800" height="280" fill="url(#bgBF)"/>
+  <rect width="800" height="500" fill="url(#bgBF)"/>
 
-  <!-- Decorative grain dots -->
-  <g opacity="0.05" fill="#1c1a17">
-    <circle cx="80"  cy="60"  r="1.5"/>
-    <circle cx="160" cy="220" r="1.5"/>
-    <circle cx="720" cy="80"  r="1.5"/>
-    <circle cx="680" cy="200" r="1.5"/>
-    <circle cx="60"  cy="180" r="1.5"/>
-    <circle cx="740" cy="240" r="1.5"/>
+  <!-- grain dots -->
+  <g opacity="0.10" fill="#ffffff">
+    <circle cx="80"  cy="70"  r="1.6"/>
+    <circle cx="170" cy="440" r="1.6"/>
+    <circle cx="730" cy="80"  r="1.6"/>
+    <circle cx="690" cy="420" r="1.6"/>
+    <circle cx="60"  cy="300" r="1.6"/>
+    <circle cx="745" cy="450" r="1.6"/>
   </g>
 
-  <!-- Center radar -->
-  <g transform="translate(400 140)">
-    <!-- Subtle glow behind radar -->
-    <circle r="110" fill="url(#centerGlow)"/>
+  <!-- Radar -->
+  <g transform="translate(400 288)">
+    <circle r="150" fill="url(#centerGlowBF)"/>
 
-    <!-- Concentric pentagons (faded grid) -->
-    <g fill="none" stroke="#1c1a17" stroke-opacity="0.12" stroke-width="1">
-      <polygon points="0,-90 85.6,-27.8 52.9,72.8 -52.9,72.8 -85.6,-27.8"/>
-      <polygon points="0,-60 57.1,-18.5 35.3,48.5 -35.3,48.5 -57.1,-18.5"/>
-      <polygon points="0,-30 28.5,-9.3 17.6,24.3 -17.6,24.3 -28.5,-9.3"/>
+    <!-- concentric pentagons -->
+    <g fill="none" stroke="#ffffff" stroke-opacity="0.10" stroke-width="1">
+      <polygon points="0,-118 112.2,-36.5 69.4,95.5 -69.4,95.5 -112.2,-36.5"/>
+      <polygon points="0,-79 75.1,-24.4 46.4,63.9 -46.4,63.9 -75.1,-24.4"/>
+      <polygon points="0,-39 37.1,-12.1 22.9,31.6 -22.9,31.6 -37.1,-12.1"/>
     </g>
 
-    <!-- Radial spokes -->
-    <g stroke="#1c1a17" stroke-opacity="0.18" stroke-width="1">
-      <line x1="0" y1="0" x2="0"     y2="-90"/>
-      <line x1="0" y1="0" x2="85.6"  y2="-27.8"/>
-      <line x1="0" y1="0" x2="52.9"  y2="72.8"/>
-      <line x1="0" y1="0" x2="-52.9" y2="72.8"/>
-      <line x1="0" y1="0" x2="-85.6" y2="-27.8"/>
+    <!-- spokes -->
+    <g stroke="#ffffff" stroke-opacity="0.14" stroke-width="1">
+      <line x1="0" y1="0" x2="0"      y2="-118"/>
+      <line x1="0" y1="0" x2="112.2"  y2="-36.5"/>
+      <line x1="0" y1="0" x2="69.4"   y2="95.5"/>
+      <line x1="0" y1="0" x2="-69.4"  y2="95.5"/>
+      <line x1="0" y1="0" x2="-112.2" y2="-36.5"/>
     </g>
 
-    <!-- Filled polygon representing the person's profile (random elegant shape) -->
-    <polygon
-      points="0,-75 70,-22 38,55 -42,52 -68,-20"
-      fill="#c9a84c"
-      fill-opacity="0.25"
-      stroke="#c9a84c"
-      stroke-width="2"/>
+    <!-- profile polygon -->
+    <polygon points="0,-98 92,-30 50,72 -55,68 -88,-29"
+      fill="#d4af37" fill-opacity="0.22" stroke="#d4af37" stroke-width="2.5"/>
 
-    <!-- 5 dots colored — one per Big Five factor -->
-    <!-- EXT (Influência) terracota -->
-    <circle cx="0"     cy="-90"  r="9" fill="#c4633a"/>
-    <circle cx="0"     cy="-90"  r="4" fill="#fff"/>
-    <!-- AMB (Empatia) sage -->
-    <circle cx="85.6"  cy="-27.8" r="9" fill="#7a9e7e"/>
-    <circle cx="85.6"  cy="-27.8" r="4" fill="#fff"/>
-    <!-- CON (Execução) indigo -->
-    <circle cx="52.9"  cy="72.8"  r="9" fill="#3d4f7c"/>
-    <circle cx="52.9"  cy="72.8"  r="4" fill="#fff"/>
-    <!-- EST (Estabilidade) gold -->
-    <circle cx="-52.9" cy="72.8"  r="9" fill="#c9a84c"/>
-    <circle cx="-52.9" cy="72.8"  r="4" fill="#fff"/>
-    <!-- ABE (Inovação) rose -->
-    <circle cx="-85.6" cy="-27.8" r="9" fill="#c47a72"/>
-    <circle cx="-85.6" cy="-27.8" r="4" fill="#fff"/>
+    <!-- 5 nodes -->
+    <g>
+      <circle cx="0"      cy="-118" r="10" fill="#d98a5a"/><circle cx="0"      cy="-118" r="4.5" fill="#0e1626"/>
+      <circle cx="112.2"  cy="-36.5" r="10" fill="#7fb08a"/><circle cx="112.2"  cy="-36.5" r="4.5" fill="#0e1626"/>
+      <circle cx="69.4"   cy="95.5"  r="10" fill="#5b7cc4"/><circle cx="69.4"   cy="95.5"  r="4.5" fill="#0e1626"/>
+      <circle cx="-69.4"  cy="95.5"  r="10" fill="#d4af37"/><circle cx="-69.4"  cy="95.5"  r="4.5" fill="#0e1626"/>
+      <circle cx="-112.2" cy="-36.5" r="10" fill="#c47a72"/><circle cx="-112.2" cy="-36.5" r="4.5" fill="#0e1626"/>
+    </g>
   </g>
 
-  <!-- Title (top left) -->
-  <g font-family="Georgia, 'Times New Roman', serif" fill="#1c1a17">
-    <text x="50" y="78" font-size="34" font-weight="700">Big Five</text>
-    <text x="50" y="108" font-size="14" font-style="italic" fill="#6e645a">A ciência por trás do seu jeito de liderar</text>
+  <!-- Title -->
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="60" y="118" font-size="50" font-weight="700" fill="#f3ede0">Big Five</text>
+    <text x="60" y="152" font-size="17" font-style="italic" fill="#9fb0c8">A ciência por trás do seu jeito de liderar</text>
   </g>
 
-  <!-- Tag (bottom left) -->
-  <g transform="translate(50 220)">
-    <rect width="160" height="28" rx="14" fill="#3d4f7c" fill-opacity="0.10"/>
-    <text x="80" y="18" text-anchor="middle"
-          font-family="Helvetica, Arial, sans-serif" font-size="10" font-weight="700"
-          fill="#3d4f7c" letter-spacing="2">5 FATORES · 4 ARQUÉTIPOS</text>
+  <!-- bottom tag -->
+  <g transform="translate(60 430)">
+    <rect width="248" height="34" rx="17" fill="#d4af37" fill-opacity="0.10" stroke="#d4af37" stroke-opacity="0.30"/>
+    <text x="124" y="22" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#d4af37" letter-spacing="2">5 FATORES · 4 ARQUÉTIPOS</text>
   </g>
 </svg>
