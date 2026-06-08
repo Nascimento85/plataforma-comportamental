@@ -624,3 +624,38 @@ model TalentCheckIn {
   @@index([pdiId])
   @@index([companyId])
 }
+
+// ============================================================
+// DIAGNOSTICO DE LIDERANCA PME (lead gen, publico, sem login)
+// Fluxo em cascata: o Dono responde, gera um token para o Lider
+// responder, e o sistema cruza os dados gerando os gaps.
+// ============================================================
+model PmeDiagnostico {
+  id            String   @id @default(cuid())
+  // Lead (dono)
+  donoNome      String
+  donoEmail     String
+  donoTelefone  String?
+  empresa       String
+  funcionarios  String?  // faixa: 1-5 | 6-20 | 21-50 | 50+
+  temLideres    Boolean  @default(false)
+  // Respostas
+  respostasDono  String  @db.Text  // JSON { questaoId: valor }
+  respostasLider String? @db.Text  // JSON, preenchido quando o lider responde
+  // Acesso do lider
+  tokenLider    String   @unique
+  liderNome     String?
+  liderEmail    String?
+  // Resultado calculado
+  scoreMaturidade Int?            // 0 a 100
+  cenario         String?         // DONO_SOLITARIO | LIDERANCA_DESALINHADA | LIDERANCA_ALINHADA
+  relatorioAi     String? @db.Text // narrativa gerada (persistida)
+  // Estado
+  status        String   @default("DONO_RESPONDEU") // DONO_RESPONDEU | COMPLETO
+  liderRespondeuEm DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([status])
+  @@index([donoEmail])
+}
