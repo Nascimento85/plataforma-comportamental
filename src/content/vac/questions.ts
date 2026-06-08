@@ -36,7 +36,7 @@ export const VAC_QUESTIONS: VacQuestion[] = [
   { id: 5, channel: 'A', bloco: 'Decisão',
     texto: 'Ao escolher um lugar para jantar ou trabalhar, o barulho do ambiente ou o tipo de música de fundo influenciam diretamente a minha decisão de ficar ou ir embora.' },
   { id: 6, channel: 'S', bloco: 'Decisão',
-    texto: 'Prefiro comprar roupas pelo toque do tecido e pelo conforto que sinto ao vesti-las, mesmo que o modelo não seja o mais chamativo visualmente.' },
+    texto: 'Prefiro comprar roupas pelo toque do tecido e pelo conforto que sinto ao vestir, mesmo que o modelo não seja o mais chamativo visualmente.' },
 
   // ───── BLOCO 3, Foco, Aprendizado e Memória
   { id: 7, channel: 'V', bloco: 'Aprendizado',
@@ -96,7 +96,7 @@ export const VAC_QUESTIONS: VacQuestion[] = [
 
   // ───── BLOCO 10, Filtros de Distração
   { id: 28, channel: 'V', bloco: 'Distração',
-    texto: 'Distraio-me facilmente se houver muito movimento de pessoas passando ao meu redor ou se houver alertas luminosos pulando na tela do computador.' },
+    texto: 'Me distraio facilmente se houver muito movimento de pessoas passando ao meu redor ou se houver alertas luminosos pulando na tela do computador.' },
   { id: 29, channel: 'A', bloco: 'Distração',
     texto: 'Interrupções sonoras bruscas (como alguém me chamando no meio de um raciocínio ou um telefone tocando alto) quebram meu fluxo de pensamento imediatamente.' },
   { id: 30, channel: 'S', bloco: 'Distração',
@@ -164,7 +164,7 @@ export const VAC_QUESTIONS: VacQuestion[] = [
   { id: 52, channel: 'V', bloco: 'Reuniões',
     texto: 'Em uma reunião online, ligo a câmera mesmo quando não preciso, porque ver o rosto dos outros me deixa mais conectado(a).' },
   { id: 53, channel: 'A', bloco: 'Reuniões',
-    texto: 'Reuniões longas só ganhando-me se houver troca de ideias falada. Apresentações de slides em silêncio me desligam rapidamente.' },
+    texto: 'Reuniões longas só me ganham se houver troca de ideias falada. Apresentações de slides em silêncio me desligam rapidamente.' },
   { id: 54, channel: 'S', bloco: 'Reuniões',
     texto: 'Numa reunião presencial, percebo nitidamente se há tensão no ambiente antes mesmo de alguém começar a falar.' },
 

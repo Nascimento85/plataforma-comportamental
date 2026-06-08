@@ -47,7 +47,7 @@ export const PERGUNTAS_LIDER: PerguntaPme[] = [
   // Clareza de metas (a dor da cobrança às cegas)
   { id: 'l_met1', bloco: 'Clareza de Metas', texto: 'Consigo planejar as ações do meu setor com antecedência, sem aquela sensação de que as prioridades e cobranças mudam a cada semana.' },
   { id: 'l_met2', bloco: 'Clareza de Metas', texto: 'O time executa as metas com clareza operacional, sem que eu precise gastar energia corrigindo rotas por falta de entendimento deles.' },
-  { id: 'l_met3', bloco: 'Clareza de Metas', texto: 'Sinto-me seguro e respaldado com as ferramentas e o orçamento necessários para entregar os resultados que a diretoria me cobra.' },
+  { id: 'l_met3', bloco: 'Clareza de Metas', texto: 'Me sinto seguro e respaldado com as ferramentas e o orçamento necessários para entregar os resultados que a diretoria me cobra.' },
   // Rotina de desenvolvimento (a dor de carregar o time nas costas)
   { id: 'l_tre1', bloco: 'Rotina de Desenvolvimento', texto: 'Consigo alinhar o desempenho da equipe por meio de conversas estruturadas, e não apenas no momento do erro ou quando o clima está tenso.' },
   { id: 'l_tre2', bloco: 'Rotina de Desenvolvimento', texto: 'Existe um processo contínuo de capacitação no meu setor para que o desempenho do time não dependa exclusivamente do meu esforço individual.' },
@@ -58,7 +58,7 @@ export const PERGUNTAS_LIDER: PerguntaPme[] = [
   { id: 'l_mot3', bloco: 'Engajamento da Equipe', texto: 'Consigo cobrar resultados e prazos mantendo o clima leve, sem parecer que estou constantemente a policiar adultos.' },
   // Cultura de liderança (a dor do isolamento e abandono profissional)
   { id: 'l_cul1', bloco: 'Cultura de Liderança', texto: 'A empresa me oferece ferramentas práticas de gestão de pessoas para que eu saiba lidar com os conflitos do dia a dia do time.' },
-  { id: 'l_cul2', bloco: 'Cultura de Liderança', texto: 'Sinto-me ouvido e direcionado estrategicamente pelo dono da empresa sobre o meu papel como gestor.' },
+  { id: 'l_cul2', bloco: 'Cultura de Liderança', texto: 'Me sinto ouvido e direcionado estrategicamente pelo dono da empresa sobre o meu papel como gestor.' },
   { id: 'l_cul3', bloco: 'Cultura de Liderança', texto: 'Percebo que a diretoria enxerga a liderança como um pilar estratégico e investe ativamente na minha evolução profissional.' },
 ]
 
