@@ -49,15 +49,6 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
   const classificados = members.filter((m) => m.zona).length
   const pendentes = members.length - classificados
 
-  async function patchMember(id: string, body: Record<string, unknown>) {
-    await fetch(`/api/talent-members/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-    router.refresh()
-  }
-
   async function removeMember(id: string) {
     await fetch(`/api/talent-members/${id}`, { method: 'DELETE' })
     router.refresh()
@@ -144,7 +135,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
         ) : (
           <div className="space-y-2">
             {members.map((m) => (
-              <MemberRow key={m.id} m={m} onPatch={patchMember} onRemove={removeMember} teamId={teamId} />
+              <MemberRow key={m.id} m={m} onRemove={removeMember} teamId={teamId} />
             ))}
           </div>
         )}
@@ -254,17 +245,14 @@ function PieDistribuicao({ counts, total }: { counts: Record<ZonaKey, number>; t
   )
 }
 
-// ── Linha de membro editável ───────────────────────────────────
+// ── Linha de membro (notas calculadas pelo questionário, read-only) ──
 function MemberRow({
-  m, onPatch, onRemove, teamId,
+  m, onRemove, teamId,
 }: {
   m: Member
-  onPatch: (id: string, body: Record<string, unknown>) => void
   onRemove: (id: string) => void
   teamId: string
 }) {
-  const [nota, setNota] = useState(m.notaPerformance != null ? String(m.notaPerformance) : '')
-  const [fit, setFit] = useState(m.fitComportamental != null ? String(m.fitComportamental) : '')
   const [avalOpen, setAvalOpen] = useState(false)
 
   const zonaInfo = m.zona ? ZONAS[m.zona as ZonaKey] : null
@@ -288,31 +276,24 @@ function MemberRow({
         </div>
       </div>
 
-      {/* Inputs nota/fit */}
-      <div className="flex items-center gap-2">
-        <label className="text-[10px] font-bold uppercase tracking-wide text-soul-ink/55">Perf.</label>
-        <input type="number" min={0} max={10} step={0.5} value={nota}
-               onChange={(e) => setNota(e.target.value)}
-               onBlur={() => onPatch(m.id, { notaPerformance: nota })}
-               className="w-16 px-2 py-1.5 rounded-lg border text-[13px] font-semibold text-center"
-               style={{ borderColor: 'rgba(232,226,214,1)' }} placeholder="0-10" />
-        <label className="text-[10px] font-bold uppercase tracking-wide text-soul-ink/55">Fit</label>
-        <input type="number" min={0} max={10} step={0.5} value={fit}
-               onChange={(e) => setFit(e.target.value)}
-               onBlur={() => onPatch(m.id, { fitComportamental: fit })}
-               className="w-16 px-2 py-1.5 rounded-lg border text-[13px] font-semibold text-center"
-               style={{ borderColor: 'rgba(232,226,214,1)' }} placeholder="0-10" />
-      </div>
+      {/* Notas calculadas (read-only) */}
+      {m.temAvaliacao ? (
+        <div className="flex items-center gap-3 text-[12px] font-bold">
+          <span style={{ color: '#c4633a' }} title="Performance">P {m.notaPerformance?.toFixed(1)}</span>
+          <span style={{ color: '#3d4f7c' }} title="Fit comportamental">F {m.fitComportamental?.toFixed(1)}</span>
+          {m.potencial != null && m.potencial > 0 && <span style={{ color: '#c9a84c' }} title="Potencial">Pot {m.potencial.toFixed(1)}</span>}
+        </div>
+      ) : (
+        <span className="text-[11.5px] font-medium text-soul-ink/45">Aguardando avaliação</span>
+      )}
 
       {/* Zona */}
       <div className="flex items-center gap-2">
-        {zonaInfo ? (
+        {zonaInfo && (
           <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold"
                 style={{ background: zonaInfo.corBg, color: zonaInfo.cor }}>
-            {zonaInfo.rotulo}{m.zonaManual ? ' ✎' : ''}
+            {zonaInfo.rotulo}
           </span>
-        ) : (
-          <span className="text-[11px] font-medium text-soul-ink/45">sem nota</span>
         )}
       </div>
 

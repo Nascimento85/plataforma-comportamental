@@ -2,6 +2,7 @@ import { getSession } from '@/lib/session'
 import { redirect } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import AppShell from '@/components/ui/AppShell'
+import BackButton from '@/components/ui/BackButton'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -24,6 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   return (
     <AppShell session={enrichedSession}>
       {children}
+      <BackButton />
     </AppShell>
   )
 }
