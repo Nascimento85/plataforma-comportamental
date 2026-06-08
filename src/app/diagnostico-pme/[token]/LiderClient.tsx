@@ -93,7 +93,7 @@ export default function LiderClient({
             </div>
           </div>
           <button onClick={() => { if (liderNome.trim().length >= 2) { setError(''); setIniciado(true) } else setError('Informe o seu nome.') }}
-                  className="w-full py-4 rounded-full text-[16px] font-bold" style={{ background: GOLD, color: BG }}>
+                  className="pme-cta w-full py-4 rounded-full text-[16px] font-bold" style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
             Começar →
           </button>
           {error && <p className="text-[14px] font-semibold mt-3 text-center" style={{ color: '#ff9a8d' }}>{error}</p>}
@@ -129,7 +129,7 @@ export default function LiderClient({
           ))}
         </div>
 
-        <button onClick={enviar} disabled={loading} className="w-full mt-7 py-4 rounded-full text-[17px] font-bold shadow-lg disabled:opacity-60" style={{ background: GOLD, color: BG }}>
+        <button onClick={enviar} disabled={loading} className="pme-cta w-full mt-7 py-4 rounded-full text-[17px] font-bold shadow-lg disabled:opacity-60" style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
           {loading ? 'Enviando…' : 'Enviar minhas respostas →'}
         </button>
       </div>

@@ -124,8 +124,8 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
                style={{ background: 'rgba(212,175,55,0.10)', border: `1px solid ${BORDER}`, color: GOLD }}>
             <span className="text-xl">✉️</span> O resultado completo será enviado direto para o seu e-mail.
           </div>
-          <button onClick={() => setEtapa('dados')} className="px-9 py-4 rounded-full text-[17px] font-bold shadow-lg"
-                  style={{ background: GOLD, color: BG }}>
+          <button onClick={() => setEtapa('dados')} className="pme-cta px-9 py-4 rounded-full text-[17px] font-bold shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
             Começar diagnóstico →
           </button>
         </div>
@@ -168,7 +168,7 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
               </div>
             </Field>
           </div>
-          <button onClick={() => { if (validarDados()) setEtapa('questionario') }} className="w-full mt-6 py-4 rounded-full text-[16px] font-bold" style={{ background: GOLD, color: BG }}>
+          <button onClick={() => { if (validarDados()) setEtapa('questionario') }} className="pme-cta w-full mt-6 py-4 rounded-full text-[16px] font-bold" style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
             Continuar →
           </button>
         </div>
@@ -204,7 +204,7 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
           ))}
         </div>
 
-        <button onClick={enviar} disabled={loading} className="w-full mt-7 py-4 rounded-full text-[17px] font-bold shadow-lg disabled:opacity-60" style={{ background: GOLD, color: BG }}>
+        <button onClick={enviar} disabled={loading} className="pme-cta w-full mt-7 py-4 rounded-full text-[17px] font-bold shadow-lg disabled:opacity-60" style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
           {loading ? 'Gerando seu diagnóstico…' : 'Gerar meu diagnóstico →'}
         </button>
       </div>
@@ -215,29 +215,45 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
 // ── Componentes compartilhados ──
 export function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ minHeight: '100vh', background: '#0f1826' }}>
+    <div className="pme-root" style={{ minHeight: '100vh', background: '#0c1422', position: 'relative', overflow: 'hidden' }}>
       <style>{`
-        .pme-input{width:100%;padding:0.85rem 1rem;border:1px solid rgba(212,175,55,0.22);border-radius:0.8rem;font-size:16px;font-weight:500;color:#e9eef6;background:#1a2740;outline:none}
-        .pme-input:focus{border-color:#d4af37}
-        .pme-input::placeholder{color:#6f819b}
-        .pme-input option{background:#1a2740;color:#e9eef6}
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        .pme-root, .pme-root button, .pme-root input, .pme-root select { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+        .pme-glow { position:absolute; top:-180px; left:50%; transform:translateX(-50%); width:760px; height:760px; border-radius:9999px; pointer-events:none;
+          background: radial-gradient(circle, rgba(212,175,55,0.13) 0%, rgba(12,20,34,0) 62%); }
+        .pme-input{ width:100%; padding:0.95rem 1.1rem; border:1px solid rgba(212,175,55,0.20); border-radius:14px; font-size:16px; font-weight:500; color:#eef2f9; background:#16223a; outline:none; transition:border-color .2s ease, box-shadow .2s ease; }
+        .pme-input:focus{ border-color:#d4af37; box-shadow:0 0 0 4px rgba(212,175,55,0.10); }
+        .pme-input::placeholder{ color:#6f819b; }
+        .pme-input option{ background:#16223a; color:#eef2f9; }
+        .pme-cta{ transition: transform .25s ease, box-shadow .25s ease; }
+        .pme-cta:hover{ transform: translateY(-2px); box-shadow: 0 16px 38px -12px rgba(212,175,55,0.55); }
+        .pme-qcard{ transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
+        .pme-qcard:hover{ border-color: rgba(212,175,55,0.22); box-shadow: 0 18px 40px -24px rgba(0,0,0,0.6); }
+        .pme-opt{ transition: all .18s ease; }
+        .pme-opt:hover{ transform: translateY(-1px); }
       `}</style>
-      <header className="h-14 flex items-center px-6" style={{ borderBottom: '1px solid rgba(212,175,55,0.18)' }}>
-        <span className="font-serif font-bold text-[18px]" style={{ color: '#e9eef6' }}>Psique <span className="font-normal" style={{ color: '#9fb0c8' }}>· Diagnóstico de Liderança</span></span>
+      <div className="pme-glow" />
+      <header className="relative h-16 flex items-center px-6 lg:px-8" style={{ borderBottom: '1px solid rgba(212,175,55,0.16)' }}>
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #d4af37, #b8902a)' }}>
+            <svg viewBox="0 0 90 90" fill="none" className="w-4 h-4"><path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z" fill="rgba(12,20,34,0.4)" stroke="#0c1422" strokeWidth="2" strokeLinejoin="round"/><circle cx="45" cy="45" r="5" fill="#0c1422"/></svg>
+          </div>
+          <span className="font-bold text-[17px]" style={{ color: '#eef2f9' }}>Psique <span className="font-medium" style={{ color: '#8c9db6' }}>· Diagnóstico de Liderança</span></span>
+        </div>
       </header>
-      <main className="px-4 py-7">{children}</main>
+      <main className="relative px-4 py-8 lg:py-10">{children}</main>
     </div>
   )
 }
 
 export function EscalaLegenda() {
   return (
-    <div className="rounded-2xl px-4 py-3 mb-5" style={{ background: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.20)' }}>
-      <p className="text-[13px] font-bold mb-1" style={{ color: '#d4af37' }}>Como responder</p>
-      <p className="text-[14px] font-medium leading-snug" style={{ color: '#c4d2e6' }}>
-        Dê uma nota de <strong style={{ color: '#e9eef6' }}>1 a 5</strong> para cada frase, pensando na sua realidade de hoje.
-        <strong style={{ color: '#e9eef6' }}> 1 = Discordo totalmente</strong> (não é nada assim) e
-        <strong style={{ color: '#e9eef6' }}> 5 = Concordo totalmente</strong> (é exatamente assim). O número 3 é o meio termo.
+    <div className="rounded-2xl px-5 py-4 mb-6" style={{ background: 'rgba(212,175,55,0.07)', border: '1px solid rgba(212,175,55,0.22)' }}>
+      <p className="text-[12px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#d4af37' }}>Como responder</p>
+      <p className="text-[15px] font-medium leading-relaxed" style={{ color: '#c9d6e8' }}>
+        Dê uma nota de <strong style={{ color: '#eef2f9' }}>1 a 5</strong> para cada frase, pensando na sua realidade de hoje.
+        <strong style={{ color: '#eef2f9' }}> 1 = Discordo totalmente</strong> (não é nada assim) e
+        <strong style={{ color: '#eef2f9' }}> 5 = Concordo totalmente</strong> (é exatamente assim). O número 3 é o meio termo.
       </p>
     </div>
   )
@@ -245,21 +261,26 @@ export function EscalaLegenda() {
 
 export function PerguntaCard({ pergunta, valor, onSelect }: { pergunta: { id: string; texto: string }; valor?: number; onSelect: (v: number) => void }) {
   return (
-    <div className="rounded-2xl p-4 md:p-5" style={{ background: '#1a2740', border: '1px solid rgba(255,255,255,0.06)' }}>
-      <p className="text-[16px] md:text-[17px] font-semibold mb-3.5 leading-snug" style={{ color: '#e9eef6' }}>{pergunta.texto}</p>
-      <div className="flex gap-2">
+    <div className="pme-qcard rounded-3xl p-5 md:p-6" style={{ background: '#16223a', border: '1px solid rgba(255,255,255,0.07)' }}>
+      <p className="text-[17px] md:text-[18px] font-semibold mb-4 leading-snug" style={{ color: '#eef2f9' }}>{pergunta.texto}</p>
+      <div className="flex gap-2 md:gap-2.5">
         {ESCALA_PME.map((opt) => {
           const sel = valor === opt.valor
           return (
             <button key={opt.valor} onClick={() => onSelect(opt.valor)} title={opt.label}
-                    className="flex-1 py-3 rounded-xl border-2 text-[16px] font-bold transition-all"
-                    style={{ borderColor: sel ? '#d4af37' : 'rgba(255,255,255,0.12)', background: sel ? '#d4af37' : 'transparent', color: sel ? '#0f1826' : '#8c9db6' }}>
+                    className="pme-opt flex-1 py-3.5 rounded-2xl border-2 text-[17px] font-bold"
+                    style={{
+                      borderColor: sel ? '#d4af37' : 'rgba(255,255,255,0.12)',
+                      background: sel ? 'linear-gradient(135deg, #e0bb46, #c79a2c)' : 'transparent',
+                      color: sel ? '#0c1422' : '#90a0b8',
+                      boxShadow: sel ? '0 8px 22px -8px rgba(212,175,55,0.55)' : 'none',
+                    }}>
               {opt.valor}
             </button>
           )
         })}
       </div>
-      <div className="flex justify-between text-[11.5px] font-medium mt-1.5 px-0.5" style={{ color: '#6f819b' }}>
+      <div className="flex justify-between text-[12px] font-medium mt-2 px-0.5" style={{ color: '#6f819b' }}>
         <span>Discordo totalmente</span><span>Concordo totalmente</span>
       </div>
     </div>
