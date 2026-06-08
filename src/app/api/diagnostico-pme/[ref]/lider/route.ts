@@ -17,8 +17,8 @@ export const dynamic = 'force-dynamic'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-export async function POST(req: NextRequest, { params }: { params: { token: string } }) {
-  const diag = await prismaAny.pmeDiagnostico.findUnique({ where: { tokenLider: params.token } })
+export async function POST(req: NextRequest, { params }: { params: { ref: string } }) {
+  const diag = await prismaAny.pmeDiagnostico.findUnique({ where: { tokenLider: params.ref } })
   if (!diag) return NextResponse.json({ error: 'Diagnóstico não encontrado.' }, { status: 404 })
   if (diag.status === 'COMPLETO') {
     return NextResponse.json({ error: 'Este diagnóstico já foi respondido pelo líder.', id: diag.id }, { status: 409 })

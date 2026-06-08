@@ -22,8 +22,8 @@ const prismaAny = prisma as any
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 const MODEL = 'claude-sonnet-4-6'
 
-export async function POST(_req: NextRequest, { params }: { params: { id: string } }) {
-  const diag = await prismaAny.pmeDiagnostico.findUnique({ where: { id: params.id } })
+export async function POST(_req: NextRequest, { params }: { params: { ref: string } }) {
+  const diag = await prismaAny.pmeDiagnostico.findUnique({ where: { id: params.ref } })
   if (!diag) return NextResponse.json({ error: 'Diagnóstico não encontrado.' }, { status: 404 })
 
   // Se já existe, devolve o salvo (cache)
