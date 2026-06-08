@@ -422,6 +422,85 @@ export async function sendPasswordResetEmail(
   }
 }
 
+// ── E-mail do Diagnóstico de Liderança PME ───────────────────────────────────
+
+export async function sendPmeDiagnosticoEmail(opts: {
+  toEmail:      string
+  donoNome:     string
+  empresa:      string
+  relatorioUrl: string
+  faixaRotulo:  string
+  score:        number
+  linkLider?:   string | null
+}): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada — diagnóstico PME não enviado.')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  const firstName = opts.donoNome.split(' ')[0]
+  const ganchoLider = opts.linkLider
+    ? `<tr><td style="padding:0 32px 24px;">
+         <div style="background:#1a2740;border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:18px;">
+           <p style="margin:0 0 8px;color:#d4af37;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Libere a análise completa</p>
+           <p style="margin:0 0 12px;color:#c4d2e6;font-size:14px;line-height:1.6;">Envie o link abaixo ao seu principal líder. Quando ele responder, o sistema cruza as visões e revela os pontos de atrito da sua gestão.</p>
+           <a href="${opts.linkLider}" style="color:#d4af37;font-size:13px;word-break:break-all;">${opts.linkLider}</a>
+         </div>
+       </td></tr>`
+    : ''
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#0f1826;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f1826;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:560px;background:#131e30;border-radius:16px;overflow:hidden;border:1px solid rgba(212,175,55,0.18);">
+        <tr><td style="padding:28px 32px;background:linear-gradient(135deg,#1a2a40,#0f1826);">
+          <p style="margin:0 0 6px;color:#d4af37;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Diagnóstico de Liderança</p>
+          <h1 style="margin:0;color:#e9eef6;font-size:24px;">${opts.empresa}</h1>
+        </td></tr>
+        <tr><td style="padding:28px 32px 8px;">
+          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">Olá, ${firstName}. O diagnóstico da sua empresa está pronto.</p>
+          <div style="text-align:center;margin:18px 0;">
+            <div style="display:inline-block;background:#1a2740;border-radius:12px;padding:18px 28px;">
+              <p style="margin:0;color:#d4af37;font-size:40px;font-weight:800;line-height:1;">${opts.score}<span style="font-size:18px;color:#9fb0c8;">/100</span></p>
+              <p style="margin:6px 0 0;color:#e9eef6;font-size:14px;font-weight:700;">${opts.faixaRotulo}</p>
+            </div>
+          </div>
+        </td></tr>
+        <tr><td style="padding:8px 32px 24px;text-align:center;">
+          <a href="${opts.relatorioUrl}" style="display:inline-block;background:#d4af37;color:#0f1826;text-decoration:none;padding:14px 32px;border-radius:99px;font-size:15px;font-weight:700;">Ver meu relatório completo →</a>
+        </td></tr>
+        ${ganchoLider}
+        <tr><td style="padding:16px 32px 28px;border-top:1px solid rgba(255,255,255,0.06);">
+          <p style="margin:0;color:#6f819b;font-size:12px;text-align:center;">Gerado por ${APP_NAME}</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [opts.toEmail],
+        subject: `${firstName}, seu Diagnóstico de Liderança está pronto (${opts.score}/100)`,
+        html,
+      }),
+    })
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      return { sent: false, error: (body as { message?: string }).message ?? `HTTP ${res.status}` }
+    }
+    return { sent: true }
+  } catch (err) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
+
 // ── E-mail de código de validação de perfil (Gamificação) ────────────────────
 
 function buildProfileValidationCodeHtml(name: string, code: string): string {

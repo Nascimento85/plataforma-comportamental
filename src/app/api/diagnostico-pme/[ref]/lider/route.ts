@@ -8,8 +8,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import {
-  PERGUNTAS_LIDER, calcularDiagnostico,
+  PERGUNTAS_LIDER, calcularDiagnostico, faixaMaturidade,
 } from '@/content/pme-diagnostico/questionarios'
+import { sendPmeDiagnosticoEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -58,6 +59,19 @@ export async function POST(req: NextRequest, { params }: { params: { ref: string
       relatorioAi:     null,
     },
   })
+
+  // Reenvia o relatório ATUALIZADO (com os gaps cruzados) ao dono
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
+  const faixa = faixaMaturidade(resultado.scoreMaturidade)
+  sendPmeDiagnosticoEmail({
+    toEmail:      diag.donoEmail,
+    donoNome:     diag.donoNome,
+    empresa:      diag.empresa,
+    relatorioUrl: `${appUrl}/diagnostico-pme/relatorio/${diag.id}`,
+    faixaRotulo:  faixa.rotulo,
+    score:        resultado.scoreMaturidade,
+    linkLider:    null,
+  }).catch((e) => console.error('[pme] email dono (pós líder) falhou:', e))
 
   return NextResponse.json({
     id: diag.id,

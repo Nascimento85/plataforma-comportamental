@@ -9,8 +9,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
 import {
-  PERGUNTAS_DONO, calcularDiagnostico,
+  PERGUNTAS_DONO, calcularDiagnostico, faixaMaturidade,
 } from '@/content/pme-diagnostico/questionarios'
+import { sendPmeDiagnosticoEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -40,8 +41,10 @@ export async function POST(req: NextRequest) {
   const donoEmail = (body.donoEmail ?? '').trim().toLowerCase()
   const empresa = (body.empresa ?? '').trim()
 
+  const donoTelefone = (body.donoTelefone ?? '').trim()
   if (donoNome.length < 2) return NextResponse.json({ error: 'Informe seu nome.' }, { status: 400 })
   if (!donoEmail.includes('@')) return NextResponse.json({ error: 'Informe um e-mail válido.' }, { status: 400 })
+  if (donoTelefone.replace(/\D/g, '').length < 10) return NextResponse.json({ error: 'Informe um WhatsApp válido com DDD.' }, { status: 400 })
   if (empresa.length < 2) return NextResponse.json({ error: 'Informe o nome da empresa.' }, { status: 400 })
 
   // Normaliza respostas (1 a 5)
@@ -66,7 +69,7 @@ export async function POST(req: NextRequest) {
     data: {
       donoNome,
       donoEmail,
-      donoTelefone:   (body.donoTelefone ?? '').trim() || null,
+      donoTelefone,
       empresa,
       funcionarios:   (body.funcionarios ?? '').trim() || null,
       temLideres,
@@ -79,10 +82,20 @@ export async function POST(req: NextRequest) {
   })
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? ''
-  return NextResponse.json({
-    id: diag.id,
-    relatorioUrl: `/diagnostico-pme/relatorio/${diag.id}`,
-    // Link para o dono enviar ao líder (só faz sentido se temLideres)
-    linkLider: temLideres ? `${appUrl}/diagnostico-pme/${tokenLider}` : null,
-  }, { status: 201 })
+  const relatorioUrl = `/diagnostico-pme/relatorio/${diag.id}`
+  const linkLider = temLideres ? `${appUrl}/diagnostico-pme/${tokenLider}` : null
+
+  // Envia o relatório por e-mail (não bloqueia a resposta)
+  const faixa = faixaMaturidade(resultado.scoreMaturidade)
+  sendPmeDiagnosticoEmail({
+    toEmail:      donoEmail,
+    donoNome,
+    empresa,
+    relatorioUrl: `${appUrl}${relatorioUrl}`,
+    faixaRotulo:  faixa.rotulo,
+    score:        resultado.scoreMaturidade,
+    linkLider,
+  }).catch((e) => console.error('[pme] email dono falhou:', e))
+
+  return NextResponse.json({ id: diag.id, relatorioUrl, linkLider }, { status: 201 })
 }
