@@ -278,12 +278,12 @@ export default function TestIntroWrapper({ testType, assessmentId, token, employ
     return (
       <div className="space-y-0">
         {/* Imagem de capa */}
-        <div className="rounded-2xl overflow-hidden mb-6 shadow-md">
+        <div className="rounded-2xl overflow-hidden mb-6 shadow-md aspect-[16/10]">
           <img
             src={intro.image}
             alt={intro.title}
-            className="w-full object-cover"
-            style={{ maxHeight: '280px', objectPosition: 'center top' }}
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center center' }}
           />
         </div>
 

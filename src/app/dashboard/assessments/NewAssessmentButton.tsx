@@ -607,12 +607,12 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                      style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
 
                   {/* Imagem */}
-                  <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist">
+                  <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist aspect-[16/10]">
                     <img
                       src={selectedTest.image}
                       alt={selectedTest.label}
-                      className="w-full object-cover"
-                      style={{ maxHeight: '180px', objectPosition: 'center center' }}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: 'center center' }}
                     />
                   </div>
 
