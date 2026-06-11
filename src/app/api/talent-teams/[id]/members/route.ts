@@ -39,7 +39,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: 'Time não encontrado.' }, { status: 404 })
   }
 
-  let body: { nome?: string; cargo?: string; employeeId?: string; perfilDisc?: string }
+  let body: { nome?: string; cargo?: string; employeeId?: string; perfilDisc?: string; email?: string }
   try {
     body = await req.json()
   } catch {
@@ -73,6 +73,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       employeeId,
       nome,
       cargo:      (body.cargo ?? '').trim() || null,
+      email:      (body.email ?? '').trim().toLowerCase() || null,
       perfilDisc,
     },
   })

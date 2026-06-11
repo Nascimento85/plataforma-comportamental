@@ -70,11 +70,18 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight">{teamNome}</h1>
               {teamDescricao && <p className="text-[14px] text-white/70 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
             </div>
-            <Link href={`/dashboard/gestao-times/${teamId}/team-build`}
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline flex-shrink-0"
-                  style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
-              ◇ Team Build deste time →
-            </Link>
+            <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
+              <Link href={`/dashboard/gestao-times/${teamId}/avaliacao-lider`}
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline"
+                    style={{ background: 'rgba(255,255,255,0.10)', color: '#e9eef6', border: '1px solid rgba(255,255,255,0.25)' }}>
+                ◆ Avaliação do Líder →
+              </Link>
+              <Link href={`/dashboard/gestao-times/${teamId}/team-build`}
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline"
+                    style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
+                ◇ Team Build deste time →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -342,6 +349,7 @@ function AddMemberModal({
   const [employeeId, setEmployeeId] = useState('')
   const [nome, setNome] = useState('')
   const [cargo, setCargo] = useState('')
+  const [email, setEmail] = useState('')
   const [perfilDisc, setPerfilDisc] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -355,10 +363,10 @@ function AddMemberModal({
       if (modo === 'vincular') {
         const emp = employeesDisponiveis.find((x) => x.employeeId === employeeId)
         if (!emp) { setError('Selecione um colaborador.'); setLoading(false); return }
-        body = { nome: emp.nome, employeeId: emp.employeeId, cargo: cargo.trim() }
+        body = { nome: emp.nome, employeeId: emp.employeeId, cargo: cargo.trim(), email: email.trim() || undefined }
       } else {
         if (nome.trim().length < 2) { setError('Informe o nome.'); setLoading(false); return }
-        body = { nome: nome.trim(), cargo: cargo.trim(), perfilDisc: perfilDisc || undefined }
+        body = { nome: nome.trim(), cargo: cargo.trim(), email: email.trim() || undefined, perfilDisc: perfilDisc || undefined }
       }
       const res = await fetch(`/api/talent-teams/${teamId}/members`, {
         method: 'POST',
@@ -449,6 +457,15 @@ function AddMemberModal({
             <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Cargo (opcional)</label>
             <input type="text" value={cargo} onChange={(e) => setCargo(e.target.value)} className="soul-input w-full"
                    placeholder="Ex: Analista de Vendas" disabled={loading} />
+          </div>
+
+          <div>
+            <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Email (para a Avaliação do Líder)</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="soul-input w-full"
+                   placeholder="email@empresa.com" disabled={loading} />
+            <p className="text-[11px] text-soul-ink/55 font-medium mt-1.5">
+              Com o email cadastrado, o colaborador recebe automaticamente o convite anônimo para avaliar o líder assim que você concluir a avaliação dele.
+            </p>
           </div>
 
           <button type="submit" disabled={loading}

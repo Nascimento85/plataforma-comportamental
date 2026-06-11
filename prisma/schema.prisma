@@ -73,6 +73,9 @@ model Company {
   subscription  Subscription?
   // Gestao de Times (20-70-10 + Team Build)
   talentTeams   TalentTeam[]
+  // Avaliacao de Lideranca (ascendente anonima)
+  liderConvites  LiderConvite[]
+  liderRespostas LiderResposta[]
 }
 
 // ============================================================
@@ -536,11 +539,16 @@ model TalentTeam {
   descricao   String?  @db.Text
   // Fase atual do time (Tuckman) — usada pelo Team Build
   faseTuckman String?  // FORMING | STORMING | NORMING | PERFORMING
+  // Lider do setor/time — alvo da Avaliacao de Lideranca ascendente
+  liderNome  String?
+  liderEmail String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   company Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
   members TalentMember[]
+  liderConvites  LiderConvite[]
+  liderRespostas LiderResposta[]
 
   @@index([companyId])
 }
@@ -554,6 +562,8 @@ model TalentMember {
   employeeId  String?
   nome        String
   cargo       String?
+  // Email do membro (avulso). Quando ha employeeId, usa o email do Employee.
+  email       String?
   // Perfil comportamental dominante (D | I | S | C). Preenchido a partir
   // do Employee vinculado ou informado manualmente pelo gestor.
   perfilDisc  String?
@@ -622,6 +632,53 @@ model TalentCheckIn {
   pdi TalentPDI @relation(fields: [pdiId], references: [id], onDelete: Cascade)
 
   @@index([pdiId])
+  @@index([companyId])
+}
+
+// ============================================================
+// AVALIACAO DE LIDERANCA (ascendente, anonima)
+// Liderados avaliam o lider do time. Mesmo padrao de anonimato
+// blindado do NR-1: Tabela A (convite com identidade, so controle)
+// e Tabela B (respostas SEM FK de identidade). Resultado agregado
+// exige n minimo de 3 respostas.
+// ============================================================
+
+// ---- Tabela A: Convite com identidade (controle de quem ja respondeu) ----
+model LiderConvite {
+  id          String    @id @default(cuid())
+  teamId      String
+  companyId   String
+  nome        String
+  email       String
+  token       String    @unique
+  status      String    @default("PENDING")  // PENDING | COMPLETED
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  team    TalentTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  company Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, email])
+  @@index([teamId])
+  @@index([companyId])
+  @@index([status])
+}
+
+// ---- Tabela B: Respostas ANONIMAS (sem FK de convite/membro) ----
+model LiderResposta {
+  id        String   @id @default(cuid())
+  teamId    String
+  companyId String
+  respostas String   @db.Text  // JSON {perguntaId: 1..5}
+  scores    String   @db.Text  // JSON {scoreFinal, pilares}
+  sciTexto  String?  @db.Text  // relato SCI anonimo (Situacao, Comportamento, Impacto)
+  createdAt DateTime @default(now())
+  // ATENCAO: sem FK para LiderConvite/TalentMember — anonimato blindado
+
+  team    TalentTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  company Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([teamId])
   @@index([companyId])
 }
 

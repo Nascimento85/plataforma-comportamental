@@ -24,7 +24,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: 'Time não encontrado.' }, { status: 404 })
   }
 
-  let body: { nome?: string; descricao?: string; faseTuckman?: string }
+  let body: { nome?: string; descricao?: string; faseTuckman?: string; liderNome?: string; liderEmail?: string }
   try {
     body = await req.json()
   } catch {
@@ -38,6 +38,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if ('faseTuckman' in body) {
     data.faseTuckman = body.faseTuckman && FASES_VALIDAS.includes(body.faseTuckman) ? body.faseTuckman : null
   }
+  if ('liderNome' in body)  data.liderNome  = (body.liderNome ?? '').trim().slice(0, 80) || null
+  if ('liderEmail' in body) data.liderEmail = (body.liderEmail ?? '').trim().toLowerCase().slice(0, 120) || null
 
   const updated = await prismaAny.talentTeam.update({ where: { id: team.id }, data })
   return NextResponse.json({ id: updated.id, faseTuckman: updated.faseTuckman }, { status: 200 })

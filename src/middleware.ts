@@ -19,6 +19,8 @@ const PUBLIC_ROUTES = [
   '/lp.html',
   '/playbook',         // playbooks gratuitos (contratacao, nr1)
   '/nr1',              // coleta NR-1 anônima por token público (LGPD/CFP)
+  '/avaliar-lider',    // avaliação de liderança anônima por token público
+  '/api/lider',        // APIs públicas da avaliação de liderança (convite + respostas)
   '/diagnostico-pme',  // diagnóstico de liderança PME (lead gen público)
   '/api/diagnostico-pme', // APIs públicas do diagnóstico PME
   '/precos',           // landing pública de planos PJ
