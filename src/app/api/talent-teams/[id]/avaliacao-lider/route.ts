@@ -19,7 +19,10 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
   const session = await getSession()
   if (!session?.id) return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
 
-  const team = await prismaAny.talentTeam.findUnique({ where: { id: params.id } })
+  const team = await prismaAny.talentTeam.findUnique({
+    where: { id: params.id },
+    include: { members: { orderBy: { createdAt: 'asc' } } },
+  })
   if (!team || team.companyId !== session.id) {
     return NextResponse.json({ error: 'Time não encontrado.' }, { status: 404 })
   }
@@ -55,7 +58,28 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
       .sort(() => Math.random() - 0.5)
   }
 
+  // Situacao de cada membro: email resolvido (proprio ou do Employee) + convite
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const membersRaw = team.members as any[]
+  const employeeIds = membersRaw.map((m) => m.employeeId).filter(Boolean) as string[]
+  const employees = employeeIds.length
+    ? await prisma.employee.findMany({ where: { id: { in: employeeIds } }, select: { id: true, email: true } })
+    : []
+  const emailDoEmployee = new Map(employees.map((e) => [e.id, e.email]))
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const conviteDoEmail = new Map(convites.map((c: any) => [c.email, c.status]))
+  const membros = membersRaw.map((m) => {
+    const email = (m.email ?? (m.employeeId ? emailDoEmployee.get(m.employeeId) : null) ?? '').trim().toLowerCase() || null
+    return {
+      id: m.id,
+      nome: m.nome,
+      email,
+      conviteStatus: email ? (conviteDoEmail.get(email) ?? null) : null,
+    }
+  })
+
   return NextResponse.json({
+    membros,
     liderNome:    team.liderNome,
     liderEmail:   team.liderEmail,
     minRespostas: MIN_RESPOSTAS_LIDER,

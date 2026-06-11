@@ -21,6 +21,7 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
   const [respostas, setRespostas] = useState<Record<number, number>>(respostasIniciais ?? {})
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [feedback, setFeedback] = useState('')
 
   const respondidas = CRITERIOS.filter((c) => respostas[c.id]).length
   const progresso = Math.round((respondidas / CRITERIOS.length) * 100)
@@ -42,8 +43,24 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error ?? 'Erro ao salvar avaliação.'); return }
-      onClose()
       router.refresh()
+      // Feedback da automacao de Avaliacao do Lider
+      const lc = data.liderConvite as { enviado?: boolean; motivo?: string } | undefined
+      if (lc?.enviado) {
+        setFeedback('✓ Avaliação salva. Convite anônimo para avaliar o líder enviado por email ao colaborador.')
+      } else if (lc?.motivo === 'SEM_LIDER') {
+        setFeedback('Avaliação salva. O convite de avaliação do líder NÃO foi enviado: defina o líder do time na tela Avaliação do Líder e use o botão Enviar convites.')
+      } else if (lc?.motivo === 'SEM_EMAIL') {
+        setFeedback('Avaliação salva. O convite de avaliação do líder NÃO foi enviado: este colaborador não tem email cadastrado. Cadastre o email na tela Avaliação do Líder.')
+      } else if (lc?.motivo === 'JA_CONVIDADO') {
+        setFeedback('Avaliação salva. Este colaborador já recebeu o convite de avaliação do líder anteriormente.')
+      } else if (lc?.motivo === 'PROPRIO_LIDER') {
+        setFeedback('Avaliação salva. Convite não enviado: este membro é o próprio líder do time.')
+      } else if (lc?.motivo === 'ERRO') {
+        setFeedback('Avaliação salva, mas houve falha ao enviar o convite de avaliação do líder. Tente pelo botão Enviar convites na tela Avaliação do Líder.')
+      } else {
+        onClose()
+      }
     } catch {
       setError('Erro de conexão.')
     } finally {
@@ -121,6 +138,17 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
         {/* Footer sticky com prévia + salvar */}
         <div className="sticky bottom-0 bg-white rounded-b-3xl px-6 md:px-7 py-4 border-t border-soul-mist/60">
           {error && <p className="text-[12.5px] font-semibold mb-2" style={{ color: '#a8522e' }}>{error}</p>}
+          {feedback && (
+            <div className="rounded-2xl px-4 py-3 mb-3 text-[13px] font-semibold leading-relaxed"
+                 style={{
+                   background: feedback.startsWith('✓') ? 'rgba(90,125,90,0.12)' : 'rgba(201,168,76,0.12)',
+                   border: `1px solid ${feedback.startsWith('✓') ? 'rgba(90,125,90,0.4)' : 'rgba(201,168,76,0.45)'}`,
+                   color: feedback.startsWith('✓') ? '#3f5c3f' : '#6d5615',
+                 }}>
+              {feedback}
+              <button onClick={onClose} className="block mt-2 underline font-bold">Fechar</button>
+            </div>
+          )}
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex gap-4 text-[12px] font-bold">
               <span style={{ color: '#c4633a' }}>Perf {previa.notaPerformance.toFixed(1)}</span>

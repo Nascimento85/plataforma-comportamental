@@ -23,7 +23,15 @@ interface Convite {
   token: string
 }
 
+interface Membro {
+  id: string
+  nome: string
+  email: string | null
+  conviteStatus: string | null
+}
+
 interface ApiData {
+  membros: Membro[]
   liderNome: string | null
   liderEmail: string | null
   minRespostas: number
@@ -51,6 +59,8 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
   const [enviando, setEnviando]   = useState(false)
   const [aviso, setAviso]         = useState('')
   const [copiado, setCopiado]     = useState('')
+  const [emailEdits, setEmailEdits] = useState<Record<string, string>>({})
+  const [salvandoMembro, setSalvandoMembro] = useState('')
 
   const carregar = useCallback(async () => {
     const res = await fetch(`/api/talent-teams/${teamId}/avaliacao-lider`)
@@ -85,6 +95,38 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
       setAviso(msgs.join(' '))
       carregar()
     } finally { setEnviando(false) }
+  }
+
+  async function salvarEmailEConvidar(m: Membro) {
+    const email = (emailEdits[m.id] ?? '').trim()
+    if (!email.includes('@')) { setAviso('Informe um email válido para ' + m.nome + '.'); return }
+    setSalvandoMembro(m.id); setAviso('')
+    try {
+      const r1 = await fetch(`/api/talent-members/${m.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      if (!r1.ok) { setAviso('Não foi possível salvar o email.'); return }
+      await convidarMembro(m.id, m.nome)
+    } finally { setSalvandoMembro('') }
+  }
+
+  async function convidarMembro(memberId: string, nome: string) {
+    setSalvandoMembro(memberId); setAviso('')
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}/avaliacao-lider/convites`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ memberIds: [memberId] }),
+      })
+      const r = await res.json()
+      if (!res.ok) { setAviso(r.error ?? 'Falha ao enviar o convite.'); return }
+      if (r.criados?.length) setAviso(`Convite enviado para ${nome}.`)
+      else if (r.semEmail?.length) setAviso(`${nome} continua sem email cadastrado.`)
+      else setAviso(`${nome} já tinha convite ativo.`)
+      carregar()
+    } finally { setSalvandoMembro('') }
   }
 
   function copiarLink(c: Convite) {
@@ -157,6 +199,61 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           </div>
         )}
       </div>
+
+      {/* Membros do time: situacao de email e convite */}
+      {data && data.membros.length > 0 && (
+        <div className="soul-panel space-y-3">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/60">Membros do time</p>
+            <p className="text-[12px] text-soul-ink/55 font-medium mt-0.5">
+              Cadastre o email de quem ainda não tem e dispare o convite individual por aqui.
+            </p>
+          </div>
+          <div className="space-y-2">
+            {data.membros.map((m) => (
+              <div key={m.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-2.5"
+                   style={{ background: 'rgba(28,26,23,0.035)' }}>
+                <div className="min-w-0">
+                  <p className="text-[13px] font-semibold text-soul-ink truncate">{m.nome}</p>
+                  <p className="text-[11px] text-soul-ink/55 font-medium truncate">{m.email ?? 'sem email cadastrado'}</p>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {m.conviteStatus === 'COMPLETED' ? (
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
+                          style={{ background: 'rgba(90,125,90,0.15)', color: '#3f5c3f' }}>✓ Respondeu</span>
+                  ) : m.conviteStatus === 'PENDING' ? (
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
+                          style={{ background: 'rgba(201,168,76,0.15)', color: '#8a6d1f' }}>Convite enviado</span>
+                  ) : m.email ? (
+                    <button onClick={() => convidarMembro(m.id, m.nome)} disabled={salvandoMembro === m.id || !data.liderNome}
+                            className="text-[11px] font-bold px-3 py-1.5 rounded-full disabled:opacity-40"
+                            style={{ background: 'rgba(61,79,124,0.12)', color: '#3d4f7c' }}>
+                      {salvandoMembro === m.id ? 'Enviando...' : 'Enviar convite ✉'}
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <input value={emailEdits[m.id] ?? ''} onChange={(e) => setEmailEdits((p) => ({ ...p, [m.id]: e.target.value }))}
+                             placeholder="email@empresa.com" type="email"
+                             className="rounded-full px-3 py-1.5 text-[12px] font-medium text-soul-ink w-48"
+                             style={{ background: 'white', border: '1.5px solid rgba(28,26,23,0.15)' }} />
+                      <button onClick={() => salvarEmailEConvidar(m)} disabled={salvandoMembro === m.id || !data.liderNome}
+                              className="text-[11px] font-bold px-3 py-1.5 rounded-full disabled:opacity-40"
+                              style={{ background: 'rgba(61,79,124,0.12)', color: '#3d4f7c' }}>
+                        {salvandoMembro === m.id ? 'Salvando...' : 'Salvar e convidar'}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+          {!data.liderNome && (
+            <p className="text-[12px] font-semibold" style={{ color: '#a8522e' }}>
+              Defina e salve o líder do setor acima para liberar o envio dos convites.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Convites */}
       {data && data.convites.length > 0 && (
