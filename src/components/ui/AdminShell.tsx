@@ -143,7 +143,7 @@ export default function AdminShell({ children, session }: Props) {
   }
 
   return (
-    <div className="min-h-screen flex" style={{ background: '#f5f0e8' }}>
+    <div className="min-h-screen flex" style={{ background: '#1f2126' }}>
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 w-56 z-20" style={sidebarBg}>

@@ -69,17 +69,17 @@ export default async function AdminPage() {
       {/* Stats principais */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { label: 'Empresas',       value: totalCompanies, emoji: '🏢', color: '#3d4f7c', bg: 'rgba(61,79,124,0.07)',   border: 'rgba(61,79,124,0.15)'   },
+          { label: 'Empresas',       value: totalCompanies, emoji: '🏢', color: '#8fa6da', bg: 'rgba(61,79,124,0.07)',   border: 'rgba(61,79,124,0.15)'   },
           { label: 'Concluídos',     value: completedCount, emoji: '✓',  color: '#7a9e7e', bg: 'rgba(122,158,126,0.07)', border: 'rgba(122,158,126,0.15)' },
           { label: 'Aguardando',     value: pendingCount,   emoji: '⏳', color: '#d4943a', bg: 'rgba(212,148,58,0.07)',  border: 'rgba(212,148,58,0.15)'  },
           { label: 'Taxa conclusão', value: conclusionRate, emoji: '📊', color: '#c4633a', bg: 'rgba(196,99,58,0.07)',   border: 'rgba(196,99,58,0.12)'   },
         ].map((s) => (
-          <div key={s.label} className="bg-white rounded-3xl p-5"
+          <div key={s.label} className="bg-soul-parchment rounded-3xl p-5"
                style={{ border: `1px solid ${s.border}` }}>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-base">{s.emoji}</span>
               <span className="text-[10px] font-sans font-semibold uppercase tracking-widest"
-                    style={{ color: 'rgba(28,26,23,0.4)' }}>{s.label}</span>
+                    style={{ color: 'rgba(240,236,227,0.4)' }}>{s.label}</span>
             </div>
             <div className="font-serif font-semibold leading-none" style={{ fontSize: '36px', color: s.color }}>
               {s.value}
@@ -100,8 +100,8 @@ export default async function AdminPage() {
             { label: 'Eneagrama',      value: enneagramCount,   dot: 'bg-soul-amber'     },
             { label: '4 Temperamentos',value: temperamentCount, dot: 'bg-soul-indigo'    },
           ].map((t) => (
-            <div key={t.label} className="bg-white rounded-2xl px-4 py-3 flex items-center gap-3"
-                 style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+            <div key={t.label} className="bg-soul-parchment rounded-2xl px-4 py-3 flex items-center gap-3"
+                 style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${t.dot}`} />
               <div>
                 <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{t.value}</div>
@@ -116,9 +116,9 @@ export default async function AdminPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
         {/* Testes recentes */}
-        <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+        <div className="bg-soul-parchment rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
           <div className="flex items-center justify-between px-6 py-4"
-               style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
+               style={{ borderBottom: '1px solid rgba(58,61,69,0.5)' }}>
             <h2 className="font-serif font-semibold text-lg text-soul-ink flex items-center gap-2">
               <span>📋</span> Últimos concluídos
             </h2>
@@ -150,8 +150,8 @@ export default async function AdminPage() {
         </div>
 
         {/* Empresas recentes */}
-        <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
-          <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(232,226,214,0.5)' }}>
+        <div className="bg-soul-parchment rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
+          <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(58,61,69,0.5)' }}>
             <h2 className="font-serif font-semibold text-lg text-soul-ink flex items-center gap-2">
               <span>🏢</span> Empresas recentes
             </h2>

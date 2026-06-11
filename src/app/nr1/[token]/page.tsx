@@ -31,7 +31,7 @@ export default async function ColetaPublicaPage({ params }: { params: { token: s
   if (erro) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6"
-           style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
+           style={{ background: 'linear-gradient(180deg, #17181c 0%, #101c30 100%)' }}>
         <div className="max-w-md text-center">
           <div className="text-5xl mb-4">🌿</div>
           <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-2">{erro}</h1>

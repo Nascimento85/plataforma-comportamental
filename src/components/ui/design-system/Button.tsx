@@ -26,8 +26,8 @@ const variantClasses: Record<Variant, string> = {
   ].join(' '),
 
   dark: [
-    'bg-soul-ink text-white border-transparent',
-    'hover:bg-soul-ink/90',
+    'bg-soul-night text-white border-transparent',
+    'hover:bg-soul-night/90',
   ].join(' '),
 
   gold: [

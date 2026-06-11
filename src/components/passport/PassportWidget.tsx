@@ -87,7 +87,7 @@ export default function PassportWidget({ state }: Props) {
         style={
           isLow || isExpired
             ? { background: 'linear-gradient(135deg, #c4633a, #d4943a)' }
-            : { background: 'rgba(255,255,255,0.85)', color: '#a8522e', border: '1px solid rgba(196,99,58,0.3)' }
+            : { background: 'rgba(255,255,255,0.85)', color: '#e09070', border: '1px solid rgba(196,99,58,0.3)' }
         }
       >
         🪙 {isLow || isExpired ? 'Recarregar passaporte' : 'Comprar créditos'}

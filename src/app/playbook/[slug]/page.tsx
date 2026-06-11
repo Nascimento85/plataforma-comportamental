@@ -23,7 +23,7 @@ export default function PlaybookPage({ params }: Props) {
   if (!p) notFound()
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #17181c 0%, #101c30 100%)' }}>
       {/* ── Top bar (oculta na impressão) ── */}
       <div className="print:hidden border-b border-soul-mist/60 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
@@ -39,7 +39,7 @@ export default function PlaybookPage({ params }: Props) {
         {/* Header */}
         <header className="mb-10">
           <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
-                style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+                style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
             {p.badge}
           </span>
           <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">

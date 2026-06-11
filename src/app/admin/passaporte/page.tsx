@@ -164,7 +164,7 @@ function MetricCard({
   tone?: 'neutral' | 'positive' | 'warning' | 'danger'
 }) {
   const toneClass = {
-    neutral:  'border-soul-mist/60 bg-white',
+    neutral:  'border-soul-mist/60 bg-soul-parchment',
     positive: 'border-emerald-200 bg-emerald-50',
     warning:  'border-amber-200 bg-amber-50',
     danger:   'border-rose-200 bg-rose-50',
@@ -205,7 +205,7 @@ export default async function AdminPassaportePage() {
       {/* Header */}
       <div>
         <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-              style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+              style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Admin · Passaporte
         </span>
         <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
@@ -353,7 +353,7 @@ export default async function AdminPassaportePage() {
             title="Vencendo nas próximas 48h"
             subtitle="Bônus com saldo > 0 que vão expirar em breve. Bom alvo de outreach manual."
           />
-          <div className="rounded-3xl border border-soul-mist/60 bg-white overflow-hidden">
+          <div className="rounded-3xl border border-soul-mist/60 bg-soul-parchment overflow-hidden">
             <table className="w-full text-sm">
               <thead className="bg-soul-mist/40 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
                 <tr>
@@ -429,7 +429,7 @@ export default async function AdminPassaportePage() {
           title="Últimas concessões de bônus"
           subtitle="Quem ganhou crédito de Passaporte mais recentemente."
         />
-        <div className="rounded-3xl border border-soul-mist/60 bg-white overflow-hidden">
+        <div className="rounded-3xl border border-soul-mist/60 bg-soul-parchment overflow-hidden">
           <table className="w-full text-sm">
             <thead className="bg-soul-mist/40 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
               <tr>

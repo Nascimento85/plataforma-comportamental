@@ -86,7 +86,7 @@ export default function DashboardShell({ children, session }: Props) {
     <div className="min-h-screen flex bg-gray-50">
 
       {/* ── Sidebar desktop (fixa, visível apenas em md+) ── */}
-      <aside className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 w-64 bg-white border-r border-gray-200 z-20">
+      <aside className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 w-64 bg-soul-parchment border-r border-gray-200 z-20">
         <SidebarContent session={session} />
       </aside>
 
@@ -99,14 +99,14 @@ export default function DashboardShell({ children, session }: Props) {
             onClick={() => setMenuOpen(false)}
           />
           {/* Drawer */}
-          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-white shadow-2xl flex flex-col">
+          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-soul-parchment shadow-2xl flex flex-col">
             <SidebarContent session={session} onNavClick={() => setMenuOpen(false)} />
           </aside>
         </div>
       )}
 
       {/* ── Header mobile (fixo no topo, visível apenas em < md) ── */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-30 h-14 bg-white border-b border-gray-200 flex items-center px-4 gap-3">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-30 h-14 bg-soul-parchment border-b border-gray-200 flex items-center px-4 gap-3">
         <button
           onClick={() => setMenuOpen(true)}
           className="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"

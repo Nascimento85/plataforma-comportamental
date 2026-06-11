@@ -45,7 +45,7 @@ export default async function NR1IndexPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-                style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+                style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
             Compliance · NR-1
           </span>
           <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">

@@ -57,7 +57,7 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
           <span>Plano Profissional</span>
           <span>{credits} / {planMax}</span>
         </div>
-        <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(28,26,23,0.08)' }}>
+        <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.104)' }}>
           <div
             className="h-full rounded-full transition-all duration-1000"
             style={{

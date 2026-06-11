@@ -87,7 +87,7 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
   const progressPct = Math.round((clampedCompleted / JOURNEY_NODES.length) * 100)
 
   return (
-    <div className="bg-white rounded-3xl border border-soul-mist p-6">
+    <div className="bg-soul-parchment rounded-3xl border border-soul-mist p-6">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-5">

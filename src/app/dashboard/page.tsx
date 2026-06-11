@@ -132,7 +132,7 @@ export default async function DashboardPage() {
           <Link
             href="/dashboard/candidates"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full
-                       border-2 border-soul-mist bg-white text-[14px] text-soul-ink font-sans font-bold
+                       border-2 border-soul-mist bg-soul-parchment text-[14px] text-soul-ink font-sans font-bold
                        hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">

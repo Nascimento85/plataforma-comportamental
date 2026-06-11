@@ -17,17 +17,18 @@
 
     /* Paleta Soul — CSS Custom Properties
        (espelham os tokens Tailwind para uso em CSS puro) */
-    --soul-ink:       #1c1a17;
-    --soul-cream:     #faf7f2;
-    --soul-parchment: #f5f0e8;
-    --soul-mist:      #e8e2d6;
-    --soul-terracota: #c4633a;
+    --soul-ink:       #f0ece3;
+    --soul-cream:     #17181c;
+    --soul-parchment: #1f2126;
+    --soul-mist:      #3a3d45;
+    --soul-night:     #101c30;
+    --soul-terracota: #d0764e;
     --soul-amber:     #d4943a;
-    --soul-sage:      #7a9e7e;
-    --soul-indigo:    #3d4f7c;
-    --soul-rose:      #c47a72;
-    --soul-gold:      #c9a84c;
-    --soul-shadow:    rgba(28, 26, 23, 0.08);
+    --soul-sage:      #8fbf8f;
+    --soul-indigo:    #8fa6da;
+    --soul-rose:      #d99a91;
+    --soul-gold:      #d4b35e;
+    --soul-shadow:    rgba(0, 0, 0, 0.32);
 
     /* Sidebar */
     --sidebar-width: 240px;
@@ -117,14 +118,14 @@
 
   .soul-btn-dark {
     @apply soul-btn px-5 py-2.5 text-sm text-white
-           bg-soul-ink hover:bg-soul-ink/90;
+           bg-soul-night hover:bg-soul-night/80 border border-white/15;
   }
 
   /* Inputs */
   .soul-input {
-    @apply block w-full rounded-2xl border border-soul-mist
-           bg-white px-4 py-3 text-sm text-soul-ink
-           placeholder:text-soul-mist/70
+    @apply block w-full rounded-2xl border border-white/15
+           bg-white/5 px-4 py-3 text-sm text-soul-ink
+           placeholder:text-soul-ink/35
            focus:outline-none focus:border-soul-terracota
            focus:ring-2 focus:ring-soul-terracota/10
            transition-colors duration-150;
@@ -132,7 +133,7 @@
 
   /* Cards */
   .soul-card {
-    @apply bg-white rounded-3xl border border-soul-mist/60
+    @apply bg-soul-parchment rounded-3xl border border-white/10
            shadow-soul transition-all duration-200;
   }
 
@@ -141,7 +142,7 @@
   }
 
   .soul-panel {
-    @apply bg-white rounded-3xl border border-soul-mist/60 p-6;
+    @apply bg-soul-parchment rounded-3xl border border-white/10 p-6;
   }
 
   /* Badges / Pills */
@@ -316,6 +317,12 @@
     background: white !important;
     border: none !important;
     padding: 0 !important;
+  }
+
+  /* Tema escuro na tela, papel claro na impressão */
+  body, .soul-panel, .soul-panel *, .nr1-report-section, .nr1-report-section * {
+    color: #1c1a17 !important;
+    background: white !important;
   }
 
   /* Narrativa consultiva: tipografia legível em papel */

@@ -79,7 +79,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
           <div className="flex flex-wrap gap-2 mb-3">
             {setores.map(s => (
               <span key={s.id} className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold"
-                    style={{ background: 'rgba(196,99,58,0.10)', color: '#a8522e' }}>
+                    style={{ background: 'rgba(196,99,58,0.10)', color: '#e09070' }}>
                 {s.nome}{s.perfilDiscDominante ? ` (DISC: ${s.perfilDiscDominante})` : ''}
               </span>
             ))}
@@ -103,7 +103,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
           </div>
           <button type="button" onClick={criarSetor}
                   className="px-4 py-2 rounded-full text-[13px] font-bold border-2"
-                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }}>
+                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>
             + Adicionar setor
           </button>
         </div>
@@ -132,7 +132,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
           <h2 className="font-serif font-semibold text-xl text-soul-ink">Convidados</h2>
           <button type="button" onClick={addConvidado}
                   className="px-3 py-1.5 rounded-full text-[12px] font-bold border-2"
-                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }}>
+                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>
             + Adicionar
           </button>
         </div>
@@ -162,7 +162,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
 
       {erro && (
         <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold"
-             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
           {erro}
         </div>
       )}

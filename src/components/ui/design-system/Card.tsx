@@ -10,7 +10,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  default:   'bg-white border border-soul-mist/60 shadow-soul',
+  default:   'bg-soul-parchment border border-soul-mist/60 shadow-soul',
   dark:      'bg-soul-hero border-transparent',
   parchment: 'bg-soul-parchment border border-soul-mist/60',
   ghost:     'bg-transparent border border-soul-mist',

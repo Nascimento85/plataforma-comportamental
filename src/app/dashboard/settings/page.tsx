@@ -144,7 +144,7 @@ export default async function SettingsPage() {
             href="/forgot-password"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-bold
                        border-2 transition-colors"
-            style={{ borderColor: 'rgba(28,26,23,0.15)', color: '#1c1a17' }}
+            style={{ borderColor: 'rgba(240,236,227,0.15)', color: '#f0ece3' }}
           >
             Redefinir senha
           </Link>
@@ -174,7 +174,7 @@ function PreferenceRow({ title, description }: { title: string; description: str
         className="flex-shrink-0 w-11 h-6 rounded-full relative"
         style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
       >
-        <div className="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-white shadow-sm"/>
+        <div className="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-soul-parchment shadow-sm"/>
       </div>
     </div>
   )

@@ -62,7 +62,7 @@ export default function StatCard({
 
   return (
     <div
-      className={`relative bg-white rounded-3xl border border-soul-mist/60 p-5 overflow-hidden
+      className={`relative bg-soul-parchment rounded-3xl border border-soul-mist/60 p-5 overflow-hidden
                   transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soul-md ${className}`}
     >
       {/* Accent bar top */}
@@ -94,7 +94,7 @@ export default function StatCard({
             title={tooltip}
             aria-label={tooltip}
             className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-[9px] font-bold cursor-help select-none"
-            style={{ background: 'rgba(28,26,23,0.08)', color: 'rgba(28,26,23,0.55)' }}
+            style={{ background: 'rgba(255,255,255,0.104)', color: 'rgba(240,236,227,0.55)' }}
           >
             ?
           </span>

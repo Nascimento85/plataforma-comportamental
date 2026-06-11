@@ -103,7 +103,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
               {(member.notaPerformance != null || member.potencial != null) && (
                 <div className="flex gap-4 mt-3 pt-3 border-t border-soul-mist/60 text-[12px] font-bold">
                   {member.notaPerformance != null && <span style={{ color: '#c4633a' }}>Performance {member.notaPerformance.toFixed(1)}</span>}
-                  {member.fitComportamental != null && <span style={{ color: '#3d4f7c' }}>Fit {member.fitComportamental.toFixed(1)}</span>}
+                  {member.fitComportamental != null && <span style={{ color: '#8fa6da' }}>Fit {member.fitComportamental.toFixed(1)}</span>}
                   {member.potencial != null && member.potencial > 0 && <span style={{ color: '#c9a84c' }}>Potencial {member.potencial.toFixed(1)}</span>}
                 </div>
               )}
@@ -143,7 +143,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
                 <p className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{perfil.tom.priorizar}</p>
               </div>
               <div className="rounded-2xl p-4" style={{ background: 'rgba(196,122,114,0.10)', border: '1px solid rgba(196,122,114,0.30)' }}>
-                <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: '#7a3d35' }}>Evite</p>
+                <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: '#f0a892' }}>Evite</p>
                 <p className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{perfil.tom.evitar}</p>
               </div>
             </div>

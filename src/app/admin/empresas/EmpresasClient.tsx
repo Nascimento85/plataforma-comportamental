@@ -88,7 +88,7 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
         </span>
       </div>
 
-      {erro  && <div className="rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>{erro}</div>}
+      {erro  && <div className="rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{erro}</div>}
       {okMsg && <div className="rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.40)', color: '#3d6b40' }}>{okMsg}</div>}
 
       <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(196,99,58,0.18)' }}>

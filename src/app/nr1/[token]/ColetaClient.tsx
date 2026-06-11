@@ -87,12 +87,12 @@ export default function ColetaClient(props: Props) {
 
   return (
     <div className="min-h-screen py-8 px-4"
-         style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
+         style={{ background: 'linear-gradient(180deg, #17181c 0%, #101c30 100%)' }}>
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
           <span className="inline-block text-[10px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-                style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+                style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
             Diagnóstico Psicossocial NR-1
           </span>
           <h1 className="font-serif font-semibold text-2xl text-soul-ink leading-tight">{coletaNome}</h1>
@@ -169,14 +169,14 @@ export default function ColetaClient(props: Props) {
             </p>
             {erro && (
               <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold"
-                   style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+                   style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
                 {erro}
               </div>
             )}
             <div className="flex flex-col sm:flex-row gap-3">
               <button onClick={() => setEtapa('COPSOQ')} disabled={enviando}
                       className="flex-1 py-3 rounded-full text-[14px] font-bold border-2"
-                      style={{ borderColor: 'rgba(28,26,23,0.25)', color: 'rgba(28,26,23,0.85)' }}>
+                      style={{ borderColor: 'rgba(240,236,227,0.25)', color: 'rgba(240,236,227,0.85)' }}>
                 Revisar
               </button>
               <button onClick={submeter} disabled={enviando}
@@ -242,7 +242,7 @@ function QuestoesBloco<Q extends { id: number; texto: string; tipo?: string }>(p
                             style={{
                               background: ativo ? '#c4633a' : 'white',
                               color:      ativo ? 'white' : '#1c1a17',
-                              border:     ativo ? '1.5px solid #c4633a' : '1.5px solid rgba(28,26,23,0.18)',
+                              border:     ativo ? '1.5px solid #c4633a' : '1.5px solid rgba(255,255,255,0.12)',
                             }}>
                       {o.label}
                     </button>
@@ -257,7 +257,7 @@ function QuestoesBloco<Q extends { id: number; texto: string; tipo?: string }>(p
         {onAnterior && (
           <button onClick={onAnterior}
                   className="px-4 py-2.5 rounded-full text-[13px] font-bold border-2"
-                  style={{ borderColor: 'rgba(28,26,23,0.25)', color: 'rgba(28,26,23,0.85)' }}>
+                  style={{ borderColor: 'rgba(240,236,227,0.25)', color: 'rgba(240,236,227,0.85)' }}>
             ← Anterior
           </button>
         )}

@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: 'Devolutiva Comportamental' }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-3xl p-6" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+    <div className="bg-soul-parchment rounded-3xl p-6" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
       <h2 className="text-[10px] font-sans font-semibold text-soul-ink/40 uppercase tracking-[0.15em] mb-4">{title}</h2>
       {children}
     </div>
@@ -71,7 +71,7 @@ function InfoCard({ label, text, variant = 'sage' }: {
     terracota: { background: 'rgba(196,99,58,0.07)',   border: '1px solid rgba(196,99,58,0.15)',   color: '#c4633a' },
     rose:      { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
     amber:     { background: 'rgba(212,148,58,0.08)',  border: '1px solid rgba(212,148,58,0.18)',  color: '#8a622e' },
-    indigo:    { background: 'rgba(61,79,124,0.07)',   border: '1px solid rgba(61,79,124,0.15)',   color: '#3d4f7c' },
+    indigo:    { background: 'rgba(61,79,124,0.07)',   border: '1px solid rgba(61,79,124,0.15)',   color: '#8fa6da' },
     'rose-warn': { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
   }
   const s = variantStyles[variant]
@@ -580,8 +580,8 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
     return (
       <div className="max-w-2xl mx-auto py-16">
         <div
-          className="bg-white rounded-3xl p-8 sm:p-10 text-center"
-          style={{ border: '1px solid rgba(232,226,214,0.6)' }}
+          className="bg-soul-parchment rounded-3xl p-8 sm:p-10 text-center"
+          style={{ border: '1px solid rgba(58,61,69,0.6)' }}
         >
           <div className="text-5xl mb-5">🔒</div>
           <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
@@ -627,7 +627,7 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
         <Link href="/dashboard/assessments" className="text-sm text-soul-ink/40 hover:text-soul-ink/70 font-sans transition-colors">
           ← Avaliações
         </Link>
-        <div className="bg-white rounded-3xl py-16 text-center" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+        <div className="bg-soul-parchment rounded-3xl py-16 text-center" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
           <div className="text-4xl mb-4">⏳</div>
           <p className="font-serif font-semibold text-xl text-soul-ink mb-2">Avaliação ainda não concluída</p>
           <p className="text-sm text-soul-ink/45 font-sans">A devolutiva estará disponível após o colaborador finalizar o teste.</p>

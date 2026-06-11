@@ -77,7 +77,7 @@ export default function SelfStartTestButton({
         {loading ? 'Abrindo…' : (label ?? 'Fazer teste agora')}
       </button>
       {error && (
-        <p className="text-[11.5px] font-semibold mt-1" style={{ color: '#a8522e' }}>{error}</p>
+        <p className="text-[11.5px] font-semibold mt-1" style={{ color: '#e09070' }}>{error}</p>
       )}
     </>
   )

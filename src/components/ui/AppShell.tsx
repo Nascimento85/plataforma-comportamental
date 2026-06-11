@@ -478,7 +478,7 @@ export default function AppShell({ children, session, maxWidth = '1180px' }: App
         className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 z-20"
         style={{
           width: 'var(--sidebar-width)',
-          background: 'linear-gradient(180deg, #1c1a17 0%, #221e18 100%)',
+          background: 'linear-gradient(180deg, #101c30 0%, #0c1422 100%)',
         }}
       >
         <div
@@ -499,7 +499,7 @@ export default function AppShell({ children, session, maxWidth = '1180px' }: App
             className="absolute left-0 top-0 bottom-0 flex flex-col shadow-soul-xl"
             style={{
               width: '264px',
-              background: 'linear-gradient(180deg, #1c1a17 0%, #221e18 100%)',
+              background: 'linear-gradient(180deg, #101c30 0%, #0c1422 100%)',
             }}
           >
             <SidebarContent session={session} onNavClick={() => setMenuOpen(false)} />

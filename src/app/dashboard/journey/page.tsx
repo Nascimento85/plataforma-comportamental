@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: 'Minha Jornada' }
 
 const TEST_LABELS: Record<string, { label: string; short: string; color: string; emoji: string }> = {
   DISC:               { label: 'DISC — Perfil Comportamental',     short: 'DISC',         color: '#c4633a', emoji: '◉' },
-  MBTI:               { label: 'MBTI — 16 Tipos de Personalidade', short: 'MBTI',         color: '#3d4f7c', emoji: '◆' },
+  MBTI:               { label: 'MBTI — 16 Tipos de Personalidade', short: 'MBTI',         color: '#8fa6da', emoji: '◆' },
   ENNEAGRAM:          { label: 'Eneagrama — 9 Tipos',              short: 'Eneagrama',    color: '#c9a84c', emoji: '✧' },
   TEMPERAMENT:        { label: '4 Temperamentos',                  short: 'Temperamentos',color: '#7a9e7e', emoji: '⬢' },
   ARCHETYPE:          { label: 'Arquétipos — Os 12 Padrões',       short: 'Arquétipos',   color: '#c47a72', emoji: '❀' },
@@ -120,7 +120,7 @@ export default async function JourneyPage() {
                   </div>
                   <div className="text-right flex-shrink-0">
                     <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                          style={{ background: 'rgba(212,148,58,0.2)', color: '#7a4f17' }}>
+                          style={{ background: 'rgba(212,148,58,0.2)', color: '#e8c878' }}>
                       {a.status === 'PENDING' ? 'Pendente' : 'Enviado'}
                     </span>
                     <p className="text-[12px] text-soul-ink/75 font-semibold mt-1">
@@ -180,7 +180,7 @@ export default async function JourneyPage() {
                     href={`/dashboard/assessments/${a.id}`}
                     className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[12px] font-bold
                                border-2 transition-colors hover:border-soul-terracota hover:text-soul-terracota"
-                    style={{ borderColor: 'rgba(232,226,214,0.9)', color: '#1c1a17' }}
+                    style={{ borderColor: 'rgba(58,61,69,0.9)', color: '#f0ece3' }}
                   >
                     Ver →
                   </Link>

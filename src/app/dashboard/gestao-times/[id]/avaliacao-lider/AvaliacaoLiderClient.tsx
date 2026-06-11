@@ -170,11 +170,11 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           <input value={liderNome} onChange={(e) => setLiderNome(e.target.value)} maxLength={80}
                  placeholder="Nome do líder (ex: Ana Souza)"
                  className="rounded-2xl px-4 py-3 text-[14px] font-medium text-soul-ink"
-                 style={{ background: 'rgba(28,26,23,0.04)', border: '1.5px solid rgba(28,26,23,0.15)' }} />
+                 style={{ background: 'rgba(255,255,255,0.052)', border: '1.5px solid rgba(240,236,227,0.15)' }} />
           <input value={liderEmail} onChange={(e) => setLiderEmail(e.target.value)} maxLength={120}
                  placeholder="Email do líder (opcional, evita autoavaliação)"
                  className="rounded-2xl px-4 py-3 text-[14px] font-medium text-soul-ink"
-                 style={{ background: 'rgba(28,26,23,0.04)', border: '1.5px solid rgba(28,26,23,0.15)' }} />
+                 style={{ background: 'rgba(255,255,255,0.052)', border: '1.5px solid rgba(240,236,227,0.15)' }} />
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <button onClick={salvarLider} disabled={salvando || liderNome.trim().length < 2}
@@ -184,7 +184,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           </button>
           <button onClick={enviarConvites} disabled={enviando || !data?.liderNome}
                   className="flex-1 py-3 rounded-full text-[14px] font-bold disabled:opacity-40"
-                  style={{ background: 'rgba(201,168,76,0.18)', color: '#8a6d1f', border: `1.5px solid rgba(201,168,76,0.5)` }}>
+                  style={{ background: 'rgba(201,168,76,0.18)', color: '#e0c878', border: `1.5px solid rgba(201,168,76,0.5)` }}>
             {enviando ? 'Enviando...' : 'Enviar convites para o time ✉'}
           </button>
         </div>
@@ -194,7 +194,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
         </p>
         {aviso && (
           <div className="rounded-2xl px-4 py-3 text-[13px] font-semibold"
-               style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.4)', color: '#6d5615' }}>
+               style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.4)', color: '#e3cf8e' }}>
             {aviso}
           </div>
         )}
@@ -212,7 +212,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           <div className="space-y-2">
             {data.membros.map((m) => (
               <div key={m.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-2.5"
-                   style={{ background: 'rgba(28,26,23,0.035)' }}>
+                   style={{ background: 'rgba(255,255,255,0.046)' }}>
                 <div className="min-w-0">
                   <p className="text-[13px] font-semibold text-soul-ink truncate">{m.nome}</p>
                   <p className="text-[11px] text-soul-ink/55 font-medium truncate">{m.email ?? 'sem email cadastrado'}</p>
@@ -220,14 +220,14 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
                 <div className="flex items-center gap-2 flex-shrink-0">
                   {m.conviteStatus === 'COMPLETED' ? (
                     <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                          style={{ background: 'rgba(90,125,90,0.15)', color: '#3f5c3f' }}>✓ Respondeu</span>
+                          style={{ background: 'rgba(90,125,90,0.15)', color: '#a9d3a9' }}>✓ Respondeu</span>
                   ) : m.conviteStatus === 'PENDING' ? (
                     <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                          style={{ background: 'rgba(201,168,76,0.15)', color: '#8a6d1f' }}>Convite enviado</span>
+                          style={{ background: 'rgba(201,168,76,0.15)', color: '#e0c878' }}>Convite enviado</span>
                   ) : m.email ? (
                     <button onClick={() => convidarMembro(m.id, m.nome)} disabled={salvandoMembro === m.id || !data.liderNome}
                             className="text-[11px] font-bold px-3 py-1.5 rounded-full disabled:opacity-40"
-                            style={{ background: 'rgba(61,79,124,0.12)', color: '#3d4f7c' }}>
+                            style={{ background: 'rgba(61,79,124,0.12)', color: '#8fa6da' }}>
                       {salvandoMembro === m.id ? 'Enviando...' : 'Enviar convite ✉'}
                     </button>
                   ) : (
@@ -235,10 +235,10 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
                       <input value={emailEdits[m.id] ?? ''} onChange={(e) => setEmailEdits((p) => ({ ...p, [m.id]: e.target.value }))}
                              placeholder="email@empresa.com" type="email"
                              className="rounded-full px-3 py-1.5 text-[12px] font-medium text-soul-ink w-48"
-                             style={{ background: 'white', border: '1.5px solid rgba(28,26,23,0.15)' }} />
+                             style={{ background: 'white', border: '1.5px solid rgba(240,236,227,0.15)' }} />
                       <button onClick={() => salvarEmailEConvidar(m)} disabled={salvandoMembro === m.id || !data.liderNome}
                               className="text-[11px] font-bold px-3 py-1.5 rounded-full disabled:opacity-40"
-                              style={{ background: 'rgba(61,79,124,0.12)', color: '#3d4f7c' }}>
+                              style={{ background: 'rgba(61,79,124,0.12)', color: '#8fa6da' }}>
                         {salvandoMembro === m.id ? 'Salvando...' : 'Salvar e convidar'}
                       </button>
                     </div>
@@ -248,7 +248,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
             ))}
           </div>
           {!data.liderNome && (
-            <p className="text-[12px] font-semibold" style={{ color: '#a8522e' }}>
+            <p className="text-[12px] font-semibold" style={{ color: '#e09070' }}>
               Defina e salve o líder do setor acima para liberar o envio dos convites.
             </p>
           )}
@@ -265,7 +265,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           <div className="space-y-2">
             {data.convites.map((c) => (
               <div key={c.id} className="flex items-center justify-between gap-3 rounded-2xl px-4 py-2.5"
-                   style={{ background: 'rgba(28,26,23,0.035)' }}>
+                   style={{ background: 'rgba(255,255,255,0.046)' }}>
                 <div className="min-w-0">
                   <p className="text-[13px] font-semibold text-soul-ink truncate">{c.nome}</p>
                   <p className="text-[11px] text-soul-ink/55 font-medium truncate">{c.email}</p>
@@ -273,14 +273,14 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
                 <div className="flex items-center gap-2 flex-shrink-0">
                   {c.status === 'COMPLETED' ? (
                     <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                          style={{ background: 'rgba(90,125,90,0.15)', color: '#3f5c3f' }}>✓ Respondeu</span>
+                          style={{ background: 'rgba(90,125,90,0.15)', color: '#a9d3a9' }}>✓ Respondeu</span>
                   ) : (
                     <>
                       <span className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                            style={{ background: 'rgba(201,168,76,0.15)', color: '#8a6d1f' }}>Pendente</span>
+                            style={{ background: 'rgba(201,168,76,0.15)', color: '#e0c878' }}>Pendente</span>
                       <button onClick={() => copiarLink(c)}
                               className="text-[11px] font-bold px-2.5 py-1 rounded-full"
-                              style={{ background: 'rgba(61,79,124,0.12)', color: '#3d4f7c' }}>
+                              style={{ background: 'rgba(61,79,124,0.12)', color: '#8fa6da' }}>
                         {copiado === c.id ? 'Copiado ✓' : 'Copiar link'}
                       </button>
                     </>
@@ -325,7 +325,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
               </div>
             </div>
             <p className="text-[14px] text-soul-ink/85 font-medium leading-relaxed rounded-2xl px-4 py-3"
-               style={{ background: 'rgba(28,26,23,0.035)' }}>
+               style={{ background: 'rgba(255,255,255,0.046)' }}>
               {data.resultado.diagnostico}
             </p>
           </div>
@@ -383,7 +383,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
               </div>
               {data.sciEntries.map((t, i) => (
                 <div key={i} className="rounded-2xl px-4 py-3 text-[13px] text-soul-ink/85 font-medium leading-relaxed italic"
-                     style={{ background: 'rgba(28,26,23,0.035)', borderLeft: `3px solid ${GOLD}` }}>
+                     style={{ background: 'rgba(255,255,255,0.046)', borderLeft: `3px solid ${GOLD}` }}>
                   “{t}”
                 </div>
               ))}

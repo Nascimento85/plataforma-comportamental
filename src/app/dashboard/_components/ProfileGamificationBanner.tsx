@@ -60,7 +60,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
           {/* Descrição */}
           <p
             className="text-[14px] sm:text-[15px] leading-relaxed font-medium mb-4 max-w-xl"
-            style={{ color: isComplete ? 'rgba(28,26,23,0.75)' : 'rgba(255,255,255,0.7)' }}
+            style={{ color: isComplete ? 'rgba(240,236,227,0.75)' : 'rgba(255,255,255,0.7)' }}
           >
             {isComplete
               ? '🎉 Seu perfil está completo! Solicite o código de validação no perfil para liberar seus créditos extras.'
@@ -72,7 +72,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
             <div className="flex items-center justify-between mb-1.5">
               <span
                 className="text-[11px] font-bold uppercase tracking-widest"
-                style={{ color: isComplete ? 'rgba(28,26,23,0.65)' : 'rgba(255,255,255,0.55)' }}
+                style={{ color: isComplete ? 'rgba(240,236,227,0.65)' : 'rgba(255,255,255,0.55)' }}
               >
                 Preenchimento
               </span>
@@ -85,7 +85,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
             </div>
             <div
               className="h-2 rounded-full overflow-hidden"
-              style={{ background: isComplete ? 'rgba(28,26,23,0.1)' : 'rgba(255,255,255,0.12)' }}
+              style={{ background: isComplete ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.12)' }}
             >
               <div
                 className="h-full rounded-full transition-all duration-700"

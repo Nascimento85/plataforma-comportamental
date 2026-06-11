@@ -122,7 +122,7 @@ export default function RegisterForm() {
             className="flex-1 py-2.5 text-sm font-medium font-sans transition-all"
             style={accountType === t ? {
               background: 'linear-gradient(135deg, #c9a84c, #d4943a)',
-              color: '#1c1a17',
+              color: '#f0ece3',
             } : {
               background: 'transparent',
               color: 'rgba(255,255,255,0.45)',

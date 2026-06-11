@@ -43,7 +43,7 @@ interface SetorAgregado {
 const RISCO_COR: Record<string, { bg: string; color: string; label: string }> = {
   BAIXO:    { bg: 'rgba(122,158,126,0.22)', color: '#4a7a4e', label: 'Baixo'    },
   MODERADO: { bg: 'rgba(212,148,58,0.22)',  color: '#8a5c1e', label: 'Moderado' },
-  ALTO:     { bg: 'rgba(196,99,58,0.22)',   color: '#a8522e', label: 'Alto'     },
+  ALTO:     { bg: 'rgba(196,99,58,0.22)',   color: '#e09070', label: 'Alto'     },
 }
 
 const DIM_LABEL: Record<string, string> = {
@@ -177,7 +177,7 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
 
       {erro && (
         <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold mt-3"
-             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
           {erro}
         </div>
       )}

@@ -66,7 +66,7 @@ const LANGUAGES: Language[] = [
       'Cozinhar o prato preferido sem avisar. Lavar o carro da pessoa. Resolver uma pendência que estava pesando na cabeça dela.',
     dayToDay:
       'Observe o que pesa no dia dela. Faça sem ser pedido. Pequenos cuidados cotidianos valem mais que grandes gestos raros.',
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '⬡',
   },
   {
@@ -91,7 +91,7 @@ export default function LoveLanguagesPage() {
       {/* ── Header ── */}
       <div>
         <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-              style={{ background: 'rgba(196,122,114,0.18)', color: '#7a3d35' }}>
+              style={{ background: 'rgba(196,122,114,0.18)', color: '#f0a892' }}>
           Vida Pessoal · Casais · Família
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">

@@ -102,8 +102,8 @@ const TEST_LABELS: Record<string, string> = {
 
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-3xl bg-white overflow-hidden ${className}`}
-         style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+    <div className={`rounded-3xl bg-soul-parchment overflow-hidden ${className}`}
+         style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
       {children}
     </div>
   )
@@ -125,7 +125,7 @@ function Bar({ label, pct, color, bold }: { label: string; pct: number; color: s
         <span className={bold ? 'font-semibold text-soul-ink' : 'text-soul-ink/60'}>{label}</span>
         <span className="text-soul-ink/35">{w}%</span>
       </div>
-      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(232,226,214,0.6)' }}>
+      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.6)' }}>
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${w}%`, backgroundColor: color }} />
       </div>
     </div>
@@ -1026,7 +1026,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   if (!assessment.result) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 max-w-md w-full p-8 text-center">
+        <div className="bg-soul-parchment rounded-2xl shadow-sm border border-gray-200 max-w-md w-full p-8 text-center">
           <div className="text-4xl mb-4">⏳</div>
           <h1 className="text-xl font-bold text-gray-900 mb-2">Avaliação ainda não concluída</h1>
           <p className="text-gray-500 text-sm">{assessment.employee.name} ainda não completou este teste.</p>
@@ -1059,11 +1059,11 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   return (
-    <div className="min-h-screen" style={{ background: '#faf7f2' }}>
+    <div className="min-h-screen" style={{ background: '#17181c' }}>
 
       {/* ── Header (oculto no modo print) ── */}
       {!isPrint && (
-        <header className="sticky top-0 z-10" style={{ background: 'rgba(250,247,242,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(232,226,214,0.7)' }}>
+        <header className="sticky top-0 z-10" style={{ background: 'rgba(250,247,242,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -1113,19 +1113,19 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
 
         {/* Card de identidade (oculto no modo print - já está na capa) */}
         {!isPrint && (
-          <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+          <div className="bg-soul-parchment rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
             <div className="p-5 flex items-start justify-between flex-wrap gap-3">
               <div>
-                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(28,26,23,0.35)' }}>Avaliação de</p>
+                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.35)' }}>Avaliação de</p>
                 <h1 className="font-serif font-semibold text-2xl text-soul-ink">{assessment.employee.name}</h1>
-                <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(28,26,23,0.45)' }}>{assessment.employee.email}</p>
+                <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(240,236,227,0.45)' }}>{assessment.employee.email}</p>
               </div>
               <div className="text-right">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-sans font-medium"
                       style={{ background: 'rgba(196,99,58,0.1)', color: '#c4633a', border: '1px solid rgba(196,99,58,0.2)' }}>
                   {testLabel}
                 </span>
-                {finishedAt && <p className="text-[11px] font-sans mt-1" style={{ color: 'rgba(28,26,23,0.35)' }}>Concluído em {finishedAt}</p>}
+                {finishedAt && <p className="text-[11px] font-sans mt-1" style={{ color: 'rgba(240,236,227,0.35)' }}>Concluído em {finishedAt}</p>}
               </div>
             </div>
           </div>
@@ -1152,8 +1152,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {/* Footer */}
         {!isPrint && (
           <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(28,26,23,0.35)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(28,26,23,0.35)' }}>Gerado pela <strong style={{ color: '#c4633a' }}>{APP_NAME}</strong></p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>Gerado pela <strong style={{ color: '#c4633a' }}>{APP_NAME}</strong></p>
           </div>
         )}
       </main>

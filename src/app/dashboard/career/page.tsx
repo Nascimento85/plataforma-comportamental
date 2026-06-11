@@ -44,7 +44,7 @@ const TESTS: CareerTest[] = [
     ],
     image: '/tests/ancora-carreira.png',
     credits: TEST_PRICE.CAREER_ANCHOR,
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '⚓',
     badge: 'Schein/MIT',
   },

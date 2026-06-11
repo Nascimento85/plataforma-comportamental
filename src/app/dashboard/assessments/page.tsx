@@ -99,7 +99,7 @@ export default async function AssessmentsPage() {
         <article
           className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
           style={{
-            background: 'linear-gradient(135deg, #faf7f2 0%, #f5ebd9 100%)',
+            background: 'linear-gradient(135deg, #17181c 0%, #f5ebd9 100%)',
             border: '1px solid rgba(196,99,58,0.22)',
             minHeight: '340px',
           }}
@@ -110,7 +110,7 @@ export default async function AssessmentsPage() {
           />
           <div className="relative z-10 flex flex-col h-full">
             <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
-                  style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+                  style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
               Categoria 1 · Performance
             </span>
 
@@ -156,7 +156,7 @@ export default async function AssessmentsPage() {
           />
           <div className="relative z-10 flex flex-col h-full">
             <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
-                  style={{ background: 'rgba(196,122,114,0.18)', color: '#7a3d35' }}>
+                  style={{ background: 'rgba(196,122,114,0.18)', color: '#f0a892' }}>
               Categoria 2 · Vida Pessoal
             </span>
 
@@ -237,7 +237,7 @@ export default async function AssessmentsPage() {
             { label: 'Em aberto',  value: pending,   dot: 'bg-soul-amber'     },
             { label: 'Expiradas',  value: expired,   dot: 'bg-soul-rose'      },
           ].map((s) => (
-            <div key={s.label} className="bg-white rounded-2xl border border-soul-mist px-4 py-3.5 flex items-center gap-3">
+            <div key={s.label} className="bg-soul-parchment rounded-2xl border border-soul-mist px-4 py-3.5 flex items-center gap-3">
               <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${s.dot}`} />
               <div>
                 <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{s.value}</div>
@@ -262,7 +262,7 @@ export default async function AssessmentsPage() {
 
       {/* ── Empty state ───────────────────────────────────────── */}
       {assessments.length === 0 && (
-        <div className="bg-white rounded-3xl border border-soul-mist py-16 text-center">
+        <div className="bg-soul-parchment rounded-3xl border border-soul-mist py-16 text-center">
           <div className="text-5xl mb-4">🗺️</div>
           <p className="font-serif font-semibold text-2xl text-soul-ink mb-2">Nenhuma avaliação enviada ainda</p>
           <p className="text-[15px] text-soul-ink/80 mb-7 max-w-md mx-auto font-medium">
@@ -274,7 +274,7 @@ export default async function AssessmentsPage() {
 
       {/* ── Lista ─────────────────────────────────────────────── */}
       {assessments.length > 0 && (
-        <div className="bg-white rounded-3xl border border-soul-mist overflow-hidden">
+        <div className="bg-soul-parchment rounded-3xl border border-soul-mist overflow-hidden">
 
           {/* Desktop table */}
           <div className="hidden md:block overflow-x-auto">

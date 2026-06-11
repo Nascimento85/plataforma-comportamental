@@ -11,7 +11,7 @@ const TEST_LABELS: Record<string, string> = {
 
 const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; border: string }> = {
   PENDING:   { label: '📨 Pendente',  color: '#d4943a', bg: 'rgba(212,148,58,0.1)',  border: 'rgba(212,148,58,0.25)' },
-  SENT:      { label: '⏳ Enviado',   color: '#3d4f7c', bg: 'rgba(61,79,124,0.1)',   border: 'rgba(61,79,124,0.25)'  },
+  SENT:      { label: '⏳ Enviado',   color: '#8fa6da', bg: 'rgba(61,79,124,0.1)',   border: 'rgba(61,79,124,0.25)'  },
   COMPLETED: { label: '✓ Concluído', color: '#7a9e7e', bg: 'rgba(122,158,126,0.1)', border: 'rgba(122,158,126,0.25)' },
   EXPIRED:   { label: '✕ Expirado',  color: '#c4633a', bg: 'rgba(196,99,58,0.1)',   border: 'rgba(196,99,58,0.2)'   },
 }
@@ -60,18 +60,18 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
       </div>
 
       {/* Filtros */}
-      <div className="bg-white rounded-3xl p-5" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <div className="bg-soul-parchment rounded-3xl p-5" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         <form method="GET" className="flex flex-wrap gap-3 items-end">
           <input
             name="q"
             defaultValue={q ?? ''}
             placeholder="Buscar por funcionário ou empresa…"
             className="flex-1 min-w-48 px-4 py-2.5 rounded-xl text-sm font-sans outline-none transition-all"
-            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}
+            style={{ background: '#17181c', border: '1px solid rgba(58,61,69,0.8)', color: '#f0ece3' }}
           />
           <select name="status" defaultValue={status ?? 'all'}
             className="px-4 py-2.5 rounded-xl text-sm font-sans outline-none w-44"
-            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}>
+            style={{ background: '#17181c', border: '1px solid rgba(58,61,69,0.8)', color: '#f0ece3' }}>
             <option value="all">Todos os status</option>
             <option value="COMPLETED">Concluído</option>
             <option value="SENT">Enviado</option>
@@ -80,7 +80,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
           </select>
           <select name="type" defaultValue={type ?? 'all'}
             className="px-4 py-2.5 rounded-xl text-sm font-sans outline-none w-44"
-            style={{ background: '#faf7f2', border: '1px solid rgba(232,226,214,0.8)', color: '#1c1a17' }}>
+            style={{ background: '#17181c', border: '1px solid rgba(58,61,69,0.8)', color: '#f0ece3' }}>
             <option value="all">Todos os tipos</option>
             <option value="DISC">DISC</option>
             <option value="MBTI">MBTI</option>
@@ -97,9 +97,9 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
           {(status || type || q) && (
             <Link href="/admin/assessments"
               className="text-sm font-sans transition-colors"
-              style={{ color: 'rgba(28,26,23,0.4)' }}
+              style={{ color: 'rgba(240,236,227,0.4)' }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#c4633a' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(28,26,23,0.4)' }}>
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(240,236,227,0.4)' }}>
               Limpar filtros
             </Link>
           )}
@@ -107,24 +107,24 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
       </div>
 
       {/* Tabela */}
-      <div className="bg-white rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <div className="bg-soul-parchment rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         {assessments.length === 0 ? (
           <div className="py-16 text-center">
             <p className="text-4xl mb-4">🔍</p>
             <p className="font-serif font-semibold text-lg text-soul-ink">Nenhum resultado encontrado</p>
-            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.4)' }}>Tente ajustar os filtros</p>
+            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.4)' }}>Tente ajustar os filtros</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead style={{ borderBottom: '1px solid rgba(232,226,214,0.6)' }}>
+              <thead style={{ borderBottom: '1px solid rgba(58,61,69,0.6)' }}>
                 <tr style={{ background: 'rgba(250,247,242,0.8)' }}>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Funcionário</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Empresa</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Teste</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Status</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Data</th>
-                  <th className="text-right px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.35)' }}>Ações</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Funcionário</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Empresa</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Teste</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Status</th>
+                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Data</th>
+                  <th className="text-right px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -133,12 +133,12 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                   const isCompleted = a.status === 'COMPLETED'
                   return (
                     <tr key={a.id} className="transition-colors hover:bg-soul-cream/40"
-                        style={{ borderBottom: '1px solid rgba(232,226,214,0.4)' }}>
+                        style={{ borderBottom: '1px solid rgba(58,61,69,0.4)' }}>
                       <td className="px-6 py-4">
                         <p className="text-sm font-medium font-sans text-soul-ink">{a.employee.name}</p>
-                        <p className="text-[11px] font-sans" style={{ color: 'rgba(28,26,23,0.4)' }}>{a.employee.email}</p>
+                        <p className="text-[11px] font-sans" style={{ color: 'rgba(240,236,227,0.4)' }}>{a.employee.email}</p>
                       </td>
-                      <td className="px-6 py-4 font-sans text-sm" style={{ color: 'rgba(28,26,23,0.6)' }}>{a.company.name}</td>
+                      <td className="px-6 py-4 font-sans text-sm" style={{ color: 'rgba(240,236,227,0.6)' }}>{a.company.name}</td>
                       <td className="px-6 py-4 font-sans text-sm text-soul-ink">{TEST_LABELS[a.testType] ?? a.testType}</td>
                       <td className="px-6 py-4">
                         <span className="text-xs font-medium font-sans px-2.5 py-1 rounded-full"
@@ -146,7 +146,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                           {st.label}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm font-sans" style={{ color: 'rgba(28,26,23,0.45)' }}>
+                      <td className="px-6 py-4 text-sm font-sans" style={{ color: 'rgba(240,236,227,0.45)' }}>
                         {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -169,7 +169,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                             </a>
                           </div>
                         ) : (
-                          <span className="text-xs font-sans" style={{ color: 'rgba(28,26,23,0.35)' }}>
+                          <span className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>
                             {a.status === 'EXPIRED' ? 'Expirado' : `Expira ${new Date(a.expiresAt).toLocaleDateString('pt-BR')}`}
                           </span>
                         )}

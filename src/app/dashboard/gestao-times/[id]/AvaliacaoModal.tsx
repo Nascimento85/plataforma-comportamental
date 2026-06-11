@@ -71,9 +71,9 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center px-3 md:px-6 py-6 overflow-y-auto"
          style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-3xl shadow-soul-xl w-full max-w-2xl my-auto" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-2xl my-auto" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         {/* Header sticky */}
-        <div className="sticky top-0 z-10 bg-white rounded-t-3xl px-6 md:px-7 pt-6 pb-4 border-b border-soul-mist/60">
+        <div className="sticky top-0 z-10 bg-soul-parchment rounded-t-3xl px-6 md:px-7 pt-6 pb-4 border-b border-soul-mist/60">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota">Avaliação de desempenho</p>
@@ -106,7 +106,7 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
                 <p className="text-[12px] text-soul-ink/55 font-medium mb-3 -mt-2 ml-4.5">{info.subtitulo}</p>
                 <div className="space-y-3">
                   {criteriosPorDimensao(dim).map((c) => (
-                    <div key={c.id} className="rounded-2xl p-3" style={{ background: 'rgba(245,240,232,0.5)', border: '1px solid rgba(232,226,214,0.7)' }}>
+                    <div key={c.id} className="rounded-2xl p-3" style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.7)' }}>
                       <p className="text-[13.5px] font-semibold text-soul-ink mb-2 leading-snug">{c.texto}</p>
                       <div className="flex gap-1.5">
                         {ESCALA_AVALIACAO.map((opt) => {
@@ -115,9 +115,9 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
                             <button key={opt.valor} onClick={() => setResp(c.id, opt.valor)} title={opt.label}
                                     className="flex-1 py-2 rounded-lg border-2 text-[13px] font-bold transition-all"
                                     style={{
-                                      borderColor: sel ? info.cor : 'rgba(232,226,214,1)',
+                                      borderColor: sel ? info.cor : 'rgba(58,61,69,1)',
                                       background: sel ? info.cor : 'white',
-                                      color: sel ? 'white' : 'rgba(28,26,23,0.6)',
+                                      color: sel ? 'white' : 'rgba(240,236,227,0.6)',
                                     }}>
                               {opt.valor}
                             </button>
@@ -136,8 +136,8 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
         </div>
 
         {/* Footer sticky com prévia + salvar */}
-        <div className="sticky bottom-0 bg-white rounded-b-3xl px-6 md:px-7 py-4 border-t border-soul-mist/60">
-          {error && <p className="text-[12.5px] font-semibold mb-2" style={{ color: '#a8522e' }}>{error}</p>}
+        <div className="sticky bottom-0 bg-soul-parchment rounded-b-3xl px-6 md:px-7 py-4 border-t border-soul-mist/60">
+          {error && <p className="text-[12.5px] font-semibold mb-2" style={{ color: '#e09070' }}>{error}</p>}
           {feedback && (
             <div className="rounded-2xl px-4 py-3 mb-3 text-[13px] font-semibold leading-relaxed"
                  style={{
@@ -152,7 +152,7 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex gap-4 text-[12px] font-bold">
               <span style={{ color: '#c4633a' }}>Perf {previa.notaPerformance.toFixed(1)}</span>
-              <span style={{ color: '#3d4f7c' }}>Fit {previa.fitComportamental.toFixed(1)}</span>
+              <span style={{ color: '#8fa6da' }}>Fit {previa.fitComportamental.toFixed(1)}</span>
               <span style={{ color: '#c9a84c' }}>Potencial {previa.potencial.toFixed(1)}</span>
             </div>
             <button onClick={salvar} disabled={saving}

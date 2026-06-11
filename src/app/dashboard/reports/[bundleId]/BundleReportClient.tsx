@@ -354,7 +354,7 @@ export default function BundleReportClient({
       {/* ── Footer CTA ── */}
       <div
         className="rounded-3xl p-6 flex items-center justify-between gap-4 flex-wrap"
-        style={{ background: 'rgba(232,226,214,0.3)', border: '1px solid rgba(232,226,214,0.6)' }}
+        style={{ background: 'rgba(58,61,69,0.3)', border: '1px solid rgba(58,61,69,0.6)' }}
       >
         <div>
           <div className="text-sm font-medium text-soul-ink font-sans">Gostou da devolutiva?</div>
@@ -423,12 +423,12 @@ function SubCard({
 }) {
   return (
     <div
-      className={`bg-white rounded-2xl p-4 ${className}`}
-      style={{ border: '1px solid rgba(232,226,214,0.6)' }}
+      className={`bg-soul-parchment rounded-2xl p-4 ${className}`}
+      style={{ border: '1px solid rgba(58,61,69,0.6)' }}
     >
       <h4
         className="text-[10px] font-bold uppercase tracking-[0.12em] mb-2 font-sans"
-        style={{ color: warning ? '#c4633a' : 'rgba(28,26,23,0.4)' }}
+        style={{ color: warning ? '#c4633a' : 'rgba(240,236,227,0.4)' }}
       >
         {warning ? '⚠ ' : ''}{title}
       </h4>

@@ -60,7 +60,7 @@ export default function CookieBanner() {
         className="max-w-3xl mx-auto rounded-2xl shadow-2xl pointer-events-auto"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(28,26,23,0.12)',
+          border: '1px solid rgba(240,236,227,0.12)',
         }}
       >
         {/* Cabeçalho compacto */}
@@ -89,13 +89,13 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2 mt-4">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-ink/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5 transition-colors"
               >
                 Recusar não-essenciais
               </button>
               <button
                 onClick={() => setExpanded(true)}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-ink/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5 transition-colors"
               >
                 Configurar
               </button>
@@ -161,7 +161,7 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-ink/5"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5"
               >
                 Apenas necessários
               </button>
@@ -206,7 +206,7 @@ function CategoryRow({
         <div className="flex items-center gap-2">
           <p className="text-[14px] font-semibold text-soul-ink">{label}</p>
           {disabled && (
-            <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-soul-ink/10 text-soul-ink/65">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-soul-night/10 text-soul-ink/65">
               Sempre ativo
             </span>
           )}
@@ -221,8 +221,8 @@ function CategoryRow({
           onChange={e => onChange(e.target.checked)}
           className="sr-only peer"
         />
-        <span className="w-10 h-5 bg-soul-ink/15 peer-checked:bg-soul-terracota rounded-full transition-colors relative">
-          <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${checked ? 'translate-x-5' : ''}`} />
+        <span className="w-10 h-5 bg-soul-night/15 peer-checked:bg-soul-terracota rounded-full transition-colors relative">
+          <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-soul-parchment rounded-full transition-transform ${checked ? 'translate-x-5' : ''}`} />
         </span>
       </label>
     </div>

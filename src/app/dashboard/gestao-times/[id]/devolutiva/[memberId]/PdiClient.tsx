@@ -155,7 +155,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
         {aiResult && (
           <div className="mt-4 rounded-2xl p-5" style={{ background: 'rgba(61,79,124,0.05)', border: '1px solid rgba(61,79,124,0.20)' }}>
             <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
-              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#3d4f7c' }}>Devolutiva aprofundada</p>
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#8fa6da' }}>Devolutiva aprofundada</p>
               {aiEm && <span className="text-[11px] text-soul-ink/50 font-medium">Gerada em {new Date(aiEm).toLocaleString('pt-BR')}</span>}
             </div>
             <div className="nr1-narrative">
@@ -177,7 +177,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
             const checked = acoesSel.includes(a)
             return (
               <label key={i} className="flex items-start gap-2.5 p-3 rounded-2xl cursor-pointer transition-colors"
-                     style={{ background: checked ? `${perfilCor}12` : 'rgba(245,240,232,0.5)', border: `1px solid ${checked ? perfilCor + '50' : 'rgba(232,226,214,0.8)'}` }}>
+                     style={{ background: checked ? `${perfilCor}12` : 'rgba(38,40,46,0.5)', border: `1px solid ${checked ? perfilCor + '50' : 'rgba(58,61,69,0.8)'}` }}>
                 <input type="checkbox" checked={checked} onChange={() => toggleAcao(a)} className="mt-1 flex-shrink-0" />
                 <span className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{a}</span>
               </label>
@@ -200,7 +200,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
                  placeholder="Adicionar uma ação personalizada…" className="soul-input flex-1 text-[14px]" />
           <button onClick={addAcaoLivre} type="button"
                   className="px-4 rounded-full text-[13px] font-bold border-2"
-                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }}>Adicionar</button>
+                  style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>Adicionar</button>
         </div>
 
         {/* Prazo + frequência */}
@@ -220,7 +220,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
           </div>
         </div>
 
-        {error && <div className="mt-3 rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>{error}</div>}
+        {error && <div className="mt-3 rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{error}</div>}
         {savedMsg && <div className="mt-3 rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.4)', color: '#2f5c33' }}>{savedMsg}</div>}
 
         <button onClick={salvarPdi} disabled={saving}
@@ -278,7 +278,7 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
       </p>
 
       {/* Novo check-in */}
-      <div className="rounded-2xl p-4 mb-5" style={{ background: 'rgba(245,240,232,0.5)', border: '1px solid rgba(232,226,214,0.8)' }}>
+      <div className="rounded-2xl p-4 mb-5" style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.8)' }}>
         <textarea value={nota} onChange={(e) => setNota(e.target.value)} rows={2} maxLength={1000}
                   placeholder="Como foi a evolução nas últimas semanas? O comportamento mudou? Refletiu nas entregas?"
                   className="soul-input w-full resize-y text-[14px] mb-3" />
@@ -300,7 +300,7 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
             {saving ? 'Registrando…' : '+ Registrar check-in'}
           </button>
         </div>
-        {error && <p className="text-[12px] font-semibold mt-2" style={{ color: '#a8522e' }}>{error}</p>}
+        {error && <p className="text-[12px] font-semibold mt-2" style={{ color: '#e09070' }}>{error}</p>}
       </div>
 
       {/* Timeline */}
@@ -313,7 +313,7 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
               {/* Linha vertical + nó */}
               <div className="flex flex-col items-center flex-shrink-0">
                 <div className="w-3 h-3 rounded-full mt-1.5" style={{ background: statusCor[c.statusMeta] ?? '#94a3b8' }} />
-                {i < checkIns.length - 1 && <div className="w-0.5 flex-1" style={{ background: 'rgba(232,226,214,1)' }} />}
+                {i < checkIns.length - 1 && <div className="w-0.5 flex-1" style={{ background: 'rgba(58,61,69,1)' }} />}
               </div>
               <div className="pb-4 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">

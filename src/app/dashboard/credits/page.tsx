@@ -80,7 +80,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
       )}
 
       {/* ── Tabela de preços por teste ── */}
-      <div className="bg-white rounded-3xl p-6 border border-soul-mist/60">
+      <div className="bg-soul-parchment rounded-3xl p-6 border border-soul-mist/60">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-4 flex items-center gap-2.5">
           <span className="w-7 h-7 rounded-lg flex items-center justify-center text-sm flex-shrink-0"
                 style={{ background: 'rgba(196,99,58,0.08)' }}>
@@ -104,7 +104,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
             <div key={t.label} className="rounded-xl p-3 border border-soul-mist/60 bg-soul-mist/10">
               <div className="text-2xl mb-1">{t.emoji}</div>
               <div className="text-soul-ink font-semibold leading-tight">{t.label}</div>
-              <div className="text-[12px] mt-1.5 font-bold" style={{ color: '#a8522e' }}>
+              <div className="text-[12px] mt-1.5 font-bold" style={{ color: '#e09070' }}>
                 {t.cost} {t.cost === 1 ? 'crédito' : 'créditos'}
               </div>
               {t.hint && <div className="text-[10px] text-soul-ink/55 mt-1 leading-snug">{t.hint}</div>}
@@ -126,14 +126,14 @@ export default async function CreditsPage({ searchParams }: PageProps) {
           {CREDIT_PACKS.map((pack) => (
             <div
               key={pack.pack}
-              className="bg-white rounded-3xl p-5 flex flex-col relative overflow-hidden"
+              className="bg-soul-parchment rounded-3xl p-5 flex flex-col relative overflow-hidden"
               style={{
                 border: pack.highlight
                   ? '2px solid rgba(196,99,58,0.4)'
-                  : '1px solid rgba(232,226,214,0.7)',
+                  : '1px solid rgba(58,61,69,0.7)',
                 boxShadow: pack.highlight
                   ? '0 4px 20px rgba(196,99,58,0.12)'
-                  : '0 1px 4px rgba(28,26,23,0.04)',
+                  : '0 1px 4px rgba(255,255,255,0.052)',
               }}
             >
               {pack.highlight && (
@@ -149,7 +149,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                 </span>
               )}
               <div className="font-serif font-semibold leading-none mb-0.5"
-                   style={{ fontSize: '40px', color: '#1c1a17' }}>
+                   style={{ fontSize: '40px', color: '#f0ece3' }}>
                 {pack.pack}
               </div>
               <div className="text-sm text-soul-ink/40 font-sans mb-1">créditos</div>
@@ -162,7 +162,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
       </div>
 
       {/* ── Transaction history ── */}
-      <div className="bg-white rounded-3xl border border-soul-mist/60 overflow-hidden">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 overflow-hidden">
         <div className="px-6 py-4 border-b border-soul-mist/40">
           <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg flex items-center justify-center text-sm"

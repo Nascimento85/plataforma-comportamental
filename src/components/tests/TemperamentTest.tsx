@@ -165,10 +165,10 @@ export default function TemperamentTest({
                               : opt === 'C' ? 'border-amber-500 bg-amber-500'
                               : opt === 'I' ? 'border-violet-500 bg-violet-500'
                               : 'border-green-500 bg-green-500'
-                              : 'border-gray-300 bg-white'
+                              : 'border-gray-300 bg-soul-parchment'
                             }`}
                         >
-                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-soul-parchment" />}
                         </div>
                         <span className={isSelected ? 'text-gray-900 font-medium' : 'text-gray-700'}>
                           {text}

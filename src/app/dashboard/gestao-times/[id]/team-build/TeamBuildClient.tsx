@@ -91,7 +91,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
                       </span>
                       <span className="font-bold" style={{ color: info.cor }}>{d.pct}% · {d.count}</span>
                     </div>
-                    <div className="h-3 rounded-full overflow-hidden" style={{ background: 'rgba(232,226,214,0.6)' }}>
+                    <div className="h-3 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.6)' }}>
                       <div className="h-full rounded-full transition-all" style={{ width: `${d.pct}%`, background: info.cor }}/>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
                   const cor = ENERGIA_INFO[a.energia].cor
                   const isGap = a.tipo === 'GAP'
                   return (
-                    <div key={i} className="rounded-2xl p-4" style={{ background: 'rgba(245,240,232,0.5)', borderLeft: `4px solid ${cor}` }}>
+                    <div key={i} className="rounded-2xl p-4" style={{ background: 'rgba(38,40,46,0.5)', borderLeft: `4px solid ${cor}` }}>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full"
                               style={{ background: isGap ? 'rgba(61,79,124,0.12)' : 'rgba(196,99,58,0.12)', color: isGap ? '#3d4f7c' : '#a8522e' }}>
@@ -151,7 +151,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
                 return (
                   <button key={f} onClick={() => salvarFase(f)}
                           className="text-left rounded-2xl p-3 transition-all"
-                          style={{ border: active ? `2px solid ${info.cor}` : '1.5px solid rgba(232,226,214,1)', background: active ? `${info.cor}14` : 'white' }}>
+                          style={{ border: active ? `2px solid ${info.cor}` : '1.5px solid rgba(58,61,69,1)', background: active ? `${info.cor}14` : 'white' }}>
                     <p className="text-[13.5px] font-bold" style={{ color: active ? info.cor : '#1c1a17' }}>{info.rotulo}</p>
                     <p className="text-[11.5px] text-soul-ink/60 font-medium leading-snug mt-0.5">{info.subtitulo}</p>
                   </button>
@@ -221,7 +221,7 @@ function ManualCard({ member }: { member: Member }) {
   const manual = member.perfilDisc ? MANUAL_POR_PERFIL[member.perfilDisc as DiscKey] : null
 
   return (
-    <div className="rounded-2xl p-4" style={{ background: 'rgba(245,240,232,0.5)', border: '1px solid rgba(232,226,214,0.8)' }}>
+    <div className="rounded-2xl p-4" style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.8)' }}>
       <div className="flex items-center gap-2.5 mb-3">
         <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[12px] font-bold flex-shrink-0"
              style={{ background: perfil?.cor ?? '#94a3b8' }}>
@@ -275,7 +275,7 @@ function DiagnosticoModal({ onClose, onResult }: { onClose: () => void; onResult
   return (
     <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center px-4 py-6 overflow-y-auto"
          style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-3xl shadow-soul-xl w-full max-w-lg p-6 md:p-7" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-lg p-6 md:p-7" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         <div className="flex items-center justify-between mb-5">
           <h3 className="font-serif font-semibold text-2xl text-soul-ink">Em que fase está o time?</h3>
           <button onClick={onClose} aria-label="Fechar" className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/70 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
@@ -291,7 +291,7 @@ function DiagnosticoModal({ onClose, onResult }: { onClose: () => void; onResult
                   return (
                     <button key={oi} onClick={() => setRespostas((p) => ({ ...p, [qi]: opt.fase }))}
                             className="w-full text-left rounded-xl px-3 py-2.5 text-[13px] font-medium transition-all"
-                            style={{ border: sel ? '2px solid #c4633a' : '1.5px solid rgba(232,226,214,1)', background: sel ? 'rgba(196,99,58,0.07)' : 'white', color: sel ? '#a8522e' : '#1c1a17' }}>
+                            style={{ border: sel ? '2px solid #c4633a' : '1.5px solid rgba(58,61,69,1)', background: sel ? 'rgba(196,99,58,0.07)' : 'white', color: sel ? '#a8522e' : '#1c1a17' }}>
                       {opt.texto}
                     </button>
                   )

@@ -8,7 +8,7 @@ const TEMPLATE_DEPARTMENTS = [
   { name: 'Liderança & Diretoria',     icon: '♛', color: '#c9a84c', desc: 'C-level, VPs e heads' },
   { name: 'Vendas & Comercial',        icon: '◉', color: '#c4633a', desc: 'Prospecção, closers, CS' },
   { name: 'Marketing',                 icon: '✦', color: '#d4943a', desc: 'Growth, conteúdo, branding' },
-  { name: 'Operações',                 icon: '⬢', color: '#3d4f7c', desc: 'Logística, supply, produção' },
+  { name: 'Operações',                 icon: '⬢', color: '#8fa6da', desc: 'Logística, supply, produção' },
   { name: 'Tecnologia & Produto',      icon: '◆', color: '#6b7fb8', desc: 'Engenharia, design, PM' },
   { name: 'Recursos Humanos',          icon: '❀', color: '#c47a72', desc: 'People, RH, cultura' },
   { name: 'Financeiro',                icon: '◈', color: '#7a9e7e', desc: 'Controladoria, contábil' },

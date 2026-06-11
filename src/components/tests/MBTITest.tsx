@@ -142,7 +142,7 @@ export default function MBTITest({
                           className={`mt-0.5 w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center
                             ${isSelected ? 'border-brand-500 bg-brand-500' : 'border-gray-300'}`}
                         >
-                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-soul-parchment" />}
                         </div>
                         <div className="flex flex-col">
                           {opt.scoreA === 3 && (

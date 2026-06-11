@@ -50,7 +50,7 @@ function timeAgo(date: Date): string {
 export default function RecentActivityCard({ assessments }: Props) {
   if (assessments.length === 0) {
     return (
-      <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-4 flex items-center gap-2.5">
           <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
           Atividade recente
@@ -77,7 +77,7 @@ export default function RecentActivityCard({ assessments }: Props) {
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5">
 
       {/* Activity list */}
-      <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
@@ -132,7 +132,7 @@ export default function RecentActivityCard({ assessments }: Props) {
       </div>
 
       {/* Candidates summary */}
-      <div className="bg-white rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-indigo/10 flex items-center justify-center text-sm">👥</span>

@@ -49,7 +49,7 @@ const LEADERSHIP_TESTS: LeadershipLens[] = [
       '4 arquétipos comerciais de liderança',
       'Devolutiva consultiva com cruzamento de dados',
     ],
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '🎯',
   },
 ]
@@ -141,7 +141,7 @@ export default async function LeadershipPage() {
       {/* Header */}
       <header className="space-y-3">
         <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest"
-             style={{ background: 'rgba(61,79,124,0.10)', color: '#3d4f7c' }}>
+             style={{ background: 'rgba(61,79,124,0.10)', color: '#8fa6da' }}>
           🎯 Liderança
         </div>
         <h1 className="font-serif text-3xl md:text-4xl font-semibold text-soul-ink leading-tight">
@@ -161,7 +161,7 @@ export default async function LeadershipPage() {
 
       {/* Card "Em breve" */}
       <div className="soul-panel relative overflow-hidden"
-           style={{ background: 'linear-gradient(135deg, rgba(232,226,214,0.4), rgba(245,240,232,0.7))', border: '1px dashed rgba(122,158,126,0.4)' }}>
+           style={{ background: 'linear-gradient(135deg, rgba(58,61,69,0.4), rgba(38,40,46,0.7))', border: '1px dashed rgba(122,158,126,0.4)' }}>
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-xl"
                style={{ background: 'rgba(122,158,126,0.15)', color: '#5a7e60' }}>

@@ -175,7 +175,7 @@ function ScatterMatrix({ members }: { members: Member[] }) {
     <div className="w-full overflow-x-auto">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ maxWidth: 620 }}>
         {/* Quadrantes de fundo */}
-        <rect x={pad} y={pad} width={plotW} height={plotH} fill="#faf7f2" stroke="#e8e2d6"/>
+        <rect x={pad} y={pad} width={plotW} height={plotH} fill="#17181c" stroke="#e8e2d6"/>
         {/* Linhas guia em 4.0 e 7.0 (limiares das zonas) */}
         {[4, 7].map((v) => (
           <g key={v}>
@@ -218,7 +218,7 @@ function PieDistribuicao({ counts, total }: { counts: Record<ZonaKey, number>; t
     <div className="flex items-center gap-5 justify-center lg:justify-start">
       <svg viewBox="0 0 140 140" width="132" height="132" className="flex-shrink-0">
         <g transform="translate(70 70) rotate(-90)">
-          <circle r={R} fill="none" stroke="rgba(232,226,214,0.7)" strokeWidth="20" />
+          <circle r={R} fill="none" stroke="rgba(58,61,69,0.7)" strokeWidth="20" />
           {ordem.map((z) => {
             const pct = counts[z] / total
             if (pct === 0) return null
@@ -267,7 +267,7 @@ function MemberRow({
 
   return (
     <div className="rounded-2xl p-3 flex flex-wrap items-center gap-3"
-         style={{ background: 'rgba(245,240,232,0.5)', border: '1px solid rgba(232,226,214,0.8)' }}>
+         style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.8)' }}>
       {/* Identidade */}
       <div className="flex items-center gap-2.5 min-w-[180px] flex-1">
         <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[12px] font-bold flex-shrink-0"
@@ -287,7 +287,7 @@ function MemberRow({
       {m.temAvaliacao ? (
         <div className="flex items-center gap-3 text-[12px] font-bold">
           <span style={{ color: '#c4633a' }} title="Performance">P {m.notaPerformance?.toFixed(1)}</span>
-          <span style={{ color: '#3d4f7c' }} title="Fit comportamental">F {m.fitComportamental?.toFixed(1)}</span>
+          <span style={{ color: '#8fa6da' }} title="Fit comportamental">F {m.fitComportamental?.toFixed(1)}</span>
           {m.potencial != null && m.potencial > 0 && <span style={{ color: '#c9a84c' }} title="Potencial">Pot {m.potencial.toFixed(1)}</span>}
         </div>
       ) : (
@@ -314,7 +314,7 @@ function MemberRow({
         {m.zona && (
           <Link href={`/dashboard/gestao-times/${teamId}/devolutiva/${m.id}`}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-full no-underline"
-                style={{ background: 'rgba(61,79,124,0.10)', color: '#3d4f7c' }}>
+                style={{ background: 'rgba(61,79,124,0.10)', color: '#8fa6da' }}>
             Devolutiva
           </Link>
         )}
@@ -390,8 +390,8 @@ function AddMemberModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto py-6"
          style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
-      <div className="bg-white rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
-           style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
+           style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         <div className="flex items-center justify-between mb-5">
           <h3 className="font-serif font-semibold text-2xl text-soul-ink">Adicionar colaborador</h3>
           <button onClick={onClose} aria-label="Fechar"
@@ -399,13 +399,13 @@ function AddMemberModal({
         </div>
 
         {/* Toggle modo */}
-        <div className="flex gap-2 mb-4 p-1 rounded-full" style={{ background: 'rgba(232,226,214,0.5)' }}>
+        <div className="flex gap-2 mb-4 p-1 rounded-full" style={{ background: 'rgba(58,61,69,0.5)' }}>
           <button onClick={() => setModo('vincular')}
-                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'vincular' ? 'bg-white shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
+                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'vincular' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
             Quem já fez teste
           </button>
           <button onClick={() => setModo('avulso')}
-                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'avulso' ? 'bg-white shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
+                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'avulso' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
             Avulso
           </button>
         </div>
@@ -413,7 +413,7 @@ function AddMemberModal({
         <form onSubmit={handleAdd} className="space-y-4">
           {error && (
             <div className="rounded-xl px-4 py-3 text-[13px] font-semibold"
-                 style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+                 style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
               {error}
             </div>
           )}

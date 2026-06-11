@@ -31,11 +31,11 @@ export default async function AvaliarLiderPage({ params }: { params: { token: st
   if (erro) {
     return (
       <div className="min-h-screen flex items-center justify-center p-6"
-           style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
+           style={{ background: 'linear-gradient(180deg, #101c30 0%, #17181c 38%)' }}>
         <div className="max-w-md text-center">
           <div className="text-5xl mb-4">🌿</div>
-          <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-2">{erro}</h1>
-          <p className="text-[14px] text-soul-ink/75 font-medium">
+          <h1 className="font-serif font-semibold text-3xl text-white mb-3">{erro}</h1>
+          <p className="text-[16px] font-medium" style={{ color: 'rgba(243,239,231,0.8)' }}>
             Se acredita que isto é um erro, contate o RH da sua empresa.
           </p>
         </div>

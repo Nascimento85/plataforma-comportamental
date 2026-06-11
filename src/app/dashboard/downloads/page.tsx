@@ -80,7 +80,7 @@ export default async function DownloadsPage() {
       {/* ── Header ── */}
       <div>
         <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-              style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+              style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Premium · Downloads
         </span>
         <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
@@ -220,7 +220,7 @@ function StatCard({
   tone?: 'neutral' | 'positive' | 'warning'
 }) {
   const toneClass = {
-    neutral:  'border-soul-mist/60 bg-white',
+    neutral:  'border-soul-mist/60 bg-soul-parchment',
     positive: 'border-emerald-200 bg-emerald-50',
     warning:  'border-amber-200 bg-amber-50',
   }[tone]
@@ -257,7 +257,7 @@ function ReportDownloadGroup({
   const profile = isDISC ? DISC_PREMIUM[primaryProfile as DiscProfileKey] : null
 
   return (
-    <article className="rounded-3xl bg-white border border-soul-mist/60 overflow-hidden">
+    <article className="rounded-3xl bg-soul-parchment border border-soul-mist/60 overflow-hidden">
 
       {/* Header do grupo */}
       <header
@@ -266,7 +266,7 @@ function ReportDownloadGroup({
           background: profile
             ? `linear-gradient(135deg, ${profile.paletteHex}11, ${profile.paletteHex}03)`
             : '#fafaf6',
-          borderBottom: '1px solid rgba(28,26,23,0.06)',
+          borderBottom: '1px solid rgba(240,236,227,0.06)',
         }}
       >
         <div>
@@ -303,7 +303,7 @@ function ReportDownloadGroup({
                 href={`/api/downloads/${d.slug}?reportId=${encodeURIComponent(reportId)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-2xl border border-soul-mist/60 p-5 hover:border-soul-terracota/40 hover:-translate-y-0.5 transition-all bg-white"
+                className="block rounded-2xl border border-soul-mist/60 p-5 hover:border-soul-terracota/40 hover:-translate-y-0.5 transition-all bg-soul-parchment"
               >
                 <div className="text-[10px] font-bold tracking-widest uppercase mb-2"
                      style={{ color: profile.paletteHex }}>

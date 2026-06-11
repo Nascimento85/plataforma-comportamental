@@ -16,6 +16,7 @@ interface TestType {
   short: string
   category: CategoryKey
   credits: number
+  minutos: number
   image: string
   hook: string
   description: string
@@ -31,6 +32,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Arquétipos',
     category: 'ARCHETYPE',
     credits: TEST_PRICE.ARCHETYPE,
+    minutos: 8,
     image: '/tests/arquetipo-misto.jpg',
     hook: 'O mapa mais profundo da plataforma.',
     description:
@@ -48,6 +50,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Arq. Femininos',
     category: 'ARCHETYPE',
     credits: TEST_PRICE.ARCHETYPE_FEMININE,
+    minutos: 8,
     image: '/tests/arquetipo-feminino.jpg',
     hook: 'O divino feminino aplicado à liderança.',
     description:
@@ -67,6 +70,7 @@ const TEST_TYPES: TestType[] = [
     short: 'DISC',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.DISC,
+    minutos: 7,
     image: '/tests/disc.jpg',
     hook: 'A ferramenta mais usada no mundo corporativo.',
     description:
@@ -83,6 +87,7 @@ const TEST_TYPES: TestType[] = [
     short: 'MBTI',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.MBTI,
+    minutos: 12,
     image: '/tests/mbti.jpg',
     hook: 'Baseado em Carl Jung. Usado por Fortune 500.',
     description:
@@ -99,6 +104,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Eneagrama',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.ENNEAGRAM,
+    minutos: 15,
     image: '/tests/eneagrama.jpg',
     hook: 'Usado pela NASA e pelo Vale do Silício.',
     description:
@@ -115,6 +121,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Temperamentos',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.TEMPERAMENT,
+    minutos: 6,
     image: '/tests/temperamentos.jpg',
     hook: 'A matéria-prima comportamental inata.',
     description:
@@ -131,6 +138,7 @@ const TEST_TYPES: TestType[] = [
     short: 'VAC',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.VAC,
+    minutos: 7,
     image: '/tests/vac.svg',
     hook: 'Como o cérebro recebe o mundo. Base usada por Apple e McKinsey.',
     description:
@@ -148,6 +156,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Big Five',
     category: 'LEADERSHIP',
     credits: TEST_PRICE.BIG_FIVE,
+    minutos: 10,
     image: '/tests/big-five.svg',
     hook: 'A ciência da liderança. Usado por Google, McKinsey e Hogan.',
     description:
@@ -166,6 +175,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Bundle 4',
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.COMBO_BUNDLE,
+    minutos: 35,
     image: '/tests/disc.jpg',
     hook: 'O raio-X comportamental definitivo. Um link, quatro testes.',
     description:
@@ -185,6 +195,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Âncoras de Carreira',
     category: 'CAREER',
     credits: TEST_PRICE.CAREER_ANCHOR,
+    minutos: 8,
     image: '/tests/ancora-carreira.png',
     hook: 'O que realmente motiva você no trabalho.',
     description:
@@ -201,6 +212,7 @@ const TEST_TYPES: TestType[] = [
     short: 'QE · Goleman',
     category: 'CAREER',
     credits: TEST_PRICE.EMOTIONAL_INTELLIGENCE,
+    minutos: 8,
     image: '/tests/inteligencia-emocional.png',
     hook: 'Como você reage sob pressão.',
     description:
@@ -220,6 +232,7 @@ const TEST_TYPES: TestType[] = [
     short: 'Relacionamentos',
     category: 'RELATIONSHIPS',
     credits: TEST_PRICE.LOVE_LANGUAGES,
+    minutos: 6,
     image: '/tests/linguagens-amor.jpg',
     hook: 'Como você ama — e como precisa ser amado.',
     description:
@@ -384,11 +397,11 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
   const widthClass = fullWidth ? 'w-full justify-center' : ''
   const triggerClasses = (variant === 'secondary'
-    ? `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all bg-white`
+    ? `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all bg-soul-parchment`
     : `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra`) + ' ' + widthClass
 
   const triggerStyle = variant === 'secondary'
-    ? { borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e' }
+    ? { borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }
     : { background: 'linear-gradient(135deg, #c4633a, #d4943a)' }
 
   return (
@@ -410,8 +423,8 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
           style={{ background: 'rgba(28, 26, 23, 0.62)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
         >
           <div
-            className="bg-white rounded-3xl shadow-soul-xl w-full max-w-5xl my-auto"
-            style={{ border: '1px solid rgba(232,226,214,0.6)' }}
+            className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-5xl my-auto"
+            style={{ border: '1px solid rgba(58,61,69,0.6)' }}
           >
             {success ? (
               /* ──────────────── Sucesso ──────────────── */
@@ -432,7 +445,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   </div>
                 ) : (
                   <div className="flex items-center justify-center gap-2 rounded-2xl px-5 py-4 mb-6 text-[15px] font-sans font-semibold"
-                       style={{ background: 'rgba(212,148,58,0.15)', border: '1px solid rgba(212,148,58,0.4)', color: '#7a4f17' }}>
+                       style={{ background: 'rgba(212,148,58,0.15)', border: '1px solid rgba(212,148,58,0.4)', color: '#e8c878' }}>
                     <span className="text-xl">⚠</span>
                     <span>E-mail não enviado — compartilhe o link manualmente</span>
                   </div>
@@ -440,7 +453,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                 <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75 mb-2">Link do teste</p>
                 <div className="rounded-2xl p-4 text-[13px] font-mono break-all text-soul-ink mb-6 text-left font-semibold"
-                     style={{ background: 'rgba(232,226,214,0.5)', border: '1px solid rgba(232,226,214,0.9)' }}>
+                     style={{ background: 'rgba(58,61,69,0.5)', border: '1px solid rgba(58,61,69,0.9)' }}>
                   {success.link}
                 </div>
 
@@ -448,7 +461,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   <button
                     onClick={handleCopy}
                     className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all"
-                    style={{ borderColor: 'rgba(196,99,58,0.5)', color: '#a8522e' }}
+                    style={{ borderColor: 'rgba(196,99,58,0.5)', color: '#e09070' }}
                   >
                     {copied ? '✓ Link copiado!' : '📋 Copiar link'}
                   </button>
@@ -488,7 +501,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   <form onSubmit={handleCreate} className="space-y-5">
                     {error && (
                       <div className="rounded-2xl px-4 py-3 text-[14px] font-sans font-semibold"
-                           style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+                           style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
                         {error}
                       </div>
                     )}
@@ -549,22 +562,22 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                                       onClick={() => update('testType', t.value)}
                                       className="relative text-left rounded-2xl p-3 transition-all duration-150"
                                       style={{
-                                        border: active ? '2px solid #c4633a' : '1.5px solid rgba(232,226,214,1)',
-                                        background: active ? 'rgba(196,99,58,0.08)' : 'white',
+                                        border: active ? '2px solid #d0764e' : '1.5px solid rgba(255,255,255,0.14)',
+                                        background: active ? 'rgba(208,118,78,0.14)' : '#26282e',
                                       }}
                                     >
                                       {t.badge && (
                                         <span className="absolute top-1.5 right-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full font-sans"
-                                              style={{ background: 'rgba(212,148,58,0.25)', color: '#7a4f17' }}>
+                                              style={{ background: 'rgba(212,148,58,0.25)', color: '#e8c878' }}>
                                           {t.badge}
                                         </span>
                                       )}
                                       <p className="text-[14px] font-bold mb-0.5 font-sans leading-tight"
-                                         style={{ color: active ? '#a8522e' : '#1c1a17' }}>
+                                         style={{ color: active ? '#e09070' : '#f0ece3' }}>
                                         {t.short}
                                       </p>
-                                      <p className="text-[12px] font-sans font-semibold" style={{ color: 'rgba(28,26,23,0.75)' }}>
-                                        {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`}
+                                      <p className="text-[12px] font-sans font-semibold" style={{ color: 'rgba(240,236,227,0.75)' }}>
+                                        {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`} · {t.minutos} min
                                       </p>
                                     </button>
                                   )
@@ -591,7 +604,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                         type="submit"
                         disabled={loading}
                         className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all disabled:opacity-60"
-                        style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#a8522e', background: 'white' }}
+                        style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070', background: 'white' }}
                       >
                         {loading ? 'Criando link…' : 'Criar e enviar link'}
                       </button>
@@ -604,7 +617,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                 {/* ── Coluna direita: preview vendedor ── */}
                 <div className="lg:w-[54%] p-6 md:p-8 relative overflow-hidden"
-                     style={{ background: 'linear-gradient(180deg, #faf7f2 0%, #f0ebdf 100%)' }}>
+                     style={{ background: 'linear-gradient(180deg, #17181c 0%, #101c30 100%)' }}>
 
                   {/* Imagem */}
                   <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist aspect-[16/10]">
@@ -619,16 +632,20 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   {/* Badges */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
                     <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                          style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+                          style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
                       {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
                     </span>
+                    <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[12px] font-bold"
+                          style={{ background: 'rgba(212,179,94,0.16)', color: '#d4b35e', border: '1px solid rgba(212,179,94,0.4)' }}>
+                      ⏱ Leva {selectedTest.minutos} minutos
+                    </span>
                     <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wider"
-                          style={{ background: 'rgba(28,26,23,0.1)', color: '#1c1a17' }}>
+                          style={{ background: 'rgba(255,255,255,0.12)', color: '#f0ece3' }}>
                       {CATEGORY_META[selectedTest.category].title}
                     </span>
                     {selectedTest.badge && (
                       <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
-                            style={{ background: 'rgba(212,148,58,0.22)', color: '#7a4f17' }}>
+                            style={{ background: 'rgba(212,148,58,0.22)', color: '#e8c878' }}>
                         ✦ {selectedTest.badge}
                       </span>
                     )}

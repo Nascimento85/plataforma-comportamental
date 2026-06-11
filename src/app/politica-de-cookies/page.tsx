@@ -70,7 +70,7 @@ const COOKIES: CookieRow[] = [
 
 export default function PoliticaDeCookiesPage() {
   return (
-    <div className="min-h-screen" style={{ background: '#faf7f2' }}>
+    <div className="min-h-screen" style={{ background: '#17181c' }}>
       <main className="max-w-3xl mx-auto px-5 py-12 sm:py-16">
 
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">
@@ -85,7 +85,7 @@ export default function PoliticaDeCookiesPage() {
 
         {/* CTA gerenciar */}
         <div
-          className="rounded-2xl p-5 sm:p-6 mb-10 border border-soul-mist/60 bg-white flex flex-wrap items-center justify-between gap-4"
+          className="rounded-2xl p-5 sm:p-6 mb-10 border border-soul-mist/60 bg-soul-parchment flex flex-wrap items-center justify-between gap-4"
         >
           <div className="flex-1 min-w-[220px]">
             <p className="font-serif text-lg font-semibold text-soul-ink">
@@ -141,7 +141,7 @@ export default function PoliticaDeCookiesPage() {
           </Section>
 
           <Section title="4. Cookies utilizados">
-            <div className="rounded-2xl border border-soul-mist/60 bg-white overflow-hidden -mx-1 sm:mx-0">
+            <div className="rounded-2xl border border-soul-mist/60 bg-soul-parchment overflow-hidden -mx-1 sm:mx-0">
               <table className="w-full text-[13px]">
                 <thead className="bg-soul-mist/30 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
                   <tr>
@@ -158,7 +158,7 @@ export default function PoliticaDeCookiesPage() {
                       <td className="px-4 py-3 font-mono text-[12px]">{c.name}</td>
                       <td className="px-4 py-3">
                         <span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold"
-                          style={{ background: 'rgba(196,99,58,0.12)', color: '#a8522e' }}>
+                          style={{ background: 'rgba(196,99,58,0.12)', color: '#e09070' }}>
                           {c.category}
                         </span>
                       </td>

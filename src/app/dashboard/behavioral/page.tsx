@@ -77,7 +77,7 @@ const LENSES: Lens[] = [
       'Compatibilidades entre os 16 tipos',
       'Aplicação em liderança situacional',
     ],
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '◆',
   },
   {
@@ -236,7 +236,7 @@ export default async function BehavioralPage() {
       {/* ── Header ── */}
       <div>
         <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-              style={{ background: 'rgba(196,99,58,0.15)', color: '#a8522e' }}>
+              style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Categoria 1 · Performance
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">

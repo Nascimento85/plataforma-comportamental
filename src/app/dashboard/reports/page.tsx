@@ -192,7 +192,7 @@ export default async function ReportsPage() {
                             href={`/result/${r.id}`}
                             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[12px] font-bold
                                        border transition-colors hover:border-soul-terracota hover:text-soul-terracota"
-                            style={{ borderColor: 'rgba(232,226,214,0.9)', color: '#1c1a17' }}
+                            style={{ borderColor: 'rgba(58,61,69,0.9)', color: '#f0ece3' }}
                           >
                             Ver
                           </Link>

@@ -32,13 +32,15 @@ const config: Config = {
 
         // ── Design System Arquetípico (soul.*) ─────────────────────────
         soul: {
-          ink:        '#1c1a17',   // texto principal (quase-preto orgânico)
-          cream:      '#faf7f2',   // fundo base (creme quente)
-          parchment:  '#f5f0e8',   // fundo de cards leves
-          mist:       '#e8e2d6',   // bordas, separadores, backgrounds hover
+          // ── TEMA ESCURO corporate cinematic (flip de 11/jun/2026) ──
+          ink:        '#f0ece3',   // texto principal (claro sobre carvão)
+          cream:      '#17181c',   // fundo base (carvão)
+          parchment:  '#1f2126',   // superfícies de cards (grafite)
+          mist:       '#3a3d45',   // bordas, separadores, backgrounds hover
+          night:      '#101c30',   // navy profundo (navegação, CTAs escuros)
 
           // Paleta cromática
-          terracota:  '#c4633a',   // cor primária — ação, CTAs
+          terracota:  '#d0764e',   // cor primária — ação, CTAs (clareada p/ dark)
           'terracota-dark':  '#a8522e',
           'terracota-light': '#d4744a',
           'terracota-muted': 'rgba(196,99,58,0.08)',
@@ -47,19 +49,19 @@ const config: Config = {
           'amber-light': '#e8b860',
           'amber-muted': 'rgba(212,148,58,0.10)',
 
-          sage:       '#7a9e7e',   // sucesso, natureza
+          sage:       '#8fbf8f',   // sucesso, natureza (clareada p/ dark)
           'sage-light': '#96bf9a',
           'sage-muted': 'rgba(122,158,126,0.12)',
 
-          indigo:     '#3d4f7c',   // profundidade, insights
+          indigo:     '#8fa6da',   // profundidade, insights (clareada p/ dark)
           'indigo-light': '#6b7fb8',
           'indigo-muted': 'rgba(61,79,124,0.10)',
 
-          rose:       '#c47a72',   // detalhe feminino, alertas suaves
+          rose:       '#d99a91',   // detalhe feminino, alertas suaves (clareada p/ dark)
           'rose-light': '#d4a0a0',
           'rose-muted': 'rgba(196,122,114,0.10)',
 
-          gold:       '#c9a84c',   // conquistas, XP, destaque premium
+          gold:       '#d4b35e',   // conquistas, XP, destaque premium (clareada p/ dark)
           'gold-light': '#e8c878',
           'gold-muted': 'rgba(201,168,76,0.12)',
         },
@@ -91,10 +93,10 @@ const config: Config = {
       },
 
       boxShadow: {
-        soul:  '0 2px 12px rgba(28,26,23,0.07)',
-        'soul-md': '0 6px 24px rgba(28,26,23,0.09)',
-        'soul-lg': '0 12px 40px rgba(28,26,23,0.12)',
-        'soul-xl': '0 20px 60px rgba(28,26,23,0.14)',
+        soul:  '0 2px 12px rgba(0,0,0,0.30)',
+        'soul-md': '0 6px 24px rgba(0,0,0,0.35)',
+        'soul-lg': '0 12px 40px rgba(0,0,0,0.42)',
+        'soul-xl': '0 20px 60px rgba(0,0,0,0.50)',
         'gold':    '0 4px 16px rgba(201,168,76,0.28)',
         'terra':   '0 6px 18px rgba(196,99,58,0.28)',
       },

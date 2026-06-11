@@ -63,7 +63,7 @@ export default function WelcomeModal({
       <div
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-md rounded-3xl overflow-hidden animate-fade-up"
-        style={{ background: '#faf7f2', boxShadow: '0 20px 60px rgba(28,26,23,0.4)' }}
+        style={{ background: '#17181c', boxShadow: '0 20px 60px rgba(28,26,23,0.4)' }}
       >
         {/* Header dourado */}
         <div
@@ -106,13 +106,13 @@ export default function WelcomeModal({
               🎟️ Passaporte Ativo
             </p>
             <p className="font-serif font-bold leading-none"
-               style={{ fontSize: '54px', color: '#a8522e' }}>
+               style={{ fontSize: '54px', color: '#e09070' }}>
               +{initialCredits}
             </p>
             <p className="text-[14px] font-bold text-soul-ink/80 mt-1">
               créditos válidos por 7 dias
             </p>
-            <p className="text-[12px] font-medium mt-1.5" style={{ color: '#a8522e' }}>
+            <p className="text-[12px] font-medium mt-1.5" style={{ color: '#e09070' }}>
               ⏳ Use antes que expirem — depois disso, zeram automaticamente
             </p>
           </div>

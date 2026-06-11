@@ -90,7 +90,7 @@ export default function UpsellPopup({
     >
       <div
         onClick={e => e.stopPropagation()}
-        className="relative bg-white w-full max-w-lg rounded-3xl p-7 sm:p-8 shadow-2xl"
+        className="relative bg-soul-parchment w-full max-w-lg rounded-3xl p-7 sm:p-8 shadow-2xl"
         style={{ border: '1px solid rgba(196,99,58,0.25)' }}
       >
         {/* Fechar */}
@@ -110,7 +110,7 @@ export default function UpsellPopup({
         </div>
 
         <h3 className="font-serif text-2xl sm:text-3xl font-bold text-soul-ink leading-tight mb-3">
-          Você acaba de descobrir que seu perfil é <span style={{ color: '#a8522e' }}>{profileName}</span>.
+          Você acaba de descobrir que seu perfil é <span style={{ color: '#e09070' }}>{profileName}</span>.
         </h3>
         <p className="text-soul-ink/75 font-sans text-base mb-5">
           Quer saber como usar isso para vender 2x mais e liderar com maestria?

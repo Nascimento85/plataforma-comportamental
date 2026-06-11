@@ -50,8 +50,8 @@ export default function NovoTimeButton({ variant = 'default' }: { variant?: 'def
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto py-6"
              style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
-          <div className="bg-white rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
-               style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+          <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
+               style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-serif font-semibold text-2xl text-soul-ink">Criar novo time</h3>
               <button onClick={() => setOpen(false)} aria-label="Fechar"
@@ -61,7 +61,7 @@ export default function NovoTimeButton({ variant = 'default' }: { variant?: 'def
             <form onSubmit={handleCreate} className="space-y-4">
               {error && (
                 <div className="rounded-xl px-4 py-3 text-[13px] font-semibold"
-                     style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }}>
+                     style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
                   {error}
                 </div>
               )}

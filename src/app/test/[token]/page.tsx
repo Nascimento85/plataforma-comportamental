@@ -72,7 +72,7 @@ export default async function TestPage({ params }: PageProps) {
             <h2 className="font-serif font-semibold text-2xl text-soul-ink">
               {allBundleDone ? 'Bundle concluído!' : 'Teste concluído!'}
             </h2>
-            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(28,26,23,0.5)' }}>
+            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.5)' }}>
               {allBundleDone
                 ? 'Você completou todos os 4 testes comportamentais!'
                 : 'Aqui está o resumo do seu perfil identificado:'}
@@ -85,9 +85,9 @@ export default async function TestPage({ params }: PageProps) {
 
           {/* Progresso do bundle */}
           {assessment.bundleId && bundleProgress.length > 0 && (
-            <div className="bg-white rounded-3xl p-5" style={{ border: '1px solid rgba(232,226,214,0.6)' }}>
+            <div className="bg-soul-parchment rounded-3xl p-5" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
               <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-3"
-                 style={{ color: 'rgba(28,26,23,0.35)' }}>
+                 style={{ color: 'rgba(240,236,227,0.35)' }}>
                 Progresso do bundle
               </p>
               <div className="space-y-2.5">
@@ -97,12 +97,12 @@ export default async function TestPage({ params }: PageProps) {
                          style={item.completed ? {
                            background: 'rgba(122,158,126,0.15)', color: '#5a8a5e', border: '1px solid rgba(122,158,126,0.3)',
                          } : {
-                           background: 'rgba(232,226,214,0.5)', color: 'rgba(28,26,23,0.35)', border: '1px solid rgba(232,226,214,0.8)',
+                           background: 'rgba(58,61,69,0.5)', color: 'rgba(240,236,227,0.35)', border: '1px solid rgba(58,61,69,0.8)',
                          }}>
                       {item.completed ? '✓' : i + 1}
                     </div>
                     <span className="text-sm font-sans"
-                          style={{ color: item.completed ? 'rgba(28,26,23,0.8)' : 'rgba(28,26,23,0.35)', fontWeight: item.completed ? 500 : 400 }}>
+                          style={{ color: item.completed ? 'rgba(240,236,227,0.8)' : 'rgba(28,26,23,0.35)', fontWeight: item.completed ? 500 : 400 }}>
                       {BUNDLE_TEST_LABELS[item.testType] ?? item.testType}
                     </span>
                   </div>
@@ -146,7 +146,7 @@ export default async function TestPage({ params }: PageProps) {
         <div className="text-center py-16">
           <div className="text-6xl mb-4">⏰</div>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">Link expirado</h2>
-          <p className="text-sm font-sans mt-2" style={{ color: 'rgba(28,26,23,0.5)' }}>
+          <p className="text-sm font-sans mt-2" style={{ color: 'rgba(240,236,227,0.5)' }}>
             Este link de avaliação expirou. Solicite um novo link à sua empresa.
           </p>
         </div>
@@ -168,8 +168,8 @@ export default async function TestPage({ params }: PageProps) {
 
 function TestShell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen" style={{ background: '#faf7f2' }}>
-      <header className="h-14 flex items-center px-6" style={{ background: 'rgba(250,247,242,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(232,226,214,0.7)' }}>
+    <div className="min-h-screen" style={{ background: '#17181c' }}>
+      <header className="h-14 flex items-center px-6" style={{ background: 'rgba(250,247,242,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>

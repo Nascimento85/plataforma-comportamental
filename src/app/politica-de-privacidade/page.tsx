@@ -15,7 +15,7 @@ const LAST_UPDATE = '29 de abril de 2026'
 
 export default function PoliticaDePrivacidadePage() {
   return (
-    <div className="min-h-screen" style={{ background: '#faf7f2' }}>
+    <div className="min-h-screen" style={{ background: '#17181c' }}>
       <main className="max-w-3xl mx-auto px-5 py-12 sm:py-16">
 
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">

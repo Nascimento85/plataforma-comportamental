@@ -134,7 +134,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
             <div className="flex flex-wrap gap-2">
               {includedTests.map((t) => (
                 <span key={t} className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold"
-                      style={{ background: 'rgba(196,99,58,0.10)', color: '#a8522e' }}>
+                      style={{ background: 'rgba(196,99,58,0.10)', color: '#e09070' }}>
                   {TEST_LABELS[t] ?? t}
                 </span>
               ))}

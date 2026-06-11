@@ -776,7 +776,7 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
         {/* Canal combinado (se houver) */}
         {r.combinedReport && (
           <div className="card p-5" style={{ background: 'rgba(212,148,58,0.10)', borderLeft: '4px solid #d4943a' }}>
-            <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#7a4f17' }}>
+            <p className="text-xs font-bold uppercase tracking-wider mb-1" style={{ color: '#e8c878' }}>
               Canal combinado identificado
             </p>
             <h4 className="font-bold text-gray-900 mb-2">{r.combinedReport.nome}</h4>
@@ -830,7 +830,7 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
             {a.emoji}
           </div>
           <h2 className="text-2xl font-bold text-gray-900">{a.nome}</h2>
-          <p className="font-medium text-sm mt-1" style={{ color: '#3d4f7c' }}>{a.combinacao}</p>
+          <p className="font-medium text-sm mt-1" style={{ color: '#8fa6da' }}>{a.combinacao}</p>
         </div>
 
         {/* Radar dos 5 fatores */}
@@ -855,7 +855,7 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
 
         {/* Visão geral */}
         <div className="card p-5">
-          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#3d4f7c' }}>Visão geral do seu perfil</p>
+          <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#8fa6da' }}>Visão geral do seu perfil</p>
           <p className="text-sm text-gray-700 leading-relaxed">{a.visaoGeral}</p>
         </div>
 
@@ -887,7 +887,7 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
 
         {/* Plano de ação */}
         <div className="card p-5" style={{ background: 'rgba(61,79,124,0.05)', borderLeft: '4px solid #3d4f7c' }}>
-          <h3 className="font-semibold text-sm mb-3" style={{ color: '#3d4f7c' }}>Plano de ação para o próximo trimestre</h3>
+          <h3 className="font-semibold text-sm mb-3" style={{ color: '#8fa6da' }}>Plano de ação para o próximo trimestre</h3>
           <div className="space-y-3">
             {a.planoDeAcao.map((pa, i) => (
               <div key={i}>

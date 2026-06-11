@@ -42,7 +42,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
           <p className="text-soul-ink/75 mb-4">{c.analysis.shadow.summary}</p>
           <div className="space-y-4">
             {c.analysis.shadow.blindspots.map((b, i) => (
-              <div key={i} className="rounded-2xl bg-white p-5 border border-soul-mist/60">
+              <div key={i} className="rounded-2xl bg-soul-parchment p-5 border border-soul-mist/60">
                 <h4 className="font-serif text-lg font-semibold text-soul-ink mb-2">{b.name}</h4>
                 <KV label="Como aparece"  value={b.whatItLooksLike} />
                 <KV label="Custo na carreira" value={b.careerCost} accent={c.paletteHex} />
@@ -56,7 +56,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
           <p className="text-soul-ink/75 mb-4">{c.analysis.fears.summary}</p>
           <div className="grid sm:grid-cols-3 gap-4">
             {c.analysis.fears.items.map((f, i) => (
-              <div key={i} className="rounded-2xl p-5 bg-white border border-soul-mist/60">
+              <div key={i} className="rounded-2xl p-5 bg-soul-parchment border border-soul-mist/60">
                 <h4 className="font-bold text-soul-ink mb-2">{f.fear}</h4>
                 <p className="text-sm text-soul-ink/65 mb-3">{f.manifestation}</p>
                 <p className="text-sm font-semibold" style={{ color: c.paletteHex }}>{f.decisionImpact}</p>
@@ -70,7 +70,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
       <Section number={2} title="Consultoria de Carreira" accent={c.paletteHex}>
         <div className="space-y-6">
           {c.career.map((play, i) => (
-            <div key={i} className="rounded-2xl bg-white p-6 border border-soul-mist/60">
+            <div key={i} className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
               <div className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
                 {play.context}
               </div>
@@ -97,7 +97,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
       {/* 3) COMUNICAÇÃO */}
       <Section number={3} title="Guia de Comunicação Estratégica" accent={c.paletteHex}>
         <div className="grid md:grid-cols-2 gap-5">
-          <div className="rounded-2xl bg-white p-6 border border-soul-mist/60">
+          <div className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
             <h3 className="font-serif text-xl font-bold mb-2">{c.communication.selfTalk.title}</h3>
             <p className="text-soul-ink/70 text-sm mb-4">{c.communication.selfTalk.summary}</p>
             <div className="space-y-3">
@@ -109,7 +109,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl bg-white p-6 border border-soul-mist/60">
+          <div className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
             <h3 className="font-serif text-xl font-bold mb-2">{c.communication.manualForOthers.title}</h3>
             <p className="text-soul-ink/70 text-sm mb-4">{c.communication.manualForOthers.summary}</p>
             <BulletList items={c.communication.manualForOthers.rules} />
@@ -131,7 +131,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
       <Section number={4} title="PDI — Desafio dos 21 Dias" accent={c.paletteHex}>
         <div className="space-y-5">
           {c.pdi.weeks.map(w => (
-            <div key={w.week} className="rounded-2xl bg-white p-6 border border-soul-mist/60">
+            <div key={w.week} className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
               <div className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
                 Semana {w.week}
               </div>
@@ -179,7 +179,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-2xl bg-white p-5 border border-soul-mist/60 hover:-translate-y-0.5 transition-all"
+                className="block rounded-2xl bg-soul-parchment p-5 border border-soul-mist/60 hover:-translate-y-0.5 transition-all"
               >
                 <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: c.paletteHex }}>
                   {d.kind} · {d.pages} pp

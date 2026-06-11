@@ -60,7 +60,7 @@ const MASCULINE: Archetype[] = [
     description: 'A energia que domina o invisível — tecnologias, sistemas, símbolos. O mago íntegro traduz complexidade em poder prático.',
     shadow: 'Manipulação, frieza, arrogância intelectual.',
     gift: 'Sabedoria, clareza, mediação.',
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '✦',
   },
   {
@@ -113,7 +113,7 @@ const FEMININE: Archetype[] = [
     description: 'A energia que domina saberes e transmite. Gosta da complexidade e da busca intelectual.',
     shadow: 'Cinismo, intelectualização, distanciamento.',
     gift: 'Discernimento, clareza, ensino.',
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '✧',
   },
   {
@@ -166,7 +166,7 @@ const LEADERSHIP: Archetype[] = [
     description: 'Lidera pela inteligência do tabuleiro. Antecipa cenários e toma decisões frias sob pressão.',
     shadow: 'Paralisia por análise, distanciamento.',
     gift: 'Clareza, longevidade, previsibilidade.',
-    color: '#3d4f7c',
+    color: '#8fa6da',
     emoji: '♜',
   },
   {

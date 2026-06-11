@@ -4,7 +4,7 @@
 // ProfileForm — formulário interativo do perfil
 // ============================================================
 // - Mobile-first com 2 colunas em sm+
-// - Glassmorphism leve (bg-white + ring suave)
+// - Glassmorphism leve (bg-soul-parchment + ring suave)
 // - Cálculo dinâmico de preenchimento (sincroniza com REQUIRED_PROFILE_FIELDS)
 // - Card de validação por código aparece quando perfil 100%
 // ============================================================
@@ -328,8 +328,8 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
           style={{
             background: isComplete
               ? 'linear-gradient(135deg, #fff8e7, #fdecd2)'
-              : 'linear-gradient(135deg, #f5f0e8, #faf7f2)',
-            border: `2px solid ${isComplete ? 'rgba(201,168,76,0.45)' : 'rgba(28,26,23,0.08)'}`,
+              : 'linear-gradient(135deg, #1f2126, #17181c)',
+            border: `2px solid ${isComplete ? 'rgba(201,168,76,0.45)' : 'rgba(255,255,255,0.104)'}`,
           }}
         >
           {/* Decoração */}
@@ -366,8 +366,8 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                   style={{
                     background: isComplete && !requesting
                       ? 'linear-gradient(135deg, #c9a84c, #d4943a)'
-                      : 'rgba(28,26,23,0.1)',
-                    color: isComplete ? '#1c1a17' : 'rgba(28,26,23,0.45)',
+                      : 'rgba(255,255,255,0.12)',
+                    color: isComplete ? '#1c1a17' : 'rgba(240,236,227,0.45)',
                     boxShadow: isComplete ? '0 4px 16px rgba(201,168,76,0.3)' : 'none',
                   }}
                 >
@@ -404,8 +404,8 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                       onChange={(e) => setCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                       placeholder="000000"
                       className="w-full px-4 py-3 rounded-xl text-2xl font-mono font-bold text-center tracking-[0.4em]
-                                 border-2 outline-none transition-all bg-white"
-                      style={{ borderColor: 'rgba(201,168,76,0.4)', color: '#a8522e' }}
+                                 border-2 outline-none transition-all bg-soul-parchment"
+                      style={{ borderColor: 'rgba(201,168,76,0.4)', color: '#e09070' }}
                     />
                   </div>
                   <button
@@ -508,7 +508,7 @@ function Field({
   return (
     <div>
       <label className="block text-[12px] font-bold uppercase tracking-widest mb-2"
-             style={{ color: required ? '#8f3f1e' : 'rgba(28,26,23,0.6)' }}>
+             style={{ color: required ? '#8f3f1e' : 'rgba(240,236,227,0.6)' }}>
         {label}
         {required && <span className="text-soul-terracota ml-1">*</span>}
         {optional && <span className="text-soul-ink/40 normal-case font-medium tracking-normal ml-1.5">(opcional)</span>}
@@ -521,13 +521,13 @@ function Field({
         placeholder={placeholder}
         className="w-full px-4 py-3 rounded-xl text-[14px] font-sans font-medium text-soul-ink outline-none transition-all"
         style={{
-          background: readOnly ? 'rgba(28,26,23,0.05)' : 'white',
-          border: '1.5px solid rgba(28,26,23,0.1)',
+          background: readOnly ? 'rgba(255,255,255,0.065)' : 'white',
+          border: '1.5px solid rgba(240,236,227,0.1)',
           cursor: readOnly ? 'not-allowed' : 'text',
-          color: readOnly ? 'rgba(28,26,23,0.6)' : '#1c1a17',
+          color: readOnly ? 'rgba(240,236,227,0.6)' : '#1c1a17',
         }}
         onFocus={(e) => { if (!readOnly) e.target.style.borderColor = 'rgba(196,99,58,0.5)' }}
-        onBlur={(e) => { e.target.style.borderColor = 'rgba(28,26,23,0.1)' }}
+        onBlur={(e) => { e.target.style.borderColor = 'rgba(240,236,227,0.1)' }}
       />
       {hint && (
         <p className="text-[11px] text-soul-ink/55 font-medium mt-1.5">{hint}</p>
@@ -569,7 +569,7 @@ function ProgressBanner({
 
           {/* Barra de progresso */}
           <div className="h-2 rounded-full overflow-hidden mt-2"
-               style={{ background: 'rgba(28,26,23,0.08)' }}>
+               style={{ background: 'rgba(255,255,255,0.104)' }}>
             <div
               className="h-full rounded-full transition-all duration-700"
               style={{
@@ -596,7 +596,7 @@ function ProgressBanner({
             🎟️ Passaporte
           </p>
           <p className="font-serif text-3xl sm:text-4xl font-bold leading-none mt-1"
-             style={{ color: '#a8522e' }}>
+             style={{ color: '#e09070' }}>
             {balance}
           </p>
           <p className="text-[12px] text-soul-ink/60 font-medium mt-0.5">

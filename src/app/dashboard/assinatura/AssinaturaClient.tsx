@@ -260,7 +260,7 @@ export function BlocoAdminDemo({
 function Alerta({ tipo, children }: { tipo: 'ok' | 'erro'; children: React.ReactNode }) {
   const styles = tipo === 'ok'
     ? { background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.40)', color: '#3d6b40' }
-    : { background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#7a3d35' }
+    : { background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }
   return (
     <div className="rounded-xl px-4 py-3 text-[13.5px] font-semibold" style={styles}>{children}</div>
   )
