@@ -176,7 +176,7 @@ export default async function DashboardPage() {
         >
           <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
                style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)', transform: 'translate(20%, -30%)' }} />
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10">
             <p className="text-[13px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
                style={{ color: '#d4b85c' }}>
               Bem vindo, {firstName}
@@ -188,24 +188,24 @@ export default async function DashboardPage() {
             <p className="text-[17px] text-white font-bold leading-snug mb-2">
               Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
             </p>
-            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5 max-w-2xl">
+            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5">
               Avalie candidatos através de 9 instrumentos científicos, mapeie riscos psicossociais
               do time com o módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
               {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
               <Link href="/dashboard/behavioral"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
+                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
                     style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
                 ▶ Iniciar teste
               </Link>
               <Link href="/dashboard/candidates"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Convidar candidato
               </Link>
               <Link href="/dashboard/compliance/nr1"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Mapear NR-1 do time
               </Link>
@@ -216,42 +216,9 @@ export default async function DashboardPage() {
 
 
       {/* ══════════════════════════════════════════════════════
-          GRID: Playbooks gratuitos + Créditos/Insight
+          PLAYBOOKS: vitrine comercial em largura total
       ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
-
-        {/* Playbooks gratuitos (vitrine comercial) */}
-        <PlaybooksHome />
-
-        {/* Lateral direita */}
-        <div className="flex flex-col gap-5">
-          <PassportWidget state={passport} />
-
-          {/* Insight card */}
-          <div
-            className="rounded-3xl p-5 relative overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
-          >
-            <div
-              className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
-              style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
-            />
-            <div className="text-xl mb-2">💡</div>
-            <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
-              Insight do seu arquétipo
-            </div>
-            <p className="text-xs text-white/72 leading-relaxed">
-              Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição do time.
-            </p>
-            <Link
-              href="/dashboard/reports"
-              className="mt-3 inline-flex items-center gap-1 text-xs text-white/80 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
-            >
-              Explorar compatibilidade →
-            </Link>
-          </div>
-        </div>
-      </div>
+      <PlaybooksHome />
 
       {/* ══════════════════════════════════════════════════════
           VITRINE: todas as ferramentas com copy persuasiva
@@ -303,9 +270,36 @@ export default async function DashboardPage() {
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          BOTTOM: Activity + Candidatos
+          BOTTOM: Atividade + Passaporte + Insight (horizontal)
       ══════════════════════════════════════════════════════ */}
-      <RecentActivityCard assessments={recentAssessments} />
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_1fr] gap-5 items-start">
+        <RecentActivityCard assessments={recentAssessments} />
+
+        <PassportWidget state={passport} />
+
+        <div
+          className="rounded-3xl p-5 relative overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
+        >
+          <div
+            className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
+            style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
+          />
+          <div className="text-xl mb-2">💡</div>
+          <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
+            Insight do seu arquétipo
+          </div>
+          <p className="text-[13px] text-white/80 leading-relaxed">
+            Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição da equipe.
+          </p>
+          <Link
+            href="/dashboard/reports"
+            className="mt-3 inline-flex items-center gap-1 text-[13px] text-white/85 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
+          >
+            Explorar compatibilidade →
+          </Link>
+        </div>
+      </div>
 
     </div>
   )
