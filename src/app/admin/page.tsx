@@ -72,7 +72,7 @@ export default async function AdminPage() {
           { label: 'Empresas',       value: totalCompanies, emoji: '🏢', color: '#8fa6da', bg: 'rgba(61,79,124,0.07)',   border: 'rgba(61,79,124,0.15)'   },
           { label: 'Concluídos',     value: completedCount, emoji: '✓',  color: '#7a9e7e', bg: 'rgba(122,158,126,0.07)', border: 'rgba(122,158,126,0.15)' },
           { label: 'Aguardando',     value: pendingCount,   emoji: '⏳', color: '#d4943a', bg: 'rgba(212,148,58,0.07)',  border: 'rgba(212,148,58,0.15)'  },
-          { label: 'Taxa conclusão', value: conclusionRate, emoji: '📊', color: '#c4633a', bg: 'rgba(196,99,58,0.07)',   border: 'rgba(196,99,58,0.12)'   },
+          { label: 'Taxa conclusão', value: conclusionRate, emoji: '📊', color: '#e09070', bg: 'rgba(196,99,58,0.07)',   border: 'rgba(196,99,58,0.12)'   },
         ].map((s) => (
           <div key={s.label} className="bg-soul-parchment rounded-3xl p-5"
                style={{ border: `1px solid ${s.border}` }}>

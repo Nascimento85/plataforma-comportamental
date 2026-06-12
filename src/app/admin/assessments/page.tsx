@@ -13,7 +13,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; 
   PENDING:   { label: '📨 Pendente',  color: '#d4943a', bg: 'rgba(212,148,58,0.1)',  border: 'rgba(212,148,58,0.25)' },
   SENT:      { label: '⏳ Enviado',   color: '#8fa6da', bg: 'rgba(61,79,124,0.1)',   border: 'rgba(61,79,124,0.25)'  },
   COMPLETED: { label: '✓ Concluído', color: '#7a9e7e', bg: 'rgba(122,158,126,0.1)', border: 'rgba(122,158,126,0.25)' },
-  EXPIRED:   { label: '✕ Expirado',  color: '#c4633a', bg: 'rgba(196,99,58,0.1)',   border: 'rgba(196,99,58,0.2)'   },
+  EXPIRED:   { label: '✕ Expirado',  color: '#e09070', bg: 'rgba(196,99,58,0.1)',   border: 'rgba(196,99,58,0.2)'   },
 }
 
 interface PageProps {
@@ -155,7 +155,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                             <Link
                               href={`/admin/assessments/${a.id}`}
                               className="text-xs font-semibold font-sans transition-colors hover:underline"
-                              style={{ color: '#c4633a' }}
+                              style={{ color: '#e09070' }}
                             >
                               Ver devolutiva
                             </Link>

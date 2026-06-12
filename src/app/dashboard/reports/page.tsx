@@ -129,7 +129,7 @@ export default async function ReportsPage() {
                   href={`/dashboard/reports/${br.bundleId}`}
                   className="inline-flex items-center gap-2 w-full justify-center py-2.5 rounded-full text-[14px] font-bold
                              border-2 transition-all"
-                  style={{ borderColor: 'rgba(196,99,58,0.4)', color: '#c4633a' }}
+                  style={{ borderColor: 'rgba(196,99,58,0.4)', color: '#e09070' }}
                 >
                   Abrir devolutiva integrada →
                 </Link>

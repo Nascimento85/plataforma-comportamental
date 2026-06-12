@@ -22,7 +22,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function TagList({ items, color = 'brand' }: { items: string[]; color?: string }) {
   const styles: Record<string, React.CSSProperties> = {
-    brand:  { background: 'rgba(196,99,58,0.08)',   color: '#c4633a',   border: '1px solid rgba(196,99,58,0.15)'  },
+    brand:  { background: 'rgba(196,99,58,0.08)',   color: '#e09070',   border: '1px solid rgba(196,99,58,0.15)'  },
     green:  { background: 'rgba(122,158,126,0.10)',  color: '#5a8a5e',   border: '1px solid rgba(122,158,126,0.2)' },
     red:    { background: 'rgba(196,122,114,0.08)',  color: '#a05a52',   border: '1px solid rgba(196,122,114,0.15)'},
     violet: { background: 'rgba(122,100,180,0.08)',  color: '#6b5fad',   border: '1px solid rgba(122,100,180,0.15)'},
@@ -67,12 +67,12 @@ function InfoCard({ label, text, variant = 'sage' }: {
   bg?: string  // kept for backward compat, ignored
 }) {
   const variantStyles: Record<InfoCardVariant, React.CSSProperties> = {
-    sage:      { background: 'rgba(122,158,126,0.08)', border: '1px solid rgba(122,158,126,0.2)',  color: '#4a7a4e' },
-    terracota: { background: 'rgba(196,99,58,0.07)',   border: '1px solid rgba(196,99,58,0.15)',   color: '#c4633a' },
-    rose:      { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
+    sage:      { background: 'rgba(122,158,126,0.08)', border: '1px solid rgba(122,158,126,0.2)',  color: '#a9d3a9' },
+    terracota: { background: 'rgba(196,99,58,0.07)',   border: '1px solid rgba(196,99,58,0.15)',   color: '#e09070' },
+    rose:      { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#f0a892' },
     amber:     { background: 'rgba(212,148,58,0.08)',  border: '1px solid rgba(212,148,58,0.18)',  color: '#8a622e' },
     indigo:    { background: 'rgba(61,79,124,0.07)',   border: '1px solid rgba(61,79,124,0.15)',   color: '#8fa6da' },
-    'rose-warn': { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#8a4a42' },
+    'rose-warn': { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#f0a892' },
   }
   const s = variantStyles[variant]
   return (

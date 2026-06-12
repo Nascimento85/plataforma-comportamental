@@ -1122,7 +1122,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
               </div>
               <div className="text-right">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-sans font-medium"
-                      style={{ background: 'rgba(196,99,58,0.1)', color: '#c4633a', border: '1px solid rgba(196,99,58,0.2)' }}>
+                      style={{ background: 'rgba(196,99,58,0.1)', color: '#e09070', border: '1px solid rgba(196,99,58,0.2)' }}>
                   {testLabel}
                 </span>
                 {finishedAt && <p className="text-[13px] font-sans mt-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Concluído em {finishedAt}</p>}
@@ -1153,7 +1153,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {!isPrint && (
           <div className="text-center pb-6 space-y-1">
             <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#c4633a' }}>{APP_NAME}</strong></p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#e09070' }}>{APP_NAME}</strong></p>
           </div>
         )}
       </main>

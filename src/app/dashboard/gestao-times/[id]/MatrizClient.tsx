@@ -175,7 +175,7 @@ function ScatterMatrix({ members }: { members: Member[] }) {
     <div className="w-full overflow-x-auto">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ maxWidth: 620 }}>
         {/* Quadrantes de fundo */}
-        <rect x={pad} y={pad} width={plotW} height={plotH} fill="#17181c" stroke="#e8e2d6"/>
+        <rect x={pad} y={pad} width={plotW} height={plotH} fill="#17181c" stroke="rgba(255,255,255,0.18)"/>
         {/* Linhas guia em 4.0 e 7.0 (limiares das zonas) */}
         {[4, 7].map((v) => (
           <g key={v}>
@@ -184,8 +184,8 @@ function ScatterMatrix({ members }: { members: Member[] }) {
           </g>
         ))}
         {/* Eixos labels */}
-        <text x={pad + plotW / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="#6e645a" fontWeight="700">Performance →</text>
-        <text x={14} y={pad + plotH / 2} textAnchor="middle" fontSize="11" fill="#6e645a" fontWeight="700"
+        <text x={pad + plotW / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="#a8acb6" fontWeight="700">Performance →</text>
+        <text x={14} y={pad + plotH / 2} textAnchor="middle" fontSize="11" fill="#a8acb6" fontWeight="700"
               transform={`rotate(-90 14 ${pad + plotH / 2})`}>Fit comportamental →</text>
 
         {/* Pontos */}
@@ -231,8 +231,8 @@ function PieDistribuicao({ counts, total }: { counts: Record<ZonaKey, number>; t
             return el
           })}
         </g>
-        <text x="70" y="66" textAnchor="middle" fontSize="24" fontWeight="700" fill="#1c1a17">{total}</text>
-        <text x="70" y="83" textAnchor="middle" fontSize="9" fill="#6e645a" fontWeight="600" letterSpacing="0.5">AVALIADOS</text>
+        <text x="70" y="66" textAnchor="middle" fontSize="24" fontWeight="700" fill="#f0ece3">{total}</text>
+        <text x="70" y="83" textAnchor="middle" fontSize="9" fill="#a8acb6" fontWeight="600" letterSpacing="0.5">AVALIADOS</text>
       </svg>
       <div className="space-y-2">
         {ordem.map((z) => {
@@ -286,9 +286,9 @@ function MemberRow({
       {/* Notas calculadas (read-only) */}
       {m.temAvaliacao ? (
         <div className="flex items-center gap-3 text-[13.5px] font-bold">
-          <span style={{ color: '#c4633a' }} title="Performance">P {m.notaPerformance?.toFixed(1)}</span>
-          <span style={{ color: '#8fa6da' }} title="Fit comportamental">F {m.fitComportamental?.toFixed(1)}</span>
-          {m.potencial != null && m.potencial > 0 && <span style={{ color: '#c9a84c' }} title="Potencial">Pot {m.potencial.toFixed(1)}</span>}
+          <span style={{ color: '#e09070' }} title="O que a pessoa entrega (eixo horizontal da matriz)">Performance {m.notaPerformance?.toFixed(1)}</span>
+          <span style={{ color: '#8fa6da' }} title="Como a pessoa entrega: fit comportamental e cultural (eixo vertical)">Fit {m.fitComportamental?.toFixed(1)}</span>
+          {m.potencial != null && m.potencial > 0 && <span style={{ color: '#d4b35e' }} title="Capacidade de ir além do cargo atual">Potencial {m.potencial.toFixed(1)}</span>}
         </div>
       ) : (
         <span className="text-[13px] font-medium text-soul-ink/68">Aguardando avaliação</span>
@@ -308,7 +308,7 @@ function MemberRow({
       <div className="flex items-center gap-1.5 ml-auto">
         <button onClick={() => setAvalOpen(true)}
                 className="text-[13.5px] font-bold px-3 py-1.5 rounded-full"
-                style={{ background: m.temAvaliacao ? 'rgba(122,158,126,0.15)' : 'rgba(196,99,58,0.10)', color: m.temAvaliacao ? '#3d5a40' : '#a8522e' }}>
+                style={{ background: m.temAvaliacao ? 'rgba(122,158,126,0.15)' : 'rgba(196,99,58,0.10)', color: m.temAvaliacao ? '#a9d3a9' : '#e09070' }}>
           {m.temAvaliacao ? '✓ Avaliação' : 'Avaliar'}
         </button>
         {m.zona && (
@@ -320,7 +320,7 @@ function MemberRow({
         )}
         <button onClick={() => { if (confirm(`Remover ${m.nome} do time?`)) onRemove(m.id) }}
                 aria-label="Remover" title="Remover do time"
-                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-600 hover:bg-rose-50 text-lg leading-none">×</button>
+                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-400 hover:bg-rose-500/10 text-lg leading-none">×</button>
       </div>
 
       {avalOpen && (

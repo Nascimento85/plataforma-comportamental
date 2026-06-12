@@ -59,7 +59,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
              style={{ background: 'rgba(122,158,126,0.1)', border: '1px solid rgba(122,158,126,0.25)' }}>
           <span className="text-2xl flex-shrink-0">🎉</span>
           <div>
-            <p className="font-semibold text-sm" style={{ color: '#4a7a4e' }}>Pagamento confirmado!</p>
+            <p className="font-semibold text-sm" style={{ color: '#a9d3a9' }}>Pagamento confirmado!</p>
             <p className="text-sm mt-0.5" style={{ color: '#5a8a5e' }}>
               Seus créditos já foram adicionados ao saldo e estão disponíveis para uso imediato.
             </p>
@@ -144,7 +144,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
               )}
               {pack.highlight && (
                 <span className="self-start mb-3 text-[12px] font-bold px-2.5 py-1 rounded-full font-sans uppercase tracking-wide"
-                      style={{ background: 'rgba(196,99,58,0.08)', color: '#c4633a' }}>
+                      style={{ background: 'rgba(196,99,58,0.08)', color: '#e09070' }}>
                   Mais popular
                 </span>
               )}

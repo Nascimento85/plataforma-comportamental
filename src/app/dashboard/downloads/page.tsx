@@ -117,7 +117,7 @@ export default async function DownloadsPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <span className="inline-block text-[12px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-1"
-                        style={{ background: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }}>
+                        style={{ background: 'rgba(122,158,126,0.18)', color: '#a9d3a9' }}>
                     {pb.badge}
                   </span>
                   <h3 className="font-serif font-semibold text-lg text-soul-ink leading-tight">{pb.titulo}</h3>
@@ -221,8 +221,8 @@ function StatCard({
 }) {
   const toneClass = {
     neutral:  'border-soul-mist/60 bg-soul-parchment',
-    positive: 'border-emerald-200 bg-emerald-50',
-    warning:  'border-amber-200 bg-amber-50',
+    positive: 'border-emerald-500/30 bg-emerald-500/10',
+    warning:  'border-amber-500/30 bg-amber-500/10',
   }[tone]
   return (
     <div className={`rounded-3xl p-5 border ${toneClass}`}>

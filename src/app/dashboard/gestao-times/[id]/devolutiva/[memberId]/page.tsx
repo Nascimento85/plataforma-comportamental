@@ -102,7 +102,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
               {/* Notas da avaliação */}
               {(member.notaPerformance != null || member.potencial != null) && (
                 <div className="flex gap-4 mt-3 pt-3 border-t border-soul-mist/60 text-[13.5px] font-bold">
-                  {member.notaPerformance != null && <span style={{ color: '#c4633a' }}>Performance {member.notaPerformance.toFixed(1)}</span>}
+                  {member.notaPerformance != null && <span style={{ color: '#e09070' }}>Performance {member.notaPerformance.toFixed(1)}</span>}
                   {member.fitComportamental != null && <span style={{ color: '#8fa6da' }}>Fit {member.fitComportamental.toFixed(1)}</span>}
                   {member.potencial != null && member.potencial > 0 && <span style={{ color: '#c9a84c' }}>Potencial {member.potencial.toFixed(1)}</span>}
                 </div>
@@ -139,7 +139,7 @@ export default async function DevolutivaPage({ params }: { params: { id: string;
             <h2 className="font-serif text-xl font-semibold text-soul-ink mb-3">Guia de tom para a conversa</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="rounded-2xl p-4" style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)' }}>
-                <p className="text-[13px] font-bold uppercase tracking-wide mb-1" style={{ color: '#3d5a40' }}>Priorize</p>
+                <p className="text-[13px] font-bold uppercase tracking-wide mb-1" style={{ color: '#a9d3a9' }}>Priorize</p>
                 <p className="text-[14.5px] text-soul-ink/90 font-medium leading-relaxed">{perfil.tom.priorizar}</p>
               </div>
               <div className="rounded-2xl p-4" style={{ background: 'rgba(196,122,114,0.10)', border: '1px solid rgba(196,122,114,0.30)' }}>

@@ -41,8 +41,8 @@ interface SetorAgregado {
 }
 
 const RISCO_COR: Record<string, { bg: string; color: string; label: string }> = {
-  BAIXO:    { bg: 'rgba(122,158,126,0.22)', color: '#4a7a4e', label: 'Baixo'    },
-  MODERADO: { bg: 'rgba(212,148,58,0.22)',  color: '#8a5c1e', label: 'Moderado' },
+  BAIXO:    { bg: 'rgba(122,158,126,0.22)', color: '#a9d3a9', label: 'Baixo'    },
+  MODERADO: { bg: 'rgba(212,148,58,0.22)',  color: '#e0c878', label: 'Moderado' },
   ALTO:     { bg: 'rgba(196,99,58,0.22)',   color: '#e09070', label: 'Alto'     },
 }
 

@@ -27,7 +27,7 @@ const LANGUAGES: Language[] = [
       'Um bilhete deixado no espelho pela manhã. Um "você está linda hoje" antes da pessoa sair. Um "obrigado por tudo que você faz" no jantar.',
     dayToDay:
       'Verbalize o que você sente. Escreva. Envie mensagens de carinho no meio do dia. Elogie especificamente — não genericamente.',
-    color: '#c4633a',
+    color: '#e09070',
     emoji: '◈',
   },
   {
@@ -40,7 +40,7 @@ const LANGUAGES: Language[] = [
       'Um jantar romântico sem celular. Uma caminhada longa conversando sobre a vida. Um fim de semana só a dois, sem agenda.',
     dayToDay:
       'Desligue o telefone nos encontros. Marque tempo exclusivo semanalmente. Escute sem interromper. Esteja realmente presente.',
-    color: '#7a9e7e',
+    color: '#a9d3a9',
     emoji: '◉',
   },
   {
@@ -53,7 +53,7 @@ const LANGUAGES: Language[] = [
       'A flor comprada na esquina voltando do trabalho. O livro do autor preferido. A lembrança trazida de uma viagem sem aviso.',
     dayToDay:
       'Observe o que a pessoa curte. Surpreenda sem motivo especial. O gesto importa mais que o valor — um bilhete dentro da marmita já conta.',
-    color: '#c9a84c',
+    color: '#d4b35e',
     emoji: '✦',
   },
   {
@@ -79,7 +79,7 @@ const LANGUAGES: Language[] = [
       'Segurar a mão ao andar na rua. Abraçar por trás enquanto cozinha. Um beijo demorado antes de sair para o trabalho.',
     dayToDay:
       'Toque com frequência — não só em momentos de intimidade. Abraços, carinho casual, contato físico cotidiano alimentam o tanque.',
-    color: '#c47a72',
+    color: '#d99a91',
     emoji: '◎',
   },
 ]
@@ -95,9 +95,9 @@ export default function LoveLanguagesPage() {
           Vida Pessoal · Casais · Família
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">
-          As 5 <span className="italic font-normal" style={{ color: '#9b4d43' }}>Linguagens</span> do Amor
+          As 5 <span className="italic font-normal" style={{ color: '#e0a89a' }}>Linguagens</span> do Amor
         </h1>
-        <p className="font-display italic text-lg md:text-xl font-semibold mt-2" style={{ color: '#9b4d43' }}>
+        <p className="font-display italic text-lg md:text-xl font-semibold mt-2" style={{ color: '#e0a89a' }}>
           &ldquo;Cada pessoa recebe amor de um jeito diferente — e ninguém te contou o seu.&rdquo;
         </p>
         <p className="text-base md:text-lg text-soul-ink/90 mt-4 font-medium max-w-3xl leading-relaxed">
@@ -111,7 +111,7 @@ export default function LoveLanguagesPage() {
       <section
         className="relative overflow-hidden rounded-3xl p-7 md:p-10"
         style={{
-          background: 'linear-gradient(135deg, #faf5f4 0%, #f0dcd6 60%, #e8c8c0 100%)',
+          background: 'linear-gradient(135deg, #261b1a 0%, #2e211e 60%, #362824 100%)',
           border: '1px solid rgba(196,122,114,0.35)',
         }}
       >
@@ -143,13 +143,13 @@ export default function LoveLanguagesPage() {
             </p>
 
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white/70 rounded-2xl p-4 border border-white">
+              <div className="bg-white/10 rounded-2xl p-4 border border-white/15">
                 <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/85">Para casais</p>
                 <p className="text-[15px] font-semibold text-soul-ink mt-1 leading-snug">
                   Reconectar afeto, encerrar mal-entendidos crônicos
                 </p>
               </div>
-              <div className="bg-white/70 rounded-2xl p-4 border border-white">
+              <div className="bg-white/10 rounded-2xl p-4 border border-white/15">
                 <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/85">Para família</p>
                 <p className="text-[15px] font-semibold text-soul-ink mt-1 leading-snug">
                   Saber como cada filho, irmão ou pai recebe amor
@@ -159,8 +159,8 @@ export default function LoveLanguagesPage() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="rounded-2xl p-5 mb-5 bg-white/80 border border-white">
-              <p className="text-[13.5px] font-bold uppercase tracking-widest mb-3" style={{ color: '#9b4d43' }}>
+            <div className="rounded-2xl p-5 mb-5 bg-white/10 border border-white/15">
+              <p className="text-[13.5px] font-bold uppercase tracking-widest mb-3" style={{ color: '#e0a89a' }}>
                 O que o relatório entrega
               </p>
               <div className="space-y-2.5">
@@ -185,7 +185,7 @@ export default function LoveLanguagesPage() {
                 <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{TEST_PRICE.LOVE_LANGUAGES} <span className="text-lg font-medium text-soul-ink/85">créditos</span></p>
               </div>
               <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[13.5px] font-bold"
-                    style={{ background: 'rgba(155,77,67,0.15)', color: '#9b4d43' }}>
+                    style={{ background: 'rgba(155,77,67,0.15)', color: '#e0a89a' }}>
                 ♥ Premium
               </span>
             </div>

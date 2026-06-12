@@ -20,7 +20,7 @@ interface EmpresaRow {
 const STATUS_BADGE: Record<string, { bg: string; color: string; label: string }> = {
   ACTIVE:   { bg: 'rgba(122,158,126,0.20)', color: '#3d6b40', label: 'Ativa' },
   TRIALING: { bg: 'rgba(201,168,76,0.22)',  color: '#8a6517', label: 'Trial' },
-  PAST_DUE: { bg: 'rgba(212,148,58,0.22)',  color: '#8a5c1e', label: 'Em atraso' },
+  PAST_DUE: { bg: 'rgba(212,148,58,0.22)',  color: '#e0c878', label: 'Em atraso' },
   CANCELED: { bg: 'rgba(196,99,58,0.18)',   color: '#8a3a1f', label: 'Cancelada' },
   EXPIRED:  { bg: 'rgba(196,99,58,0.18)',   color: '#8a3a1f', label: 'Expirada' },
 }

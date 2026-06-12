@@ -295,7 +295,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
           )}
           {saveOk && (
             <div className="rounded-xl px-4 py-3 text-sm font-sans font-semibold mb-4"
-                 style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.3)', color: '#4a7a4e' }}>
+                 style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.3)', color: '#a9d3a9' }}>
               ✓ Perfil salvo com sucesso!
             </div>
           )}
@@ -327,7 +327,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
           className="rounded-3xl p-6 mt-6 relative overflow-hidden"
           style={{
             background: isComplete
-              ? 'linear-gradient(135deg, #fff8e7, #fdecd2)'
+              ? 'linear-gradient(135deg, #2a2418, #322a1a)'
               : 'linear-gradient(135deg, #1f2126, #17181c)',
             border: `2px solid ${isComplete ? 'rgba(201,168,76,0.45)' : 'rgba(255,255,255,0.104)'}`,
           }}
@@ -377,7 +377,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
             ) : (
               <form onSubmit={handleValidateCode} className="space-y-4">
                 <div className="rounded-xl px-4 py-3 text-sm font-sans font-semibold"
-                     style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.3)', color: '#4a7a4e' }}>
+                     style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.3)', color: '#a9d3a9' }}>
                   ✓ Código enviado para o seu e-mail. Verifique a caixa de entrada (e o spam).
                   {devCode && (
                     <div className="mt-1 text-xs font-mono font-bold">DEV: código = {devCode}</div>
@@ -437,7 +437,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
         <div
           className="rounded-3xl p-6 mt-6 relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #e8f5e9, #f0faf1)',
+            background: 'linear-gradient(135deg, #1c2a1e, #213222)',
             border: '2px solid rgba(122,158,126,0.4)',
           }}
         >
@@ -549,7 +549,7 @@ function ProgressBanner({
     <div
       className="rounded-3xl p-5 sm:p-6 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #f5ede1 0%, #faf0e6 100%)',
+        background: 'linear-gradient(135deg, #26221a 0%, #2c261c 100%)',
         border: '1px solid rgba(196,99,58,0.15)',
       }}
     >

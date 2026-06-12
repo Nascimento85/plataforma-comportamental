@@ -50,7 +50,7 @@ const DISC: Lens = {
     'Aponta pontos cegos e vetores de desenvolvimento',
     'Relatório PDF pronto para devolutiva executiva',
   ],
-  color: '#c4633a',
+  color: '#e09070',
   emoji: '◉',
 }
 

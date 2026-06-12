@@ -153,7 +153,7 @@ export default function SeedRespostasButton({
         <p className="text-[13.5px] font-semibold text-red-600">{erro}</p>
       )}
       {okMsg && (
-        <p className="text-[13.5px] font-semibold" style={{ color: '#4a7a4e' }}>{okMsg}</p>
+        <p className="text-[13.5px] font-semibold" style={{ color: '#a9d3a9' }}>{okMsg}</p>
       )}
 
       <div className="flex gap-2">

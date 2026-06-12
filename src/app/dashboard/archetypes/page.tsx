@@ -40,7 +40,7 @@ const MASCULINE: Archetype[] = [
     description: 'A energia que protege, executa e defende território. O guerreiro maduro serve a uma causa maior e domina o caos com método.',
     shadow: 'Tiranização, violência, rigidez emocional.',
     gift: 'Coragem, honra, lealdade.',
-    color: '#c4633a',
+    color: '#e09070',
     emoji: '⚔',
   },
   {
@@ -103,7 +103,7 @@ const FEMININE: Archetype[] = [
     description: 'A energia que luta por território próprio. Não aceita dominação e disputa no mundo.',
     shadow: 'Agressividade, masculinização, solidão.',
     gift: 'Coragem, disciplina, realização.',
-    color: '#c4633a',
+    color: '#e09070',
     emoji: '⚔',
   },
   {
@@ -156,7 +156,7 @@ const LEADERSHIP: Archetype[] = [
     description: 'Lidera por posição e decide rápido. Constrói impérios duráveis e tolera pouca ambiguidade.',
     shadow: 'Autoritarismo, controle excessivo.',
     gift: 'Direção clara, eficiência, resultados.',
-    color: '#c4633a',
+    color: '#e09070',
     emoji: '⚑',
   },
   {

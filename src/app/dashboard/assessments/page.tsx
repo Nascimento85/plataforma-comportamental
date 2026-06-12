@@ -145,7 +145,7 @@ export default async function AssessmentsPage() {
         <article
           className="relative overflow-hidden rounded-3xl p-7 flex flex-col"
           style={{
-            background: 'linear-gradient(135deg, #faf5f4 0%, #f0dcd6 100%)',
+            background: 'linear-gradient(135deg, #261b1a 0%, #2e211e 100%)',
             border: '1px solid rgba(196,122,114,0.3)',
             minHeight: '340px',
           }}
@@ -163,7 +163,7 @@ export default async function AssessmentsPage() {
             <h2 className="font-serif font-semibold text-2xl md:text-3xl leading-tight mb-1 text-soul-ink">
               Relacionamentos
             </h2>
-            <p className="font-display italic text-[15px] font-semibold mb-3" style={{ color: '#9b4d43' }}>
+            <p className="font-display italic text-[15px] font-semibold mb-3" style={{ color: '#e0a89a' }}>
               Casais, família e relacionamentos que importam
             </p>
 

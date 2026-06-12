@@ -40,10 +40,10 @@ async function getCandidates(companyId: string) {
 function StatusBadge({ status }: { status: string | null }) {
   if (!status) return <span className="text-sm text-soul-ink/75 font-medium">—</span>
   const map: Record<string, { label: string; bg: string; color: string }> = {
-    PENDING: { label: 'Pendente', bg: 'rgba(212,148,58,0.18)', color: '#8a5c1e' },
-    SENT: { label: 'Enviado', bg: 'rgba(61,79,124,0.18)', color: '#2d3f6b' },
-    COMPLETED: { label: 'Concluído', bg: 'rgba(122,158,126,0.22)', color: '#4a7a4e' },
-    EXPIRED: { label: 'Expirado', bg: 'rgba(196,122,114,0.18)', color: '#8a4a42' },
+    PENDING: { label: 'Pendente', bg: 'rgba(212,148,58,0.18)', color: '#e0c878' },
+    SENT: { label: 'Enviado', bg: 'rgba(61,79,124,0.28)', color: '#a8bce8' },
+    COMPLETED: { label: 'Concluído', bg: 'rgba(122,158,126,0.22)', color: '#a9d3a9' },
+    EXPIRED: { label: 'Expirado', bg: 'rgba(196,122,114,0.18)', color: '#f0a892' },
   }
   const s = map[status] ?? map.PENDING
   return (

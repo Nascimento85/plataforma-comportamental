@@ -107,7 +107,7 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
                         {s.perfilDiscAuto && (
                           <span
                             className="inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[9.5px] font-bold uppercase tracking-wide"
-                            style={{ background: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }}
+                            style={{ background: 'rgba(122,158,126,0.18)', color: '#a9d3a9' }}
                             title="Calculado automaticamente a partir dos testes DISC dos funcionários do setor"
                           >
                             <svg width="9" height="9" viewBox="0 0 20 20" fill="none" stroke="currentColor"

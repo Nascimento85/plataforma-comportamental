@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'Equipes e Setores' }
 // Templates de setores comuns (usados como placeholder até a migração)
 const TEMPLATE_DEPARTMENTS = [
   { name: 'Liderança & Diretoria',     icon: '♛', color: '#c9a84c', desc: 'C-level, VPs e heads' },
-  { name: 'Vendas & Comercial',        icon: '◉', color: '#c4633a', desc: 'Prospecção, closers, CS' },
+  { name: 'Vendas & Comercial',        icon: '◉', color: '#e09070', desc: 'Prospecção, closers, CS' },
   { name: 'Marketing',                 icon: '✦', color: '#d4943a', desc: 'Growth, conteúdo, branding' },
   { name: 'Operações',                 icon: '⬢', color: '#8fa6da', desc: 'Logística, supply, produção' },
   { name: 'Tecnologia & Produto',      icon: '◆', color: '#6b7fb8', desc: 'Engenharia, design, PM' },

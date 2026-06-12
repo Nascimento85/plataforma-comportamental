@@ -14,8 +14,8 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
       className="rounded-3xl p-5"
       style={{
         background: isLow
-          ? 'linear-gradient(135deg, #f5e8e1, #faf0ec)'
-          : 'linear-gradient(135deg, #f5ede1, #faf0e6)',
+          ? 'linear-gradient(135deg, #2a201b, #30241e)'
+          : 'linear-gradient(135deg, #26221a, #2c261c)',
         border: `1px solid ${isLow ? 'rgba(196,99,58,0.2)' : 'rgba(196,99,58,0.12)'}`,
       }}
     >

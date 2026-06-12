@@ -98,7 +98,7 @@ export default function WelcomeModal({
           <div
             className="rounded-2xl p-5 mb-5 text-center"
             style={{
-              background: 'linear-gradient(135deg, #f5ede1, #faf0e6)',
+              background: 'linear-gradient(135deg, #26221a, #2c261c)',
               border: '1.5px solid rgba(196,99,58,0.2)',
             }}
           >

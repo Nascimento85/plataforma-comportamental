@@ -310,7 +310,7 @@ function PlanosPagos({
                }}>
             <div className="flex items-baseline justify-between mb-1">
               <h3 className="font-serif text-lg font-semibold text-soul-ink">{p.nome}</h3>
-              {destaque && <span className="text-[9.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded" style={{ background: 'rgba(212,184,92,0.30)', color: '#8a5c1e' }}>RECOMENDADO</span>}
+              {destaque && <span className="text-[9.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded" style={{ background: 'rgba(212,184,92,0.30)', color: '#e0c878' }}>RECOMENDADO</span>}
             </div>
             <p className="font-serif text-2xl font-semibold text-soul-ink mb-1">{p.preco}</p>
             <p className="text-[13.5px] text-soul-ink/78 font-medium mb-4">{p.cap}</p>

@@ -20,7 +20,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 type TagColor = 'brand' | 'green' | 'red' | 'violet' | 'amber'
 const TAG_STYLES: Record<TagColor, { color: string; bg: string; border: string }> = {
-  brand:  { color: '#c4633a', bg: 'rgba(196,99,58,0.08)',   border: 'rgba(196,99,58,0.2)'   },
+  brand:  { color: '#e09070', bg: 'rgba(196,99,58,0.08)',   border: 'rgba(196,99,58,0.2)'   },
   green:  { color: '#5a8a5e', bg: 'rgba(122,158,126,0.1)',  border: 'rgba(122,158,126,0.25)' },
   red:    { color: '#b05a4a', bg: 'rgba(196,90,74,0.08)',   border: 'rgba(196,90,74,0.2)'   },
   violet: { color: '#6d5a9c', bg: 'rgba(109,90,156,0.08)',  border: 'rgba(109,90,156,0.2)'  },
@@ -104,7 +104,7 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
             Perfil predominante · {r.combination}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
-          <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.tagline}</p>
+          <p className="text-sm font-sans mt-1" style={{ color: '#e09070' }}>{r.report.tagline}</p>
         </div>
       </div>
       <Section title="Distribuição do perfil">
@@ -165,7 +165,7 @@ function MbtiDevolutiva({ result }: { result: Record<string, unknown> }) {
         <div>
           <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Tipo MBTI</p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
-          <p className="text-sm font-sans mt-1 italic" style={{ color: '#c4633a' }}>"{r.report.tagline}"</p>
+          <p className="text-sm font-sans mt-1 italic" style={{ color: '#e09070' }}>"{r.report.tagline}"</p>
         </div>
       </div>
       <Section title="Descrição do perfil">
@@ -203,7 +203,7 @@ function EnneagramDevolutiva({ result }: { result: Record<string, unknown> }) {
             Tipo {r.predominant} · {r.report.altName}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
-          <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.tagline}</p>
+          <p className="text-sm font-sans mt-1" style={{ color: '#e09070' }}>{r.report.tagline}</p>
         </div>
       </div>
       <Section title="Interpretação">
@@ -315,7 +315,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
             Arquétipo dominante · Secundário: {r.secondaryReport.name}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
-          <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.title}</p>
+          <p className="text-sm font-sans mt-1" style={{ color: '#e09070' }}>{r.report.title}</p>
           <p className="text-[13px] font-sans mt-0.5 italic" style={{ color: 'rgba(240,236,227,0.68)' }}>"{r.report.tagline}"</p>
         </div>
       </div>

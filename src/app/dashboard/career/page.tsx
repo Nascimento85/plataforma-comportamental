@@ -64,7 +64,7 @@ const TESTS: CareerTest[] = [
     ],
     image: '/tests/inteligencia-emocional.png',
     credits: TEST_PRICE.EMOTIONAL_INTELLIGENCE,
-    color: '#c4633a',
+    color: '#e09070',
     emoji: '◈',
     badge: 'Goleman',
   },
@@ -89,7 +89,7 @@ export default async function CareerPage() {
       {/* ── Header ── */}
       <div>
         <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
-              style={{ background: 'rgba(61,79,124,0.14)', color: '#2d3f6b' }}>
+              style={{ background: 'rgba(61,79,124,0.14)', color: '#a8bce8' }}>
           Carreira &amp; Performance
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">

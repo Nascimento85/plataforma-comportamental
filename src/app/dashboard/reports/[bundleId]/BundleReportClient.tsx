@@ -106,8 +106,8 @@ export default function BundleReportClient({
               d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z"
               fill="rgba(196,99,58,0.08)" stroke="#c4633a" strokeWidth="1.2" strokeLinejoin="round"
             />
-            <circle cx="45" cy="45" r="5" fill="#c4633a" opacity="0.5"/>
-            <circle cx="45" cy="45" r="2.5" fill="#c4633a" opacity="0.8"/>
+            <circle cx="45" cy="45" r="5" fill="#e09070" opacity="0.5"/>
+            <circle cx="45" cy="45" r="2.5" fill="#e09070" opacity="0.8"/>
           </svg>
         </div>
         <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
@@ -341,7 +341,7 @@ export default function BundleReportClient({
                 </div>
                 <div className="pt-0.5">
                   <span className="text-[12px] font-bold uppercase tracking-widest font-sans"
-                        style={{ color: '#c4633a' }}>
+                        style={{ color: '#e09070' }}>
                     {acao.area}
                   </span>
                   <p className="text-sm text-soul-ink/80 mt-0.5 leading-relaxed font-sans">{acao.acao}</p>

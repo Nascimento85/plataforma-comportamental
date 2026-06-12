@@ -151,7 +151,7 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
           )}
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex gap-4 text-[13.5px] font-bold">
-              <span style={{ color: '#c4633a' }}>Perf {previa.notaPerformance.toFixed(1)}</span>
+              <span style={{ color: '#e09070' }}>Perf {previa.notaPerformance.toFixed(1)}</span>
               <span style={{ color: '#8fa6da' }}>Fit {previa.fitComportamental.toFixed(1)}</span>
               <span style={{ color: '#c9a84c' }}>Potencial {previa.potencial.toFixed(1)}</span>
             </div>

@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = { title: 'Minha Jornada' }
 
 const TEST_LABELS: Record<string, { label: string; short: string; color: string; emoji: string }> = {
-  DISC:               { label: 'DISC — Perfil Comportamental',     short: 'DISC',         color: '#c4633a', emoji: '◉' },
+  DISC:               { label: 'DISC — Perfil Comportamental',     short: 'DISC',         color: '#e09070', emoji: '◉' },
   MBTI:               { label: 'MBTI — 16 Tipos de Personalidade', short: 'MBTI',         color: '#8fa6da', emoji: '◆' },
   ENNEAGRAM:          { label: 'Eneagrama — 9 Tipos',              short: 'Eneagrama',    color: '#c9a84c', emoji: '✧' },
   TEMPERAMENT:        { label: '4 Temperamentos',                  short: 'Temperamentos',color: '#7a9e7e', emoji: '⬢' },
@@ -105,7 +105,7 @@ export default async function JourneyPage() {
           </p>
           <div className="space-y-2">
             {inProgress.map((a) => {
-              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#c4633a', emoji: '✦' }
+              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#e09070', emoji: '✦' }
               return (
                 <div key={a.id} className="soul-panel flex flex-wrap items-center gap-4">
                   <div
@@ -152,7 +152,7 @@ export default async function JourneyPage() {
           </h2>
           <div className="soul-panel p-0 overflow-hidden">
             {completed.map((a, i) => {
-              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#c4633a', emoji: '✦' }
+              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#e09070', emoji: '✦' }
               return (
                 <div
                   key={a.id}

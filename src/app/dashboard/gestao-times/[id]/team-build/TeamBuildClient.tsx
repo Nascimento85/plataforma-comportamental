@@ -66,7 +66,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
             coletiva. Adicione mais membros na matriz ou aplique o teste DISC.
           </p>
           <Link href={`/dashboard/gestao-times/${teamId}`}
-                className="inline-block mt-4 text-[14px] font-bold no-underline" style={{ color: '#c4633a' }}>
+                className="inline-block mt-4 text-[14px] font-bold no-underline" style={{ color: '#e09070' }}>
             ← Voltar para a matriz
           </Link>
         </div>
@@ -105,7 +105,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
             <h2 className="font-serif text-xl font-semibold text-soul-ink mb-3">Pontos cegos do time</h2>
             {analise.alertas.length === 0 ? (
               <div className="rounded-2xl p-4 text-[15px] font-medium"
-                   style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#3d5a40' }}>
+                   style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#a9d3a9' }}>
                 Time comportamentalmente equilibrado. Nenhum excesso ou gap crítico detectado. Mantenha a diversidade de perfis ao crescer.
               </div>
             ) : (
@@ -137,7 +137,7 @@ export default function TeamBuildClient({ teamId, teamNome, faseTuckman, members
           <div className="soul-panel">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
               <h2 className="font-serif text-xl font-semibold text-soul-ink">Central de dinâmicas</h2>
-              <button onClick={() => setDiagOpen(true)} className="text-[13.5px] font-bold no-underline" style={{ color: '#c4633a' }}>
+              <button onClick={() => setDiagOpen(true)} className="text-[13.5px] font-bold no-underline" style={{ color: '#e09070' }}>
                 Não sei minha fase? Responder 3 perguntas →
               </button>
             </div>

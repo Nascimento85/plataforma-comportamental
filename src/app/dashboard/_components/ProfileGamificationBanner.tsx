@@ -21,7 +21,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
       className="rounded-3xl p-5 sm:p-6 relative overflow-hidden"
       style={{
         background: isComplete
-          ? 'linear-gradient(135deg, #fff8e7, #fdecd2)'
+          ? 'linear-gradient(135deg, #2a2418, #322a1a)'
           : 'linear-gradient(135deg, #1c1a17 0%, #2d2417 60%, #3d2a1c 100%)',
         border: isComplete ? '2px solid rgba(201,168,76,0.5)' : 'none',
       }}

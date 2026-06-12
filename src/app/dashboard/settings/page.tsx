@@ -43,7 +43,7 @@ export default async function SettingsPage() {
             </p>
           </div>
           <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
-                style={{ background: 'rgba(122,158,126,0.22)', color: '#4a7a4e' }}>
+                style={{ background: 'rgba(122,158,126,0.22)', color: '#a9d3a9' }}>
             {company.active ? 'Ativa' : 'Inativa'}
           </span>
         </div>

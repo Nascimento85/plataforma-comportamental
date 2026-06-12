@@ -119,10 +119,10 @@ function BlocoRenderer({ bloco }: { bloco: Bloco }) {
   if (bloco.tipo === 'callout') {
     const variante = bloco.variante ?? 'info'
     const styles = variante === 'alerta'
-      ? { bg: 'rgba(196,122,114,0.10)', border: 'rgba(196,122,114,0.40)', color: '#8a4a42', icon: '⚠️' }
+      ? { bg: 'rgba(196,122,114,0.10)', border: 'rgba(196,122,114,0.40)', color: '#f0a892', icon: '⚠️' }
       : variante === 'sucesso'
-        ? { bg: 'rgba(122,158,126,0.12)', border: 'rgba(122,158,126,0.40)', color: '#4a7a4e', icon: '✓' }
-        : { bg: 'rgba(212,148,58,0.10)', border: 'rgba(212,148,58,0.40)', color: '#8a5c1e', icon: '💡' }
+        ? { bg: 'rgba(122,158,126,0.12)', border: 'rgba(122,158,126,0.40)', color: '#a9d3a9', icon: '✓' }
+        : { bg: 'rgba(212,148,58,0.10)', border: 'rgba(212,148,58,0.40)', color: '#e0c878', icon: '💡' }
     return (
       <div className="rounded-2xl p-4 my-4"
            style={{ background: styles.bg, border: `1px solid ${styles.border}` }}>

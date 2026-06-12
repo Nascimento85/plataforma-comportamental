@@ -507,7 +507,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                     )}
 
                     <div className="rounded-2xl px-4 py-3 text-[14px] font-sans font-semibold"
-                         style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#3d5a40' }}>
+                         style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#a9d3a9' }}>
                       Preencha os campos abaixo só se for <strong>enviar o teste para outra pessoa</strong>. Para fazer agora você mesmo, basta escolher a avaliação e clicar em <strong>Fazer teste agora</strong>.
                     </div>
 
