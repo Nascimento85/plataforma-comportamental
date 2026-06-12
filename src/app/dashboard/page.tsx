@@ -176,18 +176,21 @@ export default async function DashboardPage() {
         >
           <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
                style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)', transform: 'translate(20%, -30%)' }} />
-          <div className="relative z-10 max-w-2xl">
+          <div className="relative z-10 max-w-3xl">
             <p className="text-[13px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
                style={{ color: '#d4b85c' }}>
-              Bem-vinda, {firstName}
+              Bem vindo, {firstName}
             </p>
-            <h2 className="font-serif font-semibold text-3xl md:text-4xl text-white leading-[1.15] mb-3">
+            <h2 className="font-serif font-semibold text-3xl md:text-4xl text-white leading-[1.15] mb-3 lg:whitespace-nowrap">
               Sua plataforma comportamental{' '}
               <em className="not-italic" style={{ color: '#d4b85c' }}>em um só lugar.</em>
             </h2>
-            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5 max-w-xl">
-              Avalie candidatos com 9 instrumentos científicos, mapeie riscos psicossociais do time
-              com o módulo NR-1 e gere roteiros de entrevista personalizados.
+            <p className="text-[17px] text-white font-bold leading-snug mb-2">
+              Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
+            </p>
+            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5 max-w-2xl">
+              Avalie candidatos através de 9 instrumentos científicos, mapeie riscos psicossociais
+              do time com o módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
               {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
@@ -205,6 +208,50 @@ export default async function DashboardPage() {
           </div>
         </div>
       )}
+
+
+      {/* ══════════════════════════════════════════════════════
+          GRID: Playbooks gratuitos + Créditos/Insight
+      ══════════════════════════════════════════════════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
+
+        {/* Playbooks gratuitos (vitrine comercial) */}
+        <PlaybooksHome />
+
+        {/* Lateral direita */}
+        <div className="flex flex-col gap-5">
+          <PassportWidget state={passport} />
+
+          {/* Insight card */}
+          <div
+            className="rounded-3xl p-5 relative overflow-hidden"
+            style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
+          >
+            <div
+              className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
+              style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
+            />
+            <div className="text-xl mb-2">💡</div>
+            <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
+              Insight do seu arquétipo
+            </div>
+            <p className="text-xs text-white/72 leading-relaxed">
+              Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição do time.
+            </p>
+            <Link
+              href="/dashboard/reports"
+              className="mt-3 inline-flex items-center gap-1 text-xs text-white/80 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
+            >
+              Explorar compatibilidade →
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════════════════
+          VITRINE: todas as ferramentas com copy persuasiva
+      ══════════════════════════════════════════════════════ */}
+      <FerramentasShowcase />
 
       {/* ══════════════════════════════════════════════════════
           STATS ROW
@@ -249,49 +296,6 @@ export default async function DashboardPage() {
           deltaUp={true}
         />
       </div>
-
-      {/* ══════════════════════════════════════════════════════
-          GRID: Playbooks gratuitos + Créditos/Insight
-      ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
-
-        {/* Playbooks gratuitos (vitrine comercial) */}
-        <PlaybooksHome />
-
-        {/* Lateral direita */}
-        <div className="flex flex-col gap-5">
-          <PassportWidget state={passport} />
-
-          {/* Insight card */}
-          <div
-            className="rounded-3xl p-5 relative overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
-          >
-            <div
-              className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
-              style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
-            />
-            <div className="text-xl mb-2">💡</div>
-            <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
-              Insight do seu arquétipo
-            </div>
-            <p className="text-xs text-white/72 leading-relaxed">
-              Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição do time.
-            </p>
-            <Link
-              href="/dashboard/reports"
-              className="mt-3 inline-flex items-center gap-1 text-xs text-white/80 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
-            >
-              Explorar compatibilidade →
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════════════
-          VITRINE: todas as ferramentas com copy persuasiva
-      ══════════════════════════════════════════════════════ */}
-      <FerramentasShowcase />
 
       {/* ══════════════════════════════════════════════════════
           BOTTOM: Activity + Candidatos
