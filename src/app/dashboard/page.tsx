@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { StatCard } from '@/components/ui/design-system'
 import DiscoveryMapCard from './_components/DiscoveryMapCard'
+import FerramentasShowcase from './_components/FerramentasShowcase'
 import RecentActivityCard from './_components/RecentActivityCard'
 import PassportWidget from '@/components/passport/PassportWidget'
 import { getPassportState, WELCOME_BONUS_AMOUNT, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
@@ -286,6 +287,11 @@ export default async function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* ══════════════════════════════════════════════════════
+          VITRINE: todas as ferramentas com copy persuasiva
+      ══════════════════════════════════════════════════════ */}
+      <FerramentasShowcase />
 
       {/* ══════════════════════════════════════════════════════
           BOTTOM: Activity + Candidatos

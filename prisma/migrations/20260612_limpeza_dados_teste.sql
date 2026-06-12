@@ -1,20 +1,23 @@
 -- ============================================================
--- 20260612_limpeza_dados_teste.sql
--- LIMPEZA GERAL (pedido do Kênio em 12/jun/2026):
--- apaga testes, avaliações, candidatos, equipes, NR-1 e
--- diagnósticos PME de TODAS as empresas.
--- PRESERVA: contas (Company), assinaturas, créditos, senhas.
--- ⚠ IRREVERSÍVEL. Rodar uma única vez:
+-- 20260612_limpeza_dados_teste.sql  (v2 — inclui empresas)
+-- LIMPEZA TOTAL (pedido do Kênio em 12/jun/2026):
+-- apaga testes, avaliações, candidatos, equipes, NR-1,
+-- diagnósticos PME e TODAS as empresas cadastradas,
+-- EXCETO a conta admin do Kênio (kenio.araujo@live.com),
+-- que mantém login, assinatura e créditos.
+-- ⚠ IRREVERSÍVEL. Pode rodar mais de uma vez sem erro:
 --   npx prisma db execute --file prisma/migrations/20260612_limpeza_dados_teste.sql --schema prisma/schema.prisma
 -- ============================================================
 
 BEGIN;
 
+-- ── 1. Dados de uso (todas as empresas, inclusive a admin) ──
+
 -- Avaliação de Liderança
 DELETE FROM "LiderResposta";
 DELETE FROM "LiderConvite";
 
--- Gestão de Equipes (cascateia membros, PDIs e check-ins)
+-- Gestão de Equipes
 DELETE FROM "TalentCheckIn";
 DELETE FROM "TalentPDI";
 DELETE FROM "TalentMember";
@@ -36,7 +39,7 @@ DELETE FROM "BundleReport";
 DELETE FROM "ReportUnlock";
 DELETE FROM "ScheduledOutreach";
 
--- Testes e respostas (filhos de Assessment sem cascade primeiro)
+-- Testes e respostas
 DELETE FROM "Report";
 DELETE FROM "Result";
 DELETE FROM "DiscAnswer";
@@ -48,10 +51,35 @@ DELETE FROM "Assessment";
 -- Candidatos
 DELETE FROM "Employee";
 
+-- ── 2. Empresas (todas, exceto a conta admin do Kênio) ──
+
+-- Financeiro/assinatura das empresas que serão removidas
+DELETE FROM "BonusGrant"
+ WHERE "creditBalanceId" IN (
+   SELECT cb."id" FROM "CreditBalance" cb
+   JOIN "Company" c ON c."id" = cb."companyId"
+   WHERE c."email" <> 'kenio.araujo@live.com');
+DELETE FROM "CreditTransaction"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+DELETE FROM "CreditPurchase"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+DELETE FROM "CreditBalance"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+DELETE FROM "Subscription"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+DELETE FROM "ProfileValidationCode"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+DELETE FROM "PasswordResetToken"
+ WHERE "companyId" IN (SELECT "id" FROM "Company" WHERE "email" <> 'kenio.araujo@live.com');
+
+-- As empresas em si
+DELETE FROM "Company" WHERE "email" <> 'kenio.araujo@live.com';
+
 COMMIT;
 
--- Conferência (deve retornar tudo zerado)
-SELECT 'Assessment' AS tabela, COUNT(*) FROM "Assessment"
+-- Conferência: deve sobrar apenas 1 empresa (a sua) e zero em todo o resto
+SELECT 'Company' AS tabela, COUNT(*) FROM "Company"
+UNION ALL SELECT 'Assessment', COUNT(*) FROM "Assessment"
 UNION ALL SELECT 'Employee', COUNT(*) FROM "Employee"
 UNION ALL SELECT 'TalentTeam', COUNT(*) FROM "TalentTeam"
 UNION ALL SELECT 'LiderResposta', COUNT(*) FROM "LiderResposta"
