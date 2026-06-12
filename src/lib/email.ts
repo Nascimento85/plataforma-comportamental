@@ -699,7 +699,7 @@ export async function sendAvaliacaoLiderEmail(opts: {
         </td></tr>
         <tr><td style="padding:28px 32px 8px;">
           <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">Olá, ${firstName}. Você foi convidado a avaliar a liderança de <strong style="color:#e9eef6;">${opts.liderNome}</strong> no time <strong style="color:#e9eef6;">${opts.teamNome}</strong>.</p>
-          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">São 13 perguntas rápidas, leva menos de 5 minutos.</p>
+          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">São 15 perguntas rápidas, leva cerca de 5 minutos.</p>
         </td></tr>
         <tr><td style="padding:0 32px 8px;">
           <div style="background:#1a2740;border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:16px 18px;">

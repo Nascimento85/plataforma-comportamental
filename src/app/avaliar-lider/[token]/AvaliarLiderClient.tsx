@@ -116,7 +116,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
               dia a dia. Não há respostas certas ou erradas, responda pelo que você de fato vive no time.
             </p>
             <ul className="space-y-3 text-[15px] font-medium" style={{ color: 'rgba(243,239,231,0.88)' }}>
-              <li>· São <strong className="text-white">13 perguntas</strong>, menos de 5 minutos.</li>
+              <li>· São <strong className="text-white">{PERGUNTAS_LIDER.length} perguntas</strong>, cerca de 5 minutos.</li>
               <li>· Suas respostas são gravadas <strong className="text-white">sem nenhum vínculo</strong> com seu nome ou email.</li>
               <li>· O líder vê apenas a <strong className="text-white">média agregada do time</strong>, e somente quando houver no mínimo 3 respostas.</li>
               <li>· Ninguém consegue saber o que você respondeu, nem o RH, nem a diretoria.</li>

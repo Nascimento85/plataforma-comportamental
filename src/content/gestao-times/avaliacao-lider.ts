@@ -1,6 +1,6 @@
 // ============================================================
 // Avaliacao de Lideranca (ascendente, anonima)
-// Os liderados avaliam o lider do time em 13 perguntas (Likert
+// Os liderados avaliam o lider do time em 15 perguntas (Likert
 // 1 a 5, escala de frequencia) distribuidas em 5 pilares.
 // Classificacao: REGULAR | BOM | MUITO BOM | OTIMO.
 // ============================================================
@@ -39,11 +39,13 @@ export const PERGUNTAS_LIDER: PerguntaLider[] = [
   // ── Pilar 1: Clareza e Direcionamento ──
   { id: 'P01', pilar: 'CLAREZA', texto: 'Quando recebo uma meta ou tarefa, entendo claramente o que é esperado, até quando e por quê.' },
   { id: 'P02', pilar: 'CLAREZA', texto: 'Quando as prioridades mudam, o líder comunica a mudança em tempo hábil, antes que eu descubra sozinho.' },
-  { id: 'P03', pilar: 'CLAREZA', texto: 'Sei como o meu trabalho será avaliado: os critérios de bem feito são explícitos, não adivinhação.' },
+  { id: 'P03', pilar: 'CLAREZA', texto: 'Tenho total clareza sobre quais critérios são utilizados para avaliar se o meu trabalho foi bem feito.' },
+  { id: 'P15', pilar: 'CLAREZA', texto: 'As metas e cobranças estabelecidas pelo líder são realistas e alcançáveis dentro da nossa jornada de trabalho.' },
   // ── Pilar 2: Respeito e Seguranca Psicologica ──
   { id: 'P04', pilar: 'RESPEITO', texto: 'O líder mantém tom de voz e postura respeitosos mesmo sob pressão ou diante de erros do time.' },
   { id: 'P05', pilar: 'RESPEITO', texto: 'Quando cometo um erro, a conversa foca em resolver e aprender, não em humilhar ou expor.' },
   { id: 'P06', pilar: 'RESPEITO', texto: 'Sinto segurança para discordar do líder ou trazer más notícias sem medo de retaliação.' },
+  { id: 'P14', pilar: 'RESPEITO', texto: 'O líder se comunica com o time de forma respeitosa e equilibrada, sem episódios de arrogância, rispidez ou grosseria.' },
   // ── Pilar 3: Reconhecimento e Validacao ──
   { id: 'P07', pilar: 'RECONHECIMENTO', texto: 'Quando faço uma boa entrega, o líder reconhece, em particular ou diante do time.' },
   { id: 'P08', pilar: 'RECONHECIMENTO', texto: 'Sinto que o líder enxerga meu esforço e progresso, e não apenas os resultados finais ou os erros.' },
@@ -57,7 +59,7 @@ export const PERGUNTAS_LIDER: PerguntaLider[] = [
 ]
 
 export const PERGUNTA_SCI = {
-  id: 'P14',
+  id: 'SCI',
   texto: 'Pense em um episódio recente em que a comunicação ou a atitude do líder poderia ter sido diferente. Descreva a Situação, o Comportamento dele e o Impacto na sua motivação. Não cite nomes nem detalhes que identifiquem você.',
   textoPositivo: 'Descreva um episódio recente em que a atitude do líder impactou positivamente sua motivação. Não cite nomes nem detalhes que identifiquem você.',
 }
