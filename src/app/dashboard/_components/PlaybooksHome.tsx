@@ -24,10 +24,10 @@ export default function PlaybooksHome() {
             Playbooks gratuitos
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink leading-tight mt-0.5">
-            Manuais que valem uma consultoria. <span className="text-soul-terracota italic font-normal">De graça.</span>
+            Manuais que valem uma consultoria. <span className="text-soul-terracota italic font-normal">100% gratuitos.</span>
           </h2>
           <p className="text-[14px] text-soul-ink/78 font-medium mt-1 max-w-xl">
-            Métodos práticos de contratação, liderança e gestão escritos pra dono de empresa. Leia em 15 minutos, aplique amanhã cedo.
+            Métodos práticos de contratação, liderança e gestão, desenhados para quem é dono de empresa. Leia em 15 minutos, aplique amanhã cedo.
           </p>
         </div>
         <Link href="/dashboard/downloads"

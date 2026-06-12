@@ -451,7 +451,7 @@ function SidebarContent({
 // AppShell principal
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function AppShell({ children, session, maxWidth = '1180px' }: AppShellProps) {
+export default function AppShell({ children, session, maxWidth = '1440px' }: AppShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   // Fecha ao redimensionar para desktop

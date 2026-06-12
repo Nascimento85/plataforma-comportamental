@@ -194,9 +194,14 @@ export default async function DashboardPage() {
               {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
-              <Link href="/dashboard/candidates"
+              <Link href="/dashboard/behavioral"
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
                     style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
+                ▶ Iniciar teste
+              </Link>
+              <Link href="/dashboard/candidates"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Convidar candidato
               </Link>
               <Link href="/dashboard/compliance/nr1"
