@@ -85,7 +85,7 @@ export const CLASSIFICACOES_LIDER: FaixaClassificacao[] = [
 ]
 
 export interface FlagLider {
-  tipo: 'PILAR_CRITICO' | 'PERCEPCAO_DIVIDIDA'
+  tipo: 'PILAR_CRITICO' | 'PERCEPCAO_DIVIDIDA' | 'INTEGRIDADE'
   pilar?: PilarLiderKey
   perguntaId?: string
   valor: number

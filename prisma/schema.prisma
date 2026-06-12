@@ -672,6 +672,9 @@ model LiderResposta {
   respostas String   @db.Text  // JSON {perguntaId: 1..5}
   scores    String   @db.Text  // JSON {scoreFinal, pilares}
   sciTexto  String?  @db.Text  // relato SCI anonimo (Situacao, Comportamento, Impacto)
+  // HMAC irreversivel de IP+UserAgent: detecta respostas repetidas do
+  // mesmo dispositivo (antifraude) sem identificar o respondente
+  deviceHash String?
   createdAt DateTime @default(now())
   // ATENCAO: sem FK para LiderConvite/TalentMember — anonimato blindado
 

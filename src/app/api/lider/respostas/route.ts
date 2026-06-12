@@ -6,6 +6,7 @@
 // ============================================================
 
 import { NextRequest, NextResponse } from 'next/server'
+import { createHmac } from 'crypto'
 import { prisma } from '@/lib/prisma'
 import { calcRespostaLider } from '@/content/gestao-times/avaliacao-lider'
 
@@ -50,6 +51,14 @@ export async function POST(req: NextRequest) {
     }, { status: 400 })
   }
 
+  // Impressao digital do dispositivo: HMAC irreversivel de IP+UserAgent.
+  // Nao ha caminho de volta para a pessoa; serve apenas para detectar
+  // varias respostas do mesmo dispositivo no mesmo time (antifraude).
+  const ip = (req.headers.get('x-forwarded-for') ?? '').split(',')[0].trim() || 'sem-ip'
+  const ua = req.headers.get('user-agent') ?? 'sem-ua'
+  const segredo = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? 'psique-lider'
+  const deviceHash = createHmac('sha256', segredo).update(`${ip}|${ua}`).digest('hex').slice(0, 32)
+
   await prisma.$transaction(async (tx) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const txAny = tx as any
@@ -61,6 +70,7 @@ export async function POST(req: NextRequest) {
         respostas: JSON.stringify(body.respostas),
         scores:    JSON.stringify(calc),
         sciTexto:  sci.length > 0 ? sci.slice(0, 2000) : null,
+        deviceHash,
       },
     })
     // Tabela A: marca o convite como respondido (controle separado)

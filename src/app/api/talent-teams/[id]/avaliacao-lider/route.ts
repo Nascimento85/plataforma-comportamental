@@ -35,7 +35,7 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
     }),
     prismaAny.liderResposta.findMany({
       where: { teamId: team.id },
-      select: { respostas: true, sciTexto: true },
+      select: { respostas: true, sciTexto: true, deviceHash: true },
     }),
   ])
 
@@ -50,6 +50,9 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
       .map((r: any) => { try { return JSON.parse(r.respostas) } catch { return null } })
       .filter(Boolean)
     resultado = agregarRespostasLider(parsed)
+    // Antifraude (deviceHash): a deteccao de respostas repetidas do mesmo
+    // dispositivo NAO aparece para a empresa — somente no painel /admin
+    // (decisao de produto: evitar acusacoes internas por falso positivo).
     // Relatos SCI em ordem embaralhada (nao cronologica), so com n minimo
     sciEntries = respostas
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

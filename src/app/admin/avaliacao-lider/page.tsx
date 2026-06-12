@@ -28,7 +28,7 @@ export default async function AdminAvaliacaoLiderPage() {
       company: { select: { name: true, companyName: true, email: true } },
       _count: { select: { liderConvites: true, liderRespostas: true } },
       liderConvites: { where: { status: 'COMPLETED' }, select: { id: true } },
-      liderRespostas: { select: { respostas: true } },
+      liderRespostas: { select: { respostas: true, deviceHash: true } },
     },
     orderBy: { updatedAt: 'desc' },
   })
@@ -40,7 +40,14 @@ export default async function AdminAvaliacaoLiderPage() {
       .map((r: any) => { try { return JSON.parse(r.respostas) } catch { return null } })
       .filter(Boolean)
     const agg = lista.length >= MIN_RESPOSTAS_LIDER ? agregarRespostasLider(lista) : null
+    const porDevice = new Map<string, number>()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const r of t.liderRespostas as any[]) {
+      if (r.deviceHash) porDevice.set(r.deviceHash, (porDevice.get(r.deviceHash) ?? 0) + 1)
+    }
+    const respostasRepetidas = [...porDevice.values()].filter((n) => n > 1).reduce((a, b) => a + b - 1, 0)
     return {
+      respostasRepetidas,
       id: t.id,
       empresa: t.company.companyName || t.company.name,
       email: t.company.email,
@@ -114,6 +121,11 @@ export default async function AdminAvaliacaoLiderPage() {
                   <td className="px-5 py-4">
                     <p className="text-[14px] font-bold text-soul-ink/88">{l.respostas} de {l.convites || '—'}</p>
                     <p className="text-[12px] text-soul-ink/65 font-semibold">respostas / convites</p>
+                    {l.respostasRepetidas > 0 && (
+                      <p className="text-[12px] font-bold mt-1" style={{ color: '#f0a892' }}>
+                        ⚠ {l.respostasRepetidas + 1} do mesmo dispositivo
+                      </p>
+                    )}
                   </td>
                   <td className="px-5 py-4 font-serif text-2xl font-semibold text-soul-ink">
                     {l.agg ? l.agg.scoreFinal.toFixed(1) : '—'}
