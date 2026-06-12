@@ -8,7 +8,7 @@ const JOURNEY_NODES = [
   { key: 'disc',          label: 'Perfil DISC',         emoji: '🎭', xp: 320 },
   { key: 'mbti',          label: 'Myers-Briggs',         emoji: '🧩', xp: 380 },
   { key: 'enneagram',     label: 'Eneagrama',            emoji: '⬡',  xp: 420 },
-  { key: 'love',          label: 'Relacionamentos',      emoji: '💞', xp: 280 },
+  { key: 'love',          label: 'Relações',             emoji: '💞', xp: 280 },
   { key: 'shadow',        label: 'Arquétipo Sombra',     emoji: '🌌', xp: 500 },
   { key: 'full',          label: 'Perfil Completo',      emoji: '🏆', xp: 800 },
 ] as const
@@ -35,7 +35,7 @@ function MapNode({
       ? { background: 'linear-gradient(135deg, #c4633a, #d4943a)', border: '2.5px solid transparent', boxShadow: '0 4px 14px rgba(196,99,58,0.28)' }
       : status === 'active'
       ? { background: '#fff', border: '2.5px solid #c4633a', boxShadow: '0 0 0 5px rgba(196,99,58,0.10), 0 4px 12px rgba(196,99,58,0.15)' }
-      : { background: '#e8e2d6', border: '2px solid transparent', opacity: 0.55 }
+      : { background: 'rgba(255,255,255,0.10)', border: '2px solid rgba(255,255,255,0.18)', opacity: 0.9 }
 
   const labelColor =
     status === 'done'   ? 'text-soul-terracota font-bold' :
@@ -60,7 +60,7 @@ function MapNode({
           {node.emoji}
         </div>
       </div>
-      <div className={`text-[13px] text-center mt-1.5 leading-tight max-w-[64px] ${labelColor}`}>
+      <div className={`text-[12px] text-center mt-1.5 leading-tight max-w-[78px] break-words ${labelColor}`}>
         {node.label}
       </div>
     </div>

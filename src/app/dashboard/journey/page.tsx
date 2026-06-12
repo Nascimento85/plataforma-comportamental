@@ -33,6 +33,8 @@ async function getJourney(companyId: string) {
   return { all: assessments, completed, inProgress, expired }
 }
 
+import DiscoveryMapCard from '../_components/DiscoveryMapCard'
+
 export default async function JourneyPage() {
   const session = await getSession()
   const { all, completed, inProgress, expired } = await getJourney(session!.id)
@@ -51,6 +53,9 @@ export default async function JourneyPage() {
           Acompanhe o progresso do mapeamento comportamental da sua empresa.
         </p>
       </div>
+
+      {/* Mapa da Descoberta (movido da página inicial) */}
+      <DiscoveryMapCard totalCompleted={completed.length} />
 
       {/* Resumo */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

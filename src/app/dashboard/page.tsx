@@ -3,8 +3,8 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { StatCard } from '@/components/ui/design-system'
-import DiscoveryMapCard from './_components/DiscoveryMapCard'
 import FerramentasShowcase from './_components/FerramentasShowcase'
+import PlaybooksHome from './_components/PlaybooksHome'
 import RecentActivityCard from './_components/RecentActivityCard'
 import PassportWidget from '@/components/passport/PassportWidget'
 import { getPassportState, WELCOME_BONUS_AMOUNT, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
@@ -251,12 +251,12 @@ export default async function DashboardPage() {
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          GRID: Discovery Map + Créditos/Insight
+          GRID: Playbooks gratuitos + Créditos/Insight
       ══════════════════════════════════════════════════════ */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-5">
 
-        {/* Discovery Map */}
-        <DiscoveryMapCard totalCompleted={totalCompleted} />
+        {/* Playbooks gratuitos (vitrine comercial) */}
+        <PlaybooksHome />
 
         {/* Lateral direita */}
         <div className="flex flex-col gap-5">

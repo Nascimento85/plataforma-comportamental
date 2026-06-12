@@ -20,7 +20,7 @@ export default function PassportWidget({ state }: Props) {
       className="rounded-3xl p-5"
       style={{
         background: isExpired
-          ? 'linear-gradient(135deg, #fbeae5, #faf2ee)'
+          ? 'linear-gradient(135deg, #2e1d18, #33211b)'
           : isLow
             ? 'linear-gradient(135deg, #2a201b, #30241e)'
             : 'linear-gradient(135deg, #26221a, #2c261c)',
@@ -30,7 +30,7 @@ export default function PassportWidget({ state }: Props) {
       <div className="flex items-center justify-between mb-1.5">
         <div
           className="text-[13px] font-sans font-bold tracking-[0.14em] uppercase"
-          style={{ color: '#8f3f1e' }}
+          style={{ color: '#e09070' }}
         >
           Passaporte de Autoconhecimento
         </div>
@@ -43,7 +43,7 @@ export default function PassportWidget({ state }: Props) {
 
       <div
         className="font-serif font-bold leading-none mb-1"
-        style={{ fontSize: '46px', color: isLow ? '#8f3f1e' : '#a8522e' }}
+        style={{ fontSize: '46px', color: isLow ? '#f0a892' : '#e09070' }}
       >
         {total}
       </div>
@@ -53,13 +53,13 @@ export default function PassportWidget({ state }: Props) {
 
       {/* Decomposição bônus × pago */}
       <div className="flex gap-2 mb-4 mt-4">
-        <div className="flex-1 bg-white/85 rounded-xl p-3 text-center border border-soul-mist/60">
+        <div className="flex-1 rounded-xl p-3 text-center" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)' }}>
           <div className="font-serif text-xl font-bold text-soul-ink">{bonus}</div>
           <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">
             🎟️ Bônus
           </div>
         </div>
-        <div className="flex-1 bg-white/85 rounded-xl p-3 text-center border border-soul-mist/60">
+        <div className="flex-1 rounded-xl p-3 text-center" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)' }}>
           <div className="font-serif text-xl font-bold text-soul-ink">{paid}</div>
           <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">
             💳 Pagos
@@ -87,7 +87,7 @@ export default function PassportWidget({ state }: Props) {
         style={
           isLow || isExpired
             ? { background: 'linear-gradient(135deg, #c4633a, #d4943a)' }
-            : { background: 'rgba(255,255,255,0.85)', color: '#e09070', border: '1px solid rgba(196,99,58,0.3)' }
+            : { background: 'rgba(208,118,78,0.14)', color: '#e09070', border: '1px solid rgba(208,118,78,0.4)' }
         }
       >
         🪙 {isLow || isExpired ? 'Recarregar passaporte' : 'Comprar créditos'}
