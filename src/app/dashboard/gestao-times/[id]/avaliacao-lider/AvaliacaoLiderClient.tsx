@@ -89,7 +89,14 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
       const r = await res.json()
       if (!res.ok) { setAviso(r.error ?? 'Falha ao enviar convites.'); return }
       const msgs: string[] = []
-      if (r.criados?.length) msgs.push(`${r.criados.length} convite(s) enviado(s).`)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ok = (r.criados ?? []).filter((c: any) => c.enviado)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const falhas = (r.criados ?? []).filter((c: any) => !c.enviado)
+      if (ok.length) msgs.push(`${ok.length} convite(s) enviado(s) por email.`)
+      if (falhas.length) msgs.push(`ATENÇÃO: ${falhas.length} convite(s) criados mas o EMAIL FALHOU` +
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ` (${falhas.map((c: any) => `${c.nome}: ${c.erro ?? 'erro desconhecido'}`).join(' · ')}). Use o botão Copiar link enquanto isso.`)
       if (r.semEmail?.length) msgs.push(`Sem email cadastrado: ${r.semEmail.join(', ')}.`)
       if (!r.criados?.length && !r.semEmail?.length) msgs.push('Todos os membros já foram convidados.')
       setAviso(msgs.join(' '))

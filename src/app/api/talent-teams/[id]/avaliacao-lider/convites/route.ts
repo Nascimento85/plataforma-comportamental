@@ -45,7 +45,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     : []
   const emailDoEmployee = new Map(employees.map((e) => [e.id, e.email]))
 
-  const criados: Array<{ nome: string; email: string; enviado: boolean }> = []
+  const criados: Array<{ nome: string; email: string; enviado: boolean; erro?: string }> = []
   const semEmail: string[] = []
 
   for (const m of alvo) {
@@ -68,14 +68,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
       },
     })
 
-    const { sent } = await sendAvaliacaoLiderEmail({
+    const { sent, error } = await sendAvaliacaoLiderEmail({
       toEmail:   email,
       nome:      m.nome,
       liderNome: team.liderNome,
       teamNome:  team.nome,
       token:     convite.token,
     })
-    criados.push({ nome: m.nome, email, enviado: sent })
+    criados.push({ nome: m.nome, email, enviado: sent, erro: sent ? undefined : String(error ?? 'desconhecido').slice(0, 300) })
   }
 
   return NextResponse.json({ criados, semEmail }, { status: 201 })
