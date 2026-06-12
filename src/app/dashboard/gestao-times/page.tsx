@@ -10,6 +10,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import NovoTimeButton from './NovoTimeButton'
+import { agregarRespostasLider, MIN_RESPOSTAS_LIDER } from '@/content/gestao-times/avaliacao-lider'
 
 export const metadata: Metadata = { title: 'Gestão de Times · Psique' }
 export const dynamic = 'force-dynamic'
@@ -47,8 +48,31 @@ export default async function GestaoTimesPage() {
   const teams = await prismaAny.talentTeam.findMany({
     where: { companyId: session.id },
     orderBy: { updatedAt: 'desc' },
-    include: { _count: { select: { members: true } } },
-  }) as Array<{ id: string; nome: string; descricao: string | null; updatedAt: Date; _count: { members: number } }>
+    include: { _count: { select: { members: true, liderRespostas: true } } },
+  }) as Array<{ id: string; nome: string; descricao: string | null; liderNome: string | null; updatedAt: Date; _count: { members: number; liderRespostas: number } }>
+
+  // Resultado agregado da Avaliação do Líder por time (libera com n minimo)
+  const respostasLider = await prismaAny.liderResposta.findMany({
+    where: { companyId: session.id },
+    select: { teamId: true, respostas: true },
+  }) as Array<{ teamId: string; respostas: string }>
+  const respostasPorTime = new Map<string, Array<Record<string, number>>>()
+  for (const r of respostasLider) {
+    try {
+      const parsed = JSON.parse(r.respostas)
+      if (!respostasPorTime.has(r.teamId)) respostasPorTime.set(r.teamId, [])
+      respostasPorTime.get(r.teamId)!.push(parsed)
+    } catch { /* ignora */ }
+  }
+  const liderResumo = new Map<string, { n: number; score: number; label: string; cor: string } | { n: number }>()
+  for (const t of teams) {
+    const lista = respostasPorTime.get(t.id) ?? []
+    if (lista.length >= MIN_RESPOSTAS_LIDER) {
+      const agg = agregarRespostasLider(lista)
+      if (agg) { liderResumo.set(t.id, { n: lista.length, score: agg.scoreFinal, label: agg.classificacao, cor: agg.cor }); continue }
+    }
+    liderResumo.set(t.id, { n: lista.length })
+  }
 
   return (
     <div className="space-y-7">
@@ -91,7 +115,30 @@ export default async function GestaoTimesPage() {
               {t.descricao && (
                 <p className="text-[14px] text-soul-ink/80 font-medium mt-1 line-clamp-2">{t.descricao}</p>
               )}
-              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-soul-mist/60">
+              {(() => {
+                const r = liderResumo.get(t.id)
+                return (
+                  <div className="flex items-center gap-2 mt-3 pt-3 border-t border-soul-mist/60 flex-wrap">
+                    <span className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/65">Líder</span>
+                    {!t.liderNome ? (
+                      <span className="text-[13.5px] font-semibold text-soul-ink/65">não definido</span>
+                    ) : r && 'label' in r ? (
+                      <>
+                        <span className="text-[13.5px] font-bold text-soul-ink/88">{t.liderNome}</span>
+                        <span className="text-[12.5px] font-bold px-2.5 py-0.5 rounded-full text-white" style={{ background: r.cor }}>
+                          {r.label} · {r.score.toFixed(1)}
+                        </span>
+                        <span className="text-[12.5px] font-semibold text-soul-ink/65">({r.n} respostas)</span>
+                      </>
+                    ) : (
+                      <span className="text-[13.5px] font-semibold text-soul-ink/72">
+                        {t.liderNome} · aguardando respostas ({r?.n ?? 0}/{MIN_RESPOSTAS_LIDER})
+                      </span>
+                    )}
+                  </div>
+                )
+              })()}
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-soul-mist/60">
                 <span className="text-[13.5px] font-bold text-soul-ink/88">
                   {t._count.members} {t._count.members === 1 ? 'colaborador' : 'colaboradores'}
                 </span>
