@@ -239,8 +239,7 @@ function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
       title: 'Empresa',
       items: [
         { href: '/dashboard/candidates',    label: 'Candidatos',      iconKey: 'candidates' },
-        { href: '/dashboard/teams',         label: 'Times',           iconKey: 'teams'      },
-        { href: '/dashboard/gestao-times',  label: 'Gestão de Times', iconKey: 'talentgrid' },
+        { href: '/dashboard/gestao-times',  label: 'Gestão de Equipes', iconKey: 'talentgrid' },
         { href: '/dashboard/reports',       label: 'Relatórios',      iconKey: 'reports'    },
       ],
     },

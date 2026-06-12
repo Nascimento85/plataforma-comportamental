@@ -698,13 +698,13 @@ export async function sendAvaliacaoLiderEmail(opts: {
           <h1 style="margin:0;color:#e9eef6;font-size:22px;">Sua percepção sobre a liderança importa</h1>
         </td></tr>
         <tr><td style="padding:28px 32px 8px;">
-          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">Olá, ${firstName}. Você foi convidado a avaliar a liderança de <strong style="color:#e9eef6;">${opts.liderNome}</strong> no time <strong style="color:#e9eef6;">${opts.teamNome}</strong>.</p>
+          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">Olá, ${firstName}. Você foi convidado a avaliar a liderança de <strong style="color:#e9eef6;">${opts.liderNome}</strong> na equipe <strong style="color:#e9eef6;">${opts.teamNome}</strong>.</p>
           <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">São 15 perguntas rápidas, leva cerca de 5 minutos.</p>
         </td></tr>
         <tr><td style="padding:0 32px 8px;">
           <div style="background:#1a2740;border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:16px 18px;">
             <p style="margin:0 0 6px;color:#d4af37;font-size:13px;font-weight:700;">🔒 100% anônimo, de verdade</p>
-            <p style="margin:0;color:#c4d2e6;font-size:13px;line-height:1.6;">Suas respostas são gravadas sem nenhum vínculo com seu nome ou email. O líder vê apenas o resultado agregado do time, e somente quando houver no mínimo 3 respostas. Ninguém consegue saber o que você respondeu.</p>
+            <p style="margin:0;color:#c4d2e6;font-size:13px;line-height:1.6;">Suas respostas são gravadas sem nenhum vínculo com seu nome ou email. O líder vê apenas o resultado agregado da equipe, e somente quando houver no mínimo 3 respostas. Ninguém consegue saber o que você respondeu.</p>
           </div>
         </td></tr>
         <tr><td style="padding:20px 32px 8px;" align="center">

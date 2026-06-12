@@ -1,5 +1,5 @@
 // ============================================================
-// Banco de conteúdo de Liderança (Gestão de Times)
+// Banco de conteúdo de Liderança (Gestão de Equipes)
 // Mapeia os 4 perfis DISC para a nomenclatura de liderança do Kênio
 // e cadastra o conteúdo do motor híbrido: dicas de tom, gargalos
 // típicos no grupo dos 70% e ações práticas de PDI por perfil.
@@ -97,7 +97,7 @@ export const PERFIS_LIDERANCA: Record<DiscKey, PerfilLideranca> = {
     emoji: '🔍',
     gargalos: [
       'Paralisia por análise e perfeccionismo que atrasa entregas',
-      'Isolamento do time',
+      'Isolamento da equipe',
       'Dificuldade em lidar com ambiguidade',
     ],
     acoesPdi: [
@@ -135,7 +135,7 @@ export const ZONAS: Record<ZonaKey, ZonaInfo> = {
     faixa: '20%',
     cor: '#d4b35e',
     corBg: 'rgba(201,168,76,0.16)',
-    descricao: 'As referências de alta performance do time. Superam metas e inspiram os demais.',
+    descricao: 'As referências de alta performance da equipe. Superam metas e inspiram os demais.',
     acaoEstrategica: 'Mapear o perfil de sucesso, blindar contra o mercado e transformar em mentores dos 70%.',
   },
   MID70: {

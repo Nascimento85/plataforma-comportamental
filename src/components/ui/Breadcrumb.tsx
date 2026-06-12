@@ -18,7 +18,7 @@ const SEGMENT_LABELS: Record<string, string> = {
   archetypes:       'Arquétipos',
   journey:          'Minha Jornada',
   candidates:       'Candidatos',
-  teams:            'Times',
+  teams:            'Equipes',
   reports:          'Relatórios',
   compliance:       'Compliance',
   nr1:              'NR-1 Psicossocial',

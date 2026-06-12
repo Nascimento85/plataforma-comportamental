@@ -174,7 +174,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
             Avaliação do Líder
           </h1>
           <p className="text-[15px] text-white/80 font-medium mt-1">
-            Time {teamNome} · avaliação ascendente 100% anônima
+            Equipe {teamNome} · avaliação ascendente 100% anônima
           </p>
         </div>
       </div>
@@ -184,7 +184,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
         <div>
           <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">Líder do setor</p>
           <p className="text-[14px] text-soul-ink/80 font-medium mt-0.5">
-            É este nome que aparece para o time no questionário e nos convites por email.
+            É este nome que aparece para a equipe no questionário e nos convites por email.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -206,7 +206,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           <button onClick={enviarConvites} disabled={enviando || !data?.liderNome}
                   className="flex-1 py-3 rounded-full text-[15px] font-bold disabled:opacity-40"
                   style={{ background: 'rgba(201,168,76,0.18)', color: '#e0c878', border: `1.5px solid rgba(201,168,76,0.5)` }}>
-            {enviando ? 'Enviando...' : 'Enviar convites para o time ✉'}
+            {enviando ? 'Enviando...' : 'Enviar convites para a equipe ✉'}
           </button>
         </div>
         <p className="text-[13.5px] text-soul-ink/72 font-medium">
@@ -221,11 +221,11 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
         )}
       </div>
 
-      {/* Membros do time: situacao de email e convite */}
+      {/* Membros da equipe: situacao de email e convite */}
       {data && data.membros.length > 0 && (
         <div className="soul-panel space-y-3">
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">Membros do time</p>
+            <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">Membros da equipe</p>
             <p className="text-[13.5px] text-soul-ink/72 font-medium mt-0.5">
               Cadastre o email de quem ainda não tem e dispare o convite individual por aqui.
             </p>
@@ -323,7 +323,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           <h2 className="font-serif font-semibold text-xl text-soul-ink">Aguardando respostas</h2>
           <p className="text-[15px] text-soul-ink/85 font-medium max-w-md mx-auto">
             O resultado só é liberado com no mínimo <strong>{data.minRespostas} respostas</strong>, para
-            proteger o anonimato do time. Até agora: <strong>{data.nRespostas}</strong>.
+            proteger o anonimato da equipe. Até agora: <strong>{data.nRespostas}</strong>.
           </p>
         </div>
       )}
@@ -396,10 +396,10 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
             <div className="soul-panel space-y-3">
               <div>
                 <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">
-                  O que o time relatou (anônimo)
+                  O que a equipe relatou (anônimo)
                 </p>
                 <p className="text-[13.5px] text-soul-ink/72 font-medium mt-0.5">
-                  Episódios reais descritos pelo time, em ordem embaralhada. Espelho comportamental: nota e evidência, juntas.
+                  Episódios reais descritos pela equipe, em ordem embaralhada. Espelho comportamental: nota e evidência, juntas.
                 </p>
               </div>
               {data.sciEntries.map((t, i) => (

@@ -78,7 +78,7 @@ export default async function AdminAvaliacaoLiderPage() {
       {/* KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Times com avaliação', valor: linhas.length },
+          { label: 'Equipes com avaliação', valor: linhas.length },
           { label: 'Respostas recebidas', valor: totalRespostas },
           { label: 'Resultados liberados', valor: liberados },
           { label: 'Líderes em zona crítica', valor: criticos, destaque: criticos > 0 },
@@ -150,7 +150,7 @@ export default async function AdminAvaliacaoLiderPage() {
       )}
 
       <p className="text-[13px] text-soul-ink/65 font-medium">
-        🔒 O score só é liberado com {MIN_RESPOSTAS_LIDER} ou mais respostas por time, para preservar o anonimato dos
+        🔒 O score só é liberado com {MIN_RESPOSTAS_LIDER} ou mais respostas por equipe, para preservar o anonimato dos
         respondentes. Os relatos SCI individuais não aparecem nesta visão, apenas na tela da empresa.
       </p>
     </div>

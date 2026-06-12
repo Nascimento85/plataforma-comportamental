@@ -87,7 +87,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
             Como é trabalhar com {liderNome}?
           </h1>
           <p className="text-[15px] font-semibold mt-2" style={{ color: 'rgba(243,239,231,0.75)' }}>
-            Time {teamNome} · {empresa}
+            Equipe {teamNome} · {empresa}
           </p>
         </div>
 
@@ -113,12 +113,12 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
             <h2 className="font-serif font-semibold text-2xl text-white">Antes de começar</h2>
             <p className="text-[16px] font-medium leading-relaxed" style={{ color: 'rgba(243,239,231,0.92)' }}>
               Você vai avaliar <strong className="text-white">comportamentos observáveis</strong> de {liderNome} no
-              dia a dia. Não há respostas certas ou erradas, responda pelo que você de fato vive no time.
+              dia a dia. Não há respostas certas ou erradas, responda pelo que você de fato vive na equipe.
             </p>
             <ul className="space-y-3 text-[15px] font-medium" style={{ color: 'rgba(243,239,231,0.88)' }}>
               <li>· São <strong className="text-white">{PERGUNTAS_LIDER.length} perguntas</strong>, cerca de 5 minutos.</li>
               <li>· Suas respostas são gravadas <strong className="text-white">sem nenhum vínculo</strong> com seu nome ou email.</li>
-              <li>· O líder vê apenas a <strong className="text-white">média agregada do time</strong>, e somente quando houver no mínimo 3 respostas.</li>
+              <li>· O líder vê apenas a <strong className="text-white">média agregada da equipe</strong>, e somente quando houver no mínimo 3 respostas.</li>
               <li>· Ninguém consegue saber o que você respondeu, nem o RH, nem a diretoria.</li>
             </ul>
             <button onClick={() => setEtapa('PERGUNTAS')}

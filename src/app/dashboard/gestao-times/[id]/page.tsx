@@ -1,5 +1,5 @@
 // ============================================================
-// /dashboard/gestao-times/[id] — Matriz de Talentos de um time
+// /dashboard/gestao-times/[id] — Matriz de Talentos de uma equipe
 // ============================================================
 
 import type { Metadata } from 'next'

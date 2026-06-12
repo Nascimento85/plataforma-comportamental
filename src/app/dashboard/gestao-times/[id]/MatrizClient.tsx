@@ -63,7 +63,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
              style={{ background: `radial-gradient(circle, ${GOLD}, transparent)`, transform: 'translate(30%,-30%)' }}/>
         <div className="relative z-10">
           <Link href="/dashboard/gestao-times" className="text-[13.5px] font-semibold text-white/75 hover:text-white/90 no-underline">
-            ← Voltar para times
+            ← Voltar para equipes
           </Link>
           <div className="flex items-start justify-between gap-4 flex-wrap mt-2">
             <div>
@@ -79,7 +79,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
               <Link href={`/dashboard/gestao-times/${teamId}/team-build`}
                     className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold no-underline"
                     style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
-                ◇ Team Build deste time →
+                ◇ Team Build desta equipe →
               </Link>
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
 
         {members.length === 0 ? (
           <p className="text-[15px] text-soul-ink/75 font-medium py-6 text-center">
-            Nenhum colaborador no time ainda. Clique em “Adicionar colaborador” para começar.
+            Nenhum colaborador na equipe ainda. Clique em “Adicionar colaborador” para começar.
           </p>
         ) : (
           <div className="space-y-2">
@@ -146,6 +146,50 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
             ))}
           </div>
         )}
+      </div>
+
+      {/* ── Entenda a avaliação: linguagem simples ── */}
+      <div className="soul-panel space-y-5">
+        <div>
+          <p className="text-[13px] font-bold uppercase tracking-widest mb-1" style={{ color: '#d4b35e' }}>
+            Entenda a avaliação
+          </p>
+          <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">
+            O que é a Matriz de Talentos e para que ela serve
+          </h2>
+          <p className="text-[14.5px] text-soul-ink/85 font-medium leading-relaxed mt-2 max-w-3xl">
+            A Matriz de Talentos é uma fotografia da sua equipe. Você responde um questionário curto sobre cada
+            colaborador e a plataforma posiciona cada pessoa no mapa acima. O objetivo não é rotular nem demitir:
+            é enxergar com clareza quem está indo muito bem, quem pode render mais com o apoio certo e quem
+            precisa de uma conversa de diagnóstico, para você investir seu tempo de gestão onde dá mais resultado.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { t: 'Performance', cor: '#e09070', d: 'O que a pessoa entrega. Metas atingidas, qualidade, prazo e autonomia. É o eixo horizontal do mapa: quanto mais à direita, mais a pessoa entrega.' },
+            { t: 'Fit', cor: '#8fa6da', d: 'Como a pessoa entrega. Postura, colaboração, alinhamento com a cultura e equilíbrio sob pressão. É o eixo vertical: quanto mais alto, melhor a convivência e o exemplo.' },
+            { t: 'Potencial', cor: '#d4b35e', d: 'O quanto a pessoa pode crescer além do cargo atual. Aprende rápido, pensa no todo e tem ambição saudável. Indica quem preparar para os próximos desafios.' },
+          ].map((i) => (
+            <div key={i.t} className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${i.cor}` }}>
+              <p className="text-[15px] font-bold mb-1" style={{ color: i.cor }}>{i.t}</p>
+              <p className="text-[13.5px] text-soul-ink/80 font-medium leading-relaxed">{i.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { t: 'Alta Performance (20%)', cor: '#d4b35e', d: 'As referências da equipe: entregam muito e do jeito certo. Ação: reconhecer, reter e transformar em mentores dos demais.' },
+            { t: 'Zona de Tração (70%)', cor: '#8fa6da', d: 'A maioria saudável: o coração da operação. São produtivos e confiáveis, com potencial a destravar. Ação: ajustar a função ao perfil e acelerar o desenvolvimento.' },
+            { t: 'Zona de Diagnóstico (10%)', cor: '#d99a91', d: 'Sinal de alerta, não sentença. Algo está desalinhado: função, perfil, momento ou liderança. Ação: investigar a causa antes de qualquer decisão.' },
+          ].map((i) => (
+            <div key={i.t} className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${i.cor}` }}>
+              <p className="text-[15px] font-bold mb-1" style={{ color: i.cor }}>{i.t}</p>
+              <p className="text-[13.5px] text-soul-ink/80 font-medium leading-relaxed">{i.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {addOpen && (
@@ -318,8 +362,8 @@ function MemberRow({
             Devolutiva
           </Link>
         )}
-        <button onClick={() => { if (confirm(`Remover ${m.nome} do time?`)) onRemove(m.id) }}
-                aria-label="Remover" title="Remover do time"
+        <button onClick={() => { if (confirm(`Remover ${m.nome} da equipe?`)) onRemove(m.id) }}
+                aria-label="Remover" title="Remover da equipe"
                 className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-400 hover:bg-rose-500/10 text-lg leading-none">×</button>
       </div>
 
@@ -471,7 +515,7 @@ function AddMemberModal({
           <button type="submit" disabled={loading}
                   className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
-            {loading ? 'Adicionando…' : 'Adicionar ao time'}
+            {loading ? 'Adicionando…' : 'Adicionar aa equipe'}
           </button>
         </form>
       </div>

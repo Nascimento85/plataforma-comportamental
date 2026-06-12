@@ -49,13 +49,13 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
       if (lc?.enviado) {
         setFeedback('✓ Avaliação salva. Convite anônimo para avaliar o líder enviado por email ao colaborador.')
       } else if (lc?.motivo === 'SEM_LIDER') {
-        setFeedback('Avaliação salva. O convite de avaliação do líder NÃO foi enviado: defina o líder do time na tela Avaliação do Líder e use o botão Enviar convites.')
+        setFeedback('Avaliação salva. O convite de avaliação do líder NÃO foi enviado: defina o líder da equipe na tela Avaliação do Líder e use o botão Enviar convites.')
       } else if (lc?.motivo === 'SEM_EMAIL') {
         setFeedback('Avaliação salva. O convite de avaliação do líder NÃO foi enviado: este colaborador não tem email cadastrado. Cadastre o email na tela Avaliação do Líder.')
       } else if (lc?.motivo === 'JA_CONVIDADO') {
         setFeedback('Avaliação salva. Este colaborador já recebeu o convite de avaliação do líder anteriormente.')
       } else if (lc?.motivo === 'PROPRIO_LIDER') {
-        setFeedback('Avaliação salva. Convite não enviado: este membro é o próprio líder do time.')
+        setFeedback('Avaliação salva. Convite não enviado: este membro é o próprio líder da equipe.')
       } else if (lc?.motivo === 'ERRO') {
         setFeedback('Avaliação salva, mas houve falha ao enviar o convite de avaliação do líder. Tente pelo botão Enviar convites na tela Avaliação do Líder.')
       } else {

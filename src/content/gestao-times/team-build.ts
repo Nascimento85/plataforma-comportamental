@@ -31,7 +31,7 @@ export const MANUAL_POR_PERFIL: Record<DiscKey, ManualPerfil> = {
     resolverConflito:     'Traga a conversa de forma calorosa e valide o meu lado antes de apontar o problema. Documente os combinados ao final.',
   },
   S: {
-    funcionoMelhorQuando: 'Tenho previsibilidade, processos claros, tempo para me adaptar e um clima harmônico no time.',
+    funcionoMelhorQuando: 'Tenho previsibilidade, processos claros, tempo para me adaptar e um clima harmônico na equipe.',
     desmotivadoSe:        'Há mudanças bruscas, conflito aberto e pressão por decisão imediata, sem espaço para processar.',
     resolverConflito:     'Traga com calma e em privacidade, me dê tempo para pensar e evite tom agressivo ou cobranças abruptas.',
   },
@@ -51,7 +51,7 @@ export type EnergiaKey = 'EXECUCAO' | 'COMUNICACAO' | 'ESTABILIDADE' | 'ORGANIZA
 export const ENERGIA_INFO: Record<EnergiaKey, { rotulo: string; disc: DiscKey; cor: string; descricao: string }> = {
   EXECUCAO:     { rotulo: 'Execução',     disc: 'D', cor: '#c4633a', descricao: 'Tração, decisão e foco em resultado.' },
   COMUNICACAO:  { rotulo: 'Comunicação',  disc: 'I', cor: '#d4943a', descricao: 'Engajamento, relacionamento e energia social.' },
-  ESTABILIDADE: { rotulo: 'Estabilidade', disc: 'S', cor: '#7a9e7e', descricao: 'Constância, harmonia e suporte ao time.' },
+  ESTABILIDADE: { rotulo: 'Estabilidade', disc: 'S', cor: '#7a9e7e', descricao: 'Constância, harmonia e suporte aa equipe.' },
   ORGANIZACAO:  { rotulo: 'Organização',  disc: 'C', cor: '#3d4f7c', descricao: 'Processo, precisão e qualidade técnica.' },
 }
 
@@ -133,16 +133,16 @@ export function analisarTime(perfis: Array<string | null | undefined>): AnaliseT
       if (distribuicao[e].pct === 0) {
         const info = ENERGIA_INFO[e]
         const diag: Record<EnergiaKey, string> = {
-          EXECUCAO:     'Ninguém com energia de Execução dominante. O time pode ter dificuldade em tomar decisões rápidas e gerar tração.',
-          COMUNICACAO:  'Ninguém com energia de Comunicação dominante. O time pode ser pouco engajado externamente e com baixo brilho social.',
+          EXECUCAO:     'Ninguém com energia de Execução dominante. A equipe pode ter dificuldade em tomar decisões rápidas e gerar tração.',
+          COMUNICACAO:  'Ninguém com energia de Comunicação dominante. A equipe pode ser pouco engajado externamente e com baixo brilho social.',
           ESTABILIDADE: 'Ninguém com energia de Estabilidade dominante. Falta quem segure o clima e dê constância nos momentos de pressão.',
-          ORGANIZACAO:  'Ninguém com energia de Organização dominante. O time corre risco de desorganização, falhas de processo e baixa atenção a detalhes.',
+          ORGANIZACAO:  'Ninguém com energia de Organização dominante. A equipe corre risco de desorganização, falhas de processo e baixa atenção a detalhes.',
         }
         alertas.push({
           tipo: 'GAP', energia: e,
           titulo: `Gap de ${info.rotulo}`,
           diagnostico: diag[e],
-          recomendacao: `Considere desenvolver essa competência no time atual ou priorizar perfis com energia de ${info.rotulo} em futuras contratações.`,
+          recomendacao: `Considere desenvolver essa competência na equipe atual ou priorizar perfis com energia de ${info.rotulo} em futuras contratações.`,
         })
       }
     })
@@ -169,12 +169,12 @@ export interface FaseInfo {
   rotulo:    string
   subtitulo: string
   cor:       string
-  sinais:    string[]   // como saber que o time está nesta fase
+  sinais:    string[]   // como saber que a equipe está nesta fase
 }
 
 export const FASES_TUCKMAN: Record<FaseTuckman, FaseInfo> = {
   FORMING: {
-    key: 'FORMING', rotulo: 'Formação', subtitulo: 'O time está se conhecendo',
+    key: 'FORMING', rotulo: 'Formação', subtitulo: 'A equipe está se conhecendo',
     cor: '#7a9e7e',
     sinais: ['Time novo ou com membros recém chegados', 'As pessoas ainda são educadas e evitam conflito', 'Falta clareza sobre papéis e formas de trabalhar'],
   },
@@ -184,12 +184,12 @@ export const FASES_TUCKMAN: Record<FaseTuckman, FaseInfo> = {
     sinais: ['Discussões frequentes e ruídos de comunicação', 'Disputa por protagonismo ou resistência a regras', 'Clima tenso e queda de produtividade'],
   },
   NORMING: {
-    key: 'NORMING', rotulo: 'Normalização', subtitulo: 'O time está achando o ritmo',
+    key: 'NORMING', rotulo: 'Normalização', subtitulo: 'A equipe está achando o ritmo',
     cor: '#3d4f7c',
     sinais: ['As regras de convivência já estão se firmando', 'A colaboração começa a fluir melhor', 'Os papéis ficam mais claros, mas ainda precisam de ajuste fino'],
   },
   PERFORMING: {
-    key: 'PERFORMING', rotulo: 'Alta Performance', subtitulo: 'O time anda sozinho',
+    key: 'PERFORMING', rotulo: 'Alta Performance', subtitulo: 'A equipe anda sozinho',
     cor: '#c9a84c',
     sinais: ['Confiança alta e autonomia entre os membros', 'Conflitos viram debates produtivos', 'Foco total em resultado, com clima saudável'],
   },
@@ -208,27 +208,27 @@ export const DINAMICAS: Record<FaseTuckman, Dinamica> = {
   FORMING: {
     fase: 'FORMING',
     titulo: 'Rodada do Manual de Mim',
-    objetivo: 'Acelerar a conexão e a empatia gerando clareza imediata sobre como cada pessoa do time funciona.',
+    objetivo: 'Acelerar a conexão e a empatia gerando clareza imediata sobre como cada pessoa da equipe funciona.',
     duracao: '40 a 60 min',
     passos: [
       'Antes da reunião, gere o Manual "Como Trabalhar Comigo" de cada membro na plataforma e compartilhe.',
       'Na reunião, cada pessoa tem 5 minutos para apresentar seu manual: como funciona melhor, o que a desmotiva e como resolver conflito com ela.',
-      'Após cada apresentação, abra 2 minutos para o time fazer perguntas curtas de curiosidade, sem julgamento.',
+      'Após cada apresentação, abra 2 minutos para a equipe fazer perguntas curtas de curiosidade, sem julgamento.',
       'No fim, peça que cada um anote uma descoberta que teve sobre um colega e como vai usar isso no dia a dia.',
     ],
-    dicaOuro: 'Comece você, líder, apresentando o seu próprio manual primeiro. Isso dá segurança para o time se abrir.',
+    dicaOuro: 'Comece você, líder, apresentando o seu próprio manual primeiro. Isso dá segurança para a equipe se abrir.',
   },
   STORMING: {
     fase: 'STORMING',
     titulo: 'Acordo de Convivência',
-    objetivo: 'Transformar o atrito em regras claras, fazendo o time co criar os combinados inegociáveis de entrega, comunicação e respeito.',
+    objetivo: 'Transformar o atrito em regras claras, fazendo a equipe co criar os combinados inegociáveis de entrega, comunicação e respeito.',
     duracao: '60 a 90 min',
     passos: [
-      'Abra a conversa nomeando o momento com honestidade: o time está em uma fase de atritos, e isso é natural e tem solução.',
-      'Peça que cada um escreva, em silêncio, 3 comportamentos que atrapalham o time hoje (sem citar nomes).',
-      'Agrupe os temas no quadro e conduza o time a transformar cada dor em uma regra positiva de convivência.',
+      'Abra a conversa nomeando o momento com honestidade: a equipe está em uma fase de atritos, e isso é natural e tem solução.',
+      'Peça que cada um escreva, em silêncio, 3 comportamentos que atrapalham a equipe hoje (sem citar nomes).',
+      'Agrupe os temas no quadro e conduza a equipe a transformar cada dor em uma regra positiva de convivência.',
       'Feche com no máximo 5 regras inegociáveis de entrega, comunicação e respeito, validadas por todos.',
-      'Combine como o time vai cobrar essas regras entre si daqui pra frente.',
+      'Combine como a equipe vai cobrar essas regras entre si daqui pra frente.',
     ],
     dicaOuro: 'Não deixe a conversa virar tribunal. Foque sempre no comportamento e no impacto, nunca na pessoa.',
   },
@@ -238,8 +238,8 @@ export const DINAMICAS: Record<FaseTuckman, Dinamica> = {
     objetivo: 'Eliminar o atropelo de papéis definindo com clareza quem Executa, quem é Responsável, quem é Consultado e quem é Informado em cada projeto.',
     duracao: '45 a 60 min',
     passos: [
-      'Liste os 3 a 5 processos ou projetos mais importantes do time.',
-      'Para cada um, preencha junto com o time: quem Executa (R), quem responde pelo resultado (A), quem é Consultado (C) e quem é Informado (I).',
+      'Liste os 3 a 5 processos ou projetos mais importantes da equipe.',
+      'Para cada um, preencha junto com a equipe: quem Executa (R), quem responde pelo resultado (A), quem é Consultado (C) e quem é Informado (I).',
       'Use o perfil de cada um a favor: dê o protagonismo de execução aos Executores e o controle de qualidade aos Analíticos, por exemplo.',
       'Valide se ninguém ficou sobrecarregado e se não há zonas cinzentas de responsabilidade.',
     ],
@@ -248,12 +248,12 @@ export const DINAMICAS: Record<FaseTuckman, Dinamica> = {
   PERFORMING: {
     fase: 'PERFORMING',
     titulo: 'Retrospectiva de Forças',
-    objetivo: 'Manter o time no auge, reconhecendo o que está funcionando e elevando ainda mais a régua de confiança e autonomia.',
+    objetivo: 'Manter a equipe no auge, reconhecendo o que está funcionando e elevando ainda mais a régua de confiança e autonomia.',
     duracao: '30 a 45 min',
     passos: [
-      'Peça que cada um compartilhe uma conquista recente do time e o comportamento coletivo que a tornou possível.',
+      'Peça que cada um compartilhe uma conquista recente da equipe e o comportamento coletivo que a tornou possível.',
       'Faça uma rodada de reconhecimento: cada pessoa elogia uma força específica de um colega.',
-      'Identifiquem juntos 1 desafio novo e ambicioso que o time quer abraçar no próximo ciclo.',
+      'Identifiquem juntos 1 desafio novo e ambicioso que a equipe quer abraçar no próximo ciclo.',
       'Combinem um ritual leve de celebração para marcar as próximas vitórias.',
     ],
     dicaOuro: 'Times de alta performance se desmancham por falta de propósito novo. Sempre dê um próximo monte para escalar.',
@@ -268,7 +268,7 @@ export interface PerguntaDiagnostico {
 
 export const DIAGNOSTICO_TUCKMAN: PerguntaDiagnostico[] = [
   {
-    pergunta: 'Como está o clima de conflito no time hoje?',
+    pergunta: 'Como está o clima de conflito na equipe hoje?',
     opcoes: [
       { texto: 'Todos ainda muito educados, quase sem atrito', fase: 'FORMING' },
       { texto: 'Há atritos e discussões frequentes', fase: 'STORMING' },

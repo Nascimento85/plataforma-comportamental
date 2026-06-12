@@ -1,6 +1,6 @@
 // ============================================================
 // Avaliacao de Lideranca (ascendente, anonima)
-// Os liderados avaliam o lider do time em 15 perguntas (Likert
+// Os liderados avaliam o lider da equipe em 15 perguntas (Likert
 // 1 a 5, escala de frequencia) distribuidas em 5 pilares.
 // Classificacao: REGULAR | BOM | MUITO BOM | OTIMO.
 // ============================================================
@@ -42,12 +42,12 @@ export const PERGUNTAS_LIDER: PerguntaLider[] = [
   { id: 'P03', pilar: 'CLAREZA', texto: 'Tenho total clareza sobre quais critérios são utilizados para avaliar se o meu trabalho foi bem feito.' },
   { id: 'P15', pilar: 'CLAREZA', texto: 'As metas e cobranças estabelecidas pelo líder são realistas e alcançáveis dentro da nossa jornada de trabalho.' },
   // ── Pilar 2: Respeito e Seguranca Psicologica ──
-  { id: 'P04', pilar: 'RESPEITO', texto: 'O líder mantém tom de voz e postura respeitosos mesmo sob pressão ou diante de erros do time.' },
+  { id: 'P04', pilar: 'RESPEITO', texto: 'O líder mantém tom de voz e postura respeitosos mesmo sob pressão ou diante de erros da equipe.' },
   { id: 'P05', pilar: 'RESPEITO', texto: 'Quando cometo um erro, a conversa foca em resolver e aprender, não em humilhar ou expor.' },
   { id: 'P06', pilar: 'RESPEITO', texto: 'Sinto segurança para discordar do líder ou trazer más notícias sem medo de retaliação.' },
-  { id: 'P14', pilar: 'RESPEITO', texto: 'O líder se comunica com o time de forma respeitosa e equilibrada, sem episódios de arrogância, rispidez ou grosseria.' },
+  { id: 'P14', pilar: 'RESPEITO', texto: 'O líder se comunica com a equipe de forma respeitosa e equilibrada, sem episódios de arrogância, rispidez ou grosseria.' },
   // ── Pilar 3: Reconhecimento e Validacao ──
-  { id: 'P07', pilar: 'RECONHECIMENTO', texto: 'Quando faço uma boa entrega, o líder reconhece, em particular ou diante do time.' },
+  { id: 'P07', pilar: 'RECONHECIMENTO', texto: 'Quando faço uma boa entrega, o líder reconhece, em particular ou diante da equipe.' },
   { id: 'P08', pilar: 'RECONHECIMENTO', texto: 'Sinto que o líder enxerga meu esforço e progresso, e não apenas os resultados finais ou os erros.' },
   { id: 'P09', pilar: 'RECONHECIMENTO', texto: 'O líder demonstra interesse genuíno por mim como pessoa, não apenas como recurso produtivo.' },
   // ── Pilar 4: Suporte e Disponibilidade ──
@@ -79,8 +79,8 @@ export interface FaixaClassificacao {
 
 export const CLASSIFICACOES_LIDER: FaixaClassificacao[] = [
   { min: 1.0, max: 2.5, label: 'REGULAR',   cor: '#c0392b', diagnostico: 'Liderança de risco: alto potencial de turnover e desmotivação crônica. Requer intervenção comportamental imediata, com PDI de liderança obrigatório.' },
-  { min: 2.6, max: 3.5, label: 'BOM',       cor: '#c9a84c', diagnostico: 'Liderança transacional: entrega o básico, mas falha em validação emocional e clima. O time opera na média.' },
-  { min: 3.6, max: 4.5, label: 'MUITO BOM', cor: '#5a7d5a', diagnostico: 'Liderança assertiva: comunicação e suporte sólidos. O time confia no líder. Ajustar pontos cegos específicos por pilar.' },
+  { min: 2.6, max: 3.5, label: 'BOM',       cor: '#c9a84c', diagnostico: 'Liderança transacional: entrega o básico, mas falha em validação emocional e clima. A equipe opera na média.' },
+  { min: 3.6, max: 4.5, label: 'MUITO BOM', cor: '#5a7d5a', diagnostico: 'Liderança assertiva: comunicação e suporte sólidos. A equipe confia no líder. Ajustar pontos cegos específicos por pilar.' },
   { min: 4.6, max: 5.0, label: 'OTIMO',     cor: '#d4af37', diagnostico: 'Liderança inspiradora: equilibra cobrança de alta performance com reconhecimento. Candidato a mentor interno de novos líderes.' },
 ]
 
@@ -167,7 +167,7 @@ export function agregarRespostasLider(
           perguntaId: p.id,
           pilar: p.pilar,
           valor: trunc1(dp),
-          mensagem: `Percepção dividida no time sobre "${p.texto}". Parte avalia muito bem e parte muito mal, possível tratamento desigual.`,
+          mensagem: `Percepção dividida na equipe sobre "${p.texto}". Parte avalia muito bem e parte muito mal, possível tratamento desigual.`,
         })
       }
     }

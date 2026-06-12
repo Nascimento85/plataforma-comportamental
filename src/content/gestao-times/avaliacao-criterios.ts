@@ -1,5 +1,5 @@
 // ============================================================
-// Questionário de Avaliação 9-box (Gestão de Times, 20-70-10)
+// Questionário de Avaliação 9-box (Gestão de Equipes, 20-70-10)
 // O gestor pontua cada liderado em 3 dimensões:
 //   Performance (eixo X) · Fit comportamental (eixo Y) · Potencial
 // Escala 1 a 5. A plataforma converte em notas 0 a 10 e classifica.
@@ -38,7 +38,7 @@ export const CRITERIOS: CriterioAvaliacao[] = [
 
   // ── Fit comportamental e cultural (eixo Y) ──
   { id: 7,  dimensao: 'FIT', texto: 'Demonstra alinhamento com os valores e a cultura da empresa.' },
-  { id: 8,  dimensao: 'FIT', texto: 'Colabora e contribui para o resultado do time, não só o próprio.' },
+  { id: 8,  dimensao: 'FIT', texto: 'Colabora e contribui para o resultado da equipe, não só o próprio.' },
   { id: 9,  dimensao: 'FIT', texto: 'Comunica-se com clareza e mantém relacionamentos saudáveis.' },
   { id: 10, dimensao: 'FIT', texto: 'Recebe feedback com maturidade e se adapta a mudanças.' },
   { id: 11, dimensao: 'FIT', texto: 'Mantém equilíbrio emocional e postura profissional sob estresse.' },
@@ -113,7 +113,7 @@ export function lerResultado(zona: ZonaKey | null, potencial: number): LeituraRe
     return {
       tom: 'VALIDACAO',
       titulo: altoPotencial ? 'Referência e sucessão' : 'Referência de alta performance',
-      veredito: 'Esta pessoa é uma referência do time. O foco aqui é validar, reconhecer e blindar contra o mercado.',
+      veredito: 'Esta pessoa é uma referência da equipe. O foco aqui é validar, reconhecer e blindar contra o mercado.',
       diagnostico: altoPotencial
         ? 'Alta performance somada a alto potencial. É um forte candidato a sucessão e a posições de maior responsabilidade. O maior risco é deixar essa pessoa estagnar ou ser assediada pelo mercado.'
         : 'Alta performance consolidada. É um especialista de referência que sustenta a operação. Pode não querer virar gestor, e isso é legítimo. Valorize a profundidade técnica.',
@@ -135,7 +135,7 @@ export function lerResultado(zona: ZonaKey | null, potencial: number): LeituraRe
       veredito: 'O coração da operação, com potencial a destravar. O foco aqui é desenvolvimento direcionado por perfil.',
       diagnostico: altoPotencial
         ? 'Performance na média, mas potencial alto. Esta pessoa pode virar um dos 20% rapidamente se receber o desenvolvimento certo e o encaixe de função adequado. Priorize.'
-        : 'Performance e potencial dentro do esperado. É a base confiável do time. Pequenos ajustes comportamentais e de encaixe de função podem gerar saltos de entrega.',
+        : 'Performance e potencial dentro do esperado. É a base confiável da equipe. Pequenos ajustes comportamentais e de encaixe de função podem gerar saltos de entrega.',
       proximosPassos: [
         'Use o copiloto de devolutiva abaixo para preparar a conversa com a metodologia SCI.',
         'Construa um PDI com ações sob medida para o perfil comportamental da pessoa.',

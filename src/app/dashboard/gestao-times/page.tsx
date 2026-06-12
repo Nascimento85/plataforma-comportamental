@@ -1,6 +1,6 @@
 // ============================================================
-// /dashboard/gestao-times — landing do módulo Gestão de Times
-// Lista os times do gestor e permite criar novos. Gate premium.
+// /dashboard/gestao-times — landing do módulo Gestão de Equipes
+// Lista as equipes do gestor e permite criar novos. Gate premium.
 // ============================================================
 
 import type { Metadata } from 'next'
@@ -10,9 +10,10 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import NovoTimeButton from './NovoTimeButton'
+import ImportClient from './ImportClient'
 import { agregarRespostasLider, MIN_RESPOSTAS_LIDER } from '@/content/gestao-times/avaliacao-lider'
 
-export const metadata: Metadata = { title: 'Gestão de Times · Psique' }
+export const metadata: Metadata = { title: 'Gestão de Equipes · Psique' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,9 +29,9 @@ export default async function GestaoTimesPage() {
     return (
       <div className="max-w-2xl mx-auto py-10">
         <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-3">Recurso premium</p>
-        <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-4">Gestão de Times</h1>
+        <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-4">Gestão de Equipes</h1>
         <p className="text-[15.5px] text-soul-ink/90 font-medium leading-relaxed mb-4">
-          Saia da avaliação individual e gerencie a cultura do time inteiro. Monte a Matriz de Talentos (modelo 20-70-10
+          Saia da avaliação individual e gerencie a cultura da equipe inteiro. Monte a Matriz de Talentos (modelo 20-70-10
           moderno), conduza devolutivas estruturadas e construa planos de desenvolvimento por perfil comportamental.
         </p>
         <p className="text-[15.5px] text-soul-ink/88 font-medium leading-relaxed mb-6">
@@ -51,7 +52,7 @@ export default async function GestaoTimesPage() {
     include: { _count: { select: { members: true, liderRespostas: true } } },
   }) as Array<{ id: string; nome: string; descricao: string | null; liderNome: string | null; updatedAt: Date; _count: { members: number; liderRespostas: number } }>
 
-  // Resultado agregado da Avaliação do Líder por time (libera com n minimo)
+  // Resultado agregado da Avaliação do Líder por equipe (libera com n minimo)
   const respostasLider = await prismaAny.liderResposta.findMany({
     where: { companyId: session.id },
     select: { teamId: true, respostas: true },
@@ -80,17 +81,39 @@ export default async function GestaoTimesPage() {
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
           <p className="text-[13px] font-bold uppercase tracking-widest mb-2" style={{ color: '#c9a84c' }}>
-            Gestão de Times
+            Gestão de Equipes
           </p>
           <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
-            Matriz de Talentos <span className="text-soul-terracota italic font-normal">&amp;</span> Desenvolvimento
+            Gestão de <span className="text-soul-terracota italic font-normal">Equipes</span>
           </h1>
           <p className="text-[15px] text-soul-ink/85 mt-2 font-medium max-w-3xl">
-            Crie um time, cruze a performance de cada pessoa com o perfil comportamental e descubra quem são as
-            referências, quem está em tração e quem precisa de diagnóstico. Sem cota fria de demissão, foco em desenvolvimento.
+            Monte suas equipes, avalie cada colaborador, descubra quem são as referências e deixe o time avaliar
+            a liderança de forma anônima. Tudo em um só lugar, sem cota fria de demissão, foco em desenvolvimento.
           </p>
         </div>
         <NovoTimeButton />
+      </div>
+
+      {/* Como funciona: passo a passo simples */}
+      <div className="soul-panel">
+        <p className="text-[13px] font-bold uppercase tracking-widest mb-4" style={{ color: '#d4b35e' }}>
+          Como começar, em 4 passos
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { n: '1', t: 'Crie a equipe', d: 'Clique em Nova equipe e dê o nome do setor (ex: Comercial). Ou importe uma planilha logo abaixo, que as equipes são criadas sozinhas.' },
+            { n: '2', t: 'Cadastre os colaboradores', d: 'Importe a planilha com nome, email, cargo e setor, ou adicione um a um dentro da equipe. O email é importante: é por ele que a pessoa recebe os convites.' },
+            { n: '3', t: 'Defina o líder', d: 'Dentro da equipe, abra Avaliação do Líder e informe quem é o líder do setor. É ele que a equipe vai avaliar de forma anônima.' },
+            { n: '4', t: 'Avalie e acompanhe', d: 'Avalie cada colaborador no botão Avaliar. Ao concluir, o colaborador recebe automaticamente o convite por email para avaliar o líder.' },
+          ].map((p) => (
+            <div key={p.n} className="rounded-2xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <span className="inline-flex w-8 h-8 rounded-full items-center justify-center text-[15px] font-bold mb-2"
+                    style={{ background: 'rgba(212,179,94,0.16)', color: '#d4b35e' }}>{p.n}</span>
+              <p className="text-[14.5px] font-bold text-soul-ink leading-tight mb-1">{p.t}</p>
+              <p className="text-[13px] text-soul-ink/75 font-medium leading-relaxed">{p.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Lista de times */}
@@ -98,9 +121,9 @@ export default async function GestaoTimesPage() {
         <div className="rounded-3xl p-8 text-center"
              style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 60%, #1f2a3d 100%)' }}>
           <div className="text-5xl mb-4">◫</div>
-          <h2 className="font-serif text-2xl font-semibold text-white mb-2">Nenhum time criado ainda</h2>
+          <h2 className="font-serif text-2xl font-semibold text-white mb-2">Nenhuma equipe criada ainda</h2>
           <p className="text-[15.5px] text-white/85 font-medium max-w-lg mx-auto mb-6">
-            Comece criando seu primeiro time. Você adiciona os colaboradores (vinculando aos que já fizeram teste ou
+            Comece criando seu primeira equipe. Você adiciona os colaboradores (vinculando aos que já fizeram teste ou
             digitando avulsos), dá a nota de performance e a plataforma plota a curva de vitalidade.
           </p>
           <NovoTimeButton variant="onDark" />
@@ -148,6 +171,9 @@ export default async function GestaoTimesPage() {
           ))}
         </div>
       )}
+
+      {/* Importação de colaboradores (unificado da antiga página Times) */}
+      <ImportClient />
     </div>
   )
 }

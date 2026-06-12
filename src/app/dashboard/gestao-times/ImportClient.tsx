@@ -123,7 +123,7 @@ export default function ImportClient() {
             <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: GOLD }}>Importar colaboradores</p>
             <p className="text-[14px] text-soul-ink/80 font-medium mt-1 max-w-2xl">
               Cole do Excel/Sheets ou envie um CSV com as colunas <strong>nome; email; cargo; setor</strong>.
-              Cada setor vira um time na Gestão de Times, e quem tem email já entra como candidato
+              Cada setor vira uma equipe na Gestão de Equipes, e quem tem email já entra como candidato
               (pronto pra receber testes e a Avaliação do Líder).
             </p>
           </div>
