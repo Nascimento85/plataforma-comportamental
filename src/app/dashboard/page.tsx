@@ -195,17 +195,17 @@ export default async function DashboardPage() {
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
               <Link href="/dashboard/behavioral"
-                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
                     style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
                 ▶ Iniciar teste
               </Link>
               <Link href="/dashboard/candidates"
-                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Convidar candidato
               </Link>
               <Link href="/dashboard/compliance/nr1"
-                    className="inline-flex items-center justify-center gap-2 min-w-[210px] px-5 py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Mapear NR-1 do time
               </Link>
