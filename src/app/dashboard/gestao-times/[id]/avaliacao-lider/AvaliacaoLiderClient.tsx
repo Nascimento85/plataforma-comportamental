@@ -136,6 +136,20 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
     } finally { setSalvandoMembro('') }
   }
 
+  async function reenviar(c: Convite) {
+    setSalvandoMembro(c.id); setAviso('')
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}/avaliacao-lider/convites`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reenviarConviteId: c.id }),
+      })
+      const r = await res.json()
+      if (!res.ok) { setAviso(r.error ?? 'Falha ao reenviar.'); return }
+      setAviso(`Email reenviado para ${r.email}.`)
+    } finally { setSalvandoMembro('') }
+  }
+
   function copiarLink(c: Convite) {
     const url = `${window.location.origin}/avaliar-lider/${c.token}`
     navigator.clipboard.writeText(url)

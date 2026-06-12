@@ -31,8 +31,30 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return NextResponse.json({ error: 'Defina primeiro o nome do líder do time.' }, { status: 400 })
   }
 
-  let body: { memberIds?: string[] } = {}
+  let body: { memberIds?: string[]; reenviarConviteId?: string } = {}
   try { body = await req.json() } catch { /* corpo vazio = todos os membros */ }
+
+  // ── Reenvio de convite pendente (nao cria nada, so dispara o email de novo) ──
+  if (body.reenviarConviteId) {
+    const convite = await prismaAny.liderConvite.findUnique({ where: { id: body.reenviarConviteId } })
+    if (!convite || convite.teamId !== team.id) {
+      return NextResponse.json({ error: 'Convite não encontrado.' }, { status: 404 })
+    }
+    if (convite.status === 'COMPLETED') {
+      return NextResponse.json({ error: 'Este convite já foi respondido.' }, { status: 410 })
+    }
+    const { sent, error } = await sendAvaliacaoLiderEmail({
+      toEmail:   convite.email,
+      nome:      convite.nome,
+      liderNome: team.liderNome,
+      teamNome:  team.nome,
+      token:     convite.token,
+    })
+    if (!sent) {
+      return NextResponse.json({ error: `Falha no envio: ${String(error ?? 'desconhecida').slice(0, 300)}` }, { status: 502 })
+    }
+    return NextResponse.json({ reenviado: true, email: convite.email }, { status: 200 })
+  }
 
   // Resolve email de cada membro: campo proprio ou do Employee vinculado
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
