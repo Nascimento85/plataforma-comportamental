@@ -50,25 +50,25 @@ function timeAgo(date: Date): string {
 export default function RecentActivityCard({ assessments }: Props) {
   if (assessments.length === 0) {
     return (
-      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-4 flex items-center gap-2.5">
           <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
           Atividade recente
         </h2>
-        <div className="py-8 text-center">
+        <div className="text-center flex-1 flex flex-col justify-center py-6">
           <div className="text-3xl mb-3">🗺️</div>
-          <p className="text-[15px] text-soul-ink/85 font-semibold mb-4">
+          <p className="text-[15px] text-soul-ink/85 font-semibold">
             Nenhuma atividade ainda. Convide o primeiro candidato para começar.
           </p>
-          <Link
-            href="/dashboard/assessments"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full
-                       bg-soul-terracota text-white text-[15px] font-bold font-sans
-                       hover:bg-soul-terracota-dark transition-all duration-200"
-          >
-            + Criar primeira avaliação
-          </Link>
         </div>
+        <Link
+          href="/dashboard/assessments"
+          className="mt-auto w-full flex items-center justify-center gap-2 py-3 rounded-full
+                     bg-soul-terracota text-white text-[15px] font-bold font-sans
+                     hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px"
+        >
+          + Criar primeira avaliação
+        </Link>
       </div>
     )
   }
@@ -77,7 +77,7 @@ export default function RecentActivityCard({ assessments }: Props) {
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5">
 
       {/* Activity list */}
-      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
@@ -132,7 +132,7 @@ export default function RecentActivityCard({ assessments }: Props) {
       </div>
 
       {/* Candidates summary */}
-      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6">
+      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
             <span className="w-7 h-7 rounded-lg bg-soul-indigo/10 flex items-center justify-center text-sm">👥</span>

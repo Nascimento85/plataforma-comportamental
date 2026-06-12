@@ -272,13 +272,13 @@ export default async function DashboardPage() {
       {/* ══════════════════════════════════════════════════════
           BOTTOM: Atividade + Passaporte + Insight (horizontal)
       ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr_1fr] gap-5 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
         <RecentActivityCard assessments={recentAssessments} />
 
         <PassportWidget state={passport} />
 
         <div
-          className="rounded-3xl p-5 relative overflow-hidden"
+          className="rounded-3xl p-5 relative overflow-hidden h-full flex flex-col"
           style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
         >
           <div
@@ -289,12 +289,13 @@ export default async function DashboardPage() {
           <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
             Insight do seu arquétipo
           </div>
-          <p className="text-[13px] text-white/80 leading-relaxed">
+          <p className="text-[13.5px] text-white/85 leading-relaxed flex-1">
             Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição da equipe.
           </p>
           <Link
             href="/dashboard/reports"
-            className="mt-3 inline-flex items-center gap-1 text-[13px] text-white/85 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
+            className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full text-[15px] font-bold text-white no-underline transition-all hover:-translate-y-px"
+            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)' }}
           >
             Explorar compatibilidade →
           </Link>
