@@ -90,7 +90,7 @@ export default function LoveLanguagesPage() {
 
       {/* ── Header ── */}
       <div>
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
+        <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
               style={{ background: 'rgba(196,122,114,0.18)', color: '#f0a892' }}>
           Vida Pessoal · Casais · Família
         </span>
@@ -100,7 +100,7 @@ export default function LoveLanguagesPage() {
         <p className="font-display italic text-lg md:text-xl font-semibold mt-2" style={{ color: '#9b4d43' }}>
           &ldquo;Cada pessoa recebe amor de um jeito diferente — e ninguém te contou o seu.&rdquo;
         </p>
-        <p className="text-base md:text-lg text-soul-ink/85 mt-4 font-medium max-w-3xl leading-relaxed">
+        <p className="text-base md:text-lg text-soul-ink/90 mt-4 font-medium max-w-3xl leading-relaxed">
           Baseado no best-seller mundial de Gary Chapman. Este teste responde à pergunta mais frequente em qualquer relação:
           <strong> &ldquo;por que às vezes eu faço tudo pela pessoa que amo e ela não se sente amada?&rdquo;</strong>
           A resposta é simples — você está falando amor em uma língua que ela não entende.
@@ -122,7 +122,7 @@ export default function LoveLanguagesPage() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8">
           <div>
-            <span className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
+            <span className="inline-flex items-center gap-2 text-[13.5px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-4"
                   style={{ background: '#9b4d43', color: 'white' }}>
               ♥ Baseado em Gary Chapman
             </span>
@@ -137,21 +137,21 @@ export default function LoveLanguagesPage() {
               Esse teste revela qual é a sua, qual é a dela, e abre o canal de verdade.
             </p>
 
-            <p className="text-[15px] text-soul-ink/85 font-medium leading-relaxed mb-5">
+            <p className="text-[15px] text-soul-ink/90 font-medium leading-relaxed mb-5">
               Transforma relacionamentos reais: casais que se reconectam, filhos que se sentem vistos,
               amigos que finalmente entendem uns aos outros. Um teste que muda a forma como você se relaciona.
             </p>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-white/70 rounded-2xl p-4 border border-white">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/75">Para casais</p>
-                <p className="text-[14px] font-semibold text-soul-ink mt-1 leading-snug">
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/85">Para casais</p>
+                <p className="text-[15px] font-semibold text-soul-ink mt-1 leading-snug">
                   Reconectar afeto, encerrar mal-entendidos crônicos
                 </p>
               </div>
               <div className="bg-white/70 rounded-2xl p-4 border border-white">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/75">Para família</p>
-                <p className="text-[14px] font-semibold text-soul-ink mt-1 leading-snug">
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/85">Para família</p>
+                <p className="text-[15px] font-semibold text-soul-ink mt-1 leading-snug">
                   Saber como cada filho, irmão ou pai recebe amor
                 </p>
               </div>
@@ -160,7 +160,7 @@ export default function LoveLanguagesPage() {
 
           <div className="flex flex-col justify-center">
             <div className="rounded-2xl p-5 mb-5 bg-white/80 border border-white">
-              <p className="text-[12px] font-bold uppercase tracking-widest mb-3" style={{ color: '#9b4d43' }}>
+              <p className="text-[13.5px] font-bold uppercase tracking-widest mb-3" style={{ color: '#9b4d43' }}>
                 O que o relatório entrega
               </p>
               <div className="space-y-2.5">
@@ -171,9 +171,9 @@ export default function LoveLanguagesPage() {
                   'Guia prático de como amar cada linguagem',
                 ].map((b, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[11px] font-bold"
+                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[13px] font-bold"
                           style={{ background: '#c47a72' }}>♥</span>
-                    <p className="text-[14px] text-soul-ink font-semibold leading-snug">{b}</p>
+                    <p className="text-[15px] text-soul-ink font-semibold leading-snug">{b}</p>
                   </div>
                 ))}
               </div>
@@ -181,10 +181,10 @@ export default function LoveLanguagesPage() {
 
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/75">Investimento</p>
-                <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{TEST_PRICE.LOVE_LANGUAGES} <span className="text-lg font-medium text-soul-ink/75">créditos</span></p>
+                <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/85">Investimento</p>
+                <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{TEST_PRICE.LOVE_LANGUAGES} <span className="text-lg font-medium text-soul-ink/85">créditos</span></p>
               </div>
-              <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[12px] font-bold"
+              <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[13.5px] font-bold"
                     style={{ background: 'rgba(155,77,67,0.15)', color: '#9b4d43' }}>
                 ♥ Premium
               </span>
@@ -209,7 +209,7 @@ export default function LoveLanguagesPage() {
           <h2 className="font-serif font-semibold text-2xl md:text-3xl text-soul-ink leading-tight">
             As 5 Linguagens — como cada pessoa recebe amor
           </h2>
-          <p className="text-[15px] text-soul-ink/80 font-medium mt-1 max-w-3xl">
+          <p className="text-[15px] text-soul-ink/88 font-medium mt-1 max-w-3xl">
             Descubra aqui como cada linguagem se manifesta no dia a dia. Entenda a sua — e principalmente a de quem você ama.
           </p>
         </div>
@@ -231,25 +231,25 @@ export default function LoveLanguagesPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{l.name}</p>
-                  <p className="text-[13px] font-bold italic mt-0.5" style={{ color: l.color }}>
+                  <p className="text-[14px] font-bold italic mt-0.5" style={{ color: l.color }}>
                     {l.subtitle}
                   </p>
                 </div>
               </div>
 
-              <p className="text-[14px] text-soul-ink font-medium leading-relaxed relative">
+              <p className="text-[15px] text-soul-ink font-medium leading-relaxed relative">
                 {l.description}
               </p>
 
               <div className="relative">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Como amar no dia a dia</p>
-                <p className="text-[13px] text-soul-ink/90 font-medium leading-snug">{l.dayToDay}</p>
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Como amar no dia a dia</p>
+                <p className="text-[14px] text-soul-ink/90 font-medium leading-snug">{l.dayToDay}</p>
               </div>
 
               <div className="rounded-2xl p-3 relative"
                    style={{ background: `${l.color}12`, border: `1px solid ${l.color}35` }}>
-                <p className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: l.color }}>Exemplo</p>
-                <p className="text-[13px] text-soul-ink font-medium italic leading-snug">{l.example}</p>
+                <p className="text-[13px] font-bold uppercase tracking-widest mb-1" style={{ color: l.color }}>Exemplo</p>
+                <p className="text-[14px] text-soul-ink font-medium italic leading-snug">{l.example}</p>
               </div>
             </article>
           ))}

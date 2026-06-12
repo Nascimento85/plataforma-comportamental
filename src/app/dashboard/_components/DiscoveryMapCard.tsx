@@ -40,7 +40,7 @@ function MapNode({
   const labelColor =
     status === 'done'   ? 'text-soul-terracota font-bold' :
     status === 'active' ? 'text-soul-ink font-bold' :
-                          'text-soul-ink/65 font-semibold'
+                          'text-soul-ink/78 font-semibold'
 
   return (
     <div className="flex flex-col items-center" style={{ flexShrink: 0 }}>
@@ -51,7 +51,7 @@ function MapNode({
         >
           {status === 'done' && (
             <div
-              className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-soul-ink"
+              className="absolute -top-0.5 -right-0.5 w-5 h-5 rounded-full flex items-center justify-center text-[12px] font-bold text-soul-ink"
               style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)', border: '1.5px solid white' }}
             >
               ✓
@@ -60,7 +60,7 @@ function MapNode({
           {node.emoji}
         </div>
       </div>
-      <div className={`text-[11px] text-center mt-1.5 leading-tight max-w-[64px] ${labelColor}`}>
+      <div className={`text-[13px] text-center mt-1.5 leading-tight max-w-[64px] ${labelColor}`}>
         {node.label}
       </div>
     </div>
@@ -99,7 +99,7 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
         </h2>
         <Link
           href="/dashboard/assessments"
-          className="text-[13px] font-bold text-soul-terracota flex items-center gap-1 hover:gap-2 transition-all duration-200"
+          className="text-[14px] font-bold text-soul-terracota flex items-center gap-1 hover:gap-2 transition-all duration-200"
         >
           Ver jornada completa →
         </Link>
@@ -127,7 +127,7 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
 
       {/* Progress bar */}
       <div className="mb-4">
-        <div className="flex justify-between text-[12px] font-bold text-soul-ink mb-1.5">
+        <div className="flex justify-between text-[13.5px] font-bold text-soul-ink mb-1.5">
           <span>Progresso da jornada</span>
           <span className="text-soul-terracota font-bold">
             {clampedCompleted} de {JOURNEY_NODES.length} completos
@@ -155,13 +155,13 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
             <div className="text-[15px] font-bold text-soul-ink">
               Continue: {activeNode.label}
             </div>
-            <div className="text-[13px] text-soul-ink/80 mt-0.5 font-medium">
+            <div className="text-[14px] text-soul-ink/88 mt-0.5 font-medium">
               ~18 minutos · +{activeNode.xp} XP ao completar
             </div>
           </div>
           <Link
             href="/dashboard/journey"
-            className="flex-shrink-0 px-5 py-2.5 rounded-full bg-soul-terracota text-white text-[13px] font-bold font-sans
+            className="flex-shrink-0 px-5 py-2.5 rounded-full bg-soul-terracota text-white text-[14px] font-bold font-sans
                        hover:bg-soul-terracota-dark transition-all duration-200 hover:-translate-y-px whitespace-nowrap
                        shadow-[0_4px_12px_rgba(196,99,58,0.28)]"
           >
@@ -179,11 +179,11 @@ export default function DiscoveryMapCard({ totalCompleted }: Props) {
           <div className="text-2xl">🏆</div>
           <div>
             <div className="text-[15px] font-bold text-soul-ink">Jornada completa!</div>
-            <div className="text-[13px] text-soul-ink/75 font-medium mt-0.5">Seu Mapa Comportamental está pronto para explorar</div>
+            <div className="text-[14px] text-soul-ink/85 font-medium mt-0.5">Seu Mapa Comportamental está pronto para explorar</div>
           </div>
           <Link
             href="/dashboard/reports"
-            className="ml-auto flex-shrink-0 px-5 py-2.5 rounded-full text-[13px] font-bold font-sans
+            className="ml-auto flex-shrink-0 px-5 py-2.5 rounded-full text-[14px] font-bold font-sans
                        text-soul-sage border-2 border-soul-sage/45 hover:bg-soul-sage/10 transition-colors whitespace-nowrap"
           >
             Ver relatório →

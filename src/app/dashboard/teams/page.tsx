@@ -23,7 +23,7 @@ export default function TeamsPage() {
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
           Equipes <span className="text-soul-terracota italic font-normal">&amp;</span> Setores
         </h1>
-        <p className="text-base text-soul-ink/75 mt-2 font-medium max-w-3xl">
+        <p className="text-base text-soul-ink/85 mt-2 font-medium max-w-3xl">
           Organize seus candidatos por departamento e visualize o mapa comportamental de cada time.
           Descubra perfis complementares, identifique pontos cegos na composição e calibre a liderança.
         </p>
@@ -35,13 +35,13 @@ export default function TeamsPage() {
         <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.08]"
              style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}/>
         <div className="relative z-10 max-w-2xl">
-          <span className="inline-block text-[12px] font-bold uppercase tracking-widest text-soul-gold mb-3">
+          <span className="inline-block text-[13.5px] font-bold uppercase tracking-widest text-soul-gold mb-3">
             Recurso em liberação
           </span>
           <h2 className="font-serif text-2xl md:text-3xl font-semibold text-white leading-tight mb-3">
             Cadastre colaboradores por setor e monitore em um único painel.
           </h2>
-          <p className="text-[15px] text-white/80 font-medium leading-relaxed mb-5">
+          <p className="text-[15px] text-white/88 font-medium leading-relaxed mb-5">
             Em breve você poderá vincular cada candidato a uma equipe, importar colaboradores via CSV
             segmentado por departamento e gerar relatórios agregados por time — revelando a cultura
             comportamental real de cada setor da sua operação.
@@ -49,7 +49,7 @@ export default function TeamsPage() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/dashboard/candidates"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-semibold text-soul-ink
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-semibold text-soul-ink
                          bg-soul-gold hover:bg-soul-gold-light transition-all"
             >
               Ver candidatos cadastrados →
@@ -63,7 +63,7 @@ export default function TeamsPage() {
         <h2 className="font-serif text-2xl font-semibold text-soul-ink mb-1">
           Templates de departamento
         </h2>
-        <p className="text-[15px] text-soul-ink/70 font-medium mb-5">
+        <p className="text-[15px] text-soul-ink/80 font-medium mb-5">
           Estrutura sugerida para organizações de médio porte — você poderá criar setores personalizados.
         </p>
 
@@ -81,10 +81,10 @@ export default function TeamsPage() {
               </div>
               <div>
                 <p className="font-semibold text-[16px] text-soul-ink leading-tight">{dept.name}</p>
-                <p className="text-[13px] text-soul-ink/70 font-medium mt-1 leading-snug">{dept.desc}</p>
+                <p className="text-[14px] text-soul-ink/80 font-medium mt-1 leading-snug">{dept.desc}</p>
               </div>
               <div className="mt-auto pt-2 border-t border-soul-mist/60">
-                <span className="text-[12px] font-semibold text-soul-ink/55 uppercase tracking-wider">
+                <span className="text-[13.5px] font-semibold text-soul-ink/72 uppercase tracking-wider">
                   0 candidatos
                 </span>
               </div>
@@ -98,21 +98,21 @@ export default function TeamsPage() {
         <div className="soul-panel">
           <div className="text-3xl mb-2">🎯</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Diagnóstico por time</p>
-          <p className="text-[14px] text-soul-ink/75 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
             Descubra o perfil dominante de cada setor e pontos de atenção na cultura operacional.
           </p>
         </div>
         <div className="soul-panel">
           <div className="text-3xl mb-2">⚖️</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Composição equilibrada</p>
-          <p className="text-[14px] text-soul-ink/75 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
             Identifique times enviesados para um único estilo comportamental e calibre novas contratações.
           </p>
         </div>
         <div className="soul-panel">
           <div className="text-3xl mb-2">📈</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Evolução da cultura</p>
-          <p className="text-[14px] text-soul-ink/75 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
             Acompanhe como o DNA de cada equipe muda ao longo dos ciclos de avaliação.
           </p>
         </div>

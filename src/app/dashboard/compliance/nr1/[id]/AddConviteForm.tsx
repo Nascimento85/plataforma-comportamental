@@ -62,7 +62,7 @@ export default function AddConviteForm({
 
   if (setores.length === 0) {
     return (
-      <p className="text-[13px] text-soul-ink/70 font-medium italic mt-3">
+      <p className="text-[14px] text-soul-ink/80 font-medium italic mt-3">
         Cadastre um setor primeiro para poder adicionar convites.
       </p>
     )
@@ -73,7 +73,7 @@ export default function AddConviteForm({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mt-3 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-bold transition-colors"
+        className="mt-3 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[14px] font-bold transition-colors"
         style={{
           background: 'rgba(196,99,58,0.10)',
           color:      '#8a4a26',
@@ -92,7 +92,7 @@ export default function AddConviteForm({
   return (
     <form onSubmit={handleSubmit} className="mt-4 p-4 rounded-2xl space-y-3"
           style={{ background: 'rgba(196,99,58,0.04)', border: '1px solid rgba(196,99,58,0.15)' }}>
-      <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/70">
+      <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80">
         Novo convite
       </p>
       <div className="flex flex-wrap gap-2">
@@ -124,13 +124,13 @@ export default function AddConviteForm({
         </select>
       </div>
       {erro && (
-        <p className="text-[12px] font-semibold text-red-600">{erro}</p>
+        <p className="text-[13.5px] font-semibold text-red-600">{erro}</p>
       )}
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-bold transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[14px] font-bold transition-colors disabled:opacity-50"
           style={{
             background: 'linear-gradient(135deg, #c4633a, #d4943a)',
             color: '#ffffff',
@@ -142,7 +142,7 @@ export default function AddConviteForm({
           type="button"
           onClick={() => { setOpen(false); setErro(null); setNome(''); setEmail('') }}
           disabled={pending}
-          className="inline-flex items-center rounded-lg px-3 py-1.5 text-[13px] font-bold text-soul-ink/70 hover:text-soul-ink transition-colors"
+          className="inline-flex items-center rounded-lg px-3 py-1.5 text-[14px] font-bold text-soul-ink/80 hover:text-soul-ink transition-colors"
         >
           Cancelar
         </button>

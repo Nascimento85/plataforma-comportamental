@@ -75,39 +75,39 @@ function LeadershipCard({ lens, accountType }: { lens: LeadershipLens; accountTy
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{lens.name}</p>
-          <p className="text-[13px] font-semibold text-soul-ink/80 italic mt-0.5">{lens.tagline}</p>
+          <p className="text-[14px] font-semibold text-soul-ink/88 italic mt-0.5">{lens.tagline}</p>
         </div>
       </div>
 
       <div className="relative">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Fatores avaliados</p>
-        <p className="text-[13px] font-semibold text-soul-ink">{lens.pillar}</p>
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Fatores avaliados</p>
+        <p className="text-[14px] font-semibold text-soul-ink">{lens.pillar}</p>
       </div>
 
-      <p className="text-[14px] text-soul-ink font-medium leading-relaxed relative">
+      <p className="text-[15px] text-soul-ink font-medium leading-relaxed relative">
         {lens.description}
       </p>
 
       <div className="relative">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Aplicação corporativa</p>
-        <p className="text-[13px] text-soul-ink/90 font-medium leading-snug">{lens.application}</p>
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Aplicação corporativa</p>
+        <p className="text-[14px] text-soul-ink/90 font-medium leading-snug">{lens.application}</p>
       </div>
 
       <div className="space-y-1.5 relative">
         {lens.bullets.map((b, i) => (
           <div key={i} className="flex items-start gap-2">
-            <span className="mt-1 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold"
+            <span className="mt-1 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[12px] font-bold"
                   style={{ background: lens.color }}>✓</span>
-            <p className="text-[13px] text-soul-ink font-semibold leading-snug">{b}</p>
+            <p className="text-[14px] text-soul-ink font-semibold leading-snug">{b}</p>
           </div>
         ))}
       </div>
 
       <div className="relative pt-3 mt-auto border-t border-soul-mist/60 space-y-3">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
+          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/72">Investimento</p>
           <p className="font-serif text-lg font-bold text-soul-ink leading-none">
-            {lens.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{lens.credits > 1 ? 's' : ''}</span>
+            {lens.credits} <span className="text-[13.5px] text-soul-ink/75 font-medium">crédito{lens.credits > 1 ? 's' : ''}</span>
           </p>
         </div>
         <div className="space-y-2">
@@ -140,14 +140,14 @@ export default async function LeadershipPage() {
     <div className="space-y-8">
       {/* Header */}
       <header className="space-y-3">
-        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-widest"
+        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-widest"
              style={{ background: 'rgba(61,79,124,0.10)', color: '#8fa6da' }}>
           🎯 Liderança
         </div>
         <h1 className="font-serif text-3xl md:text-4xl font-semibold text-soul-ink leading-tight">
           Testes de Liderança e Gestão
         </h1>
-        <p className="text-[15px] text-soul-ink/80 font-medium max-w-3xl">
+        <p className="text-[15px] text-soul-ink/88 font-medium max-w-3xl">
           Ferramentas voltadas para mapeamento de estilos de liderança, planos de sucessão e desenvolvimento de gestores. Cada teste cruza fatores científicos em arquétipos comerciais de alta clareza para o RH executivo.
         </p>
       </header>
@@ -169,7 +169,7 @@ export default async function LeadershipPage() {
           </div>
           <div>
             <p className="font-serif text-lg font-semibold text-soul-ink">Em breve, mais testes de liderança</p>
-            <p className="text-[13.5px] text-soul-ink/75 font-medium leading-snug mt-1">
+            <p className="text-[14.5px] text-soul-ink/85 font-medium leading-snug mt-1">
               Estamos preparando inventários complementares de gestão executiva, prontidão para promoção e diagnósticos 360 graus. Acompanhe esta área para novidades.
             </p>
           </div>

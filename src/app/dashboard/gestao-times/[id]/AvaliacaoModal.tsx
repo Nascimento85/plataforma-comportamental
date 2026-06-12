@@ -76,14 +76,14 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
         <div className="sticky top-0 z-10 bg-soul-parchment rounded-t-3xl px-6 md:px-7 pt-6 pb-4 border-b border-soul-mist/60">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota">Avaliação de desempenho</p>
+              <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota">Avaliação de desempenho</p>
               <h3 className="font-serif font-semibold text-2xl text-soul-ink leading-tight">{memberNome}</h3>
             </div>
-            <button onClick={onClose} aria-label="Fechar" className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/70 hover:bg-soul-mist/60 text-2xl leading-none flex-shrink-0">×</button>
+            <button onClick={onClose} aria-label="Fechar" className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:bg-soul-mist/60 text-2xl leading-none flex-shrink-0">×</button>
           </div>
           {/* Progresso */}
           <div className="mt-3">
-            <div className="flex justify-between text-[12px] font-semibold text-soul-ink/60 mb-1">
+            <div className="flex justify-between text-[13.5px] font-semibold text-soul-ink/75 mb-1">
               <span>{respondidas}/{CRITERIOS.length} critérios</span>
               <span>{progresso}%</span>
             </div>
@@ -103,28 +103,28 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
                   <span className="w-2.5 h-2.5 rounded-full" style={{ background: info.cor }} />
                   <p className="font-serif text-lg font-semibold text-soul-ink">{info.rotulo}</p>
                 </div>
-                <p className="text-[12px] text-soul-ink/55 font-medium mb-3 -mt-2 ml-4.5">{info.subtitulo}</p>
+                <p className="text-[13.5px] text-soul-ink/72 font-medium mb-3 -mt-2 ml-4.5">{info.subtitulo}</p>
                 <div className="space-y-3">
                   {criteriosPorDimensao(dim).map((c) => (
                     <div key={c.id} className="rounded-2xl p-3" style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.7)' }}>
-                      <p className="text-[13.5px] font-semibold text-soul-ink mb-2 leading-snug">{c.texto}</p>
+                      <p className="text-[14.5px] font-semibold text-soul-ink mb-2 leading-snug">{c.texto}</p>
                       <div className="flex gap-1.5">
                         {ESCALA_AVALIACAO.map((opt) => {
                           const sel = respostas[c.id] === opt.valor
                           return (
                             <button key={opt.valor} onClick={() => setResp(c.id, opt.valor)} title={opt.label}
-                                    className="flex-1 py-2 rounded-lg border-2 text-[13px] font-bold transition-all"
+                                    className="flex-1 py-2 rounded-lg border-2 text-[14px] font-bold transition-all"
                                     style={{
                                       borderColor: sel ? info.cor : 'rgba(58,61,69,1)',
                                       background: sel ? info.cor : 'white',
-                                      color: sel ? 'white' : 'rgba(240,236,227,0.6)',
+                                      color: sel ? 'white' : 'rgba(240,236,227,0.68)',
                                     }}>
                               {opt.valor}
                             </button>
                           )
                         })}
                       </div>
-                      <div className="flex justify-between text-[10px] text-soul-ink/40 font-medium mt-1 px-0.5">
+                      <div className="flex justify-between text-[12px] text-soul-ink/65 font-medium mt-1 px-0.5">
                         <span>Muito abaixo</span><span>Referência</span>
                       </div>
                     </div>
@@ -137,9 +137,9 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
 
         {/* Footer sticky com prévia + salvar */}
         <div className="sticky bottom-0 bg-soul-parchment rounded-b-3xl px-6 md:px-7 py-4 border-t border-soul-mist/60">
-          {error && <p className="text-[12.5px] font-semibold mb-2" style={{ color: '#e09070' }}>{error}</p>}
+          {error && <p className="text-[13.5px] font-semibold mb-2" style={{ color: '#e09070' }}>{error}</p>}
           {feedback && (
-            <div className="rounded-2xl px-4 py-3 mb-3 text-[13px] font-semibold leading-relaxed"
+            <div className="rounded-2xl px-4 py-3 mb-3 text-[14px] font-semibold leading-relaxed"
                  style={{
                    background: feedback.startsWith('✓') ? 'rgba(90,125,90,0.12)' : 'rgba(201,168,76,0.12)',
                    border: `1px solid ${feedback.startsWith('✓') ? 'rgba(90,125,90,0.4)' : 'rgba(201,168,76,0.45)'}`,
@@ -150,13 +150,13 @@ export default function AvaliacaoModal({ memberId, memberNome, respostasIniciais
             </div>
           )}
           <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex gap-4 text-[12px] font-bold">
+            <div className="flex gap-4 text-[13.5px] font-bold">
               <span style={{ color: '#c4633a' }}>Perf {previa.notaPerformance.toFixed(1)}</span>
               <span style={{ color: '#8fa6da' }}>Fit {previa.fitComportamental.toFixed(1)}</span>
               <span style={{ color: '#c9a84c' }}>Potencial {previa.potencial.toFixed(1)}</span>
             </div>
             <button onClick={salvar} disabled={saving}
-                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
+                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
                     style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
               {saving ? 'Salvando…' : 'Salvar avaliação'}
             </button>

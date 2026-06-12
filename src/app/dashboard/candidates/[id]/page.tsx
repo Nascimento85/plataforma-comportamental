@@ -64,19 +64,19 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/candidates" className="text-[13px] font-semibold text-soul-terracota hover:underline">
+        <Link href="/dashboard/candidates" className="text-[14px] font-semibold text-soul-terracota hover:underline">
           ← Candidatos
         </Link>
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight mt-2">
           {employee.name}
         </h1>
-        <p className="text-[15px] text-soul-ink/70 font-medium mt-1">{employee.email}</p>
+        <p className="text-[15px] text-soul-ink/80 font-medium mt-1">{employee.email}</p>
       </div>
 
       <section className="soul-panel">
         <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-1">
+            <p className="text-[13px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-1">
               Devolutiva Integrada
             </p>
             <h2 className="font-serif font-semibold text-2xl text-soul-ink leading-tight">
@@ -87,7 +87,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
             {integrated && (
               <div className="flex items-center gap-3 mt-2 flex-wrap">
                 <span
-                  className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                  className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                   style={{
                     background: STATUS_BADGE[integrated.status]?.bg ?? 'rgba(0,0,0,0.08)',
                     color:      STATUS_BADGE[integrated.status]?.color ?? '#1c1a17',
@@ -95,10 +95,10 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
                 >
                   {STATUS_BADGE[integrated.status]?.label ?? integrated.status}
                 </span>
-                <span className="text-[13px] text-soul-ink/70 font-semibold">
+                <span className="text-[14px] text-soul-ink/80 font-semibold">
                   Profundidade: <strong>{DEPTH_LABEL[integrated.depth] ?? integrated.depth}</strong>
                 </span>
-                <span className="text-[13px] text-soul-ink/70 font-semibold">
+                <span className="text-[14px] text-soul-ink/80 font-semibold">
                   Baseado em <strong>{integrated.testCount}</strong> testes
                 </span>
               </div>
@@ -109,7 +109,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
         </div>
 
         {!integrated && (
-          <p className="text-[15px] text-soul-ink/80 font-medium">
+          <p className="text-[15px] text-soul-ink/88 font-medium">
             Esta pessoa ainda não tem uma devolutiva integrada.
             {completedCount < 2
               ? ` Precisa concluir pelo menos 2 testes (hoje tem ${completedCount}).`
@@ -118,7 +118,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
         )}
 
         {integrated?.status === 'GENERATING' && (
-          <p className="text-[15px] text-soul-ink/80 font-medium animate-pulse">
+          <p className="text-[15px] text-soul-ink/88 font-medium animate-pulse">
             Gerando a devolutiva integrada via IA…
           </p>
         )}
@@ -133,7 +133,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
           <div className="space-y-5">
             <div className="flex flex-wrap gap-2">
               {includedTests.map((t) => (
-                <span key={t} className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold"
+                <span key={t} className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-semibold"
                       style={{ background: 'rgba(196,99,58,0.10)', color: '#e09070' }}>
                   {TEST_LABELS[t] ?? t}
                 </span>
@@ -148,20 +148,20 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
       <section className="soul-panel">
         <h3 className="font-serif font-semibold text-xl text-soul-ink mb-3">Testes realizados</h3>
         {employee.assessments.length === 0 ? (
-          <p className="text-[14px] text-soul-ink/70 font-medium">Nenhum teste enviado ainda.</p>
+          <p className="text-[15px] text-soul-ink/80 font-medium">Nenhum teste enviado ainda.</p>
         ) : (
           <div className="space-y-2">
             {employee.assessments.map((a) => (
               <div key={a.id} className="flex items-center justify-between gap-3 py-2 border-b border-soul-mist/60 last:border-0">
                 <div>
-                  <p className="text-[14px] font-semibold text-soul-ink">{a.testType}</p>
-                  <p className="text-[12px] text-soul-ink/65 font-medium">
+                  <p className="text-[15px] font-semibold text-soul-ink">{a.testType}</p>
+                  <p className="text-[13.5px] text-soul-ink/78 font-medium">
                     {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
                   <span
-                    className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                    className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                     style={{
                       background: STATUS_BADGE[a.status]?.bg ?? 'rgba(0,0,0,0.08)',
                       color:      STATUS_BADGE[a.status]?.color ?? '#1c1a17',
@@ -170,7 +170,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
                     {STATUS_BADGE[a.status]?.label ?? a.status}
                   </span>
                   {a.status === 'COMPLETED' && (
-                    <Link href={`/dashboard/assessments/${a.id}`} className="text-[13px] font-bold text-soul-terracota hover:underline">
+                    <Link href={`/dashboard/assessments/${a.id}`} className="text-[14px] font-bold text-soul-terracota hover:underline">
                       Ver devolutiva →
                     </Link>
                   )}
@@ -238,10 +238,10 @@ function SectionBlock({ sectionKey, value }: { sectionKey: string; value: unknow
             {(obj.itens as Array<Record<string, unknown>>).map((item, i) => (
               <div key={i} className="rounded-2xl px-4 py-3" style={{ background: 'rgba(196,99,58,0.06)' }}>
                 {!!item.tema && (
-                  <p className="text-[14px] font-bold text-soul-ink mb-1">{String(item.tema)}</p>
+                  <p className="text-[15px] font-bold text-soul-ink mb-1">{String(item.tema)}</p>
                 )}
                 {!!item.descricao && (
-                  <p className="text-[14px] text-soul-ink/85 font-medium leading-relaxed">{String(item.descricao)}</p>
+                  <p className="text-[15px] text-soul-ink/90 font-medium leading-relaxed">{String(item.descricao)}</p>
                 )}
               </div>
             ))}
@@ -260,21 +260,21 @@ function SectionBlock({ sectionKey, value }: { sectionKey: string; value: unknow
             {(obj.acoes as Array<Record<string, unknown>>).map((acao, i) => (
               <li key={i} className="rounded-2xl px-4 py-3 flex gap-3 items-start"
                   style={{ background: 'rgba(122,158,126,0.10)' }}>
-                <span className="w-6 h-6 rounded-full text-white text-[12px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5"
+                <span className="w-6 h-6 rounded-full text-white text-[13.5px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5"
                       style={{ background: '#7a9e7e' }}>
                   {(acao.prioridade as number) ?? i + 1}
                 </span>
                 <div>
                   {!!acao.area && (
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 mb-0.5">
+                    <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 mb-0.5">
                       {String(acao.area)}
                     </p>
                   )}
-                  <p className="text-[14px] text-soul-ink font-semibold leading-snug">
+                  <p className="text-[15px] text-soul-ink font-semibold leading-snug">
                     {String(acao.acao ?? '')}
                   </p>
                   {!!acao.porque && (
-                    <p className="text-[13px] text-soul-ink/75 font-medium mt-1 leading-snug italic">
+                    <p className="text-[14px] text-soul-ink/85 font-medium mt-1 leading-snug italic">
                       {String(acao.porque)}
                     </p>
                   )}
@@ -297,10 +297,10 @@ function SectionBlock({ sectionKey, value }: { sectionKey: string; value: unknow
             if (typeof v === 'string') {
               return (
                 <div key={k}>
-                  <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">
+                  <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">
                     {prettify(k)}
                   </p>
-                  <p className="text-[14px] text-soul-ink/90 font-medium leading-relaxed whitespace-pre-line">{v}</p>
+                  <p className="text-[15px] text-soul-ink/90 font-medium leading-relaxed whitespace-pre-line">{v}</p>
                 </div>
               )
             }
@@ -308,11 +308,11 @@ function SectionBlock({ sectionKey, value }: { sectionKey: string; value: unknow
               const sub = v as Record<string, unknown>
               return (
                 <div key={k}>
-                  <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">
+                  <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">
                     {(sub.titulo as string) ?? prettify(k)}
                   </p>
                   {typeof sub.descricao === 'string' && (
-                    <p className="text-[14px] text-soul-ink/90 font-medium leading-relaxed whitespace-pre-line">{sub.descricao}</p>
+                    <p className="text-[15px] text-soul-ink/90 font-medium leading-relaxed whitespace-pre-line">{sub.descricao}</p>
                   )}
                 </div>
               )

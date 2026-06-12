@@ -111,7 +111,7 @@ function Card({ children, className = '' }: { children: React.ReactNode; classNa
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="text-[10px] font-sans font-bold text-soul-ink/35 uppercase tracking-[0.15em] mb-4">
+    <h3 className="text-[12px] font-sans font-bold text-soul-ink/62 uppercase tracking-[0.15em] mb-4">
       {children}
     </h3>
   )
@@ -122,8 +122,8 @@ function Bar({ label, pct, color, bold }: { label: string; pct: number; color: s
   return (
     <div className="mb-3">
       <div className="flex justify-between text-sm mb-1.5 font-sans">
-        <span className={bold ? 'font-semibold text-soul-ink' : 'text-soul-ink/60'}>{label}</span>
-        <span className="text-soul-ink/35">{w}%</span>
+        <span className={bold ? 'font-semibold text-soul-ink' : 'text-soul-ink/75'}>{label}</span>
+        <span className="text-soul-ink/62">{w}%</span>
       </div>
       <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.6)' }}>
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${w}%`, backgroundColor: color }} />
@@ -136,7 +136,7 @@ function BulletList({ items, color = '#7a9e7e' }: { items: string[]; color?: str
   return (
     <ul className="space-y-2.5">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2.5 text-sm text-soul-ink/65 leading-relaxed font-sans">
+        <li key={i} className="flex items-start gap-2.5 text-sm text-soul-ink/78 leading-relaxed font-sans">
           <span className="font-bold flex-shrink-0 mt-0.5" style={{ color }}>✓</span>
           {item}
         </li>
@@ -163,7 +163,7 @@ function InfoBox({ label, text, bg, labelColor, textColor }: {
 }) {
   return (
     <div className="rounded-2xl p-4" style={{ backgroundColor: bg, border: `1px solid ${labelColor}30` }}>
-      <p className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5 font-sans" style={{ color: labelColor }}>
+      <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-1.5 font-sans" style={{ color: labelColor }}>
         {label}
       </p>
       <p className="text-sm leading-relaxed font-sans" style={{ color: textColor }}>{text}</p>
@@ -1116,16 +1116,16 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
           <div className="bg-soul-parchment rounded-3xl overflow-hidden" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
             <div className="p-5 flex items-start justify-between flex-wrap gap-3">
               <div>
-                <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.35)' }}>Avaliação de</p>
+                <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Avaliação de</p>
                 <h1 className="font-serif font-semibold text-2xl text-soul-ink">{assessment.employee.name}</h1>
-                <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(240,236,227,0.45)' }}>{assessment.employee.email}</p>
+                <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(240,236,227,0.68)' }}>{assessment.employee.email}</p>
               </div>
               <div className="text-right">
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-sans font-medium"
                       style={{ background: 'rgba(196,99,58,0.1)', color: '#c4633a', border: '1px solid rgba(196,99,58,0.2)' }}>
                   {testLabel}
                 </span>
-                {finishedAt && <p className="text-[11px] font-sans mt-1" style={{ color: 'rgba(240,236,227,0.35)' }}>Concluído em {finishedAt}</p>}
+                {finishedAt && <p className="text-[13px] font-sans mt-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Concluído em {finishedAt}</p>}
               </div>
             </div>
           </div>
@@ -1152,8 +1152,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {/* Footer */}
         {!isPrint && (
           <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>Gerado pela <strong style={{ color: '#c4633a' }}>{APP_NAME}</strong></p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#c4633a' }}>{APP_NAME}</strong></p>
           </div>
         )}
       </main>

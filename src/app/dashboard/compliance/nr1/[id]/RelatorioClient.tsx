@@ -110,7 +110,7 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
         <div>
           <h2 className="font-serif font-semibold text-xl text-soul-ink">Relatório executivo</h2>
           {conteudo && (
-            <p className="text-[12px] text-soul-ink/70 font-medium mt-0.5">
+            <p className="text-[13.5px] text-soul-ink/80 font-medium mt-0.5">
               Gerado em {new Date(conteudo.geradoEm).toLocaleString('pt-BR')} ·
               {' '}{conteudo.totalRespondentes} respondentes ·
               {' '}{conteudo.setoresAvaliados} setor{conteudo.setoresAvaliados !== 1 ? 'es' : ''}
@@ -123,7 +123,7 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
               type="button"
               onClick={baixarPdfExecutivo}
               disabled={pdfLoading}
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-colors disabled:opacity-60"
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[14px] font-bold transition-colors disabled:opacity-60"
               style={{
                 background: 'rgba(196,99,58,0.10)',
                 color:      '#8a4a26',
@@ -140,7 +140,7 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
             </button>
           )}
           <button onClick={gerarRelatorio} disabled={loading || !algumSetorAtingiu}
-                  className="px-4 py-2 rounded-full text-[13px] font-bold text-white shadow-terra disabled:opacity-60"
+                  className="px-4 py-2 rounded-full text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
             {loading ? 'Gerando…' : conteudo ? '↻ Atualizar relatório' : '✦ Gerar relatório'}
           </button>
@@ -150,18 +150,18 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
       {/* Cabeçalho que aparece APENAS na impressão */}
       {conteudo && (
         <div className="nr1-print-only mb-6">
-          <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#8a4a26' }}>
+          <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#8a4a26' }}>
             Diagnóstico Psicossocial NR-1
           </p>
           <h1 className="font-serif font-semibold text-2xl text-soul-ink mt-1">
             Relatório Executivo
           </h1>
-          <p className="text-[12px] text-soul-ink/75 font-medium mt-1">
+          <p className="text-[13.5px] text-soul-ink/85 font-medium mt-1">
             Gerado em {new Date(conteudo.geradoEm).toLocaleString('pt-BR')} ·
             {' '}{conteudo.totalRespondentes} respondentes ·
             {' '}{conteudo.setoresAvaliados} setor{conteudo.setoresAvaliados !== 1 ? 'es' : ''}
           </p>
-          <p className="text-[10px] text-soul-ink/60 font-medium italic mt-2">
+          <p className="text-[12px] text-soul-ink/75 font-medium italic mt-2">
             Documento gerado pela plataforma Psique — Mapa Comportamental ·
             Instrumentos: Karasek JCQ + ERI Siegrist + COPSOQ II ·
             Compliance LGPD/CFP/NR-1 — coleta anônima com mínimo de 5 respondentes por setor.
@@ -170,13 +170,13 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
       )}
 
       {!algumSetorAtingiu && !conteudo && (
-        <p className="text-[14px] text-soul-ink/75 font-medium">
+        <p className="text-[15px] text-soul-ink/85 font-medium">
           Aguardando respondentes. O relatório só é liberado quando ao menos um setor atingir o mínimo de respondentes (proteção do anonimato).
         </p>
       )}
 
       {erro && (
-        <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold mt-3"
+        <div className="rounded-2xl px-4 py-3 text-[15px] font-semibold mt-3"
              style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
           {erro}
         </div>
@@ -190,7 +190,7 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div>
                   <h3 className="font-serif font-semibold text-lg text-soul-ink">{s.setorNome}</h3>
-                  <p className="text-[12px] text-soul-ink/65 font-medium">
+                  <p className="text-[13.5px] text-soul-ink/78 font-medium">
                     {s.totalRespondentes} respondentes
                     {s.perfilDiscDominante ? ` · DISC ${s.perfilDiscDominante}` : ''}
                   </p>
@@ -211,15 +211,15 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
 
               {/* Heatmap COPSOQ */}
               <div className="mb-4">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-2">COPSOQ por dimensão</p>
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-2">COPSOQ por dimensão</p>
                 <div className="space-y-1.5">
                   {s.copsoq.dimensoes.map(d => {
                     const cor = RISCO_COR[d.risco] ?? RISCO_COR.BAIXO
                     return (
                       <div key={d.dimensao} className="flex items-center gap-2">
-                        <span className="text-[12px] font-semibold text-soul-ink/85 flex-1">{DIM_LABEL[d.dimensao] ?? d.dimensao}</span>
-                        <span className="text-[12px] font-bold text-soul-ink/80 w-10 text-right">{d.mediaPontuacao}</span>
-                        <span className="inline-block rounded-full px-2 py-0.5 text-[10px] font-bold w-[70px] text-center"
+                        <span className="text-[13.5px] font-semibold text-soul-ink/90 flex-1">{DIM_LABEL[d.dimensao] ?? d.dimensao}</span>
+                        <span className="text-[13.5px] font-bold text-soul-ink/88 w-10 text-right">{d.mediaPontuacao}</span>
+                        <span className="inline-block rounded-full px-2 py-0.5 text-[12px] font-bold w-[70px] text-center"
                               style={{ background: cor.bg, color: cor.color }}>{cor.label}</span>
                       </div>
                     )
@@ -230,12 +230,12 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
               {/* Recomendações automáticas (snapshot rápido) */}
               {s.recomendacoes.length > 0 && (
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">Recomendações rápidas</p>
+                  <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-2">Recomendações rápidas</p>
                   <ol className="space-y-2 list-none">
                     {s.recomendacoes.map((r, i) => (
                       <li key={i} className="rounded-xl px-3 py-2 flex gap-2 items-start"
                           style={{ background: 'rgba(122,158,126,0.10)' }}>
-                        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold flex-shrink-0 mt-0.5"
+                        <span className="inline-flex items-center rounded-full px-2 py-0.5 text-[12px] font-bold flex-shrink-0 mt-0.5"
                               style={{
                                 background: r.prioridade === 'ALTA' ? 'rgba(196,99,58,0.25)' : 'rgba(212,148,58,0.22)',
                                 color: r.prioridade === 'ALTA' ? '#a8522e' : '#8a5c1e',
@@ -243,9 +243,9 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
                           {r.prioridade}
                         </span>
                         <div>
-                          <p className="text-[12px] font-bold text-soul-ink">{r.area}</p>
-                          <p className="text-[13px] text-soul-ink/90 font-medium">{r.acao}</p>
-                          <p className="text-[11px] text-soul-ink/65 font-medium italic mt-0.5">{r.porque}</p>
+                          <p className="text-[13.5px] font-bold text-soul-ink">{r.area}</p>
+                          <p className="text-[14px] text-soul-ink/90 font-medium">{r.acao}</p>
+                          <p className="text-[13px] text-soul-ink/78 font-medium italic mt-0.5">{r.porque}</p>
                         </div>
                       </li>
                     ))}
@@ -257,14 +257,14 @@ export default function RelatorioClient({ coletaId, algumSetorAtingiu, relatorio
               {s.narrativa && (
                 <div className="mt-5 rounded-2xl p-5 nr1-narrative"
                      style={{ background: 'rgba(255,255,255,0.65)', border: '1px solid rgba(196,99,58,0.18)' }}>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-3">
+                  <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-3">
                     Análise consultiva completa
                   </p>
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{s.narrativa}</ReactMarkdown>
                 </div>
               )}
               {s.narrativa === null && (
-                <p className="mt-5 text-[12px] text-soul-ink/60 italic">
+                <p className="mt-5 text-[13.5px] text-soul-ink/75 italic">
                   Narrativa consultiva indisponível para este setor. Tente Atualizar relatório.
                 </p>
               )}
@@ -280,10 +280,10 @@ function RiscoCard({ titulo, risco, detalhe, extra }: { titulo: string; risco: s
   const cor = RISCO_COR[risco] ?? RISCO_COR.BAIXO
   return (
     <div className="rounded-xl p-3" style={{ background: cor.bg, border: `1px solid ${cor.color}33` }}>
-      <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: cor.color }}>{titulo}</p>
+      <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: cor.color }}>{titulo}</p>
       <p className="text-[15px] font-bold mt-0.5" style={{ color: cor.color }}>{cor.label}</p>
-      <p className="text-[11px] text-soul-ink/75 font-semibold mt-1">{detalhe}</p>
-      {extra && <p className="text-[11px] text-soul-ink/65 font-medium">{extra}</p>}
+      <p className="text-[13px] text-soul-ink/85 font-semibold mt-1">{detalhe}</p>
+      {extra && <p className="text-[13px] text-soul-ink/78 font-medium">{extra}</p>}
     </div>
   )
 }

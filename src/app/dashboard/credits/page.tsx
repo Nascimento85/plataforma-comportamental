@@ -45,7 +45,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
         <h1 className="font-serif font-semibold text-3xl text-soul-ink">
           Passaporte de Autoconhecimento
         </h1>
-        <p className="text-sm text-soul-ink/45 mt-1 font-sans">
+        <p className="text-sm text-soul-ink/68 mt-1 font-sans">
           Seu passe de acesso aos testes. Bônus expiram em 7 dias — créditos pagos não.
         </p>
       </div>
@@ -104,10 +104,10 @@ export default async function CreditsPage({ searchParams }: PageProps) {
             <div key={t.label} className="rounded-xl p-3 border border-soul-mist/60 bg-soul-mist/10">
               <div className="text-2xl mb-1">{t.emoji}</div>
               <div className="text-soul-ink font-semibold leading-tight">{t.label}</div>
-              <div className="text-[12px] mt-1.5 font-bold" style={{ color: '#e09070' }}>
+              <div className="text-[13.5px] mt-1.5 font-bold" style={{ color: '#e09070' }}>
                 {t.cost} {t.cost === 1 ? 'crédito' : 'créditos'}
               </div>
-              {t.hint && <div className="text-[10px] text-soul-ink/55 mt-1 leading-snug">{t.hint}</div>}
+              {t.hint && <div className="text-[12px] text-soul-ink/72 mt-1 leading-snug">{t.hint}</div>}
             </div>
           ))}
         </div>
@@ -143,7 +143,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                 />
               )}
               {pack.highlight && (
-                <span className="self-start mb-3 text-[10px] font-bold px-2.5 py-1 rounded-full font-sans uppercase tracking-wide"
+                <span className="self-start mb-3 text-[12px] font-bold px-2.5 py-1 rounded-full font-sans uppercase tracking-wide"
                       style={{ background: 'rgba(196,99,58,0.08)', color: '#c4633a' }}>
                   Mais popular
                 </span>
@@ -152,9 +152,9 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                    style={{ fontSize: '40px', color: '#f0ece3' }}>
                 {pack.pack}
               </div>
-              <div className="text-sm text-soul-ink/40 font-sans mb-1">créditos</div>
+              <div className="text-sm text-soul-ink/65 font-sans mb-1">créditos</div>
               <div className="text-xl font-semibold text-soul-ink mb-0.5 font-sans">{pack.price}</div>
-              <div className="text-[11px] text-soul-ink/30 font-sans mb-5">{pack.per}</div>
+              <div className="text-[13px] text-soul-ink/60 font-sans mb-5">{pack.per}</div>
               <BuyCreditsButton pack={pack.pack} priceId={pack.priceId ?? ''} />
             </div>
           ))}
@@ -175,7 +175,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
         {transactions.length === 0 ? (
           <div className="px-6 py-12 text-center">
             <div className="text-3xl mb-3">📭</div>
-            <p className="text-sm text-soul-ink/40 font-sans">Nenhuma transação ainda.</p>
+            <p className="text-sm text-soul-ink/65 font-sans">Nenhuma transação ainda.</p>
           </div>
         ) : (
           <ul className="divide-y divide-soul-mist/30">
@@ -185,7 +185,7 @@ export default async function CreditsPage({ searchParams }: PageProps) {
                   <p className="text-sm font-medium text-soul-ink font-sans">
                     {t.type === 'PURCHASE' ? '🪙 Compra de créditos' : '📋 Uso de crédito — relatório'}
                   </p>
-                  <p className="text-[11px] text-soul-ink/35 mt-0.5 font-sans">
+                  <p className="text-[13px] text-soul-ink/62 mt-0.5 font-sans">
                     {new Date(t.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
                   </p>
                 </div>

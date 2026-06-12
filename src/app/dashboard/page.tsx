@@ -125,14 +125,14 @@ export default async function DashboardPage() {
             <em className="not-italic text-soul-terracota">{firstName}</em>{' '}
             <span className="text-2xl">✦</span>
           </h1>
-          <p className="text-[15px] text-soul-ink/75 mt-1.5 capitalize font-semibold">{today}</p>
+          <p className="text-[15px] text-soul-ink/85 mt-1.5 capitalize font-semibold">{today}</p>
         </div>
 
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <Link
             href="/dashboard/candidates"
             className="hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full
-                       border-2 border-soul-mist bg-soul-parchment text-[14px] text-soul-ink font-sans font-bold
+                       border-2 border-soul-mist bg-soul-parchment text-[15px] text-soul-ink font-sans font-bold
                        hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -176,7 +176,7 @@ export default async function DashboardPage() {
           <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
                style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)', transform: 'translate(20%, -30%)' }} />
           <div className="relative z-10 max-w-2xl">
-            <p className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
+            <p className="text-[13px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
                style={{ color: '#d4b85c' }}>
               Bem-vinda, {firstName}
             </p>
@@ -184,19 +184,19 @@ export default async function DashboardPage() {
               Sua plataforma comportamental{' '}
               <em className="not-italic" style={{ color: '#d4b85c' }}>em um só lugar.</em>
             </h2>
-            <p className="text-[15px] text-white/75 font-medium leading-relaxed mb-5 max-w-xl">
+            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5 max-w-xl">
               Avalie candidatos com 9 instrumentos científicos, mapeie riscos psicossociais do time
               com o módulo NR-1 e gere roteiros de entrevista personalizados.
               {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
               <Link href="/dashboard/candidates"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
                     style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
                 Convidar candidato
               </Link>
               <Link href="/dashboard/compliance/nr1"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-bold text-white no-underline transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Mapear NR-1 do time
               </Link>
@@ -274,12 +274,12 @@ export default async function DashboardPage() {
             <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
               Insight do seu arquétipo
             </div>
-            <p className="text-xs text-white/55 leading-relaxed">
+            <p className="text-xs text-white/72 leading-relaxed">
               Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição do time.
             </p>
             <Link
               href="/dashboard/reports"
-              className="mt-3 inline-flex items-center gap-1 text-xs text-white/70 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
+              className="mt-3 inline-flex items-center gap-1 text-xs text-white/80 border-b border-white/20 pb-px hover:border-white/50 transition-colors"
             >
               Explorar compatibilidade →
             </Link>

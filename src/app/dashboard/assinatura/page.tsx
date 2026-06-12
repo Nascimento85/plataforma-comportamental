@@ -37,13 +37,13 @@ export default async function AssinaturaPage() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-6">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-2">
           Conta · Assinatura
         </p>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-2">
           Sua assinatura
         </h1>
-        <p className="text-[14px] text-soul-ink/75 font-medium max-w-2xl">
+        <p className="text-[15px] text-soul-ink/85 font-medium max-w-2xl">
           Gerencie seu plano, cartão e cobrança. Empresas pagam mensal e usam a plataforma sem limites.
           Pessoas físicas continuam comprando créditos avulsos.
         </p>

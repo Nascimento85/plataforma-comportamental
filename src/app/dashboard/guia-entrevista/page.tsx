@@ -21,23 +21,23 @@ export default async function GuiaEntrevistaPage() {
   if (!session.isAdmin && !subscriptionOk) {
     return (
       <div className="max-w-2xl mx-auto py-10">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-3">
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-3">
           Recurso premium
         </p>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-4">
           Guia de Entrevista personalizado
         </h1>
-        <p className="text-[15.5px] text-soul-ink/85 font-medium leading-relaxed mb-4">
+        <p className="text-[15.5px] text-soul-ink/90 font-medium leading-relaxed mb-4">
           Gerador inteligente que monta o roteiro de entrevista perfeito para o seu cargo,
           baseado no framework de Perfis Disfuncionais e Triangulação de Evidências.
         </p>
-        <p className="text-[14.5px] text-soul-ink/80 font-medium leading-relaxed mb-6">
+        <p className="text-[15.5px] text-soul-ink/88 font-medium leading-relaxed mb-6">
           Disponível para empresas com assinatura ativa. Comece um trial de 7 dias gratuitos,
           sem cartão de crédito.
         </p>
         <Link
           href="/dashboard/assinatura"
-          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold text-white shadow-terra no-underline"
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-terra no-underline"
           style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
         >
           ✦ Começar trial de 7 dias
@@ -56,13 +56,13 @@ export default async function GuiaEntrevistaPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-6">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-2">
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-2">
           Recurso premium · Admin beta
         </p>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-2">
           Guia de Entrevista personalizado
         </h1>
-        <p className="text-[14px] text-soul-ink/75 font-medium max-w-2xl">
+        <p className="text-[15px] text-soul-ink/85 font-medium max-w-2xl">
           Gere um roteiro de entrevista sob medida para o seu cargo, com perguntas âncora
           do framework de Perfis Disfuncionais e instruções de Triangulação de Evidências.
         </p>

@@ -47,7 +47,7 @@ export default function UnlockPremiumButton({ reportId, priceBrl }: Props) {
 
       <div className="relative">
         <span
-          className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase mb-3"
+          className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[12px] font-bold tracking-[0.16em] uppercase mb-3"
           style={{ background: 'rgba(212,184,92,0.22)', color: '#e8c878' }}
         >
           ✦ Premium · PDI completo
@@ -55,12 +55,12 @@ export default function UnlockPremiumButton({ reportId, priceBrl }: Props) {
         <h3 className="font-serif text-xl sm:text-2xl font-bold mb-2 leading-tight">
           Quer o relatório completo com PDI, sombra e plano de 21 dias?
         </h3>
-        <p className="text-white/80 font-sans text-sm mb-5 leading-relaxed">
+        <p className="text-white/88 font-sans text-sm mb-5 leading-relaxed">
           Análise profunda do seu perfil, scripts de comunicação, comportamento sob pressão,
           medos inconscientes e roteiro personalizado de desenvolvimento.
         </p>
 
-        <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[13px] text-white/85 font-sans mb-5">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[14px] text-white/90 font-sans mb-5">
           <li>✦ Anatomia psicológica</li>
           <li>✦ Plano de carreira</li>
           <li>✦ Guia de comunicação</li>
@@ -79,7 +79,7 @@ export default function UnlockPremiumButton({ reportId, priceBrl }: Props) {
         </button>
 
         {err && (
-          <p className="text-[12px] text-rose-200 mt-3 font-sans">
+          <p className="text-[13.5px] text-rose-200 mt-3 font-sans">
             {err}. Tente novamente em alguns segundos.
           </p>
         )}

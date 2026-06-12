@@ -37,7 +37,7 @@ export default function ResendEmailButton({ assessmentId }: Props) {
     <button
       onClick={handleClick}
       disabled={state === 'loading'}
-      className="text-xs text-soul-ink/35 hover:text-soul-terracota font-sans font-medium
+      className="text-xs text-soul-ink/62 hover:text-soul-terracota font-sans font-medium
                  disabled:opacity-50 transition-colors"
     >
       {state === 'loading' ? 'Enviando…' : 'Reenviar email'}

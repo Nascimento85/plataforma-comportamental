@@ -11,8 +11,8 @@ export const metadata: Metadata = { title: 'Admin — Devolutiva' }
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-soul-parchment rounded-3xl p-6" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
-      <h2 className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-4"
-          style={{ color: 'rgba(240,236,227,0.35)' }}>{title}</h2>
+      <h2 className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-4"
+          style={{ color: 'rgba(240,236,227,0.68)' }}>{title}</h2>
       {children}
     </div>
   )
@@ -70,7 +70,7 @@ function InfoCard({ label, text, variant = 'sage', bg }: { label: string; text: 
   const s = INFO_STYLES[variant]
   return (
     <div className="rounded-2xl p-4" style={{ background: s.bg, border: `1px solid ${s.border}` }}>
-      <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.12em] mb-1" style={{ color: s.color, opacity: 0.7 }}>{label}</p>
+      <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.12em] mb-1" style={{ color: s.color, opacity: 0.7 }}>{label}</p>
       <p className="text-sm font-sans leading-relaxed" style={{ color: s.color }}>{text}</p>
     </div>
   )
@@ -100,7 +100,7 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
           {r.predominant}
         </div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Perfil predominante · {r.combination}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
@@ -111,7 +111,7 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
         <div className="space-y-3">
           {(['D', 'I', 'S', 'C'] as const).map((p) => (
             <div key={p}>
-              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.6)' }}>
+              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
                 <span className="font-medium">{p} — {DISC_NAMES[p]}</span>
                 <span>{Math.round(r.percentages[p] * 100)}%</span>
               </div>
@@ -134,11 +134,11 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
       <Section title="Estilo de trabalho e ambiente ideal">
         <div className="space-y-3">
           <div>
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.12em] mb-2" style={{ color: 'rgba(240,236,227,0.4)' }}>Ambiente que favorece</p>
+            <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.12em] mb-2" style={{ color: 'rgba(240,236,227,0.68)' }}>Ambiente que favorece</p>
             <TagList items={r.report.idealEnvironment} color="green" />
           </div>
           <div className="mt-3">
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.12em] mb-2" style={{ color: 'rgba(240,236,227,0.4)' }}>Estilo de decisão</p>
+            <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.12em] mb-2" style={{ color: 'rgba(240,236,227,0.68)' }}>Estilo de decisão</p>
             <p className="text-sm font-sans leading-relaxed rounded-2xl px-4 py-3" style={{ background: '#17181c', color: 'rgba(240,236,227,0.7)' }}>{r.report.decisionStyle}</p>
           </div>
         </div>
@@ -163,7 +163,7 @@ function MbtiDevolutiva({ result }: { result: Record<string, unknown> }) {
           {r.type}
         </div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>Tipo MBTI</p>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Tipo MBTI</p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1 italic" style={{ color: '#c4633a' }}>"{r.report.tagline}"</p>
         </div>
@@ -199,7 +199,7 @@ function EnneagramDevolutiva({ result }: { result: Record<string, unknown> }) {
           {r.predominant}
         </div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Tipo {r.predominant} · {r.report.altName}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
@@ -257,18 +257,18 @@ function TemperamentDevolutiva({ result }: { result: Record<string, unknown> }) 
           {r.profile.name.charAt(0)}
         </div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             {r.profile.name} · Secundário: {r.secondaryProfile.name}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.profile.title}</h2>
-          <p className="text-sm font-sans mt-1 max-w-lg" style={{ color: 'rgba(240,236,227,0.5)' }}>{r.interpretation}</p>
+          <p className="text-sm font-sans mt-1 max-w-lg" style={{ color: 'rgba(240,236,227,0.68)' }}>{r.interpretation}</p>
         </div>
       </div>
       <Section title="Distribuição dos temperamentos">
         <div className="space-y-3">
           {Object.entries(r.percentages).sort(([,a],[,b]) => b-a).map(([type, pct]) => (
             <div key={type}>
-              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.6)' }}>
+              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
                 <span className="font-medium">{TEMP_LABELS[type]}</span>
                 <span>{pct}%</span>
               </div>
@@ -311,12 +311,12 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
         <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold font-sans flex-shrink-0"
              style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>{r.report.name.charAt(0)}</div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Arquétipo dominante · Secundário: {r.secondaryReport.name}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#c4633a' }}>{r.report.title}</p>
-          <p className="text-[11px] font-sans mt-0.5 italic" style={{ color: 'rgba(240,236,227,0.4)' }}>"{r.report.tagline}"</p>
+          <p className="text-[13px] font-sans mt-0.5 italic" style={{ color: 'rgba(240,236,227,0.68)' }}>"{r.report.tagline}"</p>
         </div>
       </div>
       <Section title="Descrição"><p className="text-sm font-sans leading-relaxed" style={{ color: 'rgba(240,236,227,0.7)' }}>{r.report.description}</p></Section>
@@ -333,7 +333,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
         <div className="space-y-2">
           {sorted.map(([name, pct]) => (
             <div key={name}>
-              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.6)' }}>
+              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
                 <span className="font-medium">{name}</span><span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.5)' }}>
@@ -376,12 +376,12 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
         <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold font-sans flex-shrink-0"
              style={{ background: '#6d5a9c' }}>{r.report.name.charAt(0)}</div>
         <div>
-          <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.4)' }}>
+          <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Arquétipo dominante · Deusa: {r.report.goddess}
           </p>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">{r.report.name}</h2>
           <p className="text-sm font-sans mt-1" style={{ color: '#6d5a9c' }}>{r.report.title}</p>
-          <p className="text-[11px] font-sans mt-0.5 italic" style={{ color: 'rgba(240,236,227,0.4)' }}>"{r.report.tagline}"</p>
+          <p className="text-[13px] font-sans mt-0.5 italic" style={{ color: 'rgba(240,236,227,0.68)' }}>"{r.report.tagline}"</p>
         </div>
       </div>
       <Section title="Descrição da energia"><p className="text-sm font-sans leading-relaxed" style={{ color: 'rgba(240,236,227,0.7)' }}>{r.report.description}</p></Section>
@@ -394,7 +394,7 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
         <div className="space-y-2">
           {sorted.map(([name, pct]) => (
             <div key={name}>
-              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.6)' }}>
+              <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
                 <span className="font-medium">{name}</span><span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.5)' }}>
@@ -452,13 +452,13 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
     return (
       <div className="space-y-6">
         <Link href="/admin/assessments" className="text-sm font-sans transition-colors"
-              style={{ color: 'rgba(240,236,227,0.4)' }}>
+              style={{ color: 'rgba(240,236,227,0.68)' }}>
           ← Todos os testes
         </Link>
         <div className="bg-soul-parchment rounded-3xl p-12 text-center" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
           <p className="text-4xl mb-4">⏳</p>
           <p className="font-serif font-semibold text-lg text-soul-ink">Avaliação ainda não concluída</p>
-          <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.45)' }}>
+          <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Status atual: <strong>{assessment.status}</strong>
           </p>
         </div>
@@ -474,7 +474,7 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
       {/* Navegação */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <Link href="/admin/assessments" className="text-sm font-sans transition-colors"
-              style={{ color: 'rgba(240,236,227,0.4)' }}>
+              style={{ color: 'rgba(240,236,227,0.68)' }}>
           ← Todos os testes
         </Link>
         <a
@@ -491,19 +491,19 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
       <div className="bg-soul-parchment rounded-3xl p-5" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.4)' }}>
+            <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>
               {TEST_LABELS[testType] ?? testType} · Devolutiva
             </p>
             <h1 className="font-serif font-semibold text-2xl text-soul-ink mt-1">{assessment.employee.name}</h1>
-            <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(240,236,227,0.5)' }}>{assessment.employee.email}</p>
+            <p className="text-sm font-sans mt-0.5" style={{ color: 'rgba(240,236,227,0.68)' }}>{assessment.employee.email}</p>
           </div>
           <div className="text-right flex-shrink-0">
-            <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.4)' }}>Empresa</p>
+            <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Empresa</p>
             <p className="text-sm font-medium font-sans text-soul-ink mt-1">{assessment.company.name}</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.4)' }}>{assessment.company.email}</p>
+            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>{assessment.company.email}</p>
           </div>
         </div>
-        <p className="text-[11px] font-sans mt-3 pt-3" style={{ borderTop: '1px solid rgba(58,61,69,0.6)', color: 'rgba(240,236,227,0.4)' }}>
+        <p className="text-[13px] font-sans mt-3 pt-3" style={{ borderTop: '1px solid rgba(58,61,69,0.6)', color: 'rgba(240,236,227,0.68)' }}>
           Concluído em {new Date(assessment.completedAt!).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
         </p>
       </div>

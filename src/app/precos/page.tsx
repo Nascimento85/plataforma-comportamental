@@ -25,9 +25,9 @@ export default function PrecosPage() {
             <span className="font-serif text-lg font-semibold text-white">Psique</span>
           </Link>
           <div className="flex items-center gap-3">
-            <Link href="/login" className="text-[14px] text-white/70 hover:text-white font-medium no-underline">Entrar</Link>
+            <Link href="/login" className="text-[15px] text-white/80 hover:text-white font-medium no-underline">Entrar</Link>
             <Link href="/register"
-                  className="text-[13px] font-bold text-soul-ink px-4 py-2 rounded-full no-underline transition-transform hover:-translate-y-px"
+                  className="text-[14px] font-bold text-soul-ink px-4 py-2 rounded-full no-underline transition-transform hover:-translate-y-px"
                   style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
               Criar conta
             </Link>
@@ -37,13 +37,13 @@ export default function PrecosPage() {
 
       {/* Hero */}
       <section className="px-6 pt-14 pb-10 text-center">
-        <p className="text-[12px] uppercase tracking-[0.18em] font-bold mb-4" style={{ color: '#d4b85c' }}>
+        <p className="text-[13.5px] uppercase tracking-[0.18em] font-bold mb-4" style={{ color: '#d4b85c' }}>
           Planos para empresas
         </p>
         <h1 className="font-serif font-semibold text-white text-4xl md:text-5xl leading-[1.1] mb-5 max-w-3xl mx-auto">
           A plataforma completa de inteligência comportamental para PMEs.
         </h1>
-        <p className="text-[16px] text-white/75 font-medium max-w-2xl mx-auto leading-relaxed">
+        <p className="text-[16px] text-white/85 font-medium max-w-2xl mx-auto leading-relaxed">
           Teste comportamental ilimitado, módulo NR-1 Psicossocial, Guia de Entrevista
           personalizado e relatório executivo gerado por IA. Trial de {TRIAL_DIAS} dias gratuitos, sem cartão.
         </p>
@@ -68,7 +68,7 @@ export default function PrecosPage() {
               }}
             >
               {plano.destaque && (
-                <div className="self-start mb-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                <div className="self-start mb-3 text-[12px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
                      style={{ background: 'rgba(212,184,92,0.20)', color: '#e6c869' }}>
                   Recomendado
                 </div>
@@ -79,11 +79,11 @@ export default function PrecosPage() {
               <div className="mt-3 mb-2">
                 <span className="font-serif text-4xl font-semibold text-white">{plano.precoLabel}</span>
                 {plano.precoMensalCents !== null && (
-                  <span className="text-[14px] text-white/55 font-medium ml-1">/mês</span>
+                  <span className="text-[15px] text-white/72 font-medium ml-1">/mês</span>
                 )}
               </div>
 
-              <p className="text-[13px] text-white/65 font-medium mb-5">
+              <p className="text-[14px] text-white/78 font-medium mb-5">
                 {plano.employeeCap !== null
                   ? `Até ${plano.employeeCap} funcionários cadastrados`
                   : 'Funcionários ilimitados'}
@@ -91,7 +91,7 @@ export default function PrecosPage() {
 
               <ul className="space-y-2.5 mb-7 flex-1">
                 {plano.features.map((f, i) => (
-                  <li key={i} className="flex items-start gap-2 text-[14px] text-white/85 font-medium leading-snug">
+                  <li key={i} className="flex items-start gap-2 text-[15px] text-white/90 font-medium leading-snug">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d4b85c"
                          strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
                          className="mt-1 flex-shrink-0">
@@ -105,7 +105,7 @@ export default function PrecosPage() {
               {plano.precoMensalCents !== null ? (
                 <Link
                   href="/register?intent=trial"
-                  className="block text-center text-[14px] font-bold px-5 py-3 rounded-full no-underline transition-transform hover:-translate-y-px"
+                  className="block text-center text-[15px] font-bold px-5 py-3 rounded-full no-underline transition-transform hover:-translate-y-px"
                   style={{
                     background: plano.destaque
                       ? 'linear-gradient(135deg, #c9a84c, #d4943a)'
@@ -120,7 +120,7 @@ export default function PrecosPage() {
                 <a
                   href={`https://wa.me/?text=${encodeURIComponent('Olá, gostaria de uma proposta Enterprise da plataforma Psique.')}`}
                   target="_blank" rel="noreferrer"
-                  className="block text-center text-[14px] font-bold px-5 py-3 rounded-full no-underline transition-transform hover:-translate-y-px"
+                  className="block text-center text-[15px] font-bold px-5 py-3 rounded-full no-underline transition-transform hover:-translate-y-px"
                   style={{
                     background: 'rgba(255,255,255,0.08)',
                     color: '#ffffff',
@@ -136,7 +136,7 @@ export default function PrecosPage() {
 
         {/* Linha de tranquilidade */}
         <div className="max-w-3xl mx-auto mt-10 text-center">
-          <p className="text-[13px] text-white/55 font-medium">
+          <p className="text-[14px] text-white/72 font-medium">
             Trial de {TRIAL_DIAS} dias sem cartão · Cancele quando quiser · Suporte humano via WhatsApp
           </p>
         </div>
@@ -145,18 +145,18 @@ export default function PrecosPage() {
       {/* Bloco PF (pessoa fisica) */}
       <section className="px-6 py-12 border-t" style={{ borderColor: 'rgba(201,168,76,0.15)', background: 'rgba(255,255,255,0.02)' }}>
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-[12px] uppercase tracking-[0.18em] font-bold mb-3" style={{ color: '#d4b85c' }}>
+          <p className="text-[13.5px] uppercase tracking-[0.18em] font-bold mb-3" style={{ color: '#d4b85c' }}>
             Pessoa física
           </p>
           <h2 className="font-serif font-semibold text-white text-2xl mb-3">
             Quer fazer um teste por conta própria?
           </h2>
-          <p className="text-[14px] text-white/70 font-medium mb-5 leading-relaxed">
+          <p className="text-[15px] text-white/80 font-medium mb-5 leading-relaxed">
             Sem assinatura. Compre créditos avulsos e faça quando quiser. Você ganha 10 créditos cortesia no cadastro.
           </p>
           <Link
             href="/register"
-            className="inline-block text-[13px] font-bold text-white px-5 py-2.5 rounded-full no-underline"
+            className="inline-block text-[14px] font-bold text-white px-5 py-2.5 rounded-full no-underline"
             style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.20)' }}
           >
             Criar conta pessoal e ganhar 10 créditos
@@ -165,10 +165,10 @@ export default function PrecosPage() {
       </section>
 
       <footer className="px-6 py-8 text-center" style={{ background: '#0a0907' }}>
-        <p className="text-[12px] text-white/45 font-medium">
+        <p className="text-[13.5px] text-white/68 font-medium">
           © Psique · Mapa Comportamental ·
-          <Link href="/termos-de-uso" className="text-white/55 hover:text-white/75 no-underline ml-1">Termos</Link> ·
-          <Link href="/politica-de-privacidade" className="text-white/55 hover:text-white/75 no-underline ml-1">Privacidade</Link>
+          <Link href="/termos-de-uso" className="text-white/72 hover:text-white/85 no-underline ml-1">Termos</Link> ·
+          <Link href="/politica-de-privacidade" className="text-white/72 hover:text-white/85 no-underline ml-1">Privacidade</Link>
         </p>
       </footer>
     </main>

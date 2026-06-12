@@ -27,7 +27,7 @@ export default function PlaybookPage({ params }: Props) {
       {/* ── Top bar (oculta na impressão) ── */}
       <div className="print:hidden border-b border-soul-mist/60 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
-          <Link href="/" className="text-[13px] font-bold text-soul-terracota hover:underline">
+          <Link href="/" className="text-[14px] font-bold text-soul-terracota hover:underline">
             ← Psique
           </Link>
           <ImprimirButton titulo={p.titulo} />
@@ -38,7 +38,7 @@ export default function PlaybookPage({ params }: Props) {
       <article className="max-w-3xl mx-auto px-6 py-12 print:py-6">
         {/* Header */}
         <header className="mb-10">
-          <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+          <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                 style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
             {p.badge}
           </span>
@@ -75,11 +75,11 @@ export default function PlaybookPage({ params }: Props) {
 
         {/* Footer CTA */}
         <footer className="print:hidden mt-16 pt-8 border-t border-soul-mist/60 text-center">
-          <p className="text-[14px] text-soul-ink/70 font-medium mb-3">
+          <p className="text-[15px] text-soul-ink/80 font-medium mb-3">
             Este material é gratuito e pode ser livremente compartilhado.
           </p>
           <Link href="/empresas"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-bold text-white shadow-terra"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-bold text-white shadow-terra"
                 style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
             Conhecer a plataforma Psique →
           </Link>
@@ -127,12 +127,12 @@ function BlocoRenderer({ bloco }: { bloco: Bloco }) {
       <div className="rounded-2xl p-4 my-4"
            style={{ background: styles.bg, border: `1px solid ${styles.border}` }}>
         {bloco.titulo && (
-          <p className="text-[12px] font-bold uppercase tracking-widest mb-1.5 flex items-center gap-2"
+          <p className="text-[13.5px] font-bold uppercase tracking-widest mb-1.5 flex items-center gap-2"
              style={{ color: styles.color }}>
             <span>{styles.icon}</span> {bloco.titulo}
           </p>
         )}
-        <p className="text-[14px] font-semibold leading-relaxed" style={{ color: styles.color }}>
+        <p className="text-[15px] font-semibold leading-relaxed" style={{ color: styles.color }}>
           {bloco.conteudo}
         </p>
       </div>

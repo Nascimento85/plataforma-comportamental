@@ -71,16 +71,16 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/dashboard/compliance/nr1" className="text-[13px] font-semibold text-soul-terracota hover:underline">
+        <Link href="/dashboard/compliance/nr1" className="text-[14px] font-semibold text-soul-terracota hover:underline">
           ← Coletas NR-1
         </Link>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink mt-2 leading-tight">{coleta.nome}</h1>
         <div className="flex flex-wrap items-center gap-3 mt-2">
-          <span className="text-[13px] text-soul-ink/70 font-medium">
+          <span className="text-[14px] text-soul-ink/80 font-medium">
             Validade: {new Date(coleta.expiresAt).toLocaleDateString('pt-BR')}
           </span>
-          <span className="text-[13px] text-soul-ink/70 font-medium">·</span>
-          <span className="text-[13px] text-soul-ink/70 font-medium">
+          <span className="text-[14px] text-soul-ink/80 font-medium">·</span>
+          <span className="text-[14px] text-soul-ink/80 font-medium">
             Criado em {new Date(coleta.createdAt).toLocaleDateString('pt-BR')}
           </span>
         </div>
@@ -89,11 +89,11 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
       {/* Adesão por setor */}
       <section className="soul-panel">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-3">Adesão por setor</h2>
-        <p className="text-[13px] text-soul-ink/75 font-medium mb-4">
+        <p className="text-[14px] text-soul-ink/85 font-medium mb-4">
           Mínimo de <strong>{MIN_RESPONDENTES_PARA_RELATORIO} respondentes</strong> por setor para liberar o relatório.
         </p>
         {porSetor.length === 0 ? (
-          <p className="text-[14px] text-soul-ink/70 font-medium">Nenhum setor convidado.</p>
+          <p className="text-[15px] text-soul-ink/80 font-medium">Nenhum setor convidado.</p>
         ) : (
           <div className="space-y-3">
             {porSetor.map((s: { id: string; nome: string; perfilDisc: string | null; perfilDiscAuto: boolean; totalConvidados: number; totalRespondentes: number; taxaAdesao: number; atingiuMinimo: boolean }) => (
@@ -102,7 +102,7 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
                   <div>
                     <p className="font-serif font-semibold text-lg text-soul-ink">{s.nome}</p>
                     {s.perfilDisc && (
-                      <p className="text-[12px] text-soul-ink/70 font-semibold flex items-center gap-1.5">
+                      <p className="text-[13.5px] text-soul-ink/80 font-semibold flex items-center gap-1.5">
                         DISC dominante: {s.perfilDisc}
                         {s.perfilDiscAuto && (
                           <span
@@ -120,7 +120,7 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
                       </p>
                     )}
                   </div>
-                  <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                  <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                         style={{
                           background: s.atingiuMinimo ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',
                           color: s.atingiuMinimo ? '#4a7a4e' : '#8a5c1e',
@@ -133,7 +133,7 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
                     <div className="h-full rounded-full"
                          style={{ width: `${s.taxaAdesao}%`, background: 'linear-gradient(90deg, #c4633a, #d4943a)' }} />
                   </div>
-                  <span className="text-[13px] font-bold text-soul-ink">
+                  <span className="text-[14px] font-bold text-soul-ink">
                     {s.totalRespondentes}/{s.totalConvidados} · {s.taxaAdesao}%
                   </span>
                 </div>
@@ -146,12 +146,12 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
       {/* Convites: lista de links anônimos */}
       <section className="soul-panel">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-2">Links anônimos</h2>
-        <p className="text-[13px] text-soul-ink/75 font-medium mb-4">
+        <p className="text-[14px] text-soul-ink/85 font-medium mb-4">
           Envie estes links individualmente. Cada link é único por funcionário; depois de respondido, expira automaticamente.
         </p>
         <div className="space-y-2 max-h-[400px] overflow-y-auto">
           {coleta.convites.length === 0 ? (
-            <p className="text-[13px] text-soul-ink/70 font-medium italic py-2">
+            <p className="text-[14px] text-soul-ink/80 font-medium italic py-2">
               Nenhum convite cadastrado ainda. Adicione o primeiro abaixo.
             </p>
           ) : (
@@ -160,17 +160,17 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
               return (
                 <div key={c.id} className="flex flex-wrap items-center gap-3 py-2 border-b border-soul-mist/60 last:border-0">
                   <div className="flex-1 min-w-[200px]">
-                    <p className="text-[14px] font-semibold text-soul-ink">{c.nome}</p>
-                    <p className="text-[12px] text-soul-ink/65 font-medium">{c.email}</p>
+                    <p className="text-[15px] font-semibold text-soul-ink">{c.nome}</p>
+                    <p className="text-[13.5px] text-soul-ink/78 font-medium">{c.email}</p>
                   </div>
                   <code
-                    className="text-[12px] text-soul-ink/70 font-mono truncate max-w-[240px] select-all cursor-text"
+                    className="text-[13.5px] text-soul-ink/80 font-mono truncate max-w-[240px] select-all cursor-text"
                     title={fullUrl}
                   >
                     {fullUrl}
                   </code>
                   <CopyLinkButton url={fullUrl} />
-                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold"
+                  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[13px] font-bold"
                         style={{
                           background: c.status === 'COMPLETED' ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',
                           color: c.status === 'COMPLETED' ? '#4a7a4e' : '#8a5c1e',

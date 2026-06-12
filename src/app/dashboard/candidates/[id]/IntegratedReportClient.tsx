@@ -62,14 +62,14 @@ export default function IntegratedReportClient({ employeeId }: Props) {
       <button
         onClick={regenerate}
         disabled={loading}
-        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-sans font-bold text-white transition-all hover:-translate-y-px shadow-terra disabled:opacity-60 disabled:translate-y-0"
+        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px shadow-terra disabled:opacity-60 disabled:translate-y-0"
         style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
       >
         {loading ? '⏳ Gerando…' : '✦ Gerar / Regenerar devolutiva'}
       </button>
       {feedback && (
         <p
-          className="text-[12px] font-semibold rounded-full px-3 py-1"
+          className="text-[13.5px] font-semibold rounded-full px-3 py-1"
           style={{ background: colors.bg, color: colors.color }}
         >
           {feedback}

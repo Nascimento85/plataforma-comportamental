@@ -32,7 +32,7 @@ export default function CopyLinkButton({ url }: { url: string }) {
     <button
       type="button"
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[12px] font-bold transition-colors"
+      className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[13.5px] font-bold transition-colors"
       style={{
         background: copied ? 'rgba(122,158,126,0.22)' : 'rgba(196,99,58,0.10)',
         color:      copied ? '#4a7a4e'                : '#8a4a26',

@@ -35,7 +35,7 @@ export default async function ColetaPublicaPage({ params }: { params: { token: s
         <div className="max-w-md text-center">
           <div className="text-5xl mb-4">🌿</div>
           <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-2">{erro}</h1>
-          <p className="text-[14px] text-soul-ink/75 font-medium">
+          <p className="text-[15px] text-soul-ink/85 font-medium">
             Se acredita que isto é um erro, contate o RH da sua empresa.
           </p>
         </div>

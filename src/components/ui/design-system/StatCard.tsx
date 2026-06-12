@@ -55,7 +55,7 @@ export default function StatCard({
 
   const deltaColor =
     deltaUp === undefined
-      ? 'text-soul-ink/40'
+      ? 'text-soul-ink/65'
       : deltaUp
       ? 'text-soul-sage'
       : 'text-soul-rose'
@@ -87,14 +87,14 @@ export default function StatCard({
       </div>
 
       {/* Label */}
-      <div className="text-xs text-soul-ink/45 font-sans flex items-center gap-1">
+      <div className="text-xs text-soul-ink/68 font-sans flex items-center gap-1">
         {label}
         {tooltip && (
           <span
             title={tooltip}
             aria-label={tooltip}
             className="inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-[9px] font-bold cursor-help select-none"
-            style={{ background: 'rgba(255,255,255,0.104)', color: 'rgba(240,236,227,0.55)' }}
+            style={{ background: 'rgba(255,255,255,0.104)', color: 'rgba(240,236,227,0.68)' }}
           >
             ?
           </span>

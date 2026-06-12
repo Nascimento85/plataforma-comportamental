@@ -17,17 +17,17 @@ export default function TermosDeUsoPage() {
     <div className="min-h-screen" style={{ background: '#17181c' }}>
       <main className="max-w-3xl mx-auto px-5 py-12 sm:py-16">
 
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">
+        <p className="text-[13px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">
           Documento legal
         </p>
         <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-soul-ink leading-tight mb-2">
           Termos de Uso
         </h1>
-        <p className="text-[13px] text-soul-ink/60 mb-10">
+        <p className="text-[14px] text-soul-ink/75 mb-10">
           Última atualização: {LAST_UPDATE}
         </p>
 
-        <article className="text-soul-ink/85 space-y-6 text-[15px] leading-relaxed">
+        <article className="text-soul-ink/90 space-y-6 text-[15px] leading-relaxed">
 
           <Section title="1. Aceitação">
             <p>
@@ -187,7 +187,7 @@ export default function TermosDeUsoPage() {
           </Section>
         </article>
 
-        <div className="mt-12 pt-6 border-t border-soul-mist/60 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-soul-ink/60">
+        <div className="mt-12 pt-6 border-t border-soul-mist/60 flex flex-wrap gap-x-6 gap-y-2 text-[14px] text-soul-ink/75">
           <Link href="/politica-de-privacidade" className="hover:text-soul-terracota">Política de Privacidade</Link>
           <Link href="/politica-de-cookies"     className="hover:text-soul-terracota">Política de Cookies</Link>
           <Link href="/"                         className="hover:text-soul-terracota">Voltar para a Home</Link>

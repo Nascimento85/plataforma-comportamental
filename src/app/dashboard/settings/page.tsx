@@ -26,7 +26,7 @@ export default async function SettingsPage() {
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
           Configurações
         </h1>
-        <p className="text-base text-soul-ink/75 mt-2 font-medium">
+        <p className="text-base text-soul-ink/85 mt-2 font-medium">
           Gerencie os dados da sua empresa, cobrança e preferências de notificação.
         </p>
       </div>
@@ -38,11 +38,11 @@ export default async function SettingsPage() {
             <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">
               Perfil da empresa
             </h2>
-            <p className="text-[14px] text-soul-ink/70 font-medium mt-1">
+            <p className="text-[15px] text-soul-ink/80 font-medium mt-1">
               Informações cadastrais da conta.
             </p>
           </div>
-          <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+          <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                 style={{ background: 'rgba(122,158,126,0.22)', color: '#4a7a4e' }}>
             {company.active ? 'Ativa' : 'Inativa'}
           </span>
@@ -67,22 +67,22 @@ export default async function SettingsPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">
             Cobrança e créditos
           </h2>
-          <p className="text-[14px] text-soul-ink/70 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/80 font-medium mt-1">
             Seu saldo atual e histórico de compras.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/60">Saldo disponível</p>
+            <p className="text-[14px] font-bold uppercase tracking-widest text-soul-ink/75">Saldo disponível</p>
             <p className="font-serif text-4xl font-semibold text-soul-ink mt-1">
               {company.creditBalance?.balance ?? 0}{' '}
-              <span className="text-lg text-soul-ink/60 font-medium">créditos</span>
+              <span className="text-lg text-soul-ink/75 font-medium">créditos</span>
             </p>
           </div>
           <Link
             href="/dashboard/credits"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-bold text-white
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-bold text-white
                        shadow-terra hover:-translate-y-px transition-all"
             style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
           >
@@ -97,7 +97,7 @@ export default async function SettingsPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">
             Preferências de notificação
           </h2>
-          <p className="text-[14px] text-soul-ink/70 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/80 font-medium mt-1">
             Controle quais e-mails você recebe sobre a conta.
           </p>
         </div>
@@ -117,7 +117,7 @@ export default async function SettingsPage() {
           />
         </div>
 
-        <p className="text-[12px] text-soul-ink/55 font-medium italic mt-5">
+        <p className="text-[13.5px] text-soul-ink/72 font-medium italic mt-5">
           Em breve: ativação individual de cada notificação.
         </p>
       </section>
@@ -128,7 +128,7 @@ export default async function SettingsPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">
             Segurança
           </h2>
-          <p className="text-[14px] text-soul-ink/70 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/80 font-medium mt-1">
             Gerencie o acesso da sua conta.
           </p>
         </div>
@@ -136,15 +136,15 @@ export default async function SettingsPage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="font-semibold text-[15px] text-soul-ink">Senha de acesso</p>
-            <p className="text-[13px] text-soul-ink/70 font-medium mt-0.5">
+            <p className="text-[14px] text-soul-ink/80 font-medium mt-0.5">
               Última alteração: {company.updatedAt.toLocaleDateString('pt-BR')}
             </p>
           </div>
           <Link
             href="/forgot-password"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-bold
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-bold
                        border-2 transition-colors"
-            style={{ borderColor: 'rgba(240,236,227,0.15)', color: '#f0ece3' }}
+            style={{ borderColor: 'rgba(240,236,227,0.42)', color: '#f0ece3' }}
           >
             Redefinir senha
           </Link>
@@ -157,7 +157,7 @@ export default async function SettingsPage() {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/60 mb-1.5">{label}</p>
+      <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/75 mb-1.5">{label}</p>
       <p className="text-[15px] text-soul-ink font-semibold">{value}</p>
     </div>
   )
@@ -168,7 +168,7 @@ function PreferenceRow({ title, description }: { title: string; description: str
     <div className="flex items-start justify-between gap-4 p-4 rounded-2xl border border-soul-mist/60">
       <div className="flex-1">
         <p className="font-semibold text-[15px] text-soul-ink">{title}</p>
-        <p className="text-[13px] text-soul-ink/70 font-medium mt-0.5 leading-snug">{description}</p>
+        <p className="text-[14px] text-soul-ink/80 font-medium mt-0.5 leading-snug">{description}</p>
       </div>
       <div
         className="flex-shrink-0 w-11 h-6 rounded-full relative"

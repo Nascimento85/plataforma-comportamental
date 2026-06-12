@@ -14,8 +14,8 @@ export function SignOutButton() {
   return (
     <button
       onClick={handleSignOut}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium
-                 text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors w-full"
+      className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
+                 text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors w-full"
       aria-label="Sair da conta"
     >
       <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor"

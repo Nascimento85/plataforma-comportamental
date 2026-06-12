@@ -45,7 +45,7 @@ function SignOut() {
   return (
     <button
       onClick={handleSignOut}
-      className="w-full text-left text-[13px] font-sans font-semibold transition-colors"
+      className="w-full text-left text-[14px] font-sans font-semibold transition-colors"
       style={{ color: 'rgba(255,255,255,0.65)' }}
       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(212,148,58,1)' }}
       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)' }}
@@ -73,7 +73,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
           </div>
           <div>
             <div className="text-base font-serif font-semibold text-white leading-none">Psique</div>
-            <div className="text-[11px] font-sans uppercase tracking-widest mt-1 font-bold"
+            <div className="text-[13px] font-sans uppercase tracking-widest mt-1 font-bold"
                  style={{ color: '#c9a84c' }}>Painel Admin</div>
           </div>
         </div>
@@ -82,7 +82,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
       {/* Nav */}
       <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         <div className="px-3 py-2 mb-1">
-          <span className="text-[11px] font-sans font-bold uppercase tracking-[0.16em]"
+          <span className="text-[13px] font-sans font-bold uppercase tracking-[0.16em]"
                 style={{ color: 'rgba(255,255,255,0.55)' }}>
             Administração
           </span>
@@ -93,7 +93,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
         <NavLink href="/admin/passaporte" label="Passaporte" icon="🎟️" onClick={onNavClick} />
 
         <div className="px-3 py-2 mt-3 mb-1">
-          <span className="text-[11px] font-sans font-bold uppercase tracking-[0.16em]"
+          <span className="text-[13px] font-sans font-bold uppercase tracking-[0.16em]"
                 style={{ color: 'rgba(255,255,255,0.55)' }}>
             Minha conta
           </span>
@@ -112,7 +112,7 @@ function SidebarContent({ session, onNavClick }: { session: Props['session']; on
           </div>
           <div className="min-w-0">
             <div className="text-sm font-semibold text-white truncate font-sans">{session.name}</div>
-            <div className="text-[12px] font-medium truncate font-sans" style={{ color: 'rgba(255,255,255,0.62)' }}>
+            <div className="text-[13.5px] font-medium truncate font-sans" style={{ color: 'rgba(255,255,255,0.62)' }}>
               {session.email}
             </div>
           </div>

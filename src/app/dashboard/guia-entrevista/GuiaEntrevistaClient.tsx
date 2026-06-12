@@ -89,7 +89,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
       <form onSubmit={handleSubmit} className="soul-panel space-y-4 nr1-print-hide">
 
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1.5">
+          <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1.5">
             Cargo a ser entrevistado
           </label>
           <input
@@ -105,7 +105,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1.5">
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1.5">
               Senioridade
             </label>
             <select value={senioridade} onChange={(e) => setSenioridade(e.target.value)} className="soul-input w-full" disabled={loading}>
@@ -116,7 +116,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1.5">
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1.5">
               Tom da entrevista
             </label>
             <select value={tom} onChange={(e) => setTom(e.target.value)} className="soul-input w-full" disabled={loading}>
@@ -128,10 +128,10 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
         </div>
 
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1.5">
+          <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1.5">
             Perfis disfuncionais a investigar
           </label>
-          <p className="text-[12px] text-soul-ink/65 font-medium italic mb-2">
+          <p className="text-[13.5px] text-soul-ink/78 font-medium italic mb-2">
             Selecione quais padrões comportamentais quer mapear nesta entrevista. Recomendado começar com todos.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -154,8 +154,8 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
                     disabled={loading}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-[13px] font-bold text-soul-ink">{p.nome}</p>
-                    <p className="text-[11.5px] text-soul-ink/65 font-medium leading-snug">{p.descricao}</p>
+                    <p className="text-[14px] font-bold text-soul-ink">{p.nome}</p>
+                    <p className="text-[13px] text-soul-ink/78 font-medium leading-snug">{p.descricao}</p>
                   </div>
                 </label>
               )
@@ -164,7 +164,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
         </div>
 
         <div>
-          <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1.5">
+          <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1.5">
             Contexto adicional (opcional)
           </label>
           <textarea
@@ -176,11 +176,11 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
             maxLength={800}
             disabled={loading}
           />
-          <p className="text-[11px] text-soul-ink/55 font-medium mt-1">{contexto.length}/800</p>
+          <p className="text-[13px] text-soul-ink/72 font-medium mt-1">{contexto.length}/800</p>
         </div>
 
         {erro && (
-          <div className="rounded-xl px-4 py-3 text-[13px] font-semibold"
+          <div className="rounded-xl px-4 py-3 text-[14px] font-semibold"
                style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
             {erro}
           </div>
@@ -189,7 +189,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
           style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
         >
           {loading ? 'Gerando guia…' : '✦ Gerar guia personalizado'}
@@ -203,7 +203,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
             <div>
               <h2 className="font-serif font-semibold text-xl text-soul-ink">Guia de entrevista · {meta?.cargo}</h2>
               {meta?.geradoEm && (
-                <p className="text-[12px] text-soul-ink/65 font-medium mt-0.5">
+                <p className="text-[13.5px] text-soul-ink/78 font-medium mt-0.5">
                   Gerado em {new Date(meta.geradoEm).toLocaleString('pt-BR')}
                 </p>
               )}
@@ -211,7 +211,7 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
             <button
               type="button"
               onClick={imprimir}
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[14px] font-bold transition-colors"
               style={{
                 background: 'rgba(196,99,58,0.10)',
                 color:      '#8a4a26',
@@ -229,12 +229,12 @@ export default function GuiaEntrevistaClient({ perfisOpts }: { perfisOpts: Perfi
 
           {/* Cabeçalho que aparece APENAS na impressão */}
           <div className="nr1-print-only mb-6">
-            <p className="text-[10px] font-bold uppercase tracking-widest" style={{ color: '#8a4a26' }}>
+            <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#8a4a26' }}>
               Guia de Entrevista personalizado · Psique
             </p>
             <h1 className="font-serif font-semibold text-2xl text-soul-ink mt-1">{meta?.cargo}</h1>
             {meta?.geradoEm && (
-              <p className="text-[12px] text-soul-ink/75 font-medium mt-1">
+              <p className="text-[13.5px] text-soul-ink/85 font-medium mt-1">
                 Gerado em {new Date(meta.geradoEm).toLocaleString('pt-BR')}
               </p>
             )}

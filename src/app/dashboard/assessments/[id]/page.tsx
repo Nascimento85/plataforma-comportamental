@@ -14,7 +14,7 @@ export const metadata: Metadata = { title: 'Devolutiva Comportamental' }
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="bg-soul-parchment rounded-3xl p-6" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
-      <h2 className="text-[10px] font-sans font-semibold text-soul-ink/40 uppercase tracking-[0.15em] mb-4">{title}</h2>
+      <h2 className="text-[12px] font-sans font-semibold text-soul-ink/65 uppercase tracking-[0.15em] mb-4">{title}</h2>
       {children}
     </div>
   )
@@ -49,7 +49,7 @@ function BulletList({ items, color = 'green' }: { items: string[]; color?: 'gree
   return (
     <ul className="space-y-2.5">
       {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2.5 text-sm text-soul-ink/65 font-sans">
+        <li key={i} className="flex items-start gap-2.5 text-sm text-soul-ink/78 font-sans">
           <span className="mt-0.5 font-bold flex-shrink-0" style={{ color: dotColor[color] }}>✓</span>
           {item}
         </li>
@@ -77,7 +77,7 @@ function InfoCard({ label, text, variant = 'sage' }: {
   const s = variantStyles[variant]
   return (
     <div className="rounded-2xl p-4" style={s}>
-      <p className="text-[10px] font-bold uppercase tracking-[0.12em] mb-1.5 font-sans opacity-70">{label}</p>
+      <p className="text-[12px] font-bold uppercase tracking-[0.12em] mb-1.5 font-sans opacity-70">{label}</p>
       <p className="text-sm leading-relaxed font-sans">{text}</p>
     </div>
   )
@@ -587,11 +587,11 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
           <h1 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
             Esta avaliação pertence a outra conta
           </h1>
-          <p className="text-[14px] text-soul-ink/65 font-sans leading-relaxed mb-2">
+          <p className="text-[15px] text-soul-ink/78 font-sans leading-relaxed mb-2">
             Você está logado como <strong>{session.email}</strong>, mas esta devolutiva
             está vinculada a uma conta diferente.
           </p>
-          <p className="text-[14px] text-soul-ink/65 font-sans leading-relaxed mb-7">
+          <p className="text-[15px] text-soul-ink/78 font-sans leading-relaxed mb-7">
             Para visualizar com seus controles administrativos, faça logout e entre
             com a conta correta. Ou abra a versão pública do relatório (sem login)
             usando o link abaixo.
@@ -612,7 +612,7 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
 
           <Link
             href="/dashboard"
-            className="inline-block mt-6 text-[13px] text-soul-ink/50 hover:text-soul-ink/80 font-sans"
+            className="inline-block mt-6 text-[14px] text-soul-ink/70 hover:text-soul-ink/88 font-sans"
           >
             ← Voltar para o dashboard
           </Link>
@@ -624,13 +624,13 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
   if (assessment.status !== 'COMPLETED' || !assessment.result) {
     return (
       <div className="space-y-6">
-        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/40 hover:text-soul-ink/70 font-sans transition-colors">
+        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/65 hover:text-soul-ink/80 font-sans transition-colors">
           ← Avaliações
         </Link>
         <div className="bg-soul-parchment rounded-3xl py-16 text-center" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
           <div className="text-4xl mb-4">⏳</div>
           <p className="font-serif font-semibold text-xl text-soul-ink mb-2">Avaliação ainda não concluída</p>
-          <p className="text-sm text-soul-ink/45 font-sans">A devolutiva estará disponível após o colaborador finalizar o teste.</p>
+          <p className="text-sm text-soul-ink/68 font-sans">A devolutiva estará disponível após o colaborador finalizar o teste.</p>
         </div>
       </div>
     )
@@ -644,7 +644,7 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
     <div className="space-y-5 max-w-3xl">
       {/* Navegação */}
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/40 hover:text-soul-ink/70 font-sans transition-colors">
+        <Link href="/dashboard/assessments" className="text-sm text-soul-ink/65 hover:text-soul-ink/80 font-sans transition-colors">
           ← Avaliações
         </Link>
         <div className="flex items-center gap-2">
@@ -663,11 +663,11 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
 
       {/* Cabeçalho */}
       <div>
-        <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] text-soul-ink/35 mb-1">
+        <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] text-soul-ink/62 mb-1">
           {TEST_LABELS[testType] ?? testType} · Devolutiva
         </p>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink">{employeeName}</h1>
-        <p className="text-sm text-soul-ink/40 mt-1 font-sans">
+        <p className="text-sm text-soul-ink/65 mt-1 font-sans">
           {assessment.employee.email} · Concluído em {new Date(assessment.completedAt!).toLocaleDateString('pt-BR')}
         </p>
       </div>

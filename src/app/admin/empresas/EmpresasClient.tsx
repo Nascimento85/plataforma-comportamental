@@ -83,23 +83,23 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
           onChange={(e) => setBusca(e.target.value)}
           className="soul-input flex-1"
         />
-        <span className="text-[13px] text-soul-ink/60 font-medium whitespace-nowrap">
+        <span className="text-[14px] text-soul-ink/75 font-medium whitespace-nowrap">
           {filtradas.length} de {empresas.length}
         </span>
       </div>
 
-      {erro  && <div className="rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{erro}</div>}
-      {okMsg && <div className="rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.40)', color: '#3d6b40' }}>{okMsg}</div>}
+      {erro  && <div className="rounded-xl px-4 py-3 text-[14px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{erro}</div>}
+      {okMsg && <div className="rounded-xl px-4 py-3 text-[14px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.40)', color: '#3d6b40' }}>{okMsg}</div>}
 
       <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(196,99,58,0.18)' }}>
-        <table className="w-full text-[13px]">
+        <table className="w-full text-[14px]">
           <thead>
             <tr style={{ background: 'rgba(196,99,58,0.06)' }}>
-              <th className="text-left px-4 py-3 font-bold text-soul-ink/80 uppercase text-[11px] tracking-wider">Empresa</th>
-              <th className="text-left px-3 py-3 font-bold text-soul-ink/80 uppercase text-[11px] tracking-wider">Tipo</th>
-              <th className="text-left px-3 py-3 font-bold text-soul-ink/80 uppercase text-[11px] tracking-wider">Assinatura</th>
-              <th className="text-right px-3 py-3 font-bold text-soul-ink/80 uppercase text-[11px] tracking-wider">Testes</th>
-              <th className="text-right px-4 py-3 font-bold text-soul-ink/80 uppercase text-[11px] tracking-wider">Ação</th>
+              <th className="text-left px-4 py-3 font-bold text-soul-ink/88 uppercase text-[13px] tracking-wider">Empresa</th>
+              <th className="text-left px-3 py-3 font-bold text-soul-ink/88 uppercase text-[13px] tracking-wider">Tipo</th>
+              <th className="text-left px-3 py-3 font-bold text-soul-ink/88 uppercase text-[13px] tracking-wider">Assinatura</th>
+              <th className="text-right px-3 py-3 font-bold text-soul-ink/88 uppercase text-[13px] tracking-wider">Testes</th>
+              <th className="text-right px-4 py-3 font-bold text-soul-ink/88 uppercase text-[13px] tracking-wider">Ação</th>
             </tr>
           </thead>
           <tbody>
@@ -112,11 +112,11 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
               return (
                 <tr key={e.id} className="border-t" style={{ borderColor: 'rgba(196,99,58,0.10)' }}>
                   <td className="px-4 py-3">
-                    <div className="font-bold text-soul-ink">{e.name} {e.isAdmin && <span className="text-[10px] uppercase tracking-wider font-bold ml-1" style={{ color: '#d4943a' }}>· ADMIN</span>}</div>
-                    <div className="text-[12px] text-soul-ink/60 font-medium">{e.email}</div>
+                    <div className="font-bold text-soul-ink">{e.name} {e.isAdmin && <span className="text-[12px] uppercase tracking-wider font-bold ml-1" style={{ color: '#d4943a' }}>· ADMIN</span>}</div>
+                    <div className="text-[13.5px] text-soul-ink/75 font-medium">{e.email}</div>
                   </td>
                   <td className="px-3 py-3">
-                    <span className="inline-block px-2 py-0.5 rounded-full text-[10.5px] font-bold uppercase tracking-wider"
+                    <span className="inline-block px-2 py-0.5 rounded-full text-[12px] font-bold uppercase tracking-wider"
                           style={{
                             background: e.type === 'PJ' ? 'rgba(196,99,58,0.12)' : 'rgba(122,99,196,0.12)',
                             color:      e.type === 'PJ' ? '#8a4a26' : '#5a4a8a',
@@ -127,18 +127,18 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
                   <td className="px-3 py-3">
                     {badge ? (
                       <div>
-                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold"
+                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[13px] font-bold"
                               style={{ background: badge.bg, color: badge.color }}>
                           {badge.label}
                         </span>
-                        <div className="text-[11px] text-soul-ink/60 font-medium mt-0.5">
+                        <div className="text-[13px] text-soul-ink/75 font-medium mt-0.5">
                           {e.subPlan} {isManual && <span className="italic">(manual)</span>}
                           {isStripe && <span className="italic"> (Stripe)</span>}
                           {e.subValidoAte && ` · até ${new Date(e.subValidoAte).toLocaleDateString('pt-BR')}`}
                         </div>
                       </div>
                     ) : (
-                      <span className="text-[12px] text-soul-ink/45 font-medium italic">sem assinatura</span>
+                      <span className="text-[13.5px] text-soul-ink/68 font-medium italic">sem assinatura</span>
                     )}
                   </td>
                   <td className="px-3 py-3 text-right font-bold text-soul-ink">{e.totalAssessments}</td>
@@ -148,19 +148,19 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
                         type="button"
                         onClick={() => revogarPremium(e)}
                         disabled={isLoadingThis}
-                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
+                        className="text-[13px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
                         style={{ background: 'rgba(196,99,58,0.10)', color: '#8a3a1f', border: '1px solid rgba(196,99,58,0.30)' }}
                       >
                         {isLoadingThis ? '…' : 'Revogar'}
                       </button>
                     ) : isStripe ? (
-                      <span className="text-[11px] text-soul-ink/45 italic">Stripe</span>
+                      <span className="text-[13px] text-soul-ink/68 italic">Stripe</span>
                     ) : (
                       <button
                         type="button"
                         onClick={() => liberarPremium(e)}
                         disabled={isLoadingThis}
-                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
+                        className="text-[13px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
                         style={{ background: 'rgba(122,158,126,0.15)', color: '#3d6b40', border: '1px solid rgba(122,158,126,0.40)' }}
                       >
                         {isLoadingThis ? '…' : '✦ Liberar Premium'}
@@ -171,7 +171,7 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
               )
             })}
             {filtradas.length === 0 && (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-soul-ink/55 font-medium italic">Nenhuma empresa encontrada.</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-soul-ink/72 font-medium italic">Nenhuma empresa encontrada.</td></tr>
             )}
           </tbody>
         </table>

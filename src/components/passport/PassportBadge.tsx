@@ -71,7 +71,7 @@ export default function PassportBadge({
       />
       <span>{tone.label}</span>
       {subtitle && (
-        <span className="text-[10px] font-medium opacity-70 border-l border-current/20 pl-2">
+        <span className="text-[12px] font-medium opacity-70 border-l border-current/20 pl-2">
           {subtitle}
         </span>
       )}

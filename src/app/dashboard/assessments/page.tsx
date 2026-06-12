@@ -85,7 +85,7 @@ export default async function AssessmentsPage() {
           <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
             Avaliações
           </h1>
-          <p className="text-[16px] text-soul-ink/85 mt-2 font-medium max-w-2xl">
+          <p className="text-[16px] text-soul-ink/90 mt-2 font-medium max-w-2xl">
             Escolha a categoria mais adequada ao que você precisa decifrar — performance, relacionamento ou arquétipo — e envie o teste em menos de 30 segundos.
           </p>
         </div>
@@ -109,7 +109,7 @@ export default async function AssessmentsPage() {
             style={{ background: 'radial-gradient(circle, #c4633a, transparent)', transform: 'translate(30%,-30%)' }}
           />
           <div className="relative z-10 flex flex-col h-full">
-            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+            <span className="inline-block w-fit text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
               Categoria 1 · Performance
             </span>
@@ -125,7 +125,7 @@ export default async function AssessmentsPage() {
               As quatro lentes clássicas para ler o comportamento em ambiente corporativo. Revelam como cada líder e colaborador decide sob pressão, comunica, conduz conflito e sustenta cultura. Material bruto para formar times de alta performance e calibrar lideranças.
             </p>
 
-            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
+            <div className="space-y-1.5 mb-5 text-[14px] font-semibold text-soul-ink/90">
               <p>· DISC — Perfil Comportamental <span className="text-soul-terracota font-bold">(carro chefe)</span></p>
               <p>· MBTI — 16 Tipos de Personalidade</p>
               <p>· Eneagrama de Personalidade</p>
@@ -155,7 +155,7 @@ export default async function AssessmentsPage() {
             style={{ background: 'radial-gradient(circle, #c47a72, transparent)', transform: 'translate(30%,-30%)' }}
           />
           <div className="relative z-10 flex flex-col h-full">
-            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+            <span className="inline-block w-fit text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(196,122,114,0.18)', color: '#f0a892' }}>
               Categoria 2 · Vida Pessoal
             </span>
@@ -171,7 +171,7 @@ export default async function AssessmentsPage() {
               Baseado no best-seller de Gary Chapman. Revela como cada pessoa recebe amor — e por que, às vezes, você faz tudo pela sua parceria e ela ainda não se sente amada. A resposta muda relacionamentos reais.
             </p>
 
-            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-soul-ink/85">
+            <div className="space-y-1.5 mb-5 text-[14px] font-semibold text-soul-ink/90">
               <p>· Descubra a sua linguagem primária e secundária</p>
               <p>· Entenda a de quem você ama</p>
               <p>· Guia prático de como amar no dia a dia</p>
@@ -199,7 +199,7 @@ export default async function AssessmentsPage() {
             style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}
           />
           <div className="relative z-10 flex flex-col h-full">
-            <span className="inline-block w-fit text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+            <span className="inline-block w-fit text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(201,168,76,0.2)', color: '#e8c878' }}>
               Categoria 3 · Profundidade
             </span>
@@ -212,7 +212,7 @@ export default async function AssessmentsPage() {
               Os padrões psíquicos universais que Carl Jung mapeou. Não descrevem o que a pessoa faz — descrevem a força invisível que decide por ela. A lente mais profunda da plataforma para posicionamento de carreira, sucessão e liderança de alta complexidade.
             </p>
 
-            <div className="space-y-1.5 mb-5 text-[13px] font-semibold text-white/85">
+            <div className="space-y-1.5 mb-5 text-[14px] font-semibold text-white/90">
               <p>· Arquétipos da Liderança (4 estilos)</p>
               <p>· Arquétipos Junguianos (12 padrões universais)</p>
               <p>· Arquétipos Femininos (7 energias)</p>
@@ -241,7 +241,7 @@ export default async function AssessmentsPage() {
               <div className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${s.dot}`} />
               <div>
                 <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{s.value}</div>
-                <div className="text-[12px] text-soul-ink/75 mt-1 font-bold uppercase tracking-wider">{s.label}</div>
+                <div className="text-[13.5px] text-soul-ink/85 mt-1 font-bold uppercase tracking-wider">{s.label}</div>
               </div>
             </div>
           ))}
@@ -254,7 +254,7 @@ export default async function AssessmentsPage() {
           <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-1">
             Histórico de envios
           </h2>
-          <p className="text-[14px] text-soul-ink/75 font-medium">
+          <p className="text-[15px] text-soul-ink/85 font-medium">
             Todas as avaliações enviadas pela sua empresa, com status e ações.
           </p>
         </div>
@@ -265,7 +265,7 @@ export default async function AssessmentsPage() {
         <div className="bg-soul-parchment rounded-3xl border border-soul-mist py-16 text-center">
           <div className="text-5xl mb-4">🗺️</div>
           <p className="font-serif font-semibold text-2xl text-soul-ink mb-2">Nenhuma avaliação enviada ainda</p>
-          <p className="text-[15px] text-soul-ink/80 mb-7 max-w-md mx-auto font-medium">
+          <p className="text-[15px] text-soul-ink/88 mb-7 max-w-md mx-auto font-medium">
             Escolha uma das três categorias acima e envie a primeira avaliação para começar a mapear sua empresa.
           </p>
           <NewAssessmentButton />
@@ -281,19 +281,19 @@ export default async function AssessmentsPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-soul-mist bg-soul-parchment/40">
-                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[13.5px] font-sans font-bold text-soul-ink/85 uppercase tracking-widest">
                     Colaborador
                   </th>
-                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[13.5px] font-sans font-bold text-soul-ink/85 uppercase tracking-widest">
                     Avaliação
                   </th>
-                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[13.5px] font-sans font-bold text-soul-ink/85 uppercase tracking-widest">
                     Status
                   </th>
-                  <th className="text-left px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
+                  <th className="text-left px-6 py-4 text-[13.5px] font-sans font-bold text-soul-ink/85 uppercase tracking-widest">
                     Data
                   </th>
-                  <th className="text-right px-6 py-4 text-[12px] font-sans font-bold text-soul-ink/75 uppercase tracking-widest">
+                  <th className="text-right px-6 py-4 text-[13.5px] font-sans font-bold text-soul-ink/85 uppercase tracking-widest">
                     Ações
                   </th>
                 </tr>
@@ -313,7 +313,7 @@ export default async function AssessmentsPage() {
                           <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
                           <div>
                             <div className="text-[15px] font-semibold text-soul-ink">{a.employee.name}</div>
-                            <div className="text-[13px] text-soul-ink/75 mt-0.5 font-medium">{a.employee.email}</div>
+                            <div className="text-[14px] text-soul-ink/85 mt-0.5 font-medium">{a.employee.email}</div>
                           </div>
                         </div>
                       </td>
@@ -321,7 +321,7 @@ export default async function AssessmentsPage() {
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <span className="text-base">{tInfo.emoji}</span>
-                          <span className="text-[14px] text-soul-ink font-semibold">{tInfo.label}</span>
+                          <span className="text-[15px] text-soul-ink font-semibold">{tInfo.label}</span>
                         </div>
                       </td>
 
@@ -330,10 +330,10 @@ export default async function AssessmentsPage() {
                       </td>
 
                       <td className="px-6 py-4">
-                        <div className="text-[13px] text-soul-ink font-semibold">
+                        <div className="text-[14px] text-soul-ink font-semibold">
                           {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                         </div>
-                        <div className="text-[12px] text-soul-ink/70 mt-0.5 font-medium">
+                        <div className="text-[13.5px] text-soul-ink/80 mt-0.5 font-medium">
                           {timeAgo(a.createdAt)}
                         </div>
                       </td>
@@ -344,28 +344,28 @@ export default async function AssessmentsPage() {
                             <>
                               <Link
                                 href={`/dashboard/assessments/${a.id}`}
-                                className="text-[13px] font-bold text-soul-terracota hover:underline font-sans"
+                                className="text-[14px] font-bold text-soul-terracota hover:underline font-sans"
                               >
                                 Ver devolutiva →
                               </Link>
                               <a
                                 href={`/api/results/${a.id}/pdf`}
                                 target="_blank"
-                                className="text-[13px] text-soul-ink/80 hover:text-soul-ink font-sans font-semibold transition-colors"
+                                className="text-[14px] text-soul-ink/88 hover:text-soul-ink font-sans font-semibold transition-colors"
                               >
                                 Baixar PDF
                               </a>
                               {a.bundleId && bundleReportMap[a.bundleId] === 'COMPLETED' && (
                                 <Link
                                   href={`/dashboard/reports/${a.bundleId}`}
-                                  className="text-[12px] font-bold px-3 py-1.5 rounded-full font-sans
+                                  className="text-[13.5px] font-bold px-3 py-1.5 rounded-full font-sans
                                              bg-soul-indigo text-white hover:bg-soul-indigo/85 transition-colors"
                                 >
                                   ✦ Relatório Cruzado
                                 </Link>
                               )}
                               {a.bundleId && bundleReportMap[a.bundleId] === 'GENERATING' && (
-                                <span className="text-[12px] text-soul-indigo font-bold animate-pulse font-sans">
+                                <span className="text-[13.5px] text-soul-indigo font-bold animate-pulse font-sans">
                                   Gerando relatório…
                                 </span>
                               )}
@@ -376,7 +376,7 @@ export default async function AssessmentsPage() {
                               <a
                                 href={`${APP_URL}/test/${a.token}`}
                                 target="_blank"
-                                className="text-[13px] font-bold text-soul-terracota hover:underline font-sans"
+                                className="text-[14px] font-bold text-soul-terracota hover:underline font-sans"
                               >
                                 {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                               </a>
@@ -408,7 +408,7 @@ export default async function AssessmentsPage() {
                       <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
                       <div>
                         <div className="text-[15px] font-semibold text-soul-ink">{a.employee.name}</div>
-                        <div className="text-[13px] text-soul-ink/75 font-medium">{a.employee.email}</div>
+                        <div className="text-[14px] text-soul-ink/85 font-medium">{a.employee.email}</div>
                       </div>
                     </div>
                     <Badge variant={cfg.variant}>{cfg.label}</Badge>
@@ -417,9 +417,9 @@ export default async function AssessmentsPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span>{tInfo.emoji}</span>
-                      <span className="text-[14px] text-soul-ink font-semibold">{tInfo.label}</span>
+                      <span className="text-[15px] text-soul-ink font-semibold">{tInfo.label}</span>
                     </div>
-                    <span className="text-[12px] text-soul-ink/75 font-semibold">
+                    <span className="text-[13.5px] text-soul-ink/85 font-semibold">
                       {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                     </span>
                   </div>
@@ -428,21 +428,21 @@ export default async function AssessmentsPage() {
                     <div className="flex items-center gap-4 pt-1 flex-wrap">
                       <Link
                         href={`/dashboard/assessments/${a.id}`}
-                        className="text-[14px] text-soul-terracota font-bold hover:underline font-sans"
+                        className="text-[15px] text-soul-terracota font-bold hover:underline font-sans"
                       >
                         Ver devolutiva →
                       </Link>
                       <a
                         href={`/api/results/${a.id}/pdf`}
                         target="_blank"
-                        className="text-[14px] text-soul-ink font-bold hover:text-soul-terracota font-sans"
+                        className="text-[15px] text-soul-ink font-bold hover:text-soul-terracota font-sans"
                       >
                         Baixar PDF
                       </a>
                       {a.bundleId && bundleReportMap[a.bundleId] === 'COMPLETED' && (
                         <Link
                           href={`/dashboard/reports/${a.bundleId}`}
-                          className="text-[12px] font-bold px-3 py-1.5 rounded-full bg-soul-indigo text-white font-sans"
+                          className="text-[13.5px] font-bold px-3 py-1.5 rounded-full bg-soul-indigo text-white font-sans"
                         >
                           ✦ Relatório Cruzado
                         </Link>
@@ -455,7 +455,7 @@ export default async function AssessmentsPage() {
                       <a
                         href={`${APP_URL}/test/${a.token}`}
                         target="_blank"
-                        className="text-[14px] text-soul-terracota font-bold hover:underline font-sans"
+                        className="text-[15px] text-soul-terracota font-bold hover:underline font-sans"
                       >
                         {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                       </a>

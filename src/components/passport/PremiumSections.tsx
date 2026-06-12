@@ -24,22 +24,22 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
         style={{ background: `linear-gradient(135deg, ${c.paletteHex}18, ${c.paletteHex}05)`,
                  border: `1px solid ${c.paletteHex}33` }}
       >
-        <div className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: c.paletteHex }}>
+        <div className="text-[12px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: c.paletteHex }}>
           Relatório Premium
         </div>
         <h2 className="font-serif text-3xl sm:text-4xl font-bold text-soul-ink mb-3">{c.label}</h2>
-        <p className="text-soul-ink/75 text-lg">{c.pitchLine}</p>
+        <p className="text-soul-ink/85 text-lg">{c.pitchLine}</p>
       </header>
 
       {/* 1) ANATOMIA */}
       <Section number={1} title="Análise Profunda" accent={c.paletteHex}>
         <SubSection title={c.analysis.motor.title}>
-          <p className="text-soul-ink/75 mb-4">{c.analysis.motor.summary}</p>
+          <p className="text-soul-ink/85 mb-4">{c.analysis.motor.summary}</p>
           <BulletList items={c.analysis.motor.insights} />
         </SubSection>
 
         <SubSection title={c.analysis.shadow.title}>
-          <p className="text-soul-ink/75 mb-4">{c.analysis.shadow.summary}</p>
+          <p className="text-soul-ink/85 mb-4">{c.analysis.shadow.summary}</p>
           <div className="space-y-4">
             {c.analysis.shadow.blindspots.map((b, i) => (
               <div key={i} className="rounded-2xl bg-soul-parchment p-5 border border-soul-mist/60">
@@ -53,12 +53,12 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
         </SubSection>
 
         <SubSection title={c.analysis.fears.title}>
-          <p className="text-soul-ink/75 mb-4">{c.analysis.fears.summary}</p>
+          <p className="text-soul-ink/85 mb-4">{c.analysis.fears.summary}</p>
           <div className="grid sm:grid-cols-3 gap-4">
             {c.analysis.fears.items.map((f, i) => (
               <div key={i} className="rounded-2xl p-5 bg-soul-parchment border border-soul-mist/60">
                 <h4 className="font-bold text-soul-ink mb-2">{f.fear}</h4>
-                <p className="text-sm text-soul-ink/65 mb-3">{f.manifestation}</p>
+                <p className="text-sm text-soul-ink/78 mb-3">{f.manifestation}</p>
                 <p className="text-sm font-semibold" style={{ color: c.paletteHex }}>{f.decisionImpact}</p>
               </div>
             ))}
@@ -71,11 +71,11 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
         <div className="space-y-6">
           {c.career.map((play, i) => (
             <div key={i} className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
-              <div className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
+              <div className="text-[12px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
                 {play.context}
               </div>
               <h3 className="font-serif text-xl font-bold text-soul-ink mb-2">{play.headline}</h3>
-              <p className="text-soul-ink/70 text-sm mb-4">{play.diagnosis}</p>
+              <p className="text-soul-ink/80 text-sm mb-4">{play.diagnosis}</p>
               <div className="space-y-4">
                 {play.plays.map((p, j) => (
                   <div key={j} className="rounded-xl p-4" style={{ background: '#fafaf6' }}>
@@ -99,27 +99,27 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
         <div className="grid md:grid-cols-2 gap-5">
           <div className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
             <h3 className="font-serif text-xl font-bold mb-2">{c.communication.selfTalk.title}</h3>
-            <p className="text-soul-ink/70 text-sm mb-4">{c.communication.selfTalk.summary}</p>
+            <p className="text-soul-ink/80 text-sm mb-4">{c.communication.selfTalk.summary}</p>
             <div className="space-y-3">
               {c.communication.selfTalk.techniques.map((t, i) => (
                 <div key={i}>
                   <div className="font-semibold text-soul-ink">{t.name}</div>
-                  <p className="text-sm text-soul-ink/70">{t.how}</p>
+                  <p className="text-sm text-soul-ink/80">{t.how}</p>
                 </div>
               ))}
             </div>
           </div>
           <div className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
             <h3 className="font-serif text-xl font-bold mb-2">{c.communication.manualForOthers.title}</h3>
-            <p className="text-soul-ink/70 text-sm mb-4">{c.communication.manualForOthers.summary}</p>
+            <p className="text-soul-ink/80 text-sm mb-4">{c.communication.manualForOthers.summary}</p>
             <BulletList items={c.communication.manualForOthers.rules} />
             <h4 className="text-sm font-bold mt-4 mb-2 text-soul-ink">Scripts</h4>
             <div className="space-y-2">
               {c.communication.manualForOthers.scripts.map((s, i) => (
                 <div key={i} className="rounded-xl p-3 text-sm" style={{ background: '#fafaf6' }}>
                   <div className="font-semibold mb-1">{s.situation}</div>
-                  <p className="text-soul-ink/75"><span className="font-semibold" style={{ color: c.paletteHex }}>Diga:</span> "{s.sayThis}"</p>
-                  <p className="text-soul-ink/55 line-through mt-1">"{s.notThis}"</p>
+                  <p className="text-soul-ink/85"><span className="font-semibold" style={{ color: c.paletteHex }}>Diga:</span> "{s.sayThis}"</p>
+                  <p className="text-soul-ink/72 line-through mt-1">"{s.notThis}"</p>
                 </div>
               ))}
             </div>
@@ -132,14 +132,14 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
         <div className="space-y-5">
           {c.pdi.weeks.map(w => (
             <div key={w.week} className="rounded-2xl bg-soul-parchment p-6 border border-soul-mist/60">
-              <div className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
+              <div className="text-[12px] font-bold tracking-widest uppercase mb-1" style={{ color: c.paletteHex }}>
                 Semana {w.week}
               </div>
               <h3 className="font-serif text-xl font-bold mb-1">{w.theme}</h3>
-              <p className="text-soul-ink/70 text-sm mb-4">{w.summary}</p>
+              <p className="text-soul-ink/80 text-sm mb-4">{w.summary}</p>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-soul-ink/55 border-b border-soul-mist/60">
+                  <tr className="text-left text-soul-ink/72 border-b border-soul-mist/60">
                     <th className="py-2 pr-2 w-12">#</th>
                     <th className="py-2 pr-2 w-32">Foco</th>
                     <th className="py-2 pr-2">Tarefa</th>
@@ -151,9 +151,9 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
                   {w.days.map(d => (
                     <tr key={d.day} className="border-b border-soul-mist/40 last:border-0 align-top">
                       <td className="py-2 pr-2 font-semibold">{d.day}</td>
-                      <td className="py-2 pr-2 text-soul-ink/70">{d.focus}</td>
-                      <td className="py-2 pr-2 text-soul-ink/85">{d.task}</td>
-                      <td className="py-2 pr-2 text-soul-ink/55 italic">{d.metric}</td>
+                      <td className="py-2 pr-2 text-soul-ink/80">{d.focus}</td>
+                      <td className="py-2 pr-2 text-soul-ink/90">{d.task}</td>
+                      <td className="py-2 pr-2 text-soul-ink/72 italic">{d.metric}</td>
                       <td className="py-2 text-center">
                         <input type="checkbox" className="h-4 w-4 accent-current" />
                       </td>
@@ -181,12 +181,12 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
                 rel="noopener noreferrer"
                 className="block rounded-2xl bg-soul-parchment p-5 border border-soul-mist/60 hover:-translate-y-0.5 transition-all"
               >
-                <div className="text-[10px] font-bold tracking-widest uppercase mb-2" style={{ color: c.paletteHex }}>
+                <div className="text-[12px] font-bold tracking-widest uppercase mb-2" style={{ color: c.paletteHex }}>
                   {d.kind} · {d.pages} pp
                 </div>
                 <h4 className="font-serif text-lg font-bold text-soul-ink mb-2">{d.title}</h4>
-                <p className="text-sm text-soul-ink/65 mb-3">{d.pitch}</p>
-                <ul className="text-[12px] text-soul-ink/55 space-y-0.5">
+                <p className="text-sm text-soul-ink/78 mb-3">{d.pitch}</p>
+                <ul className="text-[13.5px] text-soul-ink/72 space-y-0.5">
                   {d.toc.slice(0, 4).map((t, i) => <li key={i}>· {t}</li>)}
                   {d.toc.length > 4 && <li className="italic">+ {d.toc.length - 4} tópicos</li>}
                 </ul>
@@ -197,7 +197,7 @@ export default function PremiumSections({ profileKey, reportId }: Props) {
             )
           })}
         </div>
-        <p className="mt-3 text-[11px] text-soul-ink/45 italic">
+        <p className="mt-3 text-[13px] text-soul-ink/68 italic">
           Cada PDF abre com uma capa personalizada com seu nome — distribuição autorizada apenas para você.
         </p>
       </Section>
@@ -229,7 +229,7 @@ function SubSection({ title, children }: { title: string; children: React.ReactN
 
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="space-y-2 text-soul-ink/80">
+    <ul className="space-y-2 text-soul-ink/88">
       {items.map((it, i) => (
         <li key={i} className="flex gap-2 leading-relaxed"><span className="font-bold opacity-50 mt-0.5">·</span>{it}</li>
       ))}
@@ -240,8 +240,8 @@ function BulletList({ items }: { items: string[] }) {
 function KV({ label, value, accent }: { label: string; value: string; accent?: string }) {
   return (
     <div className="mt-3">
-      <div className="text-[10px] font-bold tracking-widest uppercase" style={{ color: accent ?? '#0009' }}>{label}</div>
-      <p className="text-sm text-soul-ink/80">{value}</p>
+      <div className="text-[12px] font-bold tracking-widest uppercase" style={{ color: accent ?? '#0009' }}>{label}</div>
+      <p className="text-sm text-soul-ink/88">{value}</p>
     </div>
   )
 }
@@ -250,12 +250,12 @@ function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
   return (
     <div className="grid sm:grid-cols-2 gap-3 mt-2">
       <div>
-        <div className="text-[10px] font-bold tracking-widest uppercase text-emerald-700 mb-1.5">✓ Faça</div>
-        <ul className="space-y-1 text-sm text-soul-ink/80">{dos.map((d, i) => <li key={i}>· {d}</li>)}</ul>
+        <div className="text-[12px] font-bold tracking-widest uppercase text-emerald-700 mb-1.5">✓ Faça</div>
+        <ul className="space-y-1 text-sm text-soul-ink/88">{dos.map((d, i) => <li key={i}>· {d}</li>)}</ul>
       </div>
       <div>
-        <div className="text-[10px] font-bold tracking-widest uppercase text-rose-700 mb-1.5">✗ Não faça</div>
-        <ul className="space-y-1 text-sm text-soul-ink/80">{donts.map((d, i) => <li key={i}>· {d}</li>)}</ul>
+        <div className="text-[12px] font-bold tracking-widest uppercase text-rose-700 mb-1.5">✗ Não faça</div>
+        <ul className="space-y-1 text-sm text-soul-ink/88">{donts.map((d, i) => <li key={i}>· {d}</li>)}</ul>
       </div>
     </div>
   )

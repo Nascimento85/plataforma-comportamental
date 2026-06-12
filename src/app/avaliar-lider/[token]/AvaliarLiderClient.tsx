@@ -79,7 +79,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-7">
-          <span className="inline-block text-[12px] font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-4"
+          <span className="inline-block text-[13.5px] font-bold uppercase tracking-[0.18em] px-4 py-1.5 rounded-full mb-4"
                 style={{ background: 'rgba(217,188,106,0.14)', color: OURO, border: '1px solid rgba(217,188,106,0.35)' }}>
             Avaliação de Liderança · Anônima
           </span>
@@ -95,10 +95,10 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
         {etapa !== 'INTRO' && etapa !== 'OK' && (
           <div className="mb-7">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[13px] font-bold uppercase tracking-widest" style={{ color: 'rgba(243,239,231,0.8)' }}>
+              <span className="text-[14px] font-bold uppercase tracking-widest" style={{ color: 'rgba(243,239,231,0.8)' }}>
                 {respondidas} de {total} perguntas
               </span>
-              <span className="text-[13px] font-bold" style={{ color: OURO }}>{progresso}%</span>
+              <span className="text-[14px] font-bold" style={{ color: OURO }}>{progresso}%</span>
             </div>
             <div className="h-2.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.10)' }}>
               <div className="h-full rounded-full transition-all duration-300"
@@ -139,10 +139,10 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
               return (
                 <div key={pilar} className="rounded-3xl p-5 md:p-7 space-y-6" style={CARTAO}>
                   <div>
-                    <p className="text-[14px] font-bold uppercase tracking-widest" style={{ color: cor }}>
+                    <p className="text-[15px] font-bold uppercase tracking-widest" style={{ color: cor }}>
                       {info.rotulo}
                     </p>
-                    <p className="text-[14px] font-semibold mt-1" style={{ color: 'rgba(243,239,231,0.65)' }}>{info.subtitulo}</p>
+                    <p className="text-[15px] font-semibold mt-1" style={{ color: 'rgba(243,239,231,0.65)' }}>{info.subtitulo}</p>
                   </div>
                   {perguntas.map((p) => (
                     <div key={p.id} className="pt-5 first:pt-0" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
@@ -163,7 +163,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
                                     style={{ color: ativo ? '#17181c' : '#f3efe7' }}>
                                 {op.valor}
                               </span>
-                              <span className="text-[11px] md:text-[12px] font-bold leading-tight text-center"
+                              <span className="text-[13px] md:text-[13.5px] font-bold leading-tight text-center"
                                     style={{ color: ativo ? 'rgba(23,24,28,0.85)' : 'rgba(243,239,231,0.78)' }}>
                                 {op.label}
                               </span>
@@ -198,7 +198,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
                       placeholder="Situação: ... Comportamento: ... Impacto: ..."
                       className="w-full rounded-2xl px-4 py-3.5 text-[16px] font-medium resize-none outline-none"
                       style={{ background: 'rgba(255,255,255,0.07)', border: '2px solid rgba(255,255,255,0.18)', color: '#f3efe7' }} />
-            <p className="text-[14px] font-semibold" style={{ color: 'rgba(243,239,231,0.65)' }}>
+            <p className="text-[15px] font-semibold" style={{ color: 'rgba(243,239,231,0.65)' }}>
               🔒 Este relato é exibido ao líder junto com outros, em ordem embaralhada, sem qualquer identificação.
             </p>
             {erro && (
@@ -232,7 +232,7 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
               Obrigado pela sua honestidade. Sua resposta foi registrada de forma
               <strong className="text-white"> 100% anônima</strong> e vai ajudar a construir uma liderança melhor no seu time.
             </p>
-            <p className="text-[14px] font-semibold" style={{ color: 'rgba(243,239,231,0.6)' }}>Você já pode fechar esta página.</p>
+            <p className="text-[15px] font-semibold" style={{ color: 'rgba(243,239,231,0.6)' }}>Você já pode fechar esta página.</p>
           </div>
         )}
       </div>

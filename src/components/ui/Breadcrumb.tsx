@@ -68,24 +68,24 @@ export default function Breadcrumb() {
 
   return (
     <nav aria-label="Breadcrumb" className="mb-5 nr1-print-hide">
-      <ol className="flex flex-wrap items-center gap-1.5 text-[12.5px] font-medium">
+      <ol className="flex flex-wrap items-center gap-1.5 text-[13.5px] font-medium">
         {crumbs.map((c, i) => (
           <li key={c.href} className="flex items-center gap-1.5">
             {i > 0 && (
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                   className="text-soul-ink/35 flex-shrink-0">
+                   className="text-soul-ink/62 flex-shrink-0">
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             )}
             {c.isLast || c.isId || c.isNonNavigable ? (
-              <span className={c.isLast ? 'text-soul-ink font-semibold' : 'text-soul-ink/55'}>
+              <span className={c.isLast ? 'text-soul-ink font-semibold' : 'text-soul-ink/72'}>
                 {c.label}
               </span>
             ) : (
               <Link
                 href={c.href}
-                className="text-soul-ink/55 hover:text-soul-terracota transition-colors"
+                className="text-soul-ink/72 hover:text-soul-terracota transition-colors"
               >
                 {c.label}
               </Link>

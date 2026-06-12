@@ -36,7 +36,7 @@ export default async function ProfilePage() {
         <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
           Meu Perfil
         </h1>
-        <p className="text-[15px] text-soul-ink/75 mt-1.5 font-medium">
+        <p className="text-[15px] text-soul-ink/85 mt-1.5 font-medium">
           Mantenha suas informações atualizadas — algumas aparecem em relatórios e em comunicações da plataforma.
         </p>
       </div>

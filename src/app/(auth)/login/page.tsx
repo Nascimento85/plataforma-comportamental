@@ -52,7 +52,7 @@ export default function LoginPage({ searchParams }: PageProps) {
             </svg>
           </div>
           <h1 className="font-serif font-semibold text-3xl text-white mb-1">Psique</h1>
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em]" style={{ color: '#c9a84c' }}>
+          <p className="text-[13.5px] font-bold uppercase tracking-[0.2em]" style={{ color: '#c9a84c' }}>
             Mapa Comportamental
           </p>
           <p className="text-sm font-sans font-medium mt-2" style={{ color: 'rgba(255,255,255,0.65)' }}>
@@ -98,7 +98,7 @@ export default function LoginPage({ searchParams }: PageProps) {
         </div>
 
         {/* Rodapé */}
-        <p className="text-center text-[11px] mt-6 font-sans" style={{ color: 'rgba(255,255,255,0.2)' }}>
+        <p className="text-center text-[13px] mt-6 font-sans" style={{ color: 'rgba(255,255,255,0.2)' }}>
           Mapa Comportamental Arquetípico
         </p>
       </div>

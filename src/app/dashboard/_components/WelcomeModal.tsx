@@ -75,7 +75,7 @@ export default function WelcomeModal({
             onClick={close}
             aria-label="Fechar"
             className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center
-                       text-soul-ink/60 hover:text-soul-ink hover:bg-white/30 transition-colors"
+                       text-soul-ink/75 hover:text-soul-ink hover:bg-white/30 transition-colors"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -86,7 +86,7 @@ export default function WelcomeModal({
           <h2 className="font-serif font-bold text-2xl text-soul-ink leading-tight">
             Bem-vindo(a), {firstName}!
           </h2>
-          <p className="text-[14px] font-semibold text-soul-ink/80 mt-1">
+          <p className="text-[15px] font-semibold text-soul-ink/88 mt-1">
             Seu Passaporte de Autoconhecimento foi ativado
           </p>
         </div>
@@ -102,17 +102,17 @@ export default function WelcomeModal({
               border: '1.5px solid rgba(196,99,58,0.2)',
             }}
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-soul-ink/65 mb-1">
+            <p className="text-[13px] font-bold uppercase tracking-[0.16em] text-soul-ink/78 mb-1">
               🎟️ Passaporte Ativo
             </p>
             <p className="font-serif font-bold leading-none"
                style={{ fontSize: '54px', color: '#e09070' }}>
               +{initialCredits}
             </p>
-            <p className="text-[14px] font-bold text-soul-ink/80 mt-1">
+            <p className="text-[15px] font-bold text-soul-ink/88 mt-1">
               créditos válidos por 7 dias
             </p>
-            <p className="text-[12px] font-medium mt-1.5" style={{ color: '#e09070' }}>
+            <p className="text-[13.5px] font-medium mt-1.5" style={{ color: '#e09070' }}>
               ⏳ Use antes que expirem — depois disso, zeram automaticamente
             </p>
           </div>
@@ -122,7 +122,7 @@ export default function WelcomeModal({
             <p className="text-[15px] font-semibold text-soul-ink leading-snug">
               <span className="font-serif italic">Quer dobrar seu Passaporte?</span>
             </p>
-            <p className="text-[14px] text-soul-ink/70 font-medium leading-relaxed mt-1.5">
+            <p className="text-[15px] text-soul-ink/80 font-medium leading-relaxed mt-1.5">
               Complete seu perfil e ganhe <strong className="text-soul-terracota">+{bonusCredits} créditos extras</strong> (também válidos por 7 dias).
               Total de <strong>{total} créditos</strong> para iniciar sua jornada.
             </p>
@@ -140,7 +140,7 @@ export default function WelcomeModal({
             <Link
               href="/dashboard/profile"
               onClick={close}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[14px] font-bold text-white
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-bold text-white
                          shadow-terra hover:-translate-y-px transition-all"
               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
             >
@@ -149,7 +149,7 @@ export default function WelcomeModal({
             <button
               type="button"
               onClick={close}
-              className="text-[13px] font-semibold text-soul-ink/55 hover:text-soul-ink py-2 transition-colors"
+              className="text-[14px] font-semibold text-soul-ink/72 hover:text-soul-ink py-2 transition-colors"
             >
               Mais tarde
             </button>
@@ -164,7 +164,7 @@ function BenefitRow({ icon, text }: { icon: string; text: string }) {
   return (
     <div className="flex items-start gap-2.5">
       <span className="text-base mt-0.5">{icon}</span>
-      <p className="text-[13px] text-soul-ink/75 font-medium leading-snug flex-1">{text}</p>
+      <p className="text-[14px] text-soul-ink/85 font-medium leading-snug flex-1">{text}</p>
     </div>
   )
 }

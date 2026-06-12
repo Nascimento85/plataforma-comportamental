@@ -59,7 +59,7 @@ export default function ProgressBar({
     <div className={className}>
       {(showLabel || label) && (
         <div className="flex justify-between items-center mb-1.5">
-          {label && <span className="text-xs text-soul-ink/50">{label}</span>}
+          {label && <span className="text-xs text-soul-ink/70">{label}</span>}
           {showLabel && (
             <span className="text-xs font-medium text-soul-terracota ml-auto">
               {Math.round(pct)}%

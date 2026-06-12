@@ -79,14 +79,14 @@ export default async function DownloadsPage() {
 
       {/* ── Header ── */}
       <div>
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
+        <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
               style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Premium · Downloads
         </span>
         <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
           Meus <span className="text-soul-terracota italic font-normal">Downloads</span>
         </h1>
-        <p className="text-base md:text-lg text-soul-ink/85 mt-3 font-medium max-w-3xl leading-relaxed">
+        <p className="text-base md:text-lg text-soul-ink/90 mt-3 font-medium max-w-3xl leading-relaxed">
           PDFs personalizados com seu nome, prontos para imprimir e levar pra reunião.
           Cada material é gerado dinamicamente — capa, sumário e capítulos com sua marca.
         </p>
@@ -116,15 +116,15 @@ export default async function DownloadsPage() {
                   📘
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-1"
+                  <span className="inline-block text-[12px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full mb-1"
                         style={{ background: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }}>
                     {pb.badge}
                   </span>
                   <h3 className="font-serif font-semibold text-lg text-soul-ink leading-tight">{pb.titulo}</h3>
                 </div>
               </div>
-              <p className="text-[13px] text-soul-ink/80 font-medium leading-relaxed mb-3">{pb.subtitulo}</p>
-              <p className="text-[12px] font-bold text-soul-terracota group-hover:underline">
+              <p className="text-[14px] text-soul-ink/88 font-medium leading-relaxed mb-3">{pb.subtitulo}</p>
+              <p className="text-[13.5px] font-bold text-soul-terracota group-hover:underline">
                 Ler playbook →
               </p>
             </Link>
@@ -186,7 +186,7 @@ export default async function DownloadsPage() {
           <h2 className="font-serif text-xl font-semibold text-soul-ink mb-2">
             Nenhum download ainda
           </h2>
-          <p className="text-soul-ink/70 max-w-md mx-auto mb-6">
+          <p className="text-soul-ink/80 max-w-md mx-auto mb-6">
             Quando você concluir um teste e desbloquear o Premium, todos os
             materiais aparecem aqui prontos para baixar.
           </p>
@@ -201,7 +201,7 @@ export default async function DownloadsPage() {
 
       {/* ── Footer info ── */}
       {reports.length > 0 && (
-        <p className="text-[12px] text-soul-ink/50 italic pt-2">
+        <p className="text-[13.5px] text-soul-ink/70 italic pt-2">
           Cada PDF tem capa personalizada com seu nome e é gerado sob demanda.
           Distribuição autorizada apenas para o usuário avaliado.
         </p>
@@ -226,7 +226,7 @@ function StatCard({
   }[tone]
   return (
     <div className={`rounded-3xl p-5 border ${toneClass}`}>
-      <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/55">{label}</p>
+      <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/72">{label}</p>
       <p className="font-serif text-3xl font-semibold text-soul-ink mt-2 leading-none">{value}</p>
     </div>
   )
@@ -236,7 +236,7 @@ function SectionHeading({ title, subtitle }: { title: string; subtitle?: string 
   return (
     <div className="mb-3">
       <h2 className="font-serif text-2xl font-semibold text-soul-ink">{title}</h2>
-      {subtitle && <p className="text-[14px] text-soul-ink/65 font-medium">{subtitle}</p>}
+      {subtitle && <p className="text-[15px] text-soul-ink/78 font-medium">{subtitle}</p>}
     </div>
   )
 }
@@ -266,19 +266,19 @@ function ReportDownloadGroup({
           background: profile
             ? `linear-gradient(135deg, ${profile.paletteHex}11, ${profile.paletteHex}03)`
             : '#fafaf6',
-          borderBottom: '1px solid rgba(240,236,227,0.06)',
+          borderBottom: '1px solid rgba(240,236,227,0.42)',
         }}
       >
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] mb-1"
+          <p className="text-[13px] font-bold uppercase tracking-[0.18em] mb-1"
              style={{ color: profile?.paletteHex ?? '#a8522e' }}>
             {testLabel}
           </p>
           <h3 className="font-serif text-xl font-bold text-soul-ink">
             {profile ? profile.label : 'Relatório'}
-            {primaryProfile && !isDISC && <span className="text-soul-ink/55 font-medium"> · {primaryProfile}</span>}
+            {primaryProfile && !isDISC && <span className="text-soul-ink/72 font-medium"> · {primaryProfile}</span>}
           </h3>
-          <p className="text-[13px] text-soul-ink/60 mt-1">
+          <p className="text-[14px] text-soul-ink/75 mt-1">
             {employeeName} · {fmtDate(createdAt)}
           </p>
         </div>
@@ -305,19 +305,19 @@ function ReportDownloadGroup({
                 rel="noopener noreferrer"
                 className="block rounded-2xl border border-soul-mist/60 p-5 hover:border-soul-terracota/40 hover:-translate-y-0.5 transition-all bg-soul-parchment"
               >
-                <div className="text-[10px] font-bold tracking-widest uppercase mb-2"
+                <div className="text-[12px] font-bold tracking-widest uppercase mb-2"
                      style={{ color: profile.paletteHex }}>
                   {d.kind} · {d.pages} pp
                 </div>
                 <h4 className="font-serif text-lg font-bold text-soul-ink mb-2 leading-tight">{d.title}</h4>
-                <p className="text-sm text-soul-ink/65 mb-3 line-clamp-3">{d.pitch}</p>
-                <p className="text-[12px] font-bold text-soul-terracota">Baixar PDF →</p>
+                <p className="text-sm text-soul-ink/78 mb-3 line-clamp-3">{d.pitch}</p>
+                <p className="text-[13.5px] font-bold text-soul-terracota">Baixar PDF →</p>
               </a>
             ))}
           </div>
         )}
         {!profile && (
-          <p className="text-[14px] text-soul-ink/65 font-medium">
+          <p className="text-[15px] text-soul-ink/78 font-medium">
             PDFs personalizados ainda não estão disponíveis para este tipo de teste.
           </p>
         )}

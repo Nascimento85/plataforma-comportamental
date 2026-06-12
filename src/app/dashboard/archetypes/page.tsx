@@ -205,20 +205,20 @@ function ArchetypeCard({ a }: { a: Archetype }) {
         </div>
         <div>
           <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{a.name}</p>
-          <p className="text-[13px] font-semibold text-soul-ink/70 italic mt-0.5">{a.title}</p>
+          <p className="text-[14px] font-semibold text-soul-ink/80 italic mt-0.5">{a.title}</p>
         </div>
       </div>
-      <p className="text-[14px] text-soul-ink/85 font-medium leading-relaxed relative">
+      <p className="text-[15px] text-soul-ink/90 font-medium leading-relaxed relative">
         {a.description}
       </p>
       <div className="grid grid-cols-2 gap-2 pt-2 border-t border-soul-mist/60 relative">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-wider text-soul-sage">Dom</p>
-          <p className="text-[13px] text-soul-ink font-medium mt-0.5 leading-snug">{a.gift}</p>
+          <p className="text-[13px] font-bold uppercase tracking-wider text-soul-sage">Dom</p>
+          <p className="text-[14px] text-soul-ink font-medium mt-0.5 leading-snug">{a.gift}</p>
         </div>
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-wider text-soul-rose">Sombra</p>
-          <p className="text-[13px] text-soul-ink font-medium mt-0.5 leading-snug">{a.shadow}</p>
+          <p className="text-[13px] font-bold uppercase tracking-wider text-soul-rose">Sombra</p>
+          <p className="text-[14px] text-soul-ink font-medium mt-0.5 leading-snug">{a.shadow}</p>
         </div>
       </div>
     </div>
@@ -243,16 +243,16 @@ function Section({
           <h2 className="font-serif text-3xl font-semibold text-soul-ink leading-tight">
             {title}
           </h2>
-          <p className="text-[15px] text-soul-ink/75 font-medium mt-1 max-w-3xl">
+          <p className="text-[15px] text-soul-ink/85 font-medium mt-1 max-w-3xl">
             {subtitle}
           </p>
         </div>
         {cta && (
           <div className="flex flex-col sm:flex-row sm:items-end gap-3 flex-shrink-0">
             <div className="text-right">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
+              <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/72">Investimento</p>
               <p className="font-serif text-lg font-bold text-soul-ink leading-none">
-                {cta.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{cta.credits > 1 ? 's' : ''}</span>
+                {cta.credits} <span className="text-[13.5px] text-soul-ink/75 font-medium">crédito{cta.credits > 1 ? 's' : ''}</span>
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-[260px]">
@@ -284,7 +284,7 @@ export default async function ArchetypesPage() {
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">
           Catálogo de <span className="text-soul-terracota italic font-normal">Arquétipos</span>
         </h1>
-        <p className="text-base md:text-lg text-soul-ink/75 mt-3 font-medium max-w-3xl leading-relaxed">
+        <p className="text-base md:text-lg text-soul-ink/85 mt-3 font-medium max-w-3xl leading-relaxed">
           Os arquétipos são padrões psíquicos universais identificados por Carl Jung. Conhecê-los é compreender as
           forças profundas que moldam decisão, comportamento e liderança. Explore as três linhagens que a Psique mapeia.
         </p>
@@ -295,10 +295,10 @@ export default async function ArchetypesPage() {
            style={{ background: 'linear-gradient(135deg, rgba(196,99,58,0.08), rgba(201,168,76,0.12))', border: '1px solid rgba(201,168,76,0.25)' }}>
         <div className="max-w-xl">
           <p className="font-serif text-xl font-semibold text-soul-ink">Descubra seu arquétipo dominante</p>
-          <p className="text-[14px] text-soul-ink/75 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/85 font-medium mt-1">
             Teste completo dos 12 Arquétipos Junguianos com leitura integrada do dominante + secundário, sombra e jornada de amadurecimento.
           </p>
-          <p className="text-[12px] text-soul-ink/55 font-semibold mt-1">{TEST_PRICE.ARCHETYPE} créditos · O mais completo</p>
+          <p className="text-[13.5px] text-soul-ink/72 font-semibold mt-1">{TEST_PRICE.ARCHETYPE} créditos · O mais completo</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 min-w-[260px]">
           <SelfStartTestButton testType="ARCHETYPE" label="Fazer Arquétipos agora" fullWidth />

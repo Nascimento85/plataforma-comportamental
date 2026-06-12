@@ -59,7 +59,7 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <h1 className="font-serif font-semibold text-2xl text-white mb-1">Recuperar senha</h1>
-          <p className="text-[12px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="text-[13.5px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
             Digite seu e-mail para receber o link de redefinição
           </p>
         </div>

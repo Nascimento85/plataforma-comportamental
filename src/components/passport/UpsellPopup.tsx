@@ -97,13 +97,13 @@ export default function UpsellPopup({
         <button
           onClick={() => setOpen(false)}
           aria-label="Fechar"
-          className="absolute top-3 right-3 h-8 w-8 rounded-full text-soul-ink/60 hover:bg-soul-mist/40"
+          className="absolute top-3 right-3 h-8 w-8 rounded-full text-soul-ink/75 hover:bg-soul-mist/40"
         >
           ×
         </button>
 
         {/* Tag de escassez */}
-        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase mb-4"
+        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[12px] font-bold tracking-[0.16em] uppercase mb-4"
              style={{ background: '#fff3e0', color: '#a04a1f' }}>
           <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse" />
           Oferta termina em {mm}:{ss}
@@ -112,13 +112,13 @@ export default function UpsellPopup({
         <h3 className="font-serif text-2xl sm:text-3xl font-bold text-soul-ink leading-tight mb-3">
           Você acaba de descobrir que seu perfil é <span style={{ color: '#e09070' }}>{profileName}</span>.
         </h3>
-        <p className="text-soul-ink/75 font-sans text-base mb-5">
+        <p className="text-soul-ink/85 font-sans text-base mb-5">
           Quer saber como usar isso para vender 2x mais e liderar com maestria?
           Desbloqueie seu <strong>Relatório Premium + PDI</strong> agora por apenas{' '}
           <strong>R$ {priceBrl}</strong>.
         </p>
 
-        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-soul-ink/80 font-sans mb-6">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-soul-ink/88 font-sans mb-6">
           <li>✨ Como se comunicar</li>
           <li>👑 Como liderar este perfil</li>
           <li>🌑 Medos inconscientes</li>
@@ -136,7 +136,7 @@ export default function UpsellPopup({
 
         <button
           onClick={() => setOpen(false)}
-          className="block w-full text-center text-[12px] text-soul-ink/45 mt-3 font-sans hover:text-soul-ink/70"
+          className="block w-full text-center text-[13.5px] text-soul-ink/68 mt-3 font-sans hover:text-soul-ink/80"
         >
           Continuar com o relatório básico
         </button>

@@ -72,7 +72,7 @@ export default async function TestPage({ params }: PageProps) {
             <h2 className="font-serif font-semibold text-2xl text-soul-ink">
               {allBundleDone ? 'Bundle concluído!' : 'Teste concluído!'}
             </h2>
-            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.5)' }}>
+            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
               {allBundleDone
                 ? 'Você completou todos os 4 testes comportamentais!'
                 : 'Aqui está o resumo do seu perfil identificado:'}
@@ -86,8 +86,8 @@ export default async function TestPage({ params }: PageProps) {
           {/* Progresso do bundle */}
           {assessment.bundleId && bundleProgress.length > 0 && (
             <div className="bg-soul-parchment rounded-3xl p-5" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
-              <p className="text-[10px] font-sans font-semibold uppercase tracking-[0.15em] mb-3"
-                 style={{ color: 'rgba(240,236,227,0.35)' }}>
+              <p className="text-[12px] font-sans font-semibold uppercase tracking-[0.15em] mb-3"
+                 style={{ color: 'rgba(240,236,227,0.68)' }}>
                 Progresso do bundle
               </p>
               <div className="space-y-2.5">
@@ -97,7 +97,7 @@ export default async function TestPage({ params }: PageProps) {
                          style={item.completed ? {
                            background: 'rgba(122,158,126,0.15)', color: '#5a8a5e', border: '1px solid rgba(122,158,126,0.3)',
                          } : {
-                           background: 'rgba(58,61,69,0.5)', color: 'rgba(240,236,227,0.35)', border: '1px solid rgba(58,61,69,0.8)',
+                           background: 'rgba(58,61,69,0.5)', color: 'rgba(240,236,227,0.68)', border: '1px solid rgba(58,61,69,0.8)',
                          }}>
                       {item.completed ? '✓' : i + 1}
                     </div>
@@ -146,7 +146,7 @@ export default async function TestPage({ params }: PageProps) {
         <div className="text-center py-16">
           <div className="text-6xl mb-4">⏰</div>
           <h2 className="font-serif font-semibold text-2xl text-soul-ink">Link expirado</h2>
-          <p className="text-sm font-sans mt-2" style={{ color: 'rgba(240,236,227,0.5)' }}>
+          <p className="text-sm font-sans mt-2" style={{ color: 'rgba(240,236,227,0.68)' }}>
             Este link de avaliação expirou. Solicite um novo link à sua empresa.
           </p>
         </div>
@@ -179,7 +179,7 @@ function TestShell({ children }: { children: React.ReactNode }) {
               <circle cx="45" cy="45" r="5" fill="white" opacity="0.9"/>
             </svg>
           </div>
-          <span className="font-serif font-semibold text-base text-soul-ink">Psique <span className="text-soul-ink/60 font-normal">— Mapa Comportamental</span></span>
+          <span className="font-serif font-semibold text-base text-soul-ink">Psique <span className="text-soul-ink/75 font-normal">— Mapa Comportamental</span></span>
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-8">{children}</main>

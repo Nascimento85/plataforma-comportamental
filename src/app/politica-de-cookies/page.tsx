@@ -73,13 +73,13 @@ export default function PoliticaDeCookiesPage() {
     <div className="min-h-screen" style={{ background: '#17181c' }}>
       <main className="max-w-3xl mx-auto px-5 py-12 sm:py-16">
 
-        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">
+        <p className="text-[13px] font-bold uppercase tracking-[0.18em] text-soul-terracota mb-3">
           Documento legal · LGPD
         </p>
         <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-soul-ink leading-tight mb-2">
           Política de Cookies
         </h1>
-        <p className="text-[13px] text-soul-ink/60 mb-8">
+        <p className="text-[14px] text-soul-ink/75 mb-8">
           Última atualização: {LAST_UPDATE}
         </p>
 
@@ -91,14 +91,14 @@ export default function PoliticaDeCookiesPage() {
             <p className="font-serif text-lg font-semibold text-soul-ink">
               Gerenciar minhas preferências
             </p>
-            <p className="text-[13px] text-soul-ink/65 mt-1">
+            <p className="text-[14px] text-soul-ink/78 mt-1">
               Você pode alterar a qualquer momento o que consentiu.
             </p>
           </div>
           <CookiePrefsButton />
         </div>
 
-        <article className="space-y-6 text-soul-ink/85 text-[15px] leading-relaxed">
+        <article className="space-y-6 text-soul-ink/90 text-[15px] leading-relaxed">
 
           <Section title="1. O que são cookies">
             <p>
@@ -142,8 +142,8 @@ export default function PoliticaDeCookiesPage() {
 
           <Section title="4. Cookies utilizados">
             <div className="rounded-2xl border border-soul-mist/60 bg-soul-parchment overflow-hidden -mx-1 sm:mx-0">
-              <table className="w-full text-[13px]">
-                <thead className="bg-soul-mist/30 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
+              <table className="w-full text-[14px]">
+                <thead className="bg-soul-mist/30 text-soul-ink/78 text-[13px] font-bold uppercase tracking-wider">
                   <tr>
                     <th className="text-left px-4 py-3">Nome</th>
                     <th className="text-left px-4 py-3">Categoria</th>
@@ -155,22 +155,22 @@ export default function PoliticaDeCookiesPage() {
                 <tbody className="divide-y divide-soul-mist/40">
                   {COOKIES.map(c => (
                     <tr key={c.name} className="align-top">
-                      <td className="px-4 py-3 font-mono text-[12px]">{c.name}</td>
+                      <td className="px-4 py-3 font-mono text-[13.5px]">{c.name}</td>
                       <td className="px-4 py-3">
-                        <span className="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold"
+                        <span className="inline-block px-2 py-0.5 rounded-full text-[13px] font-semibold"
                           style={{ background: 'rgba(196,99,58,0.12)', color: '#e09070' }}>
                           {c.category}
                         </span>
                       </td>
-                      <td className="px-4 py-3 hidden sm:table-cell text-soul-ink/75">{c.purpose}</td>
-                      <td className="px-4 py-3 hidden md:table-cell text-soul-ink/65">{c.duration}</td>
-                      <td className="px-4 py-3 hidden md:table-cell text-soul-ink/65">{c.provider}</td>
+                      <td className="px-4 py-3 hidden sm:table-cell text-soul-ink/85">{c.purpose}</td>
+                      <td className="px-4 py-3 hidden md:table-cell text-soul-ink/78">{c.duration}</td>
+                      <td className="px-4 py-3 hidden md:table-cell text-soul-ink/78">{c.provider}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-[12px] text-soul-ink/55 italic mt-2">
+            <p className="text-[13.5px] text-soul-ink/72 italic mt-2">
               Cookies de terceiros (Google Analytics, Meta) são definidos somente após
               consentimento explícito.
             </p>
@@ -196,7 +196,7 @@ export default function PoliticaDeCookiesPage() {
           </Section>
         </article>
 
-        <div className="mt-12 pt-6 border-t border-soul-mist/60 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-soul-ink/60">
+        <div className="mt-12 pt-6 border-t border-soul-mist/60 flex flex-wrap gap-x-6 gap-y-2 text-[14px] text-soul-ink/75">
           <Link href="/politica-de-privacidade" className="hover:text-soul-terracota">Política de Privacidade</Link>
           <Link href="/termos-de-uso"           className="hover:text-soul-terracota">Termos de Uso</Link>
           <Link href="/"                        className="hover:text-soul-terracota">Voltar para a Home</Link>

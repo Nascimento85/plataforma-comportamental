@@ -94,7 +94,7 @@ export default function LoginForm() {
             Senha
           </label>
           <Link href="/forgot-password"
-                className="text-[11px] font-sans transition-colors hover:opacity-80"
+                className="text-[13px] font-sans transition-colors hover:opacity-80"
                 style={{ color: 'rgba(201,168,76,0.7)' }}>
             Esqueci minha senha
           </Link>

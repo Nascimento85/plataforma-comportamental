@@ -49,7 +49,7 @@ export default async function ReportsPage() {
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
           Relatórios
         </h1>
-        <p className="text-base text-soul-ink/75 mt-2 font-medium max-w-2xl">
+        <p className="text-base text-soul-ink/85 mt-2 font-medium max-w-2xl">
           Todas as devolutivas concluídas da sua empresa — individuais e integradas. Baixe em PDF ou abra a leitura completa.
         </p>
       </div>
@@ -57,15 +57,15 @@ export default async function ReportsPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/65">Total</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/78">Total</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{totalReports}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-terracota">Integrados (Bundle)</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-terracota">Integrados (Bundle)</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{bundleReports.length}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-indigo">Individuais</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-indigo">Individuais</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{individualResults.length}</p>
         </div>
       </div>
@@ -77,12 +77,12 @@ export default async function ReportsPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink mb-2">
             Nenhum relatório concluído ainda
           </h2>
-          <p className="text-base text-soul-ink/75 font-medium max-w-md mx-auto mb-6">
+          <p className="text-base text-soul-ink/85 font-medium max-w-md mx-auto mb-6">
             Quando um candidato concluir uma avaliação, o relatório aparecerá aqui pronto para download.
           </p>
           <Link
             href="/dashboard/assessments"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-semibold text-white
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-semibold text-white
                        shadow-terra hover:-translate-y-px transition-all"
             style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
           >
@@ -98,7 +98,7 @@ export default async function ReportsPage() {
             <h2 className="font-serif text-2xl font-semibold text-soul-ink">
               Devolutivas integradas
             </h2>
-            <p className="text-[14px] text-soul-ink/70 font-medium">
+            <p className="text-[15px] text-soul-ink/80 font-medium">
               Relatórios que cruzam múltiplos testes em uma leitura unificada.
             </p>
           </div>
@@ -110,10 +110,10 @@ export default async function ReportsPage() {
                     <p className="font-serif text-lg font-semibold text-soul-ink leading-tight">
                       {br.employee.name}
                     </p>
-                    <p className="text-[13px] text-soul-ink/70 font-medium mt-0.5">{br.employee.email}</p>
+                    <p className="text-[14px] text-soul-ink/80 font-medium mt-0.5">{br.employee.email}</p>
                   </div>
                   <span
-                    className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold"
+                    className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-semibold"
                     style={{
                       background: br.status === 'COMPLETED' ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',
                       color: br.status === 'COMPLETED' ? '#4a7a4e' : '#8a5c1e',
@@ -122,12 +122,12 @@ export default async function ReportsPage() {
                     {br.status === 'COMPLETED' ? 'Pronto' : br.status === 'GENERATING' ? 'Gerando…' : 'Pendente'}
                   </span>
                 </div>
-                <p className="text-[13px] text-soul-ink/65 font-medium mb-4">
+                <p className="text-[14px] text-soul-ink/78 font-medium mb-4">
                   {br.createdAt.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
                 </p>
                 <Link
                   href={`/dashboard/reports/${br.bundleId}`}
-                  className="inline-flex items-center gap-2 w-full justify-center py-2.5 rounded-full text-[13px] font-bold
+                  className="inline-flex items-center gap-2 w-full justify-center py-2.5 rounded-full text-[14px] font-bold
                              border-2 transition-all"
                   style={{ borderColor: 'rgba(196,99,58,0.4)', color: '#c4633a' }}
                 >
@@ -146,7 +146,7 @@ export default async function ReportsPage() {
             <h2 className="font-serif text-2xl font-semibold text-soul-ink">
               Relatórios individuais
             </h2>
-            <p className="text-[14px] text-soul-ink/70 font-medium">
+            <p className="text-[15px] text-soul-ink/80 font-medium">
               Devolutivas geradas a partir de um único teste.
             </p>
           </div>
@@ -155,16 +155,16 @@ export default async function ReportsPage() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-soul-mist/70 bg-soul-parchment/40">
-                    <th className="text-left px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70">
+                    <th className="text-left px-6 py-4 text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80">
                       Candidato
                     </th>
-                    <th className="text-left px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 hidden md:table-cell">
+                    <th className="text-left px-6 py-4 text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 hidden md:table-cell">
                       Teste
                     </th>
-                    <th className="text-left px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 hidden lg:table-cell">
+                    <th className="text-left px-6 py-4 text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 hidden lg:table-cell">
                       Concluído
                     </th>
-                    <th className="text-right px-6 py-4 text-[12px] font-bold uppercase tracking-widest text-soul-ink/70">
+                    <th className="text-right px-6 py-4 text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80">
                       Ação
                     </th>
                   </tr>
@@ -174,15 +174,15 @@ export default async function ReportsPage() {
                     <tr key={r.id} className="border-b border-soul-mist/50 hover:bg-soul-parchment/30 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-semibold text-[15px] text-soul-ink">{r.employee.name}</div>
-                        <div className="text-[13px] text-soul-ink/70 font-medium mt-0.5">{r.employee.email}</div>
+                        <div className="text-[14px] text-soul-ink/80 font-medium mt-0.5">{r.employee.email}</div>
                       </td>
                       <td className="px-6 py-4 hidden md:table-cell">
-                        <div className="text-[14px] font-semibold text-soul-ink">
+                        <div className="text-[15px] font-semibold text-soul-ink">
                           {TEST_LABELS[r.testType] ?? r.testType}
                         </div>
                       </td>
                       <td className="px-6 py-4 hidden lg:table-cell">
-                        <div className="text-[14px] font-medium text-soul-ink/85">
+                        <div className="text-[15px] font-medium text-soul-ink/90">
                           {r.completedAt?.toLocaleDateString('pt-BR') ?? '—'}
                         </div>
                       </td>
@@ -190,7 +190,7 @@ export default async function ReportsPage() {
                         <div className="inline-flex gap-2">
                           <Link
                             href={`/result/${r.id}`}
-                            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[12px] font-bold
+                            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13.5px] font-bold
                                        border transition-colors hover:border-soul-terracota hover:text-soul-terracota"
                             style={{ borderColor: 'rgba(58,61,69,0.9)', color: '#f0ece3' }}
                           >
@@ -200,7 +200,7 @@ export default async function ReportsPage() {
                             href={`/api/results/${r.id}/pdf`}
                             target="_blank"
                             rel="noopener"
-                            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[12px] font-bold text-white
+                            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13.5px] font-bold text-white
                                        shadow-terra hover:-translate-y-px transition-all"
                             style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
                           >

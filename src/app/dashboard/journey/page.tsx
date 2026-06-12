@@ -46,7 +46,7 @@ export default async function JourneyPage() {
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
           Minha Jornada
         </h1>
-        <p className="text-base text-soul-ink/75 mt-2 font-medium max-w-2xl">
+        <p className="text-base text-soul-ink/85 mt-2 font-medium max-w-2xl">
           O registro completo de cada avaliação enviada — concluídas, em andamento e pendentes.
           Acompanhe o progresso do mapeamento comportamental da sua empresa.
         </p>
@@ -55,19 +55,19 @@ export default async function JourneyPage() {
       {/* Resumo */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/65">Total</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/78">Total</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{all.length}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-sage">Concluídas</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-sage">Concluídas</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{completed.length}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-amber">Em andamento</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-amber">Em andamento</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{inProgress.length}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-rose">Expiradas</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-rose">Expiradas</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{expired.length}</p>
         </div>
       </div>
@@ -76,10 +76,10 @@ export default async function JourneyPage() {
       <div className="soul-panel">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/65">Taxa de conclusão</p>
+            <p className="text-[14px] font-bold uppercase tracking-widest text-soul-ink/78">Taxa de conclusão</p>
             <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{completionRate}%</p>
           </div>
-          <p className="text-[14px] text-soul-ink/70 font-medium">
+          <p className="text-[15px] text-soul-ink/80 font-medium">
             {completed.length} de {all.length} avaliações finalizadas
           </p>
         </div>
@@ -100,7 +100,7 @@ export default async function JourneyPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink">
             Em andamento
           </h2>
-          <p className="text-[14px] text-soul-ink/80 font-medium -mt-2">
+          <p className="text-[15px] text-soul-ink/88 font-medium -mt-2">
             Testes enviados aguardando o candidato responder. Use &ldquo;Continuar teste&rdquo; para abrir o link direto.
           </p>
           <div className="space-y-2">
@@ -116,14 +116,14 @@ export default async function JourneyPage() {
                   </div>
                   <div className="flex-1 min-w-[180px]">
                     <p className="font-semibold text-[15px] text-soul-ink truncate">{a.employee.name}</p>
-                    <p className="text-[13px] text-soul-ink/75 font-medium">{t.label}</p>
+                    <p className="text-[14px] text-soul-ink/85 font-medium">{t.label}</p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                           style={{ background: 'rgba(212,148,58,0.2)', color: '#e8c878' }}>
                       {a.status === 'PENDING' ? 'Pendente' : 'Enviado'}
                     </span>
-                    <p className="text-[12px] text-soul-ink/75 font-semibold mt-1">
+                    <p className="text-[13.5px] text-soul-ink/85 font-semibold mt-1">
                       Expira {a.expiresAt.toLocaleDateString('pt-BR')}
                     </p>
                   </div>
@@ -131,7 +131,7 @@ export default async function JourneyPage() {
                     href={`${APP_URL}/test/${a.token}`}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-bold text-white
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[14px] font-bold text-white
                                transition-all hover:-translate-y-px shadow-terra flex-shrink-0"
                     style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
                   >
@@ -166,19 +166,19 @@ export default async function JourneyPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-[15px] text-soul-ink truncate">{a.employee.name}</p>
-                    <p className="text-[13px] text-soul-ink/70 font-medium">{t.label}</p>
+                    <p className="text-[14px] text-soul-ink/80 font-medium">{t.label}</p>
                   </div>
                   <div className="text-right hidden sm:block">
-                    <p className="text-[13px] text-soul-ink font-semibold">
+                    <p className="text-[14px] text-soul-ink font-semibold">
                       {a.completedAt?.toLocaleDateString('pt-BR')}
                     </p>
-                    <p className="text-[12px] text-soul-ink/60 font-medium">
+                    <p className="text-[13.5px] text-soul-ink/75 font-medium">
                       {a.completedAt?.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
                   <Link
                     href={`/dashboard/assessments/${a.id}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[12px] font-bold
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-[13.5px] font-bold
                                border-2 transition-colors hover:border-soul-terracota hover:text-soul-terracota"
                     style={{ borderColor: 'rgba(58,61,69,0.9)', color: '#f0ece3' }}
                   >
@@ -198,12 +198,12 @@ export default async function JourneyPage() {
           <h2 className="font-serif text-2xl font-semibold text-soul-ink mb-2">
             Sua jornada começa aqui
           </h2>
-          <p className="text-base text-soul-ink/75 font-medium max-w-md mx-auto mb-6">
+          <p className="text-base text-soul-ink/85 font-medium max-w-md mx-auto mb-6">
             Ainda não há avaliações. Envie o primeiro teste e comece a mapear o perfil comportamental da sua equipe.
           </p>
           <Link
             href="/dashboard/assessments"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-semibold text-white
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-semibold text-white
                        shadow-terra hover:-translate-y-px transition-all"
             style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
           >

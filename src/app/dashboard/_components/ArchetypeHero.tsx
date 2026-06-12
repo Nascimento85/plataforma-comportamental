@@ -67,7 +67,7 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
       {/* Info */}
       <div className="flex-1 relative z-10 min-w-0">
         <div
-          className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-2"
+          className="text-[13px] font-sans font-bold tracking-[0.2em] uppercase mb-2"
           style={{ color: '#d4b85c' }}
         >
           Seu Arquétipo Dominante
@@ -85,7 +85,7 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
           {['Autonomia', 'Curiosidade', 'Aventura', 'Propósito'].map((attr) => (
             <span
               key={attr}
-              className="text-[12px] font-semibold px-3 py-1.5 rounded-full font-sans"
+              className="text-[13.5px] font-semibold px-3 py-1.5 rounded-full font-sans"
               style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', color: 'rgba(255,255,255,0.92)' }}
             >
               {attr}
@@ -112,14 +112,14 @@ export default function ArchetypeHero({ name, totalCompleted }: Props) {
               Nv{level}
             </span>
             <span
-              className="text-[10px] font-sans font-bold uppercase tracking-wide"
+              className="text-[12px] font-sans font-bold uppercase tracking-wide"
               style={{ color: '#d4b85c' }}
             >
               XP
             </span>
           </div>
         </div>
-        <div className="text-[12px] text-white/80 font-sans font-semibold whitespace-nowrap">
+        <div className="text-[13.5px] text-white/88 font-sans font-semibold whitespace-nowrap">
           {name.split(' ')[0]} · {label}
         </div>
       </div>

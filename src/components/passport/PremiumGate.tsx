@@ -66,17 +66,17 @@ export default function PremiumGate({
           className="rounded-3xl bg-white/95 backdrop-blur-md p-6 sm:p-8 max-w-md text-center shadow-xl"
           style={{ border: '1px solid rgba(196,99,58,0.25)' }}
         >
-          <div className="text-[10px] font-sans font-bold tracking-[0.18em] uppercase text-soul-terracota mb-2">
+          <div className="text-[12px] font-sans font-bold tracking-[0.18em] uppercase text-soul-terracota mb-2">
             Conteúdo Premium
           </div>
           <h3 className="font-serif text-2xl font-bold text-soul-ink mb-2">
             🔒 Desbloqueie o Relatório Completo
           </h3>
-          <p className="text-sm text-soul-ink/70 font-sans mb-5">
+          <p className="text-sm text-soul-ink/80 font-sans mb-5">
             Veja como se comunicar, liderar, e o PDI completo do perfil <strong>{profileName}</strong>.
           </p>
 
-          <ul className="text-left space-y-2 mb-6 text-sm text-soul-ink/80 font-sans">
+          <ul className="text-left space-y-2 mb-6 text-sm text-soul-ink/88 font-sans">
             <li>✨ Como se comunicar com este perfil</li>
             <li>👑 Como liderar este perfil</li>
             <li>🌑 Medos inconscientes</li>
@@ -92,11 +92,11 @@ export default function PremiumGate({
             {loading ? 'Redirecionando…' : `Desbloquear Agora — R$ ${priceBrl}`}
           </button>
 
-          <p className="text-[11px] text-soul-ink/45 mt-3 font-sans">
+          <p className="text-[13px] text-soul-ink/68 mt-3 font-sans">
             Pagamento seguro via Stripe · Acesso vitalício a este relatório
           </p>
           {error && (
-            <p className="text-[12px] text-red-700 mt-3 font-sans">{error}</p>
+            <p className="text-[13.5px] text-red-700 mt-3 font-sans">{error}</p>
           )}
         </div>
       </div>

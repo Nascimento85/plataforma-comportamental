@@ -301,7 +301,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
           )}
 
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="text-[13px] text-soul-ink/70 font-medium">
+            <p className="text-[14px] text-soul-ink/80 font-medium">
               {isComplete
                 ? '🎉 Perfil 100% completo! Solicite seu código de validação abaixo.'
                 : `Faltam ${REQUIRED_PROFILE_FIELDS.length - Math.round((completion / 100) * REQUIRED_PROFILE_FIELDS.length)} campos para completar.`}
@@ -309,7 +309,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
             <button
               type="submit"
               disabled={saving}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-bold text-white
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-bold text-white
                          shadow-terra hover:-translate-y-px transition-all disabled:opacity-60 disabled:translate-y-0"
               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
             >
@@ -339,14 +339,14 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
           <div className="relative">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-2xl">🎁</span>
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-soul-ink/70">
+              <span className="text-[13px] font-bold uppercase tracking-[0.16em] text-soul-ink/80">
                 Bônus exclusivo de onboarding
               </span>
             </div>
             <h3 className="font-serif text-2xl font-bold text-soul-ink leading-tight mb-2">
               Ganhe +6 créditos extras
             </h3>
-            <p className="text-[14px] text-soul-ink/75 font-medium leading-relaxed mb-5 max-w-2xl">
+            <p className="text-[15px] text-soul-ink/85 font-medium leading-relaxed mb-5 max-w-2xl">
               Complete todos os campos obrigatórios, solicite o código por e-mail e valide aqui — pronto, +6 créditos caem na sua conta na hora.
             </p>
 
@@ -362,12 +362,12 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                   type="button"
                   disabled={!isComplete || requesting}
                   onClick={handleRequestCode}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-bold transition-all disabled:cursor-not-allowed"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-bold transition-all disabled:cursor-not-allowed"
                   style={{
                     background: isComplete && !requesting
                       ? 'linear-gradient(135deg, #c9a84c, #d4943a)'
                       : 'rgba(255,255,255,0.12)',
-                    color: isComplete ? '#1c1a17' : 'rgba(240,236,227,0.45)',
+                    color: isComplete ? '#1c1a17' : 'rgba(240,236,227,0.68)',
                     boxShadow: isComplete ? '0 4px 16px rgba(201,168,76,0.3)' : 'none',
                   }}
                 >
@@ -393,7 +393,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
                   <div className="flex-1">
-                    <label className="block text-[12px] font-bold uppercase tracking-widest text-soul-ink/70 mb-2">
+                    <label className="block text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/80 mb-2">
                       Código de 6 dígitos
                     </label>
                     <input
@@ -411,7 +411,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                   <button
                     type="submit"
                     disabled={validating || code.length !== 6}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-[14px] font-bold text-white
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-[15px] font-bold text-white
                                shadow-terra hover:-translate-y-px transition-all disabled:opacity-60 disabled:translate-y-0"
                     style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
                   >
@@ -423,7 +423,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                   type="button"
                   onClick={handleRequestCode}
                   disabled={requesting}
-                  className="text-[12px] font-semibold text-soul-ink/60 hover:text-soul-ink transition-colors underline-offset-2 hover:underline"
+                  className="text-[13.5px] font-semibold text-soul-ink/75 hover:text-soul-ink transition-colors underline-offset-2 hover:underline"
                 >
                   {requesting ? 'Reenviando…' : 'Não recebi — reenviar código'}
                 </button>
@@ -447,7 +447,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
               <h3 className="font-serif text-xl font-bold text-soul-ink leading-tight">
                 Bônus de perfil já recebido
               </h3>
-              <p className="text-[14px] text-soul-ink/75 font-medium mt-0.5">
+              <p className="text-[15px] text-soul-ink/85 font-medium mt-0.5">
                 Os 6 créditos extras já foram adicionados à sua conta. Obrigado por completar seu perfil!
               </p>
             </div>
@@ -476,7 +476,7 @@ function Section({
       <div className="mb-5 pb-4 border-b border-soul-mist/60">
         <h2 className="font-serif text-xl font-semibold text-soul-ink leading-tight">{title}</h2>
         {subtitle && (
-          <p className="text-[13px] text-soul-ink/70 font-medium mt-0.5">{subtitle}</p>
+          <p className="text-[14px] text-soul-ink/80 font-medium mt-0.5">{subtitle}</p>
         )}
       </div>
       {children}
@@ -507,11 +507,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-[12px] font-bold uppercase tracking-widest mb-2"
-             style={{ color: required ? '#8f3f1e' : 'rgba(240,236,227,0.6)' }}>
+      <label className="block text-[13.5px] font-bold uppercase tracking-widest mb-2"
+             style={{ color: required ? '#8f3f1e' : 'rgba(240,236,227,0.68)' }}>
         {label}
         {required && <span className="text-soul-terracota ml-1">*</span>}
-        {optional && <span className="text-soul-ink/40 normal-case font-medium tracking-normal ml-1.5">(opcional)</span>}
+        {optional && <span className="text-soul-ink/65 normal-case font-medium tracking-normal ml-1.5">(opcional)</span>}
       </label>
       <input
         type={type}
@@ -519,18 +519,18 @@ function Field({
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         readOnly={readOnly}
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl text-[14px] font-sans font-medium text-soul-ink outline-none transition-all"
+        className="w-full px-4 py-3 rounded-xl text-[15px] font-sans font-medium text-soul-ink outline-none transition-all"
         style={{
           background: readOnly ? 'rgba(255,255,255,0.065)' : 'white',
-          border: '1.5px solid rgba(240,236,227,0.1)',
+          border: '1.5px solid rgba(240,236,227,0.42)',
           cursor: readOnly ? 'not-allowed' : 'text',
-          color: readOnly ? 'rgba(240,236,227,0.6)' : '#1c1a17',
+          color: readOnly ? 'rgba(240,236,227,0.68)' : '#1c1a17',
         }}
         onFocus={(e) => { if (!readOnly) e.target.style.borderColor = 'rgba(196,99,58,0.5)' }}
-        onBlur={(e) => { e.target.style.borderColor = 'rgba(240,236,227,0.1)' }}
+        onBlur={(e) => { e.target.style.borderColor = 'rgba(240,236,227,0.42)' }}
       />
       {hint && (
-        <p className="text-[11px] text-soul-ink/55 font-medium mt-1.5">{hint}</p>
+        <p className="text-[13px] text-soul-ink/72 font-medium mt-1.5">{hint}</p>
       )}
     </div>
   )
@@ -556,7 +556,7 @@ function ProgressBanner({
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-5 items-center">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-soul-ink/70">
+            <span className="text-[13px] font-bold uppercase tracking-[0.14em] text-soul-ink/80">
               Preenchimento do perfil
             </span>
             <span
@@ -581,7 +581,7 @@ function ProgressBanner({
             />
           </div>
 
-          <p className="text-[13px] text-soul-ink/70 font-medium mt-2.5 leading-snug">
+          <p className="text-[14px] text-soul-ink/80 font-medium mt-2.5 leading-snug">
             {rewarded
               ? '✓ Bônus de perfil já recebido'
               : completion === 100
@@ -592,14 +592,14 @@ function ProgressBanner({
 
         {/* Passaporte */}
         <div className="text-right sm:text-left sm:border-l sm:border-soul-mist/60 sm:pl-5">
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-soul-ink/55">
+          <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-soul-ink/72">
             🎟️ Passaporte
           </p>
           <p className="font-serif text-3xl sm:text-4xl font-bold leading-none mt-1"
              style={{ color: '#e09070' }}>
             {balance}
           </p>
-          <p className="text-[12px] text-soul-ink/60 font-medium mt-0.5">
+          <p className="text-[13.5px] text-soul-ink/75 font-medium mt-0.5">
             créditos
           </p>
         </div>

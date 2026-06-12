@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
             </svg>
           </div>
           <h1 className="font-serif font-semibold text-2xl text-white mb-1">Nova senha</h1>
-          <p className="text-[12px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="text-[13.5px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
             Escolha uma senha segura para sua conta
           </p>
         </div>

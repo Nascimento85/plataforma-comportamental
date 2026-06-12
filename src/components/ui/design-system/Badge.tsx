@@ -10,7 +10,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 const variantClasses: Record<Variant, string> = {
   done:   'bg-soul-sage/[0.12] text-soul-sage',
   pending:'bg-soul-amber/[0.10] text-soul-amber',
-  locked: 'bg-soul-mist/60 text-soul-ink/40',
+  locked: 'bg-soul-mist/60 text-soul-ink/65',
   new:    'bg-soul-indigo/[0.10] text-soul-indigo',
   gold:   'bg-soul-gold/[0.12] text-soul-gold',
   rose:   'bg-soul-rose/[0.10] text-soul-rose',

@@ -88,14 +88,14 @@ export default async function CareerPage() {
 
       {/* ── Header ── */}
       <div>
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
+        <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
               style={{ background: 'rgba(61,79,124,0.14)', color: '#2d3f6b' }}>
           Carreira &amp; Performance
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">
           Mapeie a <span className="italic text-gold-gradient" style={{ background: 'linear-gradient(135deg, #c5a059 0%, #a8843a 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>essência profissional</span> da sua equipe.
         </h1>
-        <p className="text-base md:text-lg text-soul-ink/85 mt-3 font-medium max-w-3xl leading-relaxed">
+        <p className="text-base md:text-lg text-soul-ink/90 mt-3 font-medium max-w-3xl leading-relaxed">
           Duas ferramentas científicas para entender o que motiva, retém e desenvolve profissionais.
           Aplicação direta em PDI, sucessão, recrutamento estratégico e formação de lideranças.
         </p>
@@ -115,7 +115,7 @@ export default async function CareerPage() {
                 style={{ objectPosition: 'center center' }}
               />
               {test.badge && (
-                <span className="absolute top-3 right-3 inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold backdrop-blur-md"
+                <span className="absolute top-3 right-3 inline-flex items-center rounded-full px-3 py-1 text-[13px] font-bold backdrop-blur-md"
                       style={{ background: 'rgba(255,255,255,0.85)', color: test.color, border: `1px solid ${test.color}40` }}>
                   ✦ {test.badge}
                 </span>
@@ -125,7 +125,7 @@ export default async function CareerPage() {
             {/* Conteúdo */}
             <div className="p-6 md:p-7 flex flex-col gap-4 flex-1">
               <div>
-                <p className="text-[12px] font-bold uppercase tracking-widest mb-1" style={{ color: test.color }}>
+                <p className="text-[13.5px] font-bold uppercase tracking-widest mb-1" style={{ color: test.color }}>
                   {test.tagline}
                 </p>
                 <h2 className="font-serif text-2xl md:text-3xl font-semibold text-soul-ink leading-tight">
@@ -138,10 +138,10 @@ export default async function CareerPage() {
               </p>
 
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-1.5">
+                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-1.5">
                   Aplicação corporativa
                 </p>
-                <p className="text-[14px] text-soul-ink/85 font-medium leading-snug">
+                <p className="text-[15px] text-soul-ink/90 font-medium leading-snug">
                   {test.application}
                 </p>
               </div>
@@ -149,18 +149,18 @@ export default async function CareerPage() {
               <div className="space-y-2 pt-1">
                 {test.bullets.map((b, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[11px] font-bold"
+                    <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[13px] font-bold"
                           style={{ background: test.color }}>✓</span>
-                    <p className="text-[13px] text-soul-ink font-semibold leading-snug">{b}</p>
+                    <p className="text-[14px] text-soul-ink font-semibold leading-snug">{b}</p>
                   </div>
                 ))}
               </div>
 
               <div className="mt-auto pt-4 space-y-3 border-t border-soul-mist/60">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/65">Investimento</p>
+                  <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/78">Investimento</p>
                   <p className="font-serif text-2xl font-semibold text-soul-ink">
-                    {test.credits} <span className="text-base font-medium text-soul-ink/70">crédito{test.credits > 1 ? 's' : ''}</span>
+                    {test.credits} <span className="text-base font-medium text-soul-ink/80">crédito{test.credits > 1 ? 's' : ''}</span>
                   </p>
                 </div>
                 <div className="space-y-2">
@@ -183,21 +183,21 @@ export default async function CareerPage() {
         <div className="soul-panel">
           <div className="text-3xl mb-2">🎯</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Diagnóstico de carreira</p>
-          <p className="text-[14px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/90 font-medium mt-1.5 leading-relaxed">
             Identifica âncoras profissionais e desbloqueia conversas honestas sobre o que move cada colaborador.
           </p>
         </div>
         <div className="soul-panel">
           <div className="text-3xl mb-2">📊</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Radar de soft skills</p>
-          <p className="text-[14px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/90 font-medium mt-1.5 leading-relaxed">
             Visualize claramente os 5 domínios de inteligência emocional — onde a equipe é forte e onde precisa investir.
           </p>
         </div>
         <div className="soul-panel">
           <div className="text-3xl mb-2">📈</div>
           <p className="font-serif text-lg font-semibold text-soul-ink">Retenção de talentos</p>
-          <p className="text-[14px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
+          <p className="text-[15px] text-soul-ink/90 font-medium mt-1.5 leading-relaxed">
             Reduza turnover alinhando funções, benefícios e PDI ao que cada profissional realmente valoriza.
           </p>
         </div>
@@ -212,7 +212,7 @@ export default async function CareerPage() {
           <p className="font-serif text-xl md:text-2xl font-semibold text-soul-ink leading-tight">
             Combine os dois testes para uma leitura completa.
           </p>
-          <p className="text-[15px] text-soul-ink/85 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/90 font-medium mt-1">
             <strong>Âncora de Carreira</strong> revela o &ldquo;o quê&rdquo; (o que motiva).
             <strong> Inteligência Emocional</strong> revela o &ldquo;como&rdquo; (como entrega).
             Juntos, formam o mapa executivo mais completo da plataforma.

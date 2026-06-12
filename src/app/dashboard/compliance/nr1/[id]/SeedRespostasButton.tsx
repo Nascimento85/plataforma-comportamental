@@ -75,7 +75,7 @@ export default function SeedRespostasButton({
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12.5px] font-bold transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13.5px] font-bold transition-colors"
           style={{
             background: 'rgba(122,99,196,0.10)',
             color:      '#5a4a8a',
@@ -100,15 +100,15 @@ export default function SeedRespostasButton({
       style={{ background: 'rgba(122,99,196,0.04)', border: '1px dashed rgba(122,99,196,0.30)' }}
     >
       <div className="flex items-center justify-between">
-        <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#5a4a8a' }}>
+        <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: '#5a4a8a' }}>
           Seed admin · QA / Demo
         </p>
-        <span className="text-[10.5px] text-soul-ink/55 font-medium italic">
+        <span className="text-[12px] text-soul-ink/72 font-medium italic">
           Visivel apenas para administradores
         </span>
       </div>
 
-      <p className="text-[12.5px] text-soul-ink/75 font-medium">
+      <p className="text-[13.5px] text-soul-ink/85 font-medium">
         Gera respostas mockadas (Karasek + ERI + COPSOQ) em um setor para validar o fluxo end-to-end
         sem precisar mobilizar pessoas reais.
       </p>
@@ -150,17 +150,17 @@ export default function SeedRespostasButton({
       </div>
 
       {erro && (
-        <p className="text-[12px] font-semibold text-red-600">{erro}</p>
+        <p className="text-[13.5px] font-semibold text-red-600">{erro}</p>
       )}
       {okMsg && (
-        <p className="text-[12px] font-semibold" style={{ color: '#4a7a4e' }}>{okMsg}</p>
+        <p className="text-[13.5px] font-semibold" style={{ color: '#4a7a4e' }}>{okMsg}</p>
       )}
 
       <div className="flex gap-2">
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[13px] font-bold transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[14px] font-bold transition-colors disabled:opacity-50"
           style={{ background: 'linear-gradient(135deg, #7a63c4, #5a4a8a)', color: '#ffffff' }}
         >
           {pending ? 'Gerando...' : 'Gerar respostas'}
@@ -169,7 +169,7 @@ export default function SeedRespostasButton({
           type="button"
           onClick={() => { setOpen(false); setErro(null); setOkMsg(null) }}
           disabled={pending}
-          className="inline-flex items-center rounded-lg px-3 py-1.5 text-[13px] font-bold text-soul-ink/70 hover:text-soul-ink transition-colors"
+          className="inline-flex items-center rounded-lg px-3 py-1.5 text-[14px] font-bold text-soul-ink/80 hover:text-soul-ink transition-colors"
         >
           Fechar
         </button>

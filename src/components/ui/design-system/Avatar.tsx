@@ -11,7 +11,7 @@ interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const sizeClasses: Record<Size, { div: string; text: string }> = {
-  xs: { div: 'w-6 h-6',   text: 'text-[10px]' },
+  xs: { div: 'w-6 h-6',   text: 'text-[12px]' },
   sm: { div: 'w-8 h-8',   text: 'text-xs' },
   md: { div: 'w-10 h-10', text: 'text-sm' },
   lg: { div: 'w-12 h-12', text: 'text-base' },

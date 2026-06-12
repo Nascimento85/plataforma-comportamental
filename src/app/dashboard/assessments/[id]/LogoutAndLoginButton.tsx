@@ -32,7 +32,7 @@ export default function LogoutAndLoginButton({
       disabled={loading}
       className={
         className ??
-        'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5 transition-colors disabled:opacity-60'
+        'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5 transition-colors disabled:opacity-60'
       }
     >
       {loading ? 'Saindo…' : children}

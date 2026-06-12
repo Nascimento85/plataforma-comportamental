@@ -279,11 +279,11 @@ function SidebarNavLink({
       href={href}
       onClick={onClick}
       className={[
-        'flex items-center gap-3 px-6 py-2.5 text-[14.5px] transition-all duration-200',
+        'flex items-center gap-3 px-6 py-2.5 text-[15.5px] transition-all duration-200',
         'relative no-underline',
         isActive
           ? 'text-white bg-white/[0.08] font-semibold'
-          : 'text-white/75 hover:text-white hover:bg-white/[0.05] font-medium',
+          : 'text-white/85 hover:text-white hover:bg-white/[0.05] font-medium',
       ].join(' ')}
     >
       {isActive && (
@@ -300,7 +300,7 @@ function SidebarNavLink({
       <span className="flex-1">{label}</span>
 
       {badge !== undefined && badge > 0 && (
-        <span className="bg-soul-terracota text-white text-[11px] font-bold px-2 py-0.5 rounded-full leading-none">
+        <span className="bg-soul-terracota text-white text-[13px] font-bold px-2 py-0.5 rounded-full leading-none">
           {badge}
         </span>
       )}
@@ -338,7 +338,7 @@ function SidebarContent({
           <div className="font-serif text-[17px] font-semibold text-white leading-none mb-1">
             Psique
           </div>
-          <div className="text-[11px] font-sans uppercase tracking-[0.14em] text-soul-gold font-bold">
+          <div className="text-[13px] font-sans uppercase tracking-[0.14em] text-soul-gold font-bold">
             Mapa Comportamental
           </div>
         </div>
@@ -350,7 +350,7 @@ function SidebarContent({
           <div key={group.title ?? `group-${gi}`}>
             {group.title && (
               <div className="px-6 pb-1.5 pt-3.5">
-                <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
+                <p className="text-[12px] font-sans uppercase tracking-[0.16em] text-white/68 font-bold">
                   {group.title}
                 </p>
               </div>
@@ -371,7 +371,7 @@ function SidebarContent({
             no paywall da página interna, que serve como CTA de conversão. */}
         <div>
           <div className="px-6 pb-1.5 pt-3.5 flex items-center justify-between">
-            <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
+            <p className="text-[12px] font-sans uppercase tracking-[0.16em] text-white/68 font-bold">
               Premium
             </p>
             <span className="text-[8.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded"
@@ -386,7 +386,7 @@ function SidebarContent({
         {session.isAdmin && (
           <div>
             <div className="px-6 pb-1.5 pt-3.5">
-              <p className="text-[10.5px] font-sans uppercase tracking-[0.16em] text-white/45 font-bold">
+              <p className="text-[12px] font-sans uppercase tracking-[0.16em] text-white/68 font-bold">
                 Admin
               </p>
             </div>
@@ -414,15 +414,15 @@ function SidebarContent({
             {initial}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-semibold text-white truncate font-sans">
+            <div className="text-[15px] font-semibold text-white truncate font-sans">
               {session.name}
             </div>
             {arch ? (
-              <div className="text-[12px] font-display italic font-semibold" style={{ color: '#d4b85c' }}>
+              <div className="text-[13.5px] font-display italic font-semibold" style={{ color: '#d4b85c' }}>
                 {arch.emoji} {arch.label}
               </div>
             ) : (
-              <div className="text-[12px] text-white/55 font-sans font-medium truncate">
+              <div className="text-[13.5px] text-white/72 font-sans font-medium truncate">
                 {session.email}
               </div>
             )}
@@ -434,8 +434,8 @@ function SidebarContent({
           <Link
             href="/dashboard/settings"
             onClick={onNavClick}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] font-medium
-                       text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
+                       text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
           >
             <span className="opacity-70"><NavIcon path="settings" /></span>
             Configurações
@@ -511,7 +511,7 @@ export default function AppShell({ children, session, maxWidth = '1180px' }: App
       <header className="md:hidden fixed top-0 left-0 right-0 z-30 h-14 flex items-center px-4 gap-3 border-b border-soul-mist/60 bg-soul-cream/95 backdrop-blur-sm">
         <button
           onClick={() => setMenuOpen(true)}
-          className="w-9 h-9 flex items-center justify-center rounded-xl text-soul-ink/60 hover:bg-soul-mist/60 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-xl text-soul-ink/75 hover:bg-soul-mist/60 transition-colors"
           aria-label="Abrir menu"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">

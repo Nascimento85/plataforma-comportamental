@@ -73,7 +73,7 @@ export default function LiderClient({
     return (
       <Shell>
         <div className="max-w-lg mx-auto py-8">
-          <p className="text-[13px] font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Convite confidencial</p>
+          <p className="text-[14px] font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Convite confidencial</p>
           <h1 className="font-serif text-3xl md:text-4xl font-bold leading-tight mb-3" style={{ color: TEXT }}>
             {donoNome} pediu a sua visão sobre a equipe
           </h1>
@@ -84,11 +84,11 @@ export default function LiderClient({
           </p>
           <div className="space-y-4 mb-5">
             <div>
-              <label className="block text-[13px] font-bold uppercase tracking-wide mb-1.5" style={{ color: MUTED }}>Seu nome</label>
+              <label className="block text-[14px] font-bold uppercase tracking-wide mb-1.5" style={{ color: MUTED }}>Seu nome</label>
               <input className="pme-input" value={liderNome} onChange={(e) => setLiderNome(e.target.value)} placeholder="Nome completo" />
             </div>
             <div>
-              <label className="block text-[13px] font-bold uppercase tracking-wide mb-1.5" style={{ color: MUTED }}>E-mail (opcional)</label>
+              <label className="block text-[14px] font-bold uppercase tracking-wide mb-1.5" style={{ color: MUTED }}>E-mail (opcional)</label>
               <input type="email" className="pme-input" value={liderEmail} onChange={(e) => setLiderEmail(e.target.value)} placeholder="voce@empresa.com" />
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function LiderClient({
                   className="pme-cta w-full py-4 rounded-full text-[16px] font-bold" style={{ background: 'linear-gradient(135deg, #e0bb46, #c79a2c)', color: BG }}>
             Começar →
           </button>
-          {error && <p className="text-[14px] font-semibold mt-3 text-center" style={{ color: '#ff9a8d' }}>{error}</p>}
+          {error && <p className="text-[15px] font-semibold mt-3 text-center" style={{ color: '#ff9a8d' }}>{error}</p>}
         </div>
       </Shell>
     )
@@ -106,7 +106,7 @@ export default function LiderClient({
     <Shell>
       <div className="max-w-2xl mx-auto py-4">
         <div className="sticky top-0 z-10 py-3 mb-2" style={{ background: BG }}>
-          <div className="flex justify-between text-[13px] font-semibold mb-1" style={{ color: MUTED }}>
+          <div className="flex justify-between text-[14px] font-semibold mb-1" style={{ color: MUTED }}>
             <span>{respondidas}/{perguntas.length} respondidas</span><span>{progresso}%</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
@@ -116,7 +116,7 @@ export default function LiderClient({
 
         <EscalaLegenda />
 
-        {error && <div className="rounded-xl px-4 py-3 mb-4 text-[14px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
+        {error && <div className="rounded-xl px-4 py-3 mb-4 text-[15px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
 
         <div className="space-y-7">
           {blocos.map(([bloco, perg]) => (

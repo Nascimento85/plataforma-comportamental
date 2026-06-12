@@ -62,22 +62,22 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
         <div className="absolute top-0 right-0 w-56 h-56 rounded-full opacity-[0.10]"
              style={{ background: `radial-gradient(circle, ${GOLD}, transparent)`, transform: 'translate(30%,-30%)' }}/>
         <div className="relative z-10">
-          <Link href="/dashboard/gestao-times" className="text-[12px] font-semibold text-white/60 hover:text-white/90 no-underline">
+          <Link href="/dashboard/gestao-times" className="text-[13.5px] font-semibold text-white/75 hover:text-white/90 no-underline">
             ← Voltar para times
           </Link>
           <div className="flex items-start justify-between gap-4 flex-wrap mt-2">
             <div>
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight">{teamNome}</h1>
-              {teamDescricao && <p className="text-[14px] text-white/70 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
+              {teamDescricao && <p className="text-[15px] text-white/80 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
             </div>
             <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
               <Link href={`/dashboard/gestao-times/${teamId}/avaliacao-lider`}
-                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline"
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold no-underline"
                     style={{ background: 'rgba(255,255,255,0.10)', color: '#e9eef6', border: '1px solid rgba(255,255,255,0.25)' }}>
                 ◆ Avaliação do Líder →
               </Link>
               <Link href={`/dashboard/gestao-times/${teamId}/team-build`}
-                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold no-underline"
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold no-underline"
                     style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
                 ◇ Team Build deste time →
               </Link>
@@ -93,13 +93,13 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
           return (
             <div key={z} className="soul-panel" style={{ borderLeft: `4px solid ${info.cor}` }}>
               <div className="flex items-baseline justify-between">
-                <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: info.cor }}>{info.rotulo}</p>
-                <span className="text-[11px] font-bold text-soul-ink/45">{info.faixa}</span>
+                <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: info.cor }}>{info.rotulo}</p>
+                <span className="text-[13px] font-bold text-soul-ink/68">{info.faixa}</span>
               </div>
               <p className="font-serif text-3xl font-bold text-soul-ink mt-1">
-                {counts[z]} <span className="text-base font-medium text-soul-ink/55">{counts[z] === 1 ? 'pessoa' : 'pessoas'}</span>
+                {counts[z]} <span className="text-base font-medium text-soul-ink/72">{counts[z] === 1 ? 'pessoa' : 'pessoas'}</span>
               </p>
-              <p className="text-[12px] text-soul-ink/65 font-medium mt-1 leading-snug">{info.descricao}</p>
+              <p className="text-[13.5px] text-soul-ink/78 font-medium mt-1 leading-snug">{info.descricao}</p>
             </div>
           )
         })}
@@ -109,14 +109,14 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
       <div className="soul-panel">
         <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 className="font-serif text-xl font-semibold text-soul-ink">Matriz de Talentos</h2>
-          <p className="text-[12px] text-soul-ink/55 font-medium">Eixo horizontal: Performance · Eixo vertical: Fit comportamental</p>
+          <p className="text-[13.5px] text-soul-ink/72 font-medium">Eixo horizontal: Performance · Eixo vertical: Fit comportamental</p>
         </div>
         <div className="grid lg:grid-cols-[1fr_auto] gap-6 items-center">
           <ScatterMatrix members={members} />
           {classificados > 0 && <PieDistribuicao counts={counts} total={classificados} />}
         </div>
         {pendentes > 0 && (
-          <p className="text-[12.5px] text-soul-ink/60 font-medium mt-3">
+          <p className="text-[13.5px] text-soul-ink/75 font-medium mt-3">
             {pendentes} {pendentes === 1 ? 'colaborador ainda não foi pontuado' : 'colaboradores ainda não foram pontuados'}.
             Preencha a nota de performance abaixo (ou use o botão Avaliar) para plotar na curva.
           </p>
@@ -128,7 +128,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
         <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
           <h2 className="font-serif text-xl font-semibold text-soul-ink">Colaboradores ({members.length})</h2>
           <button onClick={() => setAddOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-bold text-white shadow-terra"
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[14px] font-bold text-white shadow-terra"
                   style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
             Adicionar colaborador
@@ -136,7 +136,7 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
         </div>
 
         {members.length === 0 ? (
-          <p className="text-[14px] text-soul-ink/60 font-medium py-6 text-center">
+          <p className="text-[15px] text-soul-ink/75 font-medium py-6 text-center">
             Nenhum colaborador no time ainda. Clique em “Adicionar colaborador” para começar.
           </p>
         ) : (
@@ -239,11 +239,11 @@ function PieDistribuicao({ counts, total }: { counts: Record<ZonaKey, number>; t
           const info = ZONAS[z]
           const pct = Math.round((counts[z] / total) * 100)
           return (
-            <div key={z} className="flex items-center gap-2 text-[12.5px] min-w-[150px]">
+            <div key={z} className="flex items-center gap-2 text-[13.5px] min-w-[150px]">
               <span className="w-3 h-3 rounded-sm flex-shrink-0" style={{ background: info.cor }} />
               <span className="font-bold text-soul-ink w-9">{pct}%</span>
-              <span className="text-soul-ink/70 font-medium">{info.rotulo}</span>
-              <span className="text-soul-ink/45 font-bold ml-auto">{counts[z]}</span>
+              <span className="text-soul-ink/80 font-medium">{info.rotulo}</span>
+              <span className="text-soul-ink/68 font-bold ml-auto">{counts[z]}</span>
             </div>
           )
         })}
@@ -270,13 +270,13 @@ function MemberRow({
          style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.8)' }}>
       {/* Identidade */}
       <div className="flex items-center gap-2.5 min-w-[180px] flex-1">
-        <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[12px] font-bold flex-shrink-0"
+        <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[13.5px] font-bold flex-shrink-0"
              style={{ background: perfil?.cor ?? '#94a3b8' }}>
           {m.nome.split(' ').slice(0, 2).map((s) => s[0]).join('').toUpperCase()}
         </div>
         <div className="min-w-0">
-          <p className="text-[14px] font-bold text-soul-ink leading-tight truncate">{m.nome}</p>
-          <p className="text-[11.5px] text-soul-ink/60 font-medium truncate">
+          <p className="text-[15px] font-bold text-soul-ink leading-tight truncate">{m.nome}</p>
+          <p className="text-[13px] text-soul-ink/75 font-medium truncate">
             {m.cargo ? `${m.cargo} · ` : ''}
             {perfil ? `${perfil.apelido} (${m.perfilDisc})` : 'Perfil pendente'}
           </p>
@@ -285,19 +285,19 @@ function MemberRow({
 
       {/* Notas calculadas (read-only) */}
       {m.temAvaliacao ? (
-        <div className="flex items-center gap-3 text-[12px] font-bold">
+        <div className="flex items-center gap-3 text-[13.5px] font-bold">
           <span style={{ color: '#c4633a' }} title="Performance">P {m.notaPerformance?.toFixed(1)}</span>
           <span style={{ color: '#8fa6da' }} title="Fit comportamental">F {m.fitComportamental?.toFixed(1)}</span>
           {m.potencial != null && m.potencial > 0 && <span style={{ color: '#c9a84c' }} title="Potencial">Pot {m.potencial.toFixed(1)}</span>}
         </div>
       ) : (
-        <span className="text-[11.5px] font-medium text-soul-ink/45">Aguardando avaliação</span>
+        <span className="text-[13px] font-medium text-soul-ink/68">Aguardando avaliação</span>
       )}
 
       {/* Zona */}
       <div className="flex items-center gap-2">
         {zonaInfo && (
-          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold"
+          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-[13px] font-bold"
                 style={{ background: zonaInfo.corBg, color: zonaInfo.cor }}>
             {zonaInfo.rotulo}
           </span>
@@ -307,20 +307,20 @@ function MemberRow({
       {/* Ações */}
       <div className="flex items-center gap-1.5 ml-auto">
         <button onClick={() => setAvalOpen(true)}
-                className="text-[12px] font-bold px-3 py-1.5 rounded-full"
+                className="text-[13.5px] font-bold px-3 py-1.5 rounded-full"
                 style={{ background: m.temAvaliacao ? 'rgba(122,158,126,0.15)' : 'rgba(196,99,58,0.10)', color: m.temAvaliacao ? '#3d5a40' : '#a8522e' }}>
           {m.temAvaliacao ? '✓ Avaliação' : 'Avaliar'}
         </button>
         {m.zona && (
           <Link href={`/dashboard/gestao-times/${teamId}/devolutiva/${m.id}`}
-                className="text-[12px] font-bold px-3 py-1.5 rounded-full no-underline"
+                className="text-[13.5px] font-bold px-3 py-1.5 rounded-full no-underline"
                 style={{ background: 'rgba(61,79,124,0.10)', color: '#8fa6da' }}>
             Devolutiva
           </Link>
         )}
         <button onClick={() => { if (confirm(`Remover ${m.nome} do time?`)) onRemove(m.id) }}
                 aria-label="Remover" title="Remover do time"
-                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/40 hover:text-rose-600 hover:bg-rose-50 text-lg leading-none">×</button>
+                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-600 hover:bg-rose-50 text-lg leading-none">×</button>
       </div>
 
       {avalOpen && (
@@ -395,24 +395,24 @@ function AddMemberModal({
         <div className="flex items-center justify-between mb-5">
           <h3 className="font-serif font-semibold text-2xl text-soul-ink">Adicionar colaborador</h3>
           <button onClick={onClose} aria-label="Fechar"
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/70 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
         </div>
 
         {/* Toggle modo */}
         <div className="flex gap-2 mb-4 p-1 rounded-full" style={{ background: 'rgba(58,61,69,0.5)' }}>
           <button onClick={() => setModo('vincular')}
-                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'vincular' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
+                  className={`flex-1 py-2 rounded-full text-[13.5px] font-bold transition-all ${modo === 'vincular' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/75'}`}>
             Quem já fez teste
           </button>
           <button onClick={() => setModo('avulso')}
-                  className={`flex-1 py-2 rounded-full text-[12.5px] font-bold transition-all ${modo === 'avulso' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/60'}`}>
+                  className={`flex-1 py-2 rounded-full text-[13.5px] font-bold transition-all ${modo === 'avulso' ? 'bg-soul-parchment shadow-sm text-soul-ink' : 'text-soul-ink/75'}`}>
             Avulso
           </button>
         </div>
 
         <form onSubmit={handleAdd} className="space-y-4">
           {error && (
-            <div className="rounded-xl px-4 py-3 text-[13px] font-semibold"
+            <div className="rounded-xl px-4 py-3 text-[14px] font-semibold"
                  style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
               {error}
             </div>
@@ -420,9 +420,9 @@ function AddMemberModal({
 
           {modo === 'vincular' ? (
             <div>
-              <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Colaborador (com perfil DISC)</label>
+              <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Colaborador (com perfil DISC)</label>
               {disponiveis.length === 0 ? (
-                <p className="text-[13px] text-soul-ink/60 font-medium">
+                <p className="text-[14px] text-soul-ink/75 font-medium">
                   Nenhum colaborador com DISC disponível. Use a aba “Avulso” ou aplique o teste DISC primeiro.
                 </p>
               ) : (
@@ -437,11 +437,11 @@ function AddMemberModal({
           ) : (
             <>
               <div>
-                <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Nome</label>
+                <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Nome</label>
                 <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="soul-input w-full" disabled={loading} autoFocus />
               </div>
               <div>
-                <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Perfil DISC (se souber)</label>
+                <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Perfil DISC (se souber)</label>
                 <select value={perfilDisc} onChange={(e) => setPerfilDisc(e.target.value)} className="soul-input w-full" disabled={loading}>
                   <option value="">Pendente / não sei</option>
                   <option value="D">Executor (D)</option>
@@ -454,22 +454,22 @@ function AddMemberModal({
           )}
 
           <div>
-            <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Cargo (opcional)</label>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Cargo (opcional)</label>
             <input type="text" value={cargo} onChange={(e) => setCargo(e.target.value)} className="soul-input w-full"
                    placeholder="Ex: Analista de Vendas" disabled={loading} />
           </div>
 
           <div>
-            <label className="block text-[12px] font-bold text-soul-ink/80 uppercase tracking-widest mb-2">Email (para a Avaliação do Líder)</label>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Email (para a Avaliação do Líder)</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="soul-input w-full"
                    placeholder="email@empresa.com" disabled={loading} />
-            <p className="text-[11px] text-soul-ink/55 font-medium mt-1.5">
+            <p className="text-[13px] text-soul-ink/72 font-medium mt-1.5">
               Com o email cadastrado, o colaborador recebe automaticamente o convite anônimo para avaliar o líder assim que você concluir a avaliação dele.
             </p>
           </div>
 
           <button type="submit" disabled={loading}
-                  className="w-full py-3 rounded-full text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
+                  className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
             {loading ? 'Adicionando…' : 'Adicionar ao time'}
           </button>

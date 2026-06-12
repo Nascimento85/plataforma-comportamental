@@ -118,45 +118,45 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
       {/* ── Construtor SCI ── */}
       <div className="soul-panel">
         <h2 className="font-serif text-xl font-semibold text-soul-ink mb-1">Feedback estruturado (SCI)</h2>
-        <p className="text-[13px] text-soul-ink/60 font-medium mb-4">
+        <p className="text-[14px] text-soul-ink/75 font-medium mb-4">
           Registre os fatos no método Situação, Comportamento e Impacto. Remove o julgamento e traz a conversa para o campo dos fatos.
         </p>
         <div className="space-y-3">
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wide text-soul-ink/65 mb-1">Situação</label>
+            <label className="block text-[13px] font-bold uppercase tracking-wide text-soul-ink/78 mb-1">Situação</label>
             <textarea value={sit} onChange={(e) => setSit(e.target.value)} rows={2} maxLength={1000}
                       placeholder="Ex: No projeto de fechamento do cliente X na última semana…"
-                      className="soul-input w-full resize-y text-[14px]" />
+                      className="soul-input w-full resize-y text-[15px]" />
           </div>
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wide text-soul-ink/65 mb-1">Comportamento observado</label>
+            <label className="block text-[13px] font-bold uppercase tracking-wide text-soul-ink/78 mb-1">Comportamento observado</label>
             <textarea value={comp} onChange={(e) => setComp(e.target.value)} rows={2} maxLength={1000}
                       placeholder="Ex: Focou na relação mas não documentou os combinados e atrasou o relatório…"
-                      className="soul-input w-full resize-y text-[14px]" />
+                      className="soul-input w-full resize-y text-[15px]" />
           </div>
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wide text-soul-ink/65 mb-1">Impacto gerado</label>
+            <label className="block text-[13px] font-bold uppercase tracking-wide text-soul-ink/78 mb-1">Impacto gerado</label>
             <textarea value={imp} onChange={(e) => setImp(e.target.value)} rows={2} maxLength={1000}
                       placeholder="Ex: A equipe de operações correu no fim de semana e o cliente reclamou do prazo…"
-                      className="soul-input w-full resize-y text-[14px]" />
+                      className="soul-input w-full resize-y text-[15px]" />
           </div>
         </div>
 
         {/* Botão IA */}
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <button onClick={aprofundarIA} disabled={aiLoading}
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-bold text-white disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold text-white disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #3d4f7c, #6b7fb8)' }}>
             {aiLoading ? 'Gerando roteiro…' : aiResult ? '✦ Gerar novamente com IA' : '✦ Aprofundar devolutiva com IA'}
           </button>
-          <span className="text-[12px] text-soul-ink/55 font-medium">Cruza perfil, zona e os fatos SCI para gerar um roteiro completo.</span>
+          <span className="text-[13.5px] text-soul-ink/72 font-medium">Cruza perfil, zona e os fatos SCI para gerar um roteiro completo.</span>
         </div>
 
         {aiResult && (
           <div className="mt-4 rounded-2xl p-5" style={{ background: 'rgba(61,79,124,0.05)', border: '1px solid rgba(61,79,124,0.20)' }}>
             <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
-              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: '#8fa6da' }}>Devolutiva aprofundada</p>
-              {aiEm && <span className="text-[11px] text-soul-ink/50 font-medium">Gerada em {new Date(aiEm).toLocaleString('pt-BR')}</span>}
+              <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: '#8fa6da' }}>Devolutiva aprofundada</p>
+              {aiEm && <span className="text-[13px] text-soul-ink/70 font-medium">Gerada em {new Date(aiEm).toLocaleString('pt-BR')}</span>}
             </div>
             <div className="nr1-narrative">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiResult}</ReactMarkdown>
@@ -168,7 +168,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
       {/* ── Plano de Ação (PDI) ── */}
       <div className="soul-panel">
         <h2 className="font-serif text-xl font-semibold text-soul-ink mb-1">Plano de Desenvolvimento (PDI)</h2>
-        <p className="text-[13px] text-soul-ink/60 font-medium mb-3">
+        <p className="text-[14px] text-soul-ink/75 font-medium mb-3">
           Selecione as ações sob medida para o perfil {perfilApelido} ou adicione as suas. Defina prazo e frequência de acompanhamento.
         </p>
 
@@ -179,7 +179,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
               <label key={i} className="flex items-start gap-2.5 p-3 rounded-2xl cursor-pointer transition-colors"
                      style={{ background: checked ? `${perfilCor}12` : 'rgba(38,40,46,0.5)', border: `1px solid ${checked ? perfilCor + '50' : 'rgba(58,61,69,0.8)'}` }}>
                 <input type="checkbox" checked={checked} onChange={() => toggleAcao(a)} className="mt-1 flex-shrink-0" />
-                <span className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{a}</span>
+                <span className="text-[14.5px] text-soul-ink/90 font-medium leading-relaxed">{a}</span>
               </label>
             )
           })}
@@ -188,7 +188,7 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
             <label key={`livre-${i}`} className="flex items-start gap-2.5 p-3 rounded-2xl cursor-pointer"
                    style={{ background: `${perfilCor}12`, border: `1px solid ${perfilCor}50` }}>
               <input type="checkbox" checked onChange={() => toggleAcao(a)} className="mt-1 flex-shrink-0" />
-              <span className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed">{a}</span>
+              <span className="text-[14.5px] text-soul-ink/90 font-medium leading-relaxed">{a}</span>
             </label>
           ))}
         </div>
@@ -197,21 +197,21 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
         <div className="flex gap-2 mb-4">
           <input type="text" value={acaoLivre} onChange={(e) => setAcaoLivre(e.target.value)}
                  onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); addAcaoLivre() } }}
-                 placeholder="Adicionar uma ação personalizada…" className="soul-input flex-1 text-[14px]" />
+                 placeholder="Adicionar uma ação personalizada…" className="soul-input flex-1 text-[15px]" />
           <button onClick={addAcaoLivre} type="button"
-                  className="px-4 rounded-full text-[13px] font-bold border-2"
+                  className="px-4 rounded-full text-[14px] font-bold border-2"
                   style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>Adicionar</button>
         </div>
 
         {/* Prazo + frequência */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wide text-soul-ink/65 mb-1">Prazo</label>
-            <input type="date" value={prazo} onChange={(e) => setPrazo(e.target.value)} className="soul-input w-full text-[14px]" />
+            <label className="block text-[13px] font-bold uppercase tracking-wide text-soul-ink/78 mb-1">Prazo</label>
+            <input type="date" value={prazo} onChange={(e) => setPrazo(e.target.value)} className="soul-input w-full text-[15px]" />
           </div>
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wide text-soul-ink/65 mb-1">Frequência de check-in</label>
-            <select value={frequencia} onChange={(e) => setFrequencia(e.target.value)} className="soul-input w-full text-[14px]">
+            <label className="block text-[13px] font-bold uppercase tracking-wide text-soul-ink/78 mb-1">Frequência de check-in</label>
+            <select value={frequencia} onChange={(e) => setFrequencia(e.target.value)} className="soul-input w-full text-[15px]">
               <option value="">Selecione…</option>
               <option value="SEMANAL">Semanal</option>
               <option value="QUINZENAL">Quinzenal</option>
@@ -220,11 +220,11 @@ export default function PdiClient({ memberId, perfilCor, perfilApelido, acoesSug
           </div>
         </div>
 
-        {error && <div className="mt-3 rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{error}</div>}
-        {savedMsg && <div className="mt-3 rounded-xl px-4 py-3 text-[13px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.4)', color: '#2f5c33' }}>{savedMsg}</div>}
+        {error && <div className="mt-3 rounded-xl px-4 py-3 text-[14px] font-semibold" style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>{error}</div>}
+        {savedMsg && <div className="mt-3 rounded-xl px-4 py-3 text-[14px] font-semibold" style={{ background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.4)', color: '#2f5c33' }}>{savedMsg}</div>}
 
         <button onClick={salvarPdi} disabled={saving}
-                className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-3 text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
+                className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-3 text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
                 style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
           {saving ? 'Salvando…' : pdi ? 'Atualizar PDI' : 'Salvar PDI'}
         </button>
@@ -273,7 +273,7 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
   return (
     <div className="soul-panel">
       <h2 className="font-serif text-xl font-semibold text-soul-ink mb-1">Acompanhamento</h2>
-      <p className="text-[13px] text-soul-ink/60 font-medium mb-4">
+      <p className="text-[14px] text-soul-ink/75 font-medium mb-4">
         Registre cada check-in com o colaborador. O segredo da tração é a frequência.
       </p>
 
@@ -281,31 +281,31 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
       <div className="rounded-2xl p-4 mb-5" style={{ background: 'rgba(38,40,46,0.5)', border: '1px solid rgba(58,61,69,0.8)' }}>
         <textarea value={nota} onChange={(e) => setNota(e.target.value)} rows={2} maxLength={1000}
                   placeholder="Como foi a evolução nas últimas semanas? O comportamento mudou? Refletiu nas entregas?"
-                  className="soul-input w-full resize-y text-[14px] mb-3" />
+                  className="soul-input w-full resize-y text-[15px] mb-3" />
         <div className="flex flex-wrap items-center gap-3">
-          <select value={statusMeta} onChange={(e) => setStatusMeta(e.target.value)} className="soul-input text-[13px] py-2 w-auto">
+          <select value={statusMeta} onChange={(e) => setStatusMeta(e.target.value)} className="soul-input text-[14px] py-2 w-auto">
             <option value="EM_ANDAMENTO">Em andamento</option>
             <option value="CONCLUIDO">Concluído</option>
             <option value="EM_ATRASO">Em atraso</option>
           </select>
-          <select value={tendencia} onChange={(e) => setTendencia(e.target.value)} className="soul-input text-[13px] py-2 w-auto">
+          <select value={tendencia} onChange={(e) => setTendencia(e.target.value)} className="soul-input text-[14px] py-2 w-auto">
             <option value="">Tendência…</option>
             <option value="SUBINDO">↑ Subindo rumo aos 20%</option>
             <option value="ESTAVEL">→ Estável</option>
             <option value="DESCENDO">↓ Descendo</option>
           </select>
           <button onClick={addCheckin} disabled={saving}
-                  className="ml-auto inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-bold text-white shadow-terra disabled:opacity-60"
+                  className="ml-auto inline-flex items-center gap-2 rounded-full px-4 py-2 text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
                   style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
             {saving ? 'Registrando…' : '+ Registrar check-in'}
           </button>
         </div>
-        {error && <p className="text-[12px] font-semibold mt-2" style={{ color: '#e09070' }}>{error}</p>}
+        {error && <p className="text-[13.5px] font-semibold mt-2" style={{ color: '#e09070' }}>{error}</p>}
       </div>
 
       {/* Timeline */}
       {checkIns.length === 0 ? (
-        <p className="text-[13.5px] text-soul-ink/55 font-medium text-center py-3">Nenhum check-in registrado ainda.</p>
+        <p className="text-[14.5px] text-soul-ink/72 font-medium text-center py-3">Nenhum check-in registrado ainda.</p>
       ) : (
         <div className="space-y-0">
           {checkIns.map((c, i) => (
@@ -317,14 +317,14 @@ function TimelineCheckins({ pdiId, checkIns }: { pdiId: string; checkIns: CheckI
               </div>
               <div className="pb-4 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[12px] font-bold text-soul-ink/80">{new Date(c.createdAt).toLocaleDateString('pt-BR')}</span>
-                  <span className="text-[10.5px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full"
+                  <span className="text-[13.5px] font-bold text-soul-ink/88">{new Date(c.createdAt).toLocaleDateString('pt-BR')}</span>
+                  <span className="text-[12px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full"
                         style={{ background: `${statusCor[c.statusMeta]}22`, color: statusCor[c.statusMeta] }}>
                     {STATUS_META_LABELS[c.statusMeta] ?? c.statusMeta}
                   </span>
-                  {c.tendencia && <span className="text-[11.5px] font-bold text-soul-ink/60">{TENDENCIA_LABELS[c.tendencia] ?? c.tendencia}</span>}
+                  {c.tendencia && <span className="text-[13px] font-bold text-soul-ink/75">{TENDENCIA_LABELS[c.tendencia] ?? c.tendencia}</span>}
                 </div>
-                <p className="text-[13.5px] text-soul-ink/85 font-medium leading-relaxed mt-1">{c.nota}</p>
+                <p className="text-[14.5px] text-soul-ink/90 font-medium leading-relaxed mt-1">{c.nota}</p>
               </div>
             </div>
           ))}

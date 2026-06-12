@@ -20,7 +20,7 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
       }}
     >
       <div
-        className="text-[11px] font-sans font-bold tracking-[0.14em] uppercase mb-1.5"
+        className="text-[13px] font-sans font-bold tracking-[0.14em] uppercase mb-1.5"
         style={{ color: '#8f3f1e' }}
       >
         Saldo de créditos
@@ -34,7 +34,7 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
       </div>
 
       {isLow && (
-        <div className="text-[13px] font-sans font-bold text-soul-terracota mb-2 flex items-center gap-1">
+        <div className="text-[14px] font-sans font-bold text-soul-terracota mb-2 flex items-center gap-1">
           ⚠ Créditos baixos — recarregar em breve
         </div>
       )}
@@ -43,17 +43,17 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
       <div className="flex gap-2 mb-4 mt-2">
         <div className="flex-1 bg-white/80 rounded-xl p-3 text-center border border-soul-mist/60">
           <div className="font-serif text-xl font-bold text-soul-ink">{Math.floor(credits * 0.63)}</div>
-          <div className="text-[11px] font-bold uppercase tracking-wider text-soul-ink/75 mt-1">Individuais</div>
+          <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">Individuais</div>
         </div>
         <div className="flex-1 bg-white/80 rounded-xl p-3 text-center border border-soul-mist/60">
           <div className="font-serif text-xl font-bold text-soul-ink">{credits - Math.floor(credits * 0.63)}</div>
-          <div className="text-[11px] font-bold uppercase tracking-wider text-soul-ink/75 mt-1">Times</div>
+          <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">Times</div>
         </div>
       </div>
 
       {/* Progress */}
       <div>
-        <div className="flex justify-between text-[12px] text-soul-ink font-semibold mb-1.5">
+        <div className="flex justify-between text-[13.5px] text-soul-ink font-semibold mb-1.5">
           <span>Plano Profissional</span>
           <span>{credits} / {planMax}</span>
         </div>
@@ -72,7 +72,7 @@ export default function CreditsWidget({ credits, planMax = 200 }: Props) {
         <Link
           href="/dashboard/credits"
           className="mt-3 w-full flex items-center justify-center gap-2 py-3 rounded-full
-                     text-[14px] font-sans font-bold text-white transition-all duration-200
+                     text-[15px] font-sans font-bold text-white transition-all duration-200
                      hover:-translate-y-px shadow-terra"
           style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
         >

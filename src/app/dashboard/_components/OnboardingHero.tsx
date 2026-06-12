@@ -35,7 +35,7 @@ export default function OnboardingHero({ firstName, credits }: Props) {
       {/* Content */}
       <div className="relative z-10 max-w-xl">
         <div
-          className="text-[12px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
+          className="text-[13.5px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
           style={{ color: '#d4b85c' }}
         >
           Bem-vindo à Psique — Mapa Comportamental
@@ -46,7 +46,7 @@ export default function OnboardingHero({ firstName, credits }: Props) {
           <br/>Sua jornada começa aqui.
         </h2>
 
-        <p className="text-[16px] text-white/85 leading-relaxed font-medium mb-6 max-w-md">
+        <p className="text-[16px] text-white/90 leading-relaxed font-medium mb-6 max-w-md">
           Você tem <strong className="text-white font-bold">{credits} créditos</strong> prontos para usar.
           Convide candidatos e descubra os arquétipos que constroem times extraordinários.
         </p>
@@ -60,12 +60,12 @@ export default function OnboardingHero({ firstName, credits }: Props) {
           ].map((s) => (
             <div key={s.num} className="flex items-start gap-2.5">
               <div
-                className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-semibold text-soul-ink flex-shrink-0 mt-0.5"
+                className="w-6 h-6 rounded-full flex items-center justify-center text-[13px] font-semibold text-soul-ink flex-shrink-0 mt-0.5"
                 style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
               >
                 {s.num}
               </div>
-              <p className="text-[13px] text-white/80 leading-snug max-w-[150px] font-semibold">{s.text}</p>
+              <p className="text-[14px] text-white/88 leading-snug max-w-[150px] font-semibold">{s.text}</p>
             </div>
           ))}
         </div>
@@ -74,7 +74,7 @@ export default function OnboardingHero({ firstName, credits }: Props) {
         <div className="flex gap-3 flex-wrap">
           <Link
             href="/dashboard/assessments"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-sans font-bold text-soul-ink
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[15px] font-sans font-bold text-soul-ink
                        shadow-gold transition-all duration-200 hover:-translate-y-px hover:brightness-105"
             style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}
           >
@@ -83,7 +83,7 @@ export default function OnboardingHero({ firstName, credits }: Props) {
           <Link
             href="/dashboard/credits"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-sans font-medium
-                       border border-white/20 text-white/75 hover:border-white/40 hover:text-white transition-all duration-200"
+                       border border-white/20 text-white/85 hover:border-white/40 hover:text-white transition-all duration-200"
           >
             Ver planos de crédito
           </Link>

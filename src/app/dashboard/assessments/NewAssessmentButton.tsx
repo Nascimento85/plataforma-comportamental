@@ -397,8 +397,8 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
   const widthClass = fullWidth ? 'w-full justify-center' : ''
   const triggerClasses = (variant === 'secondary'
-    ? `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all bg-soul-parchment`
-    : `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra`) + ' ' + widthClass
+    ? `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-sans font-bold border-2 transition-all bg-soul-parchment`
+    : `inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-sans font-bold text-white transition-all duration-200 hover:-translate-y-px shadow-terra`) + ' ' + widthClass
 
   const triggerStyle = variant === 'secondary'
     ? { borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }
@@ -451,8 +451,8 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   </div>
                 )}
 
-                <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75 mb-2">Link do teste</p>
-                <div className="rounded-2xl p-4 text-[13px] font-mono break-all text-soul-ink mb-6 text-left font-semibold"
+                <p className="text-[14px] font-bold uppercase tracking-widest text-soul-ink/85 mb-2">Link do teste</p>
+                <div className="rounded-2xl p-4 text-[14px] font-mono break-all text-soul-ink mb-6 text-left font-semibold"
                      style={{ background: 'rgba(58,61,69,0.5)', border: '1px solid rgba(58,61,69,0.9)' }}>
                   {success.link}
                 </div>
@@ -460,14 +460,14 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={handleCopy}
-                    className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all"
+                    className="flex-1 py-3 rounded-full text-[15px] font-sans font-bold border-2 transition-all"
                     style={{ borderColor: 'rgba(196,99,58,0.5)', color: '#e09070' }}
                   >
                     {copied ? '✓ Link copiado!' : '📋 Copiar link'}
                   </button>
                   <button
                     onClick={handleClose}
-                    className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px shadow-terra"
+                    className="flex-1 py-3 rounded-full text-[15px] font-sans font-bold text-white transition-all hover:-translate-y-px shadow-terra"
                     style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
                   >
                     Fechar
@@ -485,13 +485,13 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       <h3 className="font-serif font-semibold text-2xl md:text-3xl text-soul-ink leading-tight">
                         Nova avaliação
                       </h3>
-                      <p className="text-[14px] text-soul-ink/80 font-medium mt-1">
+                      <p className="text-[15px] text-soul-ink/88 font-medium mt-1">
                         Envie um teste em menos de 30 segundos.
                       </p>
                     </div>
                     <button
                       onClick={handleClose}
-                      className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/70 hover:text-soul-ink hover:bg-soul-mist/60 transition-all text-2xl leading-none font-medium"
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:text-soul-ink hover:bg-soul-mist/60 transition-all text-2xl leading-none font-medium"
                       aria-label="Fechar"
                     >
                       ×
@@ -500,20 +500,20 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                   <form onSubmit={handleCreate} className="space-y-5">
                     {error && (
-                      <div className="rounded-2xl px-4 py-3 text-[14px] font-sans font-semibold"
+                      <div className="rounded-2xl px-4 py-3 text-[15px] font-sans font-semibold"
                            style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
                         {error}
                       </div>
                     )}
 
-                    <div className="rounded-2xl px-4 py-3 text-[13px] font-sans font-semibold"
+                    <div className="rounded-2xl px-4 py-3 text-[14px] font-sans font-semibold"
                          style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.30)', color: '#3d5a40' }}>
                       Preencha os campos abaixo só se for <strong>enviar o teste para outra pessoa</strong>. Para fazer agora você mesmo, basta escolher a avaliação e clicar em <strong>Fazer teste agora</strong>.
                     </div>
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
-                        Nome do candidato <span className="text-[10px] font-medium text-soul-ink/55 normal-case tracking-normal">(opcional)</span>
+                      <label className="block text-[13.5px] font-sans font-bold text-soul-ink/88 uppercase tracking-widest mb-2">
+                        Nome do candidato <span className="text-[12px] font-medium text-soul-ink/72 normal-case tracking-normal">(opcional)</span>
                       </label>
                       <input
                         type="text" value={form.employeeName}
@@ -523,8 +523,8 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                     </div>
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-2">
-                        E-mail do candidato <span className="text-[10px] font-medium text-soul-ink/55 normal-case tracking-normal">(opcional)</span>
+                      <label className="block text-[13.5px] font-sans font-bold text-soul-ink/88 uppercase tracking-widest mb-2">
+                        E-mail do candidato <span className="text-[12px] font-medium text-soul-ink/72 normal-case tracking-normal">(opcional)</span>
                       </label>
                       <input
                         type="email" value={form.employeeEmail}
@@ -534,7 +534,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                     </div>
 
                     <div>
-                      <label className="block text-[12px] font-sans font-bold text-soul-ink/80 uppercase tracking-widest mb-3">
+                      <label className="block text-[13.5px] font-sans font-bold text-soul-ink/88 uppercase tracking-widest mb-3">
                         Categoria e avaliação
                       </label>
 
@@ -548,7 +548,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                                 <p className="font-serif text-[15px] font-semibold text-soul-ink leading-tight">
                                   {meta.title}
                                 </p>
-                                <span className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota">
+                                <span className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota">
                                   {tests.length} {tests.length === 1 ? 'teste' : 'testes'}
                                 </span>
                               </div>
@@ -567,16 +567,16 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                                       }}
                                     >
                                       {t.badge && (
-                                        <span className="absolute top-1.5 right-1.5 text-[10px] font-bold px-1.5 py-0.5 rounded-full font-sans"
+                                        <span className="absolute top-1.5 right-1.5 text-[12px] font-bold px-1.5 py-0.5 rounded-full font-sans"
                                               style={{ background: 'rgba(212,148,58,0.25)', color: '#e8c878' }}>
                                           {t.badge}
                                         </span>
                                       )}
-                                      <p className="text-[14px] font-bold mb-0.5 font-sans leading-tight"
+                                      <p className="text-[15px] font-bold mb-0.5 font-sans leading-tight"
                                          style={{ color: active ? '#e09070' : '#f0ece3' }}>
                                         {t.short}
                                       </p>
-                                      <p className="text-[12px] font-sans font-semibold" style={{ color: 'rgba(240,236,227,0.75)' }}>
+                                      <p className="text-[13.5px] font-sans font-semibold" style={{ color: 'rgba(240,236,227,0.75)' }}>
                                         {t.credits === 1 ? '1 crédito' : `${t.credits} créditos`} · {t.minutos} min
                                       </p>
                                     </button>
@@ -595,7 +595,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                         onClick={handleSelfStart}
                         disabled={loading || form.testType === 'BUNDLE_4'}
                         title={form.testType === 'BUNDLE_4' ? 'O Bundle 4 só funciona por link enviado' : 'Fazer este teste agora mesmo, no seu próprio perfil'}
-                        className="flex-[1.3] py-3 rounded-full text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
+                        className="flex-[1.3] py-3 rounded-full text-[15px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
                         style={{ background: 'linear-gradient(135deg, #5e8762, #7a9e7e)', boxShadow: '0 6px 18px rgba(122,158,126,0.30)' }}
                       >
                         {loading ? 'Abrindo teste…' : 'Fazer teste agora'}
@@ -603,13 +603,13 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       <button
                         type="submit"
                         disabled={loading}
-                        className="flex-1 py-3 rounded-full text-[14px] font-sans font-bold border-2 transition-all disabled:opacity-60"
+                        className="flex-1 py-3 rounded-full text-[15px] font-sans font-bold border-2 transition-all disabled:opacity-60"
                         style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070', background: 'white' }}
                       >
                         {loading ? 'Criando link…' : 'Criar e enviar link'}
                       </button>
                     </div>
-                    <p className="text-[11.5px] text-soul-ink/60 font-medium text-center mt-1">
+                    <p className="text-[13px] text-soul-ink/75 font-medium text-center mt-1">
                       <strong>Fazer teste agora</strong>: você mesmo responde, sem digitar nada. &nbsp;·&nbsp; <strong>Criar e enviar link</strong>: gera um link para enviar a outra pessoa.
                     </p>
                   </form>
@@ -631,20 +631,20 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                   {/* Badges */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                           style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
                       {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[12px] font-bold"
+                    <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[13.5px] font-bold"
                           style={{ background: 'rgba(212,179,94,0.16)', color: '#d4b35e', border: '1px solid rgba(212,179,94,0.4)' }}>
                       ⏱ Leva {selectedTest.minutos} minutos
                     </span>
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold uppercase tracking-wider"
+                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold uppercase tracking-wider"
                           style={{ background: 'rgba(255,255,255,0.12)', color: '#f0ece3' }}>
                       {CATEGORY_META[selectedTest.category].title}
                     </span>
                     {selectedTest.badge && (
-                      <span className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-bold"
+                      <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                             style={{ background: 'rgba(212,148,58,0.22)', color: '#e8c878' }}>
                         ✦ {selectedTest.badge}
                       </span>
@@ -670,11 +670,11 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                   <div className="space-y-2.5">
                     {selectedTest.bullets.map((b, i) => (
                       <div key={i} className="flex items-start gap-3">
-                        <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[11px] font-bold"
+                        <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[13px] font-bold"
                               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
                           ✓
                         </span>
-                        <p className="text-[14px] text-soul-ink font-semibold leading-snug">{b}</p>
+                        <p className="text-[15px] text-soul-ink font-semibold leading-snug">{b}</p>
                       </div>
                     ))}
                   </div>

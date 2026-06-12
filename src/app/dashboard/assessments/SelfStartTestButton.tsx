@@ -54,8 +54,8 @@ export default function SelfStartTestButton({
   // Mesma altura, padding e tipografia do NewAssessmentButton (primary) para
   // ficarem perfeitamente alinhados quando aparecem lado a lado.
   const baseClass = variant === 'compact'
-    ? 'inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-[13px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
-    : 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
+    ? 'inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
+    : 'inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0'
 
   const cls = `${baseClass} ${fullWidth ? 'w-full' : ''}`
 
@@ -77,7 +77,7 @@ export default function SelfStartTestButton({
         {loading ? 'Abrindo…' : (label ?? 'Fazer teste agora')}
       </button>
       {error && (
-        <p className="text-[11.5px] font-semibold mt-1" style={{ color: '#e09070' }}>{error}</p>
+        <p className="text-[13px] font-semibold mt-1" style={{ color: '#e09070' }}>{error}</p>
       )}
     </>
   )

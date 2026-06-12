@@ -42,7 +42,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xl">🎁</span>
             <span
-              className="text-[10px] font-bold uppercase tracking-[0.18em]"
+              className="text-[12px] font-bold uppercase tracking-[0.18em]"
               style={{ color: isComplete ? '#8f3f1e' : 'rgba(201,168,76,0.95)' }}
             >
               Bônus exclusivo
@@ -59,7 +59,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
 
           {/* Descrição */}
           <p
-            className="text-[14px] sm:text-[15px] leading-relaxed font-medium mb-4 max-w-xl"
+            className="text-[15px] sm:text-[15px] leading-relaxed font-medium mb-4 max-w-xl"
             style={{ color: isComplete ? 'rgba(240,236,227,0.75)' : 'rgba(255,255,255,0.7)' }}
           >
             {isComplete
@@ -71,7 +71,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
           <div className="max-w-md">
             <div className="flex items-center justify-between mb-1.5">
               <span
-                className="text-[11px] font-bold uppercase tracking-widest"
+                className="text-[13px] font-bold uppercase tracking-widest"
                 style={{ color: isComplete ? 'rgba(240,236,227,0.65)' : 'rgba(255,255,255,0.55)' }}
               >
                 Preenchimento
@@ -104,7 +104,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
         <div className="flex flex-col items-stretch lg:items-end gap-2">
           <Link
             href="/dashboard/profile"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-[14px] font-bold whitespace-nowrap
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-[15px] font-bold whitespace-nowrap
                        shadow-terra hover:-translate-y-px transition-all"
             style={{
               background: isComplete
@@ -116,7 +116,7 @@ export default function ProfileGamificationBanner({ completion, bonusAmount = 6 
             {isComplete ? 'Solicitar código →' : 'Completar perfil →'}
           </Link>
           {!isComplete && (
-            <p className="text-[11px] text-white/50 font-medium text-center lg:text-right">
+            <p className="text-[13px] text-white/70 font-medium text-center lg:text-right">
               Leva menos de 2 minutos
             </p>
           )}

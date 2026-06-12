@@ -53,7 +53,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
       {/* Header */}
       <div>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink">Todos os Testes</h1>
-        <p className="text-sm text-soul-ink/45 mt-1 font-sans">
+        <p className="text-sm text-soul-ink/68 mt-1 font-sans">
           {assessments.length} resultado{assessments.length !== 1 ? 's' : ''}
           {totalCompleted > 0 && ` · ${totalCompleted} concluído${totalCompleted !== 1 ? 's' : ''}`}
         </p>
@@ -97,9 +97,9 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
           {(status || type || q) && (
             <Link href="/admin/assessments"
               className="text-sm font-sans transition-colors"
-              style={{ color: 'rgba(240,236,227,0.4)' }}
+              style={{ color: 'rgba(240,236,227,0.68)' }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#c4633a' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(240,236,227,0.4)' }}>
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(240,236,227,0.68)' }}>
               Limpar filtros
             </Link>
           )}
@@ -112,19 +112,19 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
           <div className="py-16 text-center">
             <p className="text-4xl mb-4">🔍</p>
             <p className="font-serif font-semibold text-lg text-soul-ink">Nenhum resultado encontrado</p>
-            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.4)' }}>Tente ajustar os filtros</p>
+            <p className="text-sm font-sans mt-1" style={{ color: 'rgba(240,236,227,0.68)' }}>Tente ajustar os filtros</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead style={{ borderBottom: '1px solid rgba(58,61,69,0.6)' }}>
                 <tr style={{ background: 'rgba(250,247,242,0.8)' }}>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Funcionário</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Empresa</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Teste</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Status</th>
-                  <th className="text-left px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Data</th>
-                  <th className="text-right px-6 py-3 text-[10px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.35)' }}>Ações</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Funcionário</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Empresa</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Teste</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Status</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Data</th>
+                  <th className="text-right px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -136,9 +136,9 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                         style={{ borderBottom: '1px solid rgba(58,61,69,0.4)' }}>
                       <td className="px-6 py-4">
                         <p className="text-sm font-medium font-sans text-soul-ink">{a.employee.name}</p>
-                        <p className="text-[11px] font-sans" style={{ color: 'rgba(240,236,227,0.4)' }}>{a.employee.email}</p>
+                        <p className="text-[13px] font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>{a.employee.email}</p>
                       </td>
-                      <td className="px-6 py-4 font-sans text-sm" style={{ color: 'rgba(240,236,227,0.6)' }}>{a.company.name}</td>
+                      <td className="px-6 py-4 font-sans text-sm" style={{ color: 'rgba(240,236,227,0.68)' }}>{a.company.name}</td>
                       <td className="px-6 py-4 font-sans text-sm text-soul-ink">{TEST_LABELS[a.testType] ?? a.testType}</td>
                       <td className="px-6 py-4">
                         <span className="text-xs font-medium font-sans px-2.5 py-1 rounded-full"
@@ -146,7 +146,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                           {st.label}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm font-sans" style={{ color: 'rgba(240,236,227,0.45)' }}>
+                      <td className="px-6 py-4 text-sm font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>
                         {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                       </td>
                       <td className="px-6 py-4 text-right">
@@ -169,7 +169,7 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                             </a>
                           </div>
                         ) : (
-                          <span className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.35)' }}>
+                          <span className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>
                             {a.status === 'EXPIRED' ? 'Expirado' : `Expira ${new Date(a.expiresAt).toLocaleDateString('pt-BR')}`}
                           </span>
                         )}

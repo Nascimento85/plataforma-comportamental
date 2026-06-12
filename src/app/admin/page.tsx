@@ -63,7 +63,7 @@ export default async function AdminPage() {
       {/* Header */}
       <div>
         <h1 className="font-serif font-semibold text-3xl text-soul-ink">Painel Administrativo</h1>
-        <p className="text-sm text-soul-ink/45 mt-1 font-sans">Visão geral de toda a plataforma</p>
+        <p className="text-sm text-soul-ink/68 mt-1 font-sans">Visão geral de toda a plataforma</p>
       </div>
 
       {/* Stats principais */}
@@ -78,8 +78,8 @@ export default async function AdminPage() {
                style={{ border: `1px solid ${s.border}` }}>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-base">{s.emoji}</span>
-              <span className="text-[10px] font-sans font-semibold uppercase tracking-widest"
-                    style={{ color: 'rgba(240,236,227,0.4)' }}>{s.label}</span>
+              <span className="text-[12px] font-sans font-semibold uppercase tracking-widest"
+                    style={{ color: 'rgba(240,236,227,0.68)' }}>{s.label}</span>
             </div>
             <div className="font-serif font-semibold leading-none" style={{ fontSize: '36px', color: s.color }}>
               {s.value}
@@ -90,7 +90,7 @@ export default async function AdminPage() {
 
       {/* Por tipo de teste */}
       <div>
-        <h2 className="text-[10px] font-sans font-semibold text-soul-ink/35 uppercase tracking-[0.15em] mb-3">
+        <h2 className="text-[12px] font-sans font-semibold text-soul-ink/62 uppercase tracking-[0.15em] mb-3">
           Testes por tipo
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -105,7 +105,7 @@ export default async function AdminPage() {
               <div className={`w-2 h-2 rounded-full flex-shrink-0 ${t.dot}`} />
               <div>
                 <div className="font-serif font-semibold text-2xl text-soul-ink leading-none">{t.value}</div>
-                <div className="text-[11px] text-soul-ink/40 mt-0.5 font-sans">{t.label}</div>
+                <div className="text-[13px] text-soul-ink/65 mt-0.5 font-sans">{t.label}</div>
               </div>
             </div>
           ))}
@@ -129,7 +129,7 @@ export default async function AdminPage() {
           </div>
           <div className="divide-y divide-soul-mist/30">
             {recentAssessments.length === 0 ? (
-              <p className="text-center text-sm text-soul-ink/35 py-8 font-sans">Nenhum teste concluído ainda.</p>
+              <p className="text-center text-sm text-soul-ink/62 py-8 font-sans">Nenhum teste concluído ainda.</p>
             ) : recentAssessments.map((a) => (
               <Link
                 key={a.id}
@@ -138,7 +138,7 @@ export default async function AdminPage() {
               >
                 <div>
                   <p className="text-sm font-medium text-soul-ink font-sans">{a.employee.name}</p>
-                  <p className="text-[11px] text-soul-ink/35 font-sans">{a.company.name}</p>
+                  <p className="text-[13px] text-soul-ink/62 font-sans">{a.company.name}</p>
                 </div>
                 <span className="text-xs font-medium px-2.5 py-1 rounded-full font-sans flex-shrink-0"
                       style={{ background: 'rgba(122,158,126,0.1)', color: '#5a8a5e' }}>
@@ -158,14 +158,14 @@ export default async function AdminPage() {
           </div>
           <div className="divide-y divide-soul-mist/30">
             {recentCompanies.length === 0 ? (
-              <p className="text-center text-sm text-soul-ink/35 py-8 font-sans">Nenhuma empresa cadastrada.</p>
+              <p className="text-center text-sm text-soul-ink/62 py-8 font-sans">Nenhuma empresa cadastrada.</p>
             ) : recentCompanies.map((c) => (
               <div key={c.id} className="flex items-center justify-between px-6 py-3 hover:bg-soul-cream/40 transition-colors">
                 <div>
                   <p className="text-sm font-medium text-soul-ink font-sans">{c.name}</p>
-                  <p className="text-[11px] text-soul-ink/35 font-sans">{c.email}</p>
+                  <p className="text-[13px] text-soul-ink/62 font-sans">{c.email}</p>
                 </div>
-                <span className="text-[11px] text-soul-ink/30 font-sans flex-shrink-0">
+                <span className="text-[13px] text-soul-ink/60 font-sans flex-shrink-0">
                   {c._count.assessments} teste{c._count.assessments !== 1 ? 's' : ''}
                 </span>
               </div>

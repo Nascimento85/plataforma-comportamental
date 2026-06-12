@@ -172,9 +172,9 @@ function MetricCard({
 
   return (
     <div className={`rounded-3xl p-5 border ${toneClass}`}>
-      <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/55">{label}</p>
+      <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/72">{label}</p>
       <p className="font-serif text-3xl font-semibold text-soul-ink mt-2 leading-none">{value}</p>
-      {sub && <p className="text-[12px] text-soul-ink/65 font-medium mt-2">{sub}</p>}
+      {sub && <p className="text-[13.5px] text-soul-ink/78 font-medium mt-2">{sub}</p>}
     </div>
   )
 }
@@ -183,7 +183,7 @@ function SectionHeading({ title, subtitle }: { title: string; subtitle?: string 
   return (
     <div className="mb-3">
       <h2 className="font-serif text-xl font-semibold text-soul-ink">{title}</h2>
-      {subtitle && <p className="text-[13px] text-soul-ink/65 font-medium">{subtitle}</p>}
+      {subtitle && <p className="text-[14px] text-soul-ink/78 font-medium">{subtitle}</p>}
     </div>
   )
 }
@@ -204,14 +204,14 @@ export default async function AdminPassaportePage() {
 
       {/* Header */}
       <div>
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
+        <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
               style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Admin · Passaporte
         </span>
         <h1 className="font-serif font-semibold text-3xl md:text-4xl text-soul-ink leading-tight">
           Dashboard do <span className="text-soul-terracota italic font-normal">Passaporte de Autoconhecimento</span>
         </h1>
-        <p className="text-[14px] text-soul-ink/75 mt-2 font-medium max-w-3xl">
+        <p className="text-[15px] text-soul-ink/85 mt-2 font-medium max-w-3xl">
           Saúde do funil de bônus, conversão Premium e agendamentos de outreach.
         </p>
       </div>
@@ -355,7 +355,7 @@ export default async function AdminPassaportePage() {
           />
           <div className="rounded-3xl border border-soul-mist/60 bg-soul-parchment overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-soul-mist/40 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
+              <thead className="bg-soul-mist/40 text-soul-ink/78 text-[13px] font-bold uppercase tracking-wider">
                 <tr>
                   <th className="text-left px-5 py-3">Empresa</th>
                   <th className="text-left px-5 py-3">Email</th>
@@ -367,11 +367,11 @@ export default async function AdminPassaportePage() {
                 {m.upcomingExpirations.map((g) => (
                   <tr key={g.id}>
                     <td className="px-5 py-3 font-medium text-soul-ink">{g.company.name}</td>
-                    <td className="px-5 py-3 text-soul-ink/70">{g.company.email}</td>
+                    <td className="px-5 py-3 text-soul-ink/80">{g.company.email}</td>
                     <td className="px-5 py-3 text-right font-semibold text-soul-ink">
                       {g.remaining}/{g.amount}
                     </td>
-                    <td className="px-5 py-3 text-right text-soul-ink/80">
+                    <td className="px-5 py-3 text-right text-soul-ink/88">
                       {fmtRelative(g.expiresAt)} · {fmtDateTime(g.expiresAt)}
                     </td>
                   </tr>
@@ -391,7 +391,7 @@ export default async function AdminPassaportePage() {
           />
           <div className="rounded-3xl border border-rose-200 bg-rose-50/50 overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-rose-100/60 text-rose-900/80 text-[11px] font-bold uppercase tracking-wider">
+              <thead className="bg-rose-100/60 text-rose-900/80 text-[13px] font-bold uppercase tracking-wider">
                 <tr>
                   <th className="text-left px-5 py-3">Empresa</th>
                   <th className="text-left px-5 py-3">Tipo</th>
@@ -405,14 +405,14 @@ export default async function AdminPassaportePage() {
                   <tr key={o.id}>
                     <td className="px-5 py-3">
                       <p className="font-medium text-soul-ink">{o.company.name}</p>
-                      <p className="text-[12px] text-soul-ink/60">{o.company.email}</p>
+                      <p className="text-[13.5px] text-soul-ink/75">{o.company.email}</p>
                     </td>
-                    <td className="px-5 py-3 font-mono text-[12px] text-rose-900">{o.type}</td>
+                    <td className="px-5 py-3 font-mono text-[13.5px] text-rose-900">{o.type}</td>
                     <td className="px-5 py-3 text-right font-semibold">{o.attempts}</td>
-                    <td className="px-5 py-3 text-[12px] text-rose-900/85 max-w-md truncate">
+                    <td className="px-5 py-3 text-[13.5px] text-rose-900/85 max-w-md truncate">
                       {o.errorMsg ?? '—'}
                     </td>
-                    <td className="px-5 py-3 text-right text-soul-ink/70 text-[12px]">
+                    <td className="px-5 py-3 text-right text-soul-ink/80 text-[13.5px]">
                       {fmtDateTime(o.scheduledFor)}
                     </td>
                   </tr>
@@ -431,7 +431,7 @@ export default async function AdminPassaportePage() {
         />
         <div className="rounded-3xl border border-soul-mist/60 bg-soul-parchment overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-soul-mist/40 text-soul-ink/65 text-[11px] font-bold uppercase tracking-wider">
+            <thead className="bg-soul-mist/40 text-soul-ink/78 text-[13px] font-bold uppercase tracking-wider">
               <tr>
                 <th className="text-left px-5 py-3">Empresa</th>
                 <th className="text-left px-5 py-3">Origem</th>
@@ -446,13 +446,13 @@ export default async function AdminPassaportePage() {
                 <tr key={g.id}>
                   <td className="px-5 py-3">
                     <p className="font-medium text-soul-ink">{g.company.name}</p>
-                    <p className="text-[12px] text-soul-ink/60">{g.company.email}</p>
+                    <p className="text-[13.5px] text-soul-ink/75">{g.company.email}</p>
                   </td>
-                  <td className="px-5 py-3 font-mono text-[12px] text-soul-ink/80">{g.source}</td>
+                  <td className="px-5 py-3 font-mono text-[13.5px] text-soul-ink/88">{g.source}</td>
                   <td className="px-5 py-3 text-right font-semibold text-soul-ink">{g.amount}</td>
-                  <td className="px-5 py-3 text-right text-soul-ink/80">{g.remaining}</td>
-                  <td className="px-5 py-3 text-right text-soul-ink/70 text-[12px]">{fmtDate(g.grantedAt)}</td>
-                  <td className="px-5 py-3 text-right text-soul-ink/70 text-[12px]">
+                  <td className="px-5 py-3 text-right text-soul-ink/88">{g.remaining}</td>
+                  <td className="px-5 py-3 text-right text-soul-ink/80 text-[13.5px]">{fmtDate(g.grantedAt)}</td>
+                  <td className="px-5 py-3 text-right text-soul-ink/80 text-[13.5px]">
                     {g.expiredAt
                       ? <span className="text-rose-700">expirado</span>
                       : fmtDate(g.expiresAt)}
@@ -461,7 +461,7 @@ export default async function AdminPassaportePage() {
               ))}
               {m.grantsRecent.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-5 py-8 text-center text-soul-ink/55 text-[13px]">
+                  <td colSpan={6} className="px-5 py-8 text-center text-soul-ink/72 text-[14px]">
                     Nenhuma concessão registrada ainda.
                   </td>
                 </tr>
@@ -471,7 +471,7 @@ export default async function AdminPassaportePage() {
         </div>
       </section>
 
-      <div className="text-[12px] text-soul-ink/50 italic pt-2">
+      <div className="text-[13.5px] text-soul-ink/70 italic pt-2">
         Atualizado a cada carregamento. Página dinâmica — sem cache.
       </div>
     </div>

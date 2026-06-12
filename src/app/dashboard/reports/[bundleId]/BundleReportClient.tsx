@@ -113,7 +113,7 @@ export default function BundleReportClient({
         <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-3">
           Cruzando os resultados…
         </h2>
-        <p className="text-sm text-soul-ink/50 font-sans max-w-xs mx-auto leading-relaxed mb-8">
+        <p className="text-sm text-soul-ink/70 font-sans max-w-xs mx-auto leading-relaxed mb-8">
           A inteligência artificial está integrando os 4 testes em uma devolutiva única.
           Isso pode levar até 1 minuto.
         </p>
@@ -134,7 +134,7 @@ export default function BundleReportClient({
       <div className="max-w-2xl mx-auto py-24 text-center px-4">
         <div className="text-5xl mb-4">⚠️</div>
         <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-3">Erro na geração</h2>
-        <p className="text-sm text-soul-ink/50 font-sans mb-8">
+        <p className="text-sm text-soul-ink/70 font-sans mb-8">
           Ocorreu um problema ao gerar a devolutiva. Você pode tentar novamente.
         </p>
         <button
@@ -183,7 +183,7 @@ export default function BundleReportClient({
 
         <div className="relative z-10 flex items-start justify-between gap-6 flex-wrap">
           <div className="flex-1">
-            <div className="text-[10px] font-sans font-semibold uppercase tracking-[0.2em] mb-3"
+            <div className="text-[12px] font-sans font-semibold uppercase tracking-[0.2em] mb-3"
                  style={{ color: '#c9a84c' }}>
               Devolutiva Integrada · Bundle 4 Testes
             </div>
@@ -199,8 +199,8 @@ export default function BundleReportClient({
                 {initials(employeeName)}
               </div>
               <div>
-                <div className="text-sm font-medium text-white/80 font-sans">{employeeName}</div>
-                <div className="text-[11px] text-white/35 font-sans">Gerado em {dateStr}</div>
+                <div className="text-sm font-medium text-white/88 font-sans">{employeeName}</div>
+                <div className="text-[13px] text-white/62 font-sans">Gerado em {dateStr}</div>
               </div>
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function BundleReportClient({
         <div className="space-y-4">
           {content.perfil_sintese.descricao.split('\n').map((p, i) =>
             p.trim()
-              ? <p key={i} className="text-sm text-soul-ink/70 leading-relaxed font-sans">{p}</p>
+              ? <p key={i} className="text-sm text-soul-ink/80 leading-relaxed font-sans">{p}</p>
               : null
           )}
         </div>
@@ -261,7 +261,7 @@ export default function BundleReportClient({
               <div className="w-1 rounded-full flex-shrink-0 mt-1" style={{ background: '#7a9e7e', minHeight: '100%' }}/>
               <div>
                 <h4 className="text-sm font-semibold text-soul-ink mb-1 font-sans">{item.tema}</h4>
-                <p className="text-sm text-soul-ink/60 leading-relaxed font-sans">{item.descricao}</p>
+                <p className="text-sm text-soul-ink/75 leading-relaxed font-sans">{item.descricao}</p>
               </div>
             </div>
           ))}
@@ -282,7 +282,7 @@ export default function BundleReportClient({
               <div className="w-1 rounded-full flex-shrink-0 mt-1" style={{ background: '#d4943a', minHeight: '100%' }}/>
               <div>
                 <h4 className="text-sm font-semibold text-soul-ink mb-1 font-sans">{item.tema}</h4>
-                <p className="text-sm text-soul-ink/60 leading-relaxed font-sans">{item.descricao}</p>
+                <p className="text-sm text-soul-ink/75 leading-relaxed font-sans">{item.descricao}</p>
               </div>
             </div>
           ))}
@@ -340,11 +340,11 @@ export default function BundleReportClient({
                   {acao.prioridade}
                 </div>
                 <div className="pt-0.5">
-                  <span className="text-[10px] font-bold uppercase tracking-widest font-sans"
+                  <span className="text-[12px] font-bold uppercase tracking-widest font-sans"
                         style={{ color: '#c4633a' }}>
                     {acao.area}
                   </span>
-                  <p className="text-sm text-soul-ink/70 mt-0.5 leading-relaxed font-sans">{acao.acao}</p>
+                  <p className="text-sm text-soul-ink/80 mt-0.5 leading-relaxed font-sans">{acao.acao}</p>
                 </div>
               </li>
             ))}
@@ -358,7 +358,7 @@ export default function BundleReportClient({
       >
         <div>
           <div className="text-sm font-medium text-soul-ink font-sans">Gostou da devolutiva?</div>
-          <div className="text-xs text-soul-ink/40 mt-0.5 font-sans">
+          <div className="text-xs text-soul-ink/65 mt-0.5 font-sans">
             Compartilhe com {employeeName.split(' ')[0]} ou salve como PDF para seu arquivo.
           </div>
         </div>
@@ -427,12 +427,12 @@ function SubCard({
       style={{ border: '1px solid rgba(58,61,69,0.6)' }}
     >
       <h4
-        className="text-[10px] font-bold uppercase tracking-[0.12em] mb-2 font-sans"
-        style={{ color: warning ? '#c4633a' : 'rgba(240,236,227,0.4)' }}
+        className="text-[12px] font-bold uppercase tracking-[0.12em] mb-2 font-sans"
+        style={{ color: warning ? '#c4633a' : 'rgba(240,236,227,0.68)' }}
       >
         {warning ? '⚠ ' : ''}{title}
       </h4>
-      <p className="text-sm text-soul-ink/65 leading-relaxed font-sans">{text}</p>
+      <p className="text-sm text-soul-ink/78 leading-relaxed font-sans">{text}</p>
     </div>
   )
 }

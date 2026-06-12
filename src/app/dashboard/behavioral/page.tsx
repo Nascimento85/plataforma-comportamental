@@ -166,30 +166,30 @@ function LensCard({ lens, accountType }: { lens: Lens; accountType: 'PF' | 'PJ' 
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{lens.name}</p>
-          <p className="text-[13px] font-semibold text-soul-ink/80 italic mt-0.5">{lens.tagline}</p>
+          <p className="text-[14px] font-semibold text-soul-ink/88 italic mt-0.5">{lens.tagline}</p>
         </div>
       </div>
 
       <div className="relative">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Pilares</p>
-        <p className="text-[13px] font-semibold text-soul-ink">{lens.pillar}</p>
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Pilares</p>
+        <p className="text-[14px] font-semibold text-soul-ink">{lens.pillar}</p>
       </div>
 
-      <p className="text-[14px] text-soul-ink font-medium leading-relaxed relative">
+      <p className="text-[15px] text-soul-ink font-medium leading-relaxed relative">
         {lens.description}
       </p>
 
       <div className="relative">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Aplicação corporativa</p>
-        <p className="text-[13px] text-soul-ink/90 font-medium leading-snug">{lens.application}</p>
+        <p className="text-[13px] font-bold uppercase tracking-widest text-soul-terracota mb-1">Aplicação corporativa</p>
+        <p className="text-[14px] text-soul-ink/90 font-medium leading-snug">{lens.application}</p>
       </div>
 
       <div className="space-y-1.5 relative">
         {lens.bullets.map((b, i) => (
           <div key={i} className="flex items-start gap-2">
-            <span className="mt-1 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[10px] font-bold"
+            <span className="mt-1 w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[12px] font-bold"
                   style={{ background: lens.color }}>✓</span>
-            <p className="text-[13px] text-soul-ink font-semibold leading-snug">{b}</p>
+            <p className="text-[14px] text-soul-ink font-semibold leading-snug">{b}</p>
           </div>
         ))}
       </div>
@@ -197,9 +197,9 @@ function LensCard({ lens, accountType }: { lens: Lens; accountType: 'PF' | 'PJ' 
       {/* ── CTA: investimento em cima, dois botões empilhados embaixo, full width ── */}
       <div className="relative pt-3 mt-auto border-t border-soul-mist/60 space-y-3">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-soul-ink/55">Investimento</p>
+          <p className="text-[12px] font-bold uppercase tracking-widest text-soul-ink/72">Investimento</p>
           <p className="font-serif text-lg font-bold text-soul-ink leading-none">
-            {lens.credits} <span className="text-[12px] text-soul-ink/60 font-medium">crédito{lens.credits > 1 ? 's' : ''}</span>
+            {lens.credits} <span className="text-[13.5px] text-soul-ink/75 font-medium">crédito{lens.credits > 1 ? 's' : ''}</span>
           </p>
         </div>
         <div className="space-y-2">
@@ -235,14 +235,14 @@ export default async function BehavioralPage() {
 
       {/* ── Header ── */}
       <div>
-        <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
+        <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-3"
               style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
           Categoria 1 · Performance
         </span>
         <h1 className="font-serif font-semibold text-4xl md:text-5xl text-soul-ink leading-tight">
           Análises <span className="text-soul-terracota italic font-normal">Comportamentais</span>
         </h1>
-        <p className="text-base md:text-lg text-soul-ink/85 mt-3 font-medium max-w-3xl leading-relaxed">
+        <p className="text-base md:text-lg text-soul-ink/90 mt-3 font-medium max-w-3xl leading-relaxed">
           Quatro lentes clássicas para ler o comportamento no trabalho. Revelam como cada líder e colaborador decide sob pressão, comunica, conduz conflito e sustenta cultura — o material bruto para formar times de alta performance e calibrar lideranças.
         </p>
       </div>
@@ -263,7 +263,7 @@ export default async function BehavioralPage() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8">
           <div>
-            <span className="inline-block text-[11px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
+            <span className="inline-block text-[13px] font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full mb-4"
                   style={{ background: 'rgba(212,184,92,0.22)', color: '#e8c878' }}>
               ✦ Carro chefe · Mais solicitado
             </span>
@@ -276,15 +276,15 @@ export default async function BehavioralPage() {
               {DISC.tagline}
             </p>
 
-            <p className="text-[12px] font-bold uppercase tracking-widest text-white/70 mb-1">Pilares</p>
+            <p className="text-[13.5px] font-bold uppercase tracking-widest text-white/80 mb-1">Pilares</p>
             <p className="text-[15px] font-semibold text-white/95 mb-5">{DISC.pillar}</p>
 
             <p className="text-[16px] text-white/90 font-medium leading-relaxed mb-5">
               {DISC.description}
             </p>
 
-            <p className="text-[12px] font-bold uppercase tracking-widest text-soul-gold mb-1">Aplicação corporativa</p>
-            <p className="text-[15px] text-white/85 font-medium leading-relaxed">
+            <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-gold mb-1">Aplicação corporativa</p>
+            <p className="text-[15px] text-white/90 font-medium leading-relaxed">
               {DISC.application}
             </p>
           </div>
@@ -292,13 +292,13 @@ export default async function BehavioralPage() {
           <div className="flex flex-col justify-center">
             <div className="rounded-2xl p-5 mb-5"
                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}>
-              <p className="text-[12px] font-bold uppercase tracking-widest text-soul-gold mb-3">O que entrega</p>
+              <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-gold mb-3">O que entrega</p>
               <div className="space-y-2.5">
                 {DISC.bullets.map((b, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[11px] font-bold"
+                    <span className="mt-0.5 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[13px] font-bold"
                           style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>✓</span>
-                    <p className="text-[14px] text-white font-semibold leading-snug">{b}</p>
+                    <p className="text-[15px] text-white font-semibold leading-snug">{b}</p>
                   </div>
                 ))}
               </div>
@@ -306,10 +306,10 @@ export default async function BehavioralPage() {
 
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-[12px] font-bold uppercase tracking-widest text-white/60">Investimento</p>
-                <p className="font-serif text-3xl font-semibold text-white mt-1">{DISC.credits} <span className="text-lg font-medium text-white/75">crédito{DISC.credits > 1 ? 's' : ''}</span></p>
+                <p className="text-[13.5px] font-bold uppercase tracking-widest text-white/75">Investimento</p>
+                <p className="font-serif text-3xl font-semibold text-white mt-1">{DISC.credits} <span className="text-lg font-medium text-white/85">crédito{DISC.credits > 1 ? 's' : ''}</span></p>
               </div>
-              <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[12px] font-bold"
+              <span className="inline-flex items-center rounded-full px-3 py-1.5 text-[13.5px] font-bold"
                     style={{ background: 'rgba(212,184,92,0.2)', color: '#e8c878' }}>
                 ✦ Entrada recomendada
               </span>
@@ -334,7 +334,7 @@ export default async function BehavioralPage() {
           <h2 className="font-serif font-semibold text-2xl md:text-3xl text-soul-ink leading-tight">
             Lentes complementares
           </h2>
-          <p className="text-[15px] text-soul-ink/80 font-medium mt-1 max-w-3xl">
+          <p className="text-[15px] text-soul-ink/88 font-medium mt-1 max-w-3xl">
             Ferramentas de aprofundamento para casos onde o DISC não responde sozinho. Combine para leituras mais ricas ou use individualmente em diagnósticos específicos.
           </p>
         </div>
@@ -352,7 +352,7 @@ export default async function BehavioralPage() {
           <p className="font-serif text-xl md:text-2xl font-semibold text-soul-ink leading-tight">
             Quer aplicar mais de uma lente?
           </p>
-          <p className="text-[15px] text-soul-ink/85 font-medium mt-1">
+          <p className="text-[15px] text-soul-ink/90 font-medium mt-1">
             Envie o <strong>Bundle Completo</strong>: DISC + MBTI + Eneagrama + Temperamentos em um único link, com devolutiva integrada cruzando os 4 mapas.
           </p>
         </div>

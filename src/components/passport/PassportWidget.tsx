@@ -29,7 +29,7 @@ export default function PassportWidget({ state }: Props) {
     >
       <div className="flex items-center justify-between mb-1.5">
         <div
-          className="text-[11px] font-sans font-bold tracking-[0.14em] uppercase"
+          className="text-[13px] font-sans font-bold tracking-[0.14em] uppercase"
           style={{ color: '#8f3f1e' }}
         >
           Passaporte de Autoconhecimento
@@ -47,7 +47,7 @@ export default function PassportWidget({ state }: Props) {
       >
         {total}
       </div>
-      <div className="text-[12px] text-soul-ink/55 font-sans">
+      <div className="text-[13.5px] text-soul-ink/72 font-sans">
         créditos disponíveis
       </div>
 
@@ -55,25 +55,25 @@ export default function PassportWidget({ state }: Props) {
       <div className="flex gap-2 mb-4 mt-4">
         <div className="flex-1 bg-white/85 rounded-xl p-3 text-center border border-soul-mist/60">
           <div className="font-serif text-xl font-bold text-soul-ink">{bonus}</div>
-          <div className="text-[11px] font-bold uppercase tracking-wider text-soul-ink/75 mt-1">
+          <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">
             🎟️ Bônus
           </div>
         </div>
         <div className="flex-1 bg-white/85 rounded-xl p-3 text-center border border-soul-mist/60">
           <div className="font-serif text-xl font-bold text-soul-ink">{paid}</div>
-          <div className="text-[11px] font-bold uppercase tracking-wider text-soul-ink/75 mt-1">
+          <div className="text-[13px] font-bold uppercase tracking-wider text-soul-ink/85 mt-1">
             💳 Pagos
           </div>
         </div>
       </div>
 
       {isExpired && (
-        <div className="text-[13px] font-sans font-bold text-soul-terracota mb-2 flex items-center gap-1">
+        <div className="text-[14px] font-sans font-bold text-soul-terracota mb-2 flex items-center gap-1">
           ⚠ Seu Passaporte expirou — recarregue para continuar
         </div>
       )}
       {!isExpired && status === 'ACTIVE' && hoursRemaining !== null && hoursRemaining < 48 && (
-        <div className="text-[13px] font-sans font-semibold mb-2 flex items-center gap-1" style={{ color: '#a04a1f' }}>
+        <div className="text-[14px] font-sans font-semibold mb-2 flex items-center gap-1" style={{ color: '#a04a1f' }}>
           ⏳ {hoursRemaining < 24 ? `Expira em ${hoursRemaining}h` : `Expira em ${Math.ceil(hoursRemaining/24)} dias`}
         </div>
       )}
@@ -82,7 +82,7 @@ export default function PassportWidget({ state }: Props) {
       <Link
         href="/dashboard/credits"
         className={`mt-3 w-full flex items-center justify-center gap-2 py-3 rounded-full
-                   text-[14px] font-sans font-bold transition-all duration-200
+                   text-[15px] font-sans font-bold transition-all duration-200
                    hover:-translate-y-px ${(isLow || isExpired) ? 'text-white shadow-terra' : ''}`}
         style={
           isLow || isExpired

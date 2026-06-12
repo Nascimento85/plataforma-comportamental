@@ -91,8 +91,8 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
             e libere a análise completa com os pontos de atrito da sua gestão.
           </p>
           <div className="rounded-2xl p-4 mb-4 text-left" style={{ background: CARD, border: `1px solid ${BORDER}` }}>
-            <p className="text-[12px] font-bold uppercase tracking-widest mb-1" style={{ color: GOLD }}>Link para o seu líder</p>
-            <p className="text-[14px] font-mono break-all" style={{ color: TEXT }}>{linkLider}</p>
+            <p className="text-[13.5px] font-bold uppercase tracking-widest mb-1" style={{ color: GOLD }}>Link para o seu líder</p>
+            <p className="text-[15px] font-mono break-all" style={{ color: TEXT }}>{linkLider}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button onClick={copiarLink} className="px-6 py-3.5 rounded-full text-[15px] font-bold border-2" style={{ borderColor: GOLD, color: GOLD }}>
@@ -112,7 +112,7 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
     return (
       <Shell>
         <div className="max-w-2xl mx-auto text-center py-8">
-          <p className="text-[13px] font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Diagnóstico gratuito · 3 minutos</p>
+          <p className="text-[14px] font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Diagnóstico gratuito · 3 minutos</p>
           <h1 className="font-serif text-4xl md:text-5xl font-bold leading-tight mb-5" style={{ color: TEXT }}>
             O que está travando o crescimento da sua empresa?
           </h1>
@@ -140,13 +140,13 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
         <div className="max-w-md mx-auto py-6">
           <h2 className="font-serif text-3xl font-bold mb-1" style={{ color: TEXT }}>Sobre você e sua empresa</h2>
           <p className="text-[15px] font-medium mb-5" style={{ color: MUTED }}>Para personalizar e enviar o seu diagnóstico.</p>
-          {error && <div className="rounded-xl px-4 py-3 mb-4 text-[14px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
+          {error && <div className="rounded-xl px-4 py-3 mb-4 text-[15px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
           <div className="space-y-4">
             <Field label="Seu nome"><input className="pme-input" value={donoNome} onChange={(e) => setDonoNome(e.target.value)} placeholder="Nome completo" /></Field>
             <Field label="E-mail (você receberá o resultado aqui)"><input type="email" className="pme-input" value={donoEmail} onChange={(e) => setDonoEmail(e.target.value)} placeholder="voce@empresa.com" /></Field>
             <Field label="WhatsApp com DDD">
               <input className="pme-input" value={donoTelefone} onChange={(e) => setDonoTelefone(e.target.value)} placeholder="(00) 00000-0000" />
-              <p className="text-[12px] mt-1 font-medium" style={{ color: MUTED }}>Use um número correto, é por ele que faremos o seu acompanhamento.</p>
+              <p className="text-[13.5px] mt-1 font-medium" style={{ color: MUTED }}>Use um número correto, é por ele que faremos o seu acompanhamento.</p>
             </Field>
             <Field label="Nome da empresa"><input className="pme-input" value={empresa} onChange={(e) => setEmpresa(e.target.value)} placeholder="Sua empresa" /></Field>
             <Field label="Quantos funcionários?">
@@ -157,11 +157,11 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
             </Field>
             <Field label="A empresa já tem líderes ou gestores?">
               <div className="flex gap-2">
-                <button type="button" onClick={() => setTemLideres(true)} className="flex-1 py-3 rounded-xl text-[14px] font-bold border-2 transition-all"
+                <button type="button" onClick={() => setTemLideres(true)} className="flex-1 py-3 rounded-xl text-[15px] font-bold border-2 transition-all"
                         style={{ borderColor: temLideres === true ? GOLD : BORDER, background: temLideres === true ? GOLD : 'transparent', color: temLideres === true ? BG : TEXT }}>
                   Sim, tenho líderes
                 </button>
-                <button type="button" onClick={() => setTemLideres(false)} className="flex-1 py-3 rounded-xl text-[14px] font-bold border-2 transition-all"
+                <button type="button" onClick={() => setTemLideres(false)} className="flex-1 py-3 rounded-xl text-[15px] font-bold border-2 transition-all"
                         style={{ borderColor: temLideres === false ? GOLD : BORDER, background: temLideres === false ? GOLD : 'transparent', color: temLideres === false ? BG : TEXT }}>
                   Não, sou o único líder
                 </button>
@@ -181,7 +181,7 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
     <Shell>
       <div className="max-w-2xl mx-auto py-4">
         <div className="sticky top-0 z-10 py-3 mb-2" style={{ background: BG }}>
-          <div className="flex justify-between text-[13px] font-semibold mb-1" style={{ color: MUTED }}>
+          <div className="flex justify-between text-[14px] font-semibold mb-1" style={{ color: MUTED }}>
             <span>{respondidas}/{perguntasAplicaveis.length} respondidas</span><span>{progresso}%</span>
           </div>
           <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
@@ -191,7 +191,7 @@ export default function DonoClient({ perguntas }: { perguntas: Pergunta[] }) {
 
         <EscalaLegenda />
 
-        {error && <div className="rounded-xl px-4 py-3 mb-4 text-[14px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
+        {error && <div className="rounded-xl px-4 py-3 mb-4 text-[15px] font-semibold" style={{ background: 'rgba(192,57,43,0.18)', color: '#ff9a8d' }}>{error}</div>}
 
         <div className="space-y-7">
           {blocos.map(([bloco, perg]) => (
@@ -249,7 +249,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 export function EscalaLegenda() {
   return (
     <div className="rounded-2xl px-5 py-4 mb-6" style={{ background: 'rgba(212,175,55,0.07)', border: '1px solid rgba(212,175,55,0.22)' }}>
-      <p className="text-[12px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#d4af37' }}>Como responder</p>
+      <p className="text-[13.5px] font-bold uppercase tracking-widest mb-1.5" style={{ color: '#d4af37' }}>Como responder</p>
       <p className="text-[15px] font-medium leading-relaxed" style={{ color: '#c9d6e8' }}>
         Dê uma nota de <strong style={{ color: '#eef2f9' }}>1 a 5</strong> para cada frase, pensando na sua realidade de hoje.
         <strong style={{ color: '#eef2f9' }}> 1 = Discordo totalmente</strong> (não é nada assim) e
@@ -280,7 +280,7 @@ export function PerguntaCard({ pergunta, valor, onSelect }: { pergunta: { id: st
           )
         })}
       </div>
-      <div className="flex justify-between text-[12px] font-medium mt-2 px-0.5" style={{ color: '#6f819b' }}>
+      <div className="flex justify-between text-[13.5px] font-medium mt-2 px-0.5" style={{ color: '#6f819b' }}>
         <span>Discordo totalmente</span><span>Concordo totalmente</span>
       </div>
     </div>
@@ -290,7 +290,7 @@ export function PerguntaCard({ pergunta, valor, onSelect }: { pergunta: { id: st
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-[13px] font-bold uppercase tracking-wide mb-1.5" style={{ color: '#9fb0c8' }}>{label}</label>
+      <label className="block text-[14px] font-bold uppercase tracking-wide mb-1.5" style={{ color: '#9fb0c8' }}>{label}</label>
       {children}
     </div>
   )

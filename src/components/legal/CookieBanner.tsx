@@ -60,7 +60,7 @@ export default function CookieBanner() {
         className="max-w-3xl mx-auto rounded-2xl shadow-2xl pointer-events-auto"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(240,236,227,0.12)',
+          border: '1px solid rgba(240,236,227,0.42)',
         }}
       >
         {/* Cabeçalho compacto */}
@@ -72,7 +72,7 @@ export default function CookieBanner() {
                 <h3 className="font-serif font-semibold text-base sm:text-lg text-soul-ink leading-snug">
                   Sua privacidade é importante pra gente
                 </h3>
-                <p className="text-[13px] sm:text-sm text-soul-ink/70 mt-1 leading-relaxed">
+                <p className="text-[14px] sm:text-sm text-soul-ink/80 mt-1 leading-relaxed">
                   Usamos cookies para melhorar sua experiência, analisar tráfego e
                   personalizar conteúdo. Você pode aceitar, recusar ou configurar suas
                   preferências.{' '}
@@ -89,13 +89,13 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2 mt-4">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5 transition-colors"
               >
                 Recusar não-essenciais
               </button>
               <button
                 onClick={() => setExpanded(true)}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5 transition-colors"
               >
                 Configurar
               </button>
@@ -120,7 +120,7 @@ export default function CookieBanner() {
               <button
                 onClick={() => setExpanded(false)}
                 aria-label="Voltar"
-                className="text-soul-ink/50 hover:text-soul-ink text-sm"
+                className="text-soul-ink/70 hover:text-soul-ink text-sm"
               >
                 ← Voltar
               </button>
@@ -161,7 +161,7 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/80 hover:bg-soul-night/5"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5"
               >
                 Apenas necessários
               </button>
@@ -174,7 +174,7 @@ export default function CookieBanner() {
               </button>
             </div>
 
-            <p className="text-[11px] text-soul-ink/50 mt-4 text-center">
+            <p className="text-[13px] text-soul-ink/70 mt-4 text-center">
               Você pode alterar suas escolhas a qualquer momento na{' '}
               <Link href="/politica-de-cookies" className="underline">
                 Política de Cookies
@@ -204,14 +204,14 @@ function CategoryRow({
     <div className="flex items-start gap-3 p-3 rounded-xl bg-soul-mist/20 border border-soul-mist/40">
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className="text-[14px] font-semibold text-soul-ink">{label}</p>
+          <p className="text-[15px] font-semibold text-soul-ink">{label}</p>
           {disabled && (
-            <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-soul-night/10 text-soul-ink/65">
+            <span className="text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-soul-night/10 text-soul-ink/78">
               Sempre ativo
             </span>
           )}
         </div>
-        <p className="text-[12px] text-soul-ink/65 mt-1 leading-snug">{desc}</p>
+        <p className="text-[13.5px] text-soul-ink/78 mt-1 leading-snug">{desc}</p>
       </div>
       <label className={`relative inline-flex items-center cursor-pointer flex-shrink-0 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
         <input

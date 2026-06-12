@@ -73,7 +73,7 @@ export default async function AdminEmpresasPage() {
         <h1 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mb-2">
           Empresas cadastradas
         </h1>
-        <p className="text-[14px] text-soul-ink/75 font-medium">
+        <p className="text-[15px] text-soul-ink/85 font-medium">
           {rows.length} empresa{rows.length !== 1 ? 's' : ''} no total. Use o botão
           ao lado de cada linha para conceder ou revogar premium manual.
         </p>

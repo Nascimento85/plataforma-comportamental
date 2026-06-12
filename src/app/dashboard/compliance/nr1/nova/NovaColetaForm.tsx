@@ -74,11 +74,11 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
       <section className="soul-panel">
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-3">Setores (GHE)</h2>
         {setores.length === 0 ? (
-          <p className="text-[14px] text-soul-ink/75 font-medium mb-3">Nenhum setor cadastrado. Cadastre o primeiro:</p>
+          <p className="text-[15px] text-soul-ink/85 font-medium mb-3">Nenhum setor cadastrado. Cadastre o primeiro:</p>
         ) : (
           <div className="flex flex-wrap gap-2 mb-3">
             {setores.map(s => (
-              <span key={s.id} className="inline-flex items-center rounded-full px-3 py-1 text-[12px] font-semibold"
+              <span key={s.id} className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-semibold"
                     style={{ background: 'rgba(196,99,58,0.10)', color: '#e09070' }}>
                 {s.nome}{s.perfilDiscDominante ? ` (DISC: ${s.perfilDiscDominante})` : ''}
               </span>
@@ -87,12 +87,12 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
         )}
         <div className="flex flex-wrap gap-2 items-end">
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Nome do setor</label>
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Nome do setor</label>
             <input type="text" className="soul-input" placeholder="Ex: Financeiro"
                    value={novoSetor.nome} onChange={(e) => setNovoSetor({ ...novoSetor, nome: e.target.value })} />
           </div>
           <div className="w-[180px]">
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Perfil DISC dominante</label>
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Perfil DISC dominante</label>
             <select className="soul-input" value={novoSetor.perfilDisc} onChange={(e) => setNovoSetor({ ...novoSetor, perfilDisc: e.target.value })}>
               <option value="">— (opcional) —</option>
               <option value="D">D · Dominante</option>
@@ -102,7 +102,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
             </select>
           </div>
           <button type="button" onClick={criarSetor}
-                  className="px-4 py-2 rounded-full text-[13px] font-bold border-2"
+                  className="px-4 py-2 rounded-full text-[14px] font-bold border-2"
                   style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>
             + Adicionar setor
           </button>
@@ -114,12 +114,12 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
         <h2 className="font-serif font-semibold text-xl text-soul-ink mb-3">Coleta</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Nome da coleta</label>
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Nome da coleta</label>
             <input type="text" required className="soul-input" placeholder="Ex: Diagnóstico Psicossocial Q2 2026"
                    value={nome} onChange={(e) => setNome(e.target.value)} />
           </div>
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-widest text-soul-ink/70 mb-1">Validade (último dia)</label>
+            <label className="block text-[13px] font-bold uppercase tracking-widest text-soul-ink/80 mb-1">Validade (último dia)</label>
             <input type="date" required className="soul-input"
                    value={expiresAt} onChange={(e) => setExpiresAt(e.target.value)} />
           </div>
@@ -131,12 +131,12 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-serif font-semibold text-xl text-soul-ink">Convidados</h2>
           <button type="button" onClick={addConvidado}
-                  className="px-3 py-1.5 rounded-full text-[12px] font-bold border-2"
+                  className="px-3 py-1.5 rounded-full text-[13.5px] font-bold border-2"
                   style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070' }}>
             + Adicionar
           </button>
         </div>
-        <p className="text-[13px] text-soul-ink/75 font-medium mb-4">
+        <p className="text-[14px] text-soul-ink/85 font-medium mb-4">
           Lembrete: mínimo de <strong>5 respondentes por setor</strong> para gerar relatório. Adicione todos os funcionários do setor.
         </p>
         <div className="space-y-2">
@@ -152,7 +152,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
                 {setores.map(s => <option key={s.id} value={s.id}>{s.nome}</option>)}
               </select>
               <button type="button" onClick={() => removeConvidado(i)}
-                      className="px-3 py-2 text-[12px] font-bold text-soul-ink/60 hover:text-soul-ink">
+                      className="px-3 py-2 text-[13.5px] font-bold text-soul-ink/75 hover:text-soul-ink">
                 ×
               </button>
             </div>
@@ -161,7 +161,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
       </section>
 
       {erro && (
-        <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold"
+        <div className="rounded-2xl px-4 py-3 text-[15px] font-semibold"
              style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
           {erro}
         </div>

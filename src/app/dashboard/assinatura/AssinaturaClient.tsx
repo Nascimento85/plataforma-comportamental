@@ -100,7 +100,7 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
 
         <section className="soul-panel">
           <h2 className="font-serif text-xl font-semibold text-soul-ink mb-2">Comece com {initial.trialDias} dias grátis</h2>
-          <p className="text-[14px] text-soul-ink/80 font-medium mb-4">
+          <p className="text-[15px] text-soul-ink/88 font-medium mb-4">
             Acesso completo a testes ilimitados, NR-1 Psicossocial, Guia de Entrevista e relatório
             executivo. Sem cartão de crédito.
           </p>
@@ -108,7 +108,7 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
             type="button"
             onClick={ativarTrial}
             disabled={loading === 'trial'}
-            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold text-white shadow-terra disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
             style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
           >
             {loading === 'trial' ? 'Ativando…' : `✦ Ativar trial de ${initial.trialDias} dias`}
@@ -137,7 +137,7 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
 
         <section className="soul-panel">
           <h2 className="font-serif text-lg font-semibold text-soul-ink mb-2">Garanta a continuidade do acesso</h2>
-          <p className="text-[14px] text-soul-ink/80 font-medium mb-4">
+          <p className="text-[15px] text-soul-ink/88 font-medium mb-4">
             Quando o trial acabar, a conta volta ao modelo de créditos pessoais. Para manter testes ilimitados,
             NR-1 e Guia de Entrevista, escolha um plano abaixo:
           </p>
@@ -182,14 +182,14 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
 
       <section className="soul-panel">
         <h2 className="font-serif text-lg font-semibold text-soul-ink mb-2">Gerenciar assinatura</h2>
-        <p className="text-[14px] text-soul-ink/80 font-medium mb-4">
+        <p className="text-[15px] text-soul-ink/88 font-medium mb-4">
           Acesse o portal seguro para trocar cartão, baixar notas fiscais, mudar de plano ou cancelar.
         </p>
         <button
           type="button"
           onClick={abrirPortal}
           disabled={loading === 'portal'}
-          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-bold transition-colors disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[15px] font-bold transition-colors disabled:opacity-60"
           style={{ background: 'rgba(196,99,58,0.10)', color: '#8a4a26', border: '1px solid rgba(196,99,58,0.30)' }}
         >
           {loading === 'portal' ? 'Abrindo…' : 'Abrir portal do Stripe'}
@@ -215,12 +215,12 @@ export function BlocoAdminDemo({
     <section className="mt-4 rounded-2xl p-5"
              style={{ background: 'rgba(122,99,196,0.04)', border: '1px dashed rgba(122,99,196,0.30)' }}>
       <div className="flex items-center justify-between mb-2">
-        <p className="text-[10.5px] font-bold uppercase tracking-widest" style={{ color: '#5a4a8a' }}>
+        <p className="text-[12px] font-bold uppercase tracking-widest" style={{ color: '#5a4a8a' }}>
           Admin · Conta demo
         </p>
-        <span className="text-[10px] text-soul-ink/55 font-medium italic">só visível para administradores</span>
+        <span className="text-[12px] text-soul-ink/72 font-medium italic">só visível para administradores</span>
       </div>
-      <p className="text-[13.5px] text-soul-ink/85 font-medium mb-3 leading-relaxed">
+      <p className="text-[14.5px] text-soul-ink/90 font-medium mb-3 leading-relaxed">
         Recria a conta demo pré-populada (6 funcionários, 4 com DISC, 1 coleta NR-1 com relatório pronto).
         Ideal para compartilhar com prospects em demos comerciais. <strong>Apaga tudo e recria do zero.</strong>
       </p>
@@ -228,7 +228,7 @@ export function BlocoAdminDemo({
         type="button"
         onClick={onClick}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-bold transition-colors disabled:opacity-60"
+        className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[14px] font-bold transition-colors disabled:opacity-60"
         style={{ background: 'rgba(122,99,196,0.10)', color: '#5a4a8a', border: '1px solid rgba(122,99,196,0.30)' }}
       >
         {loading ? 'Recriando...' : '↻ Recriar conta demo'}
@@ -237,18 +237,18 @@ export function BlocoAdminDemo({
       {demoMsg && (
         <div className="mt-4 rounded-xl p-4"
              style={{ background: 'rgba(122,158,126,0.10)', border: '1px solid rgba(122,158,126,0.35)' }}>
-          <p className="text-[12px] font-bold uppercase tracking-widest mb-2" style={{ color: '#3d6b40' }}>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest mb-2" style={{ color: '#3d6b40' }}>
             {demoMsg.recreated ? 'Conta demo recriada' : 'Conta demo criada'}
           </p>
-          <p className="text-[13px] text-soul-ink/85 font-medium mb-3">
+          <p className="text-[14px] text-soul-ink/90 font-medium mb-3">
             Compartilhe estas credenciais com o prospect:
           </p>
-          <div className="space-y-1.5 text-[13px] font-mono text-soul-ink">
+          <div className="space-y-1.5 text-[14px] font-mono text-soul-ink">
             <div><strong>URL:</strong> <a href={demoMsg.url} target="_blank" rel="noreferrer" className="text-soul-terracota hover:underline">{demoMsg.url}</a></div>
             <div><strong>Email:</strong> {demoMsg.email}</div>
             <div><strong>Senha:</strong> {demoMsg.password}</div>
           </div>
-          <p className="text-[11.5px] text-soul-ink/60 font-medium italic mt-3">
+          <p className="text-[13px] text-soul-ink/75 font-medium italic mt-3">
             Dica: copie como mensagem pronta para WhatsApp/email do prospect.
           </p>
         </div>
@@ -262,7 +262,7 @@ function Alerta({ tipo, children }: { tipo: 'ok' | 'erro'; children: React.React
     ? { background: 'rgba(122,158,126,0.15)', border: '1px solid rgba(122,158,126,0.40)', color: '#3d6b40' }
     : { background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }
   return (
-    <div className="rounded-xl px-4 py-3 text-[13.5px] font-semibold" style={styles}>{children}</div>
+    <div className="rounded-xl px-4 py-3 text-[14.5px] font-semibold" style={styles}>{children}</div>
   )
 }
 
@@ -281,10 +281,10 @@ function StatusCard({
   }[cor]
   return (
     <section className="rounded-2xl p-5" style={{ background: palette.bg, border: `1px solid ${palette.border}` }}>
-      <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: palette.labelColor }}>{palette.label}</p>
+      <p className="text-[12px] font-bold uppercase tracking-widest mb-1" style={{ color: palette.labelColor }}>{palette.label}</p>
       <h2 className="font-serif text-2xl font-semibold text-soul-ink leading-tight">{titulo}</h2>
-      <p className="text-[14px] text-soul-ink/85 font-medium mt-1">{subtitulo}</p>
-      {extra && <p className="text-[12.5px] text-soul-ink/65 font-medium italic mt-1">{extra}</p>}
+      <p className="text-[15px] text-soul-ink/90 font-medium mt-1">{subtitulo}</p>
+      {extra && <p className="text-[13.5px] text-soul-ink/78 font-medium italic mt-1">{extra}</p>}
     </section>
   )
 }
@@ -313,12 +313,12 @@ function PlanosPagos({
               {destaque && <span className="text-[9.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded" style={{ background: 'rgba(212,184,92,0.30)', color: '#8a5c1e' }}>RECOMENDADO</span>}
             </div>
             <p className="font-serif text-2xl font-semibold text-soul-ink mb-1">{p.preco}</p>
-            <p className="text-[12.5px] text-soul-ink/65 font-medium mb-4">{p.cap}</p>
+            <p className="text-[13.5px] text-soul-ink/78 font-medium mb-4">{p.cap}</p>
             <button
               type="button"
               onClick={() => onCheckout(planKey)}
               disabled={isLoading}
-              className="w-full rounded-full px-4 py-2.5 text-[13.5px] font-bold text-white shadow-terra disabled:opacity-60"
+              className="w-full rounded-full px-4 py-2.5 text-[14.5px] font-bold text-white shadow-terra disabled:opacity-60"
               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
             >
               {isLoading ? 'Abrindo Stripe…' : 'Assinar este plano'}
