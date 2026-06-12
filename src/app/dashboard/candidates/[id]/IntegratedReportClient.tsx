@@ -52,10 +52,10 @@ export default function IntegratedReportClient({ employeeId }: Props) {
   }
 
   const colors = feedbackKind === 'ok'
-    ? { bg: 'rgba(122,158,126,0.18)', color: '#4a7a4e' }
+    ? { bg: 'rgba(122,158,126,0.18)', color: '#a9d3a9' }
     : feedbackKind === 'warn'
-      ? { bg: 'rgba(212,148,58,0.18)', color: '#8a5c1e' }
-      : { bg: 'rgba(196,122,114,0.18)', color: '#8a4a42' }
+      ? { bg: 'rgba(212,148,58,0.18)', color: '#e0c878' }
+      : { bg: 'rgba(196,122,114,0.18)', color: '#f0a892' }
 
   return (
     <div className="flex flex-col items-end gap-2">

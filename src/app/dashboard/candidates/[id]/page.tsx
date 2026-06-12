@@ -25,12 +25,12 @@ const DEPTH_LABEL: Record<string, string> = {
 }
 
 const STATUS_BADGE: Record<string, { label: string; bg: string; color: string }> = {
-  PENDING:    { label: 'Pendente',  bg: 'rgba(212,148,58,0.18)', color: '#8a5c1e' },
-  SENT:       { label: 'Enviado',   bg: 'rgba(61,79,124,0.18)',  color: '#2d3f6b' },
-  COMPLETED:  { label: 'Concluído', bg: 'rgba(122,158,126,0.22)', color: '#4a7a4e' },
-  EXPIRED:    { label: 'Expirado',  bg: 'rgba(196,122,114,0.18)', color: '#8a4a42' },
-  GENERATING: { label: 'Gerando…',  bg: 'rgba(61,79,124,0.18)',  color: '#2d3f6b' },
-  FAILED:     { label: 'Falhou',    bg: 'rgba(196,122,114,0.18)', color: '#8a4a42' },
+  PENDING:    { label: 'Pendente',  bg: 'rgba(212,148,58,0.18)', color: '#e0c878' },
+  SENT:       { label: 'Enviado',   bg: 'rgba(61,79,124,0.28)',  color: '#a8bce8' },
+  COMPLETED:  { label: 'Concluído', bg: 'rgba(122,158,126,0.22)', color: '#a9d3a9' },
+  EXPIRED:    { label: 'Expirado',  bg: 'rgba(196,122,114,0.18)', color: '#f0a892' },
+  GENERATING: { label: 'Gerando…',  bg: 'rgba(61,79,124,0.18)',  color: '#a8bce8' },
+  FAILED:     { label: 'Falhou',    bg: 'rgba(196,122,114,0.18)', color: '#f0a892' },
 }
 
 export default async function CandidateDetailPage({ params }: { params: { id: string } }) {
@@ -90,7 +90,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
                   className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
                   style={{
                     background: STATUS_BADGE[integrated.status]?.bg ?? 'rgba(0,0,0,0.08)',
-                    color:      STATUS_BADGE[integrated.status]?.color ?? '#1c1a17',
+                    color:      STATUS_BADGE[integrated.status]?.color ?? '#f0ece3',
                   }}
                 >
                   {STATUS_BADGE[integrated.status]?.label ?? integrated.status}
@@ -124,7 +124,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
         )}
 
         {integrated?.status === 'FAILED' && (
-          <p className="text-[15px] font-medium" style={{ color: '#8a4a42' }}>
+          <p className="text-[15px] font-medium" style={{ color: '#f0a892' }}>
             A última tentativa falhou. Use o botão acima para tentar de novo.
           </p>
         )}
