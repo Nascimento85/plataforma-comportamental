@@ -1,122 +1,101 @@
+// ============================================================
+// /dashboard/teams — Equipes & Setores
+// Importação de colaboradores por setor + visão dos times.
+// Cada setor é um TalentTeam: importar aqui alimenta a Gestão
+// de Times (matriz, Team Build e Avaliação do Líder).
+// ============================================================
+
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { getSession } from '@/lib/session'
+import { prisma } from '@/lib/prisma'
+import { hasActiveSubscription } from '@/lib/subscription/check'
+import ImportClient from './ImportClient'
 
-export const metadata: Metadata = { title: 'Equipes e Setores' }
+export const metadata: Metadata = { title: 'Equipes e Setores · Psique' }
+export const dynamic = 'force-dynamic'
 
-// Templates de setores comuns (usados como placeholder até a migração)
-const TEMPLATE_DEPARTMENTS = [
-  { name: 'Liderança & Diretoria',     icon: '♛', color: '#c9a84c', desc: 'C-level, VPs e heads' },
-  { name: 'Vendas & Comercial',        icon: '◉', color: '#e09070', desc: 'Prospecção, closers, CS' },
-  { name: 'Marketing',                 icon: '✦', color: '#d4943a', desc: 'Growth, conteúdo, branding' },
-  { name: 'Operações',                 icon: '⬢', color: '#8fa6da', desc: 'Logística, supply, produção' },
-  { name: 'Tecnologia & Produto',      icon: '◆', color: '#6b7fb8', desc: 'Engenharia, design, PM' },
-  { name: 'Recursos Humanos',          icon: '❀', color: '#c47a72', desc: 'People, RH, cultura' },
-  { name: 'Financeiro',                icon: '◈', color: '#7a9e7e', desc: 'Controladoria, contábil' },
-  { name: 'Atendimento & Suporte',     icon: '◎', color: '#c4a05a', desc: 'SAC, suporte técnico' },
-]
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prismaAny = prisma as any
 
-export default function TeamsPage() {
+export default async function TeamsPage() {
+  const session = await getSession()
+  if (!session?.id) redirect('/login')
+
+  const subscriptionOk = await hasActiveSubscription(session.id)
+
+  const teams = subscriptionOk || session.isAdmin
+    ? await prismaAny.talentTeam.findMany({
+        where: { companyId: session.id },
+        orderBy: { updatedAt: 'desc' },
+        include: { _count: { select: { members: true } } },
+      }) as Array<{ id: string; nome: string; liderNome: string | null; _count: { members: number } }>
+    : []
+
   return (
     <div className="space-y-7">
       {/* Header */}
       <div>
+        <p className="text-[13px] font-bold uppercase tracking-widest mb-2" style={{ color: '#c9a84c' }}>
+          Empresa
+        </p>
         <h1 className="font-serif font-semibold text-4xl text-soul-ink leading-tight">
           Equipes <span className="text-soul-terracota italic font-normal">&amp;</span> Setores
         </h1>
-        <p className="text-base text-soul-ink/85 mt-2 font-medium max-w-3xl">
-          Organize seus candidatos por departamento e visualize o mapa comportamental de cada time.
-          Descubra perfis complementares, identifique pontos cegos na composição e calibre a liderança.
+        <p className="text-[15px] text-soul-ink/85 mt-2 font-medium max-w-3xl">
+          Importe colaboradores por departamento e monte a estrutura da empresa em minutos. Cada setor vira um
+          time na Gestão de Times, pronto para a matriz 20-70-10, o Team Build e a Avaliação do Líder.
         </p>
       </div>
 
-      {/* Banner de roadmap */}
-      <div className="rounded-3xl p-6 md:p-8 relative overflow-hidden"
-           style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 60%, #3d2a1c 100%)' }}>
-        <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.08]"
-             style={{ background: 'radial-gradient(circle, #c9a84c, transparent)', transform: 'translate(30%,-30%)' }}/>
-        <div className="relative z-10 max-w-2xl">
-          <span className="inline-block text-[13.5px] font-bold uppercase tracking-widest text-soul-gold mb-3">
-            Recurso em liberação
-          </span>
-          <h2 className="font-serif text-2xl md:text-3xl font-semibold text-white leading-tight mb-3">
-            Cadastre colaboradores por setor e monitore em um único painel.
-          </h2>
-          <p className="text-[15px] text-white/88 font-medium leading-relaxed mb-5">
-            Em breve você poderá vincular cada candidato a uma equipe, importar colaboradores via CSV
-            segmentado por departamento e gerar relatórios agregados por time — revelando a cultura
-            comportamental real de cada setor da sua operação.
+      {!subscriptionOk && !session.isAdmin ? (
+        <div className="rounded-3xl p-8 text-center"
+             style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 60%, #1f2a3d 100%)' }}>
+          <div className="text-5xl mb-4">🔒</div>
+          <h2 className="font-serif text-2xl font-semibold text-white mb-2">Recurso exclusivo de assinantes</h2>
+          <p className="text-[15.5px] text-white/85 font-medium max-w-lg mx-auto mb-6">
+            A importação de colaboradores e a gestão por setores fazem parte dos planos PJ.
+            Ative o trial gratuito de 7 dias e libere agora.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/dashboard/candidates"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[15px] font-semibold text-soul-ink
-                         bg-soul-gold hover:bg-soul-gold-light transition-all"
-            >
-              Ver candidatos cadastrados →
-            </Link>
-          </div>
+          <Link href="/dashboard/assinatura"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-bold text-white no-underline shadow-terra"
+                style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+            ✦ Começar trial de 7 dias
+          </Link>
         </div>
-      </div>
-
-      {/* Preview de setores */}
-      <div>
-        <h2 className="font-serif text-2xl font-semibold text-soul-ink mb-1">
-          Templates de departamento
-        </h2>
-        <p className="text-[15px] text-soul-ink/80 font-medium mb-5">
-          Estrutura sugerida para organizações de médio porte — você poderá criar setores personalizados.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {TEMPLATE_DEPARTMENTS.map((dept) => (
-            <div
-              key={dept.name}
-              className="soul-panel flex flex-col gap-3 hover:-translate-y-0.5 transition-transform"
-            >
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl font-bold"
-                style={{ background: `${dept.color}22`, color: dept.color }}
-              >
-                {dept.icon}
-              </div>
-              <div>
-                <p className="font-semibold text-[16px] text-soul-ink leading-tight">{dept.name}</p>
-                <p className="text-[14px] text-soul-ink/80 font-medium mt-1 leading-snug">{dept.desc}</p>
-              </div>
-              <div className="mt-auto pt-2 border-t border-soul-mist/60">
-                <span className="text-[13.5px] font-semibold text-soul-ink/72 uppercase tracking-wider">
-                  0 candidatos
-                </span>
+      ) : (
+        <>
+          {/* Setores existentes */}
+          {teams.length > 0 && (
+            <div>
+              <h2 className="font-serif font-semibold text-2xl text-soul-ink mb-4">Seus setores</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {teams.map((t) => (
+                  <Link key={t.id} href={`/dashboard/gestao-times/${t.id}`}
+                        className="soul-panel block no-underline transition-all hover:-translate-y-0.5"
+                        style={{ borderLeft: '4px solid #c9a84c' }}>
+                    <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{t.nome}</p>
+                    <p className="text-[13.5px] text-soul-ink/72 font-medium mt-1">
+                      {t.liderNome ? `Líder: ${t.liderNome}` : 'Líder não definido'}
+                    </p>
+                    <div className="flex items-center gap-2 mt-3 pt-3 border-t border-soul-mist/60">
+                      <span className="text-[13.5px] font-bold text-soul-ink/88">
+                        {t._count.members} {t._count.members === 1 ? 'colaborador' : 'colaboradores'}
+                      </span>
+                      <span className="ml-auto text-[13.5px] font-semibold" style={{ color: '#c9a84c' }}>
+                        Abrir matriz →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      </div>
+          )}
 
-      {/* Valor do recurso */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="soul-panel">
-          <div className="text-3xl mb-2">🎯</div>
-          <p className="font-serif text-lg font-semibold text-soul-ink">Diagnóstico por time</p>
-          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
-            Descubra o perfil dominante de cada setor e pontos de atenção na cultura operacional.
-          </p>
-        </div>
-        <div className="soul-panel">
-          <div className="text-3xl mb-2">⚖️</div>
-          <p className="font-serif text-lg font-semibold text-soul-ink">Composição equilibrada</p>
-          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
-            Identifique times enviesados para um único estilo comportamental e calibre novas contratações.
-          </p>
-        </div>
-        <div className="soul-panel">
-          <div className="text-3xl mb-2">📈</div>
-          <p className="font-serif text-lg font-semibold text-soul-ink">Evolução da cultura</p>
-          <p className="text-[15px] text-soul-ink/85 font-medium mt-1.5 leading-relaxed">
-            Acompanhe como o DNA de cada equipe muda ao longo dos ciclos de avaliação.
-          </p>
-        </div>
-      </div>
+          <ImportClient />
+        </>
+      )}
     </div>
   )
 }
