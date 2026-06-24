@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
 import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
 import { onPassportConsumed } from '@/lib/passport-triggers'
+import { hasActiveSubscription } from '@/lib/subscription/check'
 
 // Custo em créditos por tipo de teste — fonte única em lib/passport.ts (TEST_PRICE)
 const CREDIT_COST: Record<string, number> = {
@@ -52,6 +53,11 @@ export async function POST(request: NextRequest) {
     })
     const isAdmin = company?.isAdmin ?? false
 
+    // Assinante premium (plano ativo ou trial) tem acesso livre a todos os testes,
+    // sem consumir creditos do Passaporte. Admin tambem e isento.
+    const isPremium = await hasActiveSubscription(companyId)
+    const exemptFromCredits = isAdmin || isPremium
+
     // Resolve nome/email finais:
     // - Self assessment: usa dados do user logado (sem precisar digitar nada no form)
     // - Envio externo: exige employeeName + employeeEmail do form
@@ -75,7 +81,7 @@ export async function POST(request: NextRequest) {
     const creditCost = CREDIT_COST[testType] ?? 1
 
     // Verifica Passaporte (saldo total = bônus + pago) — só não-admins
-    if (!isAdmin) {
+    if (!exemptFromCredits) {
       const passport = await getPassportState(companyId)
       if (passport.total < creditCost) {
         return NextResponse.json(
@@ -112,7 +118,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Cobra do Passaporte (FIFO: bônus mais antigo primeiro, depois pago)
-    if (!isAdmin) {
+    if (!exemptFromCredits) {
       try {
         const r = await consumeCredits(companyId, creditCost, `Avaliação ${testType} — ${employeeName}`)
         if (r.passportNowConsumed) {

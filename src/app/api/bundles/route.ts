@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
 import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
 import { onPassportConsumed } from '@/lib/passport-triggers'
+import { hasActiveSubscription } from '@/lib/subscription/check'
 
 // Bundle Combo (DISC + MBTI + Eneagrama + Temperamento) custa 10 créditos
 const BUNDLE_TESTS = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT'] as const
@@ -36,8 +37,12 @@ export async function POST(request: NextRequest) {
     })
     const isAdmin = company?.isAdmin ?? false
 
+    // Assinante premium (plano ativo ou trial) tem acesso livre, sem consumir creditos.
+    const isPremium = await hasActiveSubscription(companyId)
+    const exemptFromCredits = isAdmin || isPremium
+
     // Verifica Passaporte (saldo total = bônus + pago)
-    if (!isAdmin) {
+    if (!exemptFromCredits) {
       const passport = await getPassportState(companyId)
       if (passport.total < BUNDLE_CREDIT_COST) {
         return NextResponse.json(
@@ -82,7 +87,7 @@ export async function POST(request: NextRequest) {
     )
 
     // Cobra do Passaporte (FIFO: bônus mais antigo primeiro)
-    if (!isAdmin) {
+    if (!exemptFromCredits) {
       try {
         const r = await consumeCredits(
           companyId,
