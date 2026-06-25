@@ -114,6 +114,8 @@ const TEST_LABELS: Record<string, string> = {
 // ── Componentes de UI ────────────────────────────────────────
 
 function Card({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const rd = resultData as Record<string, unknown>
+
   return (
     <div className={`rounded-3xl bg-soul-parchment overflow-hidden ${className}`}
          style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
@@ -1071,9 +1073,6 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const priceCents = Number(process.env.PREMIUM_REPORT_PRICE_CENTS ?? '4700')
   const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-  // Cast unico do resultData para passar aos componentes (evita generics inline no JSX).
-  const rd: Record<string, unknown> = resultData as Record<string, unknown>
-
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
 
@@ -1157,32 +1156,5 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'LOVE_LANGUAGES' ? (isPrint ? (<LoveLanguagesPrintReport result={rd} />) : (<LoveLanguagesDevolutiva d={resultData} />)) : null}
         {assessment.testType === 'CAREER_ANCHOR' ? (isPrint ? (<CareerAnchorPrintReport result={rd} />) : (<CareerAnchorDevolutiva d={resultData} />)) : null}
         {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (isPrint ? (<EmotionalIntelligencePrintReport result={rd} />) : (<EmotionalIntelligenceDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'VAC' ? (isPrint ? (<VacPrintReport result={rd} />) : (<TestResultCard testType="VAC" result={rd} />)) : null}
-        {assessment.testType === 'BIG_FIVE' ? (isPrint ? (<BigFivePrintReport result={rd} />) : (<TestResultCard testType="BIG_FIVE" result={rd} />)) : null}
-
-        {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
-        {!isPrint && reportId && !isPremiumUnlocked && (
-          <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
-        )}
-
-        {/* Footer */}
-        {!isPrint && (
-          <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#e09070' }}>{APP_NAME}</strong></p>
-          </div>
-        )}
-      </main>
-
-      {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
-      {!isPrint && reportId && !isPremiumUnlocked && (
-        <UpsellPopup
-          reportId={reportId}
-          assessmentId={assessmentId}
-          profileName={profileName}
-          priceBrl={priceBrl}
-        />
-      )}
-    </div>
-  )
-}
+        {assessment.testType === 'VAC'      && (isPrint
+          ? <VacPr

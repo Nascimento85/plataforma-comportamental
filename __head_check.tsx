@@ -12,19 +12,7 @@ import { parseResultData } from '@/lib/parseResult'
 import UpsellPopup         from '@/components/passport/UpsellPopup'
 import UnlockPremiumButton from './UnlockPremiumButton'
 import TestResultCard      from '@/components/tests/TestResultCard'
-import {
-  BigFivePrintReport,
-  DiscPrintReport,
-  MbtiPrintReport,
-  EnneagramPrintReport,
-  TemperamentPrintReport,
-  ArchetypePrintReport,
-  ArchetypeFemininePrintReport,
-  LoveLanguagesPrintReport,
-  CareerAnchorPrintReport,
-  EmotionalIntelligencePrintReport,
-  VacPrintReport,
-} from './PrintReports'
+import { BigFivePrintReport } from './PrintReports'
 
 /**
  * Resolve um identificador genérico para o Assessment correspondente.
@@ -1071,9 +1059,6 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const priceCents = Number(process.env.PREMIUM_REPORT_PRICE_CENTS ?? '4700')
   const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-  // Cast unico do resultData para passar aos componentes (evita generics inline no JSX).
-  const rd: Record<string, unknown> = resultData as Record<string, unknown>
-
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
 
@@ -1148,17 +1133,19 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         )}
 
         {/* Devolutiva por tipo */}
-        {assessment.testType === 'DISC' ? (isPrint ? (<DiscPrintReport result={rd} />) : (<DiscDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'MBTI' ? (isPrint ? (<MbtiPrintReport result={rd} />) : (<MbtiDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ENNEAGRAM' ? (isPrint ? (<EnneagramPrintReport result={rd} />) : (<EnneagramDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'TEMPERAMENT' ? (isPrint ? (<TemperamentPrintReport result={rd} />) : (<TemperamentDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE' ? (isPrint ? (<ArchetypePrintReport result={rd} />) : (<ArchetypeDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE_FEMININE' ? (isPrint ? (<ArchetypeFemininePrintReport result={rd} />) : (<ArchetypeFeminineDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'LOVE_LANGUAGES' ? (isPrint ? (<LoveLanguagesPrintReport result={rd} />) : (<LoveLanguagesDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'CAREER_ANCHOR' ? (isPrint ? (<CareerAnchorPrintReport result={rd} />) : (<CareerAnchorDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (isPrint ? (<EmotionalIntelligencePrintReport result={rd} />) : (<EmotionalIntelligenceDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'VAC' ? (isPrint ? (<VacPrintReport result={rd} />) : (<TestResultCard testType="VAC" result={rd} />)) : null}
-        {assessment.testType === 'BIG_FIVE' ? (isPrint ? (<BigFivePrintReport result={rd} />) : (<TestResultCard testType="BIG_FIVE" result={rd} />)) : null}
+        {assessment.testType === 'DISC'               && <DiscDevolutiva             d={resultData} />}
+        {assessment.testType === 'MBTI'               && <MbtiDevolutiva             d={resultData} />}
+        {assessment.testType === 'ENNEAGRAM'          && <EnneagramDevolutiva        d={resultData} />}
+        {assessment.testType === 'TEMPERAMENT'        && <TemperamentDevolutiva      d={resultData} />}
+        {assessment.testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        d={resultData} />}
+        {assessment.testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva d={resultData} />}
+        {assessment.testType === 'LOVE_LANGUAGES'     && <LoveLanguagesDevolutiva    d={resultData} />}
+        {assessment.testType === 'CAREER_ANCHOR'      && <CareerAnchorDevolutiva     d={resultData} />}
+        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' && <EmotionalIntelligenceDevolutiva d={resultData} />}
+        {assessment.testType === 'VAC'      && <TestResultCard testType="VAC"      result={resultData as Record<string, unknown>} />}
+        {assessment.testType === 'BIG_FIVE' && (isPrint
+          ? <BigFivePrintReport result={resultData as Record<string, unknown>} />
+          : <TestResultCard testType="BIG_FIVE" result={resultData as Record<string, unknown>} />)}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (

@@ -1071,9 +1071,6 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const priceCents = Number(process.env.PREMIUM_REPORT_PRICE_CENTS ?? '4700')
   const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
-  // Cast unico do resultData para passar aos componentes (evita generics inline no JSX).
-  const rd: Record<string, unknown> = resultData as Record<string, unknown>
-
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
 
@@ -1148,41 +1145,14 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         )}
 
         {/* Devolutiva por tipo */}
-        {assessment.testType === 'DISC' ? (isPrint ? (<DiscPrintReport result={rd} />) : (<DiscDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'MBTI' ? (isPrint ? (<MbtiPrintReport result={rd} />) : (<MbtiDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ENNEAGRAM' ? (isPrint ? (<EnneagramPrintReport result={rd} />) : (<EnneagramDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'TEMPERAMENT' ? (isPrint ? (<TemperamentPrintReport result={rd} />) : (<TemperamentDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE' ? (isPrint ? (<ArchetypePrintReport result={rd} />) : (<ArchetypeDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE_FEMININE' ? (isPrint ? (<ArchetypeFemininePrintReport result={rd} />) : (<ArchetypeFeminineDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'LOVE_LANGUAGES' ? (isPrint ? (<LoveLanguagesPrintReport result={rd} />) : (<LoveLanguagesDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'CAREER_ANCHOR' ? (isPrint ? (<CareerAnchorPrintReport result={rd} />) : (<CareerAnchorDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (isPrint ? (<EmotionalIntelligencePrintReport result={rd} />) : (<EmotionalIntelligenceDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'VAC' ? (isPrint ? (<VacPrintReport result={rd} />) : (<TestResultCard testType="VAC" result={rd} />)) : null}
-        {assessment.testType === 'BIG_FIVE' ? (isPrint ? (<BigFivePrintReport result={rd} />) : (<TestResultCard testType="BIG_FIVE" result={rd} />)) : null}
-
-        {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
-        {!isPrint && reportId && !isPremiumUnlocked && (
-          <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
-        )}
-
-        {/* Footer */}
-        {!isPrint && (
-          <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#e09070' }}>{APP_NAME}</strong></p>
-          </div>
-        )}
-      </main>
-
-      {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
-      {!isPrint && reportId && !isPremiumUnlocked && (
-        <UpsellPopup
-          reportId={reportId}
-          assessmentId={assessmentId}
-          profileName={profileName}
-          priceBrl={priceBrl}
-        />
-      )}
-    </div>
-  )
-}
+        {assessment.testType === 'DISC' && (isPrint ? <DiscPrintReport result={resultData as Record<string, unknown>} /> : <DiscDevolutiva d={resultData} />)}
+        {assessment.testType === 'MBTI' && (isPrint ? <MbtiPrintReport result={resultData as Record<string, unknown>} /> : <MbtiDevolutiva d={resultData} />)}
+        {assessment.testType === 'ENNEAGRAM' && (isPrint ? <EnneagramPrintReport result={resultData as Record<string, unknown>} /> : <EnneagramDevolutiva d={resultData} />)}
+        {assessment.testType === 'TEMPERAMENT' && (isPrint ? <TemperamentPrintReport result={resultData as Record<string, unknown>} /> : <TemperamentDevolutiva d={resultData} />)}
+        {assessment.testType === 'ARCHETYPE' && (isPrint ? <ArchetypePrintReport result={resultData as Record<string, unknown>} /> : <ArchetypeDevolutiva d={resultData} />)}
+        {assessment.testType === 'ARCHETYPE_FEMININE' && (isPrint ? <ArchetypeFemininePrintReport result={resultData as Record<string, unknown>} /> : <ArchetypeFeminineDevolutiva d={resultData} />)}
+        {assessment.testType === 'LOVE_LANGUAGES' && (isPrint ? <LoveLanguagesPrintReport result={resultData as Record<string, unknown>} /> : <LoveLanguagesDevolutiva d={resultData} />)}
+        {assessment.testType === 'CAREER_ANCHOR' && (isPrint ? <CareerAnchorPrintReport result={resultData as Record<string, unknown>} /> : <CareerAnchorDevolutiva d={resultData} />)}
+        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' && (isPrint ? <EmotionalIntelligencePrintReport result={resultData as Record<string, unknown>} /> : <EmotionalIntelligenceDevolutiva d={resultData} />)}
+        {assessment.testType === 'VAC'      && (isPrint
+          ? <VacPr

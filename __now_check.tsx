@@ -1072,7 +1072,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const priceBrl   = (priceCents / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   // Cast unico do resultData para passar aos componentes (evita generics inline no JSX).
-  const rd: Record<string, unknown> = resultData as Record<string, unknown>
+  const rd = resultData as Record<string, unknown>
 
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
@@ -1161,28 +1161,4 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'BIG_FIVE' ? (isPrint ? (<BigFivePrintReport result={rd} />) : (<TestResultCard testType="BIG_FIVE" result={rd} />)) : null}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
-        {!isPrint && reportId && !isPremiumUnlocked && (
-          <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
-        )}
-
-        {/* Footer */}
-        {!isPrint && (
-          <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#e09070' }}>{APP_NAME}</strong></p>
-          </div>
-        )}
-      </main>
-
-      {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
-      {!isPrint && reportId && !isPremiumUnlocked && (
-        <UpsellPopup
-          reportId={reportId}
-          assessmentId={assessmentId}
-          profileName={profileName}
-          priceBrl={priceBrl}
-        />
-      )}
-    </div>
-  )
-}
+        {!isPrint &
