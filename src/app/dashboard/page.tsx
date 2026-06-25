@@ -132,7 +132,7 @@ export default async function DashboardPage() {
         <div className="flex items-center gap-2.5 flex-shrink-0">
           <Link
             href="/dashboard/candidates"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-3 rounded-full
+            className="hidden sm:inline-flex items-center justify-center gap-2 sm:w-[210px] px-5 py-3 rounded-full
                        border-2 border-soul-mist bg-soul-parchment text-[15px] text-soul-ink font-sans font-bold
                        hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
           >
@@ -143,7 +143,9 @@ export default async function DashboardPage() {
             Ver candidatos
           </Link>
 
-          <NewAssessmentButton />
+          <div className="w-full sm:w-[210px]">
+            <NewAssessmentButton fullWidth />
+          </div>
         </div>
       </div>
 
@@ -208,6 +210,16 @@ export default async function DashboardPage() {
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
                     style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
                 Mapear NR-1 do time
+              </Link>
+              <Link href="/dashboard/gestao-times"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
+                Gestão de Equipes
+              </Link>
+              <Link href="/dashboard/guia-entrevista"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
+                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
+                Guia de Entrevistas
               </Link>
             </div>
           </div>
