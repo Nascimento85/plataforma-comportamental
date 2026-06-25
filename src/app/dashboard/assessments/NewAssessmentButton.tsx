@@ -169,6 +169,24 @@ const TEST_TYPES: TestType[] = [
     badge: 'Novo',
   },
   {
+    value: 'COMUNICACAO',
+    label: 'Mapa da Comunicação',
+    short: 'Comunicação',
+    category: 'BEHAVIORAL',
+    credits: TEST_PRICE.COMUNICACAO,
+    minutos: 8,
+    image: '/tests/comunicacao.svg',
+    hook: 'Como você fala, escuta e se posiciona, com termômetro de assertividade.',
+    description:
+      'Instrumento autoral que cruza três camadas da comunicação: o estilo (Analítico, Intuitivo, Funcional ou Emocional, inspirado em Mark Murphy), a energia social (Expressivo, Apoiador, Diretivo ou Analítico) e o termômetro de assertividade, que mede o quanto a comunicação é não violenta (CNV) ou escorrega para passividade, agressividade ou sarcasmo sob pressão. Devolutiva consultiva aprofundada.',
+    bullets: [
+      'Estilo de comunicação dominante + perfil social',
+      'Termômetro de assertividade (comunicação violenta x não violenta)',
+      'Como adaptar a fala a cada perfil e onde está o maior salto',
+    ],
+    badge: 'Novo',
+  },
+  {
     value: 'BIG_FIVE',
     label: 'Big Five — Estilo de Liderança Corporativa',
     short: 'Big Five',
@@ -668,59 +686,4 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                   {/* Badges */}
                   <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
-                          style={{ background: 'rgba(196,99,58,0.15)', color: '#e09070' }}>
-                      {selectedTest.credits} crédito{selectedTest.credits > 1 ? 's' : ''}
-                    </span>
-                    <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[13.5px] font-bold"
-                          style={{ background: 'rgba(212,179,94,0.16)', color: '#d4b35e', border: '1px solid rgba(212,179,94,0.4)' }}>
-                      ⏱ Leva {selectedTest.minutos} minutos
-                    </span>
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold uppercase tracking-wider"
-                          style={{ background: 'rgba(255,255,255,0.12)', color: '#f0ece3' }}>
-                      {CATEGORY_META[selectedTest.category].title}
-                    </span>
-                    {selectedTest.badge && (
-                      <span className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold"
-                            style={{ background: 'rgba(212,148,58,0.22)', color: '#e8c878' }}>
-                        ✦ {selectedTest.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Nome completo */}
-                  <h4 className="font-serif font-semibold text-[22px] md:text-[26px] text-soul-ink leading-tight mb-2">
-                    {selectedTest.label}
-                  </h4>
-
-                  {/* Gancho */}
-                  <p className="text-[15px] font-bold text-soul-terracota mb-4 leading-snug italic">
-                    {selectedTest.hook}
-                  </p>
-
-                  {/* Descrição executiva */}
-                  <p className="text-[15px] text-soul-ink leading-relaxed font-medium mb-5">
-                    {selectedTest.description}
-                  </p>
-
-                  {/* Bullets */}
-                  <div className="space-y-2.5">
-                    {selectedTest.bullets.map((b, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <span className="mt-1 w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-white text-[13px] font-bold"
-                              style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
-                          ✓
-                        </span>
-                        <p className="text-[15px] text-soul-ink font-semibold leading-snug">{b}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </>
-  )
-}
+                    <span className="inline-flex items-center rounded-full px

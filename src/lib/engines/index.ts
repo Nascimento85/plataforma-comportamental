@@ -44,20 +44,3 @@ export {
   BIG_FIVE_FACTOR_COLORS,
   BIG_FIVE_ARCHETYPES,
 } from './big-five'
-export {
-  calculateQmt,
-  getQmtSessionQuestions,
-  QMT_QUESTIONS,
-  QMT_COMBO_REPORTS,
-  QMT_DIM_LABELS,
-  QMT_DIM_DESC,
-} from './qmt'
-export {
-  calculateLiderancaSituacional,
-  getLsSessionQuestions,
-  LS_QUESTIONS,
-  LS_STYLE_REPORTS,
-  LS_STYLE_LABELS,
-  LS_STYLE_SHORT,
-  LS_STYLE_DESC,
-} from './lideranca-situacional'

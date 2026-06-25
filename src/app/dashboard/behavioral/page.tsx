@@ -164,6 +164,27 @@ const LENSES: Lens[] = [
     color: '#6f86c9',
     emoji: '🧠',
   },
+  {
+    key: 'comunicacao',
+    testType: 'COMUNICACAO',
+    name: 'Mapa da Comunicação',
+    tagline: 'Como você fala, escuta e se posiciona sob pressão.',
+    short: 'Comunicação',
+    credits: TEST_PRICE.COMUNICACAO,
+    pillar: 'Estilo · Energia social · Assertividade',
+    description:
+      'Instrumento autoral que cruza três camadas da comunicação: o estilo (Analítico, Intuitivo, Funcional ou Emocional), a energia social e o termômetro de assertividade, que mede o quanto a comunicação é não violenta (CNV) ou escorrega para passividade, agressividade ou sarcasmo sob pressão.',
+    application:
+      'Desenvolvimento de líderes e times, mediação de conflitos, comunicação não violenta, vendas e atendimento, e autoconhecimento sobre como a pessoa é ouvida.',
+    bullets: [
+      'Estilo de comunicação dominante + perfil social',
+      'Termômetro de assertividade (violenta x não violenta)',
+      'Como adaptar a fala a cada perfil',
+      'Devolutiva consultiva aprofundada',
+    ],
+    color: '#86b58a',
+    emoji: '🗣️',
+  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════
@@ -340,50 +361,4 @@ export default async function BehavioralPage() {
               <SelfStartTestButton testType="DISC" label="Fazer DISC agora" fullWidth />
               <NewAssessmentButton initialTestType="DISC" variant="secondary" fullWidth>
                 <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-                </svg>
-                {discCtaLabel}
-              </NewAssessmentButton>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Lentes complementares ── */}
-      <section className="space-y-4">
-        <div>
-          <h2 className="font-serif font-semibold text-2xl md:text-3xl text-soul-ink leading-tight">
-            Lentes complementares
-          </h2>
-          <p className="text-[15px] text-soul-ink/88 font-medium mt-1 max-w-3xl">
-            Ferramentas de aprofundamento para casos onde o DISC não responde sozinho. Combine para leituras mais ricas ou use individualmente em diagnósticos específicos.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {LENSES.map((l) => <LensCard key={l.key} lens={l} accountType={accountType} />)}
-        </div>
-      </section>
-
-      {/* ── CTA final ── */}
-      <section
-        className="rounded-3xl p-6 md:p-8 flex flex-wrap items-center justify-between gap-4"
-        style={{ background: 'linear-gradient(135deg, rgba(196,99,58,0.1), rgba(212,148,58,0.14))', border: '1px solid rgba(196,99,58,0.28)' }}
-      >
-        <div className="max-w-2xl">
-          <p className="font-serif text-xl md:text-2xl font-semibold text-soul-ink leading-tight">
-            Quer aplicar mais de uma lente?
-          </p>
-          <p className="text-[15px] text-soul-ink/90 font-medium mt-1">
-            Envie o <strong>Bundle Completo</strong>: DISC + MBTI + Eneagrama + Temperamentos em um único link, com devolutiva integrada cruzando os 4 mapas.
-          </p>
-        </div>
-        <NewAssessmentButton initialCategory="BEHAVIORAL">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-          </svg>
-          Nova avaliação
-        </NewAssessmentButton>
-      </section>
-    </div>
-  )
-}
+                  <path d="M8 3V13M3 8H13" stroke="cur

@@ -170,14 +170,4 @@ export default async function GestaoTimesPage() {
                 </span>
                 <span className="ml-auto text-[13.5px] font-semibold" style={{ color: '#c9a84c' }}>Abrir matriz →</span>
               </div>
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Importação de colaboradores (unificado da antiga página Times) */}
-      <ImportClient />
-    </div>
-  )
-}
+              </

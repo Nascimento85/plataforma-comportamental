@@ -28,6 +28,7 @@ const TEST_LABELS: Record<string, string> = {
   TEMPERAMENT:        '4 Temperamentos',
   ARCHETYPE:          'Arquétipos — Os 12 Padrões Universais',
   ARCHETYPE_FEMININE: 'Arquétipos Femininos — As 7 Energias',
+  COMUNICACAO:        'Mapa da Comunicação',
 }
 
 const TEST_DESCRIPTIONS: Record<string, string> = {
@@ -37,6 +38,7 @@ const TEST_DESCRIPTIONS: Record<string, string> = {
   TEMPERAMENT:        'Descobre seu temperamento predominante entre os 4 tipos clássicos: Colérico, Sanguíneo, Melancólico e Fleumático.',
   ARCHETYPE:          'Baseado na teoria de Carl Jung, identifica seu arquétipo dominante entre 12 padrões universais — revelando como você lidera, decide e se relaciona.',
   ARCHETYPE_FEMININE: 'Identifica qual das 7 energias arquetípicas femininas governa seu momento atual — e qual precisa ser ativada para o seu equilíbrio pleno.',
+  COMUNICACAO:        'Mapeia seu estilo de comunicação, sua energia social e o termômetro de assertividade: o quanto sua comunicação é não violenta e onde está seu maior salto.',
 }
 
 // ── Template HTML ─────────────────────────────────────────────────────────────
@@ -734,12 +736,4 @@ export async function sendAvaliacaoLiderEmail(opts: {
     })
     if (!res.ok) {
       const err = await res.text()
-      console.error('[email] Falha ao enviar convite de avaliação do líder:', err)
-      return { sent: false, error: err }
-    }
-    return { sent: true }
-  } catch (e) {
-    console.error('[email] Erro de rede ao enviar convite de avaliação do líder:', e)
-    return { sent: false, error: String(e) }
-  }
-}
+      console.error('[email] Falha ao enviar convite de avaliação do líder:',

@@ -20,7 +20,6 @@ export const TEST_PRICE = {
   BIG_FIVE:                5,
   QMT:                     3,
   LIDERANCA_SITUACIONAL:   3,
+  COMUNICACAO:             5,
   PREMIUM_REPORT:         10, // só com créditos PAGOS
-} as const satisfies Record<string, number>
-
-export type TestPriceKey = keyof typeof TEST_PRICE
+} as c

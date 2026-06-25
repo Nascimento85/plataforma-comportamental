@@ -173,29 +173,4 @@ export default async function LeadershipPage() {
         </p>
       </header>
 
-      {/* Grid de testes */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {LEADERSHIP_TESTS.map((lens) => (
-          <LeadershipCard key={lens.key} lens={lens} accountType={accountType} />
-        ))}
-      </div>
-
-      {/* Card "Em breve" */}
-      <div className="soul-panel relative overflow-hidden"
-           style={{ background: 'linear-gradient(135deg, rgba(58,61,69,0.4), rgba(38,40,46,0.7))', border: '1px dashed rgba(122,158,126,0.4)' }}>
-        <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-xl"
-               style={{ background: 'rgba(122,158,126,0.15)', color: '#5a7e60' }}>
-            ✨
-          </div>
-          <div>
-            <p className="font-serif text-lg font-semibold text-soul-ink">Em breve, mais testes de liderança</p>
-            <p className="text-[14.5px] text-soul-ink/85 font-medium leading-snug mt-1">
-              Estamos preparando inventários complementares de gestão executiva, prontidão para promoção e diagnósticos 360 graus. Acompanhe esta área para novidades.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+      {/* Grid

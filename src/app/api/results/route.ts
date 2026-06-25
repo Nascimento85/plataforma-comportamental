@@ -14,6 +14,7 @@ import { calculateVac } from '@/lib/engines/vac'
 import { calculateBigFive } from '@/lib/engines/big-five'
 import { calculateQmt } from '@/lib/engines/qmt'
 import { calculateLiderancaSituacional } from '@/lib/engines/lideranca-situacional'
+import { calculateComunicacao } from '@/lib/engines/comunicacao'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -126,6 +127,11 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; value: number }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'COMUNICACAO':
+        resultData = calculateComunicacao(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -180,7 +186,8 @@ export async function POST(request: NextRequest) {
         assessment.testType === 'VAC' ||
         assessment.testType === 'BIG_FIVE' ||
         assessment.testType === 'QMT' ||
-        assessment.testType === 'LIDERANCA_SITUACIONAL'
+        assessment.testType === 'LIDERANCA_SITUACIONAL' ||
+        assessment.testType === 'COMUNICACAO'
       ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({
@@ -288,35 +295,4 @@ async function generateAndUploadReport(
       employeeName: assessment.employee.name,
       companyName: assessment.company.name,
       resultData,
-    })
-
-    const pdfUrl = await uploadReport(assessment.companyId, resultId, pdfBuffer)
-
-    await prisma.report.create({
-      data: {
-        assessmentId: assessment.id,
-        resultId,
-        companyId: assessment.companyId,
-        pdfUrl,
-      },
-    })
-  } catch (err) {
-    console.error('[generateAndUploadReport]', err)
-  }
-}
-
-// Verifica se todos os testes do bundle foram concluídos e dispara geração da devolutiva cruzada
-async function checkAndGenerateBundleReport(bundleId: string): Promise<void> {
-  const bundleAssessments = await prisma.assessment.findMany({
-    where: { bundleId },
-    select: { status: true },
-  })
-
-  const allDone = bundleAssessments.length >= 4 &&
-    bundleAssessments.every(a => a.status === 'COMPLETED')
-
-  if (allDone) {
-    console.log(`[bundleReport] Bundle ${bundleId} completo — gerando devolutiva cruzada...`)
-    await generateBundleReport(bundleId)
-  }
-}
+  

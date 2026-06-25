@@ -297,26 +297,4 @@ export default async function DashboardPage() {
           style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
         >
           <div
-            className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
-            style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
-          />
-          <div className="text-xl mb-2">💡</div>
-          <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
-            Insight do seu arquétipo
-          </div>
-          <p className="text-[13.5px] text-white/85 leading-relaxed flex-1">
-            Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição da equipe.
-          </p>
-          <Link
-            href="/dashboard/reports"
-            className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full text-[15px] font-bold text-white no-underline transition-all hover:-translate-y-px"
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)' }}
-          >
-            Explorar compatibilidade →
-          </Link>
-        </div>
-      </div>
-
-    </div>
-  )
-}
+      

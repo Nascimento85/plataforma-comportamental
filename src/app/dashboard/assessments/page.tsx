@@ -24,6 +24,7 @@ const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
   BIG_FIVE:               { label: 'Big Five Liderança',   emoji: '🎯' },
   QMT:                    { label: 'QMT Triádico',         emoji: '🧠' },
   LIDERANCA_SITUACIONAL:  { label: 'Lid. Situacional',     emoji: '🧭' },
+  COMUNICACAO:            { label: 'Mapa da Comunicação',  emoji: '🗣' },
   BUNDLE:                 { label: 'Bundle Completo',      emoji: '✨' },
 }
 
@@ -466,17 +467,4 @@ export default async function AssessmentsPage() {
                   )}
 
                   {a.status === 'EXPIRED' && (
-                    <div className="pt-1">
-                      <ResendEmailButton assessmentId={a.id} />
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-
-        </div>
-      )}
-    </div>
-  )
-}
+                    <div className="pt

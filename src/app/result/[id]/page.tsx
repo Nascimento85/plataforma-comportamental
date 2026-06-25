@@ -26,6 +26,7 @@ import {
   VacPrintReport,
   QmtPrintReport,
   LsPrintReport,
+  ComunicacaoPrintReport,
 } from './PrintReports'
 
 /**
@@ -113,6 +114,7 @@ const TEST_LABELS: Record<string, string> = {
   EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional — Daniel Goleman',
   QMT:                    'QMT — Quociente Mental Triádico',
   LIDERANCA_SITUACIONAL:  'Liderança Situacional — Hersey e Blanchard',
+  COMUNICACAO:            'Mapa da Comunicação',
 }
 
 // ── Componentes de UI ────────────────────────────────────────
@@ -1165,30 +1167,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'BIG_FIVE' ? (<BigFivePrintReport result={rd} />) : null}
         {assessment.testType === 'QMT' ? (<QmtPrintReport result={rd} />) : null}
         {assessment.testType === 'LIDERANCA_SITUACIONAL' ? (<LsPrintReport result={rd} />) : null}
+        {assessment.testType === 'COMUNICACAO' ? (<ComunicacaoPrintReport result={rd} />) : null}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (
-          <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
-        )}
-
-        {/* Footer */}
-        {!isPrint && (
-          <div className="text-center pb-6 space-y-1">
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Este relatório é confidencial e destinado exclusivamente ao avaliado e à empresa solicitante.</p>
-            <p className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>Gerado pela <strong style={{ color: '#e09070' }}>{APP_NAME}</strong></p>
-          </div>
-        )}
-      </main>
-
-      {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
-      {!isPrint && reportId && !isPremiumUnlocked && (
-        <UpsellPopup
-          reportId={reportId}
-          assessmentId={assessmentId}
-          profileName={profileName}
-          priceBrl={priceBrl}
-        />
-      )}
-    </div>
-  )
-}
+ 
