@@ -1147,18 +1147,18 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
           </div>
         )}
 
-        {/* Devolutiva por tipo */}
-        {assessment.testType === 'DISC' ? (isPrint ? (<DiscPrintReport result={rd} />) : (<DiscDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'MBTI' ? (isPrint ? (<MbtiPrintReport result={rd} />) : (<MbtiDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ENNEAGRAM' ? (isPrint ? (<EnneagramPrintReport result={rd} />) : (<EnneagramDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'TEMPERAMENT' ? (isPrint ? (<TemperamentPrintReport result={rd} />) : (<TemperamentDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE' ? (isPrint ? (<ArchetypePrintReport result={rd} />) : (<ArchetypeDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'ARCHETYPE_FEMININE' ? (isPrint ? (<ArchetypeFemininePrintReport result={rd} />) : (<ArchetypeFeminineDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'LOVE_LANGUAGES' ? (isPrint ? (<LoveLanguagesPrintReport result={rd} />) : (<LoveLanguagesDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'CAREER_ANCHOR' ? (isPrint ? (<CareerAnchorPrintReport result={rd} />) : (<CareerAnchorDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (isPrint ? (<EmotionalIntelligencePrintReport result={rd} />) : (<EmotionalIntelligenceDevolutiva d={resultData} />)) : null}
-        {assessment.testType === 'VAC' ? (isPrint ? (<VacPrintReport result={rd} />) : (<TestResultCard testType="VAC" result={rd} />)) : null}
-        {assessment.testType === 'BIG_FIVE' ? (isPrint ? (<BigFivePrintReport result={rd} />) : (<TestResultCard testType="BIG_FIVE" result={rd} />)) : null}
+        {/* Devolutiva por tipo — mesmo template dark legivel na tela e no PDF */}
+        {assessment.testType === 'DISC' ? (<DiscPrintReport result={rd} />) : null}
+        {assessment.testType === 'MBTI' ? (<MbtiPrintReport result={rd} />) : null}
+        {assessment.testType === 'ENNEAGRAM' ? (<EnneagramPrintReport result={rd} />) : null}
+        {assessment.testType === 'TEMPERAMENT' ? (<TemperamentPrintReport result={rd} />) : null}
+        {assessment.testType === 'ARCHETYPE' ? (<ArchetypePrintReport result={rd} />) : null}
+        {assessment.testType === 'ARCHETYPE_FEMININE' ? (<ArchetypeFemininePrintReport result={rd} />) : null}
+        {assessment.testType === 'LOVE_LANGUAGES' ? (<LoveLanguagesPrintReport result={rd} />) : null}
+        {assessment.testType === 'CAREER_ANCHOR' ? (<CareerAnchorPrintReport result={rd} />) : null}
+        {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (<EmotionalIntelligencePrintReport result={rd} />) : null}
+        {assessment.testType === 'VAC' ? (<VacPrintReport result={rd} />) : null}
+        {assessment.testType === 'BIG_FIVE' ? (<BigFivePrintReport result={rd} />) : null}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (

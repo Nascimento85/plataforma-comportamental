@@ -118,13 +118,13 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead style={{ borderBottom: '1px solid rgba(58,61,69,0.6)' }}>
-                <tr style={{ background: 'rgba(250,247,242,0.8)' }}>
-                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Funcionário</th>
-                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Empresa</th>
-                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Teste</th>
-                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Status</th>
-                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Data</th>
-                  <th className="text-right px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.68)' }}>Ações</th>
+                <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Funcionário</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Empresa</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Teste</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Status</th>
+                  <th className="text-left px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Data</th>
+                  <th className="text-right px-6 py-3 text-[12px] font-sans font-semibold uppercase tracking-[0.15em]" style={{ color: 'rgba(240,236,227,0.92)' }}>Ações</th>
                 </tr>
               </thead>
               <tbody>
