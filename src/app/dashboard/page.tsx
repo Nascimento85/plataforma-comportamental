@@ -191,9 +191,12 @@ export default async function DashboardPage() {
               Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
             </p>
             <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5">
-              Avalie candidatos através de 9 instrumentos científicos, mapeie riscos psicossociais
-              do time com o módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
-              {totalCompleted > 0 && ` Já são ${totalCompleted} avaliações concluídas.`}
+              Avalie talentos com 12 instrumentos científicos, faça a gestão dos seus times com a
+              Matriz de Talentos e a Avaliação de Liderança, mapeie riscos psicossociais com o
+              módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
+              {totalCompleted > 0 && (totalCompleted === 1
+                ? ' Já é 1 avaliação concluída.'
+                : ` Já são ${totalCompleted} avaliações concluídas.`)}
             </p>
             <div className="flex flex-wrap items-center gap-2.5">
               <Link href="/dashboard/behavioral"
