@@ -295,4 +295,35 @@ async function generateAndUploadReport(
       employeeName: assessment.employee.name,
       companyName: assessment.company.name,
       resultData,
-  
+    })
+
+    const pdfUrl = await uploadReport(assessment.companyId, resultId, pdfBuffer)
+
+    await prisma.report.create({
+      data: {
+        assessmentId: assessment.id,
+        resultId,
+        companyId: assessment.companyId,
+        pdfUrl,
+      },
+    })
+  } catch (err) {
+    console.error('[generateAndUploadReport]', err)
+  }
+}
+
+// Verifica se todos os testes do bundle foram concluídos e dispara geração da devolutiva cruzada
+async function checkAndGenerateBundleReport(bundleId: string): Promise<void> {
+  const bundleAssessments = await prisma.assessment.findMany({
+    where: { bundleId },
+    select: { status: true },
+  })
+
+  const allDone = bundleAssessments.length >= 4 &&
+    bundleAssessments.every(a => a.status === 'COMPLETED')
+
+  if (allDone) {
+    console.log(`[bundleReport] Bundle ${bundleId} completo — gerando devolutiva cruzada...`)
+    await generateBundleReport(bundleId)
+  }
+}

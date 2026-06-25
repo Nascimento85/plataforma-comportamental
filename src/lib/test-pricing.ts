@@ -22,4 +22,6 @@ export const TEST_PRICE = {
   LIDERANCA_SITUACIONAL:   3,
   COMUNICACAO:             5,
   PREMIUM_REPORT:         10, // só com créditos PAGOS
-} as c
+} as const satisfies Record<string, number>
+
+export type TestPriceKey = keyof typeof TEST_PRICE

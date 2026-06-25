@@ -131,4 +131,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         bundleId,
-        first
+        firstAssessmentId: assessments[0].id,
+        testLink,
+        emailSent,
+        testsCount: BUNDLE_TESTS.length,
+      },
+      { status: 201 }
+    )
+  } catch (err) {
+    console.error('[bundles POST]', err)
+    return NextResponse.json({ error: 'Erro interno.' }, { status: 500 })
+  }
+}

@@ -352,4 +352,129 @@ export default function TestIntroWrapper({ testType, assessmentId, token, employ
 
         {/* Saudação */}
         <div className="mb-5">
-        
+          <h1 className="text-2xl font-bold text-gray-900">
+            Olá, {firstName}! 👋
+          </h1>
+          <p className="text-brand-600 font-semibold mt-1">{intro.subtitle}</p>
+        </div>
+
+        {/* Descrição */}
+        <div className="card p-5 mb-4">
+          <p className="text-sm text-gray-700 leading-relaxed">{intro.description}</p>
+          <div className="flex gap-4 mt-4 pt-4 border-t border-gray-100">
+            <div className="text-center flex-1">
+              <p className="text-xl font-bold text-brand-600">{intro.questions}</p>
+              <p className="text-xs text-gray-400">afirmações</p>
+            </div>
+            <div className="text-center flex-1">
+              <p className="text-xl font-bold text-brand-600">{intro.duration}</p>
+              <p className="text-xs text-gray-400">tempo médio</p>
+            </div>
+            <div className="text-center flex-1">
+              <p className="text-xl font-bold text-brand-600">1–5</p>
+              <p className="text-xs text-gray-400">escala de resposta</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Dicas */}
+        <div className="space-y-2 mb-4">
+          {intro.tips.map((tip, i) => (
+            <div key={i} className="flex items-start gap-3 bg-gray-50 rounded-xl px-4 py-3">
+              <span className="text-lg flex-shrink-0">{tip.icon}</span>
+              <p className="text-sm text-gray-700 leading-snug">{tip.text}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* O que vai descobrir */}
+        <div className="card p-5 mb-6">
+          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">O que você vai descobrir</h3>
+          <ul className="space-y-2">
+            {intro.discovers.map((d, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <span className="text-brand-500 font-bold mt-0.5">✓</span>
+                {d}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* CTA */}
+        <button
+          onClick={() => setStarted(true)}
+          className="btn-primary w-full text-base py-4"
+        >
+          {intro.cta} →
+        </button>
+        <p className="text-center text-xs text-gray-400 mt-3">
+          Não há respostas certas ou erradas. Seja você mesmo.
+        </p>
+      </div>
+    )
+  }
+
+  // Título compacto após iniciar
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-3 pb-4 border-b border-gray-100">
+        <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+          {intro.title.charAt(0)}
+        </div>
+        <div>
+          <p className="font-semibold text-gray-900 text-sm">{intro.title}</p>
+          <p className="text-xs text-gray-400">{firstName} · {intro.questions} afirmações</p>
+        </div>
+      </div>
+      {renderTest(testType, assessmentId, token)}
+    </div>
+  )
+}
+
+function renderTest(testType: string, assessmentId: string, token: string) {
+  if (testType === 'DISC') return <DISCTest assessmentId={assessmentId} token={token} />
+  if (testType === 'MBTI') return <MBTITest assessmentId={assessmentId} token={token} />
+  if (testType === 'ENNEAGRAM') return <EnneagramTest assessmentId={assessmentId} token={token} />
+  if (testType === 'TEMPERAMENT') return <TemperamentTest assessmentId={assessmentId} token={token} />
+  if (testType === 'ARCHETYPE') return (
+    <ArchetypeTest
+      assessmentId={assessmentId}
+      token={token}
+      questions={ARCHETYPE_MIXED_QUESTION_SETS[getArchetypeMixedVersion(token)]}
+      testType="ARCHETYPE"
+    />
+  )
+  if (testType === 'ARCHETYPE_FEMININE') return (
+    <ArchetypeTest
+      assessmentId={assessmentId}
+      token={token}
+      questions={ARCHETYPE_FEMININE_QUESTION_SETS[getArchetypeFeminineVersion(token)]}
+      testType="ARCHETYPE_FEMININE"
+    />
+  )
+  if (testType === 'LOVE_LANGUAGES') return (
+    <LoveLanguagesTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'CAREER_ANCHOR') return (
+    <CareerAnchorTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'EMOTIONAL_INTELLIGENCE') return (
+    <EmotionalIntelligenceTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'VAC') return (
+    <VACTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'BIG_FIVE') return (
+    <BigFiveTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'QMT') return (
+    <QMTTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'LIDERANCA_SITUACIONAL') return (
+    <LideracaSituacionalTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'COMUNICACAO') return (
+    <ComunicacaoTest assessmentId={assessmentId} token={token} />
+  )
+  return null
+}

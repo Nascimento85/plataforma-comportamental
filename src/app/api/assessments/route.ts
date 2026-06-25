@@ -1,3 +1,4 @@
+// Avaliações: criação (POST) e listagem (GET). Inclui COMUNICACAO.
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { v4 as uuidv4 } from 'uuid'
@@ -165,3 +166,23 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error('[assessments POST]', err)
     return NextResponse.json({ error: 'Erro interno.' }, { status: 500 })
+  }
+}
+
+export async function GET(request: NextRequest) {
+  try {
+    const session = await getSession()
+    if (!session) return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
+
+    const assessments = await prisma.assessment.findMany({
+      where: { companyId: session.id },
+      orderBy: { createdAt: 'desc' },
+      include: { employee: { select: { name: true, email: true } } },
+    })
+
+    return NextResponse.json(assessments)
+  } catch (err) {
+    console.error('[assessments GET]', err)
+    return NextResponse.json({ error: 'Erro interno.' }, { status: 500 })
+  }
+}

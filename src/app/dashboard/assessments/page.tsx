@@ -467,4 +467,17 @@ export default async function AssessmentsPage() {
                   )}
 
                   {a.status === 'EXPIRED' && (
-                    <div className="pt
+                    <div className="pt-1">
+                      <ResendEmailButton assessmentId={a.id} />
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+      )}
+    </div>
+  )
+}

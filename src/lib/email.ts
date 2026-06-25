@@ -736,4 +736,12 @@ export async function sendAvaliacaoLiderEmail(opts: {
     })
     if (!res.ok) {
       const err = await res.text()
-      console.error('[email] Falha ao enviar convite de avaliação do líder:',
+      console.error('[email] Falha ao enviar convite de avaliação do líder:', err)
+      return { sent: false, error: err }
+    }
+    return { sent: true }
+  } catch (e) {
+    console.error('[email] Erro de rede ao enviar convite de avaliação do líder:', e)
+    return { sent: false, error: String(e) }
+  }
+}

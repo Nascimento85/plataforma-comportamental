@@ -959,3 +959,369 @@ export function VacPrintReport({ result }: { result: Record<string, unknown> }) 
     </div>
   )
 }
+
+// ============================================================
+// QMT — Quociente Mental Triádico
+// ============================================================
+export function QmtPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    percentages: { C: number; I: number; P: number }
+    counts: { C: number; I: number; P: number }
+    ranking: { dim: 'C' | 'I' | 'P'; label: string; count: number; percentage: number }[]
+    dominant: 'C' | 'I' | 'P'
+    comboReport: {
+      nome: string; combinacao: string; visaoGeral: string
+      superpoderes: { titulo: string; descricao: string }[]
+      pontosCegos:  { titulo: string; descricao: string }[]
+      planoDeAcao:  { titulo: string; descricao: string }[]
+      brilhaEm: string
+    }
+    hemisferio: { titulo: string; texto: string }
+    equilibrio: { titulo: string; texto: string }
+  }
+  const COLORS: Record<'C' | 'I' | 'P', string> = { C: '#d8b95c', I: '#cf8b83', P: '#6f86c9' }
+  const a = r.comboReport
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
+        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.combinacao}</p>
+      </div>
+
+      {/* Radar das 3 dimensões */}
+      <div style={card}>
+        <p style={kicker}>Seu mapa mental triádico</p>
+        {r.ranking.map((d) => (
+          <div key={d.dim} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.dim === r.dominant ? 700 : 600, color: d.dim === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}% · {d.count} respostas</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: COLORS[d.dim], borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Visão geral */}
+      <div style={card}>
+        <p style={kicker}>Visão geral do seu perfil</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{a.visaoGeral}</p>
+      </div>
+
+      {/* Superpoderes */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seus maiores superpoderes</p>
+        {a.superpoderes.map((sp, i) => (
+          <div key={i} style={{ marginBottom: i === a.superpoderes.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{sp.titulo}</p>
+            <p style={itemBody}>{sp.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pontos cegos */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Seus pontos cegos</p>
+        {a.pontosCegos.map((pc, i) => (
+          <div key={i} style={{ marginBottom: i === a.pontosCegos.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{pc.titulo}</p>
+            <p style={itemBody}>{pc.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Plano de ação */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
+        {a.planoDeAcao.map((pa, i) => (
+          <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{i + 1}. {pa.titulo}</p>
+            <p style={itemBody}>{pa.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Hemisfério + Equilíbrio */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.hemisferio.titulo}</p>
+        <p style={{ ...itemBody, marginBottom: 14 }}>{r.hemisferio.texto}</p>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.equilibrio.titulo}</p>
+        <p style={{ ...itemBody }}>{r.equilibrio.texto}</p>
+      </div>
+
+      {/* Onde brilha */}
+      <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
+        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+          <strong style={{ color: INK }}>Onde este perfil brilha:</strong> {a.brilhaEm}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Liderança Situacional
+// ============================================================
+export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    percentages: Record<'S1' | 'S2' | 'S3' | 'S4', number>
+    ranking: { estilo: 'S1' | 'S2' | 'S3' | 'S4'; label: string; count: number; percentage: number }[]
+    dominant: 'S1' | 'S2' | 'S3' | 'S4'
+    adaptabilidadePct: number
+    flexibilidade: { titulo: string; texto: string }
+    adaptabilidade: { titulo: string; texto: string }
+    dominantReport: {
+      nome: string; resumo: string; visaoGeral: string; quandoUsar: string
+      superpoderes: { titulo: string; descricao: string }[]
+      pontosCegos:  { titulo: string; descricao: string }[]
+      planoDeAcao:  { titulo: string; descricao: string }[]
+      brilhaEm: string
+    }
+  }
+  const COLORS: Record<'S1' | 'S2' | 'S3' | 'S4', string> = { S1: '#d97a4f', S2: '#d8b95c', S3: '#86b58a', S4: '#6f86c9' }
+  const a = r.dominantReport
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
+        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.resumo}</p>
+      </div>
+
+      {/* Distribuição dos 4 estilos */}
+      <div style={card}>
+        <p style={kicker}>Seus 4 estilos de liderança</p>
+        {r.ranking.map((d) => (
+          <div key={d.estilo} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.estilo === r.dominant ? 700 : 600, color: d.estilo === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: COLORS[d.estilo], borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Flexibilidade + Adaptabilidade */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.flexibilidade.titulo}</p>
+        <p style={{ ...itemBody, marginBottom: 14 }}>{r.flexibilidade.texto}</p>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.adaptabilidade.titulo} · {r.adaptabilidadePct}%</p>
+        <p style={{ ...itemBody }}>{r.adaptabilidade.texto}</p>
+      </div>
+
+      {/* Visão geral */}
+      <div style={card}>
+        <p style={kicker}>Visão geral do seu estilo</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{a.visaoGeral}</p>
+      </div>
+
+      {/* Quando usar */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Quando este estilo é o ideal</p>
+        <p style={{ ...itemBody }}>{a.quandoUsar}</p>
+      </div>
+
+      {/* Superpoderes */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seus maiores superpoderes</p>
+        {a.superpoderes.map((sp, i) => (
+          <div key={i} style={{ marginBottom: i === a.superpoderes.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{sp.titulo}</p>
+            <p style={itemBody}>{sp.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pontos cegos */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Seus pontos cegos</p>
+        {a.pontosCegos.map((pc, i) => (
+          <div key={i} style={{ marginBottom: i === a.pontosCegos.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{pc.titulo}</p>
+            <p style={itemBody}>{pc.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Plano de ação */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
+        {a.planoDeAcao.map((pa, i) => (
+          <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{i + 1}. {pa.titulo}</p>
+            <p style={itemBody}>{pa.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Onde brilha */}
+      <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
+        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+          <strong style={{ color: INK }}>Onde este estilo brilha:</strong> {a.brilhaEm}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================================
+// Mapa da Comunicação (teste autoral)
+// ============================================================
+export function ComunicacaoPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    perfilRanking: { chave: string; label: string; count: number; percentage: number }[]
+    perfilDominante: string
+    perfilApoio: string
+    perfilReport: {
+      nome: string; resumo: string; visaoGeral: string
+      superpoderes: { titulo: string; descricao: string }[]
+      pontosCegos:  { titulo: string; descricao: string }[]
+      comoAdaptar:  { titulo: string; descricao: string }[]
+      brilhaEm: string
+    }
+    socialRanking: { chave: string; label: string; count: number; percentage: number }[]
+    socialDominante: string
+    socialDesc: string
+    assertRanking: { chave: string; label: string; count: number; percentage: number }[]
+    pctAssertiva: number
+    deslizeDominante: string
+    termometro: { chave: string; titulo: string; texto: string }
+  }
+  const PERFIL_COLORS: Record<string, string> = { ANALITICO: '#6f86c9', INTUITIVO: '#cf8b83', FUNCIONAL: '#d8b95c', EMOCIONAL: '#86b58a' }
+  const SOCIAL_COLORS: Record<string, string> = { EXPRESSIVO: '#cf8b83', APOIADOR: '#86b58a', DIRETIVO: '#d97a4f', ANALITICO_S: '#6f86c9' }
+  const ASSERT_COLORS: Record<string, string> = { PASSIVA: '#8b93a3', AGRESSIVA: '#d9695a', PASSIVO_AGRESSIVA: '#c08a5c', ASSERTIVA: '#74d6a0' }
+  const a = r.perfilReport
+  const pct = Math.max(0, Math.min(100, r.pctAssertiva))
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
+        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.resumo}</p>
+      </div>
+
+      {/* Estilo de comunicação (Murphy) */}
+      <div style={card}>
+        <p style={kicker}>Seu estilo de comunicação</p>
+        {r.perfilRanking.map((d) => (
+          <div key={d.chave} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.chave === r.perfilDominante ? 700 : 600, color: d.chave === r.perfilDominante ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: PERFIL_COLORS[d.chave] ?? GOLD, borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Visão geral */}
+      <div style={card}>
+        <p style={kicker}>Visão geral do seu perfil</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{a.visaoGeral}</p>
+      </div>
+
+      {/* Superpoderes */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seus maiores superpoderes</p>
+        {a.superpoderes.map((sp, i) => (
+          <div key={i} style={{ marginBottom: i === a.superpoderes.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{sp.titulo}</p>
+            <p style={itemBody}>{sp.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pontos cegos */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Seus pontos cegos</p>
+        {a.pontosCegos.map((pc, i) => (
+          <div key={i} style={{ marginBottom: i === a.pontosCegos.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{pc.titulo}</p>
+            <p style={itemBody}>{pc.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Como adaptar a cada perfil */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Como adaptar sua comunicação a cada perfil</p>
+        {a.comoAdaptar.map((ad, i) => (
+          <div key={i} style={{ marginBottom: i === a.comoAdaptar.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{ad.titulo}</p>
+            <p style={itemBody}>{ad.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Energia social */}
+      <div style={card}>
+        <p style={kicker}>Sua energia social</p>
+        {r.socialRanking.map((d) => (
+          <div key={d.chave} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.chave === r.socialDominante ? 700 : 600, color: d.chave === r.socialDominante ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: SOCIAL_COLORS[d.chave] ?? GOLD, borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+        <p style={{ ...itemBody, marginTop: 10 }}>{r.socialDesc}</p>
+      </div>
+
+      {/* Termômetro de assertividade (CNV) */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#9db4e8' }}>Termômetro de assertividade</p>
+        <div style={{ textAlign: 'center', marginBottom: 12 }}>
+          <span style={{ fontFamily: 'Georgia, serif', fontSize: 34, fontWeight: 700, color: pct >= 70 ? '#74d6a0' : pct >= 40 ? GOLD_LT : '#f0a59e' }}>{pct}%</span>
+          <span style={{ fontSize: 12, color: MUTED }}> de comunicação não violenta (assertiva)</span>
+        </div>
+        {/* barra gradiente violenta -> não violenta */}
+        <div style={{ height: 12, borderRadius: 7, overflow: 'hidden', background: 'linear-gradient(90deg, #d9695a 0%, #c08a5c 38%, #d8b95c 60%, #74d6a0 100%)', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: -3, left: `calc(${pct}% - 2px)`, width: 4, height: 18, background: INK, borderRadius: 2 }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, color: MUTED, marginTop: 6 }}>
+          <span>Comunicação violenta</span>
+          <span>Comunicação assertiva (CNV)</span>
+        </div>
+        <p style={{ ...kicker, color: '#9db4e8', marginTop: 16 }}>{r.termometro.titulo}</p>
+        <p style={{ ...itemBody }}>{r.termometro.texto}</p>
+      </div>
+
+      {/* Os 4 modos sob pressão */}
+      <div style={card}>
+        <p style={kicker}>Como você reage sob pressão</p>
+        {r.assertRanking.map((d) => (
+          <div key={d.chave} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: 600, color: '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: ASSERT_COLORS[d.chave] ?? GOLD, borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Onde brilha */}
+      <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
+        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+          <strong style={{ color: INK }}>Onde este perfil brilha:</strong> {a.brilhaEm}
+        </p>
+      </div>
+    </div>
+  )
+}
