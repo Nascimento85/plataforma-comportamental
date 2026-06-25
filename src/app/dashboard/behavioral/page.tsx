@@ -143,6 +143,27 @@ const LENSES: Lens[] = [
     color: '#d4943a',
     emoji: '👁',
   },
+  {
+    key: 'qmt',
+    testType: 'QMT',
+    name: 'QMT — Quociente Mental Triádico',
+    tagline: 'Como a mente pensa: estratégia, pessoas ou execução.',
+    short: 'QMT',
+    credits: TEST_PRICE.QMT,
+    pillar: 'Conceitual · Intuitivo · Processual',
+    description:
+      'Mapeia o modo mental dominante de cada pessoa a partir de três formas de processar o mundo. Revela se o candidato pensa primeiro em estratégia, em pessoas ou em execução, e o perfil combinado que define o seu jeito de agir.',
+    application:
+      'Alocação de talentos por tipo de mente, montagem de duplas complementares, autoconhecimento de líderes e leitura rápida do jeito de pensar de um time.',
+    bullets: [
+      'Modo mental dominante + modo de apoio',
+      '6 perfis combinados com superpoderes e pontos cegos',
+      'Leitura de hemisfério e de equilíbrio mental',
+      'Devolutiva consultiva aprofundada',
+    ],
+    color: '#6f86c9',
+    emoji: '🧠',
+  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════

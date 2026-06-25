@@ -12,6 +12,7 @@ import { calculateCareerAnchor } from '@/lib/engines/career-anchor'
 import { calculateEmotionalIntelligence } from '@/lib/engines/emotional-intelligence'
 import { calculateVac } from '@/lib/engines/vac'
 import { calculateBigFive } from '@/lib/engines/big-five'
+import { calculateQmt } from '@/lib/engines/qmt'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -114,6 +115,11 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; value: number }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'QMT':
+        resultData = calculateQmt(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -166,7 +172,8 @@ export async function POST(request: NextRequest) {
         assessment.testType === 'CAREER_ANCHOR' ||
         assessment.testType === 'EMOTIONAL_INTELLIGENCE' ||
         assessment.testType === 'VAC' ||
-        assessment.testType === 'BIG_FIVE'
+        assessment.testType === 'BIG_FIVE' ||
+        assessment.testType === 'QMT'
       ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({

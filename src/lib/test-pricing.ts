@@ -18,6 +18,8 @@ export const TEST_PRICE = {
   EMOTIONAL_INTELLIGENCE:  2,
   VAC:                     2,
   BIG_FIVE:                5,
+  QMT:                     3,
+  LIDERANCA_SITUACIONAL:   3,
   PREMIUM_REPORT:         10, // só com créditos PAGOS
 } as const satisfies Record<string, number>
 

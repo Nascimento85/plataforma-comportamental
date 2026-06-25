@@ -22,6 +22,7 @@ const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
   EMOTIONAL_INTELLIGENCE: { label: 'IE Goleman',           emoji: '◈' },
   VAC:                    { label: 'VAC Sensorial',        emoji: '👁' },
   BIG_FIVE:               { label: 'Big Five Liderança',   emoji: '🎯' },
+  QMT:                    { label: 'QMT Triádico',         emoji: '🧠' },
   BUNDLE:                 { label: 'Bundle Completo',      emoji: '✨' },
 }
 

@@ -24,6 +24,7 @@ import {
   CareerAnchorPrintReport,
   EmotionalIntelligencePrintReport,
   VacPrintReport,
+  QmtPrintReport,
 } from './PrintReports'
 
 /**
@@ -109,6 +110,7 @@ const TEST_LABELS: Record<string, string> = {
   LOVE_LANGUAGES:         '5 Linguagens do Amor',
   CAREER_ANCHOR:          'Âncoras de Carreira — Edgar Schein',
   EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional — Daniel Goleman',
+  QMT:                    'QMT — Quociente Mental Triádico',
 }
 
 // ── Componentes de UI ────────────────────────────────────────
@@ -1159,6 +1161,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (<EmotionalIntelligencePrintReport result={rd} />) : null}
         {assessment.testType === 'VAC' ? (<VacPrintReport result={rd} />) : null}
         {assessment.testType === 'BIG_FIVE' ? (<BigFivePrintReport result={rd} />) : null}
+        {assessment.testType === 'QMT' ? (<QmtPrintReport result={rd} />) : null}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (

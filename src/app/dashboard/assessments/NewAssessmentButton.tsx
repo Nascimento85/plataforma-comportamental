@@ -151,6 +151,24 @@ const TEST_TYPES: TestType[] = [
     badge: 'Novo',
   },
   {
+    value: 'QMT',
+    label: 'QMT — Quociente Mental Triádico',
+    short: 'QMT',
+    category: 'BEHAVIORAL',
+    credits: TEST_PRICE.QMT,
+    minutos: 9,
+    image: '/tests/qmt.svg',
+    hook: 'Como a mente pensa: estratégia, pessoas ou execução.',
+    description:
+      'Mapeia o modo mental dominante do candidato a partir de três formas de processar o mundo: Conceitual (estratégia), Intuitivo (pessoas) e Processual (execução). Revela o perfil combinado, os pontos cegos e como a pessoa decide e lidera. Devolutiva consultiva aprofundada.',
+    bullets: [
+      'Perfil mental dominante + modo de apoio',
+      '6 perfis combinados, com superpoderes e pontos cegos',
+      'Leitura de hemisfério e de equilíbrio (triádico ou especializado)',
+    ],
+    badge: 'Novo',
+  },
+  {
     value: 'BIG_FIVE',
     label: 'Big Five — Estilo de Liderança Corporativa',
     short: 'Big Five',

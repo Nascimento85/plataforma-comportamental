@@ -11,6 +11,7 @@ import CareerAnchorTest from '@/components/tests/CareerAnchorTest'
 import EmotionalIntelligenceTest from '@/components/tests/EmotionalIntelligenceTest'
 import VACTest from '@/components/tests/VACTest'
 import BigFiveTest from '@/components/tests/BigFiveTest'
+import QMTTest from '@/components/tests/QMTTest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -253,6 +254,26 @@ const INTROS: Record<string, {
     duration: '12–18 min',
     questions: 44,
   },
+  QMT: {
+    title: 'QMT — Quociente Mental Triádico',
+    subtitle: 'Como a sua mente pensa: estratégia, pessoas ou execução?',
+    image: '/tests/qmt.svg',
+    description: 'O QMT mapeia a forma como a sua mente funciona a partir de três modos de processar o mundo: o Conceitual (estratégia e visão), o Intuitivo (pessoas e emoção) e o Processual (execução e ordem). Inspirado nos modelos de cérebro triádico e de dominância cerebral, ele revela o seu modo mental dominante, a combinação que define o seu jeito de agir e os pontos cegos que vêm junto. É um raio X de como você decide, lidera e se relaciona com o trabalho.',
+    tips: [
+      { icon: '🧠', text: 'Escolha pela sua reação natural e espontânea, não pelo que acha mais correto.' },
+      { icon: '⚖️', text: 'Não existe modo melhor. Cada mente tem força e ponto cego próprios.' },
+      { icon: '🔓', text: 'O seu perfil nasce da combinação do modo dominante com o de apoio.' },
+    ],
+    discovers: [
+      'Seu modo mental dominante: Conceitual, Intuitivo ou Processual',
+      'O perfil combinado que define o seu jeito de pensar e agir',
+      'Se a sua mente é triádica e versátil ou especializada',
+      'Superpoderes, pontos cegos e um plano de desenvolvimento',
+    ],
+    cta: 'Mapear meu perfil mental',
+    duration: '8–12 min',
+    questions: 27,
+  },
 }
 
 // ── Componente principal ──────────────────────────────────────
@@ -403,6 +424,9 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'BIG_FIVE') return (
     <BigFiveTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'QMT') return (
+    <QMTTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

@@ -959,3 +959,106 @@ export function VacPrintReport({ result }: { result: Record<string, unknown> }) 
     </div>
   )
 }
+
+// ============================================================
+// QMT — Quociente Mental Triádico
+// ============================================================
+export function QmtPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    percentages: { C: number; I: number; P: number }
+    counts: { C: number; I: number; P: number }
+    ranking: { dim: 'C' | 'I' | 'P'; label: string; count: number; percentage: number }[]
+    dominant: 'C' | 'I' | 'P'
+    comboReport: {
+      nome: string; combinacao: string; visaoGeral: string
+      superpoderes: { titulo: string; descricao: string }[]
+      pontosCegos:  { titulo: string; descricao: string }[]
+      planoDeAcao:  { titulo: string; descricao: string }[]
+      brilhaEm: string
+    }
+    hemisferio: { titulo: string; texto: string }
+    equilibrio: { titulo: string; texto: string }
+  }
+  const COLORS: Record<'C' | 'I' | 'P', string> = { C: '#d8b95c', I: '#cf8b83', P: '#6f86c9' }
+  const a = r.comboReport
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
+        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.combinacao}</p>
+      </div>
+
+      {/* Radar das 3 dimensões */}
+      <div style={card}>
+        <p style={kicker}>Seu mapa mental triádico</p>
+        {r.ranking.map((d) => (
+          <div key={d.dim} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.dim === r.dominant ? 700 : 600, color: d.dim === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}% · {d.count} respostas</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: COLORS[d.dim], borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Visão geral */}
+      <div style={card}>
+        <p style={kicker}>Visão geral do seu perfil</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{a.visaoGeral}</p>
+      </div>
+
+      {/* Superpoderes */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seus maiores superpoderes</p>
+        {a.superpoderes.map((sp, i) => (
+          <div key={i} style={{ marginBottom: i === a.superpoderes.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{sp.titulo}</p>
+            <p style={itemBody}>{sp.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pontos cegos */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Seus pontos cegos</p>
+        {a.pontosCegos.map((pc, i) => (
+          <div key={i} style={{ marginBottom: i === a.pontosCegos.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{pc.titulo}</p>
+            <p style={itemBody}>{pc.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Plano de ação */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
+        {a.planoDeAcao.map((pa, i) => (
+          <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{i + 1}. {pa.titulo}</p>
+            <p style={itemBody}>{pa.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Hemisfério + Equilíbrio */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.hemisferio.titulo}</p>
+        <p style={{ ...itemBody, marginBottom: 14 }}>{r.hemisferio.texto}</p>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.equilibrio.titulo}</p>
+        <p style={{ ...itemBody }}>{r.equilibrio.texto}</p>
+      </div>
+
+      {/* Onde brilha */}
+      <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
+        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+          <strong style={{ color: INK }}>Onde este perfil brilha:</strong> {a.brilhaEm}
+        </p>
+      </div>
+    </div>
+  )
+}
