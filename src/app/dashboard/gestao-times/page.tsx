@@ -11,6 +11,7 @@ import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import NovoTimeButton from './NovoTimeButton'
 import ImportClient from './ImportClient'
+import DeleteTeamButton from './DeleteTeamButton'
 import { agregarRespostasLider, MIN_RESPOSTAS_LIDER } from '@/content/gestao-times/avaliacao-lider'
 
 export const metadata: Metadata = { title: 'Gestão de Equipes · Psique' }
@@ -131,10 +132,12 @@ export default async function GestaoTimesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {teams.map((t) => (
-            <Link key={t.id} href={`/dashboard/gestao-times/${t.id}`}
+            <div key={t.id} className="relative">
+              <DeleteTeamButton teamId={t.id} teamName={t.nome} />
+              <Link href={`/dashboard/gestao-times/${t.id}`}
                   className="soul-panel block no-underline transition-all hover:-translate-y-0.5"
                   style={{ borderLeft: '4px solid #c9a84c' }}>
-              <p className="font-serif text-xl font-semibold text-soul-ink leading-tight">{t.nome}</p>
+              <p className="font-serif text-xl font-semibold text-soul-ink leading-tight pr-9">{t.nome}</p>
               {t.descricao && (
                 <p className="text-[14px] text-soul-ink/80 font-medium mt-1 line-clamp-2">{t.descricao}</p>
               )}
@@ -167,7 +170,8 @@ export default async function GestaoTimesPage() {
                 </span>
                 <span className="ml-auto text-[13.5px] font-semibold" style={{ color: '#c9a84c' }}>Abrir matriz →</span>
               </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       )}
