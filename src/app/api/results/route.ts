@@ -13,6 +13,7 @@ import { calculateEmotionalIntelligence } from '@/lib/engines/emotional-intellig
 import { calculateVac } from '@/lib/engines/vac'
 import { calculateBigFive } from '@/lib/engines/big-five'
 import { calculateQmt } from '@/lib/engines/qmt'
+import { calculateLiderancaSituacional } from '@/lib/engines/lideranca-situacional'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -120,6 +121,11 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; value: number }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'LIDERANCA_SITUACIONAL':
+        resultData = calculateLiderancaSituacional(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -173,7 +179,8 @@ export async function POST(request: NextRequest) {
         assessment.testType === 'EMOTIONAL_INTELLIGENCE' ||
         assessment.testType === 'VAC' ||
         assessment.testType === 'BIG_FIVE' ||
-        assessment.testType === 'QMT'
+        assessment.testType === 'QMT' ||
+        assessment.testType === 'LIDERANCA_SITUACIONAL'
       ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({

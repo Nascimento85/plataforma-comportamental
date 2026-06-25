@@ -12,6 +12,7 @@ import EmotionalIntelligenceTest from '@/components/tests/EmotionalIntelligenceT
 import VACTest from '@/components/tests/VACTest'
 import BigFiveTest from '@/components/tests/BigFiveTest'
 import QMTTest from '@/components/tests/QMTTest'
+import LideracaSituacionalTest from '@/components/tests/LideracaSituacionalTest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -274,6 +275,26 @@ const INTROS: Record<string, {
     duration: '8–12 min',
     questions: 27,
   },
+  LIDERANCA_SITUACIONAL: {
+    title: 'Liderança Situacional — Hersey e Blanchard',
+    subtitle: 'Você lidera no automático ou lê o contexto?',
+    image: '/tests/lideranca-situacional.svg',
+    description: 'Baseado no modelo de Liderança Situacional de Paul Hersey e Ken Blanchard, um dos mais aplicados no mundo corporativo. Em vez de perguntar a sua opinião, ele te coloca em situações reais de liderança e observa como você agiria. A partir disso, revela o seu estilo dominante, a sua flexibilidade entre os 4 estilos e, o mais valioso, a sua adaptabilidade: o quanto você escolhe o estilo certo para cada momento da equipe.',
+    tips: [
+      { icon: '🎯', text: 'Escolha como você REALMENTE agiria, não o que parece mais bonito na teoria.' },
+      { icon: '⚡', text: 'Não existe estilo certo no geral. Existe o estilo certo para cada situação.' },
+      { icon: '🔓', text: 'O ouro do resultado é a adaptabilidade: ler o contexto antes de agir.' },
+    ],
+    discovers: [
+      'Seu estilo de liderança dominante (Direcionador, Orientador, Apoiador ou Delegador)',
+      'Sua flexibilidade: quantos estilos você acessa com naturalidade',
+      'Sua adaptabilidade: o quanto você escolhe o estilo certo para cada situação',
+      'Superpoderes, pontos cegos e um plano de desenvolvimento como líder',
+    ],
+    cta: 'Revelar meu perfil de liderança',
+    duration: '6–10 min',
+    questions: 12,
+  },
 }
 
 // ── Componente principal ──────────────────────────────────────
@@ -427,6 +448,9 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'QMT') return (
     <QMTTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'LIDERANCA_SITUACIONAL') return (
+    <LideracaSituacionalTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

@@ -191,7 +191,7 @@ export default async function DashboardPage() {
               Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
             </p>
             <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5">
-              Avalie talentos com 12 instrumentos científicos, faça a gestão dos seus times com a
+              Avalie talentos com 13 instrumentos científicos, faça a gestão dos seus times com a
               Matriz de Talentos e a Avaliação de Liderança, mapeie riscos psicossociais com o
               módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
               {totalCompleted > 0 && (totalCompleted === 1

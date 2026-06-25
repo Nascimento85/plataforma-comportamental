@@ -1062,3 +1062,112 @@ export function QmtPrintReport({ result }: { result: Record<string, unknown> }) 
     </div>
   )
 }
+
+// ============================================================
+// Liderança Situacional
+// ============================================================
+export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    percentages: Record<'S1' | 'S2' | 'S3' | 'S4', number>
+    ranking: { estilo: 'S1' | 'S2' | 'S3' | 'S4'; label: string; count: number; percentage: number }[]
+    dominant: 'S1' | 'S2' | 'S3' | 'S4'
+    adaptabilidadePct: number
+    flexibilidade: { titulo: string; texto: string }
+    adaptabilidade: { titulo: string; texto: string }
+    dominantReport: {
+      nome: string; resumo: string; visaoGeral: string; quandoUsar: string
+      superpoderes: { titulo: string; descricao: string }[]
+      pontosCegos:  { titulo: string; descricao: string }[]
+      planoDeAcao:  { titulo: string; descricao: string }[]
+      brilhaEm: string
+    }
+  }
+  const COLORS: Record<'S1' | 'S2' | 'S3' | 'S4', string> = { S1: '#d97a4f', S2: '#d8b95c', S3: '#86b58a', S4: '#6f86c9' }
+  const a = r.dominantReport
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
+        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.resumo}</p>
+      </div>
+
+      {/* Distribuição dos 4 estilos */}
+      <div style={card}>
+        <p style={kicker}>Seus 4 estilos de liderança</p>
+        {r.ranking.map((d) => (
+          <div key={d.estilo} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: d.estilo === r.dominant ? 700 : 600, color: d.estilo === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ color: MUTED }}>{d.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${d.percentage}%`, background: COLORS[d.estilo], borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Flexibilidade + Adaptabilidade */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.flexibilidade.titulo}</p>
+        <p style={{ ...itemBody, marginBottom: 14 }}>{r.flexibilidade.texto}</p>
+        <p style={{ ...kicker, color: '#9db4e8' }}>{r.adaptabilidade.titulo} · {r.adaptabilidadePct}%</p>
+        <p style={{ ...itemBody }}>{r.adaptabilidade.texto}</p>
+      </div>
+
+      {/* Visão geral */}
+      <div style={card}>
+        <p style={kicker}>Visão geral do seu estilo</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{a.visaoGeral}</p>
+      </div>
+
+      {/* Quando usar */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Quando este estilo é o ideal</p>
+        <p style={{ ...itemBody }}>{a.quandoUsar}</p>
+      </div>
+
+      {/* Superpoderes */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seus maiores superpoderes</p>
+        {a.superpoderes.map((sp, i) => (
+          <div key={i} style={{ marginBottom: i === a.superpoderes.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{sp.titulo}</p>
+            <p style={itemBody}>{sp.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pontos cegos */}
+      <div style={card}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Seus pontos cegos</p>
+        {a.pontosCegos.map((pc, i) => (
+          <div key={i} style={{ marginBottom: i === a.pontosCegos.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{pc.titulo}</p>
+            <p style={itemBody}>{pc.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Plano de ação */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
+        {a.planoDeAcao.map((pa, i) => (
+          <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
+            <p style={itemTitle}>{i + 1}. {pa.titulo}</p>
+            <p style={itemBody}>{pa.descricao}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Onde brilha */}
+      <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
+        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+          <strong style={{ color: INK }}>Onde este estilo brilha:</strong> {a.brilhaEm}
+        </p>
+      </div>
+    </div>
+  )
+}

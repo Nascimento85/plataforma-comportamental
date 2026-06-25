@@ -23,6 +23,7 @@ const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
   VAC:                    { label: 'VAC Sensorial',        emoji: '👁' },
   BIG_FIVE:               { label: 'Big Five Liderança',   emoji: '🎯' },
   QMT:                    { label: 'QMT Triádico',         emoji: '🧠' },
+  LIDERANCA_SITUACIONAL:  { label: 'Lid. Situacional',     emoji: '🧭' },
   BUNDLE:                 { label: 'Bundle Completo',      emoji: '✨' },
 }
 

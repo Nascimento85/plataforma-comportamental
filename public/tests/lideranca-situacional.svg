@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Liderança Situacional — Hersey e Blanchard">
+  <defs>
+    <linearGradient id="bgLS" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e1626"/>
+      <stop offset="1" stop-color="#080d18"/>
+    </linearGradient>
+    <radialGradient id="glowLS" cx="0.62" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#d4af37" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#d4af37" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bgLS)"/>
+  <rect width="800" height="500" fill="url(#glowLS)"/>
+
+  <!-- Matriz 2x2 dos estilos -->
+  <g transform="translate(440 130)">
+    <!-- células -->
+    <rect x="0"   y="0"   width="135" height="115" rx="10" fill="#86b58a" fill-opacity="0.16" stroke="#86b58a" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="145" y="0"   width="135" height="115" rx="10" fill="#d8b95c" fill-opacity="0.16" stroke="#d8b95c" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="0"   y="125" width="135" height="115" rx="10" fill="#6f86c9" fill-opacity="0.16" stroke="#6f86c9" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="145" y="125" width="135" height="115" rx="10" fill="#d97a4f" fill-opacity="0.16" stroke="#d97a4f" stroke-opacity="0.5" stroke-width="1.5"/>
+
+    <g font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+      <text x="67"  y="48"  font-size="26" font-weight="700" fill="#aeddb7">S3</text>
+      <text x="212" y="48"  font-size="26" font-weight="700" fill="#e7d39a">S2</text>
+      <text x="67"  y="173" font-size="26" font-weight="700" fill="#9fb1e6">S4</text>
+      <text x="212" y="173" font-size="26" font-weight="700" fill="#efb0a8">S1</text>
+    </g>
+    <g font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">
+      <text x="67"  y="72"  fill="#aeddb7">APOIADOR</text>
+      <text x="212" y="72"  fill="#e7d39a">ORIENTADOR</text>
+      <text x="67"  y="197" fill="#9fb1e6">DELEGADOR</text>
+      <text x="212" y="197" fill="#efb0a8">DIRECIONADOR</text>
+    </g>
+  </g>
+
+  <!-- Título -->
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="60" y="118" font-size="46" font-weight="700" fill="#f3ede0">Liderança</text>
+    <text x="60" y="166" font-size="46" font-weight="700" fill="#f3ede0">Situacional</text>
+    <text x="60" y="200" font-size="16" font-style="italic" fill="#9fb0c8">Você lidera no automático ou lê o contexto?</text>
+  </g>
+
+  <!-- Legenda eixos -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#9fb0c8">
+    <text x="60" y="300">DIREÇÃO + SUPORTE, AJUSTADOS</text>
+    <text x="60" y="322">À MATURIDADE DE CADA PESSOA</text>
+  </g>
+
+  <g transform="translate(60 360)">
+    <rect width="252" height="34" rx="17" fill="#d4af37" fill-opacity="0.10" stroke="#d4af37" stroke-opacity="0.30"/>
+    <text x="126" y="22" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#d4af37" letter-spacing="2">LIDERANÇA · HERSEY E BLANCHARD</text>
+  </g>
+</svg>

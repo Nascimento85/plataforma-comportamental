@@ -52,6 +52,27 @@ const LEADERSHIP_TESTS: LeadershipLens[] = [
     color: '#8fa6da',
     emoji: '🎯',
   },
+  {
+    key: 'lideranca-situacional',
+    testType: 'LIDERANCA_SITUACIONAL',
+    name: 'Liderança Situacional — Hersey e Blanchard',
+    tagline: 'Você lidera no automático ou lê o contexto? O modelo mais aplicado no mundo.',
+    short: 'Lid. Situacional',
+    credits: TEST_PRICE.LIDERANCA_SITUACIONAL,
+    pillar: 'Direcionar · Orientar · Apoiar · Delegar',
+    description:
+      'Baseado no modelo de Hersey e Blanchard, coloca o líder em situações reais e observa como ele agiria. Revela o estilo dominante, a flexibilidade entre os 4 estilos e a adaptabilidade: o quanto a pessoa escolhe o estilo certo para a maturidade de cada pessoa e momento.',
+    application:
+      'Diagnóstico de gestores, desenvolvimento de líderes, identificação de quem lidera no automático versus quem lê o contexto, e PDIs de liderança com plano concreto para ampliar repertório e adaptabilidade.',
+    bullets: [
+      'Cenários reais de liderança, não autoavaliação',
+      'Estilo dominante + flexibilidade entre os 4 estilos',
+      'Índice de adaptabilidade ao contexto',
+      'Devolutiva consultiva com plano de desenvolvimento',
+    ],
+    color: '#86b58a',
+    emoji: '🧭',
+  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════

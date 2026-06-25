@@ -188,6 +188,25 @@ const TEST_TYPES: TestType[] = [
     badge: 'Premium',
   },
   {
+    value: 'LIDERANCA_SITUACIONAL',
+    label: 'Liderança Situacional — Hersey e Blanchard',
+    short: 'Lid. Situacional',
+    category: 'LEADERSHIP',
+    credits: TEST_PRICE.LIDERANCA_SITUACIONAL,
+    minutos: 8,
+    image: '/tests/lideranca-situacional.svg',
+    hook: 'Lidera no automático ou lê o contexto? O modelo mais usado no mundo.',
+    description:
+      'Coloca o líder em situações reais e observa como ele agiria, em vez de perguntar a opinião. Revela o estilo dominante, a flexibilidade entre os 4 estilos e a adaptabilidade: o quanto a pessoa escolhe o estilo certo para cada momento da equipe. Devolutiva consultiva aprofundada.',
+    bullets: [
+      'Cenários reais de liderança, não autoavaliação',
+      'Estilo dominante + flexibilidade entre os 4 estilos',
+      'Índice de adaptabilidade, ler o contexto antes de agir',
+      'Devolutiva consultiva com plano de desenvolvimento',
+    ],
+    badge: 'Novo',
+  },
+  {
     value: 'BUNDLE_4',
     label: 'Bundle Completo — 4 Testes Comportamentais',
     short: 'Bundle 4',
