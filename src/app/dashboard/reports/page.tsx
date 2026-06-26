@@ -2,6 +2,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import EditableCandidateName from './EditableCandidateName'
 
 export const metadata: Metadata = { title: 'Relatórios' }
 
@@ -173,8 +174,11 @@ export default async function ReportsPage() {
                   {individualResults.map((r) => (
                     <tr key={r.id} className="border-b border-soul-mist/50 hover:bg-soul-parchment/30 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-semibold text-[15px] text-soul-ink">{r.employee.name}</div>
-                        <div className="text-[14px] text-soul-ink/80 font-medium mt-0.5">{r.employee.email}</div>
+                        <EditableCandidateName
+                          employeeId={r.employeeId}
+                          name={r.employee.name}
+                          email={r.employee.email}
+                        />
                       </td>
                       <td className="px-6 py-4 hidden md:table-cell">
                         <div className="text-[15px] font-semibold text-soul-ink">
