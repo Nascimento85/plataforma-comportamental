@@ -74,112 +74,58 @@ export default function RecentActivityCard({ assessments }: Props) {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5">
-
-      {/* Activity list */}
-      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
-            <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
-            Atividade recente
-          </h2>
-          <Link
-            href="/dashboard/assessments"
-            className="text-[14px] font-bold text-soul-terracota hover:gap-2 transition-all duration-200"
-          >
-            Ver todas →
-          </Link>
-        </div>
-
-        <div className="space-y-0">
-          {assessments.slice(0, 6).map((a, i) => {
-            const cfg = STATUS_CONFIG[a.status as AssessmentStatus] ?? {
-              label: a.status, variant: 'locked' as const,
-            }
-            const emoji = TEST_TYPE_EMOJI[a.testType] ?? '📊'
-
-            const dotColor =
-              a.status === 'COMPLETED' ? 'bg-soul-sage' :
-              a.status === 'SENT'      ? 'bg-soul-amber' :
-              a.status === 'PENDING'   ? 'bg-soul-indigo' :
-                                         'bg-soul-mist'
-
-            return (
-              <div
-                key={a.id}
-                className="flex items-start gap-3 py-3 border-b border-soul-mist/40 last:border-b-0"
-              >
-                <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dotColor}`} />
-
-                <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
-
-                <div className="flex-1 min-w-0">
-                  <div className="text-[15px] text-soul-ink font-medium">
-                    <span className="font-bold">{a.employee.name}</span>
-                    {a.status === 'COMPLETED' ? ' completou ' : ' iniciou '}
-                    <span className="text-soul-ink/88 font-semibold">{emoji} {a.testType}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <Badge variant={cfg.variant}>{cfg.label}</Badge>
-                  <span className="text-[13.5px] text-soul-ink/80 font-semibold">{timeAgo(a.createdAt)}</span>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+    <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
+          <span className="w-7 h-7 rounded-lg bg-soul-sage/12 flex items-center justify-center text-sm">📋</span>
+          Atividade recente
+        </h2>
+        <Link
+          href="/dashboard/assessments"
+          className="text-[14px] font-bold text-soul-terracota hover:gap-2 transition-all duration-200"
+        >
+          Ver todas →
+        </Link>
       </div>
 
-      {/* Candidates summary */}
-      <div className="bg-soul-parchment rounded-3xl border border-soul-mist/60 p-6 h-full flex flex-col">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif font-semibold text-xl text-soul-ink flex items-center gap-2.5">
-            <span className="w-7 h-7 rounded-lg bg-soul-indigo/10 flex items-center justify-center text-sm">👥</span>
-            Candidatos
-          </h2>
-          <Link href="/dashboard/assessments" className="text-[14px] font-bold text-soul-terracota">
-            Ver todos →
-          </Link>
-        </div>
+      <div className="space-y-0">
+        {assessments.slice(0, 6).map((a, i) => {
+          const cfg = STATUS_CONFIG[a.status as AssessmentStatus] ?? {
+            label: a.status, variant: 'locked' as const,
+          }
+          const emoji = TEST_TYPE_EMOJI[a.testType] ?? '📊'
 
-        <div className="space-y-0">
-          {assessments.slice(0, 5).map((a, i) => {
-            const cfg = STATUS_CONFIG[a.status as AssessmentStatus] ?? {
-              label: a.status, variant: 'locked' as const,
-            }
+          const dotColor =
+            a.status === 'COMPLETED' ? 'bg-soul-sage' :
+            a.status === 'SENT'      ? 'bg-soul-amber' :
+            a.status === 'PENDING'   ? 'bg-soul-indigo' :
+                                       'bg-soul-mist'
 
-            return (
-              <div key={a.id} className="flex items-center gap-3 py-2.5 border-b border-soul-mist/40 last:border-b-0">
-                <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
-                <div className="flex-1 min-w-0">
-                  <div className="text-[15px] font-bold text-soul-ink truncate">
-                    {a.employee.name}
-                  </div>
-                  <div className="text-[13.5px] font-display italic text-soul-ink/85 font-semibold">
-                    Descobrindo…
-                  </div>
+          return (
+            <div
+              key={a.id}
+              className="flex items-start gap-3 py-3 border-b border-soul-mist/40 last:border-b-0"
+            >
+              <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dotColor}`} />
+
+              <Avatar name={a.employee.name} size="sm" paletteIndex={i} />
+
+              <div className="flex-1 min-w-0">
+                <div className="text-[15px] text-soul-ink font-medium">
+                  <span className="font-bold">{a.employee.name}</span>
+                  {a.status === 'COMPLETED' ? ' completou ' : ' iniciou '}
+                  <span className="text-soul-ink/88 font-semibold">{emoji} {a.testType}</span>
                 </div>
-                <Badge variant={cfg.variant} className="flex-shrink-0">
-                  {cfg.label}
-                </Badge>
               </div>
-            )
-          })}
-        </div>
 
-        {assessments.length > 5 && (
-          <Link
-            href="/dashboard/assessments"
-            className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full
-                       text-[15px] font-bold text-soul-terracota border-2 border-soul-terracota/35
-                       hover:bg-soul-terracota/5 transition-colors font-sans"
-          >
-            + {assessments.length - 5} mais candidatos
-          </Link>
-        )}
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <Badge variant={cfg.variant}>{cfg.label}</Badge>
+                <span className="text-[13.5px] text-soul-ink/80 font-semibold">{timeAgo(a.createdAt)}</span>
+              </div>
+            </div>
+          )
+        })}
       </div>
-
     </div>
   )
 }
