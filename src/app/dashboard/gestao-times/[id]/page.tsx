@@ -29,6 +29,13 @@ export default async function MatrizPage({ params }: { params: { id: string } })
   })
   if (!team || team.companyId !== session.id) return notFound()
 
+  // Todas as equipes da empresa (para o seletor de hierarquia / "responde a")
+  const allTeams = await prismaAny.talentTeam.findMany({
+    where: { companyId: session.id },
+    select: { id: true, nome: true, parentTeamId: true },
+    orderBy: { nome: 'asc' },
+  }) as Array<{ id: string; nome: string; parentTeamId: string | null }>
+
   // Employees da empresa com perfil DISC concluído, disponíveis para vincular
   const discAssessments = await prisma.assessment.findMany({
     where: { companyId: session.id, testType: 'DISC', status: 'COMPLETED' },
@@ -89,6 +96,8 @@ export default async function MatrizPage({ params }: { params: { id: string } })
       teamDescricao={team.descricao}
       liderNome={team.liderNome ?? null}
       liderEmail={team.liderEmail ?? null}
+      parentTeamId={team.parentTeamId ?? null}
+      allTeams={allTeams}
       members={members}
       employeesDisponiveis={employeesDisponiveis}
     />

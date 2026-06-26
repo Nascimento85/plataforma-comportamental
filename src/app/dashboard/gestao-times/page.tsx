@@ -51,7 +51,7 @@ export default async function GestaoTimesPage() {
     where: { companyId: session.id },
     orderBy: { updatedAt: 'desc' },
     include: { _count: { select: { members: true, liderRespostas: true } } },
-  }) as Array<{ id: string; nome: string; descricao: string | null; liderNome: string | null; updatedAt: Date; _count: { members: number; liderRespostas: number } }>
+  }) as Array<{ id: string; nome: string; descricao: string | null; liderNome: string | null; parentTeamId: string | null; updatedAt: Date; _count: { members: number; liderRespostas: number } }>
 
   // Resultado agregado da Avaliação do Líder por equipe (libera com n minimo)
   const respostasLider = await prismaAny.liderResposta.findMany({
@@ -117,6 +117,21 @@ export default async function GestaoTimesPage() {
         </div>
       </div>
 
+      {/* Organograma da empresa (aparece com 2+ equipes) */}
+      {teams.length >= 2 && (
+        <div className="soul-panel">
+          <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
+            <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: '#8fa6da' }}>
+              Organograma da empresa
+            </p>
+            <p className="text-[13px] text-soul-ink/65 font-medium">
+              Defina “Responde a” dentro de cada equipe para montar a hierarquia.
+            </p>
+          </div>
+          <OrgChart teams={teams} liderResumo={liderResumo} />
+        </div>
+      )}
+
       {/* Lista de times */}
       {teams.length === 0 ? (
         <div className="rounded-3xl p-8 text-center"
@@ -180,4 +195,54 @@ export default async function GestaoTimesPage() {
       <ImportClient />
     </div>
   )
+}
+
+// ── Organograma: árvore indentada a partir de parentTeamId ──────
+type OrgTeam = { id: string; nome: string; liderNome: string | null; parentTeamId: string | null; _count: { members: number } }
+type LiderResumoVal = { n: number; score: number; label: string; cor: string } | { n: number }
+
+function OrgChart({ teams, liderResumo }: { teams: OrgTeam[]; liderResumo: Map<string, LiderResumoVal> }) {
+  const ids = new Set(teams.map((t) => t.id))
+  const childrenOf = new Map<string, OrgTeam[]>()
+  const roots: OrgTeam[] = []
+  for (const t of teams) {
+    const pid = t.parentTeamId && ids.has(t.parentTeamId) ? t.parentTeamId : null
+    if (!pid) { roots.push(t) }
+    else {
+      const arr = childrenOf.get(pid) ?? []
+      arr.push(t)
+      childrenOf.set(pid, arr)
+    }
+  }
+  const byNome = (a: OrgTeam, b: OrgTeam) => a.nome.localeCompare(b.nome)
+  roots.sort(byNome)
+
+  const seen = new Set<string>()
+  function renderNode(t: OrgTeam, depth: number) {
+    if (seen.has(t.id) || depth > 20) return null
+    seen.add(t.id)
+    const filhos = (childrenOf.get(t.id) ?? []).slice().sort(byNome)
+    const r = liderResumo.get(t.id)
+    return (
+      <div key={t.id}>
+        <div className="flex items-center py-1.5" style={{ paddingLeft: depth * 24 }}>
+          {depth > 0 && <span className="text-soul-ink/35 mr-1 select-none" style={{ marginLeft: -16 }}>└─</span>}
+          <Link href={`/dashboard/gestao-times/${t.id}`}
+                className="inline-flex items-center gap-2.5 rounded-xl px-3 py-2 no-underline transition-colors hover:bg-white/5 flex-wrap"
+                style={{ border: '1px solid rgba(255,255,255,0.10)', background: 'rgba(255,255,255,0.03)' }}>
+            <span className="font-bold text-[14.5px] text-soul-ink">{t.nome}</span>
+            <span className="text-[12.5px] text-soul-ink/70 font-medium">
+              {t.liderNome ? `Líder: ${t.liderNome}` : 'sem líder'} · {t._count.members} {t._count.members === 1 ? 'pessoa' : 'pessoas'}
+            </span>
+            {r && 'label' in r && (
+              <span className="text-[11.5px] font-bold px-2 py-0.5 rounded-full text-white" style={{ background: r.cor }}>{r.label}</span>
+            )}
+          </Link>
+        </div>
+        {filhos.map((f) => renderNode(f, depth + 1))}
+      </div>
+    )
+  }
+
+  return <div className="mt-3 overflow-x-auto">{roots.map((t) => renderNode(t, 0))}</div>
 }

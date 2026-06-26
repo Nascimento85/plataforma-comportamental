@@ -24,12 +24,16 @@ interface Member {
 
 interface EmployeeOpt { employeeId: string; nome: string; perfilDisc: string }
 
+interface TeamNode { id: string; nome: string; parentTeamId: string | null }
+
 interface Props {
   teamId: string
   teamNome: string
   teamDescricao: string | null
   liderNome: string | null
   liderEmail: string | null
+  parentTeamId: string | null
+  allTeams: TeamNode[]
   members: Member[]
   employeesDisponiveis: EmployeeOpt[]
 }
@@ -38,10 +42,13 @@ const NAVY = '#1f2a3d'
 const GRAPHITE = '#2b2b30'
 const GOLD = '#c9a84c'
 
-export default function MatrizClient({ teamId, teamNome, teamDescricao, liderNome, liderEmail, members, employeesDisponiveis }: Props) {
+export default function MatrizClient({ teamId, teamNome, teamDescricao, liderNome, liderEmail, parentTeamId, allTeams, members, employeesDisponiveis }: Props) {
   const router = useRouter()
   const [addOpen, setAddOpen] = useState(false)
   const [liderOpen, setLiderOpen] = useState(false)
+  const [parentOpen, setParentOpen] = useState(false)
+
+  const parentNome = allTeams.find((t) => t.id === parentTeamId)?.nome ?? null
 
   // KPIs por zona
   const counts = useMemo(() => {
@@ -85,6 +92,19 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, liderNom
                 )}
                 <span className="text-white/55">·</span>
                 <span style={{ color: GOLD }}>{liderNome ? 'editar' : 'definir'}</span>
+              </button>
+              {/* Responde a (organograma) */}
+              <button onClick={() => setParentOpen(true)}
+                      className="inline-flex items-center gap-2 mt-2 ml-0 sm:ml-2 rounded-full px-3 py-1.5 text-[13.5px] font-semibold transition-colors"
+                      style={{ background: 'rgba(255,255,255,0.08)', color: '#e9eef6', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <span style={{ color: '#8fa6da' }}>⤴</span>
+                {parentNome ? (
+                  <>Responde a: <strong className="font-bold">{parentNome}</strong></>
+                ) : (
+                  <span className="text-white/80">Sem equipe superior</span>
+                )}
+                <span className="text-white/55">·</span>
+                <span style={{ color: GOLD }}>{parentNome ? 'editar' : 'definir'}</span>
               </button>
             </div>
             <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
@@ -252,6 +272,124 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, liderNom
           onSaved={() => { setLiderOpen(false); router.refresh() }}
         />
       )}
+
+      {parentOpen && (
+        <ParentTeamModal
+          teamId={teamId}
+          teamNome={teamNome}
+          parentTeamIdInicial={parentTeamId}
+          allTeams={allTeams}
+          onClose={() => setParentOpen(false)}
+          onSaved={() => { setParentOpen(false); router.refresh() }}
+        />
+      )}
+    </div>
+  )
+}
+
+// ── Modal posição no organograma (define a equipe superior) ────
+function ParentTeamModal({
+  teamId, teamNome, parentTeamIdInicial, allTeams, onClose, onSaved,
+}: {
+  teamId: string
+  teamNome: string
+  parentTeamIdInicial: string | null
+  allTeams: TeamNode[]
+  onClose: () => void
+  onSaved: () => void
+}) {
+  const [parentId, setParentId] = useState(parentTeamIdInicial ?? '')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  // Proibidos como superior: a própria equipe e todos os seus descendentes (evita ciclo)
+  const proibidos = useMemo(() => {
+    const filhosDe = new Map<string, string[]>()
+    for (const t of allTeams) {
+      if (t.parentTeamId) {
+        const arr = filhosDe.get(t.parentTeamId) ?? []
+        arr.push(t.id)
+        filhosDe.set(t.parentTeamId, arr)
+      }
+    }
+    const set = new Set<string>([teamId])
+    const stack = [teamId]
+    while (stack.length) {
+      const cur = stack.pop()!
+      for (const f of filhosDe.get(cur) ?? []) {
+        if (!set.has(f)) { set.add(f); stack.push(f) }
+      }
+    }
+    return set
+  }, [allTeams, teamId])
+
+  const opcoes = allTeams.filter((t) => !proibidos.has(t.id))
+
+  async function salvar(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ parentTeamId: parentId || null }),
+      })
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}))
+        setError(d.error ?? 'Não foi possível salvar.')
+        setLoading(false)
+        return
+      }
+      onSaved()
+    } catch {
+      setError('Erro de conexão.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto py-6"
+         style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
+           style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="font-serif font-semibold text-2xl text-soul-ink">Posição no organograma</h3>
+          <button onClick={onClose} aria-label="Fechar"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
+        </div>
+        <p className="text-[14px] text-soul-ink/80 font-medium mb-5 leading-relaxed">
+          A qual equipe a <strong>{teamNome}</strong> responde? Por exemplo: o setor “Vendas” responde à “Gerência Comercial”, e a “Gerência” responde à “Diretoria”.
+        </p>
+
+        <form onSubmit={salvar} className="space-y-4">
+          {error && (
+            <div className="rounded-xl px-4 py-3 text-[14px] font-semibold"
+                 style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
+              {error}
+            </div>
+          )}
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Responde a</label>
+            <select value={parentId} onChange={(e) => setParentId(e.target.value)} className="soul-input w-full" disabled={loading}>
+              <option value="">Nenhuma (topo do organograma)</option>
+              {opcoes.map((t) => (
+                <option key={t.id} value={t.id}>{t.nome}</option>
+              ))}
+            </select>
+            {opcoes.length === 0 && (
+              <p className="text-[13px] text-soul-ink/72 font-medium mt-1.5">
+                Crie outras equipes (ex.: Gerência, Diretoria) para montar a hierarquia acima desta.
+              </p>
+            )}
+          </div>
+          <button type="submit" disabled={loading}
+                  className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+            {loading ? 'Salvando…' : 'Salvar posição'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

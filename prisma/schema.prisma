@@ -542,15 +542,21 @@ model TalentTeam {
   // Lider do setor/time — alvo da Avaliacao de Lideranca ascendente
   liderNome  String?
   liderEmail String?
+  // Hierarquia organizacional (organograma): equipe a qual esta responde.
+  // Null = topo da arvore (ex: Diretoria). onDelete SetNull para nao apagar filhos.
+  parentTeamId String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   company Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  parent  TalentTeam?   @relation("TeamHierarchy", fields: [parentTeamId], references: [id], onDelete: SetNull)
+  children TalentTeam[] @relation("TeamHierarchy")
   members TalentMember[]
   liderConvites  LiderConvite[]
   liderRespostas LiderResposta[]
 
   @@index([companyId])
+  @@index([parentTeamId])
 }
 
 model TalentMember {
