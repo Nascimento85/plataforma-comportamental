@@ -69,10 +69,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
   const criados: Array<{ nome: string; email: string; enviado: boolean; erro?: string }> = []
   const semEmail: string[] = []
+  const liderEmailNorm = (team.liderEmail ?? '').trim().toLowerCase()
+  let liderPulado = false
 
   for (const m of alvo) {
     const email = (m.email ?? (m.employeeId ? emailDoEmployee.get(m.employeeId) : null) ?? '').trim().toLowerCase()
     if (!email) { semEmail.push(m.nome); continue }
+    // O líder não pode receber convite para avaliar a si mesmo
+    if (liderEmailNorm && email === liderEmailNorm) { liderPulado = true; continue }
 
     // Idempotente: 1 convite ativo por team+email
     const existente = await prismaAny.liderConvite.findUnique({
@@ -100,5 +104,5 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     criados.push({ nome: m.nome, email, enviado: sent, erro: sent ? undefined : String(error ?? 'desconhecido').slice(0, 300) })
   }
 
-  return NextResponse.json({ criados, semEmail }, { status: 201 })
+  return NextResponse.json({ criados, semEmail, liderPulado }, { status: 201 })
 }

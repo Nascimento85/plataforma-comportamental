@@ -61,6 +61,15 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
   const [copiado, setCopiado]     = useState('')
   const [emailEdits, setEmailEdits] = useState<Record<string, string>>({})
   const [salvandoMembro, setSalvandoMembro] = useState('')
+  const [selecionados, setSelecionados] = useState<Set<string>>(new Set())
+
+  function toggleSel(id: string) {
+    setSelecionados((prev) => {
+      const n = new Set(prev)
+      if (n.has(id)) n.delete(id); else n.add(id)
+      return n
+    })
+  }
 
   const carregar = useCallback(async () => {
     const res = await fetch(`/api/talent-teams/${teamId}/avaliacao-lider`)
@@ -98,8 +107,38 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ` (${falhas.map((c: any) => `${c.nome}: ${c.erro ?? 'erro desconhecido'}`).join(' · ')}). Use o botão Copiar link enquanto isso.`)
       if (r.semEmail?.length) msgs.push(`Sem email cadastrado: ${r.semEmail.join(', ')}.`)
-      if (!r.criados?.length && !r.semEmail?.length) msgs.push('Todos os membros já foram convidados.')
+      if (r.liderPulado) msgs.push('O líder foi ignorado (ninguém avalia a si mesmo).')
+      if (!r.criados?.length && !r.semEmail?.length && !r.liderPulado) msgs.push('Todos os membros já foram convidados.')
       setAviso(msgs.join(' '))
+      carregar()
+    } finally { setEnviando(false) }
+  }
+
+  async function enviarSelecionados() {
+    const ids = Array.from(selecionados)
+    if (ids.length === 0) { setAviso('Selecione ao menos um colaborador.'); return }
+    setEnviando(true); setAviso('')
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}/avaliacao-lider/convites`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ memberIds: ids }),
+      })
+      const r = await res.json()
+      if (!res.ok) { setAviso(r.error ?? 'Falha ao enviar convites.'); return }
+      const msgs: string[] = []
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ok = (r.criados ?? []).filter((c: any) => c.enviado)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const falhas = (r.criados ?? []).filter((c: any) => !c.enviado)
+      if (ok.length) msgs.push(`${ok.length} convite(s) enviado(s) por email.`)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (falhas.length) msgs.push(`ATENÇÃO: ${falhas.length} email(s) falharam (${falhas.map((c: any) => c.nome).join(', ')}). Use Copiar link abaixo.`)
+      if (r.semEmail?.length) msgs.push(`Sem email cadastrado: ${r.semEmail.join(', ')}.`)
+      if (r.liderPulado) msgs.push('O líder foi ignorado (ninguém avalia a si mesmo).')
+      if (!msgs.length) msgs.push('Os selecionados já tinham convite ativo.')
+      setAviso(msgs.join(' '))
+      setSelecionados(new Set())
       carregar()
     } finally { setEnviando(false) }
   }
@@ -158,6 +197,14 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
   }
 
   const respondidos = data?.convites.filter((c) => c.status === 'COMPLETED').length ?? 0
+
+  // Helpers de seleção/elegibilidade dos membros
+  const norm = (s?: string | null) => (s ?? '').trim().toLowerCase()
+  const membros = data?.membros ?? []
+  const ehLider = (m: Membro) => !!data?.liderEmail && !!m.email && norm(m.email) === norm(data.liderEmail)
+  const podeConvidar = (m: Membro) => !!m.email && !ehLider(m) && m.conviteStatus !== 'COMPLETED' && m.conviteStatus !== 'PENDING'
+  const invitaveis = membros.filter(podeConvidar)
+  const todosInvitSelecionados = invitaveis.length > 0 && invitaveis.every((m) => selecionados.has(m.id))
 
   return (
     <div className="space-y-6">
@@ -224,22 +271,54 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
       {/* Membros da equipe: situacao de email e convite */}
       {data && data.membros.length > 0 && (
         <div className="soul-panel space-y-3">
-          <div>
-            <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">Membros da equipe</p>
-            <p className="text-[13.5px] text-soul-ink/72 font-medium mt-0.5">
-              Cadastre o email de quem ainda não tem e dispare o convite individual por aqui.
-            </p>
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <p className="text-[13px] font-bold uppercase tracking-widest text-soul-ink/75">Membros da equipe</p>
+              <p className="text-[13.5px] text-soul-ink/72 font-medium mt-0.5">
+                Marque quem deve responder e dispare os convites aos selecionados, ou convide individualmente.
+              </p>
+            </div>
+            {invitaveis.length > 0 && (
+              <div className="flex items-center gap-2 flex-wrap">
+                <button onClick={() => setSelecionados(todosInvitSelecionados ? new Set() : new Set(invitaveis.map((m) => m.id)))}
+                        className="text-[13px] font-bold px-3 py-1.5 rounded-full"
+                        style={{ background: 'rgba(255,255,255,0.06)', color: '#cfd5e0', border: '1px solid rgba(255,255,255,0.18)' }}>
+                  {todosInvitSelecionados ? 'Limpar seleção' : 'Selecionar todos'}
+                </button>
+                <button onClick={enviarSelecionados} disabled={enviando || selecionados.size === 0 || !data.liderNome}
+                        className="text-[13px] font-bold px-3 py-1.5 rounded-full text-white shadow-terra disabled:opacity-40"
+                        style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+                  {enviando ? 'Enviando...' : `Enviar aos selecionados (${selecionados.size}) ✉`}
+                </button>
+              </div>
+            )}
           </div>
           <div className="space-y-2">
-            {data.membros.map((m) => (
+            {data.membros.map((m) => {
+              const lider = ehLider(m)
+              const selecionavel = podeConvidar(m)
+              return (
               <div key={m.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl px-4 py-2.5"
-                   style={{ background: 'rgba(255,255,255,0.046)' }}>
-                <div className="min-w-0">
-                  <p className="text-[14px] font-semibold text-soul-ink truncate">{m.nome}</p>
-                  <p className="text-[13px] text-soul-ink/72 font-medium truncate">{m.email ?? 'sem email cadastrado'}</p>
+                   style={{ background: selecionados.has(m.id) ? 'rgba(196,99,58,0.10)' : 'rgba(255,255,255,0.046)' }}>
+                <div className="flex items-center gap-3 min-w-0">
+                  {selecionavel && (
+                    <input type="checkbox" checked={selecionados.has(m.id)} onChange={() => toggleSel(m.id)}
+                           aria-label={`Selecionar ${m.nome}`}
+                           className="w-4 h-4 flex-shrink-0 cursor-pointer" style={{ accentColor: '#c4633a' }} />
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-[14px] font-semibold text-soul-ink truncate">
+                      {m.nome}
+                      {lider && <span className="ml-2 text-[11px] font-bold px-2 py-0.5 rounded-full align-middle"
+                                      style={{ background: 'rgba(201,168,76,0.18)', color: '#c9a84c' }}>líder</span>}
+                    </p>
+                    <p className="text-[13px] text-soul-ink/72 font-medium truncate">{m.email ?? 'sem email cadastrado'}</p>
+                  </div>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  {m.conviteStatus === 'COMPLETED' ? (
+                  {lider ? (
+                    <span className="text-[12.5px] font-semibold text-soul-ink/60">não avalia a si mesmo</span>
+                  ) : m.conviteStatus === 'COMPLETED' ? (
                     <span className="text-[13px] font-bold px-2.5 py-1 rounded-full"
                           style={{ background: 'rgba(90,125,90,0.15)', color: '#a9d3a9' }}>✓ Respondeu</span>
                   ) : m.conviteStatus === 'PENDING' ? (
@@ -266,7 +345,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
                   )}
                 </div>
               </div>
-            ))}
+            )})}
           </div>
           {!data.liderNome && (
             <p className="text-[13.5px] font-semibold" style={{ color: '#e09070' }}>
