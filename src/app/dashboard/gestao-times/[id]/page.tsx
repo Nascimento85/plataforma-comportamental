@@ -86,6 +86,8 @@ export default async function MatrizPage({ params }: { params: { id: string } })
       teamId={team.id}
       teamNome={team.nome}
       teamDescricao={team.descricao}
+      liderNome={team.liderNome ?? null}
+      liderEmail={team.liderEmail ?? null}
       members={members}
       employeesDisponiveis={employeesDisponiveis}
     />

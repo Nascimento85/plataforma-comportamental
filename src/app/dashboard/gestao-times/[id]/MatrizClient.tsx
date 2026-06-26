@@ -27,6 +27,8 @@ interface Props {
   teamId: string
   teamNome: string
   teamDescricao: string | null
+  liderNome: string | null
+  liderEmail: string | null
   members: Member[]
   employeesDisponiveis: EmployeeOpt[]
 }
@@ -35,9 +37,10 @@ const NAVY = '#1f2a3d'
 const GRAPHITE = '#2b2b30'
 const GOLD = '#c9a84c'
 
-export default function MatrizClient({ teamId, teamNome, teamDescricao, members, employeesDisponiveis }: Props) {
+export default function MatrizClient({ teamId, teamNome, teamDescricao, liderNome, liderEmail, members, employeesDisponiveis }: Props) {
   const router = useRouter()
   const [addOpen, setAddOpen] = useState(false)
+  const [liderOpen, setLiderOpen] = useState(false)
 
   // KPIs por zona
   const counts = useMemo(() => {
@@ -69,8 +72,26 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
             <div>
               <h1 className="font-serif text-3xl md:text-4xl font-semibold text-white leading-tight">{teamNome}</h1>
               {teamDescricao && <p className="text-[15px] text-white/80 font-medium mt-1 max-w-2xl">{teamDescricao}</p>}
+              {/* Líder atual */}
+              <button onClick={() => setLiderOpen(true)}
+                      className="inline-flex items-center gap-2 mt-3 rounded-full px-3 py-1.5 text-[13.5px] font-semibold transition-colors"
+                      style={{ background: 'rgba(255,255,255,0.08)', color: '#e9eef6', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <span style={{ color: GOLD }}>★</span>
+                {liderNome ? (
+                  <>Líder: <strong className="font-bold">{liderNome}</strong></>
+                ) : (
+                  <span className="text-white/80">Líder não definido</span>
+                )}
+                <span className="text-white/55">·</span>
+                <span style={{ color: GOLD }}>{liderNome ? 'editar' : 'definir'}</span>
+              </button>
             </div>
             <div className="flex items-center gap-2 flex-wrap flex-shrink-0">
+              <button onClick={() => setLiderOpen(true)}
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold"
+                    style={{ background: 'rgba(201,168,76,0.18)', color: GOLD, border: '1px solid rgba(201,168,76,0.4)' }}>
+                ★ {liderNome ? 'Editar líder' : 'Definir líder'}
+              </button>
               <Link href={`/dashboard/gestao-times/${teamId}/avaliacao-lider`}
                     className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[14px] font-bold no-underline"
                     style={{ background: 'rgba(255,255,255,0.10)', color: '#e9eef6', border: '1px solid rgba(255,255,255,0.25)' }}>
@@ -111,15 +132,34 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
           <h2 className="font-serif text-xl font-semibold text-soul-ink">Matriz de Talentos</h2>
           <p className="text-[13.5px] text-soul-ink/72 font-medium">Eixo horizontal: Performance · Eixo vertical: Fit comportamental</p>
         </div>
-        <div className="grid lg:grid-cols-[1fr_auto] gap-6 items-center">
-          <ScatterMatrix members={members} />
-          {classificados > 0 && <PieDistribuicao counts={counts} total={classificados} />}
-        </div>
-        {pendentes > 0 && (
-          <p className="text-[13.5px] text-soul-ink/75 font-medium mt-3">
-            {pendentes} {pendentes === 1 ? 'colaborador ainda não foi pontuado' : 'colaboradores ainda não foram pontuados'}.
-            Preencha a nota de performance abaixo (ou use o botão Avaliar) para plotar na curva.
-          </p>
+        {members.length === 0 ? (
+          <div className="rounded-2xl py-12 px-6 text-center"
+               style={{ background: 'rgba(255,255,255,0.03)', border: '1px dashed rgba(255,255,255,0.14)' }}>
+            <div className="text-4xl mb-3">📊</div>
+            <p className="text-[15.5px] font-bold text-soul-ink mb-1">A curva da equipe aparece aqui</p>
+            <p className="text-[13.5px] text-soul-ink/72 font-medium max-w-md mx-auto leading-relaxed">
+              Adicione os colaboradores e faça a avaliação de cada um para plotar a equipe no mapa 20-70-10.
+            </p>
+            <button onClick={() => setAddOpen(true)}
+                    className="inline-flex items-center gap-2 mt-4 rounded-full px-4 py-2 text-[14px] font-bold text-white shadow-terra"
+                    style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg>
+              Adicionar colaborador
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="grid lg:grid-cols-[1fr_auto] gap-6 items-center">
+              <ScatterMatrix members={members} />
+              {classificados > 0 && <PieDistribuicao counts={counts} total={classificados} />}
+            </div>
+            {pendentes > 0 && (
+              <p className="text-[13.5px] text-soul-ink/75 font-medium mt-3">
+                {pendentes} {pendentes === 1 ? 'colaborador ainda não foi pontuado' : 'colaboradores ainda não foram pontuados'}.
+                Preencha a nota de performance abaixo (ou use o botão Avaliar) para plotar na curva.
+              </p>
+            )}
+          </>
         )}
       </div>
 
@@ -201,6 +241,102 @@ export default function MatrizClient({ teamId, teamNome, teamDescricao, members,
           onAdded={() => { setAddOpen(false); router.refresh() }}
         />
       )}
+
+      {liderOpen && (
+        <LeaderModal
+          teamId={teamId}
+          liderNomeInicial={liderNome}
+          liderEmailInicial={liderEmail}
+          onClose={() => setLiderOpen(false)}
+          onSaved={() => { setLiderOpen(false); router.refresh() }}
+        />
+      )}
+    </div>
+  )
+}
+
+// ── Modal definir/editar líder ─────────────────────────────────
+function LeaderModal({
+  teamId, liderNomeInicial, liderEmailInicial, onClose, onSaved,
+}: {
+  teamId: string
+  liderNomeInicial: string | null
+  liderEmailInicial: string | null
+  onClose: () => void
+  onSaved: () => void
+}) {
+  const [nome, setNome] = useState(liderNomeInicial ?? '')
+  const [email, setEmail] = useState(liderEmailInicial ?? '')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function salvar(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    if (nome.trim().length < 2) { setError('Informe o nome do líder.'); return }
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ liderNome: nome.trim(), liderEmail: email.trim() }),
+      })
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}))
+        setError(d.error ?? 'Não foi possível salvar.')
+        setLoading(false)
+        return
+      }
+      onSaved()
+    } catch {
+      setError('Erro de conexão.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto py-6"
+         style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
+           style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="font-serif font-semibold text-2xl text-soul-ink">
+            {liderNomeInicial ? 'Editar líder da equipe' : 'Definir líder da equipe'}
+          </h3>
+          <button onClick={onClose} aria-label="Fechar"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
+        </div>
+        <p className="text-[14px] text-soul-ink/80 font-medium mb-5 leading-relaxed">
+          É a pessoa que a equipe vai avaliar de forma anônima na Avaliação do Líder.
+        </p>
+
+        <form onSubmit={salvar} className="space-y-4">
+          {error && (
+            <div className="rounded-xl px-4 py-3 text-[14px] font-semibold"
+                 style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
+              {error}
+            </div>
+          )}
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Nome do líder</label>
+            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="soul-input w-full"
+                   placeholder="Ex: Maria Souza" maxLength={80} disabled={loading} autoFocus />
+          </div>
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Email do líder (opcional)</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="soul-input w-full"
+                   placeholder="email@empresa.com" maxLength={120} disabled={loading} />
+            <p className="text-[13px] text-soul-ink/72 font-medium mt-1.5">
+              Usado para enviar ao líder o resultado consolidado da avaliação da equipe.
+            </p>
+          </div>
+          <button type="submit" disabled={loading || nome.trim().length < 2}
+                  className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+            {loading ? 'Salvando…' : 'Salvar líder'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
