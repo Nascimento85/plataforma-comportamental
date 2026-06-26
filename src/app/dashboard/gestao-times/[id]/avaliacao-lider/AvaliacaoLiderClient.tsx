@@ -62,6 +62,7 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
   const [emailEdits, setEmailEdits] = useState<Record<string, string>>({})
   const [salvandoMembro, setSalvandoMembro] = useState('')
   const [selecionados, setSelecionados] = useState<Set<string>>(new Set())
+  const [puxando, setPuxando] = useState(false)
 
   function toggleSel(id: string) {
     setSelecionados((prev) => {
@@ -141,6 +142,23 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
       setSelecionados(new Set())
       carregar()
     } finally { setEnviando(false) }
+  }
+
+  async function puxarLideres() {
+    setPuxando(true); setAviso('')
+    try {
+      const res = await fetch(`/api/talent-teams/${teamId}/puxar-lideres-subordinados`, { method: 'POST' })
+      const r = await res.json()
+      if (!res.ok) { setAviso(r.error ?? 'Falha ao puxar líderes.'); return }
+      const parts: string[] = []
+      if (r.adicionados) parts.push(`${r.adicionados} líder(es) das equipes subordinadas adicionado(s) como avaliador(es).`)
+      if (r.jaExistiam) parts.push(`${r.jaExistiam} já estavam na equipe.`)
+      if (r.semLider) parts.push(`${r.semLider} equipe(s) subordinada(s) ainda sem líder definido.`)
+      if (!r.subordinadas) parts.push('Esta equipe não tem equipes subordinadas no organograma. Defina o "Responde a" das equipes de baixo para montar a hierarquia.')
+      else if (!r.adicionados && !r.jaExistiam) parts.push('Nenhum líder novo para adicionar.')
+      setAviso(parts.join(' '))
+      carregar()
+    } finally { setPuxando(false) }
   }
 
   async function salvarEmailEConvidar(m: Membro) {
@@ -260,6 +278,21 @@ export default function AvaliacaoLiderClient({ teamId, teamNome, liderNomeInicia
           Automação ativa: sempre que você concluir a avaliação 9-box de um membro com email cadastrado,
           ele recebe o convite automaticamente.
         </p>
+
+        {/* Puxar líderes das equipes subordinadas (organograma) */}
+        <div className="rounded-2xl p-3.5" style={{ background: 'rgba(143,166,218,0.08)', border: '1px solid rgba(143,166,218,0.25)' }}>
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <p className="text-[13.5px] text-soul-ink/85 font-medium max-w-md">
+              Avaliação de gerência/diretoria? Traga automaticamente os líderes de todas as equipes
+              abaixo desta no organograma para avaliarem este líder.
+            </p>
+            <button onClick={puxarLideres} disabled={puxando}
+                    className="text-[13.5px] font-bold px-4 py-2 rounded-full flex-shrink-0 disabled:opacity-50"
+                    style={{ background: 'rgba(61,79,124,0.16)', color: '#8fa6da', border: '1px solid rgba(143,166,218,0.4)' }}>
+              {puxando ? 'Puxando...' : '⤓ Puxar líderes subordinados'}
+            </button>
+          </div>
+        </div>
         {aviso && (
           <div className="rounded-2xl px-4 py-3 text-[14px] font-semibold"
                style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.4)', color: '#e3cf8e' }}>
