@@ -89,6 +89,34 @@ export const COMM_QUESTIONS: CommQuestion[] = [
       { valor: 3, texto: '"Qual o próximo passo concreto?"' },
       { valor: 4, texto: '"Como as pessoas estão lidando com isso?"' },
     ] },
+  { id: 9, bloco: 'PERFIL', enunciado: 'Explicando algo presencialmente, meu corpo e meu tom de voz:',
+    opcoes: [
+      { valor: 1, texto: 'Ficam contidos e neutros; eu foco nas palavras e nos fatos, não na expressão.' },
+      { valor: 2, texto: 'Acompanham a ideia geral; gesticulo para mostrar o panorama, sem me prender a detalhes.' },
+      { valor: 3, texto: 'Marcam cada passo; uso as mãos para enumerar etapas e organizar o que digo.' },
+      { valor: 4, texto: 'Expressam o que sinto; meu rosto e tom mostram emoção e leem a reação do outro.' },
+    ] },
+  { id: 10, bloco: 'PERFIL', enunciado: 'Numa reunião online (vídeo), eu me destaco por:',
+    opcoes: [
+      { valor: 1, texto: 'Trazer dados na tela, compartilhar números e ser preciso no que falo.' },
+      { valor: 2, texto: 'Puxar a visão do todo e a direção, sem me perder nos detalhes da pauta.' },
+      { valor: 3, texto: 'Organizar a pauta, controlar o tempo e fechar com os próximos passos claros.' },
+      { valor: 4, texto: 'Ler o clima pela câmera, dar espaço a cada um e manter o tom acolhedor.' },
+    ] },
+  { id: 11, bloco: 'PERFIL', enunciado: 'Quando escrevo no WhatsApp do trabalho, eu costumo:',
+    opcoes: [
+      { valor: 1, texto: 'Ser exato: texto correto, sem erro, com a informação precisa.' },
+      { valor: 2, texto: 'Ir direto à ideia central, em mensagens curtas e rápidas.' },
+      { valor: 3, texto: 'Detalhar o passo a passo, com listas, prazos e o que cada um faz.' },
+      { valor: 4, texto: 'Cuidar do tom, usar saudação e emoji para a mensagem não soar fria.' },
+    ] },
+  { id: 12, bloco: 'PERFIL', enunciado: 'Quando o outro está falando, eu presto mais atenção:',
+    opcoes: [
+      { valor: 1, texto: 'Se os argumentos fazem sentido e batem com os fatos.' },
+      { valor: 2, texto: 'Aonde a conversa quer chegar, a ideia por trás do que é dito.' },
+      { valor: 3, texto: 'No que precisa ser feito e quais os próximos passos.' },
+      { valor: 4, texto: 'No tom de voz e na expressão, no que a pessoa sente além das palavras.' },
+    ] },
   // ───────────────────────────────────────────────
   // BLOCO SOCIAL: 1=Expressivo 2=Apoiador 3=Diretivo 4=Analítico
   // ───────────────────────────────────────────────
@@ -140,6 +168,20 @@ export const COMM_QUESTIONS: CommQuestion[] = [
       { valor: 2, texto: 'Empatia, eu leio e acolho a plateia.' },
       { valor: 3, texto: 'Objetividade, eu entrego a mensagem rápido.' },
       { valor: 4, texto: 'Embasamento, eu sustento tudo com dados.' },
+    ] },
+  { id: 27, bloco: 'SOCIAL', enunciado: 'Numa call com a câmera ligada, a minha presença é:',
+    opcoes: [
+      { valor: 1, texto: 'Animada e calorosa; eu sorrio, falo bastante e aqueço a reunião.' },
+      { valor: 2, texto: 'Atenta e acolhedora; eu escuto, dou espaço e cuido para todos participarem.' },
+      { valor: 3, texto: 'Objetiva e enxuta; eu vou ao ponto e foco em decidir e encerrar.' },
+      { valor: 4, texto: 'Discreta e pausada; eu falo o necessário e prefiro ouvir e analisar.' },
+    ] },
+  { id: 28, bloco: 'SOCIAL', enunciado: 'No grupo de WhatsApp da equipe, eu sou aquele que:',
+    opcoes: [
+      { valor: 1, texto: 'Manda áudio, figurinha e anima a conversa.' },
+      { valor: 2, texto: 'Puxa o "bom dia", acolhe e responde todo mundo com atenção.' },
+      { valor: 3, texto: 'Vai direto ao assunto e evita conversa que não leva a nada.' },
+      { valor: 4, texto: 'Fala pouco, mas quando fala traz dado e precisão.' },
     ] },
   // ───────────────────────────────────────────────
   // BLOCO ASSERT (termômetro): 1=Passiva 2=Agressiva 3=Passivo-Agressiva 4=Assertiva
@@ -200,6 +242,20 @@ export const COMM_QUESTIONS: CommQuestion[] = [
       { valor: 3, texto: 'Azedar: você fica irônico e arredio.' },
       { valor: 4, texto: 'Firmar: você fica direto, claro e ainda respeitoso.' },
     ] },
+  { id: 48, bloco: 'ASSERT', enunciado: 'Você recebe uma mensagem ríspida no WhatsApp do trabalho. Você:',
+    opcoes: [
+      { valor: 1, texto: 'Deixa pra lá e responde "ok", engolindo o incômodo.' },
+      { valor: 2, texto: 'Responde na hora, no mesmo tom seco e ríspido.' },
+      { valor: 3, texto: 'Demora de propósito para responder e manda um "tá" seco.' },
+      { valor: 4, texto: 'Respira e responde com calma, marcando o ponto sem hostilidade, ou chama para falar por voz.' },
+    ] },
+  { id: 49, bloco: 'ASSERT', enunciado: 'Numa reunião online, falaram por cima e cortaram a sua fala. Você:',
+    opcoes: [
+      { valor: 1, texto: 'Desiste de falar e deixa passar.' },
+      { valor: 2, texto: 'Sobe o tom e fala por cima de volta.' },
+      { valor: 3, texto: 'Fecha a câmera e se desliga do assunto, em silêncio.' },
+      { valor: 4, texto: 'Espera um instante e diz: "só para concluir meu ponto, por favor".' },
+    ] },
 ]
 
 // ============================================================
@@ -236,7 +292,7 @@ export interface CommSessionQuestion {
   opcoes: CommSessionOption[] // ordem embaralhada
 }
 
-const POR_BLOCO: Record<CommBloco, number> = { PERFIL: 6, SOCIAL: 5, ASSERT: 6 }
+const POR_BLOCO: Record<CommBloco, number> = { PERFIL: 8, SOCIAL: 6, ASSERT: 6 }
 
 /**
  * Sorteia cenários por bloco (PERFIL, SOCIAL, ASSERT), embaralha a ordem

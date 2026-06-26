@@ -313,8 +313,8 @@ const INTROS: Record<string, {
       'Como adaptar sua fala a cada perfil e onde está seu maior salto',
     ],
     cta: 'Revelar meu Mapa da Comunicação',
-    duration: '6–10 min',
-    questions: 17,
+    duration: '7–11 min',
+    questions: 20,
   },
 }
 

@@ -11,7 +11,7 @@ interface CommAnswer {
 }
 
 const LETTER = ['A', 'B', 'C', 'D']
-const PAGE_SIZE = 6 // 17 questões → 3 blocos (6, 6, 5)
+const PAGE_SIZE = 7 // 20 questões → 3 blocos (7, 7, 6)
 
 export default function ComunicacaoTest({
   assessmentId,
