@@ -10,6 +10,7 @@ interface Member {
   id: string
   nome: string
   cargo: string | null
+  email: string | null
   perfilDisc: string | null
   notaPerformance: number | null
   fitComportamental: number | null
@@ -440,7 +441,9 @@ function MemberRow({
   onRemove: (id: string) => void
   teamId: string
 }) {
+  const router = useRouter()
   const [avalOpen, setAvalOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
 
   const zonaInfo = m.zona ? ZONAS[m.zona as ZonaKey] : null
   const perfil = m.perfilDisc ? PERFIS_LIDERANCA[m.perfilDisc as DiscKey] : null
@@ -498,9 +501,16 @@ function MemberRow({
             Devolutiva
           </Link>
         )}
-        <button onClick={() => { if (confirm(`Remover ${m.nome} da equipe?`)) onRemove(m.id) }}
-                aria-label="Remover" title="Remover da equipe"
-                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-400 hover:bg-rose-500/10 text-lg leading-none">×</button>
+        <button onClick={() => setEditOpen(true)}
+                aria-label="Editar colaborador" title="Editar colaborador"
+                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-soul-ink hover:bg-white/10 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L6 12l-2.5.5L4 10l7.5-7.5z" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+        <button onClick={() => { if (confirm(`Excluir ${m.nome} da equipe? Isso remove o colaborador e a avaliação dele nesta equipe. Não dá para desfazer.`)) onRemove(m.id) }}
+                aria-label="Excluir colaborador" title="Excluir colaborador"
+                className="w-7 h-7 rounded-full flex items-center justify-center text-soul-ink/65 hover:text-rose-400 hover:bg-rose-500/10 transition-colors">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6.5 4V3a1 1 0 011-1h1a1 1 0 011 1v1M5 4l.4 9a1 1 0 001 1h3.2a1 1 0 001-1L11 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
       </div>
 
       {avalOpen && (
@@ -511,6 +521,107 @@ function MemberRow({
           onClose={() => setAvalOpen(false)}
         />
       )}
+
+      {editOpen && (
+        <EditMemberModal
+          member={m}
+          onClose={() => setEditOpen(false)}
+          onSaved={() => { setEditOpen(false); router.refresh() }}
+        />
+      )}
+    </div>
+  )
+}
+
+// ── Modal editar colaborador (nome, cargo, email, perfil DISC) ──
+function EditMemberModal({
+  member, onClose, onSaved,
+}: {
+  member: Member
+  onClose: () => void
+  onSaved: () => void
+}) {
+  const [nome, setNome] = useState(member.nome)
+  const [cargo, setCargo] = useState(member.cargo ?? '')
+  const [email, setEmail] = useState(member.email ?? '')
+  const [perfilDisc, setPerfilDisc] = useState(member.perfilDisc ?? '')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function salvar(e: React.FormEvent) {
+    e.preventDefault()
+    setError('')
+    if (nome.trim().length < 2) { setError('Informe o nome do colaborador.'); return }
+    setLoading(true)
+    try {
+      const res = await fetch(`/api/talent-members/${member.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: nome.trim(), cargo: cargo.trim(), email: email.trim(), perfilDisc }),
+      })
+      if (!res.ok) {
+        const d = await res.json().catch(() => ({}))
+        setError(d.error ?? 'Não foi possível salvar.')
+        setLoading(false)
+        return
+      }
+      onSaved()
+    } catch {
+      setError('Erro de conexão.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 overflow-y-auto py-6"
+         style={{ background: 'rgba(28,26,23,0.62)', backdropFilter: 'blur(4px)' }}>
+      <div className="bg-soul-parchment rounded-3xl shadow-soul-xl w-full max-w-md p-6 md:p-7"
+           style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
+        <div className="flex items-center justify-between mb-5">
+          <h3 className="font-serif font-semibold text-2xl text-soul-ink">Editar colaborador</h3>
+          <button onClick={onClose} aria-label="Fechar"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-soul-ink/80 hover:bg-soul-mist/60 text-2xl leading-none">×</button>
+        </div>
+
+        <form onSubmit={salvar} className="space-y-4">
+          {error && (
+            <div className="rounded-xl px-4 py-3 text-[14px] font-semibold"
+                 style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
+              {error}
+            </div>
+          )}
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Nome</label>
+            <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="soul-input w-full"
+                   maxLength={80} disabled={loading} autoFocus />
+          </div>
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Cargo (opcional)</label>
+            <input type="text" value={cargo} onChange={(e) => setCargo(e.target.value)} className="soul-input w-full"
+                   placeholder="Ex: Analista de Vendas" maxLength={80} disabled={loading} />
+          </div>
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Email (para a Avaliação do Líder)</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="soul-input w-full"
+                   placeholder="email@empresa.com" maxLength={120} disabled={loading} />
+          </div>
+          <div>
+            <label className="block text-[13.5px] font-bold text-soul-ink/88 uppercase tracking-widest mb-2">Perfil DISC</label>
+            <select value={perfilDisc} onChange={(e) => setPerfilDisc(e.target.value)} className="soul-input w-full" disabled={loading}>
+              <option value="">Pendente / não sei</option>
+              <option value="D">Executor (D)</option>
+              <option value="I">Comunicador (I)</option>
+              <option value="S">Planejador (S)</option>
+              <option value="C">Analítico (C)</option>
+            </select>
+          </div>
+          <button type="submit" disabled={loading || nome.trim().length < 2}
+                  className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
+                  style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+            {loading ? 'Salvando…' : 'Salvar alterações'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

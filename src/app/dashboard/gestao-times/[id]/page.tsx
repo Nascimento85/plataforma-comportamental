@@ -52,7 +52,7 @@ export default async function MatrizPage({ params }: { params: { id: string } })
 
   // Classifica cada membro (zona automática, a menos que o gestor tenha fixado manualmente)
   type RawMember = {
-    id: string; nome: string; cargo: string | null; perfilDisc: string | null
+    id: string; nome: string; cargo: string | null; email: string | null; perfilDisc: string | null
     notaPerformance: number | null; fitComportamental: number | null; potencial: number | null
     avaliacaoJson: string | null
     zona: string | null; zonaManual: boolean
@@ -69,6 +69,7 @@ export default async function MatrizPage({ params }: { params: { id: string } })
       id: m.id,
       nome: m.nome,
       cargo: m.cargo,
+      email: m.email,
       perfilDisc: m.perfilDisc,
       notaPerformance: m.notaPerformance,
       fitComportamental: m.fitComportamental,

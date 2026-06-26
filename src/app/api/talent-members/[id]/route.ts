@@ -40,6 +40,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     zona?: string
     zonaManual?: boolean
     email?: string
+    nome?: string
+    cargo?: string
   }
   try {
     body = await req.json()
@@ -53,6 +55,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   if ('notaPerformance' in body)   data.notaPerformance   = clamp10(body.notaPerformance)
   if ('fitComportamental' in body) data.fitComportamental = clamp10(body.fitComportamental)
   if ('email' in body) data.email = (body.email ?? '').trim().toLowerCase().slice(0, 120) || null
+  if ('nome' in body && (body.nome ?? '').trim().length >= 2) data.nome = body.nome!.trim().slice(0, 80)
+  if ('cargo' in body) data.cargo = (body.cargo ?? '').trim().slice(0, 80) || null
   if ('perfilDisc' in body) {
     const p = (body.perfilDisc ?? '').toUpperCase().charAt(0)
     data.perfilDisc = ['D', 'I', 'S', 'C'].includes(p) ? p : null
