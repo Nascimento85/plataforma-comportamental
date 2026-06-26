@@ -131,6 +131,16 @@
            transition-colors duration-150;
   }
 
+  /* As opções de <select> são desenhadas no popup branco do sistema e
+     herdavam o texto claro (soul-ink), ficando ilegíveis. Forçamos texto
+     escuro sobre branco. O estado fechado continua com o texto claro do
+     soul-ink sobre o fundo escuro. Vale para todos os menus da plataforma. */
+  select option,
+  select optgroup {
+    color: #17181c;
+    background-color: #ffffff;
+  }
+
   /* Cards */
   .soul-card {
     @apply bg-soul-parchment rounded-3xl border border-white/10
