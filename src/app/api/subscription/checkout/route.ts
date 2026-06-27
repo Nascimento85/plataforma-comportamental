@@ -34,8 +34,9 @@ export async function POST(req: NextRequest) {
   try { body = await req.json() } catch { return NextResponse.json({ error: 'JSON invalido.' }, { status: 400 }) }
 
   const planKey = body.plan
-  if (!planKey || !['ESSENCIAL', 'PROFISSIONAL'].includes(planKey)) {
-    return NextResponse.json({ error: 'Plano invalido. Use ESSENCIAL ou PROFISSIONAL.' }, { status: 400 })
+  const VENDAVEIS = ['INDIVIDUAL', 'EQUIPE_5', 'EQUIPE_10', 'EQUIPE_20', 'EQUIPE_50']
+  if (!planKey || !VENDAVEIS.includes(planKey)) {
+    return NextResponse.json({ error: 'Plano inválido para checkout. Acima de 50 colaboradores é atendido pelo comercial.' }, { status: 400 })
   }
 
   const plano = PLANOS[planKey]

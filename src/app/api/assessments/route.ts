@@ -7,7 +7,7 @@ import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
 import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
 import { onPassportConsumed } from '@/lib/passport-triggers'
-import { hasActiveSubscription } from '@/lib/subscription/check'
+import { getSubscriptionStatus } from '@/lib/subscription/check'
 
 // Custo em créditos por tipo de teste — fonte única em lib/passport.ts (TEST_PRICE)
 const CREDIT_COST: Record<string, number> = {
@@ -59,7 +59,8 @@ export async function POST(request: NextRequest) {
 
     // Assinante premium (plano ativo ou trial) tem acesso livre a todos os testes,
     // sem consumir creditos do Passaporte. Admin tambem e isento.
-    const isPremium = await hasActiveSubscription(companyId)
+    const sub = await getSubscriptionStatus(companyId)
+    const isPremium = sub.hasActiveAccess
     const exemptFromCredits = isAdmin || isPremium
 
     // Resolve nome/email finais:
@@ -95,11 +96,25 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Cria ou reutiliza employee
+    // Cria ou reutiliza employee — respeitando o limite de colaboradores do plano
     let employee = await prisma.employee.findFirst({
       where: { companyId, email: employeeEmail },
     })
     if (!employee) {
+      // Limite de cadastro: planos com cap não permitem registrar novos
+      // colaboradores além da faixa contratada (admin é isento).
+      if (!isAdmin && sub.employeeCap != null) {
+        const totalColaboradores = await prisma.employee.count({ where: { companyId } })
+        if (totalColaboradores >= sub.employeeCap) {
+          return NextResponse.json(
+            {
+              error: `Seu plano permite até ${sub.employeeCap} colaborador${sub.employeeCap > 1 ? 'es' : ''} cadastrado${sub.employeeCap > 1 ? 's' : ''}, e você já atingiu o limite. Faça upgrade do plano para cadastrar novos colaboradores.`,
+              code: 'EMPLOYEE_CAP',
+            },
+            { status: 403 },
+          )
+        }
+      }
       employee = await prisma.employee.create({
         data: { companyId, name: employeeName, email: employeeEmail },
       })

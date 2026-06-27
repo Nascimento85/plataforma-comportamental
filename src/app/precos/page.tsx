@@ -1,5 +1,5 @@
 // ============================================================
-// /precos — landing publica com os 3 planos PJ
+// /precos — landing publica com a grade de planos (individual + equipes)
 // ============================================================
 
 import type { Metadata } from 'next'
@@ -8,7 +8,7 @@ import { PLANOS_LIST, TRIAL_DIAS } from '@/lib/subscription/plans'
 
 export const metadata: Metadata = {
   title:       'Planos e preços · Psique',
-  description: 'Assinatura mensal da plataforma Psique para empresas. Trial gratuito de 7 dias sem cartão de crédito. 3 planos: Essencial, Profissional e Enterprise.',
+  description: 'Assinatura mensal da plataforma Psique. Plano individual e planos por equipe (5, 10, 20, 50+ colaboradores). Trial gratuito de 7 dias sem cartão de crédito.',
 }
 
 export default function PrecosPage() {
