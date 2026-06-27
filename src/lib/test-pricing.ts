@@ -6,20 +6,20 @@
 // ============================================================
 
 export const TEST_PRICE = {
-  COMBO_BUNDLE:           10,
-  DISC:                    3,
-  TEMPERAMENT:             2,
-  ENNEAGRAM:               2,
-  MBTI:                    2,
-  CAREER_ANCHOR:           1,
-  LOVE_LANGUAGES:          5,
-  ARCHETYPE:               3,
-  ARCHETYPE_FEMININE:      3,
-  EMOTIONAL_INTELLIGENCE:  2,
-  VAC:                     2,
+  COMBO_BUNDLE:           10, // combo de 4 testes (promoção)
+  DISC:                    4,
+  TEMPERAMENT:             3,
+  ENNEAGRAM:               5,
+  MBTI:                    3,
+  CAREER_ANCHOR:           3,
+  LOVE_LANGUAGES:          6,
+  ARCHETYPE:               4,
+  ARCHETYPE_FEMININE:      4,
+  EMOTIONAL_INTELLIGENCE:  4,
+  VAC:                     3,
   BIG_FIVE:                5,
   QMT:                     3,
-  LIDERANCA_SITUACIONAL:   3,
+  LIDERANCA_SITUACIONAL:   5,
   COMUNICACAO:             5,
   PREMIUM_REPORT:         10, // só com créditos PAGOS
 } as const satisfies Record<string, number>

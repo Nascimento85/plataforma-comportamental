@@ -21,6 +21,7 @@ interface GrantBody {
   companyId?: string
   plan?:      PlanoKey
   anos?:      number  // duracao em anos (default 5)
+  validoAte?: string  // data de expiracao explicita (YYYY-MM-DD), tem prioridade sobre anos
 }
 
 export async function POST(req: NextRequest) {
@@ -45,7 +46,15 @@ export async function POST(req: NextRequest) {
   if (!empresa) return NextResponse.json({ error: 'Empresa nao encontrada.' }, { status: 404 })
 
   const now = new Date()
-  const periodEnd = new Date(now.getTime() + anos * 365 * 24 * 60 * 60 * 1000)
+  let periodEnd: Date
+  if (body.validoAte) {
+    const d = new Date(body.validoAte)
+    if (isNaN(d.getTime())) return NextResponse.json({ error: 'Data de validade invalida.' }, { status: 400 })
+    d.setHours(23, 59, 59, 999) // vale o dia inteiro informado
+    periodEnd = d
+  } else {
+    periodEnd = new Date(now.getTime() + anos * 365 * 24 * 60 * 60 * 1000)
+  }
 
   const data = {
     companyId,

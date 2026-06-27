@@ -32,6 +32,26 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
   const [erro, setErro] = useState<string | null>(null)
   const [okMsg, setOkMsg] = useState<string | null>(null)
   const [pending, startTransition] = useTransition()
+  const [editData, setEditData] = useState<string | null>(null)
+  const [dataVal, setDataVal] = useState('')
+
+  async function salvarValidade(empresa: EmpresaRow) {
+    if (!dataVal) { setErro('Informe a data de expiração.'); return }
+    setLoading(empresa.id); setErro(null); setOkMsg(null)
+    try {
+      const res = await fetch('/api/admin/grant-subscription', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ companyId: empresa.id, plan: empresa.subPlan ?? 'PROFISSIONAL', validoAte: dataVal }),
+      })
+      const data = await res.json()
+      if (!res.ok) { setErro(data.error ?? 'Falha.'); return }
+      setOkMsg(data.message ?? 'Validade atualizada.')
+      setEditData(null)
+      startTransition(() => router.refresh())
+    } catch { setErro('Erro de conexão.') }
+    finally { setLoading(null) }
+  }
 
   const filtradas = useMemo(() => {
     const q = busca.trim().toLowerCase()
@@ -144,15 +164,46 @@ export default function EmpresasClient({ empresas }: { empresas: EmpresaRow[] })
                   <td className="px-3 py-3 text-right font-bold text-soul-ink">{e.totalAssessments}</td>
                   <td className="px-4 py-3 text-right">
                     {ativa && isManual ? (
-                      <button
-                        type="button"
-                        onClick={() => revogarPremium(e)}
-                        disabled={isLoadingThis}
-                        className="text-[13px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
-                        style={{ background: 'rgba(196,99,58,0.10)', color: '#8a3a1f', border: '1px solid rgba(196,99,58,0.30)' }}
-                      >
-                        {isLoadingThis ? '…' : 'Revogar'}
-                      </button>
+                      editData === e.id ? (
+                        <div className="flex items-center gap-1.5 justify-end flex-wrap">
+                          <input
+                            type="date"
+                            value={dataVal}
+                            onChange={(ev) => setDataVal(ev.target.value)}
+                            className="rounded-lg px-2 py-1 text-[13px] font-medium"
+                            style={{ background: '#fff', color: '#17181c', border: '1px solid rgba(196,99,58,0.35)' }}
+                          />
+                          <button type="button" onClick={() => salvarValidade(e)} disabled={isLoadingThis}
+                            className="text-[13px] font-bold px-2.5 py-1 rounded-lg text-white disabled:opacity-50"
+                            style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
+                            {isLoadingThis ? '…' : 'Salvar'}
+                          </button>
+                          <button type="button" onClick={() => setEditData(null)}
+                            className="text-[13px] font-bold px-2 py-1 rounded-lg" style={{ color: 'rgba(240,236,227,0.7)' }}>×</button>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1.5 justify-end flex-wrap">
+                          <button
+                            type="button"
+                            onClick={() => { setEditData(e.id); setDataVal(e.subValidoAte ? e.subValidoAte.slice(0, 10) : ''); setErro(null); setOkMsg(null) }}
+                            disabled={isLoadingThis}
+                            title="Definir/editar data de expiração do premium"
+                            className="text-[13px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
+                            style={{ background: 'rgba(61,79,124,0.12)', color: '#5a4a8a', border: '1px solid rgba(122,99,196,0.30)' }}
+                          >
+                            📅 Validade
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => revogarPremium(e)}
+                            disabled={isLoadingThis}
+                            className="text-[13px] font-bold px-2.5 py-1 rounded-lg disabled:opacity-50"
+                            style={{ background: 'rgba(196,99,58,0.10)', color: '#8a3a1f', border: '1px solid rgba(196,99,58,0.30)' }}
+                          >
+                            {isLoadingThis ? '…' : 'Revogar'}
+                          </button>
+                        </div>
+                      )
                     ) : isStripe ? (
                       <span className="text-[13px] text-soul-ink/68 italic">Stripe</span>
                     ) : (
