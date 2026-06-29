@@ -40,7 +40,11 @@ export async function POST(req: NextRequest) {
   }
 
   const plano = PLANOS[planKey]
-  if (!plano.stripePriceId) {
+  // Lê o Price ID em runtime (acesso dinâmico ao process.env), evitando que o
+  // bundler "congele" o valor como vazio no build (o módulo plans.ts também é
+  // importado por componentes client). O fallback cobre o valor do módulo.
+  const priceId = process.env[`STRIPE_PRICE_${planKey}`] || plano.stripePriceId
+  if (!priceId) {
     return NextResponse.json(
       { error: `Stripe Price ID nao configurado para o plano ${planKey}. Configure STRIPE_PRICE_${planKey} nas env vars.` },
       { status: 500 },
@@ -73,7 +77,7 @@ export async function POST(req: NextRequest) {
   const checkout = await stripe.checkout.sessions.create({
     mode:                'subscription',
     customer:            customerId,
-    line_items: [{ price: plano.stripePriceId, quantity: 1 }],
+    line_items: [{ price: priceId, quantity: 1 }],
     success_url:         `${APP_URL}/dashboard/assinatura?success=1`,
     cancel_url:          `${APP_URL}/dashboard/assinatura?canceled=1`,
     allow_promotion_codes: true,

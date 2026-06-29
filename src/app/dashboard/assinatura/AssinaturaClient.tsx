@@ -69,7 +69,7 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
         body:    JSON.stringify({ plan }),
       })
       const data = await res.json()
-      if (!res.ok || !data.url) { setErro(data.error ?? 'Falha ao iniciar checkout.'); return }
+      if (!res.ok || !data.url) { setErro(data.error ?? 'Falha ao iniciar checkout.'); setLoading(null); return }
       window.location.href = data.url
     } catch { setErro('Erro de conexão.'); setLoading(null) }
   }
