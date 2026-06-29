@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import BuyCreditsButton from './BuyCreditsButton'
 import { getPassportState } from '@/lib/passport'
 import PassportWidget from '@/components/passport/PassportWidget'
+import { TEST_PRICE } from '@/lib/test-pricing'
 
 export const metadata: Metadata = { title: 'Passaporte de Autoconhecimento' }
 
@@ -90,16 +91,21 @@ export default async function CreditsPage({ searchParams }: PageProps) {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-sm">
           {[
-            { label: 'Combo Bundler',           emoji: '🎁', cost: 10, hint: 'DISC + MBTI + Eneagrama + Temperamento' },
-            { label: 'DISC',                    emoji: '🧭', cost: 3 },
-            { label: '4 Temperamentos',         emoji: '🌡️', cost: 2 },
-            { label: 'Eneagrama',               emoji: '🔢', cost: 2 },
-            { label: 'MBTI',                    emoji: '🧠', cost: 2 },
-            { label: 'Âncoras de Carreira',     emoji: '⚓', cost: 1 },
-            { label: 'Relacionamentos',         emoji: '💞', cost: 5 },
-            { label: 'Arquétipos',              emoji: '🎭', cost: 3 },
-            { label: 'Inteligência Emocional',  emoji: '💡', cost: 2 },
-            { label: 'Relatório Premium + PDI', emoji: '🔓', cost: 10, hint: 'Apenas com créditos pagos' },
+            { label: 'Combo Bundler',           emoji: '🎁', cost: TEST_PRICE.COMBO_BUNDLE, hint: 'DISC + MBTI + Eneagrama + Temperamento' },
+            { label: 'DISC',                    emoji: '🧭', cost: TEST_PRICE.DISC },
+            { label: '4 Temperamentos',         emoji: '🌡️', cost: TEST_PRICE.TEMPERAMENT },
+            { label: 'Eneagrama',               emoji: '🔢', cost: TEST_PRICE.ENNEAGRAM },
+            { label: 'MBTI',                    emoji: '🧠', cost: TEST_PRICE.MBTI },
+            { label: 'Âncoras de Carreira',     emoji: '⚓', cost: TEST_PRICE.CAREER_ANCHOR },
+            { label: 'Relacionamentos',         emoji: '💞', cost: TEST_PRICE.LOVE_LANGUAGES },
+            { label: 'Arquétipos',              emoji: '🎭', cost: TEST_PRICE.ARCHETYPE },
+            { label: 'Inteligência Emocional',  emoji: '💡', cost: TEST_PRICE.EMOTIONAL_INTELLIGENCE },
+            { label: 'VAC Sensorial',           emoji: '👁', cost: TEST_PRICE.VAC },
+            { label: 'Big Five Liderança',      emoji: '🎯', cost: TEST_PRICE.BIG_FIVE },
+            { label: 'QMT Triádico',            emoji: '🧩', cost: TEST_PRICE.QMT },
+            { label: 'Liderança Situacional',   emoji: '🧭', cost: TEST_PRICE.LIDERANCA_SITUACIONAL },
+            { label: 'Mapa da Comunicação',     emoji: '🗣️', cost: TEST_PRICE.COMUNICACAO },
+            { label: 'Relatório Premium + PDI', emoji: '🔓', cost: TEST_PRICE.PREMIUM_REPORT, hint: 'Apenas com créditos pagos' },
           ].map(t => (
             <div key={t.label} className="rounded-xl p-3 border border-soul-mist/60 bg-soul-mist/10">
               <div className="text-2xl mb-1">{t.emoji}</div>

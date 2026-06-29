@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { PLANOS_LIST } from '@/lib/subscription/plans'
 
 interface InitialState {
   hasActiveAccess:   boolean
@@ -16,12 +17,6 @@ interface InitialState {
   currentPeriodEnd:  string | null
   daysUntilTrialEnd: number | null
   trialDias:         number
-}
-
-const PLAN_LABEL: Record<string, { nome: string; preco: string; cap: string }> = {
-  ESSENCIAL:    { nome: 'Essencial',    preco: 'R$ 497/mês', cap: 'até 10 funcionários'    },
-  PROFISSIONAL: { nome: 'Profissional', preco: 'R$ 990/mês', cap: 'até 50 funcionários'    },
-  ENTERPRISE:   { nome: 'Enterprise',   preco: 'Sob consulta', cap: 'funcionários ilimitados' },
 }
 
 export default function AssinaturaClient({ initial, isAdmin = false }: { initial: InitialState; isAdmin?: boolean }) {
@@ -65,7 +60,7 @@ export default function AssinaturaClient({ initial, isAdmin = false }: { initial
     finally { setLoading(null) }
   }
 
-  async function irParaCheckout(plan: 'ESSENCIAL' | 'PROFISSIONAL') {
+  async function irParaCheckout(plan: string) {
     setLoading(`checkout-${plan}`); setErro(null); setOkMsg(null)
     try {
       const res = await fetch('/api/subscription/checkout', {
@@ -293,36 +288,53 @@ function PlanosPagos({
   loading, onCheckout, compacto,
 }: {
   loading: string | null
-  onCheckout: (plan: 'ESSENCIAL' | 'PROFISSIONAL') => void
+  onCheckout: (plan: string) => void
   compacto?: boolean
 }) {
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 ${compacto ? '' : 'mt-2'}`}>
-      {(['ESSENCIAL', 'PROFISSIONAL'] as const).map(planKey => {
-        const p = PLAN_LABEL[planKey]
-        const isLoading = loading === `checkout-${planKey}`
-        const destaque = planKey === 'PROFISSIONAL'
+    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 ${compacto ? '' : 'mt-2'}`}>
+      {PLANOS_LIST.map(p => {
+        const isLoading = loading === `checkout-${p.key}`
+        const destaque = p.destaque
+        const consultar = p.precoMensalCents === null
         return (
-          <div key={planKey} className="rounded-2xl p-5"
+          <div key={p.key} className="rounded-2xl p-5 flex flex-col"
                style={{
                  background: destaque ? 'rgba(212,148,58,0.06)' : 'rgba(196,99,58,0.03)',
                  border: destaque ? '1.5px solid rgba(212,148,58,0.40)' : '1px solid rgba(196,99,58,0.18)',
                }}>
-            <div className="flex items-baseline justify-between mb-1">
+            <div className="flex items-baseline justify-between mb-1 gap-2">
               <h3 className="font-serif text-lg font-semibold text-soul-ink">{p.nome}</h3>
-              {destaque && <span className="text-[9.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded" style={{ background: 'rgba(212,184,92,0.30)', color: '#e0c878' }}>RECOMENDADO</span>}
+              {destaque && <span className="text-[9.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded flex-shrink-0" style={{ background: 'rgba(212,184,92,0.30)', color: '#e0c878' }}>RECOMENDADO</span>}
             </div>
-            <p className="font-serif text-2xl font-semibold text-soul-ink mb-1">{p.preco}</p>
-            <p className="text-[13.5px] text-soul-ink/78 font-medium mb-4">{p.cap}</p>
-            <button
-              type="button"
-              onClick={() => onCheckout(planKey)}
-              disabled={isLoading}
-              className="w-full rounded-full px-4 py-2.5 text-[14.5px] font-bold text-white shadow-terra disabled:opacity-60"
-              style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
-            >
-              {isLoading ? 'Abrindo Stripe…' : 'Assinar este plano'}
-            </button>
+            <p className="font-serif text-2xl font-semibold text-soul-ink mb-0.5">
+              {p.precoLabel}{!consultar && <span className="text-[14px] font-medium text-soul-ink/70">/mês</span>}
+            </p>
+            <p className="text-[13px] text-soul-ink/78 font-medium mb-3">{p.subtitulo}</p>
+            <ul className="space-y-1.5 mb-4 flex-1">
+              {p.features.slice(0, 4).map((f, i) => (
+                <li key={i} className="text-[12.5px] text-soul-ink/82 font-medium flex gap-1.5 leading-snug">
+                  <span style={{ color: '#c9a84c' }}>✓</span>{f}
+                </li>
+              ))}
+            </ul>
+            {consultar ? (
+              <a href="mailto:contato@mapacomportamental.com?subject=Plano%20acima%20de%2050%20colaboradores"
+                 className="w-full text-center rounded-full px-4 py-2.5 text-[14.5px] font-bold no-underline"
+                 style={{ border: '1px solid rgba(196,99,58,0.4)', color: '#8a4a26' }}>
+                {p.ctaLabel}
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onCheckout(p.key)}
+                disabled={isLoading}
+                className="w-full rounded-full px-4 py-2.5 text-[14.5px] font-bold text-white shadow-terra disabled:opacity-60"
+                style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+              >
+                {isLoading ? 'Abrindo Stripe…' : p.ctaLabel}
+              </button>
+            )}
           </div>
         )
       })}
