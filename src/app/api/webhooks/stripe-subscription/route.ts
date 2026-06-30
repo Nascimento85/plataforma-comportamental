@@ -40,10 +40,22 @@ function mapStripeStatus(stripeStatus: string): string {
 }
 
 function planFromPriceId(priceId: string | null | undefined): string {
-  if (!priceId) return 'ESSENCIAL'
-  if (priceId === process.env.STRIPE_PRICE_PROFISSIONAL) return 'PROFISSIONAL'
-  if (priceId === process.env.STRIPE_PRICE_ESSENCIAL)    return 'ESSENCIAL'
-  return 'ESSENCIAL'
+  if (!priceId) return 'INDIVIDUAL'
+  // Mapeia o price ID do Stripe -> chave de plano interna.
+  // Cobre os planos atuais (Individual + Equipes) e os legados.
+  const byEnv: Array<[string | undefined, string]> = [
+    [process.env.STRIPE_PRICE_INDIVIDUAL,   'INDIVIDUAL'],
+    [process.env.STRIPE_PRICE_EQUIPE_5,     'EQUIPE_5'],
+    [process.env.STRIPE_PRICE_EQUIPE_10,    'EQUIPE_10'],
+    [process.env.STRIPE_PRICE_EQUIPE_20,    'EQUIPE_20'],
+    [process.env.STRIPE_PRICE_EQUIPE_50,    'EQUIPE_50'],
+    [process.env.STRIPE_PRICE_PROFISSIONAL, 'PROFISSIONAL'], // legado
+    [process.env.STRIPE_PRICE_ESSENCIAL,    'ESSENCIAL'],    // legado
+  ]
+  for (const [env, plan] of byEnv) {
+    if (env && env === priceId) return plan
+  }
+  return 'INDIVIDUAL'
 }
 
 async function upsertSubscriptionFromStripe(sub: Stripe.Subscription, companyId: string) {
