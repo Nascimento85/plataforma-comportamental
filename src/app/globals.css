@@ -7,6 +7,43 @@
    Tokens CSS, tipografia e utilitários compartilhados
 ═══════════════════════════════════════════════════════════════ */
 
+/* ── Tema do relatório/devolutiva ──────────────────────────────
+   Por padrão ESCURO (combina com a tela). Quando a página de
+   resultado está em modo PDF (?print=1) ela ganha a classe
+   .report-print e o relatório vira CLARO (branco, letra escura),
+   ideal para imprimir/salvar. Usa variáveis para não duplicar
+   componente — vale para todos os testes de uma vez. */
+.report-theme {
+  --rep-ink:     #f3ede0;
+  --rep-ink2:    #cfd5e0;
+  --rep-blue:    #9db4e8;
+  --rep-cream:   #e7dcc4;
+  --rep-body:    #b9c0cd;
+  --rep-muted:   #8b93a3;
+  --rep-gold:    #c9a84c;
+  --rep-gold-lt: #e6c662;
+  --rep-card-bg: #1b2030;
+  --rep-card-2:  #1e2740;
+  --rep-card-br: rgba(255,255,255,0.07);
+  --rep-track:   rgba(255,255,255,0.08);
+  --rep-page-bg: #17181c;
+}
+.report-theme.report-print {
+  --rep-ink:     #1c1a17;
+  --rep-ink2:    #2b2f3a;
+  --rep-blue:    #2f5ca8;
+  --rep-cream:   #5a4a1e;
+  --rep-body:    #41454d;
+  --rep-muted:   #6b7280;
+  --rep-gold:    #9a7d1e;
+  --rep-gold-lt: #876c12;
+  --rep-card-bg: #ffffff;
+  --rep-card-2:  #f6f3ec;
+  --rep-card-br: rgba(0,0,0,0.12);
+  --rep-track:   rgba(0,0,0,0.08);
+  --rep-page-bg: #ffffff;
+}
+
 @layer base {
   :root {
     /* Fontes */

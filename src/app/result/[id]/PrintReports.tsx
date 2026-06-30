@@ -8,13 +8,14 @@
 import React from 'react'
 
 // ── Tokens do documento dark ────────────────────────────────
-const INK      = '#f3ede0'   // titulos
-const BODY     = '#b9c0cd'   // corpo
-const MUTED    = '#8b93a3'   // secundario
-const GOLD      = '#c9a84c'
-const GOLD_LT   = '#e6c662'
-const CARD_BG   = '#1b2030'
-const CARD_BR   = '1px solid rgba(255,255,255,0.07)'
+// Cores via variáveis CSS: escuras na tela, claras no PDF (.report-print).
+const INK      = 'var(--rep-ink)'    // titulos
+const BODY     = 'var(--rep-body)'   // corpo
+const MUTED    = 'var(--rep-muted)'  // secundario
+const GOLD      = 'var(--rep-gold)'
+const GOLD_LT   = 'var(--rep-gold-lt)'
+const CARD_BG   = 'var(--rep-card-bg)'
+const CARD_BR   = '1px solid var(--rep-card-br)'
 
 const card: React.CSSProperties = {
   background: CARD_BG,
@@ -68,7 +69,7 @@ export function BigFivePrintReport({ result }: { result: Record<string, unknown>
       <div style={{ textAlign: 'center', marginBottom: 22 }}>
         <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
         <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
-        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.combinacao}</p>
+        <p style={{ fontSize: 13, color: 'var(--rep-blue)', margin: 0 }}>{a.combinacao}</p>
       </div>
 
       {/* Radar */}
@@ -77,10 +78,10 @@ export function BigFivePrintReport({ result }: { result: Record<string, unknown>
         {ordered.map((f) => (
           <div key={f} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: 600, color: '#cfd5e0' }}>{LABELS[f]}</span>
+              <span style={{ fontWeight: 600, color: 'var(--rep-ink2)' }}>{LABELS[f]}</span>
               <span style={{ color: MUTED }}>{r.percentages[f]}% · média {r.scoresAvg[f]?.toFixed(2)}</span>
             </div>
-            <div style={{ height: 8, background: 'rgba(255,255,255,0.08)', borderRadius: 5, overflow: 'hidden' }}>
+            <div style={{ height: 8, background: 'var(--rep-track)', borderRadius: 5, overflow: 'hidden' }}>
               <div style={{ height: '100%', width: `${r.percentages[f]}%`, background: COLORS[f], borderRadius: 5 }} />
             </div>
           </div>
@@ -116,7 +117,7 @@ export function BigFivePrintReport({ result }: { result: Record<string, unknown>
       </div>
 
       {/* Plano de acao */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Plano de ação para o próximo trimestre</p>
         {a.planoDeAcao.map((pa, i) => (
           <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
@@ -128,7 +129,7 @@ export function BigFivePrintReport({ result }: { result: Record<string, unknown>
 
       {/* Brilha em */}
       <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
-        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+        <p style={{ ...itemBody, color: 'var(--rep-cream)' }}>
           <strong style={{ color: INK }}>Onde este arquétipo brilha:</strong> {a.brilhaEm}
         </p>
       </div>
@@ -139,14 +140,14 @@ export function BigFivePrintReport({ result }: { result: Record<string, unknown>
 // ============================================================
 // Helpers compartilhados (tema dark)
 // ============================================================
-const TRACK = 'rgba(255,255,255,0.08)'
+const TRACK = 'var(--rep-track)'
 
 function PrintBar({ label, pct, color, bold }: { label: string; pct: number; color: string; bold?: boolean }) {
   const w = Math.max(1, Math.min(100, Math.round(pct)))
   return (
     <div style={{ marginBottom: 11 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-        <span style={{ fontWeight: bold ? 700 : 600, color: bold ? INK : '#cfd5e0' }}>{label}</span>
+        <span style={{ fontWeight: bold ? 700 : 600, color: bold ? INK : 'var(--rep-ink2)' }}>{label}</span>
         <span style={{ color: MUTED }}>{w}%</span>
       </div>
       <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -268,7 +269,7 @@ export function DiscPrintReport({ result }: { result: Record<string, unknown> })
 
       <div style={card}>
         <p style={kicker}>Características principais</p>
-        <PrintTags items={r.report.characteristics} color="#9db4e8" />
+        <PrintTags items={r.report.characteristics} color="var(--rep-blue)" />
       </div>
 
       <div style={card}>
@@ -287,7 +288,7 @@ export function DiscPrintReport({ result }: { result: Record<string, unknown> })
 
       <div style={card}>
         <p style={kicker}>Contribuição para a equipe</p>
-        <PrintTags items={r.report.teamValue} color="#9db4e8" />
+        <PrintTags items={r.report.teamValue} color="var(--rep-blue)" />
       </div>
 
       <div style={{ ...card, background: 'rgba(239,106,106,0.10)', border: '1px solid rgba(239,106,106,0.25)' }}>
@@ -297,7 +298,7 @@ export function DiscPrintReport({ result }: { result: Record<string, unknown> })
 
       <div style={{ ...card, marginBottom: 0 }}>
         <p style={kicker}>O que motiva este perfil</p>
-        <PrintBullets items={r.report.motivations} color="#9db4e8" />
+        <PrintBullets items={r.report.motivations} color="var(--rep-blue)" />
       </div>
     </div>
   )
@@ -500,7 +501,7 @@ export function TemperamentPrintReport({ result }: { result: Record<string, unkn
 
       <div style={{ ...card, marginBottom: 0 }}>
         <p style={kicker}>Funções e cargos recomendados</p>
-        <PrintTags items={r.profile.idealRoles} color="#9db4e8" />
+        <PrintTags items={r.profile.idealRoles} color="var(--rep-blue)" />
       </div>
     </div>
   )
@@ -781,7 +782,7 @@ export function CareerAnchorPrintReport({ result }: { result: Record<string, unk
 
       <div style={card}>
         <p style={kicker}>Caminhos de desenvolvimento</p>
-        <PrintBullets items={r.primaryReport.developmentTips} color="#9db4e8" />
+        <PrintBullets items={r.primaryReport.developmentTips} color="var(--rep-blue)" />
       </div>
 
       <div style={card}>
@@ -792,7 +793,7 @@ export function CareerAnchorPrintReport({ result }: { result: Record<string, unk
       <div style={{ ...card, marginBottom: 0 }}>
         <p style={kicker}>Influencia secundaria: {r.secondaryReport.name}</p>
         <p style={{ ...itemBody, borderLeft: `3px solid ${sc}`, paddingLeft: 12 }}>
-          <em style={{ color: '#cfd5e0' }}>{r.secondaryReport.tagline}</em>
+          <em style={{ color: 'var(--rep-ink2)' }}>{r.secondaryReport.tagline}</em>
         </p>
         <p style={{ ...itemBody, marginTop: 8 }}>{r.secondaryReport.summary}</p>
       </div>
@@ -865,7 +866,7 @@ export function EmotionalIntelligencePrintReport({ result }: { result: Record<st
           <p style={kicker}>Sua maior forca: {LABELS[primaryDom.domain]}</p>
           <p style={{ ...itemBody, marginBottom: 12 }}>{primaryDom.report.description}</p>
           <div style={{ background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${pc}`, borderRadius: 8, padding: '10px 14px', marginBottom: 12 }}>
-            <p style={{ ...itemBody, color: '#cfd5e0' }}>{primaryDom.feedback}</p>
+            <p style={{ ...itemBody, color: 'var(--rep-ink2)' }}>{primaryDom.feedback}</p>
           </div>
           <p style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: MUTED, margin: '0 0 8px' }}>Sub-temas avaliados</p>
           <PrintTags items={primaryDom.report.subthemes} color={pc} />
@@ -925,7 +926,7 @@ export function VacPrintReport({ result }: { result: Record<string, unknown> }) 
         {channels.slice().sort((a, b) => r.percentages[b] - r.percentages[a]).map((c) => (
           <div key={c} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: c === r.primaryChannel ? 700 : 600, color: c === r.primaryChannel ? INK : '#cfd5e0' }}>{VAC_LABELS[c]}</span>
+              <span style={{ fontWeight: c === r.primaryChannel ? 700 : 600, color: c === r.primaryChannel ? INK : 'var(--rep-ink2)' }}>{VAC_LABELS[c]}</span>
               <span style={{ color: MUTED }}>{r.percentages[c]}% · {r.scores[c]}/40</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -941,7 +942,7 @@ export function VacPrintReport({ result }: { result: Record<string, unknown> }) 
       </div>
 
       <div style={card}>
-        <p style={{ ...kicker, color: '#9db4e8' }}>Como você se comunica melhor</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>Como você se comunica melhor</p>
         <p style={{ ...itemBody, marginBottom: 14 }}>{r.primaryReport.comunicacao}</p>
         <p style={{ ...kicker, color: '#f0a59e' }}>Ponto de atenção</p>
         <p style={{ ...itemBody }}>{r.primaryReport.pontoDeMelhoria}</p>
@@ -987,7 +988,7 @@ export function QmtPrintReport({ result }: { result: Record<string, unknown> }) 
       <div style={{ textAlign: 'center', marginBottom: 22 }}>
         <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
         <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
-        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.combinacao}</p>
+        <p style={{ fontSize: 13, color: 'var(--rep-blue)', margin: 0 }}>{a.combinacao}</p>
       </div>
 
       {/* Radar das 3 dimensões */}
@@ -996,7 +997,7 @@ export function QmtPrintReport({ result }: { result: Record<string, unknown> }) 
         {r.ranking.map((d) => (
           <div key={d.dim} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: d.dim === r.dominant ? 700 : 600, color: d.dim === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ fontWeight: d.dim === r.dominant ? 700 : 600, color: d.dim === r.dominant ? INK : 'var(--rep-ink2)' }}>{d.label}</span>
               <span style={{ color: MUTED }}>{d.percentage}% · {d.count} respostas</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -1035,7 +1036,7 @@ export function QmtPrintReport({ result }: { result: Record<string, unknown> }) 
       </div>
 
       {/* Plano de ação */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
         {a.planoDeAcao.map((pa, i) => (
           <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
@@ -1047,15 +1048,15 @@ export function QmtPrintReport({ result }: { result: Record<string, unknown> }) 
 
       {/* Hemisfério + Equilíbrio */}
       <div style={card}>
-        <p style={{ ...kicker, color: '#9db4e8' }}>{r.hemisferio.titulo}</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>{r.hemisferio.titulo}</p>
         <p style={{ ...itemBody, marginBottom: 14 }}>{r.hemisferio.texto}</p>
-        <p style={{ ...kicker, color: '#9db4e8' }}>{r.equilibrio.titulo}</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>{r.equilibrio.titulo}</p>
         <p style={{ ...itemBody }}>{r.equilibrio.texto}</p>
       </div>
 
       {/* Onde brilha */}
       <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
-        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+        <p style={{ ...itemBody, color: 'var(--rep-cream)' }}>
           <strong style={{ color: INK }}>Onde este perfil brilha:</strong> {a.brilhaEm}
         </p>
       </div>
@@ -1090,7 +1091,7 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
       <div style={{ textAlign: 'center', marginBottom: 22 }}>
         <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
         <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
-        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.resumo}</p>
+        <p style={{ fontSize: 13, color: 'var(--rep-blue)', margin: 0 }}>{a.resumo}</p>
       </div>
 
       {/* Distribuição dos 4 estilos */}
@@ -1099,7 +1100,7 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
         {r.ranking.map((d) => (
           <div key={d.estilo} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: d.estilo === r.dominant ? 700 : 600, color: d.estilo === r.dominant ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ fontWeight: d.estilo === r.dominant ? 700 : 600, color: d.estilo === r.dominant ? INK : 'var(--rep-ink2)' }}>{d.label}</span>
               <span style={{ color: MUTED }}>{d.percentage}%</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -1111,9 +1112,9 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
 
       {/* Flexibilidade + Adaptabilidade */}
       <div style={card}>
-        <p style={{ ...kicker, color: '#9db4e8' }}>{r.flexibilidade.titulo}</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>{r.flexibilidade.titulo}</p>
         <p style={{ ...itemBody, marginBottom: 14 }}>{r.flexibilidade.texto}</p>
-        <p style={{ ...kicker, color: '#9db4e8' }}>{r.adaptabilidade.titulo} · {r.adaptabilidadePct}%</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>{r.adaptabilidade.titulo} · {r.adaptabilidadePct}%</p>
         <p style={{ ...itemBody }}>{r.adaptabilidade.texto}</p>
       </div>
 
@@ -1124,7 +1125,7 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
       </div>
 
       {/* Quando usar */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Quando este estilo é o ideal</p>
         <p style={{ ...itemBody }}>{a.quandoUsar}</p>
       </div>
@@ -1152,7 +1153,7 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
       </div>
 
       {/* Plano de ação */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Plano de desenvolvimento</p>
         {a.planoDeAcao.map((pa, i) => (
           <div key={i} style={{ marginBottom: i === a.planoDeAcao.length - 1 ? 0 : 12 }}>
@@ -1164,7 +1165,7 @@ export function LsPrintReport({ result }: { result: Record<string, unknown> }) {
 
       {/* Onde brilha */}
       <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
-        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+        <p style={{ ...itemBody, color: 'var(--rep-cream)' }}>
           <strong style={{ color: INK }}>Onde este estilo brilha:</strong> {a.brilhaEm}
         </p>
       </div>
@@ -1206,7 +1207,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
       <div style={{ textAlign: 'center', marginBottom: 22 }}>
         <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 14px' }} />
         <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 25, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{a.nome}</h2>
-        <p style={{ fontSize: 13, color: '#9db4e8', margin: 0 }}>{a.resumo}</p>
+        <p style={{ fontSize: 13, color: 'var(--rep-blue)', margin: 0 }}>{a.resumo}</p>
       </div>
 
       {/* Estilo de comunicação (Murphy) */}
@@ -1215,7 +1216,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
         {r.perfilRanking.map((d) => (
           <div key={d.chave} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: d.chave === r.perfilDominante ? 700 : 600, color: d.chave === r.perfilDominante ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ fontWeight: d.chave === r.perfilDominante ? 700 : 600, color: d.chave === r.perfilDominante ? INK : 'var(--rep-ink2)' }}>{d.label}</span>
               <span style={{ color: MUTED }}>{d.percentage}%</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -1254,7 +1255,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
       </div>
 
       {/* Como adaptar a cada perfil */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Como adaptar sua comunicação a cada perfil</p>
         {a.comoAdaptar.map((ad, i) => (
           <div key={i} style={{ marginBottom: i === a.comoAdaptar.length - 1 ? 0 : 12 }}>
@@ -1270,7 +1271,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
         {r.socialRanking.map((d) => (
           <div key={d.chave} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: d.chave === r.socialDominante ? 700 : 600, color: d.chave === r.socialDominante ? INK : '#cfd5e0' }}>{d.label}</span>
+              <span style={{ fontWeight: d.chave === r.socialDominante ? 700 : 600, color: d.chave === r.socialDominante ? INK : 'var(--rep-ink2)' }}>{d.label}</span>
               <span style={{ color: MUTED }}>{d.percentage}%</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -1283,7 +1284,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
 
       {/* Termômetro de assertividade (CNV) */}
       <div style={card}>
-        <p style={{ ...kicker, color: '#9db4e8' }}>Termômetro de assertividade</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>Termômetro de assertividade</p>
         <div style={{ textAlign: 'center', marginBottom: 12 }}>
           <span style={{ fontFamily: 'Georgia, serif', fontSize: 34, fontWeight: 700, color: pct >= 70 ? '#74d6a0' : pct >= 40 ? GOLD_LT : '#f0a59e' }}>{pct}%</span>
           <span style={{ fontSize: 12, color: MUTED }}> de comunicação não violenta (assertiva)</span>
@@ -1296,7 +1297,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
           <span>Comunicação violenta</span>
           <span>Comunicação assertiva (CNV)</span>
         </div>
-        <p style={{ ...kicker, color: '#9db4e8', marginTop: 16 }}>{r.termometro.titulo}</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)', marginTop: 16 }}>{r.termometro.titulo}</p>
         <p style={{ ...itemBody }}>{r.termometro.texto}</p>
       </div>
 
@@ -1306,7 +1307,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
         {r.assertRanking.map((d) => (
           <div key={d.chave} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: 600, color: '#cfd5e0' }}>{d.label}</span>
+              <span style={{ fontWeight: 600, color: 'var(--rep-ink2)' }}>{d.label}</span>
               <span style={{ color: MUTED }}>{d.percentage}%</span>
             </div>
             <div style={{ height: 8, background: TRACK, borderRadius: 5, overflow: 'hidden' }}>
@@ -1318,7 +1319,7 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
 
       {/* Onde brilha */}
       <div style={{ ...card, background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)', marginBottom: 0 }}>
-        <p style={{ ...itemBody, color: '#e7dcc4' }}>
+        <p style={{ ...itemBody, color: 'var(--rep-cream)' }}>
           <strong style={{ color: INK }}>Onde este perfil brilha:</strong> {a.brilhaEm}
         </p>
       </div>
@@ -1352,7 +1353,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
     r.scoreGeral >= 80 ? '#74d6a0' :
     r.scoreGeral >= 60 ? '#6f86c9' :
     r.scoreGeral >= 40 ? GOLD_LT : '#f0a59e'
-  const TRACK_BG = 'rgba(255,255,255,0.08)'
+  const TRACK_BG = 'var(--rep-track)'
   const pilaresOrdenados = [...r.porPilar].sort((a, b) => b.score - a.score)
 
   return (
@@ -1383,7 +1384,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
         {pilaresOrdenados.map((p) => (
           <div key={p.pilar} style={{ marginBottom: 11 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
-              <span style={{ fontWeight: 600, color: '#cfd5e0' }}>{p.label}</span>
+              <span style={{ fontWeight: 600, color: 'var(--rep-ink2)' }}>{p.label}</span>
               <span style={{ color: MUTED }}>{p.corretas}/{p.total} · {p.score}%</span>
             </div>
             <div style={{ height: 8, background: TRACK_BG, borderRadius: 5, overflow: 'hidden' }}>
@@ -1404,7 +1405,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
       </div>
 
       {/* Recomendações */}
-      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+      <div style={{ ...card, background: 'var(--rep-card-2)', borderLeft: `3px solid ${GOLD}` }}>
         <p style={{ ...kicker, color: GOLD_LT }}>Recomendações de desenvolvimento</p>
         {r.recomendacoes.map((rec, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, marginBottom: i === r.recomendacoes.length - 1 ? 0 : 9 }}>

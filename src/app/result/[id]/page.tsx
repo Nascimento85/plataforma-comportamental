@@ -1083,7 +1083,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   const rd: Record<string, unknown> = resultData as Record<string, unknown>
 
   return (
-    <div className="min-h-screen" style={{ background: '#17181c' }}>
+    <div className={`min-h-screen report-theme ${isPrint ? 'report-print' : ''}`} style={{ background: 'var(--rep-page-bg)' }}>
 
       {/* ── Header (oculto no modo print) ── */}
       {!isPrint && (
@@ -1110,7 +1110,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
 
       {/* ── Capa do relatório (modo print) ── */}
       {isPrint && (
-        <div style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 55%, #3d2a1c 100%)', color: '#fff', padding: '48px 48px 40px' }}>
+        <div style={{ background: 'linear-gradient(135deg, #faf7f1 0%, #f1ead9 100%)', color: '#1c1a17', padding: '48px 48px 40px', borderBottom: '3px solid #c9a84c' }}>
           <div className="flex items-center gap-3 mb-6">
             <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(135deg, #c9a84c, #d4943a)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg viewBox="0 0 90 90" fill="none" style={{ width: 20, height: 20 }}>
@@ -1119,16 +1119,16 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
                 <circle cx="45" cy="45" r="5" fill="white" opacity="0.9"/>
               </svg>
             </div>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'rgba(201,168,76,0.8)' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9a7d1e' }}>
               {APP_NAME}
             </p>
           </div>
-          <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>
+          <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: '#8a7a55', marginBottom: '8px' }}>
             Avaliação Comportamental
           </p>
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '32px', fontWeight: 300, margin: '0 0 10px', color: '#fff' }}>{testLabel}</h1>
-          <p style={{ fontSize: '18px', color: 'rgba(255,255,255,0.85)', margin: '0 0 4px' }}>Devolutiva: {assessment.employee.name}</p>
-          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>{assessment.company.name}{finishedAt ? ` · ${finishedAt}` : ''}</p>
+          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '32px', fontWeight: 400, margin: '0 0 10px', color: '#1c1a17' }}>{testLabel}</h1>
+          <p style={{ fontSize: '18px', color: '#3a3d45', margin: '0 0 4px' }}>Devolutiva: {assessment.employee.name}</p>
+          <p style={{ fontSize: '13px', color: '#6b7280' }}>{assessment.company.name}{finishedAt ? ` · ${finishedAt}` : ''}</p>
         </div>
       )}
 
