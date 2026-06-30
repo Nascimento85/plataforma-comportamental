@@ -12,6 +12,7 @@ import {
   type Rater360,
 } from '@/content/gestao-times/avaliacao-360'
 import Detalhe360Client from './Detalhe360Client'
+import PrintPageButton from '@/components/ui/PrintPageButton'
 
 export const metadata: Metadata = { title: 'Avaliação 360°' }
 export const dynamic = 'force-dynamic'
@@ -57,26 +58,33 @@ export default async function Avaliacao360DetailPage({ params }: { params: { id:
 
   return (
     <div className="space-y-6">
-      <div>
-        <Link href="/dashboard/avaliacao-360" className="text-[13px] text-soul-ink/60 hover:text-soul-ink font-sans">← Avaliações 360°</Link>
-        <h1 className="font-serif font-semibold text-3xl text-soul-ink mt-1">{ciclo.avaliadoNome}</h1>
-        <p className="text-sm text-soul-ink/68 font-sans">
-          {ciclo.titulo ? `${ciclo.titulo} · ` : ''}{result.totalRespostas} de {convites.length} responderam
-        </p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <Link href="/dashboard/avaliacao-360" className="no-print text-[13px] text-soul-ink/60 hover:text-soul-ink font-sans">← Avaliações 360°</Link>
+          <h1 className="font-serif font-semibold text-3xl text-soul-ink mt-1">{ciclo.avaliadoNome}</h1>
+          <p className="text-sm text-soul-ink/68 font-sans">
+            {ciclo.titulo ? `${ciclo.titulo} · ` : ''}{result.totalRespostas} de {convites.length} responderam
+          </p>
+        </div>
+        {temResultado && <PrintPageButton />}
       </div>
 
-      {/* Resultado */}
-      {temResultado ? (
-        <Resultado360View result={result} />
-      ) : (
-        <div className="bg-soul-parchment rounded-3xl p-8 text-center border border-soul-mist/60">
-          <div className="text-3xl mb-2">⏳</div>
-          <p className="text-sm text-soul-ink/68 font-sans">Ainda sem respostas. Assim que os avaliadores responderem, o radar comparativo aparece aqui.</p>
-        </div>
-      )}
+      {/* Resultado (área do PDF) */}
+      <div className="pdf-area space-y-6">
+        {temResultado ? (
+          <Resultado360View result={result} />
+        ) : (
+          <div className="bg-soul-parchment rounded-3xl p-8 text-center border border-soul-mist/60">
+            <div className="text-3xl mb-2">⏳</div>
+            <p className="text-sm text-soul-ink/68 font-sans">Ainda sem respostas. Assim que os avaliadores responderem, o radar comparativo aparece aqui.</p>
+          </div>
+        )}
+      </div>
 
-      {/* Gestão de avaliadores (copiar links / adicionar) */}
-      <Detalhe360Client cicloId={ciclo.id} convites={convites} />
+      {/* Gestão de avaliadores (copiar links / adicionar) — fora do PDF */}
+      <div className="no-print">
+        <Detalhe360Client cicloId={ciclo.id} convites={convites} />
+      </div>
     </div>
   )
 }

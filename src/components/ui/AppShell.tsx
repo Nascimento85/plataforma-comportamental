@@ -472,11 +472,11 @@ export default function AppShell({ children, session, maxWidth = '1440px' }: App
   }, [menuOpen])
 
   return (
-    <div className="min-h-screen flex" style={{ background: 'var(--soul-cream)' }}>
+    <div className="min-h-screen flex app-shell-root" style={{ background: 'var(--soul-cream)' }}>
 
       {/* ── Sidebar desktop ── */}
       <aside
-        className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 z-20"
+        className="hidden md:flex flex-col fixed top-0 left-0 bottom-0 z-20 print:hidden"
         style={{
           width: 'var(--sidebar-width)',
           background: 'linear-gradient(180deg, #101c30 0%, #0c1422 100%)',
@@ -491,7 +491,7 @@ export default function AppShell({ children, session, maxWidth = '1440px' }: App
 
       {/* ── Menu mobile overlay ── */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 md:hidden print:hidden">
           <div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
@@ -509,7 +509,7 @@ export default function AppShell({ children, session, maxWidth = '1440px' }: App
       )}
 
       {/* ── Header mobile ── */}
-      <header className="md:hidden fixed top-0 left-0 right-0 z-30 h-14 flex items-center px-4 gap-3 border-b border-soul-mist/60 bg-soul-cream/95 backdrop-blur-sm">
+      <header className="md:hidden fixed top-0 left-0 right-0 z-30 h-14 flex items-center px-4 gap-3 border-b border-soul-mist/60 bg-soul-cream/95 backdrop-blur-sm print:hidden">
         <button
           onClick={() => setMenuOpen(true)}
           className="w-9 h-9 flex items-center justify-center rounded-xl text-soul-ink/75 hover:bg-soul-mist/60 transition-colors"
@@ -534,7 +534,7 @@ export default function AppShell({ children, session, maxWidth = '1440px' }: App
       </header>
 
       {/* ── Conteúdo principal ── */}
-      <main className="flex-1 min-w-0 md:ml-60">
+      <main className="flex-1 min-w-0 md:ml-60 print:ml-0">
         <div className="pt-14 md:pt-0">
           <div
             className="mx-auto px-5 md:px-9 py-8"

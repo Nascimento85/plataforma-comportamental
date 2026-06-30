@@ -7,6 +7,7 @@ import {
   agregarEnps, CATEGORIA_CORES, type TempoCasa,
 } from '@/content/enps'
 import DetalheEnpsClient from './DetalheEnpsClient'
+import PrintPageButton from '@/components/ui/PrintPageButton'
 
 export const metadata: Metadata = { title: 'eNPS' }
 export const dynamic = 'force-dynamic'
@@ -43,22 +44,31 @@ export default async function EnpsDetailPage({ params }: { params: { id: string 
 
   return (
     <div className="space-y-6">
-      <div>
-        <Link href="/dashboard/enps" className="text-[13px] text-soul-ink/60 hover:text-soul-ink font-sans">← Pesquisas eNPS</Link>
-        <h1 className="font-serif font-semibold text-3xl text-soul-ink mt-1">{coleta.titulo || 'Pesquisa de clima'}</h1>
-        <p className="text-sm text-soul-ink/68 font-sans">{result.n} de {convites.length} responderam</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <Link href="/dashboard/enps" className="no-print text-[13px] text-soul-ink/60 hover:text-soul-ink font-sans">← Pesquisas eNPS</Link>
+          <h1 className="font-serif font-semibold text-3xl text-soul-ink mt-1">{coleta.titulo || 'Pesquisa de clima'}</h1>
+          <p className="text-sm text-soul-ink/68 font-sans">{result.n} de {convites.length} responderam</p>
+        </div>
+        {temResultado && <PrintPageButton />}
       </div>
 
-      {temResultado ? (
-        <ResultadoEnpsView result={result} />
-      ) : (
-        <div className="bg-soul-parchment rounded-3xl p-8 text-center border border-soul-mist/60">
-          <div className="text-3xl mb-2">⏳</div>
-          <p className="text-sm text-soul-ink/68 font-sans">Ainda sem respostas. O índice e a leitura aparecem aqui assim que o time responder.</p>
-        </div>
-      )}
+      {/* Resultado (área do PDF) */}
+      <div className="pdf-area space-y-6">
+        {temResultado ? (
+          <ResultadoEnpsView result={result} />
+        ) : (
+          <div className="bg-soul-parchment rounded-3xl p-8 text-center border border-soul-mist/60">
+            <div className="text-3xl mb-2">⏳</div>
+            <p className="text-sm text-soul-ink/68 font-sans">Ainda sem respostas. O índice e a leitura aparecem aqui assim que o time responder.</p>
+          </div>
+        )}
+      </div>
 
-      <DetalheEnpsClient coletaId={coleta.id} convites={convites} empresa={empresa} />
+      {/* Gestão de convidados — fora do PDF */}
+      <div className="no-print">
+        <DetalheEnpsClient coletaId={coleta.id} convites={convites} empresa={empresa} />
+      </div>
     </div>
   )
 }

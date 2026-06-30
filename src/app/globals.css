@@ -44,6 +44,18 @@
   --rep-page-bg: #ffffff;
 }
 
+/* ── Impressão de páginas do dashboard (360°, eNPS) ────────────
+   Esconde a navegação e clareia os cards dentro de .pdf-area,
+   para "Salvar como PDF" sair como documento branco e limpo. */
+@media print {
+  .app-shell-root { background: #ffffff !important; }
+  .no-print { display: none !important; }
+  .pdf-area { color: #2a2d33; }
+  .pdf-area [class*="text-soul-ink"] { color: #2a2d33; }
+  .pdf-area .bg-soul-parchment { background: #ffffff; border-color: rgba(0,0,0,0.12); box-shadow: none; }
+  .pdf-area svg text { fill: #3a3d45; }
+}
+
 @layer base {
   :root {
     /* Fontes */
