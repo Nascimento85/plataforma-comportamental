@@ -1325,3 +1325,145 @@ export function ComunicacaoPrintReport({ result }: { result: Record<string, unkn
     </div>
   )
 }
+
+// ============================================================
+// QI / RACIOCÍNIO LÓGICO (teste pontuado, com revisão de gabarito)
+// ============================================================
+export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    totalCorretas: number
+    totalQuestoes: number
+    scoreGeral: number
+    faixaLabel: string
+    vistaGeral: string
+    recomendacoes: string[]
+    pilarForteTexto: string
+    pilarFracoTexto: string
+    porPilar: Array<{ pilar: string; label: string; corretas: number; total: number; score: number }>
+    revisao: Array<{
+      id: number; pilarLabel: string; enunciado: string; alternativas: string[]
+      escolhida: number; correta: number; acertou: boolean; explicacao: string
+    }>
+    limites: string[]
+  }
+
+  const LETRAS = ['A', 'B', 'C', 'D']
+  const scoreCor =
+    r.scoreGeral >= 80 ? '#74d6a0' :
+    r.scoreGeral >= 60 ? '#6f86c9' :
+    r.scoreGeral >= 40 ? GOLD_LT : '#f0a59e'
+  const TRACK_BG = 'rgba(255,255,255,0.08)'
+  const pilaresOrdenados = [...r.porPilar].sort((a, b) => b.score - a.score)
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      {/* Cabeçalho com nota */}
+      <div style={{ textAlign: 'center', marginBottom: 22 }}>
+        <div style={{ width: 44, height: 3, background: GOLD, borderRadius: 2, margin: '0 auto 16px' }} />
+        <div style={{
+          width: 92, height: 92, borderRadius: '50%', margin: '0 auto 12px',
+          background: scoreCor, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: 'Georgia, serif', fontSize: 30, fontWeight: 700, color: '#15130f',
+        }}>{r.scoreGeral}%</div>
+        <h2 style={{ fontFamily: 'Georgia, serif', fontSize: 24, fontWeight: 600, color: INK, margin: '0 0 4px' }}>{r.faixaLabel}</h2>
+        <p style={{ fontSize: 12.5, color: MUTED, margin: 0 }}>
+          {r.totalCorretas} de {r.totalQuestoes} questões corretas
+        </p>
+      </div>
+
+      {/* Leitura geral */}
+      <div style={card}>
+        <p style={kicker}>Leitura do resultado</p>
+        <p style={{ ...itemBody, fontSize: 12.5 }}>{r.vistaGeral}</p>
+      </div>
+
+      {/* Desempenho por pilar */}
+      <div style={card}>
+        <p style={kicker}>Desempenho por pilar</p>
+        {pilaresOrdenados.map((p) => (
+          <div key={p.pilar} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: 600, color: '#cfd5e0' }}>{p.label}</span>
+              <span style={{ color: MUTED }}>{p.corretas}/{p.total} · {p.score}%</span>
+            </div>
+            <div style={{ height: 8, background: TRACK_BG, borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${p.score}%`, background: scoreCor, borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Forte e fraco */}
+      <div style={{ ...card, background: 'rgba(116,214,160,0.08)', border: '1px solid rgba(116,214,160,0.22)' }}>
+        <p style={{ ...kicker, color: '#74d6a0' }}>Seu ponto mais forte</p>
+        <p style={itemBody}>{r.pilarForteTexto}</p>
+      </div>
+      <div style={{ ...card, background: 'rgba(240,165,158,0.07)', border: '1px solid rgba(240,165,158,0.2)' }}>
+        <p style={{ ...kicker, color: '#f0a59e' }}>Onde focar o treino</p>
+        <p style={itemBody}>{r.pilarFracoTexto}</p>
+      </div>
+
+      {/* Recomendações */}
+      <div style={{ ...card, background: '#1e2740', borderLeft: `3px solid ${GOLD}` }}>
+        <p style={{ ...kicker, color: GOLD_LT }}>Recomendações de desenvolvimento</p>
+        {r.recomendacoes.map((rec, i) => (
+          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: i === r.recomendacoes.length - 1 ? 0 : 9 }}>
+            <span style={{ color: GOLD_LT, fontWeight: 700, flexShrink: 0 }}>→</span>
+            <p style={itemBody}>{rec}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Revisão com gabarito */}
+      <div style={card}>
+        <p style={kicker}>Revisão das questões (com gabarito)</p>
+        {r.revisao.map((q, idx) => (
+          <div key={q.id} style={{
+            marginBottom: idx === r.revisao.length - 1 ? 0 : 14,
+            paddingBottom: idx === r.revisao.length - 1 ? 0 : 14,
+            borderBottom: idx === r.revisao.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.06)',
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
+              <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: MUTED }}>
+                {idx + 1}. {q.pilarLabel}
+              </span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: q.acertou ? '#74d6a0' : '#f0a59e' }}>
+                {q.acertou ? '✓ Acertou' : '✗ Errou'}
+              </span>
+            </div>
+            <p style={{ ...itemBody, color: INK, marginBottom: 7 }}>{q.enunciado}</p>
+            {q.alternativas.map((alt, i) => {
+              const optValue = i + 1
+              const isCorreta = optValue === q.correta
+              const isEscolhidaErrada = optValue === q.escolhida && !q.acertou
+              const cor = isCorreta ? '#74d6a0' : isEscolhidaErrada ? '#f0a59e' : BODY
+              return (
+                <p key={i} style={{
+                  fontSize: 11.5, lineHeight: 1.5, margin: '0 0 3px', color: cor,
+                  fontWeight: (isCorreta || isEscolhidaErrada) ? 700 : 400,
+                }}>
+                  {LETRAS[i]}) {alt}
+                  {isCorreta ? '  ✓' : isEscolhidaErrada ? '  ✗ (sua resposta)' : ''}
+                </p>
+              )
+            })}
+            <p style={{ fontSize: 11, lineHeight: 1.55, color: MUTED, margin: '6px 0 0', fontStyle: 'italic' }}>
+              {q.explicacao}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Limites */}
+      <div style={{ ...card, background: 'rgba(255,255,255,0.03)', marginBottom: 0 }}>
+        <p style={{ ...kicker, color: MUTED }}>Como interpretar (e limites)</p>
+        {r.limites.map((lim, i) => (
+          <div key={i} style={{ display: 'flex', gap: 8, marginBottom: i === r.limites.length - 1 ? 0 : 7 }}>
+            <span style={{ color: MUTED, flexShrink: 0 }}>•</span>
+            <p style={{ ...itemBody, color: MUTED }}>{lim}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

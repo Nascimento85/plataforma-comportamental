@@ -14,6 +14,7 @@ import BigFiveTest from '@/components/tests/BigFiveTest'
 import QMTTest from '@/components/tests/QMTTest'
 import LideracaSituacionalTest from '@/components/tests/LideracaSituacionalTest'
 import ComunicacaoTest from '@/components/tests/ComunicacaoTest'
+import QITest from '@/components/tests/QITest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -35,6 +36,10 @@ const INTROS: Record<string, {
   cta: string
   duration: string
   questions: number
+  unit?: string        // rótulo da unidade (default "afirmações")
+  scaleTop?: string    // valor do bloco de escala (default "1–5")
+  scaleBottom?: string // rótulo do bloco de escala (default "escala de resposta")
+  disclaimer?: string  // rodapé do CTA
 }> = {
   DISC: {
     title: 'DISC — Perfil Comportamental',
@@ -316,6 +321,30 @@ const INTROS: Record<string, {
     duration: '7–11 min',
     questions: 20,
   },
+  QI: {
+    title: 'Teste de QI — Raciocínio Lógico',
+    subtitle: 'Aptidão cognitiva em 4 pilares do raciocínio',
+    image: '/tests/qi.svg',
+    description: 'Um teste de raciocínio lógico e aptidão cognitiva nos moldes das grandes provas de seleção (GMAT, matrizes de raciocínio, processos seletivos de tecnologia). Diferente dos mapas de personalidade, aqui existe resposta certa: ele mede como você resolve problemas de lógica, números, dedução e padrões. Usado em triagem de candidatos e em desenvolvimento — porque raciocínio lógico é treinável.',
+    tips: [
+      { icon: '🧠', text: 'Leia cada problema com calma. A maioria dos erros vem da pressa, não da dificuldade.' },
+      { icon: '✏️', text: 'Pode usar papel e caneta para rascunhar contas e cenários — é incentivado.' },
+      { icon: '🎯', text: 'Cada questão tem uma única resposta correta. Escolha a melhor entre as quatro.' },
+    ],
+    discovers: [
+      'Seu desempenho geral e a faixa de classificação',
+      'Sua pontuação em cada um dos 4 pilares (lógico, analítico, verbal e sequências)',
+      'Seu pilar mais forte e o que mais precisa de treino',
+      'A revisão completa, com a explicação de cada questão',
+    ],
+    cta: 'Iniciar o Teste de Raciocínio',
+    duration: '12–18 min',
+    questions: 20,
+    unit: 'questões',
+    scaleTop: 'A–D',
+    scaleBottom: 'alternativas',
+    disclaimer: 'Existe resposta certa. Vá com calma e raciocine cada questão.',
+  },
 }
 
 // ── Componente principal ──────────────────────────────────────
@@ -364,15 +393,15 @@ export default function TestIntroWrapper({ testType, assessmentId, token, employ
           <div className="flex gap-4 mt-4 pt-4 border-t border-gray-100">
             <div className="text-center flex-1">
               <p className="text-xl font-bold text-brand-600">{intro.questions}</p>
-              <p className="text-xs text-gray-400">afirmações</p>
+              <p className="text-xs text-gray-400">{intro.unit ?? 'afirmações'}</p>
             </div>
             <div className="text-center flex-1">
               <p className="text-xl font-bold text-brand-600">{intro.duration}</p>
               <p className="text-xs text-gray-400">tempo médio</p>
             </div>
             <div className="text-center flex-1">
-              <p className="text-xl font-bold text-brand-600">1–5</p>
-              <p className="text-xs text-gray-400">escala de resposta</p>
+              <p className="text-xl font-bold text-brand-600">{intro.scaleTop ?? '1–5'}</p>
+              <p className="text-xs text-gray-400">{intro.scaleBottom ?? 'escala de resposta'}</p>
             </div>
           </div>
         </div>
@@ -408,7 +437,7 @@ export default function TestIntroWrapper({ testType, assessmentId, token, employ
           {intro.cta} →
         </button>
         <p className="text-center text-xs text-gray-400 mt-3">
-          Não há respostas certas ou erradas. Seja você mesmo.
+          {intro.disclaimer ?? 'Não há respostas certas ou erradas. Seja você mesmo.'}
         </p>
       </div>
     )
@@ -423,7 +452,7 @@ export default function TestIntroWrapper({ testType, assessmentId, token, employ
         </div>
         <div>
           <p className="font-semibold text-gray-900 text-sm">{intro.title}</p>
-          <p className="text-xs text-gray-400">{firstName} · {intro.questions} afirmações</p>
+          <p className="text-xs text-gray-400">{firstName} · {intro.questions} {intro.unit ?? 'afirmações'}</p>
         </div>
       </div>
       {renderTest(testType, assessmentId, token)}
@@ -475,6 +504,9 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'COMUNICACAO') return (
     <ComunicacaoTest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'QI') return (
+    <QITest assessmentId={assessmentId} token={token} />
   )
   return null
 }

@@ -27,6 +27,7 @@ import {
   QmtPrintReport,
   LsPrintReport,
   ComunicacaoPrintReport,
+  QiPrintReport,
 } from './PrintReports'
 
 /**
@@ -115,6 +116,7 @@ const TEST_LABELS: Record<string, string> = {
   QMT:                    'QMT — Quociente Mental Triádico',
   LIDERANCA_SITUACIONAL:  'Liderança Situacional — Hersey e Blanchard',
   COMUNICACAO:            'Mapa da Comunicação',
+  QI:                     'Teste de QI — Raciocínio Lógico',
 }
 
 // ── Componentes de UI ────────────────────────────────────────
@@ -1168,6 +1170,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'QMT' ? (<QmtPrintReport result={rd} />) : null}
         {assessment.testType === 'LIDERANCA_SITUACIONAL' ? (<LsPrintReport result={rd} />) : null}
         {assessment.testType === 'COMUNICACAO' ? (<ComunicacaoPrintReport result={rd} />) : null}
+        {assessment.testType === 'QI' ? (<QiPrintReport result={rd} />) : null}
 
         {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
         {!isPrint && reportId && !isPremiumUnlocked && (

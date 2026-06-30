@@ -21,6 +21,7 @@ export const TEST_PRICE = {
   QMT:                     3,
   LIDERANCA_SITUACIONAL:   5,
   COMUNICACAO:             5,
+  QI:                      4, // Raciocínio Lógico / aptidão cognitiva (pontuado)
   PREMIUM_REPORT:         10, // só com créditos PAGOS
 } as const satisfies Record<string, number>
 

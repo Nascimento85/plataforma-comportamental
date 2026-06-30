@@ -187,6 +187,24 @@ const TEST_TYPES: TestType[] = [
     badge: 'Novo',
   },
   {
+    value: 'QI',
+    label: 'Teste de QI — Raciocínio Lógico',
+    short: 'QI · Raciocínio',
+    category: 'BEHAVIORAL',
+    credits: TEST_PRICE.QI,
+    minutos: 15,
+    image: '/tests/qi.svg',
+    hook: 'Aptidão cognitiva nos moldes de GMAT, Gupy e Kenoby.',
+    description:
+      'Diferente dos mapas de personalidade, este teste é pontuado, com resposta certa. Mede o raciocínio lógico do candidato em quatro pilares: lógico-matemático (porcentagens, taxas, probabilidade), analítico (ordenação e dedução), verbal (silogismos e analogias) e sequências (padrões). É a ferramenta clássica de triagem cognitiva em processos seletivos de tecnologia e funções analíticas.',
+    bullets: [
+      '20 questões inéditas sorteadas por candidato, com gabarito',
+      'Score geral, pontuação por pilar e faixa de classificação',
+      'Revisão completa com a explicação comentada de cada questão',
+    ],
+    badge: 'Novo',
+  },
+  {
     value: 'BIG_FIVE',
     label: 'Big Five — Estilo de Liderança Corporativa',
     short: 'Big Five',

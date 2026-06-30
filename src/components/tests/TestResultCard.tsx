@@ -905,6 +905,60 @@ export default function TestResultCard({ testType, result }: TestResultCardProps
     )
   }
 
+  // ────────────────────────────────────────────────────────────
+  // QI / Raciocínio Lógico (teste pontuado)
+  // ────────────────────────────────────────────────────────────
+  if (testType === 'QI') {
+    const r = result as {
+      totalCorretas: number
+      totalQuestoes: number
+      scoreGeral: number
+      faixaLabel: string
+      vistaGeral: string
+      porPilar: Array<{ pilar: string; label: string; corretas: number; total: number; score: number }>
+    }
+
+    const faixaCor =
+      r.scoreGeral >= 80 ? '#7a9e7e' :
+      r.scoreGeral >= 60 ? '#3d4f7c' :
+      r.scoreGeral >= 40 ? '#c9a84c' : '#c4633a'
+
+    return (
+      <div className="space-y-6">
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full text-white text-3xl font-bold mb-4"
+               style={{ background: faixaCor }}>
+            {r.scoreGeral}%
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">{r.faixaLabel}</h2>
+          <p className="text-sm text-gray-500 mt-1">
+            Você acertou <strong>{r.totalCorretas}</strong> de <strong>{r.totalQuestoes}</strong> questões
+          </p>
+        </div>
+
+        <div className="card p-5 space-y-3">
+          <h3 className="font-semibold text-gray-800 text-sm">Desempenho por pilar</h3>
+          {[...r.porPilar].sort((a, b) => b.score - a.score).map((p) => (
+            <div key={p.pilar}>
+              <div className="flex justify-between text-xs text-gray-600 mb-1">
+                <span className="font-medium">{p.label}</span>
+                <span>{p.corretas}/{p.total} · {p.score}%</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-full rounded-full" style={{ width: `${p.score}%`, background: faixaCor }} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="card p-5">
+          <h3 className="font-semibold text-gray-800 text-sm mb-2">Leitura do resultado</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">{r.vistaGeral}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="text-center py-8 text-gray-500">
       Resultado processado com sucesso.

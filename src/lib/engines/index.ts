@@ -73,3 +73,10 @@ export {
   COMM_ASSERT_LABELS,
   COMM_ASSERT_DESC,
 } from './comunicacao'
+export {
+  calculateQi,
+  getQiSessionQuestions,
+  QI_QUESTIONS,
+  QI_PILAR_LABELS,
+  QI_FAIXA_LABELS,
+} from './qi'

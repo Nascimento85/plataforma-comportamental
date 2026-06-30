@@ -185,6 +185,27 @@ const LENSES: Lens[] = [
     color: '#86b58a',
     emoji: '🗣️',
   },
+  {
+    key: 'qi',
+    testType: 'QI',
+    name: 'Teste de QI — Raciocínio Lógico',
+    tagline: 'Aptidão cognitiva nos moldes de GMAT, Gupy e Kenoby.',
+    short: 'QI',
+    credits: TEST_PRICE.QI,
+    pillar: 'Lógico-matemático · Analítico · Verbal · Sequências',
+    description:
+      'Diferente dos mapas de personalidade, este teste é pontuado: tem resposta certa. Mede a capacidade de raciocínio lógico em quatro pilares — números e porcentagens, dedução analítica, silogismos verbais e padrões. É a ferramenta clássica de triagem cognitiva em processos seletivos de tecnologia e posições analíticas.',
+    application:
+      'Triagem de candidatos em processos seletivos, avaliação de raciocínio para funções analíticas e de resolução de problemas, e desenvolvimento — porque raciocínio lógico é treinável.',
+    bullets: [
+      '20 questões inéditas (5 por pilar), sorteadas por candidato',
+      'Score geral, pontuação por pilar e faixa de classificação',
+      'Revisão completa com gabarito comentado de cada questão',
+      'Distratoras que emulam vieses cognitivos (não chutes óbvios)',
+    ],
+    color: '#c9a84c',
+    emoji: '🧠',
+  },
 ]
 
 // ═══════════════════════════════════════════════════════════════════
