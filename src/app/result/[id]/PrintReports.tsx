@@ -199,7 +199,7 @@ function PrintTags({ items, color }: { items: string[]; color: string }) {
       {items.map((it, i) => (
         <span key={i} style={{
           fontSize: 11, fontWeight: 500, padding: '4px 11px', borderRadius: 999,
-          background: 'rgba(255,255,255,0.05)', color, border: `1px solid ${color}40`,
+          background: 'var(--rep-track)', color, border: `1px solid ${color}40`,
         }}>
           {it}
         </span>
@@ -210,7 +210,7 @@ function PrintTags({ items, color }: { items: string[]; color: string }) {
 
 function PrintInfoBox({ label, text, color }: { label: string; text: string; color: string }) {
   return (
-    <div style={{ ...card, marginBottom: 0, background: 'rgba(255,255,255,0.03)', borderLeft: `3px solid ${color}` }}>
+    <div style={{ ...card, marginBottom: 0, background: 'var(--rep-track)', borderLeft: `3px solid ${color}` }}>
       <p style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color, margin: '0 0 6px' }}>{label}</p>
       <p style={{ ...itemBody }}>{text}</p>
     </div>
@@ -410,7 +410,7 @@ export function EnneagramPrintReport({ result }: { result: Record<string, unknow
           <PrintBar key={t}
             label={`Tipo ${t}${t === r.predominant ? ` — ${r.report.name}` : ''}`}
             pct={((r.scores[String(t)] ?? 0) / 75) * 100}
-            color={t === r.predominant ? col : 'rgba(255,255,255,0.25)'}
+            color={t === r.predominant ? col : 'var(--rep-track)'}
             bold={t === r.predominant} />
         ))}
       </div>
@@ -865,7 +865,7 @@ export function EmotionalIntelligencePrintReport({ result }: { result: Record<st
         <div style={card}>
           <p style={kicker}>Sua maior forca: {LABELS[primaryDom.domain]}</p>
           <p style={{ ...itemBody, marginBottom: 12 }}>{primaryDom.report.description}</p>
-          <div style={{ background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${pc}`, borderRadius: 8, padding: '10px 14px', marginBottom: 12 }}>
+          <div style={{ background: 'var(--rep-track)', borderLeft: `3px solid ${pc}`, borderRadius: 8, padding: '10px 14px', marginBottom: 12 }}>
             <p style={{ ...itemBody, color: 'var(--rep-ink2)' }}>{primaryDom.feedback}</p>
           </div>
           <p style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: MUTED, margin: '0 0 8px' }}>Sub-temas avaliados</p>
@@ -877,7 +877,7 @@ export function EmotionalIntelligencePrintReport({ result }: { result: Record<st
         <div style={card}>
           <p style={kicker}>Foco de desenvolvimento: {LABELS[devDom.domain]}</p>
           <div style={{ background: 'rgba(224,166,75,0.10)', borderLeft: '3px solid #e0a64b', borderRadius: 8, padding: '10px 14px', marginBottom: 12 }}>
-            <p style={{ ...itemBody, color: '#e6c79a' }}>{devDom.feedback}</p>
+            <p style={{ ...itemBody, color: 'var(--rep-cream)' }}>{devDom.feedback}</p>
           </div>
           <p style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: MUTED, margin: '0 0 8px' }}>Praticas recomendadas</p>
           <PrintBullets items={devDom.report.developmentTips} color={dev} />
@@ -887,7 +887,7 @@ export function EmotionalIntelligencePrintReport({ result }: { result: Record<st
       <div style={{ ...card, marginBottom: 0 }}>
         <p style={kicker}>Detalhamento por dominio</p>
         {r.domains.map((dm, i) => (
-          <div key={dm.domain} style={{ background: 'rgba(255,255,255,0.03)', borderLeft: `3px solid ${COLORS[dm.domain]}`, borderRadius: 8, padding: '10px 14px', marginBottom: i === r.domains.length - 1 ? 0 : 10 }}>
+          <div key={dm.domain} style={{ background: 'var(--rep-track)', borderLeft: `3px solid ${COLORS[dm.domain]}`, borderRadius: 8, padding: '10px 14px', marginBottom: i === r.domains.length - 1 ? 0 : 10 }}>
             <p style={{ fontSize: 12.5, fontWeight: 700, color: COLORS[dm.domain], margin: '0 0 4px' }}>{LABELS[dm.domain]} ({dm.percentage}%)</p>
             <p style={{ ...itemBody }}>{dm.feedback}</p>
           </div>
@@ -1422,7 +1422,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
           <div key={q.id} style={{
             marginBottom: idx === r.revisao.length - 1 ? 0 : 14,
             paddingBottom: idx === r.revisao.length - 1 ? 0 : 14,
-            borderBottom: idx === r.revisao.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.06)',
+            borderBottom: idx === r.revisao.length - 1 ? 'none' : '1px solid var(--rep-card-br)',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 }}>
               <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: MUTED }}>
@@ -1456,7 +1456,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
       </div>
 
       {/* Limites */}
-      <div style={{ ...card, background: 'rgba(255,255,255,0.03)', marginBottom: 0 }}>
+      <div style={{ ...card, background: 'var(--rep-track)', marginBottom: 0 }}>
         <p style={{ ...kicker, color: MUTED }}>Como interpretar (e limites)</p>
         {r.limites.map((lim, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, marginBottom: i === r.limites.length - 1 ? 0 : 7 }}>
