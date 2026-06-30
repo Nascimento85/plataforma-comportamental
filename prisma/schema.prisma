@@ -761,6 +761,62 @@ model Avaliacao360Resposta {
 }
 
 // ============================================================
+// eNPS (Employee Net Promoter Score) — pesquisa de clima anônima
+// Mesmo anonimato do NR-1: coleta + convite (controle) + resposta
+// anônima (nota 0-10, motivo, tempo de casa), sem FK de identidade.
+// ============================================================
+
+model EnpsColeta {
+  id        String   @id @default(cuid())
+  companyId String
+  titulo    String?
+  status    String   @default("ACTIVE")  // ACTIVE | CLOSED
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  convites  EnpsConvite[]
+  respostas EnpsResposta[]
+
+  @@index([companyId])
+}
+
+model EnpsConvite {
+  id          String    @id @default(cuid())
+  coletaId    String
+  companyId   String
+  nome        String
+  email       String
+  token       String    @unique
+  status      String    @default("PENDING")  // PENDING | COMPLETED
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  coleta EnpsColeta @relation(fields: [coletaId], references: [id], onDelete: Cascade)
+
+  @@index([coletaId])
+  @@index([companyId])
+  @@index([status])
+}
+
+model EnpsResposta {
+  id         String   @id @default(cuid())
+  coletaId   String
+  companyId  String
+  nota       Int      // 0 a 10
+  categoria  String   // PROMOTOR | NEUTRO | DETRATOR
+  tempoCasa  String?  // ATE_3M | DE_3M_1A | DE_1A_2A | MAIS_2A
+  motivo     String?  @db.Text
+  deviceHash String?
+  createdAt  DateTime @default(now())
+  // ATENCAO: sem FK para o convite — anonimato blindado
+
+  coleta EnpsColeta @relation(fields: [coletaId], references: [id], onDelete: Cascade)
+
+  @@index([coletaId])
+  @@index([companyId])
+}
+
+// ============================================================
 // DIAGNOSTICO DE LIDERANCA PME (lead gen, publico, sem login)
 // Fluxo em cascata: o Dono responde, gera um token para o Lider
 // responder, e o sistema cruza os dados gerando os gaps.

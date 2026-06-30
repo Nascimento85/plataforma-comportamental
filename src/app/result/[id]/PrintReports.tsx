@@ -29,8 +29,8 @@ const kicker: React.CSSProperties = {
   fontSize: 11, fontWeight: 700, letterSpacing: '2px',
   textTransform: 'uppercase', color: GOLD, margin: '0 0 12px',
 }
-const itemTitle: React.CSSProperties = { fontSize: 13.5, fontWeight: 700, color: INK, margin: '0 0 3px' }
-const itemBody:  React.CSSProperties = { fontSize: 12, lineHeight: 1.65, color: BODY, margin: 0 }
+const itemTitle: React.CSSProperties = { fontSize: 14.5, fontWeight: 700, color: INK, margin: '0 0 3px' }
+const itemBody:  React.CSSProperties = { fontSize: 13.5, lineHeight: 1.62, color: BODY, margin: 0 }
 
 // ============================================================
 // BIG FIVE
@@ -1374,7 +1374,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
       {/* Leitura geral */}
       <div style={card}>
         <p style={kicker}>Leitura do resultado</p>
-        <p style={{ ...itemBody, fontSize: 12.5 }}>{r.vistaGeral}</p>
+        <p style={{ ...itemBody, fontSize: 15 }}>{r.vistaGeral}</p>
       </div>
 
       {/* Desempenho por pilar */}
@@ -1439,7 +1439,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
               const cor = isCorreta ? '#74d6a0' : isEscolhidaErrada ? '#f0a59e' : BODY
               return (
                 <p key={i} style={{
-                  fontSize: 11.5, lineHeight: 1.5, margin: '0 0 3px', color: cor,
+                  fontSize: 13.5, lineHeight: 1.5, margin: '0 0 4px', color: cor,
                   fontWeight: (isCorreta || isEscolhidaErrada) ? 700 : 400,
                 }}>
                   {LETRAS[i]}) {alt}
@@ -1447,7 +1447,7 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
                 </p>
               )
             })}
-            <p style={{ fontSize: 11, lineHeight: 1.55, color: MUTED, margin: '6px 0 0', fontStyle: 'italic' }}>
+            <p style={{ fontSize: 13, lineHeight: 1.55, color: MUTED, margin: '7px 0 0', fontStyle: 'italic' }}>
               {q.explicacao}
             </p>
           </div>
