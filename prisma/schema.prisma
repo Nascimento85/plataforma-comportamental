@@ -692,6 +692,75 @@ model LiderResposta {
 }
 
 // ============================================================
+// AVALIACAO 360 GRAUS (multiavaliador)
+// Uma pessoa (avaliado) e avaliada por si (AUTO), GESTOR, PARES e
+// SUBORDINADOS. Mesmo anonimato blindado: o convite guarda identidade
+// + papel; a resposta guarda so o papel + dados, ligada ao CICLO e
+// nunca ao convite. Pares/subordinados aparecem so agregados.
+// companyId/teamId sao escalares; as FKs (cascade/setnull) ficam no
+// SQL da migration para nao alterar os modelos Company/TalentTeam.
+// ============================================================
+
+model Avaliacao360 {
+  id            String   @id @default(cuid())
+  companyId     String
+  teamId        String?
+  avaliadoNome  String
+  avaliadoEmail String?
+  titulo        String?  // ex: "360 Q3 2026"
+  status        String   @default("ACTIVE")  // ACTIVE | CLOSED
+  expiresAt     DateTime
+  createdAt     DateTime @default(now())
+
+  convites  Avaliacao360Convite[]
+  respostas Avaliacao360Resposta[]
+
+  @@index([companyId])
+  @@index([teamId])
+}
+
+// ---- Convite com identidade + papel (controle de quem respondeu) ----
+model Avaliacao360Convite {
+  id          String    @id @default(cuid())
+  avaliacaoId String
+  companyId   String
+  role        String    // AUTO | GESTOR | PAR | SUBORDINADO
+  nome        String
+  email       String
+  token       String    @unique
+  status      String    @default("PENDING")  // PENDING | COMPLETED
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  avaliacao Avaliacao360 @relation(fields: [avaliacaoId], references: [id], onDelete: Cascade)
+
+  @@index([avaliacaoId])
+  @@index([companyId])
+  @@index([status])
+}
+
+// ---- Resposta ANONIMA (ligada ao ciclo + papel, sem FK de convite) ----
+model Avaliacao360Resposta {
+  id             String   @id @default(cuid())
+  avaliacaoId    String
+  companyId      String
+  role           String   // AUTO | GESTOR | PAR | SUBORDINADO
+  respostas      String   @db.Text  // JSON {perguntaId: 1..5}
+  scores         String   @db.Text  // JSON {scoreFinal, pilares}
+  continuarTexto String?  @db.Text
+  melhorarTexto  String?  @db.Text
+  deviceHash     String?
+  createdAt      DateTime @default(now())
+  // ATENCAO: sem FK para o convite — anonimato blindado
+
+  avaliacao Avaliacao360 @relation(fields: [avaliacaoId], references: [id], onDelete: Cascade)
+
+  @@index([avaliacaoId])
+  @@index([companyId])
+  @@index([role])
+}
+
+// ============================================================
 // DIAGNOSTICO DE LIDERANCA PME (lead gen, publico, sem login)
 // Fluxo em cascata: o Dono responde, gera um token para o Lider
 // responder, e o sistema cruza os dados gerando os gaps.

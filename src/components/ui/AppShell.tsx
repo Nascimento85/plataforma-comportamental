@@ -240,6 +240,7 @@ function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
       items: [
         { href: '/dashboard/candidates',    label: 'Candidatos',      iconKey: 'candidates' },
         { href: '/dashboard/gestao-times',  label: 'Gestão de Equipes', iconKey: 'talentgrid' },
+        { href: '/dashboard/avaliacao-360', label: 'Avaliação 360°',  iconKey: 'leadership' },
         { href: '/dashboard/reports',       label: 'Relatórios',      iconKey: 'reports'    },
       ],
     },
