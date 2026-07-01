@@ -406,6 +406,10 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
     e.preventDefault()
     setError('')
     if (selected.length === 0) { setError('Selecione ao menos um teste.'); return }
+    if (form.employeeName.trim().length < 2 || !form.employeeEmail.includes('@')) {
+      setError('Para gerar o link, preencha o nome e o e-mail do candidato (campos no topo do formulário).')
+      return
+    }
     setLoading(true)
     try {
       const endpoint = isBundle ? '/api/bundles' : '/api/assessments'
@@ -677,6 +681,12 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       </div>
                     </div>
 
+                    {error && (
+                      <div className="rounded-xl px-4 py-3 text-[14px] font-sans font-semibold text-center"
+                           style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
+                        {error}
+                      </div>
+                    )}
                     <div className="flex flex-col sm:flex-row gap-3 pt-2">
                       <button
                         type="button"
