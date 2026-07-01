@@ -180,7 +180,7 @@ export default async function TestPage({ params }: PageProps) {
 function TestShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
-      <header className="h-14 flex items-center px-6" style={{ background: 'rgba(250,247,242,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
+      <header className="h-14 flex items-center px-6" style={{ background: 'rgba(23,24,28,0.92)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>

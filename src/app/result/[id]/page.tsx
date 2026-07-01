@@ -1082,12 +1082,39 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
   // Cast unico do resultData para passar aos componentes (evita generics inline no JSX).
   const rd: Record<string, unknown> = resultData as Record<string, unknown>
 
+  // ─── Encadeamento de combo (bundle) ───────────────────────
+  // Se este teste faz parte de um combo, busca o próximo teste ainda não
+  // concluído para oferecer o "Continuar" ao candidato.
+  let bundleNext: { token: string; label: string; index: number; total: number; remaining: number } | null = null
+  let bundleAllDone = false
+  if (assessment.bundleId) {
+    const siblings = await prisma.assessment.findMany({
+      where: { bundleId: assessment.bundleId },
+      orderBy: { bundleOrder: 'asc' },
+      select: { token: true, testType: true, status: true },
+    })
+    const total = siblings.length
+    const nextIdx = siblings.findIndex((s) => s.status !== 'COMPLETED')
+    if (nextIdx >= 0) {
+      const nx = siblings[nextIdx]
+      bundleNext = {
+        token: nx.token,
+        label: TEST_LABELS[nx.testType] ?? nx.testType,
+        index: nextIdx + 1,
+        total,
+        remaining: total - nextIdx,
+      }
+    } else {
+      bundleAllDone = total > 0
+    }
+  }
+
   return (
     <div className={`min-h-screen report-theme ${isPrint ? 'report-print' : ''}`} style={{ background: 'var(--rep-page-bg)' }}>
 
       {/* ── Header (oculto no modo print) ── */}
       {!isPrint && (
-        <header className="sticky top-0 z-10" style={{ background: 'rgba(250,247,242,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
+        <header className="sticky top-0 z-10" style={{ background: 'rgba(23,24,28,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(58,61,69,0.7)' }}>
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -1134,6 +1161,31 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
 
       {/* ── Conteúdo ── */}
       <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
+
+        {/* Continuar combo: próximo teste do bundle (oculto no print) */}
+        {!isPrint && bundleNext && (
+          <a href={`/test/${bundleNext.token}`}
+             className="block rounded-3xl p-5 text-center no-underline transition-all hover:-translate-y-px"
+             style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)', boxShadow: '0 6px 20px rgba(201,168,76,0.28)' }}>
+            <p className="text-[12px] font-sans font-bold uppercase tracking-[0.15em]" style={{ color: 'rgba(28,26,23,0.62)' }}>
+              Combo · teste {bundleNext.index} de {bundleNext.total}
+            </p>
+            <p className="font-serif font-semibold text-lg mt-1" style={{ color: '#1c1a17' }}>
+              Continuar para o próximo teste: {bundleNext.label} →
+            </p>
+            <p className="text-[13px] font-sans mt-1" style={{ color: 'rgba(28,26,23,0.72)' }}>
+              Você concluiu este teste. {bundleNext.remaining === 1 ? 'Falta só o último teste do combo.' : `Faltam ${bundleNext.remaining} testes do combo.`}
+            </p>
+          </a>
+        )}
+        {!isPrint && bundleAllDone && (
+          <div className="rounded-3xl p-5 text-center bg-soul-parchment" style={{ border: '1px solid rgba(122,158,126,0.3)' }}>
+            <p className="font-serif font-semibold text-lg text-soul-ink">🏆 Combo concluído!</p>
+            <p className="text-[13px] font-sans mt-1 text-soul-ink/70">
+              Você completou todos os testes deste combo. Os relatórios ficam disponíveis para a empresa solicitante.
+            </p>
+          </div>
+        )}
 
         {/* Card de identidade (oculto no modo print - já está na capa) */}
         {!isPrint && (
