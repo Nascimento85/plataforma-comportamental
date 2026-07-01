@@ -27,6 +27,8 @@ const PUBLIC_ROUTES = [
   '/api/enps',         // APIs públicas do eNPS (respostas)
   '/diagnostico-pme',  // diagnóstico de liderança PME (lead gen público)
   '/api/diagnostico-pme', // APIs públicas do diagnóstico PME
+  '/experimente',      // degustação via QR Code (palestras) — sem cadastro
+  '/api/experimente',  // API pública do funil de degustação
   '/precos',           // landing pública de planos PJ
   '/politica-de-privacidade',  // documento legal LGPD
   '/politica-de-cookies',       // documento legal LGPD

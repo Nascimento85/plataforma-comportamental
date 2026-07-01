@@ -18,6 +18,10 @@ const schema = z.object({
   phone:     z.string().min(8, 'Telefone inválido'),
   instagram: z.string().optional(),
   birthDate: z.string().optional(),
+  // Degustação via QR → concede 7 dias de trial premium e converte o lead
+  ref:         z.string().optional(),
+  trialLeadId: z.string().optional(),
+  src:         z.string().optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -31,7 +35,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { name, email, password, type, phone, instagram, birthDate } = parsed.data
+    const { name, email, password, type, phone, instagram, birthDate, ref, trialLeadId } = parsed.data
 
     const existing = await prisma.company.findUnique({ where: { email } })
     if (existing) {
@@ -56,6 +60,30 @@ export async function POST(request: NextRequest) {
 
       // 🎟️ Passaporte de Autoconhecimento: 10 créditos / 7 dias
       const passport = await grantWelcomePassport(tx, company.id)
+
+      // 🎁 Degustação via QR → 7 dias de trial premium interno (sem Stripe)
+      if (ref === 'trial') {
+        const now = new Date()
+        const trialEnd = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (tx as any).subscription.create({
+          data: {
+            companyId:  company.id,
+            plan:       'PROFISSIONAL',
+            status:     'TRIALING',
+            source:     'TRIAL_INTERNO',
+            trialStart: now,
+            trialEnd,
+          },
+        })
+        if (trialLeadId) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          await (tx as any).trialLead.updateMany({
+            where: { id: trialLeadId },
+            data:  { status: 'CONVERTED', convertedCompanyId: company.id, convertedAt: now },
+          })
+        }
+      }
 
       return { company, passport }
     })

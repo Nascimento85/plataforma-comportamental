@@ -525,6 +525,29 @@ model Subscription {
 }
 
 // ============================================================
+// TRIAL LEAD — degustação via QR Code (palestras / rodadas de negócio)
+// Captura nome + WhatsApp na entrada, cria testes anônimos numa
+// empresa-vitrine e rastreia a conversão em cadastro pago/trial.
+// ============================================================
+model TrialLead {
+  id                 String    @id @default(cuid())
+  firstName          String
+  whatsapp           String
+  src                String?   // etiqueta do evento (?src=palestra-osasco-jul26)
+  testTypes          String    // CSV dos testes escolhidos (ex.: "DISC,QI")
+  bundleId           String?   // agrupa os assessments de degustação
+  firstToken         String?   // token do 1º teste (link direto)
+  status             String    @default("STARTED") // STARTED | CONVERTED
+  convertedCompanyId String?   // empresa criada no cadastro (se converteu)
+  createdAt          DateTime  @default(now())
+  convertedAt        DateTime?
+
+  @@index([src])
+  @@index([status])
+  @@index([bundleId])
+}
+
+// ============================================================
 // GESTAO DE TIMES (20-70-10 + Team Build)
 // Entidade compartilhada pelos dois modulos. Um TalentTeam agrupa
 // membros (vinculados a um Employee com perfil OU avulsos). A partir

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 type AccountType = 'PJ' | 'PF'
@@ -55,6 +55,18 @@ export default function RegisterForm() {
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [trialCtx, setTrialCtx] = useState<{ ref: string | null; lead: string | null; src: string | null }>({ ref: null, lead: null, src: null })
+
+  // Lê parâmetros da degustação (?ref=trial&lead=&nome=&src=) sem useSearchParams
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const sp = new URLSearchParams(window.location.search)
+    const nome = sp.get('nome')
+    if (nome) setForm((prev) => ({ ...prev, name: prev.name || nome }))
+    setTrialCtx({ ref: sp.get('ref'), lead: sp.get('lead'), src: sp.get('src') })
+  }, [])
+
+  const isTrial = trialCtx.ref === 'trial'
 
   function update(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -86,6 +98,9 @@ export default function RegisterForm() {
           phone: form.phone || undefined,
           instagram: form.instagram || undefined,
           birthDate: accountType === 'PF' && form.birthDate ? form.birthDate : undefined,
+          ref: isTrial ? 'trial' : undefined,
+          trialLeadId: isTrial ? (trialCtx.lead ?? undefined) : undefined,
+          src: isTrial ? (trialCtx.src ?? undefined) : undefined,
         }),
       })
 
@@ -105,6 +120,12 @@ export default function RegisterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {isTrial && (
+        <div className="rounded-xl px-4 py-3 text-sm font-sans text-center"
+             style={{ background: 'rgba(201,168,76,0.14)', border: '1px solid rgba(201,168,76,0.4)', color: '#e8c878' }}>
+          🎁 Ao finalizar, você ganha <strong>7 dias de acesso premium</strong> — sem cartão.
+        </div>
+      )}
       {error && (
         <div className="rounded-xl px-4 py-3 text-sm font-sans"
              style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.3)', color: '#e09080' }}>

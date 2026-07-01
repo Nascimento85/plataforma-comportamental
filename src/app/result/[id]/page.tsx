@@ -9,6 +9,7 @@ import type { Metadata }   from 'next'
 import CopyLinkButton      from './CopyLinkButton'
 import PrintButton         from './PrintButton'
 import { parseResultData } from '@/lib/parseResult'
+import { VITRINE_EMAIL }   from '@/lib/experimente'
 import UpsellPopup         from '@/components/passport/UpsellPopup'
 import UnlockPremiumButton from './UnlockPremiumButton'
 import TestResultCard      from '@/components/tests/TestResultCard'
@@ -1036,7 +1037,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
     where: { id: assessmentId },
     include: {
       employee: { select: { name: true, email: true } },
-      company:  { select: { name: true } },
+      company:  { select: { name: true, email: true } },
       result:   true,
       report:   { include: { unlock: { select: { id: true } } } },
     },
@@ -1107,6 +1108,23 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
     } else {
       bundleAllDone = total > 0
     }
+  }
+
+  // ─── Degustação via QR (empresa-vitrine) → CTA de conversão ─
+  const isTrial = assessment.company.email === VITRINE_EMAIL
+  let trialRegisterHref = '/register?ref=trial'
+  if (isTrial) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const lead = await (prisma as any).trialLead.findFirst({
+      where: assessment.bundleId ? { bundleId: assessment.bundleId } : { firstToken: assessment.token },
+      orderBy: { createdAt: 'desc' },
+      select: { id: true, firstName: true, src: true },
+    })
+    const p = new URLSearchParams({ ref: 'trial' })
+    if (lead?.id) p.set('lead', lead.id)
+    if (lead?.firstName) p.set('nome', lead.firstName)
+    if (lead?.src) p.set('src', lead.src)
+    trialRegisterHref = `/register?${p.toString()}`
   }
 
   return (
@@ -1224,8 +1242,29 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'COMUNICACAO' ? (<ComunicacaoPrintReport result={rd} />) : null}
         {assessment.testType === 'QI' ? (<QiPrintReport result={rd} />) : null}
 
-        {/* CTA Premium (oculto no modo print e quando já desbloqueado) */}
-        {!isPrint && reportId && !isPremiumUnlocked && (
+        {/* CTA de conversão da degustação (QR) — cria conta + 7 dias premium */}
+        {!isPrint && isTrial && (
+          <div className="rounded-3xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2a2015 60%, #3d2a1c 100%)', border: '1px solid rgba(201,168,76,0.4)' }}>
+            <p className="text-[12px] font-sans font-bold uppercase tracking-[0.15em]" style={{ color: '#e8c878' }}>
+              Gostou do que viu?
+            </p>
+            <h3 className="font-serif font-semibold text-2xl mt-2" style={{ color: '#f0ece3' }}>
+              Leve esse mapa para o seu time inteiro
+            </h3>
+            <p className="text-[14.5px] font-sans mt-2 max-w-md mx-auto" style={{ color: 'rgba(240,236,227,0.75)' }}>
+              Crie sua conta grátis e comece <strong style={{ color: '#e8c878' }}>7 dias de acesso premium</strong>, sem cartão.
+              Envie testes para toda a equipe, contrate melhor e receba os relatórios completos.
+            </p>
+            <a href={trialRegisterHref}
+               className="inline-block mt-5 font-sans font-semibold py-3.5 px-7 rounded-full no-underline transition-all hover:-translate-y-px"
+               style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)', color: '#1c1a17', boxShadow: '0 6px 20px rgba(201,168,76,0.3)' }}>
+              Criar conta e ativar 7 dias premium →
+            </a>
+          </div>
+        )}
+
+        {/* CTA Premium B2B (oculto na degustação, no print e quando já desbloqueado) */}
+        {!isPrint && !isTrial && reportId && !isPremiumUnlocked && (
           <UnlockPremiumButton reportId={reportId} priceBrl={priceBrl} />
         )}
 
@@ -1239,7 +1278,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
       </main>
 
       {/* Pop-up de upsell (auto-abre após 6s, uma vez por sessão) */}
-      {!isPrint && reportId && !isPremiumUnlocked && (
+      {!isPrint && !isTrial && reportId && !isPremiumUnlocked && (
         <UpsellPopup
           reportId={reportId}
           assessmentId={assessmentId}
