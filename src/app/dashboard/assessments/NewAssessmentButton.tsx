@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { TEST_PRICE } from '@/lib/test-pricing'
+import { TEST_PRICE, bundlePriceFromTests } from '@/lib/test-pricing'
 
 // ═══════════════════════════════════════════════════════════════
 // CATÁLOGO DE TESTES — 3 Categorias Executivas
@@ -392,7 +392,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
   const selectedInfos = selected
     .map((v) => TEST_TYPES.find((t) => t.value === v))
     .filter(Boolean) as typeof TEST_TYPES
-  const totalCredits = selectedInfos.reduce((s, t) => s + t.credits, 0)
+  const bundleInfo = bundlePriceFromTests(selected) // { subtotal, discountPct, total }
 
   function update(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -694,7 +694,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                         className="flex-1 py-3 rounded-full text-[15px] font-sans font-bold border-2 transition-all disabled:opacity-60"
                         style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070', background: 'white' }}
                       >
-                        {loading ? 'Criando link…' : isBundle ? `Criar link do combo · ${totalCredits} cr.` : 'Criar e enviar link'}
+                        {loading ? 'Criando link…' : isBundle ? `Criar link do combo · ${bundleInfo.total} cr.` : 'Criar e enviar link'}
                       </button>
                     </div>
                     <p className="text-[13px] text-soul-ink/75 font-medium text-center mt-1">
@@ -727,10 +727,23 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                           </div>
                         ))}
                       </div>
-                      <div className="rounded-xl px-4 py-3 flex items-center justify-between" style={{ background: 'rgba(196,99,58,0.15)' }}>
-                        <span className="text-[14px] font-bold text-soul-ink">Total</span>
-                        <span className="text-[15px] font-bold" style={{ color: '#e09070' }}>{totalCredits} créditos</span>
+                      <div className="rounded-xl px-4 py-3" style={{ background: 'rgba(196,99,58,0.15)' }}>
+                        {bundleInfo.discountPct > 0 && (
+                          <div className="flex items-center justify-between text-[13px] mb-1.5">
+                            <span className="text-soul-ink/65 line-through">{bundleInfo.subtotal} créditos</span>
+                            <span className="font-bold px-2 py-0.5 rounded-full" style={{ background: 'rgba(122,158,126,0.22)', color: '#a9d3a9' }}>
+                              −{Math.round(bundleInfo.discountPct * 100)}% no combo
+                            </span>
+                          </div>
+                        )}
+                        <div className="flex items-center justify-between">
+                          <span className="text-[14px] font-bold text-soul-ink">Total</span>
+                          <span className="text-[16px] font-bold" style={{ color: '#e09070' }}>{bundleInfo.total} créditos</span>
+                        </div>
                       </div>
+                      {bundleInfo.discountPct === 0 && selected.length === 2 && (
+                        <p className="text-[12px] text-soul-ink/60 mt-2 text-center">Adicione 1 teste e ganhe 10% de desconto no combo 🎁</p>
+                      )}
                     </div>
                   )}
 

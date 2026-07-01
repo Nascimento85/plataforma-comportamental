@@ -5,6 +5,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { sendAssessmentEmail } from '@/lib/email'
 import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError } from '@/lib/passport'
+import { bundlePriceFromTests } from '@/lib/test-pricing'
 import { onPassportConsumed } from '@/lib/passport-triggers'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 
@@ -46,8 +47,8 @@ export async function POST(request: NextRequest) {
     const isCustom = tests.length >= 2
     if (!isCustom) tests = DEFAULT_BUNDLE_TESTS
     if (tests.length > 8) tests = tests.slice(0, 8)
-    // Custo: combo clássico dos 4 = promo (10 créditos); seleção livre = soma dos preços.
-    const BUNDLE_CREDIT_COST = isCustom ? precoTestes(tests) : TEST_PRICE.COMBO_BUNDLE
+    // Custo: combo clássico dos 4 = promo (10 créditos); seleção livre = soma com desconto progressivo.
+    const BUNDLE_CREDIT_COST = isCustom ? bundlePriceFromTests(tests).total : TEST_PRICE.COMBO_BUNDLE
 
     const company = await prisma.company.findUnique({
       where: { id: companyId },

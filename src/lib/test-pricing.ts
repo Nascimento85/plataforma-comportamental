@@ -26,3 +26,18 @@ export const TEST_PRICE = {
 } as const satisfies Record<string, number>
 
 export type TestPriceKey = keyof typeof TEST_PRICE
+
+// ── Desconto progressivo do combo (seleção livre de testes) ──
+// 2 testes: sem desconto · 3-4 testes: 10% · 5+ testes: 15%.
+export function bundleDiscountPct(nTests: number): number {
+  if (nTests >= 5) return 0.15
+  if (nTests >= 3) return 0.10
+  return 0
+}
+
+export function bundlePriceFromTests(tests: string[]): { subtotal: number; discountPct: number; total: number } {
+  const subtotal = tests.reduce((s, t) => s + ((TEST_PRICE as Record<string, number>)[t] ?? 3), 0)
+  const discountPct = bundleDiscountPct(tests.length)
+  const total = Math.max(1, Math.round(subtotal * (1 - discountPct)))
+  return { subtotal, discountPct, total }
+}
