@@ -3,6 +3,12 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { parseResultData } from '@/lib/parseResult'
+import {
+  BigFivePrintReport, DiscPrintReport, MbtiPrintReport, EnneagramPrintReport,
+  TemperamentPrintReport, ArchetypePrintReport, ArchetypeFemininePrintReport,
+  LoveLanguagesPrintReport, CareerAnchorPrintReport, EmotionalIntelligencePrintReport,
+  VacPrintReport, QmtPrintReport, LsPrintReport, ComunicacaoPrintReport, QiPrintReport,
+} from '@/app/result/[id]/PrintReports'
 
 export const metadata: Metadata = { title: 'Admin — Devolutiva' }
 
@@ -430,6 +436,10 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
 const TEST_LABELS: Record<string, string> = {
   DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
   ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arquétipos Femininos',
+  LOVE_LANGUAGES: '5 Linguagens do Amor', CAREER_ANCHOR: 'Âncoras de Carreira',
+  EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional', VAC: 'VAC — Mapa Sensorial',
+  BIG_FIVE: 'Big Five', QMT: 'QMT Triádico', LIDERANCA_SITUACIONAL: 'Liderança Situacional',
+  COMUNICACAO: 'Mapa da Comunicação', QI: 'Teste de QI',
 }
 
 interface PageProps {
@@ -467,6 +477,7 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
   }
 
   const resultData = parseResultData(assessment.result.resultData)
+  const rd: Record<string, unknown> = resultData as Record<string, unknown>
   const testType = assessment.testType
 
   return (
@@ -508,13 +519,24 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
         </p>
       </div>
 
-      {/* Conteúdo da devolutiva por tipo */}
-      {testType === 'DISC'               && <DiscDevolutiva             result={resultData} />}
-      {testType === 'MBTI'               && <MbtiDevolutiva             result={resultData} />}
-      {testType === 'ENNEAGRAM'          && <EnneagramDevolutiva        result={resultData} />}
-      {testType === 'TEMPERAMENT'        && <TemperamentDevolutiva      result={resultData} />}
-      {testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        result={resultData} />}
-      {testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva result={resultData} />}
+      {/* Conteúdo da devolutiva por tipo — mesmo template do relatório público (15 testes) */}
+      <div className="report-theme">
+        {testType === 'DISC'                   && <DiscPrintReport                   result={rd} />}
+        {testType === 'MBTI'                   && <MbtiPrintReport                   result={rd} />}
+        {testType === 'ENNEAGRAM'              && <EnneagramPrintReport              result={rd} />}
+        {testType === 'TEMPERAMENT'            && <TemperamentPrintReport            result={rd} />}
+        {testType === 'ARCHETYPE'              && <ArchetypePrintReport              result={rd} />}
+        {testType === 'ARCHETYPE_FEMININE'     && <ArchetypeFemininePrintReport      result={rd} />}
+        {testType === 'LOVE_LANGUAGES'         && <LoveLanguagesPrintReport          result={rd} />}
+        {testType === 'CAREER_ANCHOR'          && <CareerAnchorPrintReport           result={rd} />}
+        {testType === 'EMOTIONAL_INTELLIGENCE' && <EmotionalIntelligencePrintReport  result={rd} />}
+        {testType === 'VAC'                    && <VacPrintReport                    result={rd} />}
+        {testType === 'BIG_FIVE'               && <BigFivePrintReport                result={rd} />}
+        {testType === 'QMT'                    && <QmtPrintReport                    result={rd} />}
+        {testType === 'LIDERANCA_SITUACIONAL'  && <LsPrintReport                     result={rd} />}
+        {testType === 'COMUNICACAO'            && <ComunicacaoPrintReport            result={rd} />}
+        {testType === 'QI'                     && <QiPrintReport                     result={rd} />}
+      </div>
     </div>
   )
 }
