@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { v4 as uuidv4 } from 'uuid'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
+import { hasActiveSubscription } from '@/lib/subscription/check'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -26,6 +27,11 @@ export async function POST(req: NextRequest) {
   const session = await getSession()
   if (!session?.id) return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
   const companyId = session.id
+
+  // Gate premium (admin isento)
+  if (!session.isAdmin && !(await hasActiveSubscription(companyId))) {
+    return NextResponse.json({ error: 'Recurso premium. Ative uma assinatura para criar pesquisas de clima.' }, { status: 403 })
+  }
 
   let body: Body
   try { body = await req.json() } catch { return NextResponse.json({ error: 'JSON inválido.' }, { status: 400 }) }
