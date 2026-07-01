@@ -326,7 +326,7 @@ async function checkAndGenerateBundleReport(bundleId: string): Promise<void> {
     select: { status: true },
   })
 
-  const allDone = bundleAssessments.length >= 4 &&
+  const allDone = bundleAssessments.length >= 2 &&
     bundleAssessments.every(a => a.status === 'COMPLETED')
 
   if (allDone) {

@@ -378,29 +378,40 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
   const [form, setForm] = useState({
     employeeName: '',
     employeeEmail: '',
-    testType: defaultTest,
   })
+  const [selected, setSelected] = useState<string[]>(defaultTest ? [defaultTest] : [])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState<SuccessState | null>(null)
   const [copied, setCopied] = useState(false)
 
-  const selectedTest = TEST_TYPES.find((t) => t.value === form.testType) ?? TEST_TYPES[0]
+  // Seleção livre de testes (o combo fixo antigo saiu). 2+ selecionados = 1 link em sequência.
+  const isBundle = selected.length >= 2
+  const previewTest = TEST_TYPES.find((t) => t.value === selected[selected.length - 1]) ?? TEST_TYPES[0]
+  const selectedTest = previewTest // alias p/ o preview single já existente
+  const selectedInfos = selected
+    .map((v) => TEST_TYPES.find((t) => t.value === v))
+    .filter(Boolean) as typeof TEST_TYPES
+  const totalCredits = selectedInfos.reduce((s, t) => s + t.credits, 0)
 
   function update(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
+  }
+  function toggle(value: string) {
+    setError('')
+    setSelected((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]))
   }
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault()
     setError('')
+    if (selected.length === 0) { setError('Selecione ao menos um teste.'); return }
     setLoading(true)
     try {
-      const isBundle = form.testType === 'BUNDLE_4'
       const endpoint = isBundle ? '/api/bundles' : '/api/assessments'
       const payload = isBundle
-        ? { employeeName: form.employeeName, employeeEmail: form.employeeEmail }
-        : form
+        ? { employeeName: form.employeeName, employeeEmail: form.employeeEmail, testTypes: selected }
+        : { employeeName: form.employeeName, employeeEmail: form.employeeEmail, testType: selected[0] }
 
       const res = await fetch(endpoint, {
         method: 'POST',
@@ -431,14 +442,14 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
     setError('')
     setLoading(true)
     try {
-      if (form.testType === 'BUNDLE_4') {
-        setError('O Bundle 4 precisa ser enviado por link. Use o botão Criar e enviar link.')
+      if (selected.length !== 1) {
+        setError('Para fazer agora, selecione exatamente 1 teste. Para vários, use "Criar e enviar link".')
         return
       }
       const res = await fetch('/api/assessments', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ testType: form.testType, selfAssessment: true }),
+        body:    JSON.stringify({ testType: selected[0], selfAssessment: true }),
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error ?? 'Erro ao iniciar o teste.'); return }
@@ -460,11 +471,12 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
   function handleClose() {
     setOpen(false); setSuccess(null); setError(''); setCopied(false)
-    setForm({ employeeName: '', employeeEmail: '', testType: defaultTest })
+    setForm({ employeeName: '', employeeEmail: '' })
+    setSelected(defaultTest ? [defaultTest] : [])
   }
 
   function handleOpen() {
-    setForm((prev) => ({ ...prev, testType: defaultTest }))
+    setSelected(defaultTest ? [defaultTest] : [])
     setOpen(true)
   }
 
@@ -512,9 +524,9 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
 
                 {success.emailSent ? (
                   <div className="flex items-center justify-center gap-2 rounded-2xl px-5 py-4 mb-6 text-[15px] font-sans font-semibold"
-                       style={{ background: 'rgba(122,158,126,0.18)', border: '1px solid rgba(122,158,126,0.4)', color: '#2f5c33' }}>
+                       style={{ background: 'rgba(122,158,126,0.18)', border: '1px solid rgba(122,158,126,0.4)', color: '#bfe3bf' }}>
                     <span className="text-xl">📧</span>
-                    <span>E-mail enviado para <strong>{success.employeeEmail}</strong></span>
+                    <span style={{ color: '#e8f3e8' }}>E-mail enviado para <strong style={{ color: '#ffffff' }}>{success.employeeEmail}</strong></span>
                   </div>
                 ) : (
                   <div className="flex items-center justify-center gap-2 rounded-2xl px-5 py-4 mb-6 text-[15px] font-sans font-semibold"
@@ -614,7 +626,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       <div className="space-y-4">
                         {CATEGORY_ORDER.map((catKey) => {
                           const meta = CATEGORY_META[catKey]
-                          const tests = TEST_TYPES.filter((t) => t.category === catKey)
+                          const tests = TEST_TYPES.filter((t) => t.category === catKey && t.value !== 'BUNDLE_4')
                           return (
                             <div key={catKey}>
                               <div className="flex items-baseline justify-between mb-2">
@@ -627,18 +639,21 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                               </div>
                               <div className="grid grid-cols-2 gap-2">
                                 {tests.map((t) => {
-                                  const active = form.testType === t.value
+                                  const active = selected.includes(t.value)
                                   return (
                                     <button
                                       key={t.value}
                                       type="button"
-                                      onClick={() => update('testType', t.value)}
+                                      onClick={() => toggle(t.value)}
                                       className="relative text-left rounded-2xl p-3 transition-all duration-150"
                                       style={{
                                         border: active ? '2px solid #d0764e' : '1.5px solid rgba(255,255,255,0.14)',
                                         background: active ? 'rgba(208,118,78,0.14)' : '#26282e',
                                       }}
                                     >
+                                      {active && (
+                                        <span className="absolute top-1.5 left-1.5 w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ background: '#d0764e' }}>✓</span>
+                                      )}
                                       {t.badge && (
                                         <span className="absolute top-1.5 right-1.5 text-[12px] font-bold px-1.5 py-0.5 rounded-full font-sans"
                                               style={{ background: 'rgba(212,148,58,0.25)', color: '#e8c878' }}>
@@ -666,8 +681,8 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       <button
                         type="button"
                         onClick={handleSelfStart}
-                        disabled={loading || form.testType === 'BUNDLE_4'}
-                        title={form.testType === 'BUNDLE_4' ? 'O Bundle 4 só funciona por link enviado' : 'Fazer este teste agora mesmo, no seu próprio perfil'}
+                        disabled={loading || selected.length !== 1}
+                        title={selected.length !== 1 ? 'Selecione 1 teste para fazer agora mesmo' : 'Fazer este teste agora mesmo, no seu próprio perfil'}
                         className="flex-[1.3] py-3 rounded-full text-[15px] font-sans font-bold text-white transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
                         style={{ background: 'linear-gradient(135deg, #5e8762, #7a9e7e)', boxShadow: '0 6px 18px rgba(122,158,126,0.30)' }}
                       >
@@ -675,15 +690,15 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       </button>
                       <button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || selected.length === 0}
                         className="flex-1 py-3 rounded-full text-[15px] font-sans font-bold border-2 transition-all disabled:opacity-60"
                         style={{ borderColor: 'rgba(196,99,58,0.45)', color: '#e09070', background: 'white' }}
                       >
-                        {loading ? 'Criando link…' : 'Criar e enviar link'}
+                        {loading ? 'Criando link…' : isBundle ? `Criar link do combo · ${totalCredits} cr.` : 'Criar e enviar link'}
                       </button>
                     </div>
                     <p className="text-[13px] text-soul-ink/75 font-medium text-center mt-1">
-                      <strong>Fazer teste agora</strong>: você mesmo responde, sem digitar nada. &nbsp;·&nbsp; <strong>Criar e enviar link</strong>: gera um link para enviar a outra pessoa.
+                      Selecione <strong>um ou vários testes</strong>. Com 2+, eles vão num único link, em sequência, com devolutiva integrada. &nbsp;·&nbsp; <strong>Fazer teste agora</strong> funciona com 1 teste.
                     </p>
                   </form>
                 </div>
@@ -692,6 +707,34 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                 <div className="lg:w-[54%] p-6 md:p-8 relative overflow-hidden"
                      style={{ background: 'linear-gradient(180deg, #17181c 0%, #101c30 100%)' }}>
 
+                  {/* Resumo do combo (2+ testes) */}
+                  {isBundle && (
+                    <div>
+                      <div className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-bold mb-4" style={{ background: 'rgba(212,148,58,0.22)', color: '#e8c878' }}>
+                        ✦ Combo personalizado · {selected.length} testes
+                      </div>
+                      <h4 className="font-serif font-semibold text-[24px] text-soul-ink leading-tight mb-2">
+                        {selected.length} testes num único link
+                      </h4>
+                      <p className="text-[15px] text-soul-ink/85 font-medium mb-4 leading-relaxed">
+                        O candidato responde os testes em sequência, num único envio. Ao final, você recebe uma devolutiva integrada cruzando os perfis.
+                      </p>
+                      <div className="space-y-2 mb-5">
+                        {selectedInfos.map((t) => (
+                          <div key={t.value} className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                            <span className="text-[14px] font-semibold text-soul-ink">{t.short}</span>
+                            <span className="text-[13px] text-soul-ink/70">{t.credits} cr · {t.minutos} min</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="rounded-xl px-4 py-3 flex items-center justify-between" style={{ background: 'rgba(196,99,58,0.15)' }}>
+                        <span className="text-[14px] font-bold text-soul-ink">Total</span>
+                        <span className="text-[15px] font-bold" style={{ color: '#e09070' }}>{totalCredits} créditos</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {!isBundle && (<>
                   {/* Imagem */}
                   <div className="rounded-2xl overflow-hidden mb-5 border border-soul-mist aspect-[16/10]">
                     <img
@@ -751,6 +794,7 @@ export default function NewAssessmentButton({ children, variant = 'primary', ini
                       </div>
                     ))}
                   </div>
+                  </>)}
                 </div>
               </div>
             )}

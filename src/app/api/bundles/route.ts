@@ -8,13 +8,23 @@ import { TEST_PRICE, consumeCredits, getPassportState, InsufficientCreditsError 
 import { onPassportConsumed } from '@/lib/passport-triggers'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 
-// Bundle Combo (DISC + MBTI + Eneagrama + Temperamento) custa 10 créditos
-const BUNDLE_TESTS = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT'] as const
-const BUNDLE_CREDIT_COST = TEST_PRICE.COMBO_BUNDLE  // 10 créditos
+// Combo clássico (DISC + MBTI + Eneagrama + Temperamento) = promo de 10 créditos.
+// Seleção livre (2+ testes quaisquer) = soma dos preços individuais.
+const DEFAULT_BUNDLE_TESTS = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT']
+const VALID_TESTS = [
+  'DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE',
+  'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE', 'VAC', 'BIG_FIVE',
+  'QMT', 'LIDERANCA_SITUACIONAL', 'COMUNICACAO', 'QI',
+]
+
+function precoTestes(tests: string[]): number {
+  return tests.reduce((sum, t) => sum + ((TEST_PRICE as Record<string, number>)[t] ?? 3), 0)
+}
 
 const schema = z.object({
   employeeName:  z.string().min(2),
   employeeEmail: z.string().email(),
+  testTypes:     z.array(z.string()).optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -30,6 +40,14 @@ export async function POST(request: NextRequest) {
     }
 
     const { employeeName, employeeEmail } = parsed.data
+
+    // Testes do bundle: seleção livre (2+) ou fallback pro combo clássico de 4.
+    let tests = Array.from(new Set((parsed.data.testTypes ?? []).filter((t) => VALID_TESTS.includes(t))))
+    const isCustom = tests.length >= 2
+    if (!isCustom) tests = DEFAULT_BUNDLE_TESTS
+    if (tests.length > 8) tests = tests.slice(0, 8)
+    // Custo: combo clássico dos 4 = promo (10 créditos); seleção livre = soma dos preços.
+    const BUNDLE_CREDIT_COST = isCustom ? precoTestes(tests) : TEST_PRICE.COMBO_BUNDLE
 
     const company = await prisma.company.findUnique({
       where: { id: companyId },
@@ -64,12 +82,12 @@ export async function POST(request: NextRequest) {
     const expiresAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14 dias para completar o bundle
 
     // Gera tokens para cada teste
-    const tokens = BUNDLE_TESTS.map(() => uuidv4())
+    const tokens = tests.map(() => uuidv4())
 
-    // Cria os 4 assessments
+    // Cria os assessments do bundle
     const assessments = await prisma.$transaction(async (tx) =>
       Promise.all(
-        BUNDLE_TESTS.map((testType, i) =>
+        tests.map((testType, i) =>
           tx.assessment.create({
             data: {
               companyId,
@@ -92,7 +110,7 @@ export async function POST(request: NextRequest) {
         const r = await consumeCredits(
           companyId,
           BUNDLE_CREDIT_COST,
-          `Combo Bundler (DISC+MBTI+Eneagrama+Temperamento) — ${employeeName}`,
+          `Bundle (${tests.join(' + ')}) — ${employeeName}`,
         )
         if (r.passportNowConsumed) {
           await onPassportConsumed(companyId).catch(err => console.error('[trigger]', err))
@@ -134,7 +152,7 @@ export async function POST(request: NextRequest) {
         firstAssessmentId: assessments[0].id,
         testLink,
         emailSent,
-        testsCount: BUNDLE_TESTS.length,
+        testsCount: tests.length,
       },
       { status: 201 }
     )

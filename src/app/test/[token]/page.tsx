@@ -13,10 +13,21 @@ interface PageProps {
 
 // Nomes dos testes do bundle em português
 const BUNDLE_TEST_LABELS: Record<string, string> = {
-  DISC:        'DISC — Perfil Comportamental',
-  MBTI:        'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM:   'Eneagrama — 9 Tipos',
-  TEMPERAMENT: '4 Temperamentos',
+  DISC:                   'DISC — Perfil Comportamental',
+  MBTI:                   'MBTI — 16 Tipos de Personalidade',
+  ENNEAGRAM:              'Eneagrama — 9 Tipos',
+  TEMPERAMENT:            '4 Temperamentos',
+  ARCHETYPE:              'Arquétipos — Os 12 Padrões',
+  ARCHETYPE_FEMININE:     'Arquétipos Femininos — As 7 Energias',
+  LOVE_LANGUAGES:         '5 Linguagens do Amor',
+  CAREER_ANCHOR:          'Âncoras de Carreira',
+  EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional',
+  VAC:                    'VAC — Mapa Sensorial',
+  BIG_FIVE:               'Big Five — Estilo de Liderança',
+  QMT:                    'QMT — Quociente Mental Triádico',
+  LIDERANCA_SITUACIONAL:  'Liderança Situacional',
+  COMUNICACAO:            'Mapa da Comunicação',
+  QI:                     'Teste de QI — Raciocínio Lógico',
 }
 
 const BUNDLE_TEST_ORDER = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT']
