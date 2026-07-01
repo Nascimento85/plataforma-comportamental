@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import CopyTestLinkButton from './CopyTestLinkButton'
 
 export const metadata: Metadata = { title: 'Admin — Todos os Testes' }
 
@@ -169,9 +170,14 @@ export default async function AdminAssessmentsPage({ searchParams }: PageProps) 
                             </a>
                           </div>
                         ) : (
-                          <span className="text-xs font-sans" style={{ color: 'rgba(240,236,227,0.68)' }}>
-                            {a.status === 'EXPIRED' ? 'Expirado' : `Expira ${new Date(a.expiresAt).toLocaleDateString('pt-BR')}`}
-                          </span>
+                          <div className="flex items-center justify-end gap-3">
+                            {(a.status === 'SENT' || a.status === 'PENDING') && (
+                              <CopyTestLinkButton token={a.token} />
+                            )}
+                            <span className="text-xs font-sans whitespace-nowrap" style={{ color: 'rgba(240,236,227,0.68)' }}>
+                              {a.status === 'EXPIRED' ? 'Expirado' : `Expira ${new Date(a.expiresAt).toLocaleDateString('pt-BR')}`}
+                            </span>
+                          </div>
                         )}
                       </td>
                     </tr>

@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import NewAssessmentButton from './NewAssessmentButton'
 import ResendEmailButton from './ResendEmailButton'
+import CopyTestLinkButton from './CopyTestLinkButton'
 import { Avatar, Badge } from '@/components/ui/design-system'
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
@@ -383,6 +384,7 @@ export default async function AssessmentsPage() {
                               >
                                 {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                               </a>
+                              <CopyTestLinkButton token={a.token} />
                               <ResendEmailButton assessmentId={a.id} />
                             </>
                           )}
@@ -454,7 +456,7 @@ export default async function AssessmentsPage() {
                   )}
 
                   {(a.status === 'PENDING' || a.status === 'SENT') && (
-                    <div className="flex items-center gap-4 pt-1">
+                    <div className="flex items-center gap-4 pt-1 flex-wrap">
                       <a
                         href={`${APP_URL}/test/${a.token}`}
                         target="_blank"
@@ -462,6 +464,7 @@ export default async function AssessmentsPage() {
                       >
                         {a.status === 'SENT' ? 'Retomar →' : 'Iniciar →'}
                       </a>
+                      <CopyTestLinkButton token={a.token} />
                       <ResendEmailButton assessmentId={a.id} />
                     </div>
                   )}
