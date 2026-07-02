@@ -14,12 +14,12 @@
    ideal para imprimir/salvar. Usa variáveis para não duplicar
    componente — vale para todos os testes de uma vez. */
 .report-theme {
-  --rep-ink:     #f3ede0;
-  --rep-ink2:    #cfd5e0;
-  --rep-blue:    #9db4e8;
-  --rep-cream:   #e7dcc4;
-  --rep-body:    #b9c0cd;
-  --rep-muted:   #8b93a3;
+  --rep-ink:     #f7f2e8;
+  --rep-ink2:    #e3e7ef;
+  --rep-blue:    #b3c6f0;
+  --rep-cream:   #ece3cf;
+  --rep-body:    #d9dee7;
+  --rep-muted:   #aab2c1;
   --rep-gold:    #c9a84c;
   --rep-gold-lt: #e6c662;
   --rep-card-bg: #1b2030;
