@@ -9,7 +9,7 @@ import { getSubscriptionStatus } from '@/lib/subscription/check'
 import { PLANOS, TRIAL_DIAS } from '@/lib/subscription/plans'
 import AssinaturaClient from './AssinaturaClient'
 
-export const metadata: Metadata = { title: 'Assinatura · Psique' }
+export const metadata: Metadata = { title: 'Assinatura' }
 
 export default async function AssinaturaPage() {
   const session = await getSession()

@@ -1,19 +1,9 @@
 import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { TEST_LABELS_SHORT as TEST_LABELS, TEST_TYPE_EMOJI as TEST_EMOJI } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Admin — Visão Geral' }
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
-  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arq. Femininos', LOVE_LANGUAGES: 'Ling. Amor',
-  BUNDLE: 'Bundle',
-}
-
-const TEST_EMOJI: Record<string, string> = {
-  DISC: '🎭', MBTI: '🧩', ENNEAGRAM: '⬡', TEMPERAMENT: '🌡',
-  ARCHETYPE: '🧭', ARCHETYPE_FEMININE: '🌸', LOVE_LANGUAGES: '💞', BUNDLE: '✨',
-}
 
 export default async function AdminPage() {
   const [

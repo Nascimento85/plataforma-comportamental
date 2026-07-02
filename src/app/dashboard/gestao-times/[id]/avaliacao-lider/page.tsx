@@ -11,7 +11,7 @@ import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
 import AvaliacaoLiderClient from './AvaliacaoLiderClient'
 
-export const metadata: Metadata = { title: 'Avaliação do Líder · Psique' }
+export const metadata: Metadata = { title: 'Avaliação do Líder' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

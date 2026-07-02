@@ -10,7 +10,7 @@ import GuiaEntrevistaClient from './GuiaEntrevistaClient'
 import { PERFIS_DISFUNCIONAIS } from '@/content/entrevista/perfis-disfuncionais'
 import Link from 'next/link'
 
-export const metadata: Metadata = { title: 'Guia de Entrevista · Psique' }
+export const metadata: Metadata = { title: 'Guia de Entrevista' }
 
 export default async function GuiaEntrevistaPage() {
   const session = await getSession()

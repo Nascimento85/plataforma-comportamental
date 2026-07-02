@@ -2,13 +2,9 @@ import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import CopyTestLinkButton from './CopyTestLinkButton'
+import { TEST_LABELS_SHORT as TEST_LABELS } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Admin — Todos os Testes' }
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
-  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arq. Femininos', LOVE_LANGUAGES: 'Ling. Amor', BUNDLE: 'Bundle',
-}
 
 const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string; border: string }> = {
   PENDING:   { label: '📨 Pendente',  color: '#d4943a', bg: 'rgba(212,148,58,0.1)',  border: 'rgba(212,148,58,0.25)' },

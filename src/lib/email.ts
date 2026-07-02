@@ -3,6 +3,8 @@
 // Documentação: https://resend.com/docs/api-reference/emails/send-email
 // ============================================================
 
+import { TEST_LABELS } from '@/lib/test-labels'
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 const APP_URL       = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 const APP_NAME      = process.env.NEXT_PUBLIC_APP_NAME ?? 'Psique — Mapa Comportamental'
@@ -19,16 +21,6 @@ export interface SendAssessmentEmailInput {
   testType:      string
   testLink:      string
   expiresAt:     Date
-}
-
-const TEST_LABELS: Record<string, string> = {
-  DISC:               'DISC — Perfil Comportamental',
-  MBTI:               'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM:          'Eneagrama — 9 Tipos',
-  TEMPERAMENT:        '4 Temperamentos',
-  ARCHETYPE:          'Arquétipos — Os 12 Padrões Universais',
-  ARCHETYPE_FEMININE: 'Arquétipos Femininos — As 7 Energias',
-  COMUNICACAO:        'Mapa da Comunicação',
 }
 
 const TEST_DESCRIPTIONS: Record<string, string> = {

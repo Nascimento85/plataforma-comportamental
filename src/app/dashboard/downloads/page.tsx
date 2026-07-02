@@ -14,23 +14,12 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { DISC_PREMIUM, type DiscProfileKey } from '@/content/disc'
 import { PLAYBOOK_LIST } from '@/content/playbooks'
+import { TEST_LABELS } from '@/lib/test-labels'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Meus Downloads' }
 
 // ─── Helpers ────────────────────────────────────────────────
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC — Perfil Comportamental',
-  MBTI: 'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM: 'Eneagrama',
-  TEMPERAMENT: '4 Temperamentos',
-  ARCHETYPE: 'Arquétipos Junguianos',
-  ARCHETYPE_FEMININE: 'Arquétipos Femininos',
-  LOVE_LANGUAGES: '5 Linguagens do Amor',
-  CAREER_ANCHOR: 'Âncoras de Carreira',
-  EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional',
-}
 
 function isDiscProfile(s: string | null | undefined): s is DiscProfileKey {
   return s === 'D' || s === 'I' || s === 'S' || s === 'C'

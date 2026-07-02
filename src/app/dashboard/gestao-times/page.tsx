@@ -14,7 +14,7 @@ import ImportClient from './ImportClient'
 import DeleteTeamButton from './DeleteTeamButton'
 import { agregarRespostasLider, MIN_RESPOSTAS_LIDER } from '@/content/gestao-times/avaliacao-lider'
 
-export const metadata: Metadata = { title: 'Gestão de Equipes · Psique' }
+export const metadata: Metadata = { title: 'Gestão de Equipes' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -139,7 +139,7 @@ export default async function GestaoTimesPage() {
           <div className="text-5xl mb-4">◫</div>
           <h2 className="font-serif text-2xl font-semibold text-white mb-2">Nenhuma equipe criada ainda</h2>
           <p className="text-[15.5px] text-white/85 font-medium max-w-lg mx-auto mb-6">
-            Comece criando seu primeira equipe. Você adiciona os colaboradores (vinculando aos que já fizeram teste ou
+            Comece criando sua primeira equipe. Você adiciona os colaboradores (vinculando aos que já fizeram teste ou
             digitando avulsos), dá a nota de performance e a plataforma plota a curva de vitalidade.
           </p>
           <NovoTimeButton variant="onDark" />

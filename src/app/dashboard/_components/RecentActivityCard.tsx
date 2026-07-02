@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Avatar, Badge } from '@/components/ui/design-system'
+import { testEmoji, testLabelShort } from '@/lib/test-labels'
 
 type AssessmentStatus = 'PENDING' | 'SENT' | 'COMPLETED' | 'EXPIRED'
 
@@ -23,16 +24,6 @@ const STATUS_CONFIG: Record<AssessmentStatus, {
   SENT:      { label: '⏳ Enviado',   variant: 'pending' },
   PENDING:   { label: '📨 Pendente',  variant: 'new' },
   EXPIRED:   { label: '✕ Expirado',   variant: 'locked' },
-}
-
-const TEST_TYPE_EMOJI: Record<string, string> = {
-  DISC:           '🎭',
-  MBTI:           '🧩',
-  ENNEAGRAM:      '⬡',
-  TEMPERAMENT:    '🌡',
-  ARCHETYPE:      '🧭',
-  LOVE_LANGUAGES: '💞',
-  BUNDLE:         '✨',
 }
 
 function timeAgo(date: Date): string {
@@ -93,7 +84,6 @@ export default function RecentActivityCard({ assessments }: Props) {
           const cfg = STATUS_CONFIG[a.status as AssessmentStatus] ?? {
             label: a.status, variant: 'locked' as const,
           }
-          const emoji = TEST_TYPE_EMOJI[a.testType] ?? '📊'
 
           const dotColor =
             a.status === 'COMPLETED' ? 'bg-soul-sage' :
@@ -114,7 +104,7 @@ export default function RecentActivityCard({ assessments }: Props) {
                 <div className="text-[15px] text-soul-ink font-medium">
                   <span className="font-bold">{a.employee.name}</span>
                   {a.status === 'COMPLETED' ? ' completou ' : ' iniciou '}
-                  <span className="text-soul-ink/88 font-semibold">{emoji} {a.testType}</span>
+                  <span className="text-soul-ink/88 font-semibold">{testEmoji(a.testType)} {testLabelShort(a.testType)}</span>
                 </div>
               </div>
 

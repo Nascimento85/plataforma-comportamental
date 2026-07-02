@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import EditableCandidateName from './EditableCandidateName'
+import { testLabel } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Relatórios' }
 
@@ -25,16 +26,6 @@ async function getReports(companyId: string) {
   ])
 
   return { bundleReports, individualResults }
-}
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC — Perfil Comportamental',
-  MBTI: 'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM: 'Eneagrama — 9 Tipos',
-  TEMPERAMENT: '4 Temperamentos',
-  ARCHETYPE: 'Arquétipos Junguianos',
-  ARCHETYPE_FEMININE: 'Arquétipos Femininos',
-  LOVE_LANGUAGES: '5 Linguagens do Amor',
 }
 
 export default async function ReportsPage() {
@@ -62,7 +53,7 @@ export default async function ReportsPage() {
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{totalReports}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-terracota">Integrados (Bundle)</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-terracota">Devolutivas integradas</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{bundleReports.length}</p>
         </div>
         <div className="soul-panel">
@@ -182,7 +173,7 @@ export default async function ReportsPage() {
                       </td>
                       <td className="px-6 py-4 hidden md:table-cell">
                         <div className="text-[15px] font-semibold text-soul-ink">
-                          {TEST_LABELS[r.testType] ?? r.testType}
+                          {testLabel(r.testType)}
                         </div>
                       </td>
                       <td className="px-6 py-4 hidden lg:table-cell">

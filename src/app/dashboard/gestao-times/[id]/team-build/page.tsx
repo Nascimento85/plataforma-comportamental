@@ -11,7 +11,7 @@ import { hasActiveSubscription } from '@/lib/subscription/check'
 import TeamBuildClient from './TeamBuildClient'
 import { analisarTime } from '@/content/gestao-times/team-build'
 
-export const metadata: Metadata = { title: 'Team Build · Psique' }
+export const metadata: Metadata = { title: 'Team Build' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,16 +1,12 @@
 import { prisma } from '@/lib/prisma'
 import type { Metadata } from 'next'
+import { TEST_LABELS_SHORT as TEST_LABELS } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Admin — Leads da Degustação' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC', QI: 'QI', LIDERANCA_SITUACIONAL: 'Lid. Situacional',
-  EMOTIONAL_INTELLIGENCE: 'Int. Emocional', LOVE_LANGUAGES: 'Ling. Amor',
-}
 
 function waLink(whatsapp: string): string {
   const digits = whatsapp.replace(/\D/g, '')

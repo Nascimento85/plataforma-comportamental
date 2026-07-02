@@ -4,15 +4,16 @@
 // ============================================================
 
 import Link from 'next/link'
+import { TEST_COUNT } from '@/lib/test-labels'
 
 const GOLD = '#d4b35e'
 
 const FERRAMENTAS = [
   {
     icone: '🧬',
-    nome: '11 Testes Científicos',
+    nome: `${TEST_COUNT} Testes Científicos`,
     gancho: 'Decifre qualquer pessoa em minutos.',
-    texto: 'DISC, MBTI, Eneagrama, Big Five e mais 7 instrumentos validados que revelam como cada pessoa decide, age sob pressão e se relaciona. Chega de contratar e promover no escuro.',
+    texto: `DISC, MBTI, Eneagrama, Big Five e mais ${TEST_COUNT - 4} instrumentos validados que revelam como cada pessoa decide, age sob pressão e se relaciona. Chega de contratar e promover no escuro.`,
     cta: 'Explorar os testes',
     href: '/dashboard/behavioral',
     cor: '#e09070',

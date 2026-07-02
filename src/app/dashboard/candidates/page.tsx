@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import NewAssessmentButton from '../assessments/NewAssessmentButton'
+import { testLabelShort } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Candidatos' }
 
@@ -75,20 +76,20 @@ export default async function CandidatesPage() {
         <NewAssessmentButton />
       </div>
 
-      {/* Stats compactas */}
+      {/* Stats compactas — unidade explícita em cada número (pessoas ≠ avaliações) */}
       <div className="grid grid-cols-3 gap-4">
         <div className="soul-panel">
-          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/78">Total</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-ink/78">Candidatos</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">{candidates.length}</p>
         </div>
         <div className="soul-panel">
-          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-sage">Concluíram</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-sage">Com teste concluído</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">
             {candidates.filter((c) => c.completed > 0).length}
           </p>
         </div>
         <div className="soul-panel">
-          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-amber">Pendentes</p>
+          <p className="text-[13.5px] font-bold uppercase tracking-widest text-soul-amber">Avaliações pendentes</p>
           <p className="font-serif text-3xl font-semibold text-soul-ink mt-1">
             {candidates.reduce((acc, c) => acc + c.pending, 0)}
           </p>
@@ -150,7 +151,7 @@ export default async function CandidatesPage() {
                     </td>
                     <td className="px-6 py-4 hidden lg:table-cell">
                       <div className="text-[15px] font-semibold text-soul-ink">
-                        {c.latestTestType ?? '—'}
+                        {c.latestTestType ? testLabelShort(c.latestTestType) : '—'}
                       </div>
                       <div className="text-[13.5px] text-soul-ink/78 font-medium">
                         {c.createdAt.toLocaleDateString('pt-BR')}

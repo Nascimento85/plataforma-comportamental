@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import IntegratedReportClient from './IntegratedReportClient'
-import { TEST_LABELS } from '@/lib/integrated-report/adapters'
+import { testLabel } from '@/lib/test-labels'
 import type { SupportedTestType } from '@/lib/integrated-report/types'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -135,7 +135,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
               {includedTests.map((t) => (
                 <span key={t} className="inline-flex items-center rounded-full px-3 py-1 text-[13.5px] font-semibold"
                       style={{ background: 'rgba(196,99,58,0.10)', color: '#e09070' }}>
-                  {TEST_LABELS[t] ?? t}
+                  {testLabel(t)}
                 </span>
               ))}
             </div>
@@ -154,7 +154,7 @@ export default async function CandidateDetailPage({ params }: { params: { id: st
             {employee.assessments.map((a) => (
               <div key={a.id} className="flex items-center justify-between gap-3 py-2 border-b border-soul-mist/60 last:border-0">
                 <div>
-                  <p className="text-[15px] font-semibold text-soul-ink">{a.testType}</p>
+                  <p className="text-[15px] font-semibold text-soul-ink">{testLabel(a.testType)}</p>
                   <p className="text-[13.5px] text-soul-ink/78 font-medium">
                     {new Date(a.createdAt).toLocaleDateString('pt-BR')}
                   </p>

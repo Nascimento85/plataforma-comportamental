@@ -6,28 +6,12 @@ import NewAssessmentButton from './NewAssessmentButton'
 import ResendEmailButton from './ResendEmailButton'
 import CopyTestLinkButton from './CopyTestLinkButton'
 import { Avatar, Badge } from '@/components/ui/design-system'
+import { testEmoji, testLabelShort } from '@/lib/test-labels'
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
 
 export const metadata: Metadata = { title: 'Avaliações' }
 
-const TEST_LABELS: Record<string, { label: string; emoji: string }> = {
-  DISC:                   { label: 'DISC',                 emoji: '🎭' },
-  MBTI:                   { label: 'MBTI',                 emoji: '🧩' },
-  ENNEAGRAM:              { label: 'Eneagrama',            emoji: '⬡'  },
-  TEMPERAMENT:            { label: '4 Temperamentos',      emoji: '🌡' },
-  ARCHETYPE:              { label: 'Arquétipos',           emoji: '🧭' },
-  ARCHETYPE_FEMININE:     { label: 'Arq. Femininos',       emoji: '🌸' },
-  LOVE_LANGUAGES:         { label: 'Relacionamentos',      emoji: '💞' },
-  CAREER_ANCHOR:          { label: 'Âncoras de Carreira',  emoji: '⚓' },
-  EMOTIONAL_INTELLIGENCE: { label: 'IE Goleman',           emoji: '◈' },
-  VAC:                    { label: 'VAC Sensorial',        emoji: '👁' },
-  BIG_FIVE:               { label: 'Big Five Liderança',   emoji: '🎯' },
-  QMT:                    { label: 'QMT Triádico',         emoji: '🧠' },
-  LIDERANCA_SITUACIONAL:  { label: 'Lid. Situacional',     emoji: '🧭' },
-  COMUNICACAO:            { label: 'Mapa da Comunicação',  emoji: '🗣' },
-  BUNDLE:                 { label: 'Bundle Completo',      emoji: '✨' },
-}
 
 type AssessmentStatus = 'PENDING' | 'SENT' | 'COMPLETED' | 'EXPIRED'
 
@@ -305,7 +289,7 @@ export default async function AssessmentsPage() {
               <tbody>
                 {assessments.map((a: AssessmentRow, i: number) => {
                   const cfg   = STATUS_CONFIG[a.status as AssessmentStatus] ?? { label: a.status, variant: 'locked' as const }
-                  const tInfo = TEST_LABELS[a.testType] ?? { label: a.testType, emoji: '📊' }
+                  const tInfo = { label: testLabelShort(a.testType), emoji: testEmoji(a.testType) }
 
                   return (
                     <tr
@@ -404,7 +388,7 @@ export default async function AssessmentsPage() {
           <div className="md:hidden divide-y divide-soul-mist">
             {assessments.map((a: AssessmentRow, i: number) => {
               const cfg   = STATUS_CONFIG[a.status as AssessmentStatus] ?? { label: a.status, variant: 'locked' as const }
-              const tInfo = TEST_LABELS[a.testType] ?? { label: a.testType, emoji: '📊' }
+              const tInfo = { label: testLabelShort(a.testType), emoji: testEmoji(a.testType) }
 
               return (
                 <div key={a.id} className="p-4 space-y-3">

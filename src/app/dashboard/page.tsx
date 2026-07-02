@@ -14,6 +14,7 @@ import WelcomeModal from './_components/WelcomeModal'
 import ProfileGamificationBanner from './_components/ProfileGamificationBanner'
 import NewAssessmentButton from './assessments/NewAssessmentButton'
 import { calculateProfileCompletion } from '@/lib/profile'
+import { TEST_COUNT } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Dashboard' }
 
@@ -126,7 +127,7 @@ export default async function DashboardPage() {
             <em className="not-italic text-soul-terracota">{firstName}</em>{' '}
             <span className="text-2xl">✦</span>
           </h1>
-          <p className="text-[15px] text-soul-ink/85 mt-1.5 capitalize font-semibold">{today}</p>
+          <p className="text-[15px] text-soul-ink/85 mt-1.5 font-semibold">{today}</p>
         </div>
 
         <div className="flex items-center gap-2.5 flex-shrink-0">
@@ -191,7 +192,7 @@ export default async function DashboardPage() {
               Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
             </p>
             <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5">
-              Avalie talentos com 13 instrumentos científicos, faça a gestão dos seus times com a
+              Avalie talentos com {TEST_COUNT} instrumentos científicos, faça a gestão dos seus times com a
               Matriz de Talentos e a Avaliação de Liderança, mapeie riscos psicossociais com o
               módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
               {totalCompleted > 0 && (totalCompleted === 1
@@ -287,13 +288,13 @@ export default async function DashboardPage() {
       {/* ══════════════════════════════════════════════════════
           BOTTOM: Atividade + Passaporte + Insight (horizontal)
       ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
         <RecentActivityCard assessments={recentAssessments} />
 
         <PassportWidget state={passport} />
 
         <div
-          className="rounded-3xl p-5 relative overflow-hidden h-full flex flex-col"
+          className="rounded-3xl p-5 relative overflow-hidden flex flex-col"
           style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
         >
           <div

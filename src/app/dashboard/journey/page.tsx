@@ -2,17 +2,28 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { testLabel, testEmoji } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Minha Jornada' }
 
-const TEST_LABELS: Record<string, { label: string; short: string; color: string; emoji: string }> = {
-  DISC:               { label: 'DISC — Perfil Comportamental',     short: 'DISC',         color: '#e09070', emoji: '◉' },
-  MBTI:               { label: 'MBTI — 16 Tipos de Personalidade', short: 'MBTI',         color: '#8fa6da', emoji: '◆' },
-  ENNEAGRAM:          { label: 'Eneagrama — 9 Tipos',              short: 'Eneagrama',    color: '#c9a84c', emoji: '✧' },
-  TEMPERAMENT:        { label: '4 Temperamentos',                  short: 'Temperamentos',color: '#7a9e7e', emoji: '⬢' },
-  ARCHETYPE:          { label: 'Arquétipos — Os 12 Padrões',       short: 'Arquétipos',   color: '#c47a72', emoji: '❀' },
-  ARCHETYPE_FEMININE: { label: 'Arquétipos Femininos',             short: 'Arq. Fem.',    color: '#d4943a', emoji: '☽' },
-  LOVE_LANGUAGES:     { label: '5 Linguagens do Amor',             short: 'Ling. Amor',   color: '#c47a72', emoji: '❤' },
+// Cores de destaque por teste (visual próprio da Jornada);
+// rótulos e nomes vêm do módulo canônico test-labels.
+const TEST_COLORS: Record<string, string> = {
+  DISC:                   '#e09070',
+  MBTI:                   '#8fa6da',
+  ENNEAGRAM:              '#c9a84c',
+  TEMPERAMENT:            '#7a9e7e',
+  VAC:                    '#8fa6da',
+  QMT:                    '#c9a84c',
+  COMUNICACAO:            '#7a9e7e',
+  QI:                     '#8fa6da',
+  BIG_FIVE:               '#c9a84c',
+  LIDERANCA_SITUACIONAL:  '#d4943a',
+  EMOTIONAL_INTELLIGENCE: '#7a9e7e',
+  CAREER_ANCHOR:          '#c9a84c',
+  ARCHETYPE:              '#c47a72',
+  ARCHETYPE_FEMININE:     '#d4943a',
+  LOVE_LANGUAGES:         '#c47a72',
 }
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
@@ -110,7 +121,7 @@ export default async function JourneyPage() {
           </p>
           <div className="space-y-2">
             {inProgress.map((a) => {
-              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#e09070', emoji: '✦' }
+              const t = { label: testLabel(a.testType), color: TEST_COLORS[a.testType] ?? '#e09070', emoji: testEmoji(a.testType) }
               return (
                 <div key={a.id} className="soul-panel flex flex-wrap items-center gap-4">
                   <div
@@ -157,7 +168,7 @@ export default async function JourneyPage() {
           </h2>
           <div className="soul-panel p-0 overflow-hidden">
             {completed.map((a, i) => {
-              const t = TEST_LABELS[a.testType] ?? { label: a.testType, short: a.testType, color: '#e09070', emoji: '✦' }
+              const t = { label: testLabel(a.testType), color: TEST_COLORS[a.testType] ?? '#e09070', emoji: testEmoji(a.testType) }
               return (
                 <div
                   key={a.id}

@@ -17,7 +17,7 @@ import {
 import { lerResultado } from '@/content/gestao-times/avaliacao-criterios'
 import PdiClient from './PdiClient'
 
-export const metadata: Metadata = { title: 'Preparar Devolutiva · Psique' }
+export const metadata: Metadata = { title: 'Preparar Devolutiva' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

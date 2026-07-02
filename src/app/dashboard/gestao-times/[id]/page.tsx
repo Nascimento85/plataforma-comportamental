@@ -10,7 +10,7 @@ import { hasActiveSubscription } from '@/lib/subscription/check'
 import MatrizClient from './MatrizClient'
 import { scoreCombinado, classificarZona } from '@/content/gestao-times/disc-lideranca'
 
-export const metadata: Metadata = { title: 'Matriz de Talentos · Psique' }
+export const metadata: Metadata = { title: 'Matriz de Talentos' }
 export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

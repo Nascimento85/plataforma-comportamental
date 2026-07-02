@@ -30,6 +30,7 @@ import {
   ComunicacaoPrintReport,
   QiPrintReport,
 } from './PrintReports'
+import { TEST_LABELS } from '@/lib/test-labels'
 
 /**
  * Resolve um identificador genérico para o Assessment correspondente.
@@ -102,22 +103,6 @@ const FEMININE_ARCHETYPE_PT: Record<string, string> = {
   LOVER:     'AMANTE',
   WISE:      'SÁBIA',
   CRONE:     'ANCIÃ',
-}
-
-const TEST_LABELS: Record<string, string> = {
-  DISC:                   'DISC — Perfil Comportamental',
-  MBTI:                   'MBTI — 16 Tipos de Personalidade',
-  ENNEAGRAM:              'Eneagrama — 9 Tipos',
-  TEMPERAMENT:            '4 Temperamentos',
-  ARCHETYPE:              'Arquétipos — Os 12 Padrões',
-  ARCHETYPE_FEMININE:     'Arquétipos Femininos — As 7 Energias',
-  LOVE_LANGUAGES:         '5 Linguagens do Amor',
-  CAREER_ANCHOR:          'Âncoras de Carreira — Edgar Schein',
-  EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional — Daniel Goleman',
-  QMT:                    'QMT — Quociente Mental Triádico',
-  LIDERANCA_SITUACIONAL:  'Liderança Situacional — Hersey e Blanchard',
-  COMUNICACAO:            'Mapa da Comunicação',
-  QI:                     'Teste de QI — Raciocínio Lógico',
 }
 
 // ── Componentes de UI ────────────────────────────────────────
