@@ -11,15 +11,21 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const session = await getSession()
   if (!session) redirect('/login')
 
-  // Busca o tipo da conta (PF ou PJ) — afeta o que aparece na sidebar
-  const company = await prismaAny.company.findUnique({
-    where:  { id: session.id },
-    select: { type: true },
-  })
+  // Tipo da conta (PF/PJ) + avaliações pendentes (badge de Candidatos na sidebar)
+  const [company, pendingCount] = await Promise.all([
+    prismaAny.company.findUnique({
+      where:  { id: session.id },
+      select: { type: true },
+    }),
+    prisma.assessment.count({
+      where: { companyId: session.id, status: { in: ['PENDING', 'SENT'] } },
+    }),
+  ])
 
   const enrichedSession = {
     ...session,
     accountType: (company?.type === 'PF' ? 'PF' : 'PJ') as 'PF' | 'PJ',
+    pendingCount,
   }
 
   return (

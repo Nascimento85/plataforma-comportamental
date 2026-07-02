@@ -24,7 +24,7 @@ export default function PassportWidget({ state }: Props) {
           : isLow
             ? 'linear-gradient(135deg, #2a201b, #30241e)'
             : 'linear-gradient(135deg, #26221a, #2c261c)',
-        border: `1px solid ${isLow || isExpired ? 'rgba(196,99,58,0.2)' : 'rgba(196,99,58,0.12)'}`,
+        border: `1px solid ${isLow || isExpired ? 'rgba(196,99,58,0.2)' : 'rgba(201,168,76,0.25)'}`,
       }}
     >
       <div className="flex items-center justify-between mb-1.5">

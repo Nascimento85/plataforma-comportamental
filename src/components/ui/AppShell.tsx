@@ -18,6 +18,7 @@ export interface AppShellSession {
   archetype?: ArchetypeKey  // arquétipo dominante do usuário (para exibir na sidebar)
   credits?: number          // créditos disponíveis (badge opcional)
   accountType?: 'PF' | 'PJ' // tipo da conta — controla quais itens aparecem na sidebar
+  pendingCount?: number     // avaliações pendentes — badge âmbar em Candidatos
 }
 
 interface AppShellProps {
@@ -310,7 +311,10 @@ function SidebarNavLink({
       <span className="flex-1">{label}</span>
 
       {badge !== undefined && badge > 0 && (
-        <span className="bg-soul-terracota text-white text-[13px] font-bold px-2 py-0.5 rounded-full leading-none">
+        <span
+          className="text-[12.5px] font-bold px-2 py-0.5 rounded-md leading-none"
+          style={{ background: 'rgba(212,148,58,0.16)', color: '#e8b860' }}
+        >
           {badge}
         </span>
       )}
@@ -371,6 +375,7 @@ function SidebarContent({
                 href={item.href}
                 label={item.label}
                 iconKey={item.iconKey}
+                badge={item.href === '/dashboard/candidates' ? session.pendingCount : undefined}
                 onClick={onNavClick}
               />
             ))}

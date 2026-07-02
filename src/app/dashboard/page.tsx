@@ -2,7 +2,6 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { StatCard } from '@/components/ui/design-system'
 import FerramentasShowcase from './_components/FerramentasShowcase'
 import PlaybooksHome from './_components/PlaybooksHome'
 import RecentActivityCard from './_components/RecentActivityCard'
@@ -14,58 +13,126 @@ import WelcomeModal from './_components/WelcomeModal'
 import ProfileGamificationBanner from './_components/ProfileGamificationBanner'
 import NewAssessmentButton from './assessments/NewAssessmentButton'
 import { calculateProfileCompletion } from '@/lib/profile'
-import { TEST_COUNT } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Dashboard' }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const prismaAny = prisma as any
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data Layer
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function getDashboardData(companyId: string) {
-  const [company, recentAssessments, totalCompleted, totalPending, passport] =
-    await Promise.all([
-      prisma.company.findUnique({
-        where: { id: companyId },
-        include: { creditBalance: true },
-      }),
+  const weekAgo = new Date(Date.now() - 7 * 86_400_000)
 
-      prisma.assessment.findMany({
-        where: { companyId },
-        orderBy: { createdAt: 'desc' },
-        take: 8,
-        include: { employee: { select: { name: true } } },
-      }),
+  const [
+    company,
+    recentAssessments,
+    totalCompleted,
+    completedThisWeek,
+    totalPending,
+    employeeCount,
+    teamsCount,
+    passport,
+  ] = await Promise.all([
+    prisma.company.findUnique({
+      where: { id: companyId },
+      include: { creditBalance: true },
+    }),
 
-      prisma.assessment.count({
-        where: { companyId, status: 'COMPLETED' },
-      }),
+    prisma.assessment.findMany({
+      where: { companyId },
+      orderBy: { createdAt: 'desc' },
+      take: 8,
+      include: { employee: { select: { name: true } } },
+    }),
 
-      prisma.assessment.count({
-        where: { companyId, status: { in: ['PENDING', 'SENT'] } },
-      }),
+    prisma.assessment.count({
+      where: { companyId, status: 'COMPLETED' },
+    }),
 
-      getPassportState(companyId),
-    ])
+    prisma.assessment.count({
+      where: { companyId, status: 'COMPLETED', completedAt: { gte: weekAgo } },
+    }),
+
+    prisma.assessment.count({
+      where: { companyId, status: { in: ['PENDING', 'SENT'] } },
+    }),
+
+    prisma.employee.count({ where: { companyId } }),
+
+    prismaAny.talentTeam.count({ where: { companyId } }) as Promise<number>,
+
+    getPassportState(companyId),
+  ])
 
   const profileCompletion = company ? calculateProfileCompletion(company) : 0
 
   return {
     company,
-    credits:                    passport.total,
+    credits:           passport.total,
     passport,
     profileCompletion,
-    isProfileRewarded:          company?.isProfileCompletedRewarded ?? false,
+    isProfileRewarded: company?.isProfileCompletedRewarded ?? false,
     recentAssessments,
     totalCompleted,
+    completedThisWeek,
     totalPending,
-    totalCandidates:            recentAssessments.length,
-    accountType:                (company?.type === 'PF' ? 'PF' : 'PJ') as 'PF' | 'PJ',
+    employeeCount,
+    teamsCount,
+    accountType:       (company?.type === 'PF' ? 'PF' : 'PJ') as 'PF' | 'PJ',
   }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Page
+// KPI acionável — número + unidade + próximo passo
+// ─────────────────────────────────────────────────────────────────────────────
+
+function KpiCard({
+  label,
+  value,
+  unit,
+  ctaLabel,
+  ctaHref,
+  alert = false,
+}: {
+  label: string
+  value: number | string
+  unit: string
+  ctaLabel: string
+  ctaHref: string
+  alert?: boolean
+}) {
+  return (
+    <div
+      className="soul-panel !p-5 flex flex-col"
+      style={alert ? { borderLeft: '2px solid rgba(212,148,58,0.7)' } : undefined}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <p
+          className="text-[12.5px] font-bold tracking-[0.14em] uppercase"
+          style={{ color: alert ? '#e0c878' : undefined }}
+        >
+          <span className={alert ? '' : 'text-soul-ink/78'}>{label}</span>
+        </p>
+        {alert && <span className="w-2 h-2 mt-1 rounded-full bg-soul-amber animate-pulse flex-shrink-0" />}
+      </div>
+      <p className="font-serif text-4xl font-semibold text-soul-ink mt-2">{value}</p>
+      <p className="text-[13.5px] text-soul-ink/78 font-medium mt-1 flex-1">{unit}</p>
+      <Link
+        href={ctaHref}
+        className="inline-flex items-center gap-1.5 mt-3 text-[13.5px] font-bold no-underline transition-colors"
+        style={{ color: '#d4b35e' }}
+      >
+        {ctaLabel} →
+      </Link>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Page — hierarquia: o que precisa de você → ações → atividade → ferramentas
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default async function DashboardPage() {
@@ -80,8 +147,10 @@ export default async function DashboardPage() {
     isProfileRewarded,
     recentAssessments,
     totalCompleted,
+    completedThisWeek,
     totalPending,
-    totalCandidates,
+    employeeCount,
+    teamsCount,
     accountType,
   } = await getDashboardData(companyId)
 
@@ -102,7 +171,7 @@ export default async function DashboardPage() {
   })
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
 
       {/* ══════════════════════════════════════════════════════
           WELCOME MODAL — só aparece no primeiro login
@@ -118,7 +187,7 @@ export default async function DashboardPage() {
       )}
 
       {/* ══════════════════════════════════════════════════════
-          TOP BAR
+          TOPBAR compacta: saudação + badge de créditos + CTAs
       ══════════════════════════════════════════════════════ */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
@@ -130,17 +199,26 @@ export default async function DashboardPage() {
           <p className="text-[15px] text-soul-ink/85 mt-1.5 font-semibold">{today}</p>
         </div>
 
-        <div className="flex items-center gap-2.5 flex-shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+          <Link
+            href={isPJ ? '/dashboard/assinatura' : '/dashboard/credits'}
+            className="inline-flex items-center gap-2 px-4 py-3 rounded-full text-[14px] font-bold no-underline transition-colors"
+            style={{
+              color: '#e0c878',
+              background: 'rgba(201,168,76,0.10)',
+              border: '1px solid rgba(201,168,76,0.28)',
+            }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#d4b35e' }} />
+            {credits} {credits === 1 ? 'crédito' : 'créditos'}
+          </Link>
+
           <Link
             href="/dashboard/candidates"
-            className="hidden sm:inline-flex items-center justify-center gap-2 sm:w-[210px] px-5 py-3 rounded-full
+            className="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full
                        border-2 border-soul-mist bg-soul-parchment text-[15px] text-soul-ink font-sans font-bold
                        hover:border-soul-terracota hover:text-soul-terracota transition-all duration-200"
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-              <path d="M13.5 8C13.5 11.04 11.04 13.5 8 13.5C4.96 13.5 2.5 11.04 2.5 8C2.5 4.96 4.96 2.5 8 2.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              <path d="M11 2L14 5L11 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
             Ver candidatos
           </Link>
 
@@ -151,19 +229,78 @@ export default async function DashboardPage() {
       </div>
 
       {/* ══════════════════════════════════════════════════════
-          BANNER GAMIFICAÇÃO — só PF (PJ usa modelo de assinatura, não créditos)
+          BANNER GAMIFICAÇÃO — só PF (PJ usa modelo de assinatura)
       ══════════════════════════════════════════════════════ */}
       {!isPJ && !isProfileRewarded && (
         <ProfileGamificationBanner completion={profileCompletion} bonusAmount={PROFILE_COMPLETE_AMOUNT} />
       )}
 
-      {/* ══════════════════════════════════════════════════════
-          HERO: onboarding para PF nova / arquétipo para PF ativa
-          (PJ não usa OnboardingHero porque ele fala de créditos)
-      ══════════════════════════════════════════════════════ */}
+      {/* Onboarding só para conta PF recém-criada, antes dos KPIs zerados */}
       {!isPJ && isNewAccount && (
         <OnboardingHero firstName={firstName} credits={credits} />
       )}
+
+      {/* ══════════════════════════════════════════════════════
+          1. PULSO DO DIA — o que mudou, o que precisa de você
+      ══════════════════════════════════════════════════════ */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <KpiCard
+          label="Aguardando resposta"
+          value={totalPending}
+          unit={totalPending === 1 ? 'avaliação com convite enviado' : 'avaliações com convite enviado'}
+          ctaLabel={totalPending > 0 ? 'Reenviar convites' : 'Convidar candidato'}
+          ctaHref="/dashboard/assessments"
+          alert={totalPending > 0}
+        />
+        <KpiCard
+          label="Avaliações concluídas"
+          value={totalCompleted}
+          unit={completedThisWeek > 0
+            ? `↑ ${completedThisWeek} nesta semana`
+            : 'histórico acumulado'}
+          ctaLabel="Ver relatórios"
+          ctaHref="/dashboard/reports"
+        />
+        <KpiCard
+          label="Candidatos"
+          value={employeeCount}
+          unit={employeeCount === 1 ? 'pessoa cadastrada' : 'pessoas cadastradas'}
+          ctaLabel="Gerenciar"
+          ctaHref="/dashboard/candidates"
+        />
+        <KpiCard
+          label="Equipes"
+          value={teamsCount}
+          unit={teamsCount === 1 ? 'equipe na Matriz de Talentos' : 'equipes na Matriz de Talentos'}
+          ctaLabel={teamsCount > 0 ? 'Abrir gestão' : 'Criar a primeira'}
+          ctaHref="/dashboard/gestao-times"
+        />
+      </div>
+
+      {/* ══════════════════════════════════════════════════════
+          2. AÇÕES RÁPIDAS — uma linha, sem banner
+      ══════════════════════════════════════════════════════ */}
+      <div className="flex flex-wrap items-center gap-3">
+        <Link href="/dashboard/behavioral"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
+              style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
+          ▶ Iniciar teste
+        </Link>
+        {[
+          { label: 'Mapear NR-1 do time',  href: '/dashboard/compliance/nr1' },
+          { label: 'Gestão de Equipes',    href: '/dashboard/gestao-times' },
+          { label: 'Guia de Entrevistas',  href: '/dashboard/guia-entrevista' },
+          { label: 'Baixar playbooks',     href: '/dashboard/downloads' },
+        ].map((a) => (
+          <Link key={a.href} href={a.href}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14.5px] font-semibold text-soul-ink no-underline
+                           bg-soul-parchment border border-white/10 transition-all hover:-translate-y-px hover:border-soul-gold/40">
+            {a.label}
+          </Link>
+        ))}
+      </div>
+
+      {/* Nível/arquétipo — só PF ativa; vem depois dos dados, não antes */}
       {!isPJ && !isNewAccount && (
         <ArchetypeHero
           name={session!.name ?? firstName}
@@ -171,152 +308,55 @@ export default async function DashboardPage() {
         />
       )}
 
-      {/* Hero PJ — empresarial, sem mencionar créditos */}
-      {isPJ && (
-        <div
-          className="rounded-3xl p-7 relative overflow-hidden"
-          style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 50%, #3d2a1c 100%)' }}
-        >
-          <div className="absolute top-0 right-0 w-72 h-72 rounded-full pointer-events-none"
-               style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%)', transform: 'translate(20%, -30%)' }} />
-          <div className="relative z-10">
-            <p className="text-[13px] font-sans font-bold tracking-[0.2em] uppercase mb-3"
-               style={{ color: '#d4b85c' }}>
-              Bem vindo, {firstName}
+      {/* ══════════════════════════════════════════════════════
+          3. ATIVIDADE (⅔) + PASSAPORTE / LEITURA CRUZADA (⅓)
+      ══════════════════════════════════════════════════════ */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+        <div className="lg:col-span-2">
+          <RecentActivityCard assessments={recentAssessments} />
+        </div>
+
+        <div className="space-y-5">
+          <PassportWidget state={passport} />
+
+          {/* Leitura cruzada — único acento azul permitido no dashboard */}
+          <div
+            className="rounded-3xl p-5 relative overflow-hidden flex flex-col"
+            style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
+          >
+            <div
+              className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
+              style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
+            />
+            <p className="text-[12px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: '#a8bce8' }}>
+              Leitura cruzada
             </p>
-            <h2 className="font-serif font-semibold text-3xl md:text-4xl text-white leading-[1.15] mb-3 lg:whitespace-nowrap">
-              Sua plataforma comportamental{' '}
-              <em className="not-italic" style={{ color: '#d4b85c' }}>em um só lugar.</em>
-            </h2>
-            <p className="text-[17px] text-white font-bold leading-snug mb-2">
-              Transforme a gestão de pessoas com inteligência de dados e segurança jurídica.
-            </p>
-            <p className="text-[15px] text-white/85 font-medium leading-relaxed mb-5">
-              Avalie talentos com {TEST_COUNT} instrumentos científicos, faça a gestão dos seus times com a
-              Matriz de Talentos e a Avaliação de Liderança, mapeie riscos psicossociais com o
-              módulo NR-1 e gere roteiros de entrevista personalizados em segundos.
-              {totalCompleted > 0 && (totalCompleted === 1
-                ? ' Já é 1 avaliação concluída.'
-                : ` Já são ${totalCompleted} avaliações concluídas.`)}
-            </p>
-            <div className="flex flex-wrap items-center gap-2.5">
-              <Link href="/dashboard/behavioral"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
-                    style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
-                ▶ Iniciar teste
-              </Link>
-              <Link href="/dashboard/candidates"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
-                Convidar candidato
-              </Link>
-              <Link href="/dashboard/compliance/nr1"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
-                Mapear NR-1 do time
-              </Link>
-              <Link href="/dashboard/gestao-times"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
-                Gestão de Equipes
-              </Link>
-              <Link href="/dashboard/guia-entrevista"
-                    className="inline-flex items-center justify-center gap-2 w-full sm:w-[235px] py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-colors"
-                    style={{ background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.20)' }}>
-                Guia de Entrevistas
-              </Link>
+            <div className="font-serif font-semibold text-[17px] text-white leading-snug mb-1.5">
+              Compare os perfis do seu time
             </div>
+            <p className="text-[13.5px] text-white/85 leading-relaxed flex-1">
+              Cruze DISC, MBTI e Eneagrama entre membros e descubra atritos antes que virem conflito.
+            </p>
+            <Link
+              href="/dashboard/gestao-times"
+              className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full text-[14.5px] font-bold text-white no-underline transition-all hover:-translate-y-px"
+              style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)' }}
+            >
+              Explorar compatibilidade →
+            </Link>
           </div>
         </div>
-      )}
-
-
-      {/* ══════════════════════════════════════════════════════
-          PLAYBOOKS: vitrine comercial em largura total
-      ══════════════════════════════════════════════════════ */}
-      <PlaybooksHome />
+      </div>
 
       {/* ══════════════════════════════════════════════════════
-          VITRINE: todas as ferramentas com copy persuasiva
+          4. FERRAMENTAS — catálogo compacto, sem copy de venda
       ══════════════════════════════════════════════════════ */}
       <FerramentasShowcase />
 
       {/* ══════════════════════════════════════════════════════
-          STATS ROW
+          5. PLAYBOOKS — faixa única com chips
       ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          value={credits}
-          label="Passaporte"
-          icon="🎟️"
-          accent={passport.status === 'EXPIRED' ? 'rose' : credits <= 3 ? 'rose' : 'terracota'}
-          delta={
-            passport.status === 'EXPIRED' ? '⚠ Expirado — recarregar' :
-            passport.status === 'ACTIVE' && passport.hoursRemaining !== null && passport.hoursRemaining < 48
-              ? `⏳ Expira em ${passport.hoursRemaining < 24 ? passport.hoursRemaining + 'h' : Math.ceil(passport.hoursRemaining/24) + ' dias'}`
-              : credits <= 3 ? '⚠ Recarregar em breve' : undefined
-          }
-          deltaUp={credits > 3 && passport.status !== 'EXPIRED'}
-          tooltip="Bônus expiram em 7 dias. Créditos pagos não expiram. Cada teste custa de 1 a 5 créditos."
-        />
-        <StatCard
-          value={totalCompleted}
-          label="Avaliações concluídas"
-          icon="✅"
-          accent="sage"
-          delta={totalCompleted > 0 ? `↑ histórico acumulado` : undefined}
-          deltaUp={true}
-        />
-        <StatCard
-          value={totalPending}
-          label="Candidatos ativos"
-          icon="👥"
-          accent="indigo"
-          delta={totalPending > 0 ? `${totalPending} aguardando resposta` : 'Nenhum em andamento'}
-          deltaUp={totalPending === 0}
-        />
-        <StatCard
-          value="4/12"
-          label="Cartas descobertas"
-          icon="🃏"
-          accent="gold"
-          delta="↑ Nova carta disponível!"
-          deltaUp={true}
-        />
-      </div>
-
-      {/* ══════════════════════════════════════════════════════
-          BOTTOM: Atividade + Passaporte + Insight (horizontal)
-      ══════════════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-        <RecentActivityCard assessments={recentAssessments} />
-
-        <PassportWidget state={passport} />
-
-        <div
-          className="rounded-3xl p-5 relative overflow-hidden flex flex-col"
-          style={{ background: 'linear-gradient(135deg, #3d4f7c, #2d3f6b)' }}
-        >
-          <div
-            className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-[0.07]"
-            style={{ background: 'radial-gradient(circle, white, transparent)', transform: 'translate(30%, -30%)' }}
-          />
-          <div className="text-xl mb-2">💡</div>
-          <div className="font-serif font-semibold text-[15px] text-white leading-snug mb-2">
-            Insight do seu arquétipo
-          </div>
-          <p className="text-[13.5px] text-white/85 leading-relaxed flex-1">
-            Exploradores têm 40% mais engajamento quando trabalham em projetos com autonomia total. Considere isso na composição da equipe.
-          </p>
-          <Link
-            href="/dashboard/reports"
-            className="mt-4 w-full flex items-center justify-center gap-2 py-3 rounded-full text-[15px] font-bold text-white no-underline transition-all hover:-translate-y-px"
-            style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.28)' }}
-          >
-            Explorar compatibilidade →
-          </Link>
-        </div>
-      </div>
+      <PlaybooksHome />
 
     </div>
   )

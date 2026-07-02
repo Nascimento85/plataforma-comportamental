@@ -1,6 +1,6 @@
 // ============================================================
-// Vitrine de playbooks gratuitos na página inicial.
-// Copy comercial: conhecimento gratuito que gera desejo.
+// Playbooks gratuitos — faixa única e discreta no fim do
+// dashboard. A vitrine completa fica em /dashboard/downloads.
 // ============================================================
 
 import Link from 'next/link'
@@ -15,42 +15,48 @@ const EMOJIS: Record<string, string> = {
   'anatomia-do-diagnostico': '🔬',
 }
 
+const CHIPS_VISIVEIS = 3
+
 export default function PlaybooksHome() {
+  const visiveis = PLAYBOOK_LIST.slice(0, CHIPS_VISIVEIS)
+  const restantes = PLAYBOOK_LIST.length - visiveis.length
+
   return (
-    <div className="soul-panel flex flex-col">
-      <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
-        <div>
-          <p className="text-[13px] font-bold uppercase tracking-widest" style={{ color: '#d4b35e' }}>
-            Playbooks gratuitos
-          </p>
-          <h2 className="font-serif font-semibold text-3xl text-soul-ink leading-tight mt-0.5">
-            Manuais que valem uma consultoria. <span className="text-soul-terracota italic font-normal">100% gratuitos.</span>
-          </h2>
-          <p className="text-[15.5px] text-soul-ink/80 font-medium mt-1.5 max-w-3xl">
-            Métodos práticos de contratação, liderança e gestão, desenhados para quem é dono de empresa. Leia em 15 minutos, aplique amanhã cedo.
-          </p>
-        </div>
-        <Link href="/dashboard/downloads"
-              className="text-[13.5px] font-bold whitespace-nowrap no-underline"
-              style={{ color: '#d4b35e' }}>
-          Ver todos →
-        </Link>
+    <div className="soul-panel flex flex-col md:flex-row md:items-center gap-5">
+      <div className="md:flex-1 min-w-0">
+        <p className="text-[12px] font-bold uppercase tracking-[0.18em]" style={{ color: '#d4b35e' }}>
+          Playbooks gratuitos
+        </p>
+        <h2 className="font-serif font-semibold text-xl text-soul-ink leading-tight mt-1">
+          Manuais que valem uma consultoria
+        </h2>
+        <p className="text-[13.5px] text-soul-ink/78 font-medium mt-1">
+          Contratação, NR-1, liderança cirúrgica e mais. Leia em 15 minutos, aplique amanhã cedo.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {PLAYBOOK_LIST.map((pb) => (
+      <div className="flex flex-wrap gap-2">
+        {visiveis.map((pb) => (
           <Link key={pb.slug} href={`/playbook/${pb.slug}`}
-                className="rounded-2xl p-5 no-underline transition-all hover:-translate-y-0.5 flex items-start gap-3"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' }}>
-            <span className="text-2xl flex-shrink-0 mt-0.5">{EMOJIS[pb.slug] ?? '📘'}</span>
-            <div className="min-w-0">
-              <p className="text-[15.5px] font-bold text-soul-ink leading-snug">{pb.titulo}</p>
-              <p className="text-[14px] text-soul-ink/78 font-medium leading-relaxed mt-1 line-clamp-2">{pb.subtitulo}</p>
-              <p className="text-[13.5px] font-bold mt-2" style={{ color: '#d4b35e' }}>Ler agora →</p>
-            </div>
+                className="text-[13px] font-semibold text-soul-ink/90 no-underline px-3 py-1.5 rounded-full transition-colors hover:text-soul-gold"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.10)' }}>
+            {EMOJIS[pb.slug] ?? '📘'} {pb.titulo}
           </Link>
         ))}
+        {restantes > 0 && (
+          <Link href="/dashboard/downloads"
+                className="text-[13px] font-semibold text-soul-ink/78 no-underline px-3 py-1.5 rounded-full transition-colors hover:text-soul-gold"
+                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.10)' }}>
+            +{restantes}
+          </Link>
+        )}
       </div>
+
+      <Link href="/dashboard/downloads"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-[13.5px] font-bold no-underline transition-colors"
+            style={{ color: '#e0c878', border: '1px solid rgba(201,168,76,0.30)' }}>
+        Ver todos →
+      </Link>
     </div>
   )
 }
