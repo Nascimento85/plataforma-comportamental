@@ -23,7 +23,7 @@ const ALLOWED = FREE_TRIAL_TESTS.map((t) => t.testType)
 const schema = z.object({
   firstName: z.string().trim().min(2, 'Informe seu nome.'),
   whatsapp:  z.string().trim().min(8, 'Informe um WhatsApp válido.'),
-  src:       z.string().trim().max(80).optional(),
+  src:       z.string().trim().max(80).nullish(),
   testTypes: z.array(z.string()).min(1, 'Escolha ao menos um teste.'),
 })
 
