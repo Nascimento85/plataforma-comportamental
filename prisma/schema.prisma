@@ -548,6 +548,21 @@ model TrialLead {
 }
 
 // ============================================================
+// PERFIL IDEAL DA VAGA — recrutador descreve a vaga e a IA
+// recomenda o perfil comportamental ideal (DISC + cruzamentos).
+// ============================================================
+model JobProfile {
+  id         String   @id @default(cuid())
+  companyId  String
+  titulo     String
+  descricao  String   // texto livre do recrutador sobre a vaga
+  resultData String   // JSON com o perfil ideal gerado pela IA
+  createdAt  DateTime @default(now())
+
+  @@index([companyId])
+}
+
+// ============================================================
 // GESTAO DE TIMES (20-70-10 + Team Build)
 // Entidade compartilhada pelos dois modulos. Um TalentTeam agrupa
 // membros (vinculados a um Employee com perfil OU avulsos). A partir

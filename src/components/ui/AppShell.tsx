@@ -185,6 +185,14 @@ function NavIcon({ path }: { path: string }) {
         <circle cx="13.5" cy="12" r="1.4" stroke="currentColor" strokeWidth="1.3"/>
       </svg>
     ),
+    // Perfil da Vaga — alvo
+    target: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
+        <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="10" cy="10" r="3.2" stroke="currentColor" strokeWidth="1.5"/>
+        <circle cx="10" cy="10" r="0.9" fill="currentColor"/>
+      </svg>
+    ),
   }
   return <>{icons[path] ?? null}</>
 }
@@ -239,6 +247,7 @@ function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
       title: 'Empresa',
       items: [
         { href: '/dashboard/candidates',    label: 'Candidatos',      iconKey: 'candidates' },
+        { href: '/dashboard/vagas',         label: 'Perfil da Vaga',  iconKey: 'target'     },
         { href: '/dashboard/gestao-times',  label: 'Gestão de Equipes', iconKey: 'talentgrid' },
         { href: '/dashboard/avaliacao-360', label: 'Avaliação 360°',  iconKey: 'leadership' },
         { href: '/dashboard/enps',          label: 'eNPS · Clima',    iconKey: 'journey'    },
