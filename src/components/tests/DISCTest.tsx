@@ -14,17 +14,12 @@ interface DISCAnswer {
   profileC: number
 }
 
-const PROFILE_COLORS: Record<string, string> = {
-  D: 'border-red-400 bg-red-50 hover:bg-red-100',
-  I: 'border-amber-400 bg-amber-50 hover:bg-amber-100',
-  S: 'border-green-400 bg-green-50 hover:bg-green-100',
-  C: 'border-blue-400 bg-blue-50 hover:bg-blue-100',
-}
-const PROFILE_SELECTED: Record<string, string> = {
-  D: 'border-red-500 bg-red-100 ring-2 ring-red-300',
-  I: 'border-amber-500 bg-amber-100 ring-2 ring-amber-300',
-  S: 'border-green-500 bg-green-100 ring-2 ring-green-300',
-  C: 'border-blue-500 bg-blue-100 ring-2 ring-blue-300',
+// Cores DISC vibrantes, calibradas para o tema escuro do teste
+const DISC_HEX: Record<string, string> = {
+  D: '#ef4444', // Dominância — vermelho
+  I: '#f59e0b', // Influência — âmbar
+  S: '#22c55e', // Estabilidade — verde
+  C: '#3b82f6', // Conformidade — azul
 }
 
 /**
@@ -152,41 +147,57 @@ export default function DISCTest({
     <div className="space-y-6">
       {/* Barra de progresso */}
       <div>
-        <div className="flex justify-between text-sm text-gray-500 mb-1">
+        <div className="flex justify-between text-[13px] mb-1.5 font-sans" style={{ color: 'rgba(240,236,227,0.6)' }}>
           <span>Grupo {currentGroup + 1} de {DISC_GROUPS.length}</span>
           <span>{completedGroups} concluídos</span>
         </div>
-        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
           <div
-            className="h-full bg-brand-500 rounded-full transition-all duration-300"
-            style={{ width: `${progress}%` }}
+            className="h-full rounded-full transition-all duration-300"
+            style={{ width: `${progress}%`, background: 'linear-gradient(90deg, #c9a84c, #d4943a)' }}
           />
         </div>
       </div>
 
       {/* Instruções */}
-      <div className="bg-brand-50 border border-brand-200 rounded-xl p-4 text-sm text-brand-800">
-        <strong>Como responder:</strong> Para cada grupo de 4 palavras, distribua os pontos de <strong>4 (mais parecido com você)</strong> a <strong>1 (menos parecido)</strong>. Cada número só pode ser usado uma vez por grupo.
+      <div className="rounded-2xl p-4 text-[14px] font-sans leading-relaxed"
+           style={{ background: 'rgba(61,79,124,0.12)', border: '1px solid rgba(61,79,124,0.32)', color: 'rgba(240,236,227,0.82)' }}>
+        <strong style={{ color: '#a9c0f0' }}>Como responder:</strong> em cada grupo, distribua os pontos de{' '}
+        <strong style={{ color: '#f0ece3' }}>4 (mais parecido com você)</strong> a{' '}
+        <strong style={{ color: '#f0ece3' }}>1 (menos parecido)</strong>. Cada número é usado uma única vez por grupo.
       </div>
 
       {/* Card do grupo atual */}
-      <div className="card p-6">
-        <h3 className="font-semibold text-gray-700 text-sm mb-4 uppercase tracking-wide">
+      <div className="rounded-3xl p-5 sm:p-6" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(58,61,69,0.7)' }}>
+        <h3 className="font-sans font-bold text-[12px] mb-4 uppercase tracking-[0.14em]" style={{ color: 'rgba(240,236,227,0.55)' }}>
           Grupo {group.groupNumber} — {group.theme}
         </h3>
 
-        <div className="space-y-3">
+        {/* Legenda das colunas */}
+        <div className="flex items-center justify-end gap-1.5 mb-2 pr-1">
+          <span className="text-[11px] font-sans" style={{ color: 'rgba(240,236,227,0.42)' }}>mais parecido</span>
+          <span className="text-[11px] font-sans" style={{ color: 'rgba(240,236,227,0.3)' }}>→</span>
+          <span className="text-[11px] font-sans" style={{ color: 'rgba(240,236,227,0.42)' }}>menos</span>
+        </div>
+
+        <div className="space-y-2.5">
           {(['D', 'I', 'S', 'C'] as const).map((profile) => {
             const option = group.options[profile]
             const currentVal = groupRanking?.[profile] ?? null
+            const hex = DISC_HEX[profile]
 
             return (
-              <div key={profile} className="flex items-center gap-3">
-                {/* Palavra */}
-                <div className="flex-1 text-gray-900 font-medium">{option}</div>
+              <div key={profile} className="flex items-center gap-3 rounded-2xl px-3 py-2.5"
+                   style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(58,61,69,0.5)' }}>
+                {/* Acento de cor da linha */}
+                <span className="w-1.5 h-9 rounded-full flex-shrink-0"
+                      style={{ background: hex, opacity: currentVal ? 1 : 0.45 }} />
 
-                {/* Seletor de pontuação 1–4 */}
-                <div className="flex gap-2">
+                {/* Palavra */}
+                <div className="flex-1 font-medium text-[15px]" style={{ color: '#f0ece3' }}>{option}</div>
+
+                {/* Seletor de pontuação 4–1 */}
+                <div className="flex gap-1.5 sm:gap-2">
                   {[4, 3, 2, 1].map((val) => {
                     const isSelected = currentVal === val
                     const isDisabled = !isSelected && usedValues.includes(val)
@@ -196,10 +207,12 @@ export default function DISCTest({
                         key={val}
                         onClick={() => assignRanking(profile, val)}
                         disabled={isDisabled}
-                        className={`w-9 h-9 rounded-lg border-2 text-sm font-bold transition-all
-                          ${isSelected ? PROFILE_SELECTED[profile] : PROFILE_COLORS[profile]}
-                          ${isDisabled ? 'opacity-30 cursor-not-allowed' : 'cursor-pointer'}
-                        `}
+                        className="w-10 h-10 rounded-xl border-2 text-[15px] font-bold transition-all hover:-translate-y-0.5 disabled:hover:translate-y-0"
+                        style={isSelected
+                          ? { background: hex, borderColor: hex, color: '#fff', boxShadow: `0 4px 14px ${hex}55` }
+                          : isDisabled
+                            ? { background: 'transparent', borderColor: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.22)', cursor: 'not-allowed' }
+                            : { background: `${hex}14`, borderColor: `${hex}80`, color: hex }}
                       >
                         {val}
                       </button>
@@ -212,7 +225,7 @@ export default function DISCTest({
         </div>
 
         {currentComplete && (
-          <div className="mt-4 text-green-600 text-sm font-medium flex items-center gap-1">
+          <div className="mt-4 text-[14px] font-sans font-semibold flex items-center gap-1.5" style={{ color: '#5fbf6a' }}>
             ✓ Grupo concluído
           </div>
         )}
@@ -220,14 +233,16 @@ export default function DISCTest({
 
       {/* Aviso de grupos incompletos */}
       {completedGroups < DISC_GROUPS.length && currentGroup === DISC_GROUPS.length - 1 && (
-        <div className="bg-amber-50 border border-amber-200 text-amber-700 text-sm rounded-lg px-4 py-3">
-          ⚠️ Ainda faltam {DISC_GROUPS.length - completedGroups} grupo(s) para preencher. Clique em "Finalizar teste" para ser direcionado ao primeiro grupo incompleto.
+        <div className="text-[14px] font-sans rounded-xl px-4 py-3"
+             style={{ background: 'rgba(212,148,58,0.12)', border: '1px solid rgba(212,148,58,0.32)', color: '#e8c16a' }}>
+          ⚠️ Ainda faltam {DISC_GROUPS.length - completedGroups} grupo(s) para preencher. Clique em &quot;Finalizar teste&quot; para ser direcionado ao primeiro grupo incompleto.
         </div>
       )}
 
       {/* Erro */}
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
+        <div className="text-[14px] font-sans rounded-xl px-4 py-3"
+             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.45)', color: '#f0a892' }}>
           {error}
         </div>
       )}
