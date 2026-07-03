@@ -63,7 +63,7 @@ export const intjPremium: MbtiPremium = {
   cognition: {
     stack: ['Ni','Te','Fi','Se'],
     explanation:
-      'Sua função dominante é Ni (Intuição Introvertida): você sintetiza padrões em visões de longo prazo. Te (Pensamento Extrovertido) executa essas visões em sistemas. Fi (Sentimento Introvertido) é seu termômetro de valor pessoal. Se (Sensação Extrovertida) é sua função inferior — onde você desliga: presente sensorial, prazer físico, espontaneidade.',
+      'Sua função dominante é Ni (Intuição Introvertida): você sintetiza padrões em visões de longo prazo. Te (Pensamento Extrovertido) executa essas visões em sistemas. Fi (Sentimento Introvertido) é seu termômetro de valor pessoal. Se (Sensação Extrovertida) é sua função inferior, onde você desliga: presente sensorial, prazer físico, espontaneidade.',
     decisionRule:
       'Você decide pela visão (Ni) e racionaliza pela eficiência (Te). Ignora o impacto emocional imediato (Fi virada para dentro) e sub-experiencia o presente (Se inferior). Resultado: decisões brilhantes a longo prazo, frias no curto.',
   },
@@ -75,7 +75,7 @@ export const intjPremium: MbtiPremium = {
       { role: 'CTO / Diretor de Engenharia', whyFits: 'Visão técnica + execução sistemática.', bandBrlMonthly: 'R$ 25k–60k+', caveat: 'Cuidado com isolamento: o cargo exige liderar humanos, não só código.' },
       { role: 'Estrategista de Negócio',    whyFits: 'Antecipa cenários e desenha rota.',     bandBrlMonthly: 'R$ 15k–40k',   caveat: 'Equipe pode te achar distante. Faça 1:1 ritualizado.' },
       { role: 'Cientista de Dados Sênior',  whyFits: 'Extrair padrão de complexidade é seu jogo.', bandBrlMonthly: 'R$ 14k–32k', caveat: 'Não fique só no notebook. Suba no púlpito a cada trimestre.' },
-      { role: 'Empreendedor SaaS B2B',      whyFits: 'Visão + sistema + paciência longa.',    bandBrlMonthly: 'Variável (R$ 0 a infinito)', caveat: 'Vendas iniciais matam INTJ — terceirize ou contrate INFJ/ENTP.' },
+      { role: 'Empreendedor SaaS B2B',      whyFits: 'Visão + sistema + paciência longa.',    bandBrlMonthly: 'Variável (R$ 0 a infinito)', caveat: 'Vendas iniciais matam INTJ: terceirize ou contrate INFJ/ENTP.' },
     ],
     avoid: [
       'Vendas porta-a-porta (alta exigência social/emocional)',

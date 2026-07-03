@@ -10,7 +10,18 @@ import {
   VacPrintReport, QmtPrintReport, LsPrintReport, ComunicacaoPrintReport, QiPrintReport,
 } from '@/app/result/[id]/PrintReports'
 
-export const metadata: Metadata = { title: 'Admin — Devolutiva' }
+export const metadata: Metadata = { title: 'Admin · Devolutiva' }
+
+// Labels PT para as chaves internas dos engines de arquétipos
+const JUNGIAN_PT: Record<string, string> = {
+  INNOCENT: 'Inocente', ORPHAN: 'Órfão', HERO: 'Herói', CAREGIVER: 'Cuidador',
+  EXPLORER: 'Explorador', REBEL: 'Rebelde', LOVER: 'Amante', CREATOR: 'Criador',
+  MAGICIAN: 'Mago', SAGE: 'Sábio', RULER: 'Soberano', JESTER: 'Bobo da Corte',
+}
+const FEMININE_PT: Record<string, string> = {
+  MAIDEN: 'Donzela', MOTHER: 'Mãe', HUNTRESS: 'Caçadora', SOVEREIGN: 'Soberana',
+  LOVER: 'Amante', WISE: 'Sábia', CRONE: 'Anciã',
+}
 
 // ── Helpers de renderização ─────────────────────────────────────
 
@@ -27,10 +38,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 type TagColor = 'brand' | 'green' | 'red' | 'violet' | 'amber'
 const TAG_STYLES: Record<TagColor, { color: string; bg: string; border: string }> = {
   brand:  { color: '#e09070', bg: 'rgba(196,99,58,0.08)',   border: 'rgba(196,99,58,0.2)'   },
-  green:  { color: '#5a8a5e', bg: 'rgba(122,158,126,0.1)',  border: 'rgba(122,158,126,0.25)' },
-  red:    { color: '#b05a4a', bg: 'rgba(196,90,74,0.08)',   border: 'rgba(196,90,74,0.2)'   },
-  violet: { color: '#6d5a9c', bg: 'rgba(109,90,156,0.08)',  border: 'rgba(109,90,156,0.2)'  },
-  amber:  { color: '#a07020', bg: 'rgba(212,148,58,0.1)',   border: 'rgba(212,148,58,0.25)' },
+  green:  { color: '#9fd0a3', bg: 'rgba(122,158,126,0.1)',  border: 'rgba(122,158,126,0.25)' },
+  red:    { color: '#e59a90', bg: 'rgba(196,90,74,0.08)',   border: 'rgba(196,90,74,0.2)'   },
+  violet: { color: '#b0a4e6', bg: 'rgba(109,90,156,0.08)',  border: 'rgba(109,90,156,0.2)'  },
+  amber:  { color: '#e3b168', bg: 'rgba(212,148,58,0.1)',   border: 'rgba(212,148,58,0.25)' },
 }
 
 function TagList({ items, color = 'brand' }: { items: string[]; color?: TagColor }) {
@@ -63,12 +74,12 @@ function BulletList({ items, color = 'green' }: { items: string[]; color?: 'gree
 
 type InfoVariant = 'sage' | 'terracota' | 'rose' | 'amber' | 'indigo' | 'violet'
 const INFO_STYLES: Record<InfoVariant, { color: string; bg: string; border: string }> = {
-  sage:     { color: '#3d6640', bg: 'rgba(122,158,126,0.1)',  border: 'rgba(122,158,126,0.25)' },
-  terracota:{ color: '#8a3520', bg: 'rgba(196,99,58,0.08)',   border: 'rgba(196,99,58,0.2)'   },
-  rose:     { color: '#8a4040', bg: 'rgba(196,90,90,0.08)',   border: 'rgba(196,90,90,0.2)'   },
-  amber:    { color: '#7a5010', bg: 'rgba(212,148,58,0.1)',   border: 'rgba(212,148,58,0.25)' },
-  indigo:   { color: '#2a3d6c', bg: 'rgba(61,79,124,0.08)',   border: 'rgba(61,79,124,0.2)'   },
-  violet:   { color: '#4a3a7c', bg: 'rgba(109,90,156,0.08)',  border: 'rgba(109,90,156,0.2)'  },
+  sage:     { color: '#a9d3a9', bg: 'rgba(122,158,126,0.1)',  border: 'rgba(122,158,126,0.25)' },
+  terracota:{ color: '#e09070', bg: 'rgba(196,99,58,0.08)',   border: 'rgba(196,99,58,0.2)'   },
+  rose:     { color: '#e59a90', bg: 'rgba(196,90,90,0.08)',   border: 'rgba(196,90,90,0.2)'   },
+  amber:    { color: '#e3b168', bg: 'rgba(212,148,58,0.1)',   border: 'rgba(212,148,58,0.25)' },
+  indigo:   { color: '#8fa6da', bg: 'rgba(61,79,124,0.08)',   border: 'rgba(61,79,124,0.2)'   },
+  violet:   { color: '#b0a4e6', bg: 'rgba(109,90,156,0.08)',  border: 'rgba(109,90,156,0.2)'  },
 }
 
 function InfoCard({ label, text, variant = 'sage', bg }: { label: string; text: string; variant?: InfoVariant; bg?: string }) {
@@ -118,7 +129,7 @@ function DiscDevolutiva({ result }: { result: Record<string, unknown> }) {
           {(['D', 'I', 'S', 'C'] as const).map((p) => (
             <div key={p}>
               <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
-                <span className="font-medium">{p} — {DISC_NAMES[p]}</span>
+                <span className="font-medium">{p} · {DISC_NAMES[p]}</span>
                 <span>{Math.round(r.percentages[p] * 100)}%</span>
               </div>
               <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.5)' }}>
@@ -340,7 +351,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
           {sorted.map(([name, pct]) => (
             <div key={name}>
               <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
-                <span className="font-medium">{name}</span><span>{Math.round(pct)}%</span>
+                <span className="font-medium">{JUNGIAN_PT[name] ?? name}</span><span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.5)' }}>
                 <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#d4943a' }} />
@@ -401,7 +412,7 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
           {sorted.map(([name, pct]) => (
             <div key={name}>
               <div className="flex justify-between text-xs font-sans mb-1" style={{ color: 'rgba(240,236,227,0.68)' }}>
-                <span className="font-medium">{name}</span><span>{Math.round(pct)}%</span>
+                <span className="font-medium">{FEMININE_PT[name] ?? name}</span><span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(58,61,69,0.5)' }}>
                 <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#6d5a9c' }} />

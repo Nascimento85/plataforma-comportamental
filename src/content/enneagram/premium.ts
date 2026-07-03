@@ -46,8 +46,8 @@ export interface EnneagramPremium {
 // ──────────────────────────────────────────────────────────
 export const type8Premium: EnneagramPremium = {
   key: '8',
-  name: 'Tipo 8 — O Desafiador',
-  pitch: 'Você protege todo mundo — exceto a parte sua que é tenra. Aqui você aprende que vulnerabilidade é a forma mais alta de força.',
+  name: 'Tipo 8 · O Desafiador',
+  pitch: 'Você protege todo mundo, exceto a parte sua que é tenra. Aqui você aprende que vulnerabilidade é a forma mais alta de força.',
   paletteHex: '#8c2f17',
 
   motivations: {
@@ -68,7 +68,7 @@ export const type8Premium: EnneagramPremium = {
       '1. Permitir 5 minutos diários de tenrura sem performar nada.',
       '2. Falar com alguém em quem confia sobre 1 medo real (não estratégia).',
       '3. Receber ajuda sem retribuir imediatamente.',
-      '4. Dizer "eu não sei" em alta voz — sem qualificação.',
+      '4. Dizer "eu não sei" em alta voz, sem qualificação.',
       '5. Permitir-se chorar sem editar a cena depois.',
     ],
   },
@@ -81,24 +81,24 @@ export const type8Premium: EnneagramPremium = {
     },
     disintegration: {
       goesTo: '5',
-      behaviorShift: 'Em estresse forte, você ISOLA — desaparece, desliga, "queima ponte" mentalmente.',
+      behaviorShift: 'Em estresse forte, você ISOLA: desaparece, desliga, "queima ponte" mentalmente.',
       signal: 'Você corta contato com pessoas que te decepcionaram, sem aviso, e acha que está sendo "honesto".',
     },
   },
 
   subtypes: {
     SOCIAL: {
-      name: 'Solidariedade — "O Camarada"',
+      name: 'Solidariedade · "O Camarada"',
       flavor: 'Lidera grupo, defende causas, conhece todo mundo. O 8 que vira ativista, sindicalista, mentora.',
       redFlag: 'Negligencia o íntimo. Conhece 500 pessoas e nenhuma sabe o que ele sente.',
     },
     SEXUAL: {
-      name: 'Posse — "O Desafiador Intenso"',
-      flavor: 'Cria vínculo de "tudo ou nada". Espera lealdade absoluta — e dá igual em troca.',
+      name: 'Posse · "O Desafiador Intenso"',
+      flavor: 'Cria vínculo de "tudo ou nada". Espera lealdade absoluta, e dá igual em troca.',
       redFlag: 'Ciúme. Confunde possessividade com amor. Testa lealdade do parceiro com pequenas provocações.',
     },
     PRESERVATION: {
-      name: 'Sobrevivência — "Construtor de Império"',
+      name: 'Sobrevivência · "Construtor de Império"',
       flavor: 'Foca em controle de recursos: dinheiro, território, segurança. Trabalha para nunca depender.',
       redFlag: 'Materialismo defensivo. Acumula sem desfrutar. Confunde patrimônio com paz.',
     },
@@ -134,13 +134,13 @@ const skeleton = (key: EnneagramKey, name: string, pitch: string, paletteHex: st
 })
 
 export const ENNEAGRAM_PREMIUM: Record<EnneagramKey, Partial<EnneagramPremium>> = {
-  '1': skeleton('1', 'Tipo 1 — O Reformador',     'Perfeição é uma armadilha de quem teve que ser bom para sobreviver.', '#3a6db4'),
-  '2': skeleton('2', 'Tipo 2 — O Prestativo',     'Cuidar dos outros foi a forma como você aprendeu a ser amada.',        '#a8522e'),
-  '3': skeleton('3', 'Tipo 3 — O Realizador',     'Você confunde valor com performance. Aqui descobre quem você É.',      '#d4943a'),
-  '4': skeleton('4', 'Tipo 4 — O Individualista', 'Sua diferença é dom — mas virou trincheira. Hora de sair.',             '#8c4b8c'),
-  '5': skeleton('5', 'Tipo 5 — O Investigador',   'Saber tudo é jeito de não viver nada. Coragem é entrar.',               '#3a4f8c'),
-  '6': skeleton('6', 'Tipo 6 — O Leal',           'Sua mente prepara para o pior. A vida acontece no enquanto.',           '#7a8298'),
-  '7': skeleton('7', 'Tipo 7 — O Entusiasta',     'A próxima coisa nunca é a coisa. Termine 1 antes de procurar a próxima.','#d4a93a'),
+  '1': skeleton('1', 'Tipo 1 · O Reformador',     'Perfeição é uma armadilha de quem teve que ser bom para sobreviver.', '#3a6db4'),
+  '2': skeleton('2', 'Tipo 2 · O Prestativo',     'Cuidar dos outros foi a forma como você aprendeu a ser amada.',        '#a8522e'),
+  '3': skeleton('3', 'Tipo 3 · O Realizador',     'Você confunde valor com performance. Aqui descobre quem você É.',      '#d4943a'),
+  '4': skeleton('4', 'Tipo 4 · O Individualista', 'Sua diferença é dom, mas virou trincheira. Hora de sair.',             '#8c4b8c'),
+  '5': skeleton('5', 'Tipo 5 · O Investigador',   'Saber tudo é jeito de não viver nada. Coragem é entrar.',               '#3a4f8c'),
+  '6': skeleton('6', 'Tipo 6 · O Leal',           'Sua mente prepara para o pior. A vida acontece no enquanto.',           '#7a8298'),
+  '7': skeleton('7', 'Tipo 7 · O Entusiasta',     'A próxima coisa nunca é a coisa. Termine 1 antes de procurar a próxima.','#d4a93a'),
   '8': type8Premium,
-  '9': skeleton('9', 'Tipo 9 — O Pacificador',    'Sua paz pode ser sumiço. Aparecer dói; sumir custa mais.',              '#7a9e7e'),
+  '9': skeleton('9', 'Tipo 9 · O Pacificador',    'Sua paz pode ser sumiço. Aparecer dói; sumir custa mais.',              '#7a9e7e'),
 }

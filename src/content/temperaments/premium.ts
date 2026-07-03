@@ -43,7 +43,7 @@ export interface TemperamentPremium {
 // ──────────────────────────────────────────────────────────
 export const colericoPremium: TemperamentPremium = {
   key: 'COLERICO',
-  label: 'Colérico — O Combustível',
+  label: 'Colérico · O Combustível',
   pitch: 'Você vive em chama. A pergunta não é se vai queimar; é o que vai aceder ANTES de queimar.',
   paletteHex: '#c4633a',
 
@@ -53,7 +53,7 @@ export const colericoPremium: TemperamentPremium = {
     energyCurve:
       'Pico entre 6h–11h. Queda forte às 14h–15h (não é preguiça, é depleção). 2º pico fraco às 18h. Insônia "irritada" (não cansada) é comum se o dia teve conflito.',
     sleep:
-      'Ideal: dormir antes das 23h. Quanto mais tarde, mais difícil — porque você atravessa a janela de melatonina e entra em vigília adrenérgica.',
+      'Ideal: dormir antes das 23h. Quanto mais tarde, mais difícil, porque você atravessa a janela de melatonina e entra em vigília adrenérgica.',
   },
 
   food: {
@@ -83,9 +83,9 @@ export const colericoPremium: TemperamentPremium = {
 
   stress: {
     acuteResponse:
-      'Mandíbula trava, ombros sobem, voz aumenta de volume. Pulso sobe 10–20bpm em 15 segundos. Você decide rápido demais — quase sempre se arrepende em 24h.',
+      'Mandíbula trava, ombros sobem, voz aumenta de volume. Pulso sobe 10 a 20 bpm em 15 segundos. Você decide rápido demais, e quase sempre se arrepende em 24h.',
     rageOrAnxiety:
-      'Raiva. Quase sempre. Ansiedade aparece como "frustração impaciente" — não como medo abstrato.',
+      'Raiva. Quase sempre. Ansiedade aparece como "frustração impaciente", não como medo abstrato.',
     techniques: [
       { name: 'Respiração 4–7–8', how: 'Inspire 4s, segure 7s, solte 8s. 4 ciclos.', duration: '90s' },
       { name: 'Caminhada de 6 min', how: 'Saia da sala. Caminhe sem celular. Volte só com decisão tomada.', duration: '6 min' },
@@ -95,13 +95,13 @@ export const colericoPremium: TemperamentPremium = {
   },
 
   virtuesVices: {
-    cardinalVirtue: 'Força — capacidade de mover o que não se moveria sem você.',
-    cardinalVice:   'Ira — fogo que queima primeiro a casa de quem ama você.',
+    cardinalVirtue: 'Força: capacidade de mover o que não se moveria sem você.',
+    cardinalVice:   'Ira: fogo que queima primeiro a casa de quem ama você.',
     practices: [
       '1. Pausa de 4 segundos antes de toda decisão emocional.',
       '2. Diário noturno de 3 linhas: "onde fui injusto hoje?".',
       '3. Pedir desculpa concreta, sem justificativa, em até 24h.',
-      '4. Domingos sem agenda — terreno fértil para o silêncio.',
+      '4. Domingos sem agenda: terreno fértil para o silêncio.',
       '5. Praticar dar valor sem cobrar retribuição imediata.',
     ],
   },
@@ -123,8 +123,8 @@ export const colericoPremium: TemperamentPremium = {
 // ──────────────────────────────────────────────────────────
 export const sanguineoPremium: Pick<TemperamentPremium,'key'|'label'|'pitch'|'paletteHex'> = {
   key: 'SANGUINEO',
-  label: 'Sanguíneo — A Faísca',
-  pitch: 'Você é luz. O risco é virar fogo de palha — brilhar 3 dias e apagar.',
+  label: 'Sanguíneo · A Faísca',
+  pitch: 'Você é luz. O risco é virar fogo de palha: brilhar 3 dias e apagar.',
   paletteHex: '#d4943a',
 }
 
@@ -133,7 +133,7 @@ export const sanguineoPremium: Pick<TemperamentPremium,'key'|'label'|'pitch'|'pa
 // ──────────────────────────────────────────────────────────
 export const melancolicoPremium: Pick<TemperamentPremium,'key'|'label'|'pitch'|'paletteHex'> = {
   key: 'MELANCOLICO',
-  label: 'Melancólico — A Profundidade',
+  label: 'Melancólico · A Profundidade',
   pitch: 'Você sente o que outros mal percebem. Aprenda a transformar peso em poesia, não em prisão.',
   paletteHex: '#3a4f8c',
 }
@@ -143,7 +143,7 @@ export const melancolicoPremium: Pick<TemperamentPremium,'key'|'label'|'pitch'|'
 // ──────────────────────────────────────────────────────────
 export const fleumaticoPremium: Pick<TemperamentPremium,'key'|'label'|'pitch'|'paletteHex'> = {
   key: 'FLEUMATICO',
-  label: 'Fleumático — A Calma Profunda',
+  label: 'Fleumático · A Calma Profunda',
   pitch: 'Sua paz é seu superpoder. O risco é confundir paz com inércia.',
   paletteHex: '#7a9e7e',
 }

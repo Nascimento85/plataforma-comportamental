@@ -65,7 +65,7 @@ export const loverPremium: ArchetypePremium = {
 
   symbolic: {
     elementary: 'Elemento Fogo. Cores: Terracota, Rosa Antigo, Bronze. Animal: cisne ou pomba (a depender da fase).',
-    glyph: 'Coração estilizado dentro de círculo solar — usar como marca d\'água em opacidade 8% no canto inferior direito.',
+    glyph: 'Coração estilizado dentro de círculo solar: usar como marca d\'água em opacidade 8% no canto inferior direito.',
   },
 
   branding: {
@@ -101,7 +101,7 @@ export const loverPremium: ArchetypePremium = {
 
   shadow: {
     summary:
-      'A Amante na sombra confunde "ser amada" com "existir". A relação vira espelho — sem o outro, ela some.',
+      'A Amante na sombra confunde "ser amada" com "existir". A relação vira espelho: sem o outro, ela some.',
     triggers: [
       'Sentir-se invisível para quem ama.',
       'Comparação com outra pessoa que ela percebe como "mais desejável".',
@@ -115,17 +115,17 @@ export const loverPremium: ArchetypePremium = {
       'Drama, idealização, rompimento e retorno cíclico.',
     ],
     repair: [
-      '1. Ritual de auto-cuidado SOZINHA — banho longo, perfume só seu, leitura na cama.',
+      '1. Ritual de auto-cuidado SOZINHA: banho longo, perfume só seu, leitura na cama.',
       '2. Diário matinal: "o que sou eu independente de quem está comigo?".',
-      '3. Convivência regular com a Sábia (leitura, estudo) e a Criadora (arte) — equilibra a Amante.',
-      '4. Comunidade feminina — irmandade resgata o que a relação amorosa não pode dar.',
-      '5. Terapia ou coaching — sombra trabalhada SOZINHA é lenta. Trabalhada com presença é mais rápida.',
+      '3. Convivência regular com a Sábia (leitura, estudo) e a Criadora (arte): equilibra a Amante.',
+      '4. Comunidade feminina: irmandade resgata o que a relação amorosa não pode dar.',
+      '5. Terapia ou coaching: sombra trabalhada SOZINHA é lenta. Trabalhada com presença é mais rápida.',
     ],
   },
 
   activation: {
     summary:
-      'Para invocar a Amante saudável (não a sombra), o caminho é o sensorial sagrado — não a busca compulsiva por afeto.',
+      'Para invocar a Amante saudável (não a sombra), o caminho é o sensorial sagrado, não a busca compulsiva por afeto.',
     exercises: [
       { name: 'Banho ritual',         duration: '20 min',         ritual: 'Vela acesa, sal grosso, óleo essencial. Mergulho em silêncio. Mantra: "eu sou inteira em mim".' },
       { name: 'Mesa de mim',           duration: '30 min/semana',  ritual: 'Prato bonito, vinho ou chá, prato preparado COM cuidado para você mesma. Sem celular.' },

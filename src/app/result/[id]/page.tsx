@@ -223,7 +223,7 @@ function DiscDevolutiva({ d }: { d: Record<string, unknown> }) {
       <Card><div className="p-6">
         <SectionTitle>Distribuição do perfil DISC</SectionTitle>
         {(['D','I','S','C'] as const).map((p) => (
-          <Bar key={p} label={`${p} — ${N[p]}`}
+          <Bar key={p} label={`${p} · ${N[p]}`}
             pct={Math.round((r.percentages[p] ?? 0) * 100)}
             color={C[p]} bold={p === pred} />
         ))}
@@ -325,8 +325,8 @@ function MbtiDevolutiva({ d }: { d: Record<string, unknown> }) {
           return (
             <div key={dim.label} className="mb-5">
               <p className="text-xs font-semibold text-gray-500 mb-2">{dim.label}</p>
-              <Bar label={`${dim.poleA} — ${winA ? 'predominante' : 'secundário'}`} pct={pctA} color={BRAND} bold={winA} />
-              <Bar label={`${dim.poleB} — ${!winA ? 'predominante' : 'secundário'}`} pct={pctB} color="#818cf8" bold={!winA} />
+              <Bar label={`${dim.poleA} · ${winA ? 'predominante' : 'secundário'}`} pct={pctA} color={BRAND} bold={winA} />
+              <Bar label={`${dim.poleB} · ${!winA ? 'predominante' : 'secundário'}`} pct={pctB} color="#818cf8" bold={!winA} />
             </div>
           )
         })}
@@ -403,7 +403,7 @@ function EnneagramDevolutiva({ d }: { d: Record<string, unknown> }) {
         <SectionTitle>Pontuação por tipo (máx. 75 pts)</SectionTitle>
         {[1,2,3,4,5,6,7,8,9].map((t) => (
           <Bar key={t}
-            label={`Tipo ${t}${t === r.predominant ? ` — ${r.report.name}` : ''}`}
+            label={`Tipo ${t}${t === r.predominant ? ` · ${r.report.name}` : ''}`}
             pct={((r.scores[String(t)] ?? 0) / 75) * 100}
             color={t === r.predominant ? col : '#e2e8f0'}
             bold={t === r.predominant} />
@@ -422,7 +422,7 @@ function EnneagramDevolutiva({ d }: { d: Record<string, unknown> }) {
       </Grid2>
 
       <Card><div className="p-6">
-        <SectionTitle>Asas — influências secundárias</SectionTitle>
+        <SectionTitle>Asas · influências secundárias</SectionTitle>
         <div className="space-y-3">
           {r.report.wings.map((w, i) => (
             <div key={i} className="bg-violet-50 border border-violet-200 rounded-xl px-4 py-3">
@@ -601,7 +601,7 @@ function ArchetypeDevolutiva({ d }: { d: Record<string, unknown> }) {
       </div></Card>
 
       <Card><div className="p-6" style={{ backgroundColor: '#f0f4ff', borderColor: '#c7d2fe' }}>
-        <SectionTitle>Arquétipo secundário — {r.secondaryReport.name}</SectionTitle>
+        <SectionTitle>Arquétipo secundário · {r.secondaryReport.name}</SectionTitle>
         <p className="text-xs font-bold mb-2" style={{ color: BRAND }}>
           {r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;
         </p>
@@ -675,7 +675,7 @@ function ArchetypeFeminineDevolutiva({ d }: { d: Record<string, unknown> }) {
       </Grid2>
 
       <Card><div className="p-6" style={{ backgroundColor: '#faf5ff', borderColor: '#ddd6fe' }}>
-        <SectionTitle>Arquétipo secundário — {r.secondaryReport.name}</SectionTitle>
+        <SectionTitle>Arquétipo secundário · {r.secondaryReport.name}</SectionTitle>
         <p className="text-xs font-bold mb-2" style={{ color: VIOLET }}>
           {r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;
         </p>
@@ -1044,7 +1044,7 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
 
   const resultData   = parseResultData(assessment.result.resultData)
   const testLabel    = TEST_LABELS[assessment.testType] ?? assessment.testType
-  const APP_NAME     = process.env.NEXT_PUBLIC_APP_NAME ?? 'Psique — Mapa Comportamental'
+  const APP_NAME     = process.env.NEXT_PUBLIC_APP_NAME ?? 'Psique · Mapa Comportamental'
   const finishedAt   = assessment.completedAt
     ? new Date(assessment.completedAt).toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' })
     : null

@@ -205,7 +205,7 @@ export function calculateQi(answers: QiAnswer[]): QiResult {
     revisao,
     limites: [
       'Este é um indicador de aptidão para triagem e desenvolvimento, não um teste de QI clínico nem um diagnóstico.',
-      'O resultado reflete o desempenho neste conjunto de questões e neste momento — raciocínio lógico melhora com prática.',
+      'O resultado reflete o desempenho neste conjunto de questões e neste momento: raciocínio lógico melhora com prática.',
       'Use como um dado entre outros (entrevista, experiência, outros mapas comportamentais), nunca como critério único de decisão.',
     ],
   }

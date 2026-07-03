@@ -257,7 +257,7 @@ export function DiscPrintReport({ result }: { result: Record<string, unknown> })
       <div style={card}>
         <p style={kicker}>Distribuição do perfil DISC</p>
         {(['D', 'I', 'S', 'C'] as const).map((p) => (
-          <PrintBar key={p} label={`${p} — ${N[p]}`} pct={Math.round((r.percentages[p] ?? 0) * 100)} color={C[p]} bold={p === pred} />
+          <PrintBar key={p} label={`${p} · ${N[p]}`} pct={Math.round((r.percentages[p] ?? 0) * 100)} color={C[p]} bold={p === pred} />
         ))}
       </div>
 
@@ -340,8 +340,8 @@ export function MbtiPrintReport({ result }: { result: Record<string, unknown> })
           return (
             <div key={dim.label} style={{ marginBottom: 16 }}>
               <p style={{ fontSize: 11, fontWeight: 600, color: MUTED, margin: '0 0 8px' }}>{dim.label}</p>
-              <PrintBar label={`${dim.poleA} — ${winA ? 'predominante' : 'secundário'}`} pct={pctA} color={BRAND} bold={winA} />
-              <PrintBar label={`${dim.poleB} — ${!winA ? 'predominante' : 'secundário'}`} pct={pctB} color="#aab8ec" bold={!winA} />
+              <PrintBar label={`${dim.poleA} · ${winA ? 'predominante' : 'secundário'}`} pct={pctA} color={BRAND} bold={winA} />
+              <PrintBar label={`${dim.poleB} · ${!winA ? 'predominante' : 'secundário'}`} pct={pctB} color="#aab8ec" bold={!winA} />
             </div>
           )
         })}
@@ -408,7 +408,7 @@ export function EnneagramPrintReport({ result }: { result: Record<string, unknow
         <p style={kicker}>Pontuação por tipo (máx. 75 pts)</p>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
           <PrintBar key={t}
-            label={`Tipo ${t}${t === r.predominant ? ` — ${r.report.name}` : ''}`}
+            label={`Tipo ${t}${t === r.predominant ? ` · ${r.report.name}` : ''}`}
             pct={((r.scores[String(t)] ?? 0) / 75) * 100}
             color={t === r.predominant ? col : 'var(--rep-track)'}
             bold={t === r.predominant} />
@@ -425,7 +425,7 @@ export function EnneagramPrintReport({ result }: { result: Record<string, unknow
       </div>
 
       <div style={card}>
-        <p style={kicker}>Asas — influências secundárias</p>
+        <p style={kicker}>Asas · influências secundárias</p>
         {r.report.wings.map((w, i) => (
           <div key={i} style={{ marginBottom: i === r.report.wings.length - 1 ? 0 : 10, background: 'rgba(167,139,250,0.10)', border: '1px solid rgba(167,139,250,0.25)', borderRadius: 10, padding: '10px 14px' }}>
             <p style={{ fontSize: 11, fontWeight: 700, color: '#c4b5fd', margin: '0 0 4px' }}>Tipo {w.wing}</p>
@@ -584,7 +584,7 @@ export function ArchetypePrintReport({ result }: { result: Record<string, unknow
       </div>
 
       <div style={{ ...card, marginBottom: 0, background: 'rgba(125,147,224,0.10)', border: '1px solid rgba(125,147,224,0.25)' }}>
-        <p style={kicker}>Arquétipo secundário — {r.secondaryReport.name}</p>
+        <p style={kicker}>Arquétipo secundário · {r.secondaryReport.name}</p>
         <p style={{ fontSize: 11, fontWeight: 700, color: BRAND, margin: '0 0 8px' }}>
           {r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;
         </p>
@@ -655,7 +655,7 @@ export function ArchetypeFemininePrintReport({ result }: { result: Record<string
       </div>
 
       <div style={{ ...card, marginBottom: r.activationReport ? 16 : 0, background: 'rgba(167,139,250,0.10)', border: '1px solid rgba(167,139,250,0.25)' }}>
-        <p style={kicker}>Arquétipo secundário — {r.secondaryReport.name}</p>
+        <p style={kicker}>Arquétipo secundário · {r.secondaryReport.name}</p>
         <p style={{ fontSize: 11, fontWeight: 700, color: VIOLET, margin: '0 0 8px' }}>
           {r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;
         </p>

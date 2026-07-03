@@ -6,8 +6,20 @@ import Link from 'next/link'
 import ShareResultButton from './ShareResultButton'
 import LogoutAndLoginButton from './LogoutAndLoginButton'
 import { parseResultData } from '@/lib/parseResult'
+import { TEST_LABELS } from '@/lib/test-labels'
 
 export const metadata: Metadata = { title: 'Devolutiva Comportamental' }
+
+// Labels PT para as chaves internas dos engines de arquétipos
+const JUNGIAN_PT: Record<string, string> = {
+  INNOCENT: 'Inocente', ORPHAN: 'Órfão', HERO: 'Herói', CAREGIVER: 'Cuidador',
+  EXPLORER: 'Explorador', REBEL: 'Rebelde', LOVER: 'Amante', CREATOR: 'Criador',
+  MAGICIAN: 'Mago', SAGE: 'Sábio', RULER: 'Soberano', JESTER: 'Bobo da Corte',
+}
+const FEMININE_PT: Record<string, string> = {
+  MAIDEN: 'Donzela', MOTHER: 'Mãe', HUNTRESS: 'Caçadora', SOVEREIGN: 'Soberana',
+  LOVER: 'Amante', WISE: 'Sábia', CRONE: 'Anciã',
+}
 
 // ── Helpers de renderização ─────────────────────────────────────
 
@@ -23,10 +35,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function TagList({ items, color = 'brand' }: { items: string[]; color?: string }) {
   const styles: Record<string, React.CSSProperties> = {
     brand:  { background: 'rgba(196,99,58,0.08)',   color: '#e09070',   border: '1px solid rgba(196,99,58,0.15)'  },
-    green:  { background: 'rgba(122,158,126,0.10)',  color: '#5a8a5e',   border: '1px solid rgba(122,158,126,0.2)' },
-    red:    { background: 'rgba(196,122,114,0.08)',  color: '#a05a52',   border: '1px solid rgba(196,122,114,0.15)'},
-    violet: { background: 'rgba(122,100,180,0.08)',  color: '#6b5fad',   border: '1px solid rgba(122,100,180,0.15)'},
-    amber:  { background: 'rgba(212,148,58,0.10)',   color: '#a0722e',   border: '1px solid rgba(212,148,58,0.2)' },
+    green:  { background: 'rgba(122,158,126,0.10)',  color: '#9fd0a3',   border: '1px solid rgba(122,158,126,0.2)' },
+    red:    { background: 'rgba(196,122,114,0.08)',  color: '#e59a90',   border: '1px solid rgba(196,122,114,0.15)'},
+    violet: { background: 'rgba(122,100,180,0.08)',  color: '#b0a4e6',   border: '1px solid rgba(122,100,180,0.15)'},
+    amber:  { background: 'rgba(212,148,58,0.10)',   color: '#e3b168',   border: '1px solid rgba(212,148,58,0.2)' },
   }
   const s = styles[color] ?? styles.brand
   return (
@@ -70,7 +82,7 @@ function InfoCard({ label, text, variant = 'sage' }: {
     sage:      { background: 'rgba(122,158,126,0.08)', border: '1px solid rgba(122,158,126,0.2)',  color: '#a9d3a9' },
     terracota: { background: 'rgba(196,99,58,0.07)',   border: '1px solid rgba(196,99,58,0.15)',   color: '#e09070' },
     rose:      { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#f0a892' },
-    amber:     { background: 'rgba(212,148,58,0.08)',  border: '1px solid rgba(212,148,58,0.18)',  color: '#8a622e' },
+    amber:     { background: 'rgba(212,148,58,0.08)',  border: '1px solid rgba(212,148,58,0.18)',  color: '#e3b168' },
     indigo:    { background: 'rgba(61,79,124,0.07)',   border: '1px solid rgba(61,79,124,0.15)',   color: '#8fa6da' },
     'rose-warn': { background: 'rgba(196,122,114,0.07)', border: '1px solid rgba(196,122,114,0.15)', color: '#f0a892' },
   }
@@ -121,8 +133,8 @@ function DiscDevolutiva({ result, employee }: { result: Record<string, unknown>;
         <div className="space-y-3">
           {(['D', 'I', 'S', 'C'] as const).map((p) => (
             <div key={p}>
-              <div className="flex justify-between text-xs text-gray-600 mb-1">
-                <span className="font-medium">{p} — {DISC_NAMES[p]}</span>
+              <div className="flex justify-between text-xs text-soul-ink/70 mb-1 font-sans">
+                <span className="font-medium">{p} · {DISC_NAMES[p]}</span>
                 <span>{Math.round(r.percentages[p] * 100)}%</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -158,11 +170,11 @@ function DiscDevolutiva({ result, employee }: { result: Record<string, unknown>;
       <Section title="Estilo de trabalho e ambiente ideal">
         <div className="space-y-3">
           <div>
-            <p className="text-xs font-semibold text-gray-500 mb-2">Ambiente que favorece</p>
+            <p className="text-xs font-semibold text-soul-ink/62 mb-2 font-sans">Ambiente que favorece</p>
             <TagList items={r.report.idealEnvironment} color="green" />
           </div>
           <div className="mt-3">
-            <p className="text-xs font-semibold text-gray-500 mb-2">Estilo de decisão</p>
+            <p className="text-xs font-semibold text-soul-ink/62 mb-2 font-sans">Estilo de decisão</p>
             <p className="text-sm text-gray-700 bg-gray-50 rounded-lg px-4 py-3">{r.report.decisionStyle}</p>
           </div>
         </div>
@@ -206,7 +218,7 @@ function MbtiDevolutiva({ result, employee }: { result: Record<string, unknown>;
       </div>
 
       <Section title="Descrição do perfil">
-        <p className="text-sm text-gray-700 leading-relaxed">{r.report.description}</p>
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.report.description}</p>
       </Section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -253,7 +265,7 @@ function EnneagramDevolutiva({ result, employee }: { result: Record<string, unkn
       </div>
 
       <Section title="Interpretação">
-        <p className="text-sm text-gray-700 leading-relaxed">{r.interpretation[r.predominant]}</p>
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.interpretation[r.predominant]}</p>
       </Section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -331,7 +343,7 @@ function TemperamentDevolutiva({ result, employee }: { result: Record<string, un
         <div className="space-y-3">
           {Object.entries(r.percentages).sort(([,a],[,b]) => b-a).map(([type, pct]) => (
             <div key={type}>
-              <div className="flex justify-between text-xs text-gray-600 mb-1">
+              <div className="flex justify-between text-xs text-soul-ink/70 mb-1 font-sans">
                 <span className="font-medium">{TEMP_LABELS[type]}</span>
                 <span>{pct}%</span>
               </div>
@@ -344,7 +356,7 @@ function TemperamentDevolutiva({ result, employee }: { result: Record<string, un
       </Section>
 
       <Section title="Descrição do perfil">
-        <p className="text-sm text-gray-700 leading-relaxed">{r.profile.description}</p>
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.profile.description}</p>
       </Section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -403,7 +415,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
       </div>
 
       <Section title="Descrição do arquétipo">
-        <p className="text-sm text-gray-700 leading-relaxed">{r.report.description}</p>
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.report.description}</p>
       </Section>
 
       <div className="grid grid-cols-2 gap-4">
@@ -424,8 +436,8 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
         <div className="space-y-2">
           {sorted.map(([name, pct]) => (
             <div key={name}>
-              <div className="flex justify-between text-xs text-gray-600 mb-1">
-                <span className="font-medium">{name}</span>
+              <div className="flex justify-between text-xs text-soul-ink/70 mb-1 font-sans">
+                <span className="font-medium">{JUNGIAN_PT[name] ?? name}</span>
                 <span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -453,7 +465,7 @@ function ArchetypeDevolutiva({ result }: { result: Record<string, unknown> }) {
         <TagList items={r.report.careers} color="brand" />
       </Section>
 
-      <Section title={`Arquétipo secundário — ${r.secondaryReport.name}`}>
+      <Section title={`Arquétipo secundário · ${r.secondaryReport.name}`}>
         <div className="bg-brand-50 border border-brand-200 rounded-lg px-4 py-3">
           <p className="text-xs font-semibold text-brand-700 mb-1">{r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;</p>
           <p className="text-sm text-brand-900">{r.secondaryReport.description}</p>
@@ -495,7 +507,7 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
       </div>
 
       <Section title="Descrição da energia">
-        <p className="text-sm text-gray-700 leading-relaxed">{r.report.description}</p>
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.report.description}</p>
       </Section>
 
       <div className="grid grid-cols-2 gap-4">
@@ -509,8 +521,8 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
         <div className="space-y-2">
           {sorted.map(([name, pct]) => (
             <div key={name}>
-              <div className="flex justify-between text-xs text-gray-600 mb-1">
-                <span className="font-medium">{name}</span>
+              <div className="flex justify-between text-xs text-soul-ink/70 mb-1 font-sans">
+                <span className="font-medium">{FEMININE_PT[name] ?? name}</span>
                 <span>{Math.round(pct)}%</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -530,7 +542,11 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
         </Section>
       </div>
 
-      <Section title={`Arquétipo secundário — ${r.secondaryReport.name}`}>
+      <Section title="Direcionamento prático · Como ativar o melhor dessa energia">
+        <p className="text-sm text-soul-ink/82 leading-relaxed font-sans">{r.report.activationTip}</p>
+      </Section>
+
+      <Section title={`Arquétipo secundário · ${r.secondaryReport.name}`}>
         <div className="bg-violet-50 border border-violet-200 rounded-lg px-4 py-3">
           <p className="text-xs font-semibold text-violet-700 mb-1">{r.secondaryReport.title} · &ldquo;{r.secondaryReport.tagline}&rdquo;</p>
           <p className="text-sm text-violet-900">{r.secondaryReport.description}</p>
@@ -552,11 +568,6 @@ function ArchetypeFeminineDevolutiva({ result }: { result: Record<string, unknow
 
 interface PageProps {
   params: { id: string }
-}
-
-const TEST_LABELS: Record<string, string> = {
-  DISC: 'DISC', MBTI: 'MBTI', ENNEAGRAM: 'Eneagrama', TEMPERAMENT: '4 Temperamentos',
-  ARCHETYPE: 'Arquétipos', ARCHETYPE_FEMININE: 'Arquétipos Femininos',
 }
 
 export default async function AssessmentDetailPage({ params }: PageProps) {
@@ -679,6 +690,24 @@ export default async function AssessmentDetailPage({ params }: PageProps) {
       {testType === 'TEMPERAMENT'        && <TemperamentDevolutiva      result={resultData} employee={employeeName} />}
       {testType === 'ARCHETYPE'          && <ArchetypeDevolutiva        result={resultData} />}
       {testType === 'ARCHETYPE_FEMININE' && <ArchetypeFeminineDevolutiva result={resultData} />}
+
+      {/* Testes com devolutiva dedicada em /result: redireciona o olhar pra lá */}
+      {!['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE'].includes(testType) && (
+        <div className="bg-soul-parchment rounded-3xl p-8 text-center" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
+          <div className="text-4xl mb-4">📖</div>
+          <p className="font-serif font-semibold text-xl text-soul-ink mb-2">Devolutiva aprofundada disponível</p>
+          <p className="text-sm text-soul-ink/78 font-sans leading-relaxed mb-6">
+            Este teste tem uma leitura completa e dedicada, com gráficos, análise detalhada e plano de desenvolvimento.
+          </p>
+          <Link
+            href={`/result/${assessment.id}`}
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-semibold text-white shadow-terra hover:-translate-y-px transition-all"
+            style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
+          >
+            Abrir devolutiva completa →
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

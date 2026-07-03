@@ -46,13 +46,13 @@ export interface LoveLanguagePremium {
 export const wordsPremium: LoveLanguagePremium = {
   key: 'WORDS',
   label: 'Palavras de Afirmação',
-  pitch: 'Você guarda elogios na alma como outros guardam ouro. Aqui você aprende a pedir os elogios certos — sem mendigar.',
+  pitch: 'Você guarda elogios na alma como outros guardam ouro. Aqui você aprende a pedir os elogios certos, sem mendigar.',
   paletteHex: '#a8522e',
 
   partnerGuide: {
     title:   'Guia para Quem Ama Alguém de Palavras de Afirmação',
     summary:
-      'Para uma pessoa de Palavras, "tá tudo bem" é vácuo. Ela precisa OUVIR. Não basta sentir; precisa ser dito. Sem palavras, ela duvida do amor — mesmo cercada de gestos.',
+      'Para uma pessoa de Palavras, "tá tudo bem" é vácuo. Ela precisa OUVIR. Não basta sentir; precisa ser dito. Sem palavras, ela duvida do amor, mesmo cercada de gestos.',
     do: [
       'Diga em voz alta o que você admira nela hoje. Específico, não genérico.',
       'Mande mensagens curtas no meio do dia. Bilhete na bolsa, no espelho, no almoço.',
@@ -63,7 +63,7 @@ export const wordsPremium: LoveLanguagePremium = {
     dont: [
       'Achar que "ela já sabe que eu amo". Para esse perfil, dizer É amar.',
       'Substituir palavras por presente caro. Anel não cobre 3 meses sem elogio.',
-      'Críticas em público — corta o vínculo de raiz.',
+      'Críticas em público: corta o vínculo de raiz.',
       'Sarcasmo. Para Palavras, sarcasmo é violência simbólica.',
     ],
     sample_week: [
@@ -100,7 +100,7 @@ export const wordsPremium: LoveLanguagePremium = {
         'Negocie aumento mostrando reconhecimento PÚBLICO recebido (vira referência).',
       ],
       reframe: [
-        'Sua necessidade NÃO é fraqueza — é literatura interna. Você processa o mundo em palavras.',
+        'Sua necessidade NÃO é fraqueza, é literatura interna. Você processa o mundo em palavras.',
         'Pedir reconhecimento é honestidade emocional, não vaidade.',
       ],
     },
@@ -112,12 +112,12 @@ export const wordsPremium: LoveLanguagePremium = {
     reaction:
       'Você se distancia em silêncio. Responde curto. Vai para o quarto. Acumula até explodir por algo aparentemente pequeno.',
     repairScript:
-      '"Eu preciso te falar uma coisa. Quando você [ação específica] na quarta, eu me senti invisível. Não é sobre estar errado — é sobre eu sentir falta de ouvir você dizer o que sente sobre mim. Posso pedir que da próxima vez você me diga em voz alta?"',
+      '"Eu preciso te falar uma coisa. Quando você [ação específica] na quarta, eu me senti invisível. Não é sobre estar errado, é sobre eu sentir falta de ouvir você dizer o que sente sobre mim. Posso pedir que da próxima vez você me diga em voz alta?"',
     selfCare: [
       'Diário matinal: escreva 3 frases de afirmação sobre você mesmo. Aos poucos preenche o copo de dentro.',
-      'Áudios de pessoas que te amam — guarde. Reescute em momentos de invisibilidade.',
+      'Áudios de pessoas que te amam: guarde. Reescute em momentos de invisibilidade.',
       'Carta-conforto: escreva uma carta para sua versão de 8 anos de idade dizendo o que ela precisava ouvir.',
-      'Comunidade onde palavras circulam (livro-clube, grupo de escrita) — ali você se nutre.',
+      'Comunidade onde palavras circulam (livro-clube, grupo de escrita): ali você se nutre.',
     ],
   },
 
