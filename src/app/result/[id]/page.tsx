@@ -12,6 +12,7 @@ import { parseResultData } from '@/lib/parseResult'
 import { VITRINE_EMAIL }   from '@/lib/experimente'
 import UpsellPopup         from '@/components/passport/UpsellPopup'
 import UnlockPremiumButton from './UnlockPremiumButton'
+import EnneagramPremiumSection from './EnneagramPremiumSection'
 import TestResultCard      from '@/components/tests/TestResultCard'
 import {
   BigFivePrintReport,
@@ -1214,6 +1215,8 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'DISC' ? (<DiscPrintReport result={rd} />) : null}
         {assessment.testType === 'MBTI' ? (<MbtiPrintReport result={rd} />) : null}
         {assessment.testType === 'ENNEAGRAM' ? (<EnneagramPrintReport result={rd} />) : null}
+        {/* Camada premium do Eneagrama: só após o desbloqueio pago (tela e PDF) */}
+        {assessment.testType === 'ENNEAGRAM' && isPremiumUnlocked ? (<EnneagramPremiumSection result={rd} />) : null}
         {assessment.testType === 'TEMPERAMENT' ? (<TemperamentPrintReport result={rd} />) : null}
         {assessment.testType === 'ARCHETYPE' ? (<ArchetypePrintReport result={rd} />) : null}
         {assessment.testType === 'ARCHETYPE_FEMININE' ? (<ArchetypeFemininePrintReport result={rd} />) : null}
