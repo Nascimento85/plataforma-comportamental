@@ -737,3 +737,99 @@ export async function sendAvaliacaoLiderEmail(opts: {
     return { sent: false, error: String(e) }
   }
 }
+
+
+// ── E-mails da integração Hotmart ────────────────────────────────────────────
+
+export async function sendHotmartWelcomeEmail(opts: {
+  toEmail:     string
+  name:        string
+  grantLabel:  string
+  credits?:    number
+  accessLink:  string
+  isNewAccount: boolean
+}): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  const firstName = opts.name.split(' ')[0]
+  const creditsLine = opts.credits
+    ? `<p style="margin:0 0 16px;font-size:15px;color:#374151;line-height:1.6;"><strong>${opts.credits} créditos</strong> já estão disponíveis no seu saldo para gerar seus relatórios.</p>`
+    : ''
+  const ctaLabel = opts.isNewAccount ? 'Criar minha senha e acessar' : 'Acessar minha conta'
+  const intro = opts.isNewAccount
+    ? 'Criamos a sua conta automaticamente com o e-mail da compra. Falta só definir a sua senha:'
+    : 'Sua compra já foi creditada na sua conta:'
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8" /></head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3f4f6;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;">
+        <tr><td style="background:#0f172a;padding:28px 40px;">
+          <p style="margin:0;font-size:18px;font-weight:700;color:#e8c97a;">${APP_NAME}</p>
+        </td></tr>
+        <tr><td style="padding:36px 40px;">
+          <h1 style="margin:0 0 16px;font-size:22px;color:#111827;">Compra confirmada, ${firstName}! 🎉</h1>
+          <p style="margin:0 0 16px;font-size:15px;color:#374151;line-height:1.6;">
+            Sua compra de <strong>${opts.grantLabel}</strong> foi aprovada. ${intro}
+          </p>
+          ${creditsLine}
+          <table cellpadding="0" cellspacing="0" border="0" style="margin:24px 0;"><tr><td style="border-radius:10px;background:linear-gradient(135deg,#e8c97a,#c9a84c);">
+            <a href="${opts.accessLink}" style="display:inline-block;padding:14px 32px;font-size:15px;font-weight:700;color:#14100a;text-decoration:none;">${ctaLabel} →</a>
+          </td></tr></table>
+          <p style="margin:0;font-size:13px;color:#6b7280;line-height:1.6;">
+            Qualquer dúvida, é só responder este e-mail. Bons insights!
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [opts.toEmail],
+        subject: `[${APP_NAME}] Sua compra chegou: ${opts.grantLabel}`,
+        html,
+      }),
+    })
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      return { sent: false, error: (body as { message?: string }).message ?? `HTTP ${res.status}` }
+    }
+    return { sent: true }
+  } catch (err) {
+    return { sent: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
+
+export async function sendHotmartAdminAlert(opts: {
+  subject: string
+  lines:   string[]
+}): Promise<void> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') return
+  const adminEmail = process.env.HOTMART_ALERT_EMAIL ?? 'contato@mapacomportamental.com'
+  const html = `<p style="font-family:sans-serif;font-size:14px;color:#111;">${opts.lines.join('<br/>')}</p>`
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [adminEmail],
+        subject: `[Hotmart] ${opts.subject}`,
+        html,
+      }),
+    })
+  } catch (err) {
+    console.error('[email] Falha ao enviar alerta Hotmart:', err)
+  }
+}
