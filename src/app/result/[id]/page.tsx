@@ -13,6 +13,7 @@ import { VITRINE_EMAIL }   from '@/lib/experimente'
 import UpsellPopup         from '@/components/passport/UpsellPopup'
 import UnlockPremiumButton from './UnlockPremiumButton'
 import EnneagramPremiumSection from './EnneagramPremiumSection'
+import { MbtiPremiumSection, TemperamentPremiumSection, LoveLanguagesPremiumSection } from './PremiumSections'
 import TestResultCard      from '@/components/tests/TestResultCard'
 import {
   BigFivePrintReport,
@@ -1214,13 +1215,16 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {/* Devolutiva por tipo — mesmo template dark legivel na tela e no PDF */}
         {assessment.testType === 'DISC' ? (<DiscPrintReport result={rd} />) : null}
         {assessment.testType === 'MBTI' ? (<MbtiPrintReport result={rd} />) : null}
+        {assessment.testType === 'MBTI' && isPremiumUnlocked ? (<MbtiPremiumSection result={rd} />) : null}
         {assessment.testType === 'ENNEAGRAM' ? (<EnneagramPrintReport result={rd} />) : null}
-        {/* Camada premium do Eneagrama: só após o desbloqueio pago (tela e PDF) */}
+        {/* Camadas premium: só após o desbloqueio pago (tela e PDF) */}
         {assessment.testType === 'ENNEAGRAM' && isPremiumUnlocked ? (<EnneagramPremiumSection result={rd} />) : null}
         {assessment.testType === 'TEMPERAMENT' ? (<TemperamentPrintReport result={rd} />) : null}
+        {assessment.testType === 'TEMPERAMENT' && isPremiumUnlocked ? (<TemperamentPremiumSection result={rd} />) : null}
         {assessment.testType === 'ARCHETYPE' ? (<ArchetypePrintReport result={rd} />) : null}
         {assessment.testType === 'ARCHETYPE_FEMININE' ? (<ArchetypeFemininePrintReport result={rd} />) : null}
         {assessment.testType === 'LOVE_LANGUAGES' ? (<LoveLanguagesPrintReport result={rd} />) : null}
+        {assessment.testType === 'LOVE_LANGUAGES' && isPremiumUnlocked ? (<LoveLanguagesPremiumSection result={rd} />) : null}
         {assessment.testType === 'CAREER_ANCHOR' ? (<CareerAnchorPrintReport result={rd} />) : null}
         {assessment.testType === 'EMOTIONAL_INTELLIGENCE' ? (<EmotionalIntelligencePrintReport result={rd} />) : null}
         {assessment.testType === 'VAC' ? (<VacPrintReport result={rd} />) : null}
