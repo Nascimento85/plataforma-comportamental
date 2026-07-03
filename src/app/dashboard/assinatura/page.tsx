@@ -45,7 +45,10 @@ export default async function AssinaturaPage() {
         </h1>
         <p className="text-[15px] text-soul-ink/85 font-medium max-w-2xl">
           Gerencie seu plano, cartão e cobrança. Empresas pagam mensal e usam a plataforma sem limites.
-          Pessoas físicas continuam comprando créditos avulsos.
+          Prefere pagar por uso? Você também pode{' '}
+          <a href="/dashboard/credits" className="font-bold no-underline" style={{ color: '#d4b35e' }}>
+            comprar créditos avulsos →
+          </a>
         </p>
       </div>
 

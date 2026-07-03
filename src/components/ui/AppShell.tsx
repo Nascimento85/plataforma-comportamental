@@ -214,11 +214,18 @@ interface NavGroup {
 }
 
 /**
- * Estrutura da sidebar — AVALIAR / TIMES / RESULTADOS (auditoria UX, Sprint 3).
+ * Estrutura da sidebar — AVALIAR / TIMES / RESULTADOS / PLANOS (auditoria UX, Sprint 3).
  * As 5 páginas de categoria de teste viraram um único Catálogo com filtros.
- * Créditos (PF) e Assinatura moram no rodapé, junto de Configurações.
+ * PLANOS expõe as duas modalidades de compra: créditos avulsos (PF) e
+ * assinatura premium — monetização nunca fica escondida no rodapé.
  */
-function buildNavGroups(): NavGroup[] {
+function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
+  const planosItems: NavItem[] = []
+  if (accountType === 'PF') {
+    planosItems.push({ href: '/dashboard/credits', label: 'Créditos', iconKey: 'credits' })
+  }
+  planosItems.push({ href: '/dashboard/assinatura', label: 'Assinatura Premium', iconKey: 'star' })
+
   return [
     {
       title: null,
@@ -251,6 +258,10 @@ function buildNavGroups(): NavGroup[] {
         { href: '/dashboard/reports',   label: 'Relatórios', iconKey: 'reports'   },
         { href: '/dashboard/downloads', label: 'Playbooks',  iconKey: 'downloads' },
       ],
+    },
+    {
+      title: 'Planos',
+      items: planosItems,
     },
   ]
 }
@@ -354,7 +365,7 @@ function SidebarContent({
 
       {/* ── Nav principal ── */}
       <nav className="flex-1 overflow-y-auto py-1.5">
-        {buildNavGroups().map((group, gi) => (
+        {buildNavGroups(session.accountType ?? 'PJ').map((group, gi) => (
           <div key={group.title ?? `group-${gi}`}>
             {group.title && (
               <div className="px-6 pb-1.5 pt-3.5">
@@ -424,26 +435,6 @@ function SidebarContent({
 
         {/* Ações da conta — sempre visíveis */}
         <div className="flex flex-col">
-          {session.accountType === 'PF' && (
-            <Link
-              href="/dashboard/credits"
-              onClick={onNavClick}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
-                         text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
-            >
-              <span className="opacity-70"><NavIcon path="credits" /></span>
-              Créditos
-            </Link>
-          )}
-          <Link
-            href="/dashboard/assinatura"
-            onClick={onNavClick}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
-                       text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
-          >
-            <span className="opacity-70"><NavIcon path="star" /></span>
-            Assinatura
-          </Link>
           <Link
             href="/dashboard/settings"
             onClick={onNavClick}
