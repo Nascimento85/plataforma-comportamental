@@ -9,6 +9,10 @@
 //   - Consentimento livre: 3 opções claras (Aceitar/Rejeitar/Configurar)
 //   - Opção de rejeição em local de fácil acesso
 //   - Direito de revisão: link "Gerenciar cookies" no footer
+//
+// IMPORTANTE: o card é branco fixo, então as cores de texto são
+// explícitas (não usam tokens soul-*, que no tema dark são claros
+// e deixavam o banner ilegível).
 // ============================================================
 
 'use client'
@@ -16,6 +20,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useCookieConsent, type CookieCategory } from '@/lib/cookie-consent'
+
+// Cores fixas do card branco (independentes do tema da página)
+const TXT       = '#1c1a17'
+const TXT_SOFT  = 'rgba(28,26,23,0.78)'
+const TXT_MUTED = 'rgba(28,26,23,0.62)'
+const BORDER    = 'rgba(28,26,23,0.16)'
+const TERRA     = '#b05a2e'
 
 export default function CookieBanner() {
   const { needsDecision, acceptAll, rejectAll, update } = useCookieConsent()
@@ -60,7 +71,7 @@ export default function CookieBanner() {
         className="max-w-3xl mx-auto rounded-2xl shadow-2xl pointer-events-auto"
         style={{
           background: '#ffffff',
-          border: '1px solid rgba(240,236,227,0.42)',
+          border: '1px solid rgba(28,26,23,0.12)',
         }}
       >
         {/* Cabeçalho compacto */}
@@ -69,16 +80,17 @@ export default function CookieBanner() {
             <div className="flex items-start gap-3 mb-3">
               <span className="text-2xl">🍪</span>
               <div className="flex-1">
-                <h3 className="font-serif font-semibold text-base sm:text-lg text-soul-ink leading-snug">
+                <h3 className="font-serif font-semibold text-base sm:text-lg leading-snug" style={{ color: TXT }}>
                   Sua privacidade é importante pra gente
                 </h3>
-                <p className="text-[14px] sm:text-sm text-soul-ink/80 mt-1 leading-relaxed">
+                <p className="text-[14px] sm:text-sm mt-1 leading-relaxed" style={{ color: TXT_SOFT }}>
                   Usamos cookies para melhorar sua experiência, analisar tráfego e
                   personalizar conteúdo. Você pode aceitar, recusar ou configurar suas
                   preferências.{' '}
                   <Link
                     href="/politica-de-cookies"
-                    className="underline font-medium text-soul-terracota hover:text-soul-ink"
+                    className="underline font-medium hover:opacity-80"
+                    style={{ color: TERRA }}
                   >
                     Saiba mais
                   </Link>
@@ -89,13 +101,15 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2 mt-4">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold transition-colors hover:bg-black/5"
+                style={{ border: `1px solid ${BORDER}`, color: TXT }}
               >
                 Recusar não-essenciais
               </button>
               <button
                 onClick={() => setExpanded(true)}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold transition-colors hover:bg-black/5"
+                style={{ border: `1px solid ${BORDER}`, color: TXT }}
               >
                 Configurar
               </button>
@@ -114,13 +128,14 @@ export default function CookieBanner() {
         {expanded && (
           <div className="p-5 sm:p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif font-semibold text-base sm:text-lg text-soul-ink">
+              <h3 className="font-serif font-semibold text-base sm:text-lg" style={{ color: TXT }}>
                 Preferências de cookies
               </h3>
               <button
                 onClick={() => setExpanded(false)}
                 aria-label="Voltar"
-                className="text-soul-ink/70 hover:text-soul-ink text-sm"
+                className="text-sm hover:opacity-80"
+                style={{ color: TXT_MUTED }}
               >
                 ← Voltar
               </button>
@@ -138,7 +153,7 @@ export default function CookieBanner() {
               <CategoryRow
                 cat="analytics"
                 label="Análise e desempenho"
-                desc="Nos ajudam a entender como o site é usado (páginas mais vistas, tempo de carregamento) — sempre de forma agregada e anônima."
+                desc="Nos ajudam a entender como o site é usado (páginas mais vistas, tempo de carregamento), sempre de forma agregada e anônima."
                 checked={prefs.analytics}
                 onChange={v => setPrefs(p => ({ ...p, analytics: v }))}
               />
@@ -161,7 +176,8 @@ export default function CookieBanner() {
             <div className="flex flex-col sm:flex-row gap-2">
               <button
                 onClick={() => rejectAll()}
-                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold border border-soul-ink/15 text-soul-ink/88 hover:bg-soul-night/5"
+                className="flex-1 px-4 py-2.5 rounded-full text-sm font-semibold transition-colors hover:bg-black/5"
+                style={{ border: `1px solid ${BORDER}`, color: TXT }}
               >
                 Apenas necessários
               </button>
@@ -174,9 +190,9 @@ export default function CookieBanner() {
               </button>
             </div>
 
-            <p className="text-[13px] text-soul-ink/70 mt-4 text-center">
+            <p className="text-[13px] mt-4 text-center" style={{ color: TXT_MUTED }}>
               Você pode alterar suas escolhas a qualquer momento na{' '}
-              <Link href="/politica-de-cookies" className="underline">
+              <Link href="/politica-de-cookies" className="underline" style={{ color: TERRA }}>
                 Política de Cookies
               </Link>
               .
@@ -201,17 +217,20 @@ function CategoryRow({
   onChange: (v: boolean) => void
 }) {
   return (
-    <div className="flex items-start gap-3 p-3 rounded-xl bg-soul-mist/20 border border-soul-mist/40">
+    <div className="flex items-start gap-3 p-3 rounded-xl" style={{ background: '#f6f4f0', border: '1px solid rgba(28,26,23,0.08)' }}>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className="text-[15px] font-semibold text-soul-ink">{label}</p>
+          <p className="text-[15px] font-semibold" style={{ color: TXT }}>{label}</p>
           {disabled && (
-            <span className="text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-soul-night/10 text-soul-ink/78">
+            <span
+              className="text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+              style={{ background: 'rgba(28,26,23,0.08)', color: TXT_MUTED }}
+            >
               Sempre ativo
             </span>
           )}
         </div>
-        <p className="text-[13.5px] text-soul-ink/78 mt-1 leading-snug">{desc}</p>
+        <p className="text-[13.5px] mt-1 leading-snug" style={{ color: TXT_SOFT }}>{desc}</p>
       </div>
       <label className={`relative inline-flex items-center cursor-pointer flex-shrink-0 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
         <input
@@ -221,8 +240,11 @@ function CategoryRow({
           onChange={e => onChange(e.target.checked)}
           className="sr-only peer"
         />
-        <span className="w-10 h-5 bg-soul-night/15 peer-checked:bg-soul-terracota rounded-full transition-colors relative">
-          <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-soul-parchment rounded-full transition-transform ${checked ? 'translate-x-5' : ''}`} />
+        <span
+          className="w-10 h-5 rounded-full transition-colors relative"
+          style={{ background: checked ? '#c4633a' : 'rgba(28,26,23,0.18)' }}
+        >
+          <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${checked ? 'translate-x-5' : ''}`} />
         </span>
       </label>
     </div>
