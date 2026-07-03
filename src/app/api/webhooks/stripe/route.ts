@@ -31,7 +31,22 @@ export async function POST(request: NextRequest) {
   }
 
   const session = event.data.object as Stripe.Checkout.Session
-  const kind    = session.metadata?.kind ?? 'PACK'
+
+  // Assinaturas são tratadas pelo endpoint /api/webhooks/stripe-subscription.
+  // Se esse evento chegar aqui (endpoint inscrito em checkout.session.completed
+  // sem filtro), ignoramos com 200 — devolver 500 causa retentativas infinitas.
+  if (session.mode === 'subscription' || session.metadata?.plan) {
+    return NextResponse.json({ received: true, ignored: 'subscription' })
+  }
+
+  const kind = session.metadata?.kind ?? 'PACK'
+
+  // Sessão sem metadata que reconhecemos: não é nossa (ou foi criada à mão no
+  // dashboard). Loga e devolve 200 para o Stripe não reenviar para sempre.
+  if (kind !== 'PREMIUM_UNLOCK' && (!session.metadata?.companyId || !session.metadata?.pack)) {
+    console.error('[webhook] checkout.session.completed sem metadata reconhecida, ignorando:', session.id, session.metadata)
+    return NextResponse.json({ received: true, ignored: 'unknown-metadata' })
+  }
 
   try {
     if (kind === 'PREMIUM_UNLOCK') {
@@ -56,6 +71,13 @@ async function handleCreditsPack(session: Stripe.Checkout.Session) {
     console.error('[webhook] Metadata pack inválida:', session.metadata)
     throw new Error('Metadata pack inválida')
   }
+
+  // Idempotência: o Stripe reenvia o evento se a resposta atrasar. Sem esse
+  // guard, o segundo envio viola o unique de stripeSessionId e devolve 500.
+  const already = await prisma.creditPurchase.findUnique({
+    where: { stripeSessionId: session.id },
+  })
+  if (already) return
 
   await prisma.$transaction(async (tx) => {
     await tx.creditBalance.upsert({
