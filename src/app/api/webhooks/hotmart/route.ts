@@ -111,8 +111,10 @@ async function handleApproved(data: NonNullable<HotmartPayload['data']>) {
   const priceCents  = Math.round((data.purchase?.price?.value ?? 0) * 100)
 
   if (!buyerEmail || !transaction) {
+    // Payload malformado: retentativa do Hotmart nunca resolve, então
+    // confirma o recebimento (200) e registra para ação manual.
     console.error('[hotmart] Payload sem e-mail do comprador ou transação', { buyerEmail, transaction })
-    return NextResponse.json({ error: 'Payload incompleto.' }, { status: 400 })
+    return NextResponse.json({ received: true, incomplete: true })
   }
 
   // Idempotência: o Hotmart reenvia eventos e dispara APPROVED e
@@ -277,7 +279,8 @@ async function grantSubscription(
 async function handleRevoked(data: NonNullable<HotmartPayload['data']>, event: string) {
   const transaction = data.purchase?.transaction
   if (!transaction) {
-    return NextResponse.json({ error: 'Payload incompleto.' }, { status: 400 })
+    console.warn(`[hotmart] ${event} sem código de transação; nada a estornar`)
+    return NextResponse.json({ received: true, incomplete: true })
   }
 
   const purchase = await prisma.creditPurchase.findUnique({
@@ -337,7 +340,10 @@ async function handleRevoked(data: NonNullable<HotmartPayload['data']>, event: s
 async function handleSubscriptionCanceled(data: NonNullable<HotmartPayload['data']>) {
   const subscriberCode = data.subscription?.subscriber?.code
   if (!subscriberCode) {
-    return NextResponse.json({ error: 'Payload incompleto.' }, { status: 400 })
+    // Sem código do assinante não há o que cancelar (acontece nos
+    // eventos de teste do painel). 200 evita retentativas inúteis.
+    console.warn('[hotmart] SUBSCRIPTION_CANCELLATION sem subscriber code; ignorado')
+    return NextResponse.json({ received: true, incomplete: true })
   }
 
   const updated = await prisma.subscription.updateMany({
