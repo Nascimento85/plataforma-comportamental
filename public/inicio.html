@@ -240,6 +240,30 @@
   @media (min-width: 820px) { .plan-note { flex-direction: row; align-items: center; justify-content: space-between; } }
   .plan-note strong { color: var(--gold-hi); }
 
+  /* ── modalidades de pagamento ── */
+  .mode-h { margin-top: 48px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .mode-h .b {
+    font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--gold-hi); background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.3);
+    padding: 7px 13px; border-radius: 999px; white-space: nowrap;
+  }
+  .mode-h .l { flex: 1; min-width: 40px; height: 1px; background: var(--line); }
+  .mode-h .d { font-size: 12.5px; color: var(--faint); }
+  .sub-grid { margin-top: 26px; display: grid; gap: 18px; align-items: stretch; }
+  @media (min-width: 900px) { .sub-grid { grid-template-columns: .85fr 1.15fr; } }
+  .tier { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .tier:last-child { border-bottom: 0; }
+  .tier .n { font-weight: 700; color: #fff; }
+  .tier .f { font-size: 12px; color: var(--faint); }
+  .tier .p { font-family: var(--serif); font-size: 19px; color: var(--gold-hi); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tier .p small { font-family: var(--sans); font-size: 11px; color: var(--faint); }
+  .tier.rec { background: rgba(201,168,76,.07); margin: 0 -14px; padding-left: 14px; padding-right: 14px; border-radius: 10px; }
+  .rec-tag {
+    display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: #14100A; background: linear-gradient(135deg, var(--gold-hi), var(--gold));
+    padding: 3px 8px; border-radius: 5px; margin-left: 8px; vertical-align: middle;
+  }
+
   /* ── diagnóstico ── */
   .diag { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .diag-inner { padding: 64px 0; display: flex; flex-direction: column; gap: 24px; }
@@ -383,7 +407,15 @@
 
 <!-- ══════════ CUSTO DO ERRO ══════════ -->
 <section class="cost">
-  <div class="wrap cost-grid">
+  <div class="wrap" style="padding-top:64px">
+    <p class="eyebrow reveal">A dor do pequeno empresário</p>
+    <h2 class="h2 reveal" style="--d:.06s">Contratar no amadorismo <em>custa caro.</em></h2>
+    <p class="lede reveal" style="--d:.12s">
+      Pequenas e médias empresas raramente têm condições de manter um RH estruturado,
+      e acabam contratando por instinto. O resultado aparece na folha, no clima e no caixa:
+    </p>
+  </div>
+  <div class="wrap cost-grid" style="padding-top:36px">
     <div class="cost-card reveal">
       <p class="n">R$ 38 mil</p>
       <p>Custo médio de uma demissão precoce em PMEs, somando rescisão, retrabalho e moral do time.</p>
@@ -518,9 +550,19 @@
 <!-- ══════════ PLANOS ══════════ -->
 <section id="planos" class="cost" style="scroll-margin-top:70px">
   <div class="wrap pad">
-    <p class="eyebrow reveal">Planos e créditos</p>
-    <h2 class="h2 reveal" style="--d:.06s">Pague por uso <em>ou assine e use sem limites.</em></h2>
-    <p class="lede reveal" style="--d:.12s">Duas modalidades: créditos avulsos que ficam no seu saldo sem validade nem renovação automática — cada relatório consome conforme a profundidade — ou Assinatura Premium para empresas, com testes ilimitados e trial de 7 dias.</p>
+    <p class="eyebrow reveal">Planos e modalidades</p>
+    <h2 class="h2 reveal" style="--d:.06s">Liberdade de escolha: <em>créditos avulsos ou assinatura.</em></h2>
+    <p class="lede reveal" style="--d:.12s">
+      A estrutura de um RH estratégico por uma fração do custo de um analista.
+      Pessoa física escolhe entre créditos ou assinatura individual; empresas assinam
+      pelo número de colaboradores. Sem fidelidade em nenhuma das duas.
+    </p>
+
+    <div class="mode-h reveal">
+      <span class="b">Modalidade 1 · Créditos avulsos</span>
+      <span class="l"></span>
+      <span class="d">Pague por uso · sem mensalidade · saldo sem validade</span>
+    </div>
 
     <div class="plans">
       <article class="card plan reveal">
@@ -565,21 +607,62 @@
       </article>
     </div>
 
-    <div class="plan-note reveal">
-      <p>
-        <strong>Empresas com volume:</strong> a Assinatura Premium libera testes ilimitados,
-        Gestão de Equipes, NR-1 Psicossocial e Guia de Entrevista por mensalidade —
-        planos por número de colaboradores, com trial de 7 dias sem cartão.
-      </p>
-      <a class="btn btn-gold" style="flex-shrink:0" href="/precos">Ver planos de assinatura <span class="arr">→</span></a>
+    <div class="mode-h reveal">
+      <span class="b">Modalidade 2 · Assinatura</span>
+      <span class="l"></span>
+      <span class="d">Uso ilimitado · trial de 7 dias sem cartão · cancele quando quiser</span>
     </div>
 
-    <div class="plan-note reveal" style="--d:.06s">
+    <div class="sub-grid">
+      <article class="card plan reveal">
+        <p class="k">Individual</p>
+        <p class="who">Pessoa física em jornada de autoconhecimento</p>
+        <p class="price">R$ 97<small>/mês</small></p>
+        <p class="cr">Acesso premium pessoal</p>
+        <ul class="feat">
+          <li>Todos os 15 testes, sem limite de uso</li>
+          <li>Devolutivas aprofundadas e integradas</li>
+          <li>Sugestões de evolução personalizadas</li>
+        </ul>
+        <a class="btn btn-line" href="/precos">Assinar Individual</a>
+      </article>
+
+      <article class="card plan reveal" style="--d:.08s">
+        <p class="k">Empresas · por número de colaboradores</p>
+        <p class="who">Testes ilimitados + Gestão de Equipes + NR-1 Psicossocial + Guia de Entrevistas, o RH estratégico completo</p>
+        <div style="margin-top:16px">
+          <div class="tier">
+            <span><span class="n">Equipe 5</span><br/><span class="f">até 5 colaboradores</span></span>
+            <span class="p">R$ 447<small>/mês</small></span>
+          </div>
+          <div class="tier rec">
+            <span><span class="n">Equipe 10</span><span class="rec-tag">Recomendado</span><br/><span class="f">até 10 · matriz de talentos + PDF executivo consultivo + suporte prioritário</span></span>
+            <span class="p">R$ 797<small>/mês</small></span>
+          </div>
+          <div class="tier">
+            <span><span class="n">Equipe 20</span><br/><span class="f">até 20 · hierarquia multinível + avaliação em cascata</span></span>
+            <span class="p">R$ 1.397<small>/mês</small></span>
+          </div>
+          <div class="tier">
+            <span><span class="n">Equipe 50</span><br/><span class="f">até 50 · onboarding assistido + relatórios consolidados</span></span>
+            <span class="p">R$ 2.347<small>/mês</small></span>
+          </div>
+          <div class="tier">
+            <span><span class="n">Acima de 50</span><br/><span class="f">colaboradores ilimitados · customizações e SLA corporativo</span></span>
+            <span class="p">Consultar</span>
+          </div>
+        </div>
+        <a class="btn btn-gold" href="/precos">Ver assinaturas em detalhe <span class="arr">→</span></a>
+      </article>
+    </div>
+
+    <div class="plan-note reveal">
       <p>
-        <strong>Comece sem pagar nada:</strong> são até 10 créditos de cortesia,
-        4 ao criar a conta e mais 6 ao completar o perfil. Sem cartão de crédito.
+        <strong>Comece sem pagar nada, nas duas modalidades:</strong> até 10 créditos de cortesia
+        (4 ao criar a conta + 6 ao completar o perfil) ou trial de 7 dias na assinatura.
+        Sem cartão de crédito em nenhum dos casos.
       </p>
-      <a class="btn btn-line" style="flex-shrink:0" href="/register">Criar conta grátis</a>
+      <a class="btn btn-gold" style="flex-shrink:0" href="/register">Criar conta grátis <span class="arr">→</span></a>
     </div>
   </div>
 </section>
