@@ -20,12 +20,13 @@ export type HotmartGrant =
   | { kind: 'SUBSCRIPTION'; plan: 'ESSENCIAL' | 'PROFISSIONAL' | 'ENTERPRISE'; label: string }
 
 export const HOTMART_OFFERS: Record<string, HotmartGrant> = {
-  // ── PREENCHER com os códigos reais das ofertas do Hotmart ──
-  // Exemplos (troque as chaves pelos códigos verdadeiros):
-  //
-  // 'traducao-intima':  { kind: 'CREDITS', credits: 4,  label: 'Tradução Íntima (Linguagens do Amor + Arquétipo)' },
-  // 'mapa-completo':    { kind: 'CREDITS', credits: 15, label: 'Mapa Comportamental Completo' },
-  // 'assinatura-ind':   { kind: 'SUBSCRIPTION', plan: 'PROFISSIONAL', label: 'Assinatura Individual' },
+  // Tradução Íntima · Linguagens do Amor + Arquétipos (produto Hotmart id 8057855, R$ 67)
+  // Chave pelo id do produto: cobre todas as ofertas dele.
+  '8057855': { kind: 'CREDITS', credits: 4, label: 'Tradução Íntima · Linguagens do Amor + Arquétipos' },
+
+  // Próximas ofertas (preencher ao criar no Hotmart):
+  // 'mapa-completo':  { kind: 'CREDITS', credits: 15, label: 'Mapa Comportamental Completo' },
+  // 'assinatura-ind': { kind: 'SUBSCRIPTION', plan: 'PROFISSIONAL', label: 'Assinatura Individual' },
 }
 
 /** Resolve a entrega a partir do código da oferta ou do id do produto. */
