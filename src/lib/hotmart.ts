@@ -22,7 +22,9 @@ export type HotmartGrant =
 export const HOTMART_OFFERS: Record<string, HotmartGrant> = {
   // Tradução Íntima · Linguagens do Amor + Arquétipos (produto Hotmart id 8057855, R$ 67)
   // Chave pelo id do produto: cobre todas as ofertas dele.
-  '8057855': { kind: 'CREDITS', credits: 4, label: 'Tradução Íntima · Linguagens do Amor + Arquétipos' },
+  // 10 créditos = Linguagens do Amor (6) + Arquétipos (4): a oferta se
+  // sustenta sozinha, sem depender dos bônus de cadastro (que expiram).
+  '8057855': { kind: 'CREDITS', credits: 10, label: 'Tradução Íntima · Linguagens do Amor + Arquétipos' },
 
   // Próximas ofertas (preencher ao criar no Hotmart):
   // 'mapa-completo':  { kind: 'CREDITS', credits: 15, label: 'Mapa Comportamental Completo' },
