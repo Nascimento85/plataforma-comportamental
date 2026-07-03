@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation'
 // Rótulos amigáveis por segmento de URL
 const SEGMENT_LABELS: Record<string, string> = {
   dashboard:         'Início',
+  testes:            'Catálogo de Testes',
   behavioral:        'Comportamentais',
   leadership:        'Liderança',
   career:            'Carreira',

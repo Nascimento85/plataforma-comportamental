@@ -214,50 +214,43 @@ interface NavGroup {
 }
 
 /**
- * Estrutura da sidebar computada conforme o tipo de conta.
- * PF: vê Créditos (compra avulsa). PJ: NÃO vê Créditos (usa Assinatura mensal).
+ * Estrutura da sidebar — AVALIAR / TIMES / RESULTADOS (auditoria UX, Sprint 3).
+ * As 5 páginas de categoria de teste viraram um único Catálogo com filtros.
+ * Créditos (PF) e Assinatura moram no rodapé, junto de Configurações.
  */
-function buildNavGroups(accountType: 'PF' | 'PJ'): NavGroup[] {
-  const isPF = accountType === 'PF'
-
-  const recursosItems: NavItem[] = [
-    { href: '/dashboard/downloads',  label: 'Downloads',  iconKey: 'downloads' },
-  ]
-  if (isPF) recursosItems.push({ href: '/dashboard/credits', label: 'Créditos', iconKey: 'credits' })
-  recursosItems.push({ href: '/dashboard/assinatura', label: 'Assinatura', iconKey: 'star' })
-
+function buildNavGroups(): NavGroup[] {
   return [
     {
       title: null,
       items: [
-        { href: '/dashboard', label: 'Início', iconKey: 'dashboard' },
+        { href: '/dashboard',         label: 'Início',        iconKey: 'dashboard' },
+        { href: '/dashboard/journey', label: 'Minha Jornada', iconKey: 'journey'   },
       ],
     },
     {
-      title: 'Testes',
+      title: 'Avaliar',
       items: [
-        { href: '/dashboard/behavioral',     label: 'Comportamentais', iconKey: 'behavioral'    },
-        { href: '/dashboard/leadership',     label: 'Liderança',       iconKey: 'leadership'    },
-        { href: '/dashboard/career',         label: 'Carreira',        iconKey: 'career'        },
-        { href: '/dashboard/love-languages', label: 'Relacionamentos', iconKey: 'relationships' },
-        { href: '/dashboard/archetypes',     label: 'Arquétipos',      iconKey: 'archetypes'    },
-        { href: '/dashboard/journey',        label: 'Minha Jornada',   iconKey: 'journey'       },
+        { href: '/dashboard/testes',          label: 'Catálogo de Testes', iconKey: 'behavioral' },
+        { href: '/dashboard/candidates',      label: 'Candidatos',         iconKey: 'candidates' },
+        { href: '/dashboard/vagas',           label: 'Perfil da Vaga',     iconKey: 'target'     },
+        { href: '/dashboard/guia-entrevista', label: 'Guia de Entrevista', iconKey: 'interview'  },
       ],
     },
     {
-      title: 'Empresa',
+      title: 'Times',
       items: [
-        { href: '/dashboard/candidates',    label: 'Candidatos',      iconKey: 'candidates' },
-        { href: '/dashboard/vagas',         label: 'Perfil da Vaga',  iconKey: 'target'     },
-        { href: '/dashboard/gestao-times',  label: 'Gestão de Equipes', iconKey: 'talentgrid' },
-        { href: '/dashboard/avaliacao-360', label: 'Avaliação 360°',  iconKey: 'leadership' },
-        { href: '/dashboard/enps',          label: 'eNPS · Clima',    iconKey: 'journey'    },
-        { href: '/dashboard/reports',       label: 'Relatórios',      iconKey: 'reports'    },
+        { href: '/dashboard/gestao-times',   label: 'Gestão de Equipes',  iconKey: 'talentgrid' },
+        { href: '/dashboard/avaliacao-360',  label: 'Avaliação 360°',     iconKey: 'leadership' },
+        { href: '/dashboard/enps',           label: 'eNPS · Clima',       iconKey: 'journey'    },
+        { href: '/dashboard/compliance/nr1', label: 'NR-1 Psicossocial',  iconKey: 'compliance' },
       ],
     },
     {
-      title: 'Recursos',
-      items: recursosItems,
+      title: 'Resultados',
+      items: [
+        { href: '/dashboard/reports',   label: 'Relatórios', iconKey: 'reports'   },
+        { href: '/dashboard/downloads', label: 'Playbooks',  iconKey: 'downloads' },
+      ],
     },
   ]
 }
@@ -293,9 +286,10 @@ function SidebarNavLink({
         'flex items-center gap-3 px-6 py-2.5 text-[15.5px] transition-all duration-200',
         'relative no-underline',
         isActive
-          ? 'text-white bg-white/[0.08] font-semibold'
+          ? 'font-semibold'
           : 'text-white/85 hover:text-white hover:bg-white/[0.05] font-medium',
       ].join(' ')}
+      style={isActive ? { background: 'rgba(201,168,76,0.08)', color: '#e8c97a' } : undefined}
     >
       {isActive && (
         <span
@@ -360,7 +354,7 @@ function SidebarContent({
 
       {/* ── Nav principal ── */}
       <nav className="flex-1 overflow-y-auto py-1.5">
-        {buildNavGroups(session.accountType ?? 'PJ').map((group, gi) => (
+        {buildNavGroups().map((group, gi) => (
           <div key={group.title ?? `group-${gi}`}>
             {group.title && (
               <div className="px-6 pb-1.5 pt-3.5">
@@ -381,22 +375,6 @@ function SidebarContent({
             ))}
           </div>
         ))}
-
-        {/* PREMIUM: visível pra TODOS. Quem não tem assinatura ativa cai
-            no paywall da página interna, que serve como CTA de conversão. */}
-        <div>
-          <div className="px-6 pb-1.5 pt-3.5 flex items-center justify-between">
-            <p className="text-[12px] font-sans uppercase tracking-[0.16em] text-white/68 font-bold">
-              Premium
-            </p>
-            <span className="text-[8.5px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded"
-                  style={{ background: 'rgba(201,168,76,0.18)', color: '#d4b85c' }}>
-              PRO
-            </span>
-          </div>
-          <SidebarNavLink href="/dashboard/compliance/nr1"  label="NR-1 Psicossocial"  iconKey="compliance" onClick={onNavClick} />
-          <SidebarNavLink href="/dashboard/guia-entrevista" label="Guia de Entrevista" iconKey="interview"  onClick={onNavClick} />
-        </div>
 
         {session.isAdmin && (
           <div>
@@ -446,6 +424,26 @@ function SidebarContent({
 
         {/* Ações da conta — sempre visíveis */}
         <div className="flex flex-col">
+          {session.accountType === 'PF' && (
+            <Link
+              href="/dashboard/credits"
+              onClick={onNavClick}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
+                         text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
+            >
+              <span className="opacity-70"><NavIcon path="credits" /></span>
+              Créditos
+            </Link>
+          )}
+          <Link
+            href="/dashboard/assinatura"
+            onClick={onNavClick}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-[14px] font-medium
+                       text-white/75 hover:text-white hover:bg-white/[0.06] transition-colors no-underline"
+          >
+            <span className="opacity-70"><NavIcon path="star" /></span>
+            Assinatura
+          </Link>
           <Link
             href="/dashboard/settings"
             onClick={onNavClick}

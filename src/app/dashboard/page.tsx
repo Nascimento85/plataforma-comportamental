@@ -281,7 +281,7 @@ export default async function DashboardPage() {
           2. AÇÕES RÁPIDAS — uma linha, sem banner
       ══════════════════════════════════════════════════════ */}
       <div className="flex flex-wrap items-center gap-3">
-        <Link href="/dashboard/behavioral"
+        <Link href="/dashboard/testes"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14.5px] font-bold text-soul-ink no-underline transition-transform hover:-translate-y-px"
               style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
           ▶ Iniciar teste

@@ -12,7 +12,7 @@ const FERRAMENTAS = [
     icone: '🧬',
     nome: 'Testes científicos',
     texto: `${TEST_COUNT} instrumentos: DISC, MBTI, Eneagrama, Big Five e mais.`,
-    href: '/dashboard/behavioral',
+    href: '/dashboard/testes',
   },
   {
     icone: '🗂',
@@ -65,7 +65,7 @@ export default function FerramentasShowcase() {
         <h2 className="font-serif font-semibold text-2xl text-soul-ink leading-tight">
           Ferramentas
         </h2>
-        <Link href="/dashboard/behavioral"
+        <Link href="/dashboard/testes"
               className="text-[13.5px] font-bold whitespace-nowrap no-underline"
               style={{ color: '#d4b35e' }}>
           Ver catálogo completo →
