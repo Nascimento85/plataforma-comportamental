@@ -254,16 +254,24 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3 rounded-full text-sm font-sans font-medium text-soul-ink mt-2
+        className="w-full py-3.5 rounded-xl text-[15px] font-sans font-bold mt-2 flex items-center justify-center gap-2
                    transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
         style={{
+          color: '#14100a',
           background: loading
             ? 'rgba(201,168,76,0.6)'
-            : 'linear-gradient(135deg, #c9a84c, #d4943a)',
-          boxShadow: '0 4px 16px rgba(201,168,76,0.22)',
+            : 'linear-gradient(135deg, #e8c97a, #c9a84c 55%, #a8873a)',
+          boxShadow: '0 8px 24px rgba(201,168,76,0.3)',
         }}
       >
-        {loading ? 'Criando conta…' : 'Criar conta'}
+        {loading ? 'Criando conta…' : (
+          <>
+            Criar conta grátis
+            <svg className="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 10h12m0 0-4-4m4 4-4 4" />
+            </svg>
+          </>
+        )}
       </button>
     </form>
   )
