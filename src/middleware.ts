@@ -40,6 +40,7 @@ const PUBLIC_ROUTES = [
   '/api/auth/reset-password',
   '/api/webhooks/stripe',  // webhook público — sem cookie de sessão
   '/api/webhooks/stripe-subscription',  // webhook de assinatura — sem cookie de sessão
+  '/api/webhooks/hotmart', // webhook Hotmart — protegido por X-HOTMART-HOTTOK
   '/api/cron',             // crons protegidos por Bearer CRON_SECRET, não por cookie
   '/api/premium/checkout', // checkout chamado da página pública /result/[id]
   '/api/results',          // submissão de teste — protegido por token único do Assessment
