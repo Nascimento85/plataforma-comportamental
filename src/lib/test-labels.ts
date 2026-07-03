@@ -17,21 +17,21 @@ interface TestMeta {
 // TEST_COUNT deriva deste objeto: ao lançar um teste novo, basta
 // adicioná-lo aqui e todo o copy de contagem se atualiza sozinho.
 const TEST_CATALOG = {
-  DISC:                   { label: 'DISC — Perfil Comportamental',          short: 'DISC',                emoji: '🎭' },
-  MBTI:                   { label: 'MBTI — 16 Tipos de Personalidade',      short: 'MBTI',                emoji: '🧩' },
-  ENNEAGRAM:              { label: 'Eneagrama — 9 Tipos',                   short: 'Eneagrama',           emoji: '⬡'  },
+  DISC:                   { label: 'DISC · Perfil Comportamental',          short: 'DISC',                emoji: '🎭' },
+  MBTI:                   { label: 'MBTI · 16 Tipos de Personalidade',      short: 'MBTI',                emoji: '🧩' },
+  ENNEAGRAM:              { label: 'Eneagrama · 9 Tipos',                   short: 'Eneagrama',           emoji: '⬡'  },
   TEMPERAMENT:            { label: '4 Temperamentos',                       short: 'Temperamentos',       emoji: '🌡' },
-  VAC:                    { label: 'VAC — Perfil Sensorial',                short: 'VAC Sensorial',       emoji: '👁' },
-  QMT:                    { label: 'QMT — Quociente Mental Triádico',       short: 'QMT Triádico',        emoji: '🧠' },
+  VAC:                    { label: 'VAC · Perfil Sensorial',                short: 'VAC Sensorial',       emoji: '👁' },
+  QMT:                    { label: 'QMT · Quociente Mental Triádico',       short: 'QMT Triádico',        emoji: '🧠' },
   COMUNICACAO:            { label: 'Mapa da Comunicação',                   short: 'Comunicação',         emoji: '🗣' },
   QI:                     { label: 'Raciocínio Lógico (QI)',                short: 'QI',                  emoji: '🧮' },
-  BIG_FIVE:               { label: 'Big Five — Liderança',                  short: 'Big Five',            emoji: '🎯' },
+  BIG_FIVE:               { label: 'Big Five · Liderança',                  short: 'Big Five',            emoji: '🎯' },
   LIDERANCA_SITUACIONAL:  { label: 'Liderança Situacional',                 short: 'Lid. Situacional',    emoji: '👑' },
   EMOTIONAL_INTELLIGENCE: { label: 'Inteligência Emocional (Goleman)',      short: 'IE Goleman',          emoji: '◈'  },
   CAREER_ANCHOR:          { label: 'Âncoras de Carreira',                   short: 'Âncoras de Carreira', emoji: '⚓' },
   LOVE_LANGUAGES:         { label: '5 Linguagens do Amor',                  short: 'Ling. do Amor',       emoji: '💞' },
-  ARCHETYPE:              { label: 'Arquétipos — Os 12 Padrões Universais', short: 'Arquétipos',          emoji: '🧭' },
-  ARCHETYPE_FEMININE:     { label: 'Arquétipos Femininos — As 7 Energias',  short: 'Arq. Femininos',      emoji: '🌸' },
+  ARCHETYPE:              { label: 'Arquétipos · Os 12 Padrões Universais', short: 'Arquétipos',          emoji: '🧭' },
+  ARCHETYPE_FEMININE:     { label: 'Arquétipos Femininos · As 7 Energias',  short: 'Arq. Femininos',      emoji: '🌸' },
 } as const satisfies Record<string, TestMeta>
 
 // Tipos que aparecem em assessments mas não são testes do catálogo.
