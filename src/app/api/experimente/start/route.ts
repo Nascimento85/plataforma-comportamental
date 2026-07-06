@@ -10,7 +10,7 @@ import { z } from 'zod'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 import { prisma } from '@/lib/prisma'
-import { FREE_TRIAL_TESTS, VITRINE_EMAIL, VITRINE_NAME } from '@/lib/experimente'
+import { EXPERIMENTE_ALLOWED, VITRINE_EMAIL, VITRINE_NAME } from '@/lib/experimente'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-const ALLOWED = FREE_TRIAL_TESTS.map((t) => t.testType)
+const ALLOWED = EXPERIMENTE_ALLOWED
 
 const schema = z.object({
   firstName: z.string().trim().min(2, 'Informe seu nome.'),

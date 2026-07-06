@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ExperimenteClient from './ExperimenteClient'
+import { resolveExperimenteTests } from '@/lib/experimente'
 
 export const metadata: Metadata = {
   title: 'Experimente grátis — Psique · Mapa Comportamental',
@@ -9,11 +10,12 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 interface PageProps {
-  searchParams: { src?: string }
+  searchParams: { src?: string; tests?: string }
 }
 
 export default function ExperimentePage({ searchParams }: PageProps) {
   const src = (searchParams.src ?? '').trim() || null
+  const tests = resolveExperimenteTests(searchParams.tests)
 
   return (
     <div className="min-h-screen" style={{ background: '#17181c' }}>
@@ -50,7 +52,7 @@ export default function ExperimentePage({ searchParams }: PageProps) {
 
         {/* Card do funil */}
         <div className="bg-soul-parchment rounded-3xl p-5 sm:p-7" style={{ border: '1px solid rgba(58,61,69,0.6)' }}>
-          <ExperimenteClient src={src} />
+          <ExperimenteClient src={src} tests={tests} />
         </div>
 
         <p className="text-center text-[12px] font-sans pb-4" style={{ color: 'rgba(240,236,227,0.4)' }}>

@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { FREE_TRIAL_TESTS } from '@/lib/experimente'
+import type { FreeTest } from '@/lib/experimente'
 
-export default function ExperimenteClient({ src }: { src: string | null }) {
+export default function ExperimenteClient({ src, tests }: { src: string | null; tests: FreeTest[] }) {
   const router = useRouter()
   const [selected, setSelected] = useState<string[]>([])
   const [firstName, setFirstName] = useState('')
@@ -52,7 +52,7 @@ export default function ExperimenteClient({ src }: { src: string | null }) {
           Passo 1 · Escolha até 2 testes
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {FREE_TRIAL_TESTS.map((t) => {
+          {tests.map((t) => {
             const on = selected.includes(t.testType)
             const disabled = !on && selected.length >= 2
             return (
