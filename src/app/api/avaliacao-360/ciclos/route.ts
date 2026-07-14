@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import { hasActiveSubscription } from '@/lib/subscription/check'
+import { sendAvaliacao360ConviteEmail } from '@/lib/email'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -73,13 +74,31 @@ export async function POST(req: NextRequest) {
     status: 'PENDING',
   }))
   // createMany não retorna os registros — então criamos um a um para devolver os links
+  const company = await prismaAny.company.findUnique({
+    where: { id: companyId },
+    select: { name: true },
+  })
+  let emailsEnviados = 0
+  let emailsFalha = 0
   const convites = []
   for (const c of convitesData) {
     const created = await prismaAny.avaliacao360Convite.create({ data: c })
     convites.push({ role: created.role, nome: created.nome, email: created.email, link: `${APP_URL}/avaliacao-360/${created.token}` })
+    // Envia o convite por e-mail (falha não desfaz o ciclo; o link fica no painel)
+    const envio = await sendAvaliacao360ConviteEmail({
+      toEmail:      created.email,
+      nome:         created.nome,
+      avaliadoNome: avaliadoNome,
+      companyNome:  company?.name ?? 'Sua empresa',
+      token:        created.token,
+    })
+    if (envio.sent) emailsEnviados++
+    else emailsFalha++
+    // Resend limita ~2 req/s — intervalo entre envios
+    await new Promise(res => setTimeout(res, 600))
   }
 
-  return NextResponse.json({ id: ciclo.id, convites }, { status: 201 })
+  return NextResponse.json({ id: ciclo.id, convites, emailsEnviados, emailsFalha }, { status: 201 })
 }
 
 export async function GET() {

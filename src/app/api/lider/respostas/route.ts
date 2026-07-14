@@ -23,6 +23,7 @@ interface SubmitBody {
 }
 
 export async function POST(req: NextRequest) {
+  try {
   let body: SubmitBody
   try { body = await req.json() } catch { return NextResponse.json({ error: 'JSON inválido.' }, { status: 400 }) }
   if (!body.token || !body.respostas) {
@@ -81,4 +82,12 @@ export async function POST(req: NextRequest) {
   })
 
   return NextResponse.json({ ok: true })
+  } catch (e) {
+    // Garante resposta JSON mesmo em erro inesperado (evita HTML 500)
+    console.error('[lider/respostas] Erro ao gravar submissão:', e)
+    return NextResponse.json(
+      { error: 'Erro interno ao registrar as respostas. Tente novamente em instantes.' },
+      { status: 500 },
+    )
+  }
 }

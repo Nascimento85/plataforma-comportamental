@@ -58,17 +58,42 @@ export default function AvaliarLiderClient({ token, liderNome, teamNome, empresa
       return
     }
     setEnviando(true)
+
+    // Até 3 tentativas com intervalo crescente — cobre instabilidade de
+    // rede móvel e 500/502 transitório do servidor.
+    const MAX_TENTATIVAS = 3
     try {
-      const res = await fetch('/api/lider/respostas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, respostas, sciTexto: sciTexto.trim() || undefined }),
-      })
-      const data = await res.json()
-      if (!res.ok) { setErro(data.error ?? 'Não foi possível enviar. Tente novamente.'); return }
-      setEtapa('OK')
-    } catch {
-      setErro('Falha de conexão. Verifique sua internet e tente novamente.')
+      for (let tentativa = 1; tentativa <= MAX_TENTATIVAS; tentativa++) {
+        try {
+          const res = await fetch('/api/lider/respostas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token, respostas, sciTexto: sciTexto.trim() || undefined }),
+            cache: 'no-store',
+          })
+          const raw = await res.text()
+          let data: { ok?: boolean; error?: string } = {}
+          try { data = JSON.parse(raw) } catch { /* resposta não-JSON */ }
+
+          if (res.ok) { setEtapa('OK'); return }
+          // 410 com convite já COMPLETED = tentativa anterior gravou
+          if (res.status === 410 && (data.error ?? '').includes('já respondeu')) { setEtapa('OK'); return }
+          if (res.status >= 400 && res.status < 500) {
+            setErro(data.error ?? `Não foi possível enviar (código ${res.status}).`)
+            return
+          }
+          if (tentativa === MAX_TENTATIVAS) {
+            setErro(data.error ?? `O servidor está instável (código ${res.status}). Aguarde alguns segundos e tente enviar novamente — suas respostas não foram perdidas.`)
+            return
+          }
+        } catch {
+          if (tentativa === MAX_TENTATIVAS) {
+            setErro('Sem conexão com o servidor. Verifique sua internet e tente enviar novamente — suas respostas não foram perdidas.')
+            return
+          }
+        }
+        await new Promise((r) => setTimeout(r, tentativa * 1500))
+      }
     } finally {
       setEnviando(false)
     }

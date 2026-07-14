@@ -815,6 +815,83 @@ export async function sendNR1ConviteEmail(opts: {
 }
 
 
+// ============================================================
+// AVALIACAO 360 — convite ao avaliador (auto, gestor, par, liderado)
+// Disparado na criacao do ciclo e ao adicionar avaliadores.
+// ============================================================
+export async function sendAvaliacao360ConviteEmail(opts: {
+  toEmail:      string
+  nome:         string
+  avaliadoNome: string
+  companyNome:  string
+  token:        string
+}): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada — convite 360 não enviado.')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  const firstName = opts.nome.split(' ')[0]
+  const link = `${APP_URL}/avaliacao-360/${opts.token}`
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#0f1826;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f1826;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:560px;background:#131e30;border-radius:16px;overflow:hidden;border:1px solid rgba(212,175,55,0.18);">
+        <tr><td style="padding:28px 32px;background:linear-gradient(135deg,#1a2a40,#0f1826);">
+          <p style="margin:0 0 6px;color:#d4af37;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Avaliação 360°</p>
+          <h1 style="margin:0;color:#e9eef6;font-size:22px;">Sua percepção sobre ${opts.avaliadoNome}</h1>
+        </td></tr>
+        <tr><td style="padding:28px 32px 8px;">
+          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">Olá, ${firstName}. A empresa <strong style="color:#e9eef6;">${opts.companyNome}</strong> convida você a participar da avaliação 360° de <strong style="color:#e9eef6;">${opts.avaliadoNome}</strong>.</p>
+          <p style="margin:0 0 14px;color:#c4d2e6;font-size:15px;line-height:1.7;">São 24 perguntas rápidas, leva cerca de 10 minutos.</p>
+        </td></tr>
+        <tr><td style="padding:0 32px 8px;">
+          <div style="background:#1a2740;border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:16px 18px;">
+            <p style="margin:0 0 6px;color:#d4af37;font-size:13px;font-weight:700;">🔒 Resposta confidencial</p>
+            <p style="margin:0;color:#c4d2e6;font-size:13px;line-height:1.6;">Suas respostas são gravadas sem vínculo com seu nome ou e-mail — apenas o papel (gestor, par, liderado) é registrado. A pessoa avaliada vê somente resultados agregados.</p>
+          </div>
+        </td></tr>
+        <tr><td style="padding:20px 32px 8px;" align="center">
+          <a href="${link}" style="display:inline-block;background:#d4af37;color:#0f1826;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:10px;">Avaliar agora</a>
+        </td></tr>
+        <tr><td style="padding:8px 32px 24px;">
+          <p style="margin:0;color:#9fb0c8;font-size:12px;line-height:1.6;text-align:center;">Se o botão não funcionar, copie e cole este link no navegador:<br/><a href="${link}" style="color:#d4af37;word-break:break-all;">${link}</a></p>
+        </td></tr>
+        <tr><td style="padding:16px 32px;background:#0f1826;border-top:1px solid rgba(255,255,255,0.06);">
+          <p style="margin:0;color:#5d6f8a;font-size:11px;text-align:center;">${APP_NAME}</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_API_KEY}` },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [opts.toEmail],
+        subject: `Avaliação 360° de ${opts.avaliadoNome} (confidencial, 10 minutos)`,
+        html,
+      }),
+    })
+    if (!res.ok) {
+      const err = await res.text()
+      console.error('[email] Falha ao enviar convite 360:', err)
+      return { sent: false, error: err }
+    }
+    return { sent: true }
+  } catch (e) {
+    console.error('[email] Erro de rede ao enviar convite 360:', e)
+    return { sent: false, error: String(e) }
+  }
+}
+
+
 // ── E-mails da integração Hotmart ────────────────────────────────────────────
 
 export async function sendHotmartWelcomeEmail(opts: {

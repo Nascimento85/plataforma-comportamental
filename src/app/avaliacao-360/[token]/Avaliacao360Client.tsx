@@ -64,18 +64,43 @@ export default function Avaliacao360Client({ token, role, avaliadoNome, titulo, 
       return
     }
     setSubmitting(true); setError('')
-    try {
-      const res = await fetch('/api/avaliacao-360/respostas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, respostas: answers, continuarTexto: continuar, melhorarTexto: melhorar }),
-      })
-      const data = await res.json()
-      if (!res.ok) { setError(data.error ?? 'Erro ao enviar.'); setSubmitting(false); return }
-      setDone(true)
-    } catch {
-      setError('Erro ao conectar. Tente novamente.')
-      setSubmitting(false)
+
+    // Até 3 tentativas com intervalo crescente — cobre instabilidade de
+    // rede móvel e 500/502 transitório do servidor.
+    const MAX_TENTATIVAS = 3
+    for (let tentativa = 1; tentativa <= MAX_TENTATIVAS; tentativa++) {
+      try {
+        const res = await fetch('/api/avaliacao-360/respostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, respostas: answers, continuarTexto: continuar, melhorarTexto: melhorar }),
+          cache: 'no-store',
+        })
+        const raw = await res.text()
+        let data: { ok?: boolean; error?: string } = {}
+        try { data = JSON.parse(raw) } catch { /* resposta não-JSON */ }
+
+        if (res.ok) { setDone(true); return }
+        // 410 com convite já COMPLETED = tentativa anterior gravou
+        if (res.status === 410 && (data.error ?? '').includes('já respondeu')) { setDone(true); return }
+        if (res.status >= 400 && res.status < 500) {
+          setError(data.error ?? `Erro ao enviar (código ${res.status}).`)
+          setSubmitting(false)
+          return
+        }
+        if (tentativa === MAX_TENTATIVAS) {
+          setError(data.error ?? `O servidor está instável (código ${res.status}). Aguarde alguns segundos e tente enviar novamente — suas respostas não foram perdidas.`)
+          setSubmitting(false)
+          return
+        }
+      } catch {
+        if (tentativa === MAX_TENTATIVAS) {
+          setError('Sem conexão com o servidor. Verifique sua internet e tente enviar novamente — suas respostas não foram perdidas.')
+          setSubmitting(false)
+          return
+        }
+      }
+      await new Promise((r) => setTimeout(r, tentativa * 1500))
     }
   }
 
