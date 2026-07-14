@@ -23,8 +23,12 @@ export async function POST(_req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: 'Nao autorizado.' }, { status: 401 })
     }
 
+    // Admin pode disparar por qualquer empresa (suporte); demais contas,
+    // apenas convites da propria empresa.
     const convite = await prismaAny.nR1Convite.findFirst({
-      where: { id: params.id, companyId: session.id },
+      where: session.isAdmin
+        ? { id: params.id }
+        : { id: params.id, companyId: session.id },
       include: { coleta: { select: { nome: true, status: true, expiresAt: true } } },
     })
     if (!convite) return NextResponse.json({ error: 'Convite nao encontrado.' }, { status: 404 })
@@ -35,8 +39,9 @@ export async function POST(_req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: 'Coleta expirada.' }, { status: 410 })
     }
 
+    // Nome da empresa DONA do convite (relevante no bypass de admin)
     const company = await prismaAny.company.findUnique({
-      where: { id: session.id },
+      where: { id: convite.companyId },
       select: { name: true },
     })
 
