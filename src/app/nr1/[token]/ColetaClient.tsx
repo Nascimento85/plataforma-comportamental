@@ -71,14 +71,26 @@ export default function ColetaClient(props: Props) {
       },
     }
 
+    // Confirma no servidor se a submissao foi de fato gravada.
+    // Cobre o caso de a resposta do POST se perder/corromper no caminho
+    // (proxy de operadora, rede instavel): o convite vira COMPLETED no
+    // banco e o GET devolve 410 "ja respondeu".
+    async function confirmaGravado(): Promise<boolean> {
+      try {
+        const r = await fetch(`/api/nr1/convite/${token}`, { cache: 'no-store' })
+        return r.status === 410
+      } catch { return false }
+    }
+
     // Ate 3 tentativas com intervalo crescente — cobre instabilidade de
     // rede movel e cold start / 502 transitorio do servidor.
     const MAX_TENTATIVAS = 3
+    let diagnostico = ''
     for (let tentativa = 1; tentativa <= MAX_TENTATIVAS; tentativa++) {
       try {
         const res = await fetch('/api/nr1/respostas', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(body),
           cache: 'no-store',
         })
@@ -95,6 +107,10 @@ export default function ColetaClient(props: Props) {
         // em tentativa anterior que o cliente nao confirmou)
         if (res.status === 410) { setEtapa('OK'); return }
 
+        // Resposta suspeita (ex.: 200 sem o JSON esperado — proxy no meio
+        // do caminho): confirma direto no servidor antes de acusar erro.
+        if (await confirmaGravado()) { setEtapa('OK'); return }
+
         // Erros de validacao (4xx) nao melhoram com retry
         if (res.status >= 400 && res.status < 500) {
           setErro(data.error ?? `Falha ao enviar (código ${res.status}).`)
@@ -102,16 +118,18 @@ export default function ColetaClient(props: Props) {
           return
         }
 
-        // 5xx: tenta de novo
+        diagnostico = `[HTTP ${res.status}${res.redirected ? ` · redirecionado p/ ${res.url}` : ''} · "${raw.slice(0, 80).replace(/\s+/g, ' ')}"]`
         if (tentativa === MAX_TENTATIVAS) {
-          setErro(data.error ?? `O servidor está instável (código ${res.status}). Aguarde alguns segundos e toque em Enviar novamente — suas respostas não foram perdidas.`)
+          setErro(`Não conseguimos confirmar o envio. Aguarde alguns segundos e toque em Enviar novamente — suas respostas não foram perdidas. Se persistir, envie um print desta tela ao RH. ${diagnostico}`)
           setEnviando(false)
           return
         }
-      } catch {
-        // Falha de rede: tenta de novo
+      } catch (e) {
+        // Falha de rede: verifica se gravou; senao, tenta de novo
+        if (await confirmaGravado()) { setEtapa('OK'); return }
         if (tentativa === MAX_TENTATIVAS) {
-          setErro('Sem conexão com o servidor. Verifique sua internet e toque em Enviar novamente — suas respostas não foram perdidas.')
+          diagnostico = `[rede: ${String(e).slice(0, 80)}]`
+          setErro(`Sem conexão com o servidor. Verifique sua internet e toque em Enviar novamente — suas respostas não foram perdidas. Se persistir, envie um print desta tela ao RH. ${diagnostico}`)
           setEnviando(false)
           return
         }
