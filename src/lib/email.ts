@@ -738,6 +738,82 @@ export async function sendAvaliacaoLiderEmail(opts: {
   }
 }
 
+// ============================================================
+// NR-1 — convite anonimo ao funcionario (diagnostico psicossocial)
+// Disparado na criacao da coleta e ao adicionar convite avulso.
+// ============================================================
+export async function sendNR1ConviteEmail(opts: {
+  toEmail:     string
+  nome:        string
+  companyNome: string
+  coletaNome:  string
+  token:       string
+}): Promise<{ sent: boolean; error?: string }> {
+  if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') {
+    console.warn('[email] RESEND_API_KEY não configurada — convite NR-1 não enviado.')
+    return { sent: false, error: 'RESEND_API_KEY não configurada' }
+  }
+
+  const firstName = opts.nome.split(' ')[0]
+  const link = `${APP_URL}/nr1/${opts.token}`
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#17181c;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#17181c;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="100%" style="max-width:560px;background:#1d2026;border-radius:16px;overflow:hidden;border:1px solid rgba(196,99,58,0.25);">
+        <tr><td style="padding:28px 32px;background:linear-gradient(135deg,#22252c,#17181c);">
+          <p style="margin:0 0 6px;color:#e09070;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;">Diagnóstico Psicossocial NR-1</p>
+          <h1 style="margin:0;color:#f0ece3;font-size:22px;">${opts.coletaNome}</h1>
+        </td></tr>
+        <tr><td style="padding:28px 32px 8px;">
+          <p style="margin:0 0 14px;color:#cfc9bd;font-size:15px;line-height:1.7;">Olá, ${firstName}. A empresa <strong style="color:#f0ece3;">${opts.companyNome}</strong> convida você a participar de uma avaliação sobre as condições de trabalho do seu setor, conforme exigência da NR-1.</p>
+          <p style="margin:0 0 14px;color:#cfc9bd;font-size:15px;line-height:1.7;">São 3 questionários curtos — leva cerca de <strong style="color:#f0ece3;">10 a 15 minutos</strong>.</p>
+        </td></tr>
+        <tr><td style="padding:0 32px 8px;">
+          <div style="background:#25211d;border:1px solid rgba(196,99,58,0.35);border-radius:12px;padding:16px 18px;">
+            <p style="margin:0 0 6px;color:#e09070;font-size:13px;font-weight:700;">🔒 100% anônimo, de verdade</p>
+            <p style="margin:0;color:#cfc9bd;font-size:13px;line-height:1.6;">Suas respostas são gravadas sem nenhum vínculo com seu nome ou e-mail. A empresa recebe apenas médias agregadas por setor, e somente quando houver no mínimo 5 respondentes. Ninguém consegue saber o que você respondeu.</p>
+          </div>
+        </td></tr>
+        <tr><td style="padding:20px 32px 8px;" align="center">
+          <a href="${link}" style="display:inline-block;background:linear-gradient(135deg,#c4633a,#d4943a);color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;padding:14px 36px;border-radius:999px;">Responder avaliação</a>
+        </td></tr>
+        <tr><td style="padding:8px 32px 24px;">
+          <p style="margin:0;color:#8f887c;font-size:12px;line-height:1.6;text-align:center;">Se o botão não funcionar, copie e cole este link no navegador:<br/><a href="${link}" style="color:#e09070;word-break:break-all;">${link}</a></p>
+        </td></tr>
+        <tr><td style="padding:16px 32px;background:#17181c;border-top:1px solid rgba(255,255,255,0.06);">
+          <p style="margin:0;color:#5d584e;font-size:11px;text-align:center;">${APP_NAME}</p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_API_KEY}` },
+      body: JSON.stringify({
+        from: `${FROM_NAME} <${FROM_EMAIL}>`,
+        to: [opts.toEmail],
+        subject: `${opts.companyNome} convida você: diagnóstico NR-1 (anônimo, 10-15 min)`,
+        html,
+      }),
+    })
+    if (!res.ok) {
+      const err = await res.text()
+      console.error('[email] Falha ao enviar convite NR-1:', err)
+      return { sent: false, error: err }
+    }
+    return { sent: true }
+  } catch (e) {
+    console.error('[email] Erro de rede ao enviar convite NR-1:', e)
+    return { sent: false, error: String(e) }
+  }
+}
+
 
 // ── E-mails da integração Hotmart ────────────────────────────────────────────
 

@@ -170,7 +170,7 @@ export default function NovaColetaForm({ setoresIniciais }: { setoresIniciais: S
       <button type="submit" disabled={loading}
               className="w-full py-3 rounded-full text-[15px] font-bold text-white shadow-terra disabled:opacity-60"
               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}>
-        {loading ? 'Criando coleta…' : '✦ Criar coleta e gerar links anônimos'}
+        {loading ? 'Criando coleta e enviando e-mails…' : '✦ Criar coleta e enviar convites por e-mail'}
       </button>
     </form>
   )

@@ -7,7 +7,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
 import { hasActiveSubscription } from '@/lib/subscription/check'
+import { sendNR1ConviteEmail } from '@/lib/email'
 import { randomBytes } from 'crypto'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -78,8 +82,38 @@ export async function POST(req: NextRequest) {
     }))
     await txAny.nR1Convite.createMany({ data: conviteCreates })
 
-    return { coleta, totalConvites: conviteCreates.length }
+    return { coleta, convites: conviteCreates }
   })
 
-  return NextResponse.json(result, { status: 201 })
+  // Envia os convites por e-mail (fora da transacao — falha de e-mail
+  // nao desfaz a coleta; o link continua disponivel para copiar no painel)
+  const company = await prismaAny.company.findUnique({
+    where: { id: session.id },
+    select: { name: true },
+  })
+  let emailsEnviados = 0
+  let emailsFalha = 0
+  for (const c of result.convites) {
+    const r = await sendNR1ConviteEmail({
+      toEmail:     c.email,
+      nome:        c.nome,
+      companyNome: company?.name ?? 'Sua empresa',
+      coletaNome:  result.coleta.nome,
+      token:       c.token,
+    })
+    if (r.sent) emailsEnviados++
+    else emailsFalha++
+    // Resend limita ~2 req/s — intervalo entre envios
+    await new Promise(res => setTimeout(res, 600))
+  }
+
+  return NextResponse.json(
+    {
+      coleta: result.coleta,
+      totalConvites: result.convites.length,
+      emailsEnviados,
+      emailsFalha,
+    },
+    { status: 201 },
+  )
 }

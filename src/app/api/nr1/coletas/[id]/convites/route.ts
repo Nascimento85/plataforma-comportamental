@@ -8,7 +8,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
+import { sendNR1ConviteEmail } from '@/lib/email'
 import { randomBytes } from 'crypto'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
@@ -46,7 +50,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   // Confirma que a coleta pertence a empresa logada
   const coleta = await prismaAny.nR1Coleta.findFirst({
     where: { id: params.id, companyId: session.id },
-    select: { id: true, expiresAt: true },
+    select: { id: true, nome: true, expiresAt: true },
   })
   if (!coleta) {
     return NextResponse.json({ error: 'Coleta nao encontrada.' }, { status: 404 })
@@ -88,5 +92,19 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     select: { id: true, nome: true, email: true, token: true, status: true, setorId: true },
   })
 
-  return NextResponse.json({ convite }, { status: 201 })
+  // Envia o convite por e-mail (falha nao impede a criacao — o link
+  // continua disponivel para copiar no painel)
+  const company = await prismaAny.company.findUnique({
+    where: { id: session.id },
+    select: { name: true },
+  })
+  const envio = await sendNR1ConviteEmail({
+    toEmail:     convite.email,
+    nome:        convite.nome,
+    companyNome: company?.name ?? 'Sua empresa',
+    coletaNome:  coleta.nome,
+    token:       convite.token,
+  })
+
+  return NextResponse.json({ convite, emailEnviado: envio.sent }, { status: 201 })
 }

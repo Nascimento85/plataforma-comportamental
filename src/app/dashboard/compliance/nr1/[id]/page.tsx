@@ -9,6 +9,7 @@ import { getSession } from '@/lib/session'
 import { prisma } from '@/lib/prisma'
 import RelatorioClient from './RelatorioClient'
 import CopyLinkButton from './CopyLinkButton'
+import EnviarEmailButton from './EnviarEmailButton'
 import AddConviteForm from './AddConviteForm'
 import SeedRespostasButton from './SeedRespostasButton'
 import { MIN_RESPONDENTES_PARA_RELATORIO } from '@/lib/nr1/aggregate'
@@ -170,6 +171,7 @@ export default async function ColetaDetalhePage({ params }: { params: { id: stri
                     {fullUrl}
                   </code>
                   <CopyLinkButton url={fullUrl} />
+                  {c.status !== 'COMPLETED' && <EnviarEmailButton conviteId={c.id} />}
                   <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-[13px] font-bold"
                         style={{
                           background: c.status === 'COMPLETED' ? 'rgba(122,158,126,0.22)' : 'rgba(212,148,58,0.18)',

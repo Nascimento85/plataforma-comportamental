@@ -62,26 +62,61 @@ export default function ColetaClient(props: Props) {
 
   async function submeter() {
     setEnviando(true); setErro('')
-    try {
-      const body = {
-        token,
-        respostas: {
-          karasek: Object.entries(karasekAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
-          eri:     Object.entries(eriAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
-          copsoq:  Object.entries(copsoqAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
-        },
+    const body = {
+      token,
+      respostas: {
+        karasek: Object.entries(karasekAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
+        eri:     Object.entries(eriAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
+        copsoq:  Object.entries(copsoqAns).map(([id, v]) => ({ questaoId: Number(id), valor: v })),
+      },
+    }
+
+    // Ate 3 tentativas com intervalo crescente — cobre instabilidade de
+    // rede movel e cold start / 502 transitorio do servidor.
+    const MAX_TENTATIVAS = 3
+    for (let tentativa = 1; tentativa <= MAX_TENTATIVAS; tentativa++) {
+      try {
+        const res = await fetch('/api/nr1/respostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+          cache: 'no-store',
+        })
+
+        // Le como texto primeiro: se o servidor devolver HTML (erro 500/502
+        // de infraestrutura), res.json() quebraria e mascararia o status real.
+        const raw = await res.text()
+        let data: { ok?: boolean; error?: string } = {}
+        try { data = JSON.parse(raw) } catch { /* resposta nao-JSON */ }
+
+        if (res.ok && data.ok) { setEtapa('OK'); return }
+
+        // 410 = ja respondeu → considera concluido (respostas ja registradas
+        // em tentativa anterior que o cliente nao confirmou)
+        if (res.status === 410) { setEtapa('OK'); return }
+
+        // Erros de validacao (4xx) nao melhoram com retry
+        if (res.status >= 400 && res.status < 500) {
+          setErro(data.error ?? `Falha ao enviar (código ${res.status}).`)
+          setEnviando(false)
+          return
+        }
+
+        // 5xx: tenta de novo
+        if (tentativa === MAX_TENTATIVAS) {
+          setErro(data.error ?? `O servidor está instável (código ${res.status}). Aguarde alguns segundos e toque em Enviar novamente — suas respostas não foram perdidas.`)
+          setEnviando(false)
+          return
+        }
+      } catch {
+        // Falha de rede: tenta de novo
+        if (tentativa === MAX_TENTATIVAS) {
+          setErro('Sem conexão com o servidor. Verifique sua internet e toque em Enviar novamente — suas respostas não foram perdidas.')
+          setEnviando(false)
+          return
+        }
       }
-      const res = await fetch('/api/nr1/respostas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-      const data = await res.json()
-      if (!res.ok) { setErro(data.error ?? 'Falha ao enviar.'); setEnviando(false); return }
-      setEtapa('OK')
-    } catch {
-      setErro('Erro de conexão. Tente novamente.')
-      setEnviando(false)
+      await new Promise(r => setTimeout(r, tentativa * 1500))
     }
   }
 

@@ -45,15 +45,17 @@ export default function AddConviteForm({
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ nome: nomeT, email: emailT, setorId }),
       })
+      const data = await res.json().catch(() => ({} as { error?: string; emailEnviado?: boolean }))
       if (!res.ok) {
-        const data = await res.json().catch(() => ({} as { error?: string }))
         setErro(data.error ?? 'Falha ao adicionar convite.')
         return
       }
       // sucesso: limpa form e refaz fetch da pagina
       setNome('')
       setEmail('')
-      setErro(null)
+      setErro(data.emailEnviado === false
+        ? 'Convite criado, mas o e-mail não pôde ser enviado — copie o link e envie manualmente.'
+        : null)
       startTransition(() => router.refresh())
     } catch {
       setErro('Erro de conexao. Tente novamente.')
