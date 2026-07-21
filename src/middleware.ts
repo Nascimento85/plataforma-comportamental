@@ -19,6 +19,8 @@ const PUBLIC_ROUTES = [
   '/lp.html',
   '/playbook',         // playbooks gratuitos (contratacao, nr1)
   '/nr1',              // coleta NR-1 anônima por token público (LGPD/CFP)
+  '/api/nr1/convite',  // API pública: dados do convite NR-1 por token (sem login)
+  '/api/nr1/respostas',// API pública: submissão anônima NR-1 (sem login)
   '/avaliar-lider',    // avaliação de liderança anônima por token público
   '/api/lider',        // APIs públicas da avaliação de liderança (convite + respostas)
   '/avaliacao-360',    // coleta 360° por token público (auto/gestor/pares/subordinados)
@@ -53,10 +55,13 @@ export function middleware(request: NextRequest) {
   // Canonical: redireciona www.mapacomportamental.com → mapacomportamental.com
   // com 301 (permanente, bom para SEO). Preserva path + query.
   if (host.startsWith('www.')) {
-    const apexHost = host.slice(4) // remove "www."
+    const apexHost = host.slice(4).split(':')[0] // remove "www." e porta interna
     const target = new URL(request.url)
+    target.protocol = 'https:'
     target.host = apexHost
-    return NextResponse.redirect(target, 301)
+    target.port = '' // sem isso, a porta interna do container (:8080) vazava na URL
+    // 308 = permanente E preserva o método (POST continua POST)
+    return NextResponse.redirect(target, 308)
   }
 
   // Homepage: serve a NOVA home preto/dourado (hub completo com 9 testes,
