@@ -44,7 +44,7 @@ const INTROS: Record<string, {
   DISC: {
     title: 'DISC — Perfil Comportamental',
     subtitle: 'O Mapa da Navegação Comportamental',
-    image: '/tests/disc.jpg',
+    image: '/tests/disc.webp',
     description: 'Desenvolvido com base nos estudos do Dr. William Moulton Marston, o DISC é a ferramenta de análise comportamental mais utilizada no mundo corporativo. Ele revela como você age, lidera e se comunica — e como maximizar sua performance em qualquer ambiente.',
     tips: [
       { icon: '🎯', text: 'Responda pensando no seu comportamento no trabalho ou sob pressão profissional.' },
@@ -64,7 +64,7 @@ const INTROS: Record<string, {
   MBTI: {
     title: 'MBTI — Preferências Cognitivas',
     subtitle: 'A Bússola da Preferência Cognitiva',
-    image: '/tests/mbti.jpg',
+    image: '/tests/mbti.webp',
     description: 'Baseado nos estudos de Carl Jung, o MBTI é a ferramenta de tipologia mais famosa do mundo. Ele não mede seu caráter — revela suas preferências inatas. Como você pensa, decide e interage com o mundo quando está sendo 100% você mesmo.',
     tips: [
       { icon: '🌴', text: 'Responda como você é "em férias" — sem as exigências do cargo ou papel social.' },
@@ -84,7 +84,7 @@ const INTROS: Record<string, {
   ENNEAGRAM: {
     title: 'Eneagrama — Motivações Profundas',
     subtitle: 'O Mapa da Arquitetura Emocional',
-    image: '/tests/eneagrama.jpg',
+    image: '/tests/eneagrama.webp',
     description: 'Utilizado por organizações como a NASA e o Vale do Silício, o Eneagrama vai além do comportamento — ele revela a intenção oculta por trás das suas ações. Descubra o padrão motivacional que rege sua vida e o caminho exato para sua melhor versão.',
     tips: [
       { icon: '💎', text: 'Seja brutalmente honesto — responda como você realmente se sente "por dentro", especialmente sob estresse.' },
@@ -104,7 +104,7 @@ const INTROS: Record<string, {
   TEMPERAMENT: {
     title: '4 Temperamentos — Natureza Biológica',
     subtitle: 'O Alicerce Biológico da Personalidade',
-    image: '/tests/temperamentos.jpg',
+    image: '/tests/temperamentos.webp',
     description: 'Baseada nos estudos de Hipócrates e refinada ao longo de milênios, esta teoria identifica as quatro inclinações naturais que determinam como você reage ao mundo. O temperamento é sua "matéria-prima" — aquilo que nasce com você e não pode ser ignorado.',
     tips: [
       { icon: '👶', text: 'Pense em como você era na infância ou em como age sob extremo estresse — aí aparece o temperamento real.' },
@@ -124,7 +124,7 @@ const INTROS: Record<string, {
   ARCHETYPE: {
     title: 'Arquétipos — Os 12 Padrões Universais',
     subtitle: 'O Algoritmo Mental da Liderança',
-    image: '/tests/arquetipo-misto.jpg',
+    image: '/tests/arquetipo-misto.webp',
     description: 'Baseado na teoria de Carl Jung, os arquétipos são padrões universais de comportamento que todos os seres humanos reconhecem instintivamente. Descubra qual "personagem" está rodando em você — e como isso molda suas decisões, lideranças e resultados.',
     tips: [
       { icon: '🧬', text: 'Responda pelo que realmente sente, não pelo que seu cargo ou papel social exige.' },
@@ -144,7 +144,7 @@ const INTROS: Record<string, {
   LOVE_LANGUAGES: {
     title: '5 Linguagens do Amor',
     subtitle: 'Descubra como você dá e recebe amor',
-    image: '/tests/linguagens-amor.jpg',
+    image: '/tests/linguagens-amor.webp',
     description: 'Baseado no best-seller de Gary Chapman, este teste identifica sua linguagem primária do amor — a forma como você mais se sente amado(a) e valorizado(a). Usado por casais, líderes e equipes para criar conexões mais profundas e relacionamentos mais saudáveis.',
     tips: [
       { icon: '💝', text: 'Em cada par, escolha a afirmação que mais representa você — mesmo que ambas pareçam verdadeiras.' },
@@ -164,7 +164,7 @@ const INTROS: Record<string, {
   ARCHETYPE_FEMININE: {
     title: 'Arquétipos Femininos — As 7 Energias',
     subtitle: 'O Despertar da Força Feminina',
-    image: '/tests/arquetipo-feminino.jpg',
+    image: '/tests/arquetipo-feminino.webp',
     description: 'Os 7 arquétipos femininos representam as energias primordiais da psique feminina, originados da mitologia grega. Este teste identifica qual energia está liderando sua fase atual de vida e carreira — e qual precisa ser ativada para o seu equilíbrio pleno.',
     tips: [
       { icon: '🌙', text: 'Responda pelo que realmente sente internamente — não pelo que a sociedade espera de você.' },
@@ -184,7 +184,7 @@ const INTROS: Record<string, {
   CAREER_ANCHOR: {
     title: 'Âncoras de Carreira — Edgar Schein',
     subtitle: 'O que realmente motiva você no trabalho',
-    image: '/tests/ancora-carreira.png',
+    image: '/tests/ancora-carreira.webp',
     description: 'Desenvolvido pelo Dr. Edgar Schein (MIT), o teste de Âncoras de Carreira identifica o "auto-conceito profissional" — os valores inegociáveis que sustentam suas decisões de longo prazo. Descubra se sua âncora é autonomia, segurança, desafio técnico, liderança ou outra das 8 forças que regem o que você não abre mão na carreira.',
     tips: [
       { icon: '⚓', text: 'Pense na sua trajetória profissional como um todo — o que se mantém constante nas suas escolhas?' },
@@ -204,7 +204,7 @@ const INTROS: Record<string, {
   EMOTIONAL_INTELLIGENCE: {
     title: 'Inteligência Emocional — Daniel Goleman',
     subtitle: 'Como você reage sob pressão',
-    image: '/tests/inteligencia-emocional.png',
+    image: '/tests/inteligencia-emocional.webp',
     description: 'Baseado no modelo de Daniel Goleman, este teste avalia os 5 domínios da Inteligência Emocional — Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais. Descubra como você percebe, usa e gerencia suas emoções para impulsionar relacionamentos e performance profissional.',
     tips: [
       { icon: '🧠', text: 'Pense em situações reais do seu cotidiano profissional — não em como gostaria de ser.' },

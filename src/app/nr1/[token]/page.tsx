@@ -10,7 +10,10 @@ import { KARASEK_QUESTOES, ERI_QUESTOES, COPSOQ_QUESTOES } from '@/lib/nr1/quest
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-export const metadata: Metadata = { title: 'Diagnóstico Psicossocial — NR-1' }
+export const metadata: Metadata = {
+  title: 'Diagnóstico Psicossocial — NR-1',
+  robots: { index: false, follow: false },
+}
 
 export default async function ColetaPublicaPage({ params }: { params: { token: string } }) {
   const convite = await prismaAny.nR1Convite.findUnique({

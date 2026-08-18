@@ -9,7 +9,10 @@ import EnpsClient from './EnpsClient'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-export const metadata: Metadata = { title: 'Pesquisa de Clima · Psique' }
+export const metadata: Metadata = {
+  title: 'Pesquisa de Clima · Psique',
+  robots: { index: false, follow: false },
+}
 export const dynamic = 'force-dynamic'
 
 export default async function EnpsPage({ params }: { params: { token: string } }) {

@@ -1,0 +1,22 @@
+# Mapa Comportamental — regras para buscadores
+# Páginas comerciais liberadas; tudo que carrega dado pessoal, bloqueado.
+
+User-agent: *
+Allow: /
+
+# Devolutivas, questionários e coletas: contêm nome e resultado de pessoas reais.
+Disallow: /result/
+Disallow: /test/
+Disallow: /nr1/
+Disallow: /avaliar-lider/
+Disallow: /avaliacao-360/
+Disallow: /enps/
+Disallow: /diagnostico-pme/
+Disallow: /experimente/
+
+# Área logada e administração.
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://mapacomportamental.com/sitemap.xml

@@ -11,7 +11,10 @@ import type { Rater360 } from '@/content/gestao-times/avaliacao-360'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-export const metadata: Metadata = { title: 'Avaliação 360° · Psique' }
+export const metadata: Metadata = {
+  title: 'Avaliação 360° · Psique',
+  robots: { index: false, follow: false },
+}
 export const dynamic = 'force-dynamic'
 
 export default async function Avaliacao360Page({ params }: { params: { token: string } }) {

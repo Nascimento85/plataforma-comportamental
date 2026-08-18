@@ -10,7 +10,10 @@ import AvaliarLiderClient from './AvaliarLiderClient'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const prismaAny = prisma as any
 
-export const metadata: Metadata = { title: 'Avaliação de Liderança · Psique' }
+export const metadata: Metadata = {
+  title: 'Avaliação de Liderança · Psique',
+  robots: { index: false, follow: false },
+}
 export const dynamic = 'force-dynamic'
 
 export default async function AvaliarLiderPage({ params }: { params: { token: string } }) {

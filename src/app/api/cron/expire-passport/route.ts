@@ -17,14 +17,16 @@ import { NextRequest, NextResponse } from 'next/server'
 import { expireOverdueGrants } from '@/lib/passport'
 import { schedulePassportExpiredOutreach } from '@/lib/manychat'
 import { prisma } from '@/lib/prisma'
+import { autorizaCron } from '@/lib/cron-auth'
 
 export const runtime  = 'nodejs'
 export const dynamic  = 'force-dynamic'
 
 export async function GET(request: NextRequest) {
   // --- Auth ---
-  const auth = request.headers.get('authorization')
-  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  const permitido = autorizaCron(request.headers.get('authorization'))
+  if (!permitido.ok) {
+    console.warn('[cron/expire-passport] negado:', permitido.motivo)
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

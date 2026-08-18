@@ -33,7 +33,7 @@ const TEST_TYPES: TestType[] = [
     category: 'ARCHETYPE',
     credits: TEST_PRICE.ARCHETYPE,
     minutos: 8,
-    image: '/tests/arquetipo-misto.jpg',
+    image: '/tests/arquetipo-misto.webp',
     hook: 'O mapa mais profundo da plataforma.',
     description:
       'Baseado na psicologia analítica de Carl Jung. Identifica qual dos 12 padrões arquetípicos está no comando de uma pessoa — e revela a força-motriz invisível por trás de decisões, liderança e posicionamento. Leitura executiva para fundadores, C-level e líderes em transição de carreira.',
@@ -51,7 +51,7 @@ const TEST_TYPES: TestType[] = [
     category: 'ARCHETYPE',
     credits: TEST_PRICE.ARCHETYPE_FEMININE,
     minutos: 8,
-    image: '/tests/arquetipo-feminino.jpg',
+    image: '/tests/arquetipo-feminino.webp',
     hook: 'O divino feminino aplicado à liderança.',
     description:
       'Mapeia qual das 7 energias arquetípicas femininas governa o momento atual — Mãe, Virgem, Amazona, Sábia, Mística, Sacerdotisa e Feiticeira. Diagnóstico da energia ativa e da que precisa ser ativada para plenitude de comando. Ferramenta indispensável para programas de liderança feminina.',
@@ -71,7 +71,7 @@ const TEST_TYPES: TestType[] = [
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.DISC,
     minutos: 7,
-    image: '/tests/disc.jpg',
+    image: '/tests/disc.webp',
     hook: 'A ferramenta mais usada no mundo corporativo.',
     description:
       'Revela as quatro forças que regem o comportamento no trabalho — Dominância, Influência, Estabilidade e Conformidade. A lente de entrada para entender como cada pessoa executa, decide sob pressão e o que a trava em função. Base técnica para composição de times e alinhamento de cultura.',
@@ -88,7 +88,7 @@ const TEST_TYPES: TestType[] = [
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.MBTI,
     minutos: 12,
-    image: '/tests/mbti.jpg',
+    image: '/tests/mbti.webp',
     hook: 'Baseado em Carl Jung. Usado por Fortune 500.',
     description:
       'Decodifica as preferências cognitivas que moldam decisão e comunicação. Identifica 1 entre 16 tipos de personalidade e é a base para alinhar estilos de liderança, montar times complementares e conduzir coaching executivo de alta profundidade.',
@@ -105,7 +105,7 @@ const TEST_TYPES: TestType[] = [
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.ENNEAGRAM,
     minutos: 15,
-    image: '/tests/eneagrama.jpg',
+    image: '/tests/eneagrama.webp',
     hook: 'Usado pela NASA e pelo Vale do Silício.',
     description:
       'Vai além do comportamento visível: revela a motivação raiz e o medo nuclear que travam maturidade profissional. Adotado por lideranças de alta complexidade para acelerar desenvolvimento, identificar pontos cegos e direcionar o caminho exato para a versão mais madura do colaborador.',
@@ -122,7 +122,7 @@ const TEST_TYPES: TestType[] = [
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.TEMPERAMENT,
     minutos: 6,
-    image: '/tests/temperamentos.jpg',
+    image: '/tests/temperamentos.webp',
     hook: 'A matéria-prima comportamental inata.',
     description:
       'Identifica as quatro inclinações naturais — Colérico, Sanguíneo, Melancólico e Fleumático — que determinam como uma pessoa reage, comunica e ocupa espaço em um time. Leitura rápida e precisa para gestores que precisam calibrar pessoas no dia a dia operacional.',
@@ -249,7 +249,7 @@ const TEST_TYPES: TestType[] = [
     category: 'BEHAVIORAL',
     credits: TEST_PRICE.COMBO_BUNDLE,
     minutos: 35,
-    image: '/tests/disc.jpg',
+    image: '/tests/disc.webp',
     hook: 'O raio-X comportamental definitivo. Um link, quatro testes.',
     description:
       'DISC, MBTI, Eneagrama e 4 Temperamentos em um único envio. O colaborador responde os 4 testes em sequência e você recebe uma devolutiva integrada gerada por IA que cruza os 4 mapas. Ideal para avaliação de executivos, processos de sucessão e contratações-chave.',
@@ -269,7 +269,7 @@ const TEST_TYPES: TestType[] = [
     category: 'CAREER',
     credits: TEST_PRICE.CAREER_ANCHOR,
     minutos: 8,
-    image: '/tests/ancora-carreira.png',
+    image: '/tests/ancora-carreira.webp',
     hook: 'O que realmente motiva você no trabalho.',
     description:
       'Desenvolvido pelo Dr. Edgar Schein (MIT), o teste de Âncoras de Carreira identifica os valores profissionais inegociáveis que sustentam suas decisões de longo prazo. Revela se sua âncora é autonomia, segurança, desafio técnico, liderança ou outra das 8 forças que regem o que você não abre mão na carreira. Ferramenta-chave para retenção, PDI e planos de carreira realistas.',
@@ -286,7 +286,7 @@ const TEST_TYPES: TestType[] = [
     category: 'CAREER',
     credits: TEST_PRICE.EMOTIONAL_INTELLIGENCE,
     minutos: 8,
-    image: '/tests/inteligencia-emocional.png',
+    image: '/tests/inteligencia-emocional.webp',
     hook: 'Como você reage sob pressão.',
     description:
       'Baseado no modelo de Daniel Goleman, este teste avalia os 5 domínios da Inteligência Emocional — Autoconsciência, Autorregulação, Motivação, Empatia e Habilidades Sociais. Resultado em radar de competências mostrando força e vetor de desenvolvimento. Ferramenta essencial para liderança humana, gestão de conflitos e formação de soft skills.',
@@ -306,7 +306,7 @@ const TEST_TYPES: TestType[] = [
     category: 'RELATIONSHIPS',
     credits: TEST_PRICE.LOVE_LANGUAGES,
     minutos: 6,
-    image: '/tests/linguagens-amor.jpg',
+    image: '/tests/linguagens-amor.webp',
     hook: 'Como você ama — e como precisa ser amado.',
     description:
       'Baseado no best-seller mundial de Gary Chapman. Identifica como cada pessoa recebe amor: palavras de afirmação, tempo de qualidade, presentes, atos de serviço ou toque físico. Responde à pergunta mais comum dos relacionamentos: por que às vezes eu faço tudo e a pessoa que amo não se sente amada? É porque estou falando em uma língua que ela não entende.',

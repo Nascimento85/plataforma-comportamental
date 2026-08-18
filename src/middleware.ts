@@ -89,6 +89,8 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // txt/xml/ico/pdf ficam de fora: sem isso o middleware manda /robots.txt
+    // e /sitemap.xml para o /login e os buscadores nunca leem nenhum dos dois.
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml|pdf|webmanifest)$).*)',
   ],
 }

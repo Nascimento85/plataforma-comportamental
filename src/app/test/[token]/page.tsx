@@ -5,7 +5,10 @@ import TestIntroWrapper from '@/components/tests/TestIntroWrapper'
 import TestResultCard from '@/components/tests/TestResultCard'
 import { parseResultData } from '@/lib/parseResult'
 
-export const metadata: Metadata = { title: 'Avaliação Comportamental' }
+export const metadata: Metadata = {
+  title: 'Avaliação Comportamental',
+  robots: { index: false, follow: false },
+}
 
 interface PageProps {
   params: { token: string }

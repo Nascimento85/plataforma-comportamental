@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
 
     const checkout = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
+      // Sem payment_method_types: o Stripe usa os metodos automaticos ligados no
+      // painel. Fixar ['card'] bloqueava o Pix mesmo com ele habilitado la.
       line_items: [
         PREMIUM_PRICE_ID
           ? { price: PREMIUM_PRICE_ID, quantity: 1 }

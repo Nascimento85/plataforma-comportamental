@@ -77,6 +77,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   return {
     title: `Devolutiva de ${a.employee.name}`,
     description: 'Relatório de avaliação comportamental.',
+    // Devolutiva é pública por link (para compartilhar), mas nunca indexável:
+    // o título carrega o nome da pessoa e o corpo, o perfil comportamental.
+    robots: { index: false, follow: false },
   }
 }
 
