@@ -39,6 +39,25 @@ export const metadata: Metadata = {
     description:
         'Plataforma de mapeamento comportamental para empresas: DISC, MBTI, Eneagrama, Arquetipos Junguianos, Temperamentos e Linguagens do Amor.',
     keywords: ['DISC', 'MBTI', 'Eneagrama', 'arquetipos', 'Jung', 'avaliacao comportamental', 'RH', 'mapeamento comportamental'],
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://mapacomportamental.com'),
+    // Sem og:image, todo link colado no WhatsApp/Instagram aparecia como caixa
+    // vazia. As paginas com dado pessoal sobrescrevem isto com robots noindex.
+    openGraph: {
+        type: 'website',
+        locale: 'pt_BR',
+        siteName: 'Mapa Comportamental',
+        title: 'Psique — Mapa Comportamental',
+        description:
+            'Entenda como você decide, lidera e se relaciona: 15 avaliações comportamentais com devolutiva completa.',
+        images: [{ url: '/og-mapa.png', width: 1200, height: 630, alt: 'Mapa Comportamental' }],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Psique — Mapa Comportamental',
+        description:
+            'Entenda como você decide, lidera e se relaciona: 15 avaliações comportamentais com devolutiva completa.',
+        images: ['/og-mapa.png'],
+    },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
