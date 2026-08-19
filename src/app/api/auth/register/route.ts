@@ -1,7 +1,7 @@
 // ============================================================
 // SUBSTITUI: src/app/api/auth/register/route.ts
 // Mudança principal: bônus de boas-vindas vira o "Passaporte de
-// Autoconhecimento" — 10 créditos válidos por 7 dias (helper).
+// Autoconhecimento" — 4 créditos válidos por 7 dias (helper).
 // ============================================================
 
 import { NextRequest, NextResponse } from 'next/server'
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
         },
       })
 
-      // 🎟️ Passaporte de Autoconhecimento: 10 créditos / 7 dias
+      // 🎟️ Passaporte de Autoconhecimento: 4 créditos / 7 dias
       const passport = await grantWelcomePassport(tx, company.id)
 
       // 🎁 Degustação via QR → 7 dias de trial premium interno (sem Stripe)

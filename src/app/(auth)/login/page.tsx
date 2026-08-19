@@ -32,7 +32,7 @@ export default function LoginPage({ searchParams }: PageProps) {
           <div>
             <p className="text-sm font-semibold" style={{ color: '#96bf9a' }}>🎟️ Passaporte de Autoconhecimento ativado!</p>
             <p className="text-xs mt-0.5 leading-relaxed" style={{ color: 'rgba(150,191,154,0.8)' }}>
-              Você ganhou <strong>4 créditos válidos por 7 dias</strong>. Complete seu perfil para ganhar +6 créditos extras.
+              Você ganhou <strong>4 créditos válidos por 7 dias</strong>. Escolha seu primeiro teste e comece agora.
             </p>
           </div>
         </div>

@@ -152,14 +152,14 @@ export default function PrecosPage() {
             Quer fazer um teste por conta própria?
           </h2>
           <p className="text-[15px] text-white/80 font-medium mb-5 leading-relaxed">
-            Sem assinatura. Compre créditos avulsos e faça quando quiser. Você ganha 10 créditos cortesia no cadastro.
+            Sem assinatura. Compre créditos avulsos e faça quando quiser. Você ganha 4 créditos de cortesia no cadastro.
           </p>
           <Link
             href="/register"
             className="inline-block text-[14px] font-bold text-white px-5 py-2.5 rounded-full no-underline"
             style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.20)' }}
           >
-            Criar conta pessoal e ganhar 10 créditos
+            Criar conta pessoal e ganhar 4 créditos
           </Link>
         </div>
       </section>

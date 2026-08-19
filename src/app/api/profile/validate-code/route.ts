@@ -4,7 +4,6 @@
 // Valida o código de 6 dígitos enviado por e-mail.
 // Se válido (existe, não usado, não expirou, pertence ao usuário):
 //   1. Marca o código como usado
-//   2. Adiciona +6 créditos ao saldo
 //   3. Cria CreditTransaction (auditoria: tipo BONUS)
 //   4. Marca isProfileCompletedRewarded = true (idempotência)
 // Tudo em uma transação atômica.
@@ -14,9 +13,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/session'
-import { grantProfileCompleteBonus, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
-
-const BONUS_CREDITS = PROFILE_COMPLETE_AMOUNT // 6 — bônus por completar perfil (expira em 7 dias)
 
 const schema = z.object({
   code: z
@@ -53,7 +49,7 @@ export async function POST(request: NextRequest) {
 
     if (company.isProfileCompletedRewarded) {
       return NextResponse.json(
-        { error: 'Você já recebeu os 6 créditos deste benefício.' },
+        { error: 'Seu e-mail já foi confirmado.' },
         { status: 400 }
       )
     }
@@ -76,15 +72,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Transação atômica: marca código + concede bônus (expira em 7 dias) + marca flag
+    // O bonus de creditos por perfil completo foi descontinuado: pagar por
+    // endereco e CEP de pessoa fisica era atrito no cadastro e coleta de dado
+    // que a plataforma nao usa. O codigo continua servindo como confirmacao
+    // de e-mail, que e o que interessa manter.
     await prisma.$transaction(async (tx) => {
       await tx.profileValidationCode.update({
         where: { id: validCode.id },
         data: { used: true },
       })
-
-      // Passaporte: bônus de 6 créditos com expiração em 7 dias
-      await grantProfileCompleteBonus(tx, company.id)
 
       await tx.company.update({
         where: { id: company.id },
@@ -94,8 +90,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       ok: true,
-      creditsAwarded: BONUS_CREDITS,
-      message: `Parabéns! +${BONUS_CREDITS} créditos foram adicionados à sua conta.`,
+      creditsAwarded: 0,
+      message: 'E-mail confirmado com sucesso.',
     })
   } catch (err) {
     console.error('[api/profile/validate-code]', err)

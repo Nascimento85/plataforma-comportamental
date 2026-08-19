@@ -11,7 +11,7 @@ export default function RegisterPage() {
       sub="Crie a conta, escolha um teste e receba um relatório profissional com diagnóstico e direcionamento prático. Sem cartão de crédito."
       bullets={[
         { icon: '🎟️', text: <><strong className="text-white">4 créditos de cortesia</strong> só por criar a conta</> },
-        { icon: '⭐', text: <><strong className="text-white">+6 créditos extras</strong> ao completar o seu perfil</> },
+        { icon: '⭐', text: <>Devolutiva <strong className="text-white">completa em PDF</strong>, não um rótulo de quatro letras</> },
         { icon: '⚡', text: <>Primeiro teste concluído <strong className="text-white">em 5 minutos</strong>, de qualquer aparelho</> },
       ]}
       proof="Junte-se a líderes, RHs e casais em mais de 70 países"

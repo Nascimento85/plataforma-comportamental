@@ -6,11 +6,10 @@ import FerramentasShowcase from './_components/FerramentasShowcase'
 import PlaybooksHome from './_components/PlaybooksHome'
 import RecentActivityCard from './_components/RecentActivityCard'
 import PassportWidget from '@/components/passport/PassportWidget'
-import { getPassportState, WELCOME_BONUS_AMOUNT, PROFILE_COMPLETE_AMOUNT } from '@/lib/passport'
+import { getPassportState, WELCOME_BONUS_AMOUNT } from '@/lib/passport'
 import ArchetypeHero from './_components/ArchetypeHero'
 import OnboardingHero from './_components/OnboardingHero'
 import WelcomeModal from './_components/WelcomeModal'
-import ProfileGamificationBanner from './_components/ProfileGamificationBanner'
 import NewAssessmentButton from './assessments/NewAssessmentButton'
 import { calculateProfileCompletion } from '@/lib/profile'
 
@@ -182,7 +181,6 @@ export default async function DashboardPage() {
           companyId={companyId}
           firstName={firstName}
           initialCredits={WELCOME_BONUS_AMOUNT}
-          bonusCredits={PROFILE_COMPLETE_AMOUNT}
         />
       )}
 
@@ -231,9 +229,7 @@ export default async function DashboardPage() {
       {/* ══════════════════════════════════════════════════════
           BANNER GAMIFICAÇÃO — só PF (PJ usa modelo de assinatura)
       ══════════════════════════════════════════════════════ */}
-      {!isPJ && !isProfileRewarded && (
-        <ProfileGamificationBanner completion={profileCompletion} bonusAmount={PROFILE_COMPLETE_AMOUNT} />
-      )}
+
 
       {/* Onboarding só para conta PF recém-criada, antes dos KPIs zerados */}
       {!isPJ && isNewAccount && (

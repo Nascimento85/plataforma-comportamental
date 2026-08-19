@@ -82,10 +82,9 @@ export default function TermosDeUsoPage() {
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Ao se cadastrar, você recebe <strong>4 créditos bônus</strong> válidos por 7 dias.</li>
-              <li>Ao completar seu perfil, você ganha <strong>+6 créditos bônus</strong>, também válidos por 7 dias a partir da concessão.</li>
               <li>Créditos bônus expiram automaticamente após 7 dias e <strong>não são reembolsáveis</strong>.</li>
               <li>Créditos comprados (pagos) <strong>não expiram</strong>.</li>
-              <li>Cada teste consome um número definido de créditos (DISC: 3, MBTI: 2, Eneagrama: 2, etc.).</li>
+              <li>Cada teste consome um número definido de créditos, informado na tela de cada avaliação antes da confirmação (por exemplo, MBTI: 3, DISC: 4, Eneagrama: 5).</li>
             </ul>
             <p>
               O Relatório Premium é uma compra avulsa via Stripe (R$ 47,00) que libera

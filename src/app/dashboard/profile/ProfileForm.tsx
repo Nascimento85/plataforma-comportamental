@@ -320,7 +320,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
       </form>
 
       {/* ════════════════════════════════════════════════════════
-          CARD DE VALIDAÇÃO POR CÓDIGO (Gamificação +6 créditos)
+          CARD DE CONFIRMAÇÃO DE E-MAIL POR CÓDIGO
       ════════════════════════════════════════════════════════ */}
       {!rewarded && (
         <div
@@ -338,16 +338,16 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
 
           <div className="relative">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">🎁</span>
+              <span className="text-2xl">✉️</span>
               <span className="text-[13px] font-bold uppercase tracking-[0.16em] text-soul-ink/80">
-                Bônus exclusivo de onboarding
+                Confirmação de e-mail
               </span>
             </div>
             <h3 className="font-serif text-2xl font-bold text-soul-ink leading-tight mb-2">
-              Ganhe +6 créditos extras
+              Confirme seu e-mail
             </h3>
             <p className="text-[15px] text-soul-ink/85 font-medium leading-relaxed mb-5 max-w-2xl">
-              Complete todos os campos obrigatórios, solicite o código por e-mail e valide aqui — pronto, +6 créditos caem na sua conta na hora.
+              Solicite o código por e-mail e valide aqui. É assim que garantimos que os relatórios e os links de teste cheguem até você.
             </p>
 
             {!codeSent ? (
@@ -415,7 +415,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                                shadow-terra hover:-translate-y-px transition-all disabled:opacity-60 disabled:translate-y-0"
                     style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
                   >
-                    {validating ? 'Validando…' : 'Validar e ganhar +6'}
+                    {validating ? 'Validando…' : 'Confirmar e-mail'}
                   </button>
                 </div>
 
@@ -448,7 +448,7 @@ export default function ProfileForm({ initial, completion: initialCompletion, ba
                 Bônus de perfil já recebido
               </h3>
               <p className="text-[15px] text-soul-ink/85 font-medium mt-0.5">
-                Os 6 créditos extras já foram adicionados à sua conta. Obrigado por completar seu perfil!
+                Seu e-mail está confirmado. Os relatórios e links de teste chegam sem problema.
               </p>
             </div>
           </div>
@@ -585,8 +585,8 @@ function ProgressBanner({
             {rewarded
               ? '✓ Bônus de perfil já recebido'
               : completion === 100
-                ? 'Perfil completo — solicite seu código abaixo para ganhar +6 créditos'
-                : `Complete os campos obrigatórios para liberar +6 créditos extras`}
+                ? 'Perfil completo — solicite o código abaixo para confirmar seu e-mail'
+                : `Complete os campos obrigatórios para confirmar seu e-mail`}
           </p>
         </div>
 

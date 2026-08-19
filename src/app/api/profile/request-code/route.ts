@@ -34,7 +34,7 @@ export async function POST(_request: NextRequest) {
 
     if (company.isProfileCompletedRewarded) {
       return NextResponse.json(
-        { error: 'Você já recebeu os 6 créditos de bônus deste benefício.' },
+        { error: 'Seu e-mail já foi confirmado.' },
         { status: 400 }
       )
     }

@@ -120,11 +120,11 @@ export default function WelcomeModal({
           {/* Próximo passo */}
           <div className="text-center mb-5">
             <p className="text-[15px] font-semibold text-soul-ink leading-snug">
-              <span className="font-serif italic">Quer dobrar seu Passaporte?</span>
+              <span className="font-serif italic">Por onde começar?</span>
             </p>
             <p className="text-[15px] text-soul-ink/80 font-medium leading-relaxed mt-1.5">
-              Complete seu perfil e ganhe <strong className="text-soul-terracota">+{bonusCredits} créditos extras</strong> (também válidos por 7 dias).
-              Total de <strong>{total} créditos</strong> para iniciar sua jornada.
+              Escolha um teste, responda com calma e receba a devolutiva completa.
+              A maioria leva <strong>menos de 10 minutos</strong>.
             </p>
           </div>
 
@@ -138,13 +138,13 @@ export default function WelcomeModal({
           {/* CTAs */}
           <div className="flex flex-col gap-2">
             <Link
-              href="/dashboard/profile"
+              href="/dashboard"
               onClick={close}
               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-[15px] font-bold text-white
                          shadow-terra hover:-translate-y-px transition-all"
               style={{ background: 'linear-gradient(135deg, #c4633a, #d4943a)' }}
             >
-              Completar perfil e ganhar +{bonusCredits} →
+              Escolher meu primeiro teste →
             </Link>
             <button
               type="button"
