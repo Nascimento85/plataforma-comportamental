@@ -35,8 +35,8 @@ export default function PoliticaDePrivacidadePage() {
               O Mapa Comportamental ("nós", "nosso") é uma plataforma online de
               avaliações comportamentais (DISC, MBTI, Eneagrama, Temperamentos,
               Arquétipos, Linguagens do Amor, Âncoras de Carreira, Inteligência
-              Emocional) operada por <strong>[Razão Social aqui]</strong>, inscrita no
-              CNPJ <strong>[XX.XXX.XXX/0001-XX]</strong>, com sede em <strong>[endereço]</strong>.
+              Emocional) operada por <strong>KAN PARTICIPAÇÕES LTDA</strong>, inscrita no
+              CNPJ <strong>67.585.002/0001-60</strong>, com sede em Belo Horizonte/MG.
             </p>
             <p>
               Para qualquer dúvida ou solicitação relacionada aos seus dados pessoais,
@@ -207,7 +207,7 @@ export default function PoliticaDePrivacidadePage() {
               atuar como canal de comunicação entre o controlador, os titulares e a ANPD.
             </p>
             <p>
-              <strong>DPO:</strong> [Nome do Encarregado]<br />
+              <strong>Encarregado:</strong> Kênio Nascimento<br />
               <strong>E-mail:</strong>{' '}
               <a href="mailto:contato@mapacomportamental.com" className="text-soul-terracota underline">
                 contato@mapacomportamental.com
@@ -218,7 +218,7 @@ export default function PoliticaDePrivacidadePage() {
           <Section title="12. Foro">
             <p>
               Esta Política é regida pelas leis da República Federativa do Brasil. Fica
-              eleito o foro da comarca de <strong>[Cidade/UF]</strong> para dirimir
+              eleito o foro da comarca de <strong>Belo Horizonte/MG</strong> para dirimir
               qualquer controvérsia, com renúncia a qualquer outro, por mais
               privilegiado que seja.
             </p>

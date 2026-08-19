@@ -31,6 +31,11 @@ export default function TermosDeUsoPage() {
 
           <Section title="1. Aceitação">
             <p>
+              A plataforma Mapa Comportamental é operada por{' '}
+              <strong>KAN PARTICIPAÇÕES LTDA</strong>, inscrita no CNPJ{' '}
+              <strong>67.585.002/0001-60</strong>, com sede em Belo Horizonte/MG.
+            </p>
+            <p>
               Ao criar uma conta ou utilizar a plataforma Mapa Comportamental ("Plataforma"),
               você declara ter lido, entendido e concordado com estes Termos de Uso e
               com nossa{' '}
@@ -170,7 +175,7 @@ export default function TermosDeUsoPage() {
           <Section title="11. Lei aplicável e foro">
             <p>
               Estes Termos são regidos pelas leis da República Federativa do Brasil.
-              Fica eleito o foro da comarca de <strong>[Cidade/UF]</strong> para
+              Fica eleito o foro da comarca de <strong>Belo Horizonte/MG</strong> para
               dirimir qualquer controvérsia, com renúncia a qualquer outro, por mais
               privilegiado que seja.
             </p>
