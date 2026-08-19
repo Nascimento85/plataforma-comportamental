@@ -17,7 +17,8 @@
     "db:seed": "tsx prisma/seed.ts",
 
     "test:engines": "node tests/test-engines.mjs",
-    "test": "npm run test:engines",
+    "test:telefone": "node tests/test-telefone.mjs",
+    "test": "npm run test:engines && npm run test:telefone",
 
     "setup:dev": "npm run db:push:dev && npm run db:seed",
     "dev:local": "cp prisma/schema.dev.prisma prisma/schema.prisma && npm run setup:dev && npm run dev",

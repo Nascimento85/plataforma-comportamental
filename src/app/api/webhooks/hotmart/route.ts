@@ -25,6 +25,7 @@ import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
 import { resolveHotmartGrant, hotmartTxId, type HotmartGrant } from '@/lib/hotmart'
+import { vincularDegustacao } from '@/lib/hotmart-vinculo'
 import { sendHotmartWelcomeEmail, sendHotmartAdminAlert } from '@/lib/email'
 
 export const runtime = 'nodejs'
@@ -181,6 +182,11 @@ async function handleApproved(data: NonNullable<HotmartPayload['data']>) {
     await grantSubscription(company.id, grant, transaction, priceCents, data)
   }
 
+  // Se ela veio do teste gratuito, o resultado migra da conta-vitrine para
+  // a conta dela. Serve para os dois lados: ela encontra o que já fez, e a
+  // venda deixa de ser anônima na origem.
+  const vinculo = await vincularDegustacao(company.id, data.buyer?.checkout_phone)
+
   await sendHotmartWelcomeEmail({
     toEmail:      buyerEmail,
     name:         buyerName,
@@ -190,7 +196,12 @@ async function handleApproved(data: NonNullable<HotmartPayload['data']>) {
     isNewAccount,
   })
 
-  return NextResponse.json({ received: true, granted: grant.kind, newAccount: isNewAccount })
+  return NextResponse.json({
+    received: true,
+    granted: grant.kind,
+    newAccount: isNewAccount,
+    degustacaoVinculada: vinculo.vinculado,
+  })
 }
 
 async function grantCredits(

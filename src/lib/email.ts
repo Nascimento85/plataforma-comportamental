@@ -970,7 +970,10 @@ export async function sendHotmartAdminAlert(opts: {
   lines:   string[]
 }): Promise<void> {
   if (!RESEND_API_KEY || RESEND_API_KEY === 'COLOQUE_SUA_CHAVE_RESEND_AQUI') return
-  const adminEmail = process.env.HOTMART_ALERT_EMAIL ?? 'contato@mapacomportamental.com'
+  // Cai no ADMIN_EMAIL antes do endereço institucional: alerta de venda que
+  // nao creditou precisa chegar em quem resolve, nao numa caixa compartilhada.
+  const adminEmail =
+    process.env.HOTMART_ALERT_EMAIL ?? process.env.ADMIN_EMAIL ?? 'contato@mapacomportamental.com'
   const html = `<p style="font-family:sans-serif;font-size:14px;color:#111;">${opts.lines.join('<br/>')}</p>`
   try {
     await fetch('https://api.resend.com/emails', {
