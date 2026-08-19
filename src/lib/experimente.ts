@@ -47,9 +47,9 @@ export const EXPERIMENTE_CATALOG: Record<string, FreeTest> = {
   },
   COMUNICACAO: {
     testType: 'COMUNICACAO',
-    label:    'Mapa da Comunicação',
+    label:    'O Teste do Silêncio',
     emoji:    '💬',
-    tagline:  'O que você faz quando a conversa esquenta.',
+    tagline:  'O que você faz quando a conversa esquenta — e o que isso custa.',
     duration: '8–12 min',
   },
   QMT: {
