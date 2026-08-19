@@ -1468,3 +1468,79 @@ export function QiPrintReport({ result }: { result: Record<string, unknown> }) {
     </div>
   )
 }
+
+// ============================================================
+// O TESTE DO SILENCIO
+// ============================================================
+export function SilencioPrintReport({ result }: { result: Record<string, unknown> }) {
+  const r = result as {
+    ranking: { chave: string; label: string; count: number; percentage: number }[]
+    pctAssertiva: number
+    deslize: string
+    perfilChave: string
+    perfil: {
+      titulo: string; fraseTipica: string; oQueVoceFaz: string
+      comoChega: string; oQueCusta: string; primeiroPasso: string
+    }
+    termometro: { chave: string; titulo: string; texto: string }
+  }
+
+  const CORES: Record<string, string> = {
+    PASSIVA: '#7f9ec9',
+    AGRESSIVA: '#d97a6a',
+    PASSIVO_AGRESSIVA: '#c9a24c',
+    ASSERTIVA: '#7cb897',
+  }
+  const corPerfil = CORES[r.perfilChave] ?? GOLD
+
+  return (
+    <div style={{ padding: '26px 40px 44px' }}>
+      <PrintHero
+        badge={`${r.pctAssertiva}%`}
+        badgeColor={corPerfil}
+        round
+        kickerText="O Teste do Silêncio"
+        title={r.perfil.titulo}
+        tagline={r.perfil.fraseTipica}
+        taglineColor={corPerfil}
+      />
+
+      <div style={card}>
+        <p style={kicker}>Como você responde quando aperta</p>
+        {r.ranking.map((b) => (
+          <div key={b.chave} style={{ marginBottom: 11 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, marginBottom: 5 }}>
+              <span style={{ fontWeight: b.chave === r.perfilChave ? 700 : 600, color: b.chave === r.perfilChave ? INK : 'var(--rep-ink2)' }}>
+                {b.label}
+              </span>
+              <span style={{ color: MUTED }}>{b.percentage}%</span>
+            </div>
+            <div style={{ height: 8, background: 'var(--rep-track)', borderRadius: 5, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${b.percentage}%`, background: CORES[b.chave] ?? GOLD_LT, borderRadius: 5 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={card}>
+        <p style={{ ...kicker, color: corPerfil }}>{r.termometro.titulo}</p>
+        <p style={itemBody}>{r.termometro.texto}</p>
+      </div>
+
+      <div style={card}>
+        <p style={kicker}>O que você faz</p>
+        <p style={{ ...itemBody, marginBottom: 16 }}>{r.perfil.oQueVoceFaz}</p>
+        <p style={{ ...kicker, color: 'var(--rep-blue)' }}>Como isso chega do outro lado</p>
+        <p style={{ ...itemBody, marginBottom: 16 }}>{r.perfil.comoChega}</p>
+        <p style={{ ...kicker, color: '#f0a59e' }}>O que custa</p>
+        <p style={itemBody}>{r.perfil.oQueCusta}</p>
+      </div>
+
+      <div style={{ ...card, borderLeft: `3px solid ${corPerfil}` }}>
+        <p style={{ ...kicker, color: corPerfil }}>Primeiro passo, ainda esta semana</p>
+        <p style={{ ...itemTitle, marginBottom: 8 }}>Uma coisa só, e a mais simples de todas</p>
+        <p style={itemBody}>{r.perfil.primeiroPasso}</p>
+      </div>
+    </div>
+  )
+}

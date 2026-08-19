@@ -15,6 +15,7 @@ import QMTTest from '@/components/tests/QMTTest'
 import LideracaSituacionalTest from '@/components/tests/LideracaSituacionalTest'
 import ComunicacaoTest from '@/components/tests/ComunicacaoTest'
 import QITest from '@/components/tests/QITest'
+import SilencioTest from '@/components/tests/SilencioTest'
 import {
   ARCHETYPE_MIXED_QUESTION_SETS,
   getArchetypeMixedVersion,
@@ -301,6 +302,26 @@ const INTROS: Record<string, {
     duration: '6–10 min',
     questions: 12,
   },
+  SILENCIO: {
+    title: 'O Teste do Silêncio',
+    subtitle: 'O que você faz quando a conversa esquenta',
+    image: '/tests/comunicacao.svg',
+    description: 'Oito situações que você provavelmente já viveu. Em cada uma, quatro reações possíveis. Não existe resposta certa, existe a sua reação de verdade. No fim, você recebe o seu termômetro de assertividade e o nome do padrão que aparece quando a conversa aperta: recuar e engolir, endurecer e atacar, ou falar pelo silêncio e pelo tom. Reconhecer esse padrão é a parte que quase ninguém faz.',
+    tips: [
+      { icon: '⚡', text: 'Vá pela primeira reação, não pela que você gostaria de ter.' },
+      { icon: '🤍', text: 'Ninguém escolhe o próprio padrão. Ele foi aprendido cedo.' },
+      { icon: '⏱️', text: 'São três a quatro minutos. Dá para fazer no celular.' },
+    ],
+    discovers: [
+      'Quanto da sua comunicação é assertiva de fato',
+      'Qual padrão aparece quando a tensão sobe',
+      'Como aquilo chega do outro lado da conversa',
+      'Um primeiro movimento concreto para a próxima vez',
+    ],
+    cta: 'Ver o meu resultado',
+    duration: '3 a 4 min',
+    questions: 8,
+  },
   COMUNICACAO: {
     title: 'Mapa da Comunicação',
     subtitle: 'Como você fala, escuta e se posiciona',
@@ -507,6 +528,9 @@ function renderTest(testType: string, assessmentId: string, token: string) {
   )
   if (testType === 'QI') return (
     <QITest assessmentId={assessmentId} token={token} />
+  )
+  if (testType === 'SILENCIO') return (
+    <SilencioTest assessmentId={assessmentId} token={token} />
   )
   return null
 }

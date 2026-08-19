@@ -8,6 +8,7 @@ import {
   TemperamentPrintReport, ArchetypePrintReport, ArchetypeFemininePrintReport,
   LoveLanguagesPrintReport, CareerAnchorPrintReport, EmotionalIntelligencePrintReport,
   VacPrintReport, QmtPrintReport, LsPrintReport, ComunicacaoPrintReport, QiPrintReport,
+  SilencioPrintReport,
 } from '@/app/result/[id]/PrintReports'
 
 export const metadata: Metadata = { title: 'Admin · Devolutiva' }
@@ -450,7 +451,7 @@ const TEST_LABELS: Record<string, string> = {
   LOVE_LANGUAGES: '5 Linguagens do Amor', CAREER_ANCHOR: 'Âncoras de Carreira',
   EMOTIONAL_INTELLIGENCE: 'Inteligência Emocional', VAC: 'VAC — Mapa Sensorial',
   BIG_FIVE: 'Big Five', QMT: 'QMT Triádico', LIDERANCA_SITUACIONAL: 'Liderança Situacional',
-  COMUNICACAO: 'Mapa da Comunicação', QI: 'Teste de QI',
+  COMUNICACAO: 'Mapa da Comunicação', QI: 'Teste de QI', SILENCIO: 'O Teste do Silêncio',
 }
 
 interface PageProps {
@@ -547,6 +548,7 @@ export default async function AdminAssessmentDetailPage({ params }: PageProps) {
         {testType === 'LIDERANCA_SITUACIONAL'  && <LsPrintReport                     result={rd} />}
         {testType === 'COMUNICACAO'            && <ComunicacaoPrintReport            result={rd} />}
         {testType === 'QI'                     && <QiPrintReport                     result={rd} />}
+        {testType === 'SILENCIO'               && <SilencioPrintReport               result={rd} />}
       </div>
     </div>
   )

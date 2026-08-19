@@ -31,6 +31,7 @@ const BUNDLE_TEST_LABELS: Record<string, string> = {
   LIDERANCA_SITUACIONAL:  'Liderança Situacional',
   COMUNICACAO:            'Mapa da Comunicação',
   QI:                     'Teste de QI — Raciocínio Lógico',
+  SILENCIO:               'O Teste do Silêncio',
 }
 
 const BUNDLE_TEST_ORDER = ['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT']

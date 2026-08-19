@@ -31,6 +31,7 @@ import {
   LsPrintReport,
   ComunicacaoPrintReport,
   QiPrintReport,
+  SilencioPrintReport,
 } from './PrintReports'
 import { TEST_LABELS } from '@/lib/test-labels'
 
@@ -1236,9 +1237,33 @@ export default async function PublicResultPage({ params, searchParams }: PagePro
         {assessment.testType === 'LIDERANCA_SITUACIONAL' ? (<LsPrintReport result={rd} />) : null}
         {assessment.testType === 'COMUNICACAO' ? (<ComunicacaoPrintReport result={rd} />) : null}
         {assessment.testType === 'QI' ? (<QiPrintReport result={rd} />) : null}
+        {assessment.testType === 'SILENCIO' ? (<SilencioPrintReport result={rd} />) : null}
 
-        {/* CTA de conversão da degustação (QR) — cria conta + 7 dias premium */}
-        {!isPrint && isTrial && (
+        {/* CTA da degustação. O Teste do Silêncio traz público B2C de
+            relacionamento, então oferecer "leve para o seu time" ali seria
+            falar com a pessoa errada: esse caminho vai para Tradução Íntima. */}
+        {!isPrint && isTrial && assessment.testType === 'SILENCIO' && (
+          <div className="rounded-3xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #1d1420 0%, #2b1c2e 60%, #3a2430 100%)', border: '1px solid rgba(227,161,139,0.4)' }}>
+            <p className="text-[12px] font-sans font-bold uppercase tracking-[0.15em]" style={{ color: '#e3a18b' }}>
+              Você já sabe o que faz
+            </p>
+            <h3 className="font-serif font-semibold text-2xl mt-2" style={{ color: '#f0ece3' }}>
+              Agora falta saber o que dizer
+            </h3>
+            <p className="text-[14.5px] font-sans mt-2 max-w-md mx-auto" style={{ color: 'rgba(240,236,227,0.78)' }}>
+              Reconhecer o padrão é metade do caminho. A outra metade é ter a frase pronta
+              na hora em que a conversa aperta, e é disso que trata a Tradução Íntima.
+            </p>
+            <a href={process.env.NEXT_PUBLIC_TRADUCAO_INTIMA_URL || '/amor.html'}
+               className="inline-block mt-5 font-sans font-semibold py-3.5 px-7 rounded-full no-underline transition-all hover:-translate-y-px"
+               style={{ background: 'linear-gradient(135deg, #e3a18b, #d9a441)', color: '#1c1a17', boxShadow: '0 6px 20px rgba(227,161,139,0.3)' }}>
+              Conhecer a Tradução Íntima →
+            </a>
+          </div>
+        )}
+
+        {/* CTA de conversão da degustação (QR): cria conta + 7 dias premium */}
+        {!isPrint && isTrial && assessment.testType !== 'SILENCIO' && (
           <div className="rounded-3xl p-6 text-center" style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2a2015 60%, #3d2a1c 100%)', border: '1px solid rgba(201,168,76,0.4)' }}>
             <p className="text-[12px] font-sans font-bold uppercase tracking-[0.15em]" style={{ color: '#e8c878' }}>
               Gostou do que viu?

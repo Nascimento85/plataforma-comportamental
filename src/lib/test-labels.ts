@@ -25,6 +25,7 @@ const TEST_CATALOG = {
   QMT:                    { label: 'QMT · Quociente Mental Triádico',       short: 'QMT Triádico',        emoji: '🧠' },
   COMUNICACAO:            { label: 'Mapa da Comunicação',                   short: 'Comunicação',         emoji: '🗣' },
   QI:                     { label: 'Raciocínio Lógico (QI)',                short: 'QI',                  emoji: '🧮' },
+  SILENCIO:               { label: 'O Teste do Silêncio',                   short: 'Silêncio',            emoji: '💬' },
   BIG_FIVE:               { label: 'Big Five · Liderança',                  short: 'Big Five',            emoji: '🎯' },
   LIDERANCA_SITUACIONAL:  { label: 'Liderança Situacional',                 short: 'Lid. Situacional',    emoji: '👑' },
   EMOTIONAL_INTELLIGENCE: { label: 'Inteligência Emocional (Goleman)',      short: 'IE Goleman',          emoji: '◈'  },

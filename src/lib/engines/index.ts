@@ -80,3 +80,10 @@ export {
   QI_PILAR_LABELS,
   QI_FAIXA_LABELS,
 } from './qi'
+export {
+  calculateSilencio,
+  getSilencioSessionQuestions,
+  SILENCIO_QUESTIONS,
+  SILENCIO_LABELS,
+  SILENCIO_PERFIS,
+} from './silencio'

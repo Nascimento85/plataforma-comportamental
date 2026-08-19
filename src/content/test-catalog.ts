@@ -190,6 +190,27 @@ export const TEST_CATALOG: CatalogTest[] = [
     category: 'BEHAVIORAL',
   },
   {
+    testType: 'SILENCIO',
+    name: 'O Teste do Silêncio',
+    short: 'Silêncio',
+    tagline: 'O que você faz quando a conversa esquenta.',
+    pillar: 'Assertividade em conflito',
+    description:
+      'Recorte curto do termômetro de assertividade, em situações de relacionamento. Oito cenários de escolha forçada revelam quanto da sua comunicação é assertiva de fato e qual padrão assume o volante sob tensão: recuar e engolir (passiva), endurecer e atacar (agressiva) ou falar pelo silêncio e pelo tom (passivo-agressiva).',
+    application:
+      'Autoconhecimento, relacionamento a dois, conversas difíceis e primeiro contato com a plataforma.',
+    bullets: [
+      'Termômetro de assertividade em porcentagem',
+      'O padrão que aparece quando a tensão sobe',
+      'Como aquilo chega do outro lado da conversa',
+      'Um primeiro movimento concreto para a próxima vez',
+    ],
+    credits: TEST_PRICE.SILENCIO,
+    color: '#c99a86',
+    emoji: '💬',
+    category: 'BEHAVIORAL',
+  },
+  {
     testType: 'QI',
     name: 'Teste de QI — Raciocínio Lógico',
     short: 'QI',

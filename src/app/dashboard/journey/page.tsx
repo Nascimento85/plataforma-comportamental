@@ -16,6 +16,7 @@ const TEST_COLORS: Record<string, string> = {
   VAC:                    '#8fa6da',
   QMT:                    '#c9a84c',
   COMUNICACAO:            '#7a9e7e',
+  SILENCIO:               '#c99a86',
   QI:                     '#8fa6da',
   BIG_FIVE:               '#c9a84c',
   LIDERANCA_SITUACIONAL:  '#d4943a',

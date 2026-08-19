@@ -22,6 +22,7 @@ export const TEST_PRICE = {
   LIDERANCA_SITUACIONAL:   5,
   COMUNICACAO:             5,
   QI:                      4, // Raciocínio Lógico / aptidão cognitiva (pontuado)
+  SILENCIO:                2, // O Teste do Silêncio: recorte curto, isca de topo de funil
   PREMIUM_REPORT:         10, // só com créditos PAGOS
 } as const satisfies Record<string, number>
 

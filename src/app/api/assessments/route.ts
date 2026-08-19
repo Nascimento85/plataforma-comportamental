@@ -25,6 +25,7 @@ const CREDIT_COST: Record<string, number> = {
   QMT:                   TEST_PRICE.QMT,                     // 3
   LIDERANCA_SITUACIONAL: TEST_PRICE.LIDERANCA_SITUACIONAL,    // 3
   COMUNICACAO:           TEST_PRICE.COMUNICACAO,             // 5
+  SILENCIO:              TEST_PRICE.SILENCIO,                // 2
   QI:                    TEST_PRICE.QI,                      // 4
 }
 
@@ -32,7 +33,7 @@ const schema = z.object({
   // Quando selfAssessment=true, name/email são opcionais (usa dados do user logado)
   employeeName:   z.string().min(2).optional(),
   employeeEmail:  z.string().email().optional(),
-  testType:       z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE', 'VAC', 'BIG_FIVE', 'QMT', 'LIDERANCA_SITUACIONAL', 'COMUNICACAO', 'QI']),
+  testType:       z.enum(['DISC', 'MBTI', 'ENNEAGRAM', 'TEMPERAMENT', 'ARCHETYPE', 'ARCHETYPE_FEMININE', 'LOVE_LANGUAGES', 'CAREER_ANCHOR', 'EMOTIONAL_INTELLIGENCE', 'VAC', 'BIG_FIVE', 'QMT', 'LIDERANCA_SITUACIONAL', 'COMUNICACAO', 'QI', 'SILENCIO']),
   selfAssessment: z.boolean().optional(),
 })
 

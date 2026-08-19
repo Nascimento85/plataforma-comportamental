@@ -31,6 +31,7 @@ const TEST_DESCRIPTIONS: Record<string, string> = {
   ARCHETYPE:          'Baseado na teoria de Carl Jung, identifica seu arquétipo dominante entre 12 padrões universais — revelando como você lidera, decide e se relaciona.',
   ARCHETYPE_FEMININE: 'Identifica qual das 7 energias arquetípicas femininas governa seu momento atual — e qual precisa ser ativada para o seu equilíbrio pleno.',
   COMUNICACAO:        'Mapeia seu estilo de comunicação, sua energia social e o termômetro de assertividade: o quanto sua comunicação é não violenta e onde está seu maior salto.',
+  SILENCIO:           'Mostra o que você faz quando a conversa esquenta: o seu termômetro de assertividade e o padrão que aparece sob tensão.',
 }
 
 // ── Template HTML ─────────────────────────────────────────────────────────────

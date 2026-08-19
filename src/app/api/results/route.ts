@@ -16,6 +16,7 @@ import { calculateQmt } from '@/lib/engines/qmt'
 import { calculateLiderancaSituacional } from '@/lib/engines/lideranca-situacional'
 import { calculateComunicacao } from '@/lib/engines/comunicacao'
 import { calculateQi } from '@/lib/engines/qi'
+import { calculateSilencio } from '@/lib/engines/silencio'
 import { uploadReport } from '@/lib/supabase'
 import { generateReport } from '@/lib/pdf/generator'
 import { sendTestCompletionNotifications } from '@/lib/email'
@@ -138,6 +139,11 @@ export async function POST(request: NextRequest) {
           answers as { questionId: number; value: number }[]
         ) as unknown as Record<string, unknown>
         break
+      case 'SILENCIO':
+        resultData = calculateSilencio(
+          answers as { questionId: number; value: number }[]
+        ) as unknown as Record<string, unknown>
+        break
       default:
         return NextResponse.json({ error: 'Tipo de teste não suportado ainda.' }, { status: 400 })
     }
@@ -194,7 +200,8 @@ export async function POST(request: NextRequest) {
         assessment.testType === 'QMT' ||
         assessment.testType === 'LIDERANCA_SITUACIONAL' ||
         assessment.testType === 'COMUNICACAO' ||
-        assessment.testType === 'QI'
+        assessment.testType === 'QI' ||
+        assessment.testType === 'SILENCIO'
       ) {
         await tx.enneagramAnswer.createMany({
           data: (answers as { questionId: number; value: number }[]).map((a) => ({
