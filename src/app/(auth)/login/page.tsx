@@ -13,16 +13,16 @@ export default function LoginPage({ searchParams }: PageProps) {
 
   return (
     <AuthShell
-      headline={<>Decifre pessoas.<br />Lidere com <em className="not-italic" style={{ color: '#e8c97a' }}>precisão</em>.</>}
-      sub="A plataforma de ciência comportamental para quem decide com dados: contratação, liderança, compliance e desenvolvimento de times."
+      headline={<>Você já sabe o que sente.<br />Falta saber o que isso <em style={{ color: '#E0B368', fontStyle: 'italic' }}>faz com os outros</em>.</>}
+      sub="Quinze avaliações que traduzem comportamento em linguagem prática: como você decide, como você lidera, como você se relaciona e o que a sua presença provoca."
       bullets={[
-        { icon: '🧬', text: <><strong className="text-white">15 testes científicos</strong> validados, do DISC ao Big Five</> },
-        { icon: '🛡️', text: <><strong className="text-white">Compliance NR-1</strong> com coleta anônima e relatório executivo</> },
-        { icon: '📄', text: <>Relatórios profissionais <strong className="text-white">com a sua marca</strong></> },
+        { icon: '', text: <>Por que a mesma frase sua funciona com uma pessoa e explode com outra.</> },
+        { icon: '', text: <>O que o seu jeito de decidir sob pressão entrega antes de você abrir a boca.</> },
+        { icon: '', text: <>Qual padrão assume o volante quando a conversa aperta, e o que ele custa.</> },
       ]}
-      proof="DISC, MBTI, Eneagrama e Big Five — instrumentos usados há décadas"
-      formTitle="Bem-vindo de volta"
-      formSub="Entre para continuar suas análises"
+      proof="Devolutiva completa em PDF. Sem mensalidade, sem contrato."
+      formTitle="Entrar na plataforma"
+      formSub="Continue de onde você parou"
       banner={justRegistered ? (
         <div
           className="flex items-start gap-3 rounded-2xl px-4 py-4 mb-5 font-sans"

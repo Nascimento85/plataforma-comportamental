@@ -1,55 +1,105 @@
 // ============================================================
-// AuthShell · layout premium das telas de entrada (login/cadastro)
-// Split-screen: painel de marca à esquerda (valor + prova social),
-// formulário à direita. Em telas menores vira coluna única com
-// cabeçalho compacto. Identidade navy/ouro alinhada à home.
+// AuthShell · telas de entrada (login, cadastro, senha)
+// ============================================================
+// Direção 1b do canvas de identidade: espresso quente, âmbar e terracota,
+// Newsreader nos títulos e Albert Sans na interface, cantos suaves.
+//
+// A tela anterior era um cartão de vidro fosco sobre navy com brilho
+// dourado, e não dava à pessoa nenhum motivo para criar conta. Aqui o
+// painel da esquerda existe para uma coisa só: fazer ela querer ver o
+// próprio resultado antes de preencher o formulário.
 // ============================================================
 
 import type { ReactNode } from 'react'
 
-const GOLD = '#c9a84c'
-const GOLD_HI = '#e8c97a'
+const ESPRESSO   = '#1B1410'
+const ESPRESSO_2 = '#2B2018'
+const AMBAR      = '#E0B368'
+const TERRACOTA  = '#B3663F'
+const LINHO      = '#F5ECDD'
+const PAPEL      = '#FDF8EF'
+const TRACO      = '#DCCDB6'
 
-function PsiMark({ size = 56 }: { size?: number }) {
+const serif = 'var(--font-newsreader), Georgia, serif'
+const sans  = 'var(--font-albert), "Segoe UI", system-ui, sans-serif'
+
+function MarcaPsi({ size = 44, cor = AMBAR }: { size?: number; cor?: string }) {
   return (
-    <div
-      className="inline-flex items-center justify-center rounded-2xl shadow-lg"
+    <span
+      aria-hidden="true"
       style={{
-        width: size,
-        height: size,
-        background: 'linear-gradient(135deg, #e8c97a, #c9a84c 55%, #a8873a)',
-        boxShadow: '0 8px 28px rgba(201,168,76,0.35)',
+        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+        width: size, height: size, borderRadius: '50%',
+        border: `1px solid ${cor}`, color: cor,
+        fontFamily: serif, fontSize: size * 0.46, lineHeight: 1,
+        paddingBottom: size * 0.04, flexShrink: 0,
       }}
     >
-      <svg viewBox="0 0 90 90" fill="none" style={{ width: size * 0.58, height: size * 0.58 }}>
-        <path
-          d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z"
-          fill="rgba(255,255,255,0.3)" stroke="white" strokeWidth="1.5" strokeLinejoin="round"
-        />
-        <circle cx="45" cy="45" r="4" fill="white" opacity="0.9" />
-      </svg>
+      Ψ
+    </span>
+  )
+}
+
+/** Amostra real de devolutiva. Mostra o produto em vez de descrevê-lo. */
+function AmostraDevolutiva() {
+  const barras = [
+    { rotulo: 'Assertiva',          pct: 38, cor: AMBAR },
+    { rotulo: 'Passivo-agressiva',  pct: 37, cor: TERRACOTA },
+    { rotulo: 'Passiva',            pct: 25, cor: 'rgba(245,236,221,.34)' },
+  ]
+  return (
+    <div
+      style={{
+        background: ESPRESSO_2, border: '1px solid rgba(224,179,104,.22)',
+        borderRadius: 16, padding: '20px 22px',
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
+        <span style={{ fontFamily: sans, fontSize: 10.5, fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase', color: AMBAR }}>
+          Amostra de devolutiva
+        </span>
+        <span style={{ fontFamily: sans, fontSize: 10.5, color: 'rgba(245,236,221,.42)' }}>
+          O Teste do Silêncio
+        </span>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
+        {barras.map((b) => (
+          <div key={b.rotulo} style={{ display: 'grid', gridTemplateColumns: '1fr 34px', gap: 12, alignItems: 'center' }}>
+            <div>
+              <span style={{ fontFamily: sans, fontSize: 12, color: 'rgba(245,236,221,.82)' }}>{b.rotulo}</span>
+              <div style={{ height: 6, borderRadius: 99, background: 'rgba(245,236,221,.10)', marginTop: 5 }}>
+                <div style={{ width: `${b.pct}%`, height: 6, borderRadius: 99, background: b.cor }} />
+              </div>
+            </div>
+            <span style={{ fontFamily: sans, fontSize: 11, color: 'rgba(245,236,221,.55)', textAlign: 'right' }}>
+              {b.pct}%
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <p style={{
+        marginTop: 15, paddingTop: 13, borderTop: '1px solid rgba(245,236,221,.10)',
+        fontFamily: serif, fontStyle: 'italic', fontSize: 14, lineHeight: 1.5,
+        color: 'rgba(245,236,221,.86)',
+      }}>
+        "Você não engole nem explode: manda o recado pelo tom. Ele sente que errou e não sabe em quê."
+      </p>
     </div>
   )
 }
 
 export interface AuthShellProps {
-  /** Título serif do painel de marca (aceita <br/> via ReactNode) */
   headline: ReactNode
-  /** Parágrafo de apoio do painel de marca */
   sub: string
-  /** Bullets de valor: emoji + texto (negrito opcional via <strong>) */
+  /** O `icon` é aceito por compatibilidade, mas não é renderizado. */
   bullets: { icon: string; text: ReactNode }[]
-  /** Linha de prova social no rodapé do painel (ex.: stats) */
   proof?: string
-  /** Título do formulário */
   formTitle: string
-  /** Subtítulo do formulário */
   formSub: string
-  /** Banner opcional acima do card (ex.: pós-cadastro) */
   banner?: ReactNode
-  /** Conteúdo do card (o form em si) */
   children: ReactNode
-  /** Linha abaixo do card (link alternativo login/cadastro) */
   belowCard: ReactNode
 }
 
@@ -57,144 +107,122 @@ export default function AuthShell({
   headline, sub, bullets, proof, formTitle, formSub, banner, children, belowCard,
 }: AuthShellProps) {
   return (
-    <main className="min-h-screen flex" style={{ background: '#090e1a' }}>
+    <main style={{ minHeight: '100vh', display: 'flex', background: LINHO, fontFamily: sans }}>
       <style>{`
-        @keyframes authFadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @keyframes authSobe { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+        .an1 { animation: authSobe .6s cubic-bezier(.16,1,.3,1) both; }
+        .an2 { animation: authSobe .6s cubic-bezier(.16,1,.3,1) .1s both; }
+        .an3 { animation: authSobe .6s cubic-bezier(.16,1,.3,1) .2s both; }
+        @media (prefers-reduced-motion: reduce) { .an1,.an2,.an3 { animation: none; } }
+        .auth-campo input {
+          width: 100%; padding: 12px 2px; font-size: 16px; font-family: ${sans};
+          color: ${ESPRESSO}; background: transparent;
+          border: none; border-bottom: 1px solid ${TRACO}; border-radius: 0;
+          transition: border-color .2s;
         }
-        @keyframes authPulse {
-          0%, 100% { opacity: 1; }
-          50%      { opacity: .35; }
+        .auth-campo input:focus { outline: none; border-bottom-color: ${TERRACOTA}; }
+        .auth-campo label {
+          display: block; font-size: 11px; font-weight: 600; letter-spacing: .1em;
+          text-transform: uppercase; color: #8A7359; margin-bottom: 4px;
         }
-        .auth-anim   { animation: authFadeUp .7s cubic-bezier(.16,1,.3,1) both; }
-        .auth-anim-2 { animation: authFadeUp .7s cubic-bezier(.16,1,.3,1) .12s both; }
-        .auth-anim-3 { animation: authFadeUp .7s cubic-bezier(.16,1,.3,1) .22s both; }
-        @media (prefers-reduced-motion: reduce) {
-          .auth-anim, .auth-anim-2, .auth-anim-3 { animation: none; }
+        .auth-campo button[type="submit"] {
+          width: 100%; padding: 15px 22px; border: none; border-radius: 999px; cursor: pointer;
+          font-family: ${sans}; font-size: 15px; font-weight: 600;
+          background: ${ESPRESSO}; color: ${PAPEL}; transition: background .2s, transform .12s;
         }
+        .auth-campo button[type="submit"]:hover:not(:disabled) { background: ${TERRACOTA}; transform: translateY(-1px); }
+        .auth-campo button[type="submit"]:disabled { opacity: .55; cursor: wait; }
+        .auth-campo a { color: ${TERRACOTA}; }
       `}</style>
 
-      {/* ── Painel de marca (desktop) ─────────────────────── */}
+      {/* ── Painel da marca ─────────────────────────────────── */}
       <aside
-        className="hidden lg:flex flex-col justify-between w-[46%] xl:w-[42%] relative overflow-hidden px-12 xl:px-16 py-12"
-        style={{ background: 'linear-gradient(160deg, #0c1322 0%, #090e1a 60%)' }}
+        className="hidden lg:flex"
+        style={{
+          width: '46%', maxWidth: 620, flexDirection: 'column', justifyContent: 'space-between',
+          gap: 40, padding: '48px 56px', background: ESPRESSO, color: LINHO,
+        }}
       >
-        {/* Glow dourado */}
-        <div
-          className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.14) 0%, transparent 65%)' }}
-        />
-        {/* Mandala */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.05]">
-          <svg width="640" height="640" viewBox="0 0 90 90" fill="none">
-            <circle cx="45" cy="45" r="42" stroke={GOLD} strokeWidth="0.4" strokeDasharray="4 6" />
-            <circle cx="45" cy="45" r="32" stroke={GOLD} strokeWidth="0.3" />
-            <circle cx="45" cy="45" r="22" stroke={GOLD} strokeWidth="0.3" />
-            <path d="M45 3L48.5 39.5L82 26L55.5 45L82 64L48.5 50.5L45 87L41.5 50.5L8 64L34.5 45L8 26L41.5 39.5Z"
-              fill={GOLD} opacity="0.5" />
-          </svg>
-        </div>
-
-        {/* Logo */}
-        <div className="relative auth-anim flex items-center gap-3">
-          <PsiMark size={44} />
-          <div className="leading-tight">
-            <p className="font-serif font-semibold text-xl text-white">Psique</p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em]" style={{ color: GOLD }}>
-              Mapa Comportamental
+        <div className="an1" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <MarcaPsi size={40} />
+          <div style={{ lineHeight: 1.2 }}>
+            <p style={{ fontFamily: serif, fontSize: 20, color: LINHO }}>Mapa Comportamental</p>
+            <p style={{ fontSize: 9.5, fontWeight: 600, letterSpacing: '.22em', textTransform: 'uppercase', color: AMBAR, marginTop: 2 }}>
+              entenda pessoas de verdade
             </p>
           </div>
         </div>
 
-        {/* Mensagem central */}
-        <div className="relative auth-anim-2 max-w-md">
-          <h2 className="font-serif font-semibold text-4xl xl:text-[2.6rem] leading-[1.15] text-white">
+        <div className="an2" style={{ maxWidth: 460 }}>
+          <h2 style={{ fontFamily: serif, fontWeight: 400, fontSize: 'clamp(2rem, 2.9vw, 2.7rem)', lineHeight: 1.12, color: LINHO }}>
             {headline}
           </h2>
-          <p className="mt-5 text-[15px] leading-relaxed font-sans" style={{ color: 'rgba(255,255,255,0.6)' }}>
+          <p style={{ marginTop: 18, fontSize: 15, lineHeight: 1.65, color: 'rgba(245,236,221,.66)' }}>
             {sub}
           </p>
 
-          <ul className="mt-8 space-y-4">
+          <ul style={{ marginTop: 26, listStyle: 'none', padding: 0, borderTop: '1px solid rgba(245,236,221,.12)' }}>
             {bullets.map((b, i) => (
-              <li key={i} className="flex items-start gap-3.5 font-sans">
-                <span
-                  className="flex items-center justify-center w-9 h-9 rounded-xl text-base flex-shrink-0"
-                  style={{ background: 'rgba(201,168,76,0.10)', border: '1px solid rgba(201,168,76,0.25)' }}
-                >
-                  {b.icon}
-                </span>
-                <span className="text-[14.5px] leading-relaxed pt-1.5" style={{ color: 'rgba(255,255,255,0.78)' }}>
-                  {b.text}
-                </span>
+              <li
+                key={i}
+                style={{
+                  padding: '13px 0', borderBottom: '1px solid rgba(245,236,221,.12)',
+                  fontSize: 14.5, lineHeight: 1.55, color: 'rgba(245,236,221,.8)',
+                }}
+              >
+                {b.text}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Prova social */}
-        <div className="relative auth-anim-3">
+        <div className="an3">
+          <AmostraDevolutiva />
           {proof && (
-            <p className="text-[13px] font-sans flex items-center gap-2" style={{ color: 'rgba(255,255,255,0.4)' }}>
-              <span
-                className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ background: GOLD, animation: 'authPulse 2s infinite' }}
-              />
-              {proof}
-            </p>
+            <p style={{ marginTop: 16, fontSize: 12.5, color: 'rgba(245,236,221,.42)' }}>{proof}</p>
           )}
         </div>
       </aside>
 
-      {/* ── Painel do formulário ──────────────────────────── */}
-      <section className="flex-1 flex items-center justify-center px-5 py-10 relative overflow-hidden">
-        {/* Glow sutil no lado do form */}
-        <div
-          className="absolute -bottom-40 -right-40 w-[420px] h-[420px] rounded-full pointer-events-none"
-          style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%)' }}
-        />
-
-        <div className="w-full max-w-[420px] relative z-10">
-          {/* Cabeçalho compacto (só mobile) */}
-          <div className="lg:hidden text-center mb-8 auth-anim">
-            <PsiMark size={52} />
-            <h1 className="font-serif font-semibold text-2xl text-white mt-3">Psique</h1>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] mt-0.5" style={{ color: GOLD }}>
-              Mapa Comportamental
-            </p>
+      {/* ── Painel do formulário ────────────────────────────── */}
+      <section
+        style={{
+          flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '40px 20px', background: LINHO,
+        }}
+      >
+        <div style={{ width: '100%', maxWidth: 420 }}>
+          <div className="lg:hidden an1" style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 28 }}>
+            <MarcaPsi size={36} cor={TERRACOTA} />
+            <p style={{ fontFamily: serif, fontSize: 19, color: ESPRESSO }}>Mapa Comportamental</p>
           </div>
 
-          {banner && <div className="auth-anim">{banner}</div>}
+          {banner && <div className="an1">{banner}</div>}
 
           <div
-            className="rounded-3xl p-7 sm:p-8 auth-anim-2"
+            className="an2 auth-campo"
             style={{
-              background: 'rgba(255,255,255,0.045)',
-              border: '1px solid rgba(255,255,255,0.09)',
-              backdropFilter: 'blur(20px)',
-              boxShadow: '0 30px 80px -30px rgba(0,0,0,0.6)',
+              background: PAPEL, border: `1px solid ${TRACO}`, borderRadius: 16,
+              padding: '30px 28px',
+              boxShadow: '0 1px 1px rgba(27,20,16,.03), 0 16px 40px -26px rgba(27,20,16,.32)',
             }}
           >
-            <div className="mb-6">
-              <h1 className="font-serif font-semibold text-[26px] text-white">{formTitle}</h1>
-              <p className="text-sm font-sans mt-1.5" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                {formSub}
-              </p>
+            <div style={{ marginBottom: 22 }}>
+              <h1 style={{ fontFamily: serif, fontWeight: 400, fontSize: 26, color: ESPRESSO, lineHeight: 1.2 }}>
+                {formTitle}
+              </h1>
+              <p style={{ fontSize: 14, marginTop: 6, color: '#8A7359' }}>{formSub}</p>
             </div>
-
             {children}
           </div>
 
-          <div className="mt-6 text-center auth-anim-3">{belowCard}</div>
-
-          <p className="text-center text-[12px] mt-8 font-sans lg:hidden" style={{ color: 'rgba(255,255,255,0.25)' }}>
-            15 avaliações · devolutiva completa · sem cartão
-          </p>
+          <div className="an3" style={{ marginTop: 22, textAlign: 'center', color: '#5A4838' }}>
+            {belowCard}
+          </div>
         </div>
       </section>
     </main>
   )
 }
 
-export { GOLD, GOLD_HI }
+export { ESPRESSO, AMBAR, TERRACOTA, LINHO }

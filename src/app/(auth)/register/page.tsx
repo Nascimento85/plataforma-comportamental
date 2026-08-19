@@ -7,14 +7,14 @@ export const metadata: Metadata = { title: 'Criar conta | Psique' }
 export default function RegisterPage() {
   return (
     <AuthShell
-      headline={<>Sua primeira análise a <em className="not-italic" style={{ color: '#e8c97a' }}>minutos</em> de distância.</>}
-      sub="Crie a conta, escolha um teste e receba um relatório profissional com diagnóstico e direcionamento prático. Sem cartão de crédito."
+      headline={<>Sua primeira leitura está a <em style={{ color: '#E0B368', fontStyle: 'italic' }}>minutos</em> daqui.</>}
+      sub="Crie a conta, escolha uma avaliação e receba a devolutiva completa: o que você faz, por que faz, e como aquilo chega do outro lado."
       bullets={[
-        { icon: '🎟️', text: <><strong className="text-white">5 créditos de cortesia</strong> só por criar a conta</> },
-        { icon: '⭐', text: <>Devolutiva <strong className="text-white">completa em PDF</strong>, não um rótulo de quatro letras</> },
-        { icon: '⚡', text: <>Primeiro teste concluído <strong className="text-white">em 5 minutos</strong>, de qualquer aparelho</> },
+        { icon: '', text: <><strong>5 créditos de cortesia</strong> só por criar a conta, sem cartão.</> },
+        { icon: '', text: <>Devolutiva <strong>completa em PDF</strong>, não um rótulo de quatro letras.</> },
+        { icon: '', text: <>Primeira avaliação concluída em poucos minutos, do celular.</> },
       ]}
-      proof="Sem cartão, sem assinatura. Você faz o teste e leva a devolutiva."
+      proof="Você faz o teste e leva a devolutiva. Nada fica preso na plataforma."
       formTitle="Crie sua conta grátis"
       formSub="Leva menos de um minuto"
       belowCard={

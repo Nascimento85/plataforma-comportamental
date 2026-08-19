@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Fraunces, DM_Sans, Cormorant_Garamond } from 'next/font/google'
+import { Inter, Fraunces, DM_Sans, Cormorant_Garamond, Newsreader, Albert_Sans } from 'next/font/google'
 import './globals.css'
 import CookieBanner from '@/components/legal/CookieBanner'
 
@@ -20,6 +20,24 @@ const fraunces = Fraunces({
     weight: ['400', '500', '600', '700'],
     style: ['normal', 'italic'],
     variable: '--font-fraunces',
+    display: 'swap',
+})
+
+// -- Identidade da marca (direção 1b do design system) --------------------
+// Newsreader nos títulos, Albert Sans na interface. É o par definido no
+// canvas de identidade e usado na home e nas telas de entrada.
+const newsreader = Newsreader({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '600'],
+    style: ['normal', 'italic'],
+    variable: '--font-newsreader',
+    display: 'swap',
+})
+
+const albertSans = Albert_Sans({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-albert',
     display: 'swap',
 })
 
@@ -64,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html
             lang="pt-BR"
-            className={`${inter.variable} ${dmSans.variable} ${fraunces.variable} ${cormorant.variable}`}
+            className={`${inter.variable} ${dmSans.variable} ${fraunces.variable} ${cormorant.variable} ${newsreader.variable} ${albertSans.variable}`}
         >
             <body>
                 {children}
