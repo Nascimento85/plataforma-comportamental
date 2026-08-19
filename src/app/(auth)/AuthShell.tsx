@@ -189,7 +189,7 @@ export default function AuthShell({
           <div className="mt-6 text-center auth-anim-3">{belowCard}</div>
 
           <p className="text-center text-[12px] mt-8 font-sans lg:hidden" style={{ color: 'rgba(255,255,255,0.25)' }}>
-            15 testes científicos · NR-1 · 70+ países
+            15 avaliações · devolutiva completa · sem cartão
           </p>
         </div>
       </section>

@@ -10,11 +10,11 @@ export default function RegisterPage() {
       headline={<>Sua primeira análise a <em className="not-italic" style={{ color: '#e8c97a' }}>minutos</em> de distância.</>}
       sub="Crie a conta, escolha um teste e receba um relatório profissional com diagnóstico e direcionamento prático. Sem cartão de crédito."
       bullets={[
-        { icon: '🎟️', text: <><strong className="text-white">4 créditos de cortesia</strong> só por criar a conta</> },
+        { icon: '🎟️', text: <><strong className="text-white">5 créditos de cortesia</strong> só por criar a conta</> },
         { icon: '⭐', text: <>Devolutiva <strong className="text-white">completa em PDF</strong>, não um rótulo de quatro letras</> },
         { icon: '⚡', text: <>Primeiro teste concluído <strong className="text-white">em 5 minutos</strong>, de qualquer aparelho</> },
       ]}
-      proof="Junte-se a líderes, RHs e casais em mais de 70 países"
+      proof="Sem cartão, sem assinatura. Você faz o teste e leva a devolutiva."
       formTitle="Crie sua conta grátis"
       formSub="Leva menos de um minuto"
       belowCard={

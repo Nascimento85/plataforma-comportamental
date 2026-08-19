@@ -45,11 +45,11 @@ export const EXPERIMENTE_CATALOG: Record<string, FreeTest> = {
     tagline:  'Como você percebe e gerencia emoções sob tensão.',
     duration: '6–10 min',
   },
-  LOVE_LANGUAGES: {
-    testType: 'LOVE_LANGUAGES',
-    label:    '5 Linguagens do Amor',
-    emoji:    '💞',
-    tagline:  'Como você dá e recebe amor — pra vida e pra liderança.',
+  COMUNICACAO: {
+    testType: 'COMUNICACAO',
+    label:    'Mapa da Comunicação',
+    emoji:    '💬',
+    tagline:  'O que você faz quando a conversa esquenta.',
     duration: '8–12 min',
   },
   QMT: {
@@ -69,7 +69,7 @@ export const EXPERIMENTE_CATALOG: Record<string, FreeTest> = {
 }
 
 // Cardápio padrão (quando o QR não especifica ?tests=)
-export const DEFAULT_FREE_TESTS = ['DISC', 'QI', 'LIDERANCA_SITUACIONAL', 'EMOTIONAL_INTELLIGENCE', 'LOVE_LANGUAGES']
+export const DEFAULT_FREE_TESTS = ['COMUNICACAO', 'EMOTIONAL_INTELLIGENCE', 'VAC']
 
 // Todos os testes permitidos na degustação (validação na API)
 export const EXPERIMENTE_ALLOWED = Object.keys(EXPERIMENTE_CATALOG)

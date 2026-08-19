@@ -20,7 +20,7 @@ export default function LoginPage({ searchParams }: PageProps) {
         { icon: '🛡️', text: <><strong className="text-white">Compliance NR-1</strong> com coleta anônima e relatório executivo</> },
         { icon: '📄', text: <>Relatórios profissionais <strong className="text-white">com a sua marca</strong></> },
       ]}
-      proof="Metodologias validadas em mais de 70 países"
+      proof="DISC, MBTI, Eneagrama e Big Five — instrumentos usados há décadas"
       formTitle="Bem-vindo de volta"
       formSub="Entre para continuar suas análises"
       banner={justRegistered ? (
@@ -32,7 +32,7 @@ export default function LoginPage({ searchParams }: PageProps) {
           <div>
             <p className="text-sm font-semibold" style={{ color: '#96bf9a' }}>🎟️ Passaporte de Autoconhecimento ativado!</p>
             <p className="text-xs mt-0.5 leading-relaxed" style={{ color: 'rgba(150,191,154,0.8)' }}>
-              Você ganhou <strong>4 créditos válidos por 7 dias</strong>. Escolha seu primeiro teste e comece agora.
+              Você ganhou <strong>5 créditos válidos por 7 dias</strong>. Escolha seu primeiro teste e comece agora.
             </p>
           </div>
         </div>

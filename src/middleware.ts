@@ -13,7 +13,8 @@ const PUBLIC_ROUTES = [
   '/amor.html',
   '/empresas',         // landing page corporativa
   '/empresas.html',
-  '/inicio',           // nova home preto/dourado (hub completo)
+  '/home.html',        // home B2C: porta unica do teste gratuito
+  '/inicio',           // home anterior (vitrine dos 15 testes) — mantida acessivel
   '/inicio.html',
   '/lp',               // LP antiga (mantida acessível para histórico)
   '/lp.html',
@@ -64,10 +65,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(target, 308)
   }
 
-  // Homepage: serve a NOVA home preto/dourado (hub completo com 9 testes,
-  // NR-1, downloads gratuitos e CTAs neurovendas). Antes apontava p/ /lp.html.
+  // Homepage: porta unica do teste gratuito, com captura de nome + WhatsApp,
+  // apontada para o publico B2C (comunicacao no relacionamento). A vitrine
+  // anterior dos 15 testes continua em /inicio.html — para voltar atras,
+  // basta trocar o destino desta linha.
   if (pathname === '/') {
-    return NextResponse.rewrite(new URL('/inicio.html', request.url))
+    return NextResponse.rewrite(new URL('/home.html', request.url))
   }
 
   // Rotas públicas (sem auth)

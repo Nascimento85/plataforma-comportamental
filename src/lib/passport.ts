@@ -20,9 +20,12 @@ export { TEST_PRICE }
 
 // ─── Constantes do Passaporte ──────────────────────────────
 export const PASSPORT_TTL_DAYS         = 7
-export const WELCOME_BONUS_AMOUNT      = 4   // 4 créditos no cadastro
-export const PROFILE_COMPLETE_AMOUNT   = 6   // +6 ao completar perfil
-// Total potencial: 10 créditos, todos válidos por 7 dias.
+// 5 creditos no cadastro — o piso e o Mapa da Comunicacao, que custa 5.
+// Um trial que nao cobre o teste mais alinhado ao publico nao serve de isca.
+export const WELCOME_BONUS_AMOUNT      = 5
+// Bonus por perfil completo descontinuado (ver commit 9babf3b). A constante
+// fica para nao quebrar registros historicos de BonusGrant ja concedidos.
+export const PROFILE_COMPLETE_AMOUNT   = 6
 
 // ─── Sources possíveis ────────────────────────────────────
 export type BonusSource =
