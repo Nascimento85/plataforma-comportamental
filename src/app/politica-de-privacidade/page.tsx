@@ -35,8 +35,8 @@ export default function PoliticaDePrivacidadePage() {
               O Mapa Comportamental ("nós", "nosso") é uma plataforma online de
               avaliações comportamentais (DISC, MBTI, Eneagrama, Temperamentos,
               Arquétipos, Linguagens do Amor, Âncoras de Carreira, Inteligência
-              Emocional) operada por <strong>KAN PARTICIPAÇÕES LTDA</strong>, inscrita no
-              CNPJ <strong>67.585.002/0001-60</strong>, com sede em Belo Horizonte/MG.
+              Emocional) operada por <strong>KAN PARTICIPAÇÕES LTDA</strong>, com sede em
+              Belo Horizonte/MG.
             </p>
             <p>
               Para qualquer dúvida ou solicitação relacionada aos seus dados pessoais,

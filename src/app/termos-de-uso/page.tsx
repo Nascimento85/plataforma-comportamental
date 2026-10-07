@@ -32,8 +32,7 @@ export default function TermosDeUsoPage() {
           <Section title="1. Aceitação">
             <p>
               A plataforma Mapa Comportamental é operada por{' '}
-              <strong>KAN PARTICIPAÇÕES LTDA</strong>, inscrita no CNPJ{' '}
-              <strong>67.585.002/0001-60</strong>, com sede em Belo Horizonte/MG.
+              <strong>KAN PARTICIPAÇÕES LTDA</strong>, com sede em Belo Horizonte/MG.
             </p>
             <p>
               Ao criar uma conta ou utilizar a plataforma Mapa Comportamental ("Plataforma"),
