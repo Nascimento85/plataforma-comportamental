@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>O Teste do Silêncio | Mapa Comportamental</title>
-<meta name="description" content="Descubra em poucos minutos o que acontece quando a conversa esquenta entre vocês, e por que ele parece parar de te escutar bem na hora em que você mais precisa. Gratuito, sem cadastro." />
+<title>Mapa Comportamental · Clareza de perfil para sua carreira e sua empresa</title>
+<meta name="description" content="Talvez o problema não seja o seu emprego, e sim a falta de clareza sobre o seu perfil. Para empresas: pare de pagar duas vezes pela mesma vaga. Avaliações comportamentais com devolutiva completa." />
 <link rel="canonical" href="https://mapacomportamental.com/" />
 
-<meta property="og:title" content="Não é falta de amor. É falta de tradução." />
-<meta property="og:description" content="Descubra o que acontece quando a conversa esquenta entre vocês, e por que ele parece parar de te escutar bem na hora em que você mais precisa." />
+<meta property="og:title" content="Talvez o problema não seja o seu emprego." />
+<meta property="og:description" content="Clareza de perfil para quem quer acertar na carreira, e para quem cansou de contratar errado." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://mapacomportamental.com" />
 <meta property="og:image" content="https://mapacomportamental.com/og-mapa.png" />
@@ -23,9 +23,9 @@
 
 <style>
   /* ══════════════════════════════════════════════════════════
-     Identidade
-     Zona feminina  · linho, espresso, terracota queimada
-     Zona corporativa · mesma tipografia e base, tom chumbo
+     Identidade 1b · espresso, linho e terracota
+     Os tons de texto foram escolhidos por contraste medido:
+     nada de cinza claro sobre fundo claro.
      ══════════════════════════════════════════════════════════ */
   :root {
     --linho:        #F5ECDD;
@@ -34,223 +34,286 @@
     --traco:        #DCCDB6;
     --traco-forte:  #BFAB8D;
     --espresso:     #1B1410;
-    --espresso-2:   #5A4838;
-    --espresso-3:   #8A7359;
+    --espresso-2:   #4A3A2C;
+    --espresso-3:   #6B5744;
     --terracota:    #B3663F;
-    --terracota-cl: #E0B368;
+    --terracota-tx: #9A5230;
+    --ambar:        #E0B368;
+    --creme-forte:  #FFF8EC;
 
     --chumbo:       #0C0F14;
-    --chumbo-2:     #5A6373;
     --neutro-frio:  #F2EDE2;
     --traco-frio:   #D8D0BF;
+    --chumbo-2:     #4F5867;
 
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans:  "Albert Sans", "Segoe UI", system-ui, sans-serif;
-
     --medida: 62ch;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--linho);
-    color: var(--espresso);
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    background: var(--linho); color: var(--espresso);
+    font-family: var(--sans); font-size: 17px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+  [hidden] { display: none !important; }
   ::selection { background: var(--terracota); color: var(--papel); }
   :focus-visible { outline: 2px solid var(--terracota); outline-offset: 3px; border-radius: 3px; }
 
   .faixa { width: 100%; }
-  .interna { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  .coluna  { max-width: 680px; }
+  .interna { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .coluna  { max-width: 720px; }
+  section { padding: clamp(60px, 9vw, 112px) 0; }
 
   /* ── tipografia ─────────────────────────────────────────── */
-  .display {
-    font-family: var(--serif); font-weight: 380; font-style: normal;
-    line-height: 1.04; letter-spacing: -.012em; text-wrap: balance;
-  }
-  h1.display { font-size: clamp(2.4rem, 5vw, 3.75rem); }
+  .display { font-family: var(--serif); font-weight: 460; line-height: 1.06; letter-spacing: -.012em; text-wrap: balance; }
+  h1.display { font-size: clamp(2.35rem, 5vw, 3.8rem); }
   h2.display { font-size: clamp(1.95rem, 4vw, 3rem); line-height: 1.1; }
   .display em { font-style: italic; color: var(--terracota); }
-
-  .rotulo {
-    font-size: .72rem; font-weight: 600; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--terracota);
-  }
-  .apoio { color: var(--espresso-2); font-size: 1.07rem; max-width: var(--medida); }
-
-  /* ── cabeçalho ──────────────────────────────────────────── */
-  header.topo { border-bottom: 1px solid var(--traco); background: var(--linho); }
-  .topo .interna { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
-  .marca { display: flex; align-items: center; gap: 11px; }
-  .psi {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 50%;
-    border: 1px solid var(--terracota); color: var(--terracota);
-    font-family: var(--serif); font-size: 1.15rem; line-height: 1; padding-bottom: 2px; flex-shrink: 0;
-  }
-  .psi-pe { width: 28px; height: 28px; font-size: 1rem; border-color: var(--chumbo-2); color: var(--chumbo-2); }
-  .marca .n1 { font-family: var(--serif); font-size: 1.32rem; letter-spacing: -.01em; }
-  .marca .n2 { font-size: .66rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--espresso-3); }
-  .topo nav { display: flex; gap: 30px; font-size: .93rem; font-weight: 500; color: var(--espresso-2); }
-  .topo nav a { padding-bottom: 2px; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
-  .topo nav a:hover { color: var(--espresso); border-bottom-color: var(--terracota); }
-  @media (max-width: 860px) { .topo nav { display: none; } }
-
-  /* ── abertura ───────────────────────────────────────────── */
-  .abertura { padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
-  .abertura .interna {
-    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr);
-    gap: clamp(36px, 6vw, 76px); align-items: start;
-  }
-  @media (max-width: 940px) { .abertura .interna { grid-template-columns: 1fr; } }
-
-  .abertura h1 { margin-top: 22px; }
-  .abertura .chamada { margin-top: 26px; font-size: clamp(1.06rem, 1.7vw, 1.22rem); color: var(--espresso-2); max-width: 46ch; }
-  .abertura .chamada b { color: var(--espresso); font-weight: 600; }
-
-  .garantias { margin-top: 30px; display: flex; flex-direction: column; gap: 11px; }
-  .garantias div { display: flex; align-items: baseline; gap: 11px; font-size: .96rem; color: var(--espresso-2); }
-  .garantias .marca-cheque {
-    font-family: var(--serif); font-size: 1.05rem; color: var(--terracota); line-height: 1; flex-shrink: 0;
-  }
-
-  /* ── formulário ─────────────────────────────────────────── */
-  .ficha {
-    background: var(--papel);
-    border: 1px solid var(--traco);
-    border-radius: 14px;
-    padding: clamp(26px, 3vw, 34px);
-    box-shadow: 0 1px 1px rgba(43,33,27,.03), 0 12px 34px -22px rgba(43,33,27,.28);
-    position: sticky; top: 24px;
-  }
-  @media (max-width: 940px) { .ficha { position: static; } }
-  .ficha .titulo { font-family: var(--serif); font-size: 1.5rem; line-height: 1.15; }
-  .ficha .aux { margin-top: 7px; font-size: .9rem; color: var(--espresso-3); }
-  form { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
-  label { display: block; font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--espresso-3); margin-bottom: 7px; }
-  input {
-    width: 100%; padding: 13px 2px; font-size: 1.02rem; font-family: var(--sans); color: var(--espresso);
-    background: transparent; border: none; border-bottom: 1px solid var(--traco-forte);
-    border-radius: 0; transition: border-color .2s;
-  }
-  input::placeholder { color: #B4A797; }
-  input:focus { outline: none; border-bottom-color: var(--terracota); }
-  button.acao {
-    margin-top: 8px; width: 100%; padding: 16px 22px; border: none; border-radius: 999px; cursor: pointer;
-    font-family: var(--sans); font-size: 1rem; font-weight: 600; letter-spacing: .01em;
-    background: var(--espresso); color: var(--papel);
-    transition: background .2s, transform .12s;
-  }
-  button.acao:hover { background: var(--terracota); transform: translateY(-1px); }
-  button.acao:disabled { opacity: .55; cursor: wait; transform: none; }
-  .nota { font-size: .82rem; color: var(--espresso-3); line-height: 1.55; }
-  .nota a { border-bottom: 1px solid var(--traco-forte); }
-  .erro { font-size: .9rem; color: #A33A2A; }
-
-  /* ── seções ─────────────────────────────────────────────── */
-  section { padding: clamp(60px, 9vw, 116px) 0; }
-  .faixa-linho { background: var(--linho-fundo); }
-  .cabecalho-secao { max-width: 780px; }
+  .rotulo { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota-tx); }
+  .apoio { color: var(--espresso-2); font-size: 1.1rem; max-width: var(--medida); }
+  .cabecalho-secao { max-width: 800px; }
   .cabecalho-secao .apoio { margin-top: 20px; }
 
-  /* ── os quatro padrões: lista editorial, não cards ─────── */
-  .padroes { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--traco); }
-  .padrao {
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    gap: clamp(18px, 4vw, 56px);
-    padding: clamp(28px, 3.5vw, 40px) 0;
-    border-bottom: 1px solid var(--traco);
-    align-items: baseline;
+  /* ── cabeçalho ──────────────────────────────────────────── */
+  header.topo { background: var(--espresso); border-bottom: 1px solid rgba(245,236,221,.12); }
+  .topo .interna { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 74px; }
+  .marca { display: flex; align-items: center; gap: 11px; }
+  .psi {
+    display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--ambar); color: var(--ambar);
+    font-family: var(--serif); font-size: 1.15rem; line-height: 1; padding-bottom: 2px; flex-shrink: 0;
   }
-  @media (max-width: 780px) { .padrao { grid-template-columns: 1fr; gap: 14px; } }
-  .padrao:nth-child(even) { padding-left: clamp(0px, 5vw, 76px); }
-  .padrao .nome {
-    font-family: var(--serif); font-size: clamp(1.4rem, 2.4vw, 1.85rem); line-height: 1.15;
-  }
-  .padrao .fala {
-    display: block; margin-top: 10px;
-    font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 2vw, 1.4rem);
-    color: var(--terracota); line-height: 1.3;
-  }
-  .padrao .efeito { color: var(--espresso-2); font-size: 1.02rem; }
+  .marca .n1 { font-family: var(--serif); font-size: 1.3rem; letter-spacing: -.01em; color: var(--creme-forte); }
+  .topo nav { display: flex; align-items: center; gap: 26px; font-size: .95rem; font-weight: 600; color: rgba(245,236,221,.88); }
+  .topo nav a { padding-bottom: 2px; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+  .topo nav a:hover { color: var(--creme-forte); border-bottom-color: var(--ambar); }
+  .topo nav a.entrar { padding: 9px 18px; border: 1.5px solid rgba(245,236,221,.5); border-radius: 999px; }
+  .topo nav a.entrar:hover { background: var(--linho); color: var(--espresso); border-color: var(--linho); }
+  @media (max-width: 900px) { .topo nav a:not(.entrar) { display: none; } }
+  .marca .n1 { white-space: nowrap; }
+  @media (max-width: 420px) { .marca .n1 { font-size: 1.1rem; } .psi { width: 30px; height: 30px; } }
 
-  /* ── devolutiva: lista numerada com respiro ─────────────── */
-  .entrega { margin-top: clamp(40px, 5vw, 60px); display: flex; flex-direction: column; }
-  .entrega-item {
-    display: grid; grid-template-columns: 74px minmax(0, 1fr);
-    gap: clamp(14px, 3vw, 34px);
-    padding: 30px 0; border-top: 1px solid var(--traco);
+  /* atalho para a ação, só no celular (lá o cartão fica depois do texto) */
+  .atalho-celular { display: none; }
+  @media (max-width: 940px) {
+    .atalho-celular {
+      display: block; margin-top: 24px; text-align: center; padding: 15px 22px; border-radius: 999px;
+      background: var(--ambar); color: var(--espresso); font-weight: 700; font-size: 1.02rem;
+    }
   }
-  .entrega-item:last-child { border-bottom: 1px solid var(--traco); }
-  @media (max-width: 640px) { .entrega-item { grid-template-columns: 1fr; gap: 8px; } }
-  .entrega-item .ordem { font-family: var(--serif); font-size: 2rem; color: var(--traco-forte); line-height: 1; }
-  .entrega-item h3 { font-family: var(--serif); font-size: 1.42rem; font-weight: 400; line-height: 1.2; }
-  .entrega-item p { margin-top: 9px; color: var(--espresso-2); font-size: 1.02rem; max-width: 56ch; }
 
-  /* ── passos ─────────────────────────────────────────────── */
-  .passos { margin-top: clamp(36px, 4.5vw, 52px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
-  @media (max-width: 760px) { .passos { grid-template-columns: 1fr; gap: 26px; } }
-  .passo { border-top: 2px solid var(--espresso); padding-top: 18px; }
-  .passo .k { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota); }
-  .passo p { margin-top: 10px; color: var(--espresso-2); font-size: 1rem; }
-  .passo b { color: var(--espresso); font-weight: 600; }
+  /* ══════════════ ABERTURA HÍBRIDA ══════════════ */
+  .abertura { background: var(--espresso); color: var(--linho); padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); }
+  .seletor {
+    display: inline-flex; gap: 4px; padding: 5px; border-radius: 999px;
+    background: rgba(245,236,221,.08); border: 1px solid rgba(245,236,221,.16);
+  }
+  .seletor button {
+    border: none; cursor: pointer; padding: 11px 22px; border-radius: 999px;
+    font-size: .98rem; font-weight: 700; color: rgba(245,236,221,.82); background: transparent;
+    transition: background .2s, color .2s;
+  }
+  .seletor button:hover { color: var(--creme-forte); }
+  .seletor button[aria-selected="true"] { background: var(--linho); color: var(--espresso); }
 
-  /* ── perguntas ──────────────────────────────────────────── */
+  .painel { margin-top: clamp(30px, 4vw, 44px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr); gap: clamp(36px, 6vw, 72px); align-items: start; }
+  @media (max-width: 940px) { .painel { grid-template-columns: 1fr; } }
+  .painel .rotulo { color: var(--ambar); }
+  .painel h1 { margin-top: 16px; color: var(--creme-forte); font-size: clamp(2.2rem, 4.4vw, 3.3rem); }
+  .painel h1 em { color: var(--ambar); }
+  .painel .chamada { margin-top: 24px; font-size: clamp(1.08rem, 1.7vw, 1.24rem); color: rgba(245,236,221,.9); max-width: 50ch; }
+  .painel .chamada b { color: var(--creme-forte); font-weight: 700; }
+  .sintomas { list-style: none; margin-top: 28px; max-width: 52ch; }
+  .sintomas li {
+    position: relative; padding: 11px 0 11px 30px; border-top: 1px solid rgba(245,236,221,.14);
+    font-size: 1.04rem; font-weight: 500; color: rgba(245,236,221,.95);
+  }
+  .sintomas li:last-child { border-bottom: 1px solid rgba(245,236,221,.14); }
+  .sintomas li::before { content: "→"; position: absolute; left: 0; top: 10px; color: var(--ambar); font-weight: 700; }
+  .link-claro {
+    display: inline-flex; margin-top: 24px; font-weight: 700; color: var(--ambar);
+    border-bottom: 2px solid currentColor; padding-bottom: 2px;
+  }
+  .link-claro:hover { color: var(--creme-forte); }
+
+  /* cartão de ação (claro sobre o escuro) */
+  .ficha {
+    background: var(--papel); color: var(--espresso); border-radius: 18px;
+    padding: clamp(26px, 3vw, 34px);
+    box-shadow: 0 24px 60px -28px rgba(0,0,0,.6);
+  }
+  .ficha .titulo { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; line-height: 1.15; }
+  .ficha .aux { margin-top: 8px; font-size: .98rem; color: var(--espresso-2); }
+  .ficha form { margin-top: 22px; display: flex; flex-direction: column; gap: 15px; }
+  label { display: block; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--espresso-3); margin-bottom: 7px; }
+  input {
+    width: 100%; padding: 13px 14px; font-size: 1.04rem; font-family: var(--sans); color: var(--espresso);
+    background: #fff; border: 1.5px solid var(--traco); border-radius: 12px;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  input::placeholder { color: #7C6650; opacity: 1; }
+  input:focus { outline: none; border-color: var(--terracota); box-shadow: 0 0 0 3px rgba(179,102,63,.16); }
+  button.acao, a.acao {
+    display: block; text-align: center; margin-top: 4px; width: 100%; padding: 16px 22px; border: none; border-radius: 999px; cursor: pointer;
+    font-family: var(--sans); font-size: 1.04rem; font-weight: 700;
+    background: var(--espresso); color: var(--papel); transition: background .2s, transform .12s;
+  }
+  button.acao:hover, a.acao:hover { background: var(--terracota); transform: translateY(-1px); }
+  button.acao:disabled { opacity: .55; cursor: wait; transform: none; }
+  .nota { font-size: .88rem; color: var(--espresso-3); line-height: 1.55; }
+  .nota a { color: var(--terracota-tx); border-bottom: 1px solid currentColor; }
+  .erro { font-size: .95rem; color: #9A3412; font-weight: 600; }
+  .entregas { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .entregas li { display: flex; gap: 10px; align-items: baseline; font-size: 1rem; color: var(--espresso-2); }
+  .entregas li::before { content: "✓"; color: #3F6B45; font-weight: 700; flex-shrink: 0; }
+  .ficha .secundario { display: block; text-align: center; margin-top: 14px; font-weight: 700; color: var(--terracota-tx); }
+
+  /* ══════════════ PROBLEMA ══════════════ */
+  .carta-papel { background: var(--papel); }
+  .carta-linho { background: var(--linho-fundo); }
+  .dores { margin-top: clamp(36px, 5vw, 56px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
+  @media (max-width: 780px) { .dores { grid-template-columns: 1fr; } }
+  .dor-coluna { border-top: 2px solid var(--espresso); padding-top: 20px; }
+  .dor-coluna h3 { font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota-tx); }
+  .dor-coluna ul { list-style: none; margin-top: 14px; }
+  .dor-coluna li {
+    position: relative; padding: 14px 0 14px 28px; border-bottom: 1px solid var(--traco);
+    font-size: 1.08rem; font-weight: 500; color: var(--espresso); line-height: 1.5;
+  }
+  .dor-coluna li::before { content: "×"; position: absolute; left: 2px; top: 12px; font-size: 1.25rem; font-weight: 700; color: var(--terracota); }
+  .virada { margin-top: clamp(32px, 4vw, 48px); font-family: var(--serif); font-weight: 500; font-size: clamp(1.45rem, 2.6vw, 2rem); line-height: 1.2; max-width: 32ch; }
+  .virada em { font-style: italic; color: var(--terracota); }
+
+  /* ══════════════ CANAIS DE COMUNICAÇÃO ══════════════ */
+  .canais { margin-top: clamp(36px, 5vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 900px) { .canais { grid-template-columns: 1fr; } }
+  .canal { background: var(--papel); border: 1px solid var(--traco); border-radius: 16px; padding: 26px 24px 28px; }
+  .canal .sigla {
+    display: inline-flex; width: 44px; height: 44px; border-radius: 50%; align-items: center; justify-content: center;
+    background: var(--espresso); color: var(--ambar); font-family: var(--serif); font-size: 1.35rem; font-weight: 500;
+  }
+  .canal h3 { margin-top: 14px; font-family: var(--serif); font-weight: 500; font-size: 1.55rem; line-height: 1.15; }
+  .canal .frase { margin-top: 4px; font-weight: 700; color: var(--terracota-tx); }
+  .canal p { margin-top: 12px; font-size: 1rem; color: var(--espresso-2); }
+  .canal .como { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--traco); font-size: .98rem; color: var(--espresso); }
+  .canal .como b { display: block; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--espresso-3); margin-bottom: 4px; }
+  .importancia { margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+  @media (max-width: 900px) { .importancia { grid-template-columns: 1fr; } }
+  .importancia h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.6rem, 2.8vw, 2.1rem); line-height: 1.15; }
+  .usos { list-style: none; border-top: 1px solid var(--traco-forte); }
+  .usos li { padding: 16px 0; border-bottom: 1px solid var(--traco-forte); font-size: 1.04rem; color: var(--espresso-2); }
+  .usos li b { color: var(--espresso); }
+
+  /* ══════════════ CUSTO ══════════════ */
+  .custo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+  @media (max-width: 900px) { .custo { grid-template-columns: 1fr; } }
+  .nota-pessoal {
+    margin-top: 28px; padding: 22px 24px; border-left: 3px solid var(--terracota);
+    background: rgba(253,248,239,.7); border-radius: 0 12px 12px 0; font-size: 1.05rem; color: var(--espresso-2);
+  }
+  .nota-pessoal b { color: var(--espresso); }
+  .calc {
+    background: var(--papel); border: 1px solid var(--traco); border-radius: 16px; padding: clamp(24px, 3vw, 32px);
+    box-shadow: 0 1px 1px rgba(43,33,27,.03), 0 18px 40px -26px rgba(43,33,27,.34);
+  }
+  .calc .titulo { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; line-height: 1.2; }
+  .calc form { margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .calc input { font-weight: 600; }
+  .calc .linha-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 420px) { .calc .linha-2 { grid-template-columns: 1fr; } }
+  .resultado { margin-top: 20px; padding: 20px 22px; border-radius: 12px; background: var(--espresso); color: var(--linho); }
+  .resultado .k { font-size: .76rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ambar); }
+  .resultado .valor { margin-top: 6px; font-family: var(--serif); font-weight: 500; font-size: clamp(2.1rem, 4vw, 2.7rem); line-height: 1.05; }
+  .resultado .formula { margin-top: 8px; font-size: .88rem; color: rgba(245,236,221,.82); }
+  .fora-da-conta { margin-top: 18px; font-size: 1rem; color: var(--espresso-2); }
+  .link-forte {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+    font-weight: 700; color: var(--terracota-tx); border-bottom: 2px solid currentColor; padding-bottom: 2px;
+  }
+  .link-forte:hover { color: var(--espresso); }
+
+  /* ══════════════ TEMPO E INAÇÃO ══════════════ */
+  .tempo { background: var(--espresso); color: var(--linho); }
+  .pergunta-dura { padding: clamp(28px, 4vw, 44px) 0; border-bottom: 1px solid rgba(245,236,221,.16); }
+  .pergunta-dura:first-child { padding-top: 0; }
+  .pergunta-dura:last-child { border-bottom: none; padding-bottom: 0; }
+  .pergunta-dura h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.1; color: var(--creme-forte); max-width: 24ch; }
+  .pergunta-dura h2 em { font-style: italic; color: var(--ambar); }
+  .pergunta-dura p { margin-top: 16px; font-size: 1.12rem; color: rgba(245,236,221,.9); max-width: 60ch; }
+  .inacao { list-style: none; margin-top: 22px; max-width: 66ch; }
+  .inacao li { position: relative; padding: 13px 0 13px 30px; border-top: 1px solid rgba(245,236,221,.14); font-size: 1.1rem; font-weight: 500; color: rgba(245,236,221,.95); }
+  .inacao li::before { content: "→"; position: absolute; left: 0; top: 12px; color: var(--ambar); font-weight: 700; }
+  .inacao li:last-child { color: var(--creme-forte); font-weight: 700; }
+
+  /* ══════════════ DECISÃO ══════════════ */
+  .ganhos { margin-top: clamp(36px, 5vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 960px) { .ganhos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .ganhos { grid-template-columns: 1fr; } }
+  .ganho { background: var(--papel); border: 1px solid var(--traco); border-radius: 14px; padding: 22px 22px 24px; }
+  .ganho .ok { display: inline-flex; width: 30px; height: 30px; border-radius: 50%; align-items: center; justify-content: center; background: rgba(63,107,69,.12); color: #3F6B45; font-weight: 700; }
+  .ganho h3 { margin-top: 12px; font-size: 1.12rem; font-weight: 700; line-height: 1.3; }
+  .ganho p { margin-top: 8px; font-size: 1rem; color: var(--espresso-2); }
+  .inventario { margin-top: clamp(48px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); }
+  @media (max-width: 900px) { .inventario { grid-template-columns: 1fr; } }
+  .inventario h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.6rem, 2.8vw, 2.1rem); line-height: 1.15; }
+  .itens { list-style: none; border-top: 1px solid var(--traco); }
+  .itens li { padding: 16px 0; border-bottom: 1px solid var(--traco); font-size: 1.04rem; color: var(--espresso-2); }
+  .itens li b { display: block; font-size: 1.08rem; color: var(--espresso); }
+  .chips { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 7px; }
+  .chips span { font-size: .86rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--linho); border: 1px solid var(--traco); color: var(--espresso); }
+  .portas { margin-top: clamp(48px, 6vw, 72px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  @media (max-width: 780px) { .portas { grid-template-columns: 1fr; } }
+  .porta { border-radius: 16px; padding: clamp(26px, 3vw, 34px); }
+  .porta-clara { background: var(--papel); border: 1px solid var(--traco); }
+  .porta-escura { background: var(--chumbo); color: var(--neutro-frio); }
+  .porta .k { font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota-tx); }
+  .porta-escura .k { color: var(--ambar); }
+  .porta h3 { margin-top: 10px; font-family: var(--serif); font-weight: 500; font-size: 1.6rem; line-height: 1.15; }
+  .porta p { margin-top: 10px; font-size: 1.02rem; color: var(--espresso-2); }
+  .porta-escura p { color: rgba(242,237,226,.88); }
+  .botoes { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: .98rem; cursor: pointer; border: none; transition: background .2s, color .2s, transform .12s; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-cheio { background: var(--espresso); color: var(--papel); }
+  .btn-cheio:hover { background: var(--terracota); }
+  .btn-vazado { background: transparent; border: 1.5px solid var(--espresso); color: var(--espresso); }
+  .btn-vazado:hover { background: var(--espresso); color: var(--papel); }
+  .porta-escura .btn-cheio { background: var(--neutro-frio); color: var(--chumbo); }
+  .porta-escura .btn-cheio:hover { background: var(--ambar); }
+  .porta-escura .btn-vazado { border-color: rgba(242,237,226,.6); color: var(--neutro-frio); }
+  .porta-escura .btn-vazado:hover { background: var(--neutro-frio); color: var(--chumbo); }
+  .ultima-frase { margin-top: clamp(40px, 5vw, 60px); text-align: center; font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2.4vw, 1.75rem); }
+
+  /* ══════════════ PERGUNTAS ══════════════ */
   .perguntas { margin-top: clamp(34px, 4vw, 48px); border-top: 1px solid var(--traco); }
   details { border-bottom: 1px solid var(--traco); }
   summary {
-    list-style: none; cursor: pointer; padding: 24px 0;
+    list-style: none; cursor: pointer; padding: 22px 0;
     display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
-    font-size: 1.08rem; font-weight: 600;
+    font-size: 1.1rem; font-weight: 700;
   }
   summary::-webkit-details-marker { display: none; }
   summary::after { content: "+"; font-family: var(--serif); font-size: 1.5rem; color: var(--terracota); line-height: 1; flex-shrink: 0; }
   details[open] summary::after { content: "\2013"; }
-  details p { padding-bottom: 26px; color: var(--espresso-2); max-width: var(--medida); font-size: 1rem; }
-
-  /* ── fechamento ─────────────────────────────────────────── */
-  .fechamento { background: var(--espresso); color: var(--linho); }
-  .fechamento .interna { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(30px, 5vw, 64px); align-items: center; }
-  @media (max-width: 880px) { .fechamento .interna { grid-template-columns: 1fr; } }
-  .fechamento h2 { color: var(--linho); }
-  .fechamento h2 em { color: var(--terracota-cl); }
-  .fechamento p { margin-top: 20px; color: rgba(244,240,233,.72); max-width: 48ch; }
-  .fechamento .botao {
-    display: inline-block; margin-top: 30px; padding: 17px 36px; border-radius: 999px;
-    background: var(--linho); color: var(--espresso); font-weight: 600; font-size: 1rem;
-    transition: background .2s, transform .12s;
-  }
-  .fechamento .botao:hover { background: var(--terracota-cl); transform: translateY(-1px); }
-
-  /* ── zona corporativa: mesma tipografia, clima mais frio ── */
-  .corporativa { background: var(--neutro-frio); color: var(--chumbo); border-top: 1px solid var(--traco-frio); }
-  .corporativa .interna { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(26px, 5vw, 64px); align-items: center; }
-  @media (max-width: 880px) { .corporativa .interna { grid-template-columns: 1fr; } }
-  .corporativa .rotulo { color: var(--chumbo-2); }
-  .corporativa h2 { color: var(--chumbo); font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
-  .corporativa p { margin-top: 16px; color: var(--chumbo-2); max-width: 52ch; }
-  .corporativa .link {
-    display: inline-flex; align-items: center; gap: 9px; margin-top: 22px;
-    font-weight: 600; font-size: .98rem; color: var(--chumbo);
-    padding-bottom: 3px; border-bottom: 1px solid var(--chumbo);
-  }
-  .corporativa .link:hover { color: var(--terracota); border-bottom-color: var(--terracota); }
+  details p { padding-bottom: 24px; color: var(--espresso-2); max-width: var(--medida); font-size: 1.04rem; }
+  details p a { color: var(--terracota-tx); font-weight: 700; border-bottom: 1px solid currentColor; }
 
   /* ── rodapé ─────────────────────────────────────────────── */
-  footer.pe { background: var(--neutro-frio); border-top: 1px solid var(--traco-frio); padding: 42px 0 56px; font-size: .88rem; color: var(--chumbo-2); }
+  footer.pe { background: var(--neutro-frio); border-top: 1px solid var(--traco-frio); padding: 42px 0 56px; font-size: .92rem; color: var(--chumbo-2); }
   footer.pe .interna { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: flex-start; }
-  footer.pe nav { display: flex; flex-wrap: wrap; gap: 10px 26px; }
-  footer.pe a:hover { color: var(--terracota); }
-  .cnpj { font-size: .8rem; line-height: 1.7; margin-top: 10px; }
+  footer.pe nav { display: flex; flex-wrap: wrap; gap: 10px 26px; font-weight: 600; }
+  footer.pe a:hover { color: var(--terracota-tx); }
+  footer .psi { width: 28px; height: 28px; font-size: 1rem; border-color: var(--chumbo-2); color: var(--chumbo-2); }
+  footer .n1 { font-family: var(--serif); font-size: 1.1rem; color: var(--chumbo); }
+  .razao-social { font-size: .84rem; line-height: 1.7; margin-top: 10px; }
 
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
@@ -262,226 +325,397 @@
       <span class="n1">Mapa Comportamental</span>
     </a>
     <nav>
-      <a href="#padroes">Os quatro padrões</a>
-      <a href="#devolutiva">O que você recebe</a>
-      <a href="#perguntas">Perguntas</a>
-      <a href="/empresas.html">Para empresas</a>
-      <a href="/login">Entrar</a>
+      <a href="/?para=voce" data-para="pessoa">Para você</a>
+      <a href="/?para=empresa" data-para="empresa">Para empresas</a>
+      <a href="#canais">Canais de comunicação</a>
+      <a href="#plataforma">A plataforma</a>
+      <a class="entrar" href="/login">Entrar</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <!-- ═══════════ ABERTURA ═══════════ -->
-  <section class="abertura faixa">
+  <!-- ═══════════ ABERTURA HÍBRIDA ═══════════ -->
+  <section class="abertura faixa" id="topo">
     <div class="interna">
-      <div>
-        <p class="rotulo">O Teste do Silêncio · gratuito</p>
-        <h1 class="display">Não é falta de amor.<br />É falta de <em>tradução</em>.</h1>
-        <p class="chamada">
-          Descubra em poucos minutos o que acontece exatamente quando a conversa esquenta entre vocês,
-          e <b>por que ele parece parar de te escutar</b> bem na hora em que você mais precisa.
-        </p>
-
-        <div class="garantias">
-          <div><span class="marca-cheque">✓</span><span>Gratuito de verdade</span></div>
-          <div><span class="marca-cheque">✓</span><span>Sem cartão, sem senha, sem cadastro</span></div>
-          <div><span class="marca-cheque">✓</span><span>Resultado imediato na tela</span></div>
-        </div>
+      <div class="seletor" role="tablist" aria-label="Para quem é">
+        <button type="button" role="tab" id="aba-pessoa" aria-controls="painel-pessoa" aria-selected="true" data-para="pessoa">Minha carreira</button>
+        <button type="button" role="tab" id="aba-empresa" aria-controls="painel-empresa" aria-selected="false" data-para="empresa">Minha empresa</button>
       </div>
 
-      <div class="ficha" id="comecar">
-        <p class="titulo">Fazer o teste</p>
-        <p class="aux">Só o primeiro nome e o WhatsApp. O teste abre na sequência.</p>
-        <form id="form-teste" novalidate>
-          <div>
-            <label for="nome">Primeiro nome</label>
-            <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Como você quer ser chamada" required />
-          </div>
-          <div>
-            <label for="whats">WhatsApp</label>
-            <input id="whats" name="whats" type="tel" inputmode="tel" autocomplete="tel" placeholder="(31) 99999-9999" required />
-          </div>
-          <p class="erro" id="erro" hidden></p>
-          <button class="acao" type="submit" id="botao">Fazer o teste agora</button>
-          <p class="nota">
-            O resultado aparece na tela assim que você termina.
-            <a href="/politica-de-privacidade">Como tratamos seus dados</a>.
+      <!-- Profissional -->
+      <div class="painel" id="painel-pessoa" role="tabpanel" aria-labelledby="aba-pessoa">
+        <div>
+          <p class="rotulo">Para profissionais</p>
+          <h1 class="display">Talvez o problema não seja o seu emprego. Seja a <em>falta de clareza</em> sobre o seu perfil.</h1>
+          <p class="chamada">
+            Quem não conhece o próprio perfil troca de cargo, de empresa e até de profissão procurando alívio,
+            e muitas vezes vai parar numa função <b>tão incompatível quanto a anterior</b>. Antes de pedir demissão,
+            descubra como você decide, se comunica e reage sob pressão, e que tipo de trabalho combina de verdade com isso.
           </p>
-        </form>
+          <a class="atalho-celular" href="#comecar">Descobrir meu perfil grátis ↓</a>
+          <ul class="sintomas">
+            <li>Você chega na segunda-feira já cansado, sem conseguir explicar de quê.</li>
+            <li>Já trocou de emprego e o incômodo foi junto.</li>
+            <li>Pensa em mudar de área, mas não sabe para qual.</li>
+          </ul>
+          <a class="link-claro" href="#plataforma">Ver tudo o que a plataforma entrega ↓</a>
+        </div>
+
+        <div class="ficha" id="comecar">
+          <p class="titulo" id="ficha-titulo">Descubra seu perfil, grátis</p>
+          <p class="aux" id="ficha-aux">Teste de perfil comportamental DISC, de 10 a 15 minutos. Sem cartão, sem senha, sem cadastro.</p>
+          <form id="form-teste" novalidate>
+            <input type="hidden" id="teste" value="DISC" />
+            <div>
+              <label for="nome">Primeiro nome</label>
+              <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Como você quer ser chamado" required />
+            </div>
+            <div>
+              <label for="whats">WhatsApp</label>
+              <input id="whats" name="whats" type="tel" inputmode="tel" autocomplete="tel" placeholder="(31) 99999-9999" required />
+            </div>
+            <p class="erro" id="erro" hidden></p>
+            <button class="acao" type="submit" id="botao">Descobrir meu perfil agora</button>
+            <p class="nota">
+              O resultado aparece na tela assim que você termina.
+              <a href="/politica-de-privacidade">Como tratamos seus dados</a>.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Empresário -->
+      <div class="painel" id="painel-empresa" role="tabpanel" aria-labelledby="aba-empresa" hidden>
+        <div>
+          <p class="rotulo">Para empresários e gestores</p>
+          <h1 class="display">Cada contratação errada sai do seu caixa. E a <em>rotatividade</em> é a fatura chegando todo mês.</h1>
+          <p class="chamada">
+            Sem um RH estruturado, a escolha vira aposta: currículo bonito, entrevista simpática e intuição.
+            Três meses depois a pessoa não entrega, o time sobrecarrega e o processo recomeça do zero.
+            <b>Avalie o perfil do candidato antes de assinar</b> e pare de pagar duas vezes pela mesma vaga.
+          </p>
+          <a class="atalho-celular" href="/register">Criar conta da empresa</a>
+          <ul class="sintomas">
+            <li>Gente que brilha na entrevista e decepciona na rotina.</li>
+            <li>A mesma vaga reabrindo a cada poucos meses.</li>
+            <li>Equipe sobrecarregada cobrindo quem saiu, até o próximo pedir para sair.</li>
+          </ul>
+          <a class="link-claro" href="#custo">Calcular quanto isso já custou ↓</a>
+        </div>
+
+        <div class="ficha">
+          <p class="titulo">Avalie seu primeiro candidato</p>
+          <p class="aux">Crie a conta da empresa, envie o link da avaliação e receba o relatório quando ele terminar. Os créditos de cortesia do cadastro pagam a primeira avaliação.</p>
+          <ul class="entregas">
+            <li>Como o candidato decide e reage sob pressão</li>
+            <li>Como ele se comunica e o que o motiva de verdade</li>
+            <li>Pontos de atenção antes da contratação, não depois</li>
+          </ul>
+          <a class="acao" href="/register" style="margin-top:24px">Criar conta da empresa</a>
+          <a class="secundario" href="/empresas.html">Conhecer a plataforma para empresas</a>
+          <p class="nota" style="margin-top:12px; text-align:center">Sem cartão de crédito para começar.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ OS QUATRO PADRÕES ═══════════ -->
-  <section class="faixa faixa-linho" id="padroes">
+  <!-- ═══════════ O PROBLEMA ═══════════ -->
+  <section class="faixa carta-papel" id="plataforma">
     <div class="interna">
       <div class="cabecalho-secao">
-        <p class="rotulo">O diagnóstico</p>
-        <h2 class="display" style="margin-top:16px">Quando a discussão aperta, todo mundo escorrega para um destes <em>quatro lugares</em>.</h2>
+        <p class="rotulo">O que está por trás</p>
+        <h2 class="display" style="margin-top:16px">Todo padrão que você não enxerga <em>cobra juros</em>.</h2>
         <p class="apoio">
-          Ninguém escolhe conscientemente. É automático, aprendido cedo, e costuma aparecer sempre no mesmo
-          ponto do conflito. Reconhecer o seu é o que muda a conversa seguinte.
+          Na carreira e na empresa, os problemas que mais se repetem quase nunca são falta de esforço.
+          São padrões de comportamento que ninguém nomeou: como cada pessoa decide, se comunica,
+          reage sob pressão e o que a motiva de verdade.
         </p>
       </div>
 
-      <div class="padroes">
-        <article class="padrao">
-          <div>
-            <p class="nome">A Passiva</p>
-            <span class="fala">"Deixa, não vale a pena começar de novo."</span>
-          </div>
-          <p class="efeito">Você engole para manter a paz. A conta chega semanas depois, com juros.</p>
-        </article>
+      <div class="dores">
+        <div class="dor-coluna">
+          <h3>Na sua carreira</h3>
+          <ul>
+            <li>A carreira trava sempre no mesmo ponto, mesmo trocando de chefe, de empresa, de cidade.</li>
+            <li>Você aceita a vaga pelo salário ou pelo cargo e descobre, meses depois, que a rotina não tem nada a ver com você.</li>
+            <li>Você se esforça o dobro para ser entendido pela metade.</li>
+          </ul>
+        </div>
+        <div class="dor-coluna">
+          <h3>Na sua empresa</h3>
+          <ul>
+            <li>O candidato que brilhou na entrevista e decepcionou em noventa dias.</li>
+            <li>O melhor técnico, promovido a gestor, que esvaziou o próprio time.</li>
+            <li>A rotatividade que ninguém mede, mas que todo mundo sente no caixa e no clima.</li>
+          </ul>
+        </div>
+      </div>
 
-        <article class="padrao">
-          <div>
-            <p class="nome">A Agressiva</p>
-            <span class="fala">"Você nunca me escuta, nunca mesmo."</span>
-          </div>
-          <p class="efeito">A frase é verdadeira para o que você sente, mas soa como ataque para ele. A defesa sobe e o assunto morre.</p>
-        </article>
+      <p class="virada">Nenhum desses problemas é falta de esforço. É falta de <em>leitura</em>.</p>
+    </div>
+  </section>
 
-        <article class="padrao">
-          <div>
-            <p class="nome">A Passivo-agressiva</p>
-            <span class="fala">"Não, tá tudo bem." E não está.</span>
-          </div>
-          <p class="efeito">O recado vai pelo tom, pelo silêncio, pela porta fechada. Ele sente que errou, mas não sabe em quê.</p>
-        </article>
+  <!-- ═══════════ CANAIS DE COMUNICAÇÃO ═══════════ -->
+  <section class="faixa carta-linho" id="canais">
+    <div class="interna">
+      <div class="cabecalho-secao">
+        <p class="rotulo">Canais de comunicação</p>
+        <h2 class="display" style="margin-top:16px">O mesmo recado chega inteiro para uma pessoa e <em>se perde</em> para outra.</h2>
+        <p class="apoio">
+          Não é falta de atenção nem de inteligência. Cada pessoa capta o mundo por um canal preferido,
+          e quando a mensagem chega pelo canal errado, ela simplesmente não fica. Conhecer o seu canal,
+          e o de quem está do outro lado, muda a forma de aprender, de ensinar, de vender e de liderar.
+        </p>
+      </div>
 
-        <article class="padrao">
-          <div>
-            <p class="nome">A Assertiva</p>
-            <span class="fala">"Quando você fez isso, eu me senti sozinha."</span>
-          </div>
-          <p class="efeito">O único dos quatro em que o outro consegue responder ao que você realmente disse, sem precisar se defender.</p>
+      <div class="canais">
+        <article class="canal">
+          <span class="sigla" aria-hidden="true">V</span>
+          <h3>Visual</h3>
+          <p class="frase">Precisa ver para entender.</p>
+          <p>Pede para mostrar, rabisca enquanto pensa, diz "veja bem" e "ficou claro". Perde o fio numa explicação longa e só falada.</p>
+          <p class="como"><b>Como alcançar</b>Mostre: esquema, exemplo, imagem, o resultado antes do caminho.</p>
         </article>
+        <article class="canal">
+          <span class="sigla" aria-hidden="true">A</span>
+          <h3>Auditivo</h3>
+          <p class="frase">Precisa ouvir e conversar.</p>
+          <p>Lembra de falas inteiras, pensa em voz alta, diz "escuta só" e "isso me soa bem". Um e-mail frio não convence. Uma conversa, sim.</p>
+          <p class="como"><b>Como alcançar</b>Converse: explique em voz alta, abra espaço para perguntas, cuide do tom.</p>
+        </article>
+        <article class="canal">
+          <span class="sigla" aria-hidden="true">S</span>
+          <h3>Sinestésico</h3>
+          <p class="frase">Precisa fazer e sentir.</p>
+          <p>Aprende na prática, decide pelo que sente, diz "sinto que" e "vamos testar". Desliga em reunião longa e parada.</p>
+          <p class="como"><b>Como alcançar</b>Envolva: deixe experimentar, use exemplos concretos, mostre o impacto real.</p>
+        </article>
+      </div>
+
+      <div class="importancia">
+        <div>
+          <h3>Por que isso importa mais do que parece.</h3>
+          <div class="botoes">
+            <button type="button" class="btn btn-cheio" data-teste="VAC">Descobrir meu canal, grátis</button>
+          </div>
+          <p class="nota" style="margin-top:12px">Teste VAC, de 8 a 12 minutos. Sem cadastro.</p>
+        </div>
+        <ul class="usos">
+          <li><b>Na carreira.</b> Você rende mais numa função que conversa com o seu canal. Boa parte da insatisfação no trabalho é passar o dia inteiro no canal errado.</li>
+          <li><b>Na liderança.</b> A instrução que você dá do seu jeito pode ser exatamente a que o seu liderado não consegue absorver. Aí parece desinteresse, e é só desencontro.</li>
+          <li><b>Nas vendas e no atendimento.</b> O cliente compra quando a explicação chega pelo canal dele. Mesmo produto, mesmo preço, resultado diferente.</li>
+          <li><b>Em casa.</b> Muito do "você nunca me escuta" é canal desencontrado, não falta de afeto.</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ A DEVOLUTIVA ═══════════ -->
-  <section class="faixa" id="devolutiva">
-    <div class="interna">
-      <div class="cabecalho-secao">
-        <p class="rotulo">A devolutiva</p>
-        <h2 class="display" style="margin-top:16px">O que chega para você no fim da leitura</h2>
-        <p class="apoio">Não é um rótulo simplista. É um retrato claro do que acontece com você no meio do atrito.</p>
+  <!-- ═══════════ O CUSTO REAL ═══════════ -->
+  <section class="faixa carta-papel" id="custo">
+    <div class="interna custo">
+      <div>
+        <p class="rotulo">O custo real</p>
+        <h2 class="display" style="margin-top:16px">Quanto isso já custou? <em>Faça a conta</em> com os seus números.</h2>
+        <p class="apoio" style="margin-top:20px">
+          Pense na última contratação que não deu certo e preencha a calculadora com valores aproximados.
+          Ninguém vê esses números além de você: a conta é feita aqui mesmo, na sua tela.
+        </p>
+        <div class="nota-pessoal">
+          <b>Na carreira, a fatura não chega só em reais.</b> Chega em anos no lugar errado. Em promoções que não vieram.
+          Em energia gasta numa função que nunca ia combinar com você, por mais que você se esforçasse.
+        </div>
       </div>
 
-      <div class="entrega">
-        <div class="entrega-item">
-          <span class="ordem">01</span>
+      <div class="calc">
+        <p class="titulo">Uma contratação errada custa quanto?</p>
+        <form id="calc" onsubmit="return false">
           <div>
-            <h3>Seu termômetro</h3>
-            <p>Quanto da sua comunicação é assertiva de fato, e qual dos três desvios aparece primeiro quando o clima pesa.</p>
+            <label for="c-salario">Salário mensal da pessoa (R$)</label>
+            <input id="c-salario" type="number" inputmode="numeric" min="0" step="100" value="3000" />
           </div>
-        </div>
-        <div class="entrega-item">
-          <span class="ordem">02</span>
+          <div class="linha-2">
+            <div>
+              <label for="c-perceber">Meses até perceber</label>
+              <input id="c-perceber" type="number" inputmode="numeric" min="0" step="1" value="3" />
+            </div>
+            <div>
+              <label for="c-repor">Meses para repor</label>
+              <input id="c-repor" type="number" inputmode="numeric" min="0" step="1" value="2" />
+            </div>
+          </div>
           <div>
-            <h3>Seu estilo</h3>
-            <p>Se você organiza a discussão por lógica, por emoção, por ação ou por intuição. É o que explica por que vocês parecem falar línguas completamente diferentes.</p>
+            <label for="c-rescisao">Rescisão e encargos do desligamento (R$)</label>
+            <input id="c-rescisao" type="number" inputmode="numeric" min="0" step="100" value="3000" />
           </div>
+        </form>
+
+        <div class="resultado" aria-live="polite">
+          <p class="k">Custo direto de uma única contratação errada</p>
+          <p class="valor" id="c-total">R$ 18.000</p>
+          <p class="formula">salário × (meses até perceber + meses para repor) + rescisão</p>
         </div>
-        <div class="entrega-item">
-          <span class="ordem">03</span>
-          <div>
-            <h3>Seu ponto cego</h3>
-            <p>A frase ou o gesto que você repete sem perceber e que, do outro lado, chega com um sentido totalmente distorcido.</p>
-          </div>
-        </div>
+
+        <p class="fora-da-conta">
+          E essa conta ainda deixa de fora o cliente mal atendido, o colega que fez o trabalho dobrado,
+          o clima do time e as horas que você gastou tentando consertar o que não tinha conserto.
+          Agora multiplique pelas vagas que reabriram no último ano.
+        </p>
+        <a class="link-forte" href="/precos">Compare com o custo de avaliar antes de contratar →</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ COMO FUNCIONA ═══════════ -->
-  <section class="faixa faixa-linho">
+  <!-- ═══════════ TEMPO E INAÇÃO ═══════════ -->
+  <section class="faixa tempo">
+    <div class="interna">
+      <div class="pergunta-dura">
+        <h2>Há quanto tempo isso <em>incomoda você</em>?</h2>
+        <p>
+          Seja honesto. Não é de agora. Você reconhece o padrão porque ele já apareceu antes: em outro emprego,
+          em outra equipe, em outra contratação. Seis meses? Dois anos? Desde que você se entende por gente?
+        </p>
+      </div>
+      <div class="pergunta-dura">
+        <h2>E por quanto tempo mais você vai <em>tolerar</em>?</h2>
+        <p>
+          Padrão sem nome não desaparece com o tempo. Ele se acomoda. A cada mês, ensina para todo mundo à sua
+          volta que é assim que as coisas funcionam com você, e fica mais difícil de mudar.
+        </p>
+      </div>
+      <div class="pergunta-dura">
+        <h2>O que acontece se você <em>deixar como está</em>?</h2>
+        <ul class="inacao">
+          <li>Você troca de emprego de novo e leva o mesmo incômodo na mudança.</li>
+          <li>A próxima contratação vai ser feita exatamente como a última que deu errado.</li>
+          <li>Você continua pagando a conta sem ver a fatura: em rotatividade, em retrabalho, em anos no lugar errado.</li>
+          <li>E daqui a um ano você vai ler uma página como esta, com o mesmo problema e um ano a menos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ A DECISÃO ═══════════ -->
+  <section class="faixa carta-linho">
     <div class="interna">
       <div class="cabecalho-secao">
-        <p class="rotulo">Como funciona</p>
-        <h2 class="display" style="margin-top:16px">Três passos, menos de cinco minutos</h2>
+        <p class="rotulo">A decisão</p>
+        <h2 class="display" style="margin-top:16px">Agora imagine o contrário: <em>você decide resolver</em>.</h2>
+        <p class="apoio">É isso que muda quando o comportamento deixa de ser palpite e passa a ter nome, medida e direção.</p>
       </div>
-      <div class="passos">
-        <div class="passo">
-          <p class="k">Passo 1</p>
-          <p>Você deixa <b>nome e WhatsApp</b>. Sem senha, sem cadastro, sem compromisso.</p>
+
+      <div class="ganhos">
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você escolhe a carreira com critério</h3>
+          <p>Sabe que tipo de função, rotina e ambiente combinam com o seu perfil, antes do próximo pedido de demissão.</p>
         </div>
-        <div class="passo">
-          <p class="k">Passo 2</p>
-          <p>Responde a <b>situações reais</b> do dia a dia: a conversa que trava, a mensagem que não foi respondida, o tom que subiu.</p>
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você contrata sabendo quem está contratando</h3>
+          <p>Como a pessoa decide, se comunica e reage sob pressão. Antes da assinatura, não depois da rescisão.</p>
         </div>
-        <div class="passo">
-          <p class="k">Passo 3</p>
-          <p>Recebe a <b>devolutiva completa</b> na hora, na tela, com o seu padrão nomeado e explicado.</p>
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você lidera cada um do jeito que ele rende</h3>
+          <p>Não do jeito que você renderia. O mesmo feedback que motiva um derruba outro, e o relatório mostra qual é qual.</p>
+        </div>
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você se comunica pelo canal certo</h3>
+          <p>Com a equipe, com o cliente e em casa. A mensagem para de se perder no caminho.</p>
+        </div>
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você mapeia os riscos psicossociais da NR-1</h3>
+          <p>Diagnóstico estruturado por equipe, com relatório para documentar e agir no que aparecer.</p>
+        </div>
+        <div class="ganho">
+          <span class="ok" aria-hidden="true">✓</span>
+          <h3>Você decide com dado, não com achismo</h3>
+          <p>Cada avaliação vira uma devolutiva completa, com diagnóstico, pontos cegos e direcionamento.</p>
         </div>
       </div>
+
+      <div class="inventario">
+        <div>
+          <p class="rotulo">Tudo o que está dentro</p>
+          <h3 style="margin-top:14px">Uma plataforma, todas as leituras que importam.</h3>
+        </div>
+        <ul class="itens">
+          <li>
+            <b>Quinze avaliações reconhecidas</b>
+            <div class="chips">
+              <span>DISC</span><span>Big Five</span><span>MBTI</span><span>Eneagrama</span><span>4 Temperamentos</span>
+              <span>Inteligência Emocional</span><span>Liderança Situacional</span><span>Mapa da Comunicação</span>
+              <span>Âncoras de Carreira</span><span>5 Linguagens do Amor</span><span>Arquétipos</span>
+              <span>Arquétipos Femininos</span><span>VAC Sensorial</span><span>QMT Triádico</span><span>Raciocínio Lógico</span>
+            </div>
+          </li>
+          <li><b>Devolutiva completa em PDF</b>Diagnóstico, pontos cegos e direcionamento prático, não um rótulo de quatro letras.</li>
+          <li><b>Análise premium</b>Aprofundamento por perfil e plano de desenvolvimento para as primeiras semanas.</li>
+          <li><b>Painel para empresas</b>Link para candidatos, relatório por colaborador e diagnóstico psicossocial da NR-1.</li>
+          <li><b>Do seu jeito</b>Créditos avulsos para usar quando precisar, ou assinatura para quem avalia sempre.</li>
+        </ul>
+      </div>
+
+      <div class="portas">
+        <div class="porta porta-clara">
+          <p class="k">Para sua carreira</p>
+          <h3>Comece pelo seu perfil.</h3>
+          <p>Faça agora o teste de perfil gratuito, ou crie sua conta e escolha a avaliação que você quer primeiro.</p>
+          <div class="botoes">
+            <button type="button" class="btn btn-cheio" data-teste="DISC">Descobrir meu perfil grátis</button>
+            <a class="btn btn-vazado" href="/register">Criar conta grátis</a>
+          </div>
+        </div>
+        <div class="porta porta-escura">
+          <p class="k">Para sua empresa</p>
+          <h3>Pare de contratar no escuro.</h3>
+          <p>Avalie candidatos e equipes com relatório por colaborador, sem precisar de um RH estruturado para isso.</p>
+          <div class="botoes">
+            <a class="btn btn-cheio" href="/register">Criar conta da empresa</a>
+            <a class="btn btn-vazado" href="/precos">Ver planos</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="ultima-frase">Não decidir também é uma decisão. Só que é a mais cara de todas.</p>
     </div>
   </section>
 
   <!-- ═══════════ PERGUNTAS ═══════════ -->
-  <section class="faixa" id="perguntas">
+  <section class="faixa carta-papel" id="perguntas">
     <div class="interna coluna">
       <p class="rotulo">Antes de começar</p>
       <h2 class="display" style="margin-top:16px">O que costumam perguntar</h2>
 
       <div class="perguntas">
         <details>
-          <summary>O Teste do Silêncio é gratuito mesmo?</summary>
-          <p>É. O teste e a devolutiva completa não custam nada e não pedem cartão. Existem materiais mais profundos na plataforma, como a Tradução Íntima, mas nada aqui depende deles.</p>
+          <summary>Os testes gratuitos são gratuitos mesmo?</summary>
+          <p>São. O teste de perfil (DISC) e o de canal de comunicação (VAC) não pedem cartão nem senha, e a devolutiva aparece na tela assim que você termina. As avaliações mais profundas da plataforma são pagas, e você só usa se quiser.</p>
         </details>
         <details>
           <summary>Por que vocês pedem meu WhatsApp?</summary>
           <p>O resultado aparece na tela na hora, sem depender dele. O WhatsApp é o canal por onde a gente conversa se você quiser ir mais fundo depois. Zero spam, zero revenda de dados. Se quiser sair, basta uma mensagem.</p>
         </details>
         <details>
+          <summary>Isso substitui orientação vocacional ou terapia?</summary>
+          <p>Não. É autoconhecimento estruturado em modelos reconhecidos de comportamento. Ajuda a enxergar o seu perfil com clareza e a tomar decisões melhores, mas não é diagnóstico clínico nem substitui um profissional.</p>
+        </details>
+        <details>
+          <summary>Como funciona para empresas?</summary>
+          <p>Você cria a conta da empresa, envia o link da avaliação para o candidato ou colaborador e recebe o relatório completo quando ele termina. Ao se cadastrar, a empresa ganha créditos de cortesia suficientes para a primeira avaliação. Depois, escolhe entre créditos avulsos ou assinatura.</p>
+        </details>
+        <details>
           <summary>Quanto tempo leva?</summary>
-          <p>São oito situações, entre três e cinco minutos, direto pelo celular. Dá para fazer numa pausa, mas responder com calma muda a precisão do resultado.</p>
+          <p>O teste de perfil leva de 10 a 15 minutos, e o de canal de comunicação, de 8 a 12. Dá para fazer pelo celular, mas responder com calma muda a precisão do resultado.</p>
         </details>
         <details>
-          <summary>Isso substitui terapia?</summary>
-          <p>Não. É uma ferramenta de autoconhecimento estruturada em modelos reconhecidos de comunicação, incluindo a Comunicação Não Violenta. Serve para iluminar um padrão prático, não para tratar questões profundas.</p>
+          <summary>Ainda dá para fazer o Teste do Silêncio?</summary>
+          <p>Dá. Ele continua em <a href="/silencio">mapacomportamental.com/silencio</a>, para quem quer entender o que acontece quando a conversa esquenta no relacionamento.</p>
         </details>
-        <details>
-          <summary>Meu parceiro precisa fazer também?</summary>
-          <p>Não precisa. O padrão que muda a dinâmica da relação mais rápido é o seu, porque é o único que você controla. Muita mulher descobre que, ao mudar a própria forma de abrir a conversa, a resposta do outro muda junto.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ FECHAMENTO ═══════════ -->
-  <section class="faixa fechamento">
-    <div class="interna">
-      <div>
-        <h2 class="display">A próxima discussão <em>já está marcada</em>.</h2>
-        <p>
-          Ela vai acontecer, como sempre acontece. A única diferença é você chegar nela sabendo
-          exatamente o que costuma fazer, e podendo escolher um caminho diferente.
-        </p>
-      </div>
-      <div>
-        <a class="botao" href="#comecar">Fazer o Teste do Silêncio</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ ZONA CORPORATIVA ═══════════ -->
-  <section class="faixa corporativa" style="padding: clamp(52px, 6vw, 76px) 0">
-    <div class="interna">
-      <div>
-        <p class="rotulo">Para empresas</p>
-        <h2 class="display" style="margin-top:14px">A mesma leitura, aplicada a times.</h2>
-      </div>
-      <div>
-        <p>
-          Avaliação comportamental para contratação, desenvolvimento de liderança, diagnóstico
-          psicossocial da NR-1 e gestão de equipes. Quinze instrumentos, devolutiva completa
-          e relatório por colaborador.
-        </p>
-        <a class="link" href="/empresas.html">Ver a plataforma corporativa</a>
       </div>
     </div>
   </section>
@@ -491,8 +725,8 @@
 <footer class="pe">
   <div class="interna">
     <div>
-      <div class="marca"><span class="psi psi-pe" aria-hidden="true">Ψ</span><span class="n1" style="font-size:1.1rem">Mapa Comportamental</span></div>
-      <p class="cnpj">
+      <div class="marca"><span class="psi" aria-hidden="true">Ψ</span><span class="n1">Mapa Comportamental</span></div>
+      <p class="razao-social">
         KAN PARTICIPAÇÕES LTDA · CNPJ 67.585.002/0001-60<br />
         contato@mapacomportamental.com
       </p>
@@ -500,6 +734,7 @@
     <nav>
       <a href="/empresas.html">Para empresas</a>
       <a href="/precos">Planos</a>
+      <a href="/silencio">Teste do Silêncio</a>
       <a href="/login">Entrar</a>
       <a href="/politica-de-privacidade">Privacidade</a>
       <a href="/termos-de-uso">Termos</a>
@@ -509,14 +744,71 @@
 </footer>
 
 <script>
+/* ── Abertura: seletor carreira / empresa ── */
 (function () {
-  var TESTE = 'SILENCIO';
+  var paineis = { pessoa: document.getElementById('painel-pessoa'), empresa: document.getElementById('painel-empresa') };
+  var abas = { pessoa: document.getElementById('aba-pessoa'), empresa: document.getElementById('aba-empresa') };
 
-  function soDigitos(s) { return (s || '').replace(/\D+/g, ''); }
+  function mostrar(qual, rolar) {
+    if (!paineis[qual]) return;
+    Object.keys(paineis).forEach(function (k) {
+      var ativo = k === qual;
+      paineis[k].hidden = !ativo;
+      abas[k].setAttribute('aria-selected', ativo ? 'true' : 'false');
+    });
+    if (rolar) document.getElementById('topo').scrollIntoView({ behavior: 'smooth' });
+  }
 
+  document.querySelectorAll('[data-para]').forEach(function (el) {
+    el.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      mostrar(el.getAttribute('data-para'), el.tagName === 'A');
+    });
+  });
+
+  var para = new URLSearchParams(window.location.search).get('para');
+  if (para === 'empresa') mostrar('empresa', false);
+})();
+
+/* ── Formulário do teste gratuito (DISC por padrão, VAC pela seção de canais) ── */
+(function () {
+  var TEXTOS = {
+    DISC: {
+      titulo: 'Descubra seu perfil, grátis',
+      aux: 'Teste de perfil comportamental DISC, de 10 a 15 minutos. Sem cartão, sem senha, sem cadastro.',
+      botao: 'Descobrir meu perfil agora'
+    },
+    VAC: {
+      titulo: 'Descubra seu canal de comunicação',
+      aux: 'Teste VAC: visual, auditivo ou sinestésico. De 8 a 12 minutos, sem cartão e sem cadastro.',
+      botao: 'Descobrir meu canal agora'
+    }
+  };
+
+  var campoTeste = document.getElementById('teste');
   var form  = document.getElementById('form-teste');
   var erro  = document.getElementById('erro');
   var botao = document.getElementById('botao');
+
+  function escolher(teste) {
+    var t = TEXTOS[teste] ? teste : 'DISC';
+    campoTeste.value = t;
+    document.getElementById('ficha-titulo').textContent = TEXTOS[t].titulo;
+    document.getElementById('ficha-aux').textContent = TEXTOS[t].aux;
+    botao.textContent = TEXTOS[t].botao;
+  }
+
+  document.querySelectorAll('[data-teste]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      escolher(el.getAttribute('data-teste'));
+      var painel = document.getElementById('painel-pessoa');
+      if (painel.hidden) document.getElementById('aba-pessoa').click();
+      document.getElementById('comecar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function () { document.getElementById('nome').focus({ preventScroll: true }); }, 500);
+    });
+  });
+
+  function soDigitos(s) { return (s || '').replace(/\D+/g, ''); }
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
@@ -536,7 +828,7 @@
     fetch('/api/experimente/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName: nome, whatsapp: whats, src: 'home', testTypes: [TESTE] })
+      body: JSON.stringify({ firstName: nome, whatsapp: whats, src: 'home', testTypes: [campoTeste.value] })
     })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
       .then(function (res) {
@@ -549,6 +841,26 @@
         botao.disabled = false; botao.textContent = textoOriginal;
       });
   });
+})();
+
+/* ── Calculadora do custo de uma contratação errada (roda só no navegador) ── */
+(function () {
+  var reais = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  var saida = document.getElementById('c-total');
+  if (!saida) return;
+
+  function valor(id) {
+    var n = parseFloat(document.getElementById(id).value);
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+  function calcular() {
+    var total = valor('c-salario') * (valor('c-perceber') + valor('c-repor')) + valor('c-rescisao');
+    saida.textContent = reais.format(total);
+  }
+  ['c-salario', 'c-perceber', 'c-repor', 'c-rescisao'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', calcular);
+  });
+  calcular();
 })();
 </script>
 

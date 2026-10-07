@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>O Teste do Silêncio | Mapa Comportamental</title>
+<meta name="description" content="Descubra em poucos minutos o que acontece quando a conversa esquenta entre vocês, e por que ele parece parar de te escutar bem na hora em que você mais precisa. Gratuito, sem cadastro." />
+<link rel="canonical" href="https://mapacomportamental.com/silencio" />
+
+<meta property="og:title" content="Não é falta de amor. É falta de tradução." />
+<meta property="og:description" content="Descubra o que acontece quando a conversa esquenta entre vocês, e por que ele parece parar de te escutar bem na hora em que você mais precisa." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://mapacomportamental.com/silencio" />
+<meta property="og:image" content="https://mapacomportamental.com/og-mapa.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://mapacomportamental.com/og-mapa.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Albert+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  /* ══════════════════════════════════════════════════════════
+     Identidade
+     Zona feminina  · linho, espresso, terracota queimada
+     Zona corporativa · mesma tipografia e base, tom chumbo
+     ══════════════════════════════════════════════════════════ */
+  :root {
+    --linho:        #F5ECDD;
+    --linho-fundo:  #EDE1CE;
+    --papel:        #FDF8EF;
+    --traco:        #DCCDB6;
+    --traco-forte:  #BFAB8D;
+    --espresso:     #1B1410;
+    --espresso-2:   #4A3A2C;
+    --espresso-3:   #6B5744;
+    --terracota:    #B3663F;
+    --terracota-cl: #E0B368;
+
+    --chumbo:       #0C0F14;
+    --chumbo-2:     #5A6373;
+    --neutro-frio:  #F2EDE2;
+    --traco-frio:   #D8D0BF;
+
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans:  "Albert Sans", "Segoe UI", system-ui, sans-serif;
+
+    --medida: 62ch;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--linho);
+    color: var(--espresso);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--terracota); color: var(--papel); }
+  :focus-visible { outline: 2px solid var(--terracota); outline-offset: 3px; border-radius: 3px; }
+
+  .faixa { width: 100%; }
+  .interna { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .coluna  { max-width: 680px; }
+
+  /* ── tipografia ─────────────────────────────────────────── */
+  .display {
+    font-family: var(--serif); font-weight: 460; font-style: normal;
+    line-height: 1.04; letter-spacing: -.012em; text-wrap: balance;
+  }
+  h1.display { font-size: clamp(2.4rem, 5vw, 3.75rem); }
+  h2.display { font-size: clamp(1.95rem, 4vw, 3rem); line-height: 1.1; }
+  .display em { font-style: italic; color: var(--terracota); }
+
+  .rotulo {
+    font-size: .78rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--terracota);
+  }
+  .apoio { color: var(--espresso-2); font-size: 1.07rem; max-width: var(--medida); }
+
+  /* ── cabeçalho ──────────────────────────────────────────── */
+  header.topo { border-bottom: 1px solid var(--traco); background: var(--linho); }
+  .topo .interna { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
+  .marca { display: flex; align-items: center; gap: 11px; }
+  .psi {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--terracota); color: var(--terracota);
+    font-family: var(--serif); font-size: 1.15rem; line-height: 1; padding-bottom: 2px; flex-shrink: 0;
+  }
+  .psi-pe { width: 28px; height: 28px; font-size: 1rem; border-color: var(--chumbo-2); color: var(--chumbo-2); }
+  .marca .n1 { font-family: var(--serif); font-size: 1.32rem; letter-spacing: -.01em; }
+  .marca .n2 { font-size: .66rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--espresso-3); }
+  .topo nav { display: flex; gap: 30px; font-size: .93rem; font-weight: 500; color: var(--espresso-2); }
+  .topo nav a { padding-bottom: 2px; border-bottom: 1px solid transparent; transition: border-color .2s, color .2s; }
+  .topo nav a:hover { color: var(--espresso); border-bottom-color: var(--terracota); }
+  @media (max-width: 860px) { .topo nav { display: none; } }
+
+  /* ── abertura ───────────────────────────────────────────── */
+  .abertura { padding: clamp(56px, 8vw, 104px) 0 clamp(48px, 7vw, 88px); }
+  .abertura .interna {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr);
+    gap: clamp(36px, 6vw, 76px); align-items: start;
+  }
+  @media (max-width: 940px) { .abertura .interna { grid-template-columns: 1fr; } }
+
+  .abertura h1 { margin-top: 22px; }
+  .abertura .chamada { margin-top: 26px; font-size: clamp(1.06rem, 1.7vw, 1.22rem); color: var(--espresso-2); max-width: 46ch; }
+  .abertura .chamada b { color: var(--espresso); font-weight: 600; }
+
+  .garantias { margin-top: 30px; display: flex; flex-direction: column; gap: 11px; }
+  .garantias div { display: flex; align-items: baseline; gap: 11px; font-size: .96rem; color: var(--espresso-2); }
+  .garantias .marca-cheque {
+    font-family: var(--serif); font-size: 1.05rem; color: var(--terracota); line-height: 1; flex-shrink: 0;
+  }
+
+  /* ── formulário ─────────────────────────────────────────── */
+  .ficha {
+    background: var(--papel);
+    border: 1px solid var(--traco);
+    border-radius: 14px;
+    padding: clamp(26px, 3vw, 34px);
+    box-shadow: 0 1px 1px rgba(43,33,27,.03), 0 12px 34px -22px rgba(43,33,27,.28);
+    position: sticky; top: 24px;
+  }
+  @media (max-width: 940px) { .ficha { position: static; } }
+  .ficha .titulo { font-family: var(--serif); font-size: 1.5rem; line-height: 1.15; }
+  .ficha .aux { margin-top: 7px; font-size: .9rem; color: var(--espresso-3); }
+  form { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+  label { display: block; font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--espresso-3); margin-bottom: 7px; }
+  input {
+    width: 100%; padding: 13px 2px; font-size: 1.02rem; font-family: var(--sans); color: var(--espresso);
+    background: transparent; border: none; border-bottom: 1px solid var(--traco-forte);
+    border-radius: 0; transition: border-color .2s;
+  }
+  input::placeholder { color: #7C6650; }
+  input:focus { outline: none; border-bottom-color: var(--terracota); }
+  button.acao {
+    margin-top: 8px; width: 100%; padding: 16px 22px; border: none; border-radius: 999px; cursor: pointer;
+    font-family: var(--sans); font-size: 1rem; font-weight: 600; letter-spacing: .01em;
+    background: var(--espresso); color: var(--papel);
+    transition: background .2s, transform .12s;
+  }
+  button.acao:hover { background: var(--terracota); transform: translateY(-1px); }
+  button.acao:disabled { opacity: .55; cursor: wait; transform: none; }
+  .nota { font-size: .82rem; color: var(--espresso-3); line-height: 1.55; }
+  .nota a { border-bottom: 1px solid var(--traco-forte); }
+  .erro { font-size: .9rem; color: #A33A2A; }
+
+  /* ── seções ─────────────────────────────────────────────── */
+  section { padding: clamp(60px, 9vw, 116px) 0; }
+  .faixa-linho { background: var(--linho-fundo); }
+  .cabecalho-secao { max-width: 780px; }
+  .cabecalho-secao .apoio { margin-top: 20px; }
+
+  /* ── os quatro padrões: lista editorial, não cards ─────── */
+  .padroes { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--traco); }
+  .padrao {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(18px, 4vw, 56px);
+    padding: clamp(28px, 3.5vw, 40px) 0;
+    border-bottom: 1px solid var(--traco);
+    align-items: baseline;
+  }
+  @media (max-width: 780px) { .padrao { grid-template-columns: 1fr; gap: 14px; } }
+  .padrao:nth-child(even) { padding-left: clamp(0px, 5vw, 76px); }
+  .padrao .nome {
+    font-family: var(--serif); font-size: clamp(1.4rem, 2.4vw, 1.85rem); line-height: 1.15;
+  }
+  .padrao .fala {
+    display: block; margin-top: 10px;
+    font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--terracota); line-height: 1.3;
+  }
+  .padrao .efeito { color: var(--espresso-2); font-size: 1.02rem; }
+
+  /* ── devolutiva: lista numerada com respiro ─────────────── */
+  .entrega { margin-top: clamp(40px, 5vw, 60px); display: flex; flex-direction: column; }
+  .entrega-item {
+    display: grid; grid-template-columns: 74px minmax(0, 1fr);
+    gap: clamp(14px, 3vw, 34px);
+    padding: 30px 0; border-top: 1px solid var(--traco);
+  }
+  .entrega-item:last-child { border-bottom: 1px solid var(--traco); }
+  @media (max-width: 640px) { .entrega-item { grid-template-columns: 1fr; gap: 8px; } }
+  .entrega-item .ordem { font-family: var(--serif); font-size: 2rem; color: var(--traco-forte); line-height: 1; }
+  .entrega-item h3 { font-family: var(--serif); font-size: 1.42rem; font-weight: 400; line-height: 1.2; }
+  .entrega-item p { margin-top: 9px; color: var(--espresso-2); font-size: 1.02rem; max-width: 56ch; }
+
+  /* ── passos ─────────────────────────────────────────────── */
+  .passos { margin-top: clamp(36px, 4.5vw, 52px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
+  @media (max-width: 760px) { .passos { grid-template-columns: 1fr; gap: 26px; } }
+  .passo { border-top: 2px solid var(--espresso); padding-top: 18px; }
+  .passo .k { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--terracota); }
+  .passo p { margin-top: 10px; color: var(--espresso-2); font-size: 1rem; }
+  .passo b { color: var(--espresso); font-weight: 600; }
+
+  /* ── perguntas ──────────────────────────────────────────── */
+  .perguntas { margin-top: clamp(34px, 4vw, 48px); border-top: 1px solid var(--traco); }
+  details { border-bottom: 1px solid var(--traco); }
+  summary {
+    list-style: none; cursor: pointer; padding: 24px 0;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+    font-size: 1.08rem; font-weight: 600;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; font-family: var(--serif); font-size: 1.5rem; color: var(--terracota); line-height: 1; flex-shrink: 0; }
+  details[open] summary::after { content: "\2013"; }
+  details p { padding-bottom: 26px; color: var(--espresso-2); max-width: var(--medida); font-size: 1rem; }
+
+  /* ── fechamento ─────────────────────────────────────────── */
+  .fechamento { background: var(--espresso); color: var(--linho); }
+  .fechamento .interna { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(30px, 5vw, 64px); align-items: center; }
+  @media (max-width: 880px) { .fechamento .interna { grid-template-columns: 1fr; } }
+  .fechamento h2 { color: var(--linho); }
+  .fechamento h2 em { color: var(--terracota-cl); }
+  .fechamento p { margin-top: 20px; color: rgba(244,240,233,.88); max-width: 48ch; }
+  .fechamento .botao {
+    display: inline-block; margin-top: 30px; padding: 17px 36px; border-radius: 999px;
+    background: var(--linho); color: var(--espresso); font-weight: 600; font-size: 1rem;
+    transition: background .2s, transform .12s;
+  }
+  .fechamento .botao:hover { background: var(--terracota-cl); transform: translateY(-1px); }
+
+  /* ── zona corporativa: mesma tipografia, clima mais frio ── */
+  .corporativa { background: var(--neutro-frio); color: var(--chumbo); border-top: 1px solid var(--traco-frio); }
+  .corporativa .interna { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(26px, 5vw, 64px); align-items: center; }
+  @media (max-width: 880px) { .corporativa .interna { grid-template-columns: 1fr; } }
+  .corporativa .rotulo { color: var(--chumbo-2); }
+  .corporativa h2 { color: var(--chumbo); font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+  .corporativa p { margin-top: 16px; color: var(--chumbo-2); max-width: 52ch; }
+  .corporativa .link {
+    display: inline-flex; align-items: center; gap: 9px; margin-top: 22px;
+    font-weight: 600; font-size: .98rem; color: var(--chumbo);
+    padding-bottom: 3px; border-bottom: 1px solid var(--chumbo);
+  }
+  .corporativa .link:hover { color: var(--terracota); border-bottom-color: var(--terracota); }
+
+  /* ── rodapé ─────────────────────────────────────────────── */
+  footer.pe { background: var(--neutro-frio); border-top: 1px solid var(--traco-frio); padding: 42px 0 56px; font-size: .88rem; color: var(--chumbo-2); }
+  footer.pe .interna { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: flex-start; }
+  footer.pe nav { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+  footer.pe a:hover { color: var(--terracota); }
+  .cnpj { font-size: .8rem; line-height: 1.7; margin-top: 10px; }
+
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="topo faixa">
+  <div class="interna">
+    <a class="marca" href="/" aria-label="Mapa Comportamental, início">
+      <span class="psi" aria-hidden="true">Ψ</span>
+      <span class="n1">Mapa Comportamental</span>
+    </a>
+    <nav>
+      <a href="#padroes">Os quatro padrões</a>
+      <a href="#devolutiva">O que você recebe</a>
+      <a href="#perguntas">Perguntas</a>
+      <a href="/empresas.html">Para empresas</a>
+      <a href="/login">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════ ABERTURA ═══════════ -->
+  <section class="abertura faixa">
+    <div class="interna">
+      <div>
+        <p class="rotulo">O Teste do Silêncio · gratuito</p>
+        <h1 class="display">Não é falta de amor.<br />É falta de <em>tradução</em>.</h1>
+        <p class="chamada">
+          Descubra em poucos minutos o que acontece exatamente quando a conversa esquenta entre vocês,
+          e <b>por que ele parece parar de te escutar</b> bem na hora em que você mais precisa.
+        </p>
+
+        <div class="garantias">
+          <div><span class="marca-cheque">✓</span><span>Gratuito de verdade</span></div>
+          <div><span class="marca-cheque">✓</span><span>Sem cartão, sem senha, sem cadastro</span></div>
+          <div><span class="marca-cheque">✓</span><span>Resultado imediato na tela</span></div>
+        </div>
+      </div>
+
+      <div class="ficha" id="comecar">
+        <p class="titulo">Fazer o teste</p>
+        <p class="aux">Só o primeiro nome e o WhatsApp. O teste abre na sequência.</p>
+        <form id="form-teste" novalidate>
+          <div>
+            <label for="nome">Primeiro nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Como você quer ser chamada" required />
+          </div>
+          <div>
+            <label for="whats">WhatsApp</label>
+            <input id="whats" name="whats" type="tel" inputmode="tel" autocomplete="tel" placeholder="(31) 99999-9999" required />
+          </div>
+          <p class="erro" id="erro" hidden></p>
+          <button class="acao" type="submit" id="botao">Fazer o teste agora</button>
+          <p class="nota">
+            O resultado aparece na tela assim que você termina.
+            <a href="/politica-de-privacidade">Como tratamos seus dados</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ OS QUATRO PADRÕES ═══════════ -->
+  <section class="faixa faixa-linho" id="padroes">
+    <div class="interna">
+      <div class="cabecalho-secao">
+        <p class="rotulo">O diagnóstico</p>
+        <h2 class="display" style="margin-top:16px">Quando a discussão aperta, todo mundo escorrega para um destes <em>quatro lugares</em>.</h2>
+        <p class="apoio">
+          Ninguém escolhe conscientemente. É automático, aprendido cedo, e costuma aparecer sempre no mesmo
+          ponto do conflito. Reconhecer o seu é o que muda a conversa seguinte.
+        </p>
+      </div>
+
+      <div class="padroes">
+        <article class="padrao">
+          <div>
+            <p class="nome">A Passiva</p>
+            <span class="fala">"Deixa, não vale a pena começar de novo."</span>
+          </div>
+          <p class="efeito">Você engole para manter a paz. A conta chega semanas depois, com juros.</p>
+        </article>
+
+        <article class="padrao">
+          <div>
+            <p class="nome">A Agressiva</p>
+            <span class="fala">"Você nunca me escuta, nunca mesmo."</span>
+          </div>
+          <p class="efeito">A frase é verdadeira para o que você sente, mas soa como ataque para ele. A defesa sobe e o assunto morre.</p>
+        </article>
+
+        <article class="padrao">
+          <div>
+            <p class="nome">A Passivo-agressiva</p>
+            <span class="fala">"Não, tá tudo bem." E não está.</span>
+          </div>
+          <p class="efeito">O recado vai pelo tom, pelo silêncio, pela porta fechada. Ele sente que errou, mas não sabe em quê.</p>
+        </article>
+
+        <article class="padrao">
+          <div>
+            <p class="nome">A Assertiva</p>
+            <span class="fala">"Quando você fez isso, eu me senti sozinha."</span>
+          </div>
+          <p class="efeito">O único dos quatro em que o outro consegue responder ao que você realmente disse, sem precisar se defender.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ A DEVOLUTIVA ═══════════ -->
+  <section class="faixa" id="devolutiva">
+    <div class="interna">
+      <div class="cabecalho-secao">
+        <p class="rotulo">A devolutiva</p>
+        <h2 class="display" style="margin-top:16px">O que chega para você no fim da leitura</h2>
+        <p class="apoio">Não é um rótulo simplista. É um retrato claro do que acontece com você no meio do atrito.</p>
+      </div>
+
+      <div class="entrega">
+        <div class="entrega-item">
+          <span class="ordem">01</span>
+          <div>
+            <h3>Seu termômetro</h3>
+            <p>Quanto da sua comunicação é assertiva de fato, e qual dos três desvios aparece primeiro quando o clima pesa.</p>
+          </div>
+        </div>
+        <div class="entrega-item">
+          <span class="ordem">02</span>
+          <div>
+            <h3>Seu estilo</h3>
+            <p>Se você organiza a discussão por lógica, por emoção, por ação ou por intuição. É o que explica por que vocês parecem falar línguas completamente diferentes.</p>
+          </div>
+        </div>
+        <div class="entrega-item">
+          <span class="ordem">03</span>
+          <div>
+            <h3>Seu ponto cego</h3>
+            <p>A frase ou o gesto que você repete sem perceber e que, do outro lado, chega com um sentido totalmente distorcido.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COMO FUNCIONA ═══════════ -->
+  <section class="faixa faixa-linho">
+    <div class="interna">
+      <div class="cabecalho-secao">
+        <p class="rotulo">Como funciona</p>
+        <h2 class="display" style="margin-top:16px">Três passos, menos de cinco minutos</h2>
+      </div>
+      <div class="passos">
+        <div class="passo">
+          <p class="k">Passo 1</p>
+          <p>Você deixa <b>nome e WhatsApp</b>. Sem senha, sem cadastro, sem compromisso.</p>
+        </div>
+        <div class="passo">
+          <p class="k">Passo 2</p>
+          <p>Responde a <b>situações reais</b> do dia a dia: a conversa que trava, a mensagem que não foi respondida, o tom que subiu.</p>
+        </div>
+        <div class="passo">
+          <p class="k">Passo 3</p>
+          <p>Recebe a <b>devolutiva completa</b> na hora, na tela, com o seu padrão nomeado e explicado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PERGUNTAS ═══════════ -->
+  <section class="faixa" id="perguntas">
+    <div class="interna coluna">
+      <p class="rotulo">Antes de começar</p>
+      <h2 class="display" style="margin-top:16px">O que costumam perguntar</h2>
+
+      <div class="perguntas">
+        <details>
+          <summary>O Teste do Silêncio é gratuito mesmo?</summary>
+          <p>É. O teste e a devolutiva completa não custam nada e não pedem cartão. Existem materiais mais profundos na plataforma, como a Tradução Íntima, mas nada aqui depende deles.</p>
+        </details>
+        <details>
+          <summary>Por que vocês pedem meu WhatsApp?</summary>
+          <p>O resultado aparece na tela na hora, sem depender dele. O WhatsApp é o canal por onde a gente conversa se você quiser ir mais fundo depois. Zero spam, zero revenda de dados. Se quiser sair, basta uma mensagem.</p>
+        </details>
+        <details>
+          <summary>Quanto tempo leva?</summary>
+          <p>São oito situações, entre três e cinco minutos, direto pelo celular. Dá para fazer numa pausa, mas responder com calma muda a precisão do resultado.</p>
+        </details>
+        <details>
+          <summary>Isso substitui terapia?</summary>
+          <p>Não. É uma ferramenta de autoconhecimento estruturada em modelos reconhecidos de comunicação, incluindo a Comunicação Não Violenta. Serve para iluminar um padrão prático, não para tratar questões profundas.</p>
+        </details>
+        <details>
+          <summary>Meu parceiro precisa fazer também?</summary>
+          <p>Não precisa. O padrão que muda a dinâmica da relação mais rápido é o seu, porque é o único que você controla. Muita mulher descobre que, ao mudar a própria forma de abrir a conversa, a resposta do outro muda junto.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FECHAMENTO ═══════════ -->
+  <section class="faixa fechamento">
+    <div class="interna">
+      <div>
+        <h2 class="display">A próxima discussão <em>já está marcada</em>.</h2>
+        <p>
+          Ela vai acontecer, como sempre acontece. A única diferença é você chegar nela sabendo
+          exatamente o que costuma fazer, e podendo escolher um caminho diferente.
+        </p>
+      </div>
+      <div>
+        <a class="botao" href="#comecar">Fazer o Teste do Silêncio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ZONA CORPORATIVA ═══════════ -->
+  <section class="faixa corporativa" style="padding: clamp(52px, 6vw, 76px) 0">
+    <div class="interna">
+      <div>
+        <p class="rotulo">Para empresas</p>
+        <h2 class="display" style="margin-top:14px">A mesma leitura, aplicada a times.</h2>
+      </div>
+      <div>
+        <p>
+          Avaliação comportamental para contratação, desenvolvimento de liderança, diagnóstico
+          psicossocial da NR-1 e gestão de equipes. Quinze instrumentos, devolutiva completa
+          e relatório por colaborador.
+        </p>
+        <a class="link" href="/empresas.html">Ver a plataforma corporativa</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pe">
+  <div class="interna">
+    <div>
+      <div class="marca"><span class="psi psi-pe" aria-hidden="true">Ψ</span><span class="n1" style="font-size:1.1rem">Mapa Comportamental</span></div>
+      <p class="cnpj">
+        KAN PARTICIPAÇÕES LTDA · CNPJ 67.585.002/0001-60<br />
+        contato@mapacomportamental.com
+      </p>
+    </div>
+    <nav>
+      <a href="/empresas.html">Para empresas</a>
+      <a href="/precos">Planos</a>
+      <a href="/login">Entrar</a>
+      <a href="/politica-de-privacidade">Privacidade</a>
+      <a href="/termos-de-uso">Termos</a>
+      <a href="/politica-de-cookies">Cookies</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var TESTE = 'SILENCIO';
+
+  function soDigitos(s) { return (s || '').replace(/\D+/g, ''); }
+
+  var form  = document.getElementById('form-teste');
+  var erro  = document.getElementById('erro');
+  var botao = document.getElementById('botao');
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var nome  = (document.getElementById('nome').value || '').trim();
+    var whats = soDigitos(document.getElementById('whats').value);
+
+    function falha(msg) { erro.textContent = msg; erro.hidden = false; }
+    erro.hidden = true;
+
+    if (nome.length < 2)   return falha('Escreva seu primeiro nome.');
+    if (whats.length < 10) return falha('Digite o WhatsApp com DDD.');
+
+    botao.disabled = true;
+    var textoOriginal = botao.textContent;
+    botao.textContent = 'Preparando seu teste…';
+
+    fetch('/api/experimente/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName: nome, whatsapp: whats, src: 'silencio', testTypes: [TESTE] })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (res.ok && res.d && res.d.redirect) { window.location.href = res.d.redirect; return; }
+        falha((res.d && res.d.error) || 'Não consegui abrir o teste agora. Tente de novo em instantes.');
+        botao.disabled = false; botao.textContent = textoOriginal;
+      })
+      .catch(function () {
+        falha('Sem conexão com o servidor. Verifique sua internet e tente de novo.');
+        botao.disabled = false; botao.textContent = textoOriginal;
+      });
+  });
+})();
+</script>
+
+</body>
+</html>

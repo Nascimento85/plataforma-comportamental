@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { TINTA_FRACA } from '../tokens'
 
 /**
  * Aceita apenas caminhos relativos seguros como callbackUrl
@@ -55,20 +56,10 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div
-          className="rounded-xl px-4 py-3 text-sm font-sans"
-          style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.3)', color: '#e09080' }}
-        >
-          {error}
-        </div>
-      )}
+      {error && <div className="auth-erro">{error}</div>}
 
       <div>
-        <label htmlFor="email" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={{ color: 'rgba(255,255,255,0.4)' }}>
-          E-mail
-        </label>
+        <label htmlFor="email">E-mail</label>
         <input
           id="email"
           type="email"
@@ -77,30 +68,17 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="empresa@email.com"
-          className="w-full px-4 py-3.5 rounded-xl text-sm font-sans outline-none transition-all"
-          style={{
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            color: 'white',
-          }}
-          onFocus={e => { e.target.style.borderColor = 'rgba(201,168,76,0.55)'; e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.boxShadow = '0 0 0 3px rgba(201,168,76,0.12)' }}
-          onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.background = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
         />
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <label htmlFor="password" className="block text-xs font-sans font-semibold uppercase tracking-widest"
-                 style={{ color: 'rgba(255,255,255,0.4)' }}>
-            Senha
-          </label>
-          <Link href="/forgot-password"
-                className="text-[13px] font-sans transition-colors hover:opacity-80"
-                style={{ color: 'rgba(201,168,76,0.7)' }}>
+        <div className="flex items-baseline justify-between gap-3">
+          <label htmlFor="password" style={{ marginBottom: 0 }}>Senha</label>
+          <Link href="/forgot-password" className="text-[14px] transition-colors hover:opacity-80">
             Esqueci minha senha
           </Link>
         </div>
-        <div className="relative">
+        <div className="relative" style={{ marginTop: 7 }}>
           <input
             id="password"
             type={showPassword ? 'text' : 'password'}
@@ -109,21 +87,14 @@ export default function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
-            className="w-full px-4 py-3.5 pr-12 rounded-xl text-sm font-sans outline-none transition-all"
-            style={{
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: 'white',
-            }}
-            onFocus={e => { e.target.style.borderColor = 'rgba(201,168,76,0.55)'; e.target.style.background = 'rgba(255,255,255,0.1)'; e.target.style.boxShadow = '0 0 0 3px rgba(201,168,76,0.12)' }}
-            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.background = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
+            style={{ paddingRight: 46 }}
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg transition-opacity hover:opacity-80"
-            style={{ color: 'rgba(255,255,255,0.45)' }}
+            className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg transition-opacity hover:opacity-80"
+            style={{ color: TINTA_FRACA, background: 'transparent', border: 'none', cursor: 'pointer' }}
             tabIndex={-1}
           >
             {showPassword ? (
@@ -144,15 +115,8 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 rounded-xl text-[15px] font-sans font-bold mt-2 flex items-center justify-center gap-2
-                   transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
-        style={{
-          color: '#14100a',
-          background: loading
-            ? 'rgba(201,168,76,0.6)'
-            : 'linear-gradient(135deg, #e8c97a, #c9a84c 55%, #a8873a)',
-          boxShadow: '0 8px 24px rgba(201,168,76,0.3)',
-        }}
+        className="flex items-center justify-center gap-2"
+        style={{ marginTop: 8 }}
       >
         {loading ? 'Entrando…' : (
           <>

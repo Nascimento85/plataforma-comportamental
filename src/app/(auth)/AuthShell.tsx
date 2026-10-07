@@ -12,13 +12,10 @@
 
 import type { ReactNode } from 'react'
 
-const ESPRESSO   = '#1B1410'
-const ESPRESSO_2 = '#2B2018'
-const AMBAR      = '#E0B368'
-const TERRACOTA  = '#B3663F'
-const LINHO      = '#F5ECDD'
-const PAPEL      = '#FDF8EF'
-const TRACO      = '#DCCDB6'
+import {
+  ESPRESSO, ESPRESSO_2, AMBAR, TERRACOTA, LINHO, PAPEL, TRACO,
+  TINTA, TINTA_FRACA,
+} from './tokens'
 
 const serif = 'var(--font-newsreader), Georgia, serif'
 const sans  = 'var(--font-albert), "Segoe UI", system-ui, sans-serif'
@@ -55,24 +52,24 @@ function AmostraDevolutiva() {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 14 }}>
-        <span style={{ fontFamily: sans, fontSize: 10.5, fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase', color: AMBAR }}>
+        <span style={{ fontFamily: sans, fontSize: 11, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: AMBAR }}>
           Amostra de devolutiva
         </span>
-        <span style={{ fontFamily: sans, fontSize: 10.5, color: 'rgba(245,236,221,.42)' }}>
+        <span style={{ fontFamily: sans, fontSize: 11.5, color: 'rgba(245,236,221,.68)' }}>
           O Teste do Silêncio
         </span>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {barras.map((b) => (
-          <div key={b.rotulo} style={{ display: 'grid', gridTemplateColumns: '1fr 34px', gap: 12, alignItems: 'center' }}>
+          <div key={b.rotulo} style={{ display: 'grid', gridTemplateColumns: '1fr 38px', gap: 12, alignItems: 'center' }}>
             <div>
-              <span style={{ fontFamily: sans, fontSize: 12, color: 'rgba(245,236,221,.82)' }}>{b.rotulo}</span>
-              <div style={{ height: 6, borderRadius: 99, background: 'rgba(245,236,221,.10)', marginTop: 5 }}>
+              <span style={{ fontFamily: sans, fontSize: 13, fontWeight: 500, color: 'rgba(245,236,221,.94)' }}>{b.rotulo}</span>
+              <div style={{ height: 6, borderRadius: 99, background: 'rgba(245,236,221,.12)', marginTop: 5 }}>
                 <div style={{ width: `${b.pct}%`, height: 6, borderRadius: 99, background: b.cor }} />
               </div>
             </div>
-            <span style={{ fontFamily: sans, fontSize: 11, color: 'rgba(245,236,221,.55)', textAlign: 'right' }}>
+            <span style={{ fontFamily: sans, fontSize: 12.5, fontWeight: 600, color: 'rgba(245,236,221,.82)', textAlign: 'right' }}>
               {b.pct}%
             </span>
           </div>
@@ -80,9 +77,9 @@ function AmostraDevolutiva() {
       </div>
 
       <p style={{
-        marginTop: 15, paddingTop: 13, borderTop: '1px solid rgba(245,236,221,.10)',
-        fontFamily: serif, fontStyle: 'italic', fontSize: 14, lineHeight: 1.5,
-        color: 'rgba(245,236,221,.86)',
+        marginTop: 15, paddingTop: 13, borderTop: '1px solid rgba(245,236,221,.12)',
+        fontFamily: serif, fontStyle: 'italic', fontSize: 15, lineHeight: 1.5,
+        color: 'rgba(245,236,221,.94)',
       }}>
         "Você não engole nem explode: manda o recado pelo tom. Ele sente que errou e não sabe em quê."
       </p>
@@ -114,25 +111,8 @@ export default function AuthShell({
         .an2 { animation: authSobe .6s cubic-bezier(.16,1,.3,1) .1s both; }
         .an3 { animation: authSobe .6s cubic-bezier(.16,1,.3,1) .2s both; }
         @media (prefers-reduced-motion: reduce) { .an1,.an2,.an3 { animation: none; } }
-        .auth-campo input {
-          width: 100%; padding: 12px 2px; font-size: 16px; font-family: ${sans};
-          color: ${ESPRESSO}; background: transparent;
-          border: none; border-bottom: 1px solid ${TRACO}; border-radius: 0;
-          transition: border-color .2s;
-        }
-        .auth-campo input:focus { outline: none; border-bottom-color: ${TERRACOTA}; }
-        .auth-campo label {
-          display: block; font-size: 11px; font-weight: 600; letter-spacing: .1em;
-          text-transform: uppercase; color: #8A7359; margin-bottom: 4px;
-        }
-        .auth-campo button[type="submit"] {
-          width: 100%; padding: 15px 22px; border: none; border-radius: 999px; cursor: pointer;
-          font-family: ${sans}; font-size: 15px; font-weight: 600;
-          background: ${ESPRESSO}; color: ${PAPEL}; transition: background .2s, transform .12s;
-        }
-        .auth-campo button[type="submit"]:hover:not(:disabled) { background: ${TERRACOTA}; transform: translateY(-1px); }
-        .auth-campo button[type="submit"]:disabled { opacity: .55; cursor: wait; }
-        .auth-campo a { color: ${TERRACOTA}; }
+        /* O estilo dos campos (.auth-campo) mora em globals.css,
+           compartilhado com as telas de recuperação de senha. */
       `}</style>
 
       {/* ── Painel da marca ─────────────────────────────────── */}
@@ -154,23 +134,25 @@ export default function AuthShell({
         </div>
 
         <div className="an2" style={{ maxWidth: 460 }}>
-          <h2 style={{ fontFamily: serif, fontWeight: 400, fontSize: 'clamp(2rem, 2.9vw, 2.7rem)', lineHeight: 1.12, color: LINHO }}>
+          <h2 style={{ fontFamily: serif, fontWeight: 500, fontSize: 'clamp(2.1rem, 3vw, 2.8rem)', lineHeight: 1.12, color: '#FFF8EC' }}>
             {headline}
           </h2>
-          <p style={{ marginTop: 18, fontSize: 15, lineHeight: 1.65, color: 'rgba(245,236,221,.66)' }}>
+          <p style={{ marginTop: 18, fontSize: 16.5, lineHeight: 1.65, color: 'rgba(245,236,221,.86)' }}>
             {sub}
           </p>
 
-          <ul style={{ marginTop: 26, listStyle: 'none', padding: 0, borderTop: '1px solid rgba(245,236,221,.12)' }}>
+          <ul style={{ marginTop: 26, listStyle: 'none', padding: 0, borderTop: '1px solid rgba(245,236,221,.16)' }}>
             {bullets.map((b, i) => (
               <li
                 key={i}
                 style={{
-                  padding: '13px 0', borderBottom: '1px solid rgba(245,236,221,.12)',
-                  fontSize: 14.5, lineHeight: 1.55, color: 'rgba(245,236,221,.8)',
+                  display: 'flex', gap: 12, alignItems: 'flex-start',
+                  padding: '13px 0', borderBottom: '1px solid rgba(245,236,221,.16)',
+                  fontSize: 15.5, fontWeight: 500, lineHeight: 1.55, color: 'rgba(245,236,221,.94)',
                 }}
               >
-                {b.text}
+                <span aria-hidden="true" style={{ color: AMBAR, fontWeight: 700, flexShrink: 0 }}>→</span>
+                <span>{b.text}</span>
               </li>
             ))}
           </ul>
@@ -179,7 +161,7 @@ export default function AuthShell({
         <div className="an3">
           <AmostraDevolutiva />
           {proof && (
-            <p style={{ marginTop: 16, fontSize: 12.5, color: 'rgba(245,236,221,.42)' }}>{proof}</p>
+            <p style={{ marginTop: 16, fontSize: 13.5, fontWeight: 500, color: 'rgba(245,236,221,.72)' }}>{proof}</p>
           )}
         </div>
       </aside>
@@ -208,15 +190,15 @@ export default function AuthShell({
             }}
           >
             <div style={{ marginBottom: 22 }}>
-              <h1 style={{ fontFamily: serif, fontWeight: 400, fontSize: 26, color: ESPRESSO, lineHeight: 1.2 }}>
+              <h1 style={{ fontFamily: serif, fontWeight: 500, fontSize: 28, color: ESPRESSO, lineHeight: 1.2 }}>
                 {formTitle}
               </h1>
-              <p style={{ fontSize: 14, marginTop: 6, color: '#8A7359' }}>{formSub}</p>
+              <p style={{ fontSize: 15, marginTop: 6, color: TINTA_FRACA }}>{formSub}</p>
             </div>
             {children}
           </div>
 
-          <div className="an3" style={{ marginTop: 22, textAlign: 'center', color: '#5A4838' }}>
+          <div className="an3" style={{ marginTop: 22, textAlign: 'center', color: TINTA, fontSize: 15 }}>
             {belowCard}
           </div>
         </div>
@@ -225,4 +207,4 @@ export default function AuthShell({
   )
 }
 
-export { ESPRESSO, AMBAR, TERRACOTA, LINHO }
+// A paleta mora em ./tokens — importe de lá em componentes de cliente.

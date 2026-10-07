@@ -2,25 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { ESPRESSO, PAPEL, TRACO, TINTA_FRACA, PLACEHOLDER } from '../tokens'
 
 type AccountType = 'PJ' | 'PF'
 
-const inputStyle: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.08)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  color: 'white',
-}
-const inputFocusStyle: React.CSSProperties = {
-  borderColor: 'rgba(201,168,76,0.5)',
-  background: 'rgba(255,255,255,0.1)',
-}
-const inputBlurStyle: React.CSSProperties = {
-  borderColor: 'rgba(255,255,255,0.12)',
-  background: 'rgba(255,255,255,0.08)',
-}
-const labelStyle: React.CSSProperties = {
-  color: 'rgba(255,255,255,0.4)',
-}
+// Campos e rótulos herdam o estilo de `.auth-campo`, definido no AuthShell.
+// Nada de cor inline aqui: sobre o papel claro, tom herdado do tema escuro
+// antigo vira texto invisível.
 
 function SoulInput({
   id, type = 'text', required, value, onChange, placeholder, prefix,
@@ -32,16 +20,13 @@ function SoulInput({
   return (
     <div className="relative">
       {prefix && (
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-sans"
-              style={{ color: 'rgba(255,255,255,0.3)' }}>{prefix}</span>
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base"
+              style={{ color: PLACEHOLDER }}>{prefix}</span>
       )}
       <input
         id={id} type={type} required={required} value={value} onChange={onChange}
         placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-xl text-sm font-sans outline-none transition-all"
-        style={{ ...inputStyle, ...(prefix ? { paddingLeft: '2rem' } : {}) }}
-        onFocus={e => Object.assign(e.target.style, inputFocusStyle)}
-        onBlur={e => Object.assign(e.target.style, inputBlurStyle)}
+        style={prefix ? { paddingLeft: 30 } : undefined}
       />
     </div>
   )
@@ -121,33 +106,24 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {isTrial && (
-        <div className="rounded-xl px-4 py-3 text-sm font-sans text-center"
-             style={{ background: 'rgba(201,168,76,0.14)', border: '1px solid rgba(201,168,76,0.4)', color: '#e8c878' }}>
+        <div className="rounded-xl px-4 py-3 text-[15px] text-center"
+             style={{ background: 'rgba(179,102,63,0.10)', border: '1px solid rgba(179,102,63,0.32)', color: ESPRESSO }}>
           🎁 Ao finalizar, você ganha <strong>7 dias de acesso premium</strong> — sem cartão.
         </div>
       )}
-      {error && (
-        <div className="rounded-xl px-4 py-3 text-sm font-sans"
-             style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.3)', color: '#e09080' }}>
-          {error}
-        </div>
-      )}
+      {error && <div className="auth-erro">{error}</div>}
 
       {/* Toggle PF / PJ */}
-      <div className="flex rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.12)' }}>
+      <div className="flex rounded-xl overflow-hidden" style={{ border: `1.5px solid ${TRACO}` }}>
         {(['PJ', 'PF'] as AccountType[]).map((t) => (
           <button
             key={t}
             type="button"
             onClick={() => setAccountType(t)}
-            className="flex-1 py-2.5 text-sm font-medium font-sans transition-all"
-            style={accountType === t ? {
-              background: 'linear-gradient(135deg, #c9a84c, #d4943a)',
-              color: '#f0ece3',
-            } : {
-              background: 'transparent',
-              color: 'rgba(255,255,255,0.45)',
-            }}
+            className="flex-1 py-3 text-[15px] font-semibold transition-all"
+            style={accountType === t
+              ? { background: ESPRESSO, color: PAPEL, border: 'none', cursor: 'pointer' }
+              : { background: 'transparent', color: TINTA_FRACA, border: 'none', cursor: 'pointer' }}
           >
             {t === 'PJ' ? '🏢 Empresa (PJ)' : '👤 Autônomo (PF)'}
           </button>
@@ -156,8 +132,7 @@ export default function RegisterForm() {
 
       {/* Nome */}
       <div>
-        <label htmlFor="name" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
+        <label htmlFor="name">
           {accountType === 'PJ' ? 'Nome da empresa' : 'Nome completo'}
         </label>
         <SoulInput
@@ -169,8 +144,7 @@ export default function RegisterForm() {
 
       {/* E-mail */}
       <div>
-        <label htmlFor="email" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
+        <label htmlFor="email">
           E-mail
         </label>
         <SoulInput
@@ -182,8 +156,7 @@ export default function RegisterForm() {
 
       {/* Telefone */}
       <div>
-        <label htmlFor="phone" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
+        <label htmlFor="phone">
           Telefone / WhatsApp
         </label>
         <SoulInput
@@ -195,9 +168,8 @@ export default function RegisterForm() {
 
       {/* Instagram */}
       <div>
-        <label htmlFor="instagram" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
-          Instagram <span style={{ color: 'rgba(255,255,255,0.2)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(opcional)</span>
+        <label htmlFor="instagram">
+          Instagram <span style={{ color: PLACEHOLDER, fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(opcional)</span>
         </label>
         <SoulInput
           id="instagram" value={form.instagram}
@@ -210,25 +182,19 @@ export default function RegisterForm() {
       {/* Data de nascimento — só para PF */}
       {accountType === 'PF' && (
         <div>
-          <label htmlFor="birthDate" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-                 style={labelStyle}>
-            Data de nascimento <span style={{ color: 'rgba(255,255,255,0.2)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(opcional)</span>
+          <label htmlFor="birthDate">
+            Data de nascimento <span style={{ color: PLACEHOLDER, fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(opcional)</span>
           </label>
           <input
             id="birthDate" type="date" value={form.birthDate}
             onChange={(e) => update('birthDate', e.target.value)}
-            className="w-full px-4 py-3 rounded-xl text-sm font-sans outline-none transition-all"
-            style={inputStyle}
-            onFocus={e => Object.assign(e.target.style, inputFocusStyle)}
-            onBlur={e => Object.assign(e.target.style, inputBlurStyle)}
           />
         </div>
       )}
 
       {/* Senha */}
       <div>
-        <label htmlFor="password" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
+        <label htmlFor="password">
           Senha
         </label>
         <SoulInput
@@ -240,8 +206,7 @@ export default function RegisterForm() {
 
       {/* Confirmar senha */}
       <div>
-        <label htmlFor="confirmPassword" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-               style={labelStyle}>
+        <label htmlFor="confirmPassword">
           Confirmar senha
         </label>
         <SoulInput
@@ -254,15 +219,8 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 rounded-xl text-[15px] font-sans font-bold mt-2 flex items-center justify-center gap-2
-                   transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
-        style={{
-          color: '#14100a',
-          background: loading
-            ? 'rgba(201,168,76,0.6)'
-            : 'linear-gradient(135deg, #e8c97a, #c9a84c 55%, #a8873a)',
-          boxShadow: '0 8px 24px rgba(201,168,76,0.3)',
-        }}
+        className="flex items-center justify-center gap-2"
+        style={{ marginTop: 8 }}
       >
         {loading ? 'Criando conta…' : (
           <>

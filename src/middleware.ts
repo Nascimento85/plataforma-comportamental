@@ -13,7 +13,9 @@ const PUBLIC_ROUTES = [
   '/amor.html',
   '/empresas',         // landing page corporativa
   '/empresas.html',
-  '/home.html',        // home B2C: porta unica do teste gratuito
+  '/home.html',        // home hibrida: carreira (DISC gratis) e empresa (contratacao)
+  '/silencio',         // Teste do Silencio, que era a home ate out/2026
+  '/silencio.html',
   '/inicio',           // home anterior (vitrine dos 15 testes) — mantida acessivel
   '/inicio.html',
   '/lp',               // LP antiga (mantida acessível para histórico)
@@ -65,12 +67,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(target, 308)
   }
 
-  // Homepage: porta unica do teste gratuito, com captura de nome + WhatsApp,
-  // apontada para o publico B2C (comunicacao no relacionamento). A vitrine
-  // anterior dos 15 testes continua em /inicio.html — para voltar atras,
-  // basta trocar o destino desta linha.
+  // Homepage hibrida: carreira (teste DISC gratuito) e empresa (contratacao
+  // e rotatividade). O Teste do Silencio, que era a home, mora em /silencio.
+  // A vitrine anterior dos 15 testes continua em /inicio.html.
   if (pathname === '/') {
     return NextResponse.rewrite(new URL('/home.html', request.url))
+  }
+  if (pathname === '/silencio') {
+    return NextResponse.rewrite(new URL('/silencio.html', request.url))
   }
 
   // Rotas públicas (sem auth)

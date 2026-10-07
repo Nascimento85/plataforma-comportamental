@@ -3,6 +3,10 @@
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { ESPRESSO, TERRACOTA, LINHO, PAPEL, TRACO, TINTA, TINTA_FRACA } from '../../tokens'
+
+const serif = 'var(--font-newsreader), Georgia, serif'
+const sans  = 'var(--font-albert), "Segoe UI", system-ui, sans-serif'
 
 export default function ResetPasswordPage() {
   const params = useParams()
@@ -51,114 +55,81 @@ export default function ResetPasswordPage() {
     }
   }
 
-  const inputStyle: React.CSSProperties = {
-    background: 'rgba(255,255,255,0.08)',
-    border: '1px solid rgba(255,255,255,0.12)',
-    color: 'white',
-  }
-
   return (
     <main
-      className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #1c1a17 0%, #2d2417 55%, #3d2a1c 100%)' }}
+      className="min-h-screen flex items-center justify-center px-4 py-10"
+      style={{ background: LINHO, fontFamily: sans }}
     >
-      {/* Orbs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-           style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%)', transform: 'translate(25%, -30%)' }} />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none"
-           style={{ background: 'radial-gradient(circle, rgba(196,99,58,0.10) 0%, transparent 65%)', transform: 'translate(-30%, 30%)' }} />
+      <div className="w-full max-w-md">
 
-      <div className="w-full max-w-sm relative z-10">
-
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
-               style={{ background: 'linear-gradient(135deg, #c9a84c, #d4943a)' }}>
-            <svg viewBox="0 0 90 90" fill="none" className="w-8 h-8">
-              <path d="M45 13L48.5 39.5L72 26L55.5 45L72 64L48.5 50.5L45 77L41.5 50.5L18 64L34.5 45L18 26L41.5 39.5Z"
-                fill="rgba(255,255,255,0.3)" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-              <circle cx="45" cy="45" r="4" fill="white" opacity="0.9"/>
-            </svg>
-          </div>
-          <h1 className="font-serif font-semibold text-2xl text-white mb-1">Nova senha</h1>
-          <p className="text-[13.5px] font-sans" style={{ color: 'rgba(255,255,255,0.4)' }}>
+        {/* Marca */}
+        <div className="text-center mb-7">
+          <span
+            aria-hidden="true"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4"
+            style={{ border: `1px solid ${TERRACOTA}`, color: TERRACOTA, fontFamily: serif, fontSize: 22 }}
+          >
+            Ψ
+          </span>
+          <h1 style={{ fontFamily: serif, fontWeight: 500, fontSize: 28, color: ESPRESSO, lineHeight: 1.2 }}>
+            Nova senha
+          </h1>
+          <p className="mt-1.5" style={{ fontSize: 15, color: TINTA_FRACA }}>
             Escolha uma senha segura para sua conta
           </p>
         </div>
 
-        {/* Card */}
-        <div className="rounded-3xl p-7"
-             style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(20px)' }}>
+        {/* Cartão */}
+        <div
+          className="auth-campo rounded-2xl"
+          style={{
+            background: PAPEL, border: `1px solid ${TRACO}`, padding: '30px 28px',
+            boxShadow: '0 1px 1px rgba(27,20,16,.03), 0 16px 40px -26px rgba(27,20,16,.32)',
+          }}
+        >
           {success ? (
             <div className="text-center">
               <div className="text-5xl mb-4">✅</div>
-              <h2 className="font-serif font-semibold text-xl text-white mb-2">Senha redefinida!</h2>
-              <p className="text-sm font-sans mb-6 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+              <h2 style={{ fontFamily: serif, fontWeight: 500, fontSize: 22, color: ESPRESSO, marginBottom: 10 }}>
+                Senha redefinida!
+              </h2>
+              <p className="mb-6 leading-relaxed" style={{ fontSize: 15, color: TINTA }}>
                 Sua senha foi atualizada com sucesso. Você será redirecionado para o login em instantes.
               </p>
-              <Link href="/login" className="text-sm font-sans font-medium transition-colors hover:opacity-80"
-                    style={{ color: '#c9a84c' }}>
+              <Link href="/login" className="transition-colors hover:opacity-80" style={{ fontSize: 15 }}>
                 Ir para o login agora →
               </Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <div className="rounded-xl px-4 py-3 text-sm font-sans"
-                     style={{ background: 'rgba(196,122,114,0.15)', border: '1px solid rgba(196,122,114,0.3)', color: '#e09080' }}>
-                  {error}
-                </div>
-              )}
+              {error && <div className="auth-erro">{error}</div>}
 
               <div>
-                <label htmlFor="password" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-                       style={{ color: 'rgba(255,255,255,0.4)' }}>
-                  Nova senha
-                </label>
+                <label htmlFor="password">Nova senha</label>
                 <input
                   id="password" type="password" required value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Mínimo 8 caracteres"
                   autoComplete="new-password"
-                  className="w-full px-4 py-3 rounded-xl text-sm font-sans outline-none transition-all"
-                  style={inputStyle}
-                  onFocus={e => { e.target.style.borderColor = 'rgba(201,168,76,0.5)'; e.target.style.background = 'rgba(255,255,255,0.1)' }}
-                  onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.background = 'rgba(255,255,255,0.08)' }}
                 />
               </div>
 
               <div>
-                <label htmlFor="confirm" className="block text-xs font-sans font-semibold uppercase tracking-widest mb-2"
-                       style={{ color: 'rgba(255,255,255,0.4)' }}>
-                  Confirmar nova senha
-                </label>
+                <label htmlFor="confirm">Confirmar nova senha</label>
                 <input
                   id="confirm" type="password" required value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
                   placeholder="Repita a nova senha"
                   autoComplete="new-password"
-                  className="w-full px-4 py-3 rounded-xl text-sm font-sans outline-none transition-all"
-                  style={inputStyle}
-                  onFocus={e => { e.target.style.borderColor = 'rgba(201,168,76,0.5)'; e.target.style.background = 'rgba(255,255,255,0.1)' }}
-                  onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.12)'; e.target.style.background = 'rgba(255,255,255,0.08)' }}
                 />
               </div>
 
-              <button
-                type="submit" disabled={loading}
-                className="w-full py-3 rounded-full text-sm font-sans font-medium text-soul-ink
-                           transition-all hover:-translate-y-px disabled:opacity-60 disabled:translate-y-0"
-                style={{
-                  background: loading ? 'rgba(201,168,76,0.6)' : 'linear-gradient(135deg, #c9a84c, #d4943a)',
-                  boxShadow: '0 4px 16px rgba(201,168,76,0.22)',
-                }}
-              >
+              <button type="submit" disabled={loading} style={{ marginTop: 8 }}>
                 {loading ? 'Salvando…' : 'Redefinir senha'}
               </button>
 
-              <p className="text-center text-xs font-sans">
-                <Link href="/login" className="font-medium transition-colors hover:opacity-80"
-                      style={{ color: '#c9a84c' }}>
+              <p className="text-center" style={{ fontSize: 15 }}>
+                <Link href="/login" className="transition-colors hover:opacity-80">
                   ← Voltar para o login
                 </Link>
               </p>

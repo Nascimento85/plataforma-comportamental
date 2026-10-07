@@ -328,6 +328,76 @@
   border-radius: 0 8px 8px 0;
 }
 
+/* ════════════════════════════════════════════════════════════
+   Telas de entrada · identidade 1b (espresso e terracota)
+   ════════════════════════════════════════════════════════════
+   Fonte única do estilo de campo em login, cadastro e recuperação
+   de senha. Os formulários não trazem cor própria: sobre o papel
+   claro, qualquer tom herdado do tema escuro vira texto invisível.
+   Paleta espelhada em src/app/(auth)/tokens.ts.                  */
+
+.auth-campo input,
+.auth-campo select {
+  width: 100%;
+  padding: 13px 14px;
+  font-size: 16px;                    /* 16px também evita o zoom do iOS */
+  font-family: var(--font-albert), 'Segoe UI', system-ui, sans-serif;
+  color: #1B1410;
+  background: #FFFFFF;
+  border: 1.5px solid #DCCDB6;
+  border-radius: 12px;
+  transition: border-color .18s, box-shadow .18s;
+}
+.auth-campo input:focus,
+.auth-campo select:focus {
+  outline: none;
+  border-color: #B3663F;
+  box-shadow: 0 0 0 3px rgba(179, 102, 63, .16);
+}
+.auth-campo input::placeholder { color: #7C6650; opacity: 1; }
+.auth-campo input:-webkit-autofill {
+  -webkit-text-fill-color: #1B1410;
+  box-shadow: 0 0 0 100px #FFFFFF inset;
+}
+.auth-campo label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6B5744;
+  margin-bottom: 7px;
+}
+.auth-campo button[type="submit"] {
+  width: 100%;
+  padding: 16px 22px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--font-albert), 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: #1B1410;
+  color: #FDF8EF;
+  transition: background .2s, transform .12s;
+}
+.auth-campo button[type="submit"]:hover:not(:disabled) {
+  background: #B3663F;
+  transform: translateY(-1px);
+}
+.auth-campo button[type="submit"]:disabled { opacity: .55; cursor: wait; }
+.auth-campo a { color: #9A5230; font-weight: 600; }
+
+.auth-erro {
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  background: rgba(154, 52, 18, .08);
+  border: 1px solid rgba(154, 52, 18, .28);
+  color: #9A3412;
+}
+
 /* Cabeçalho visível APENAS na impressão (PDF do relatório NR-1) */
 .nr1-print-only { display: none; }
 
